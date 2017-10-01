@@ -1,0 +1,12 @@
+[submodule "themes/MinimalXY"]
+	path = themes/MinimalXY
+	url = https://github.com/petrnohejl/MinimalXY.git
+[submodule "themes/pelican-hyde"]
+	path = themes/pelican-hyde
+	url = https://github.com/jvanz/pelican-hyde.git
+[submodule "themes/Flex"]
+	path = themes/Flex
+	url = https://github.com/alexandrevicenzi/Flex.git
+[submodule "themes/minimalX"]
+	path = themes/minimalX
+	url = https://github.com/art1fa/minimalX.git
