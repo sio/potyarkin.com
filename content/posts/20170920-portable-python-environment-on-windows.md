@@ -1,4 +1,6 @@
-# Portable development setup for Python on Windows
+title: Portable development setup for Python on Windows
+date: 2017-09-20
+
 ## WinPython
 https://winpython.github.io/
 
