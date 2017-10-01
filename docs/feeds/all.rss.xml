@@ -4,4 +4,4 @@
 &lt;p&gt;All-in-one distribution which comes with many difficult-to-build packages
 preinstalled. And their ...-Zero version is great for thumb drives!&lt;/p&gt;
 &lt;p&gt;Pip works just fine, but installing packages that require C compiler is
-always a pain on Windows. May be I should look into conda and see if …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vitaly Potyarkin</dc:creator><pubDate>Wed, 20 Sep 2017 00:00:00 +0300</pubDate><guid isPermaLink="false">tag:potyarkin.ml,2017-09-20:/posts/2017/portable-development-setup-for-python-on-windows/</guid></item></channel></rss>
+always a pain on Windows. May be I should look into conda and see if …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vitaly Potyarkin</dc:creator><pubDate>Wed, 20 Sep 2017 00:00:00 +0300</pubDate><guid isPermaLink="false">tag:potyarkin.ml,2017-09-20:/posts/2017/portable-development-setup-for-python-on-windows/</guid><category>python</category><category>windows</category><category>bookmarks</category></item></channel></rss>
