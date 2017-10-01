@@ -3,7 +3,8 @@
 from __future__ import unicode_literals
 
 AUTHOR = 'Vitaly Potyarkin'
-SITENAME = 'Unsorted notes'
+BIO = 'Unsorted ramblings, sometimes related to programming'
+SITENAME = 'Randomize'
 SITEURL = ''
 
 PATH = 'content'
