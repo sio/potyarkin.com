@@ -38,7 +38,7 @@ DEFAULT_PAGINATION = 5
 
 # Custom configuration for potyarkin.ml
 LOCALE = "C"
-DEFAULT_DATE_FORMAT = "%Y - %m - %d"
+DEFAULT_DATE_FORMAT = "%Y-%m-%d"
 DEFAULT_DATE = "fs"  # get post's date from filesystem
 
 ARTICLE_PATHS = ['posts',]
