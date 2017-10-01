@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Randomize</title><link href="http://potyarkin.ml/" rel="alternate"></link><link href="http://potyarkin.ml/feeds/all.atom.xml" rel="self"></link><id>http://potyarkin.ml/</id><updated>2017-09-20T00:00:00+03:00</updated><entry><title>Portable development setup for Python on Windows</title><link href="http://potyarkin.ml/posts/2017/portable-development-setup-for-python-on-windows/" rel="alternate"></link><published>2017-09-20T00:00:00+03:00</published><updated>2017-09-20T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2017-09-20:/posts/2017/portable-development-setup-for-python-on-windows/</id><summary type="html">&lt;h2&gt;WinPython&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://winpython.github.io/"&gt;https://winpython.github.io/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;All-in-one distribution which comes with many difficult-to-build packages
+preinstalled. And their ...-Zero version is great for thumb drives!&lt;/p&gt;
+&lt;p&gt;Pip works just fine, but installing packages that require C compiler is
+always a pain on Windows. May be I should look into conda and see if …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;WinPython&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://winpython.github.io/"&gt;https://winpython.github.io/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;All-in-one distribution which comes with many difficult-to-build packages
+preinstalled. And their ...-Zero version is great for thumb drives!&lt;/p&gt;
+&lt;p&gt;Pip works just fine, but installing packages that require C compiler is
+always a pain on Windows. May be I should look into conda and see if it
+offers a portable variant.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; there are unofficial binary wheels for most common Python packages
+at &lt;a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/"&gt;http://www.lfd.uci.edu/~gohlke/pythonlibs/&lt;/a&gt; The site's hosting is a little
+unreliable, so it might take a few trys to fetch a package.&lt;/p&gt;
+&lt;h2&gt;Git Portable&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://git-scm.com/download/win"&gt;https://git-scm.com/download/win&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Git for Windows is now recommended by official Git website, and there always
+is a portable version.&lt;/p&gt;
+&lt;p&gt;This package provides not only Git but also bash and a basic MSYS environment
+(coreutils, sed, grep, awk, etc) which make life on Window &lt;em&gt;so much&lt;/em&gt; easier!
+Also, it comes with VIM preinstalled, which is a damn good editor and is
+preferred by many developers.&lt;/p&gt;
+&lt;h2&gt;GNU Make&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://www.equation.com/servlet/equation.cmd?fa=make"&gt;http://www.equation.com/servlet/equation.cmd?fa=make&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Unfortunately Git for Windows does not come with GNU make preinstalled, so
+we have to download it manually. Great guys at Equation Solution are regularly
+building standalone versions of GNU Make for 32-bit and 64-bit Windows.&lt;/p&gt;
+&lt;p&gt;Downloaded file has to be placed somewhere in PATH.&lt;/p&gt;
+&lt;h2&gt;GitHub with SSH keys&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://help.github.com/articles/connecting-to-github-with-ssh/"&gt;https://help.github.com/articles/connecting-to-github-with-ssh/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I don't know if it is even possible to setup HTTPS authentication without
+installing GitHub Desktop, and SSH key authentication works with GitHub
+same as everywhere.&lt;/p&gt;
+&lt;p&gt;I keep the keys on my laptop and the rest of the environment is on a thumb
+drive. That way I can develop anywhere I want, Windows comes as a given (sadly),
+and I don't have to worry about keys security, because they are not exposed
+to random computers.&lt;/p&gt;
+&lt;p&gt;Official documentation recommends using HTTPS just because it's easier for
+newcomers (&lt;a href="https://stackoverflow.com/questions/11041729"&gt;https://stackoverflow.com/questions/11041729&lt;/a&gt;)
+- It does not require generating public/private keys and uploading the correct
+  one to GitHub
+- HTTPS is allowed everywhere and SSH might be blocked by a firewall&lt;/p&gt;</content></entry></feed>
