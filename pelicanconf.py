@@ -41,6 +41,14 @@ LOCALE = "C"
 DEFAULT_DATE_FORMAT = "%Y-%m-%d"
 DEFAULT_DATE = "fs"  # get post's date from filesystem
 
+STATIC_PATHS = [
+    'images',
+    'static/CNAME'
+    ]
+EXTRA_PATH_METADATA = {
+    'static/CNAME': {'path': 'CNAME'},
+    }
+
 ARTICLE_PATHS = ['posts',]
 ARTICLE_URL = '{category}/{date:%Y}/{slug}/'
 ARTICLE_SAVE_AS = '{category}/{date:%Y}/{slug}/index.html'
