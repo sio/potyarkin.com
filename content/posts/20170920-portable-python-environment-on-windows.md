@@ -2,7 +2,7 @@ title: Portable development setup for Python on Windows
 date: 2017-09-20
 
 ## WinPython
-https://winpython.github.io/
+<https://winpython.github.io/>
 
 All-in-one distribution which comes with many difficult-to-build packages
 preinstalled. And their ...-Zero version is great for thumb drives!
@@ -12,12 +12,12 @@ always a pain on Windows. May be I should look into conda and see if it
 offers a portable variant.
 
 **NOTE:** there are unofficial binary wheels for most common Python packages
-at http://www.lfd.uci.edu/~gohlke/pythonlibs/ The site's hosting is a little
+at <http://www.lfd.uci.edu/~gohlke/pythonlibs/> The site's hosting is a little
 unreliable, so it might take a few trys to fetch a package.
 
 
 ## Git Portable
-https://git-scm.com/download/win
+<https://git-scm.com/download/win>
 
 Git for Windows is now recommended by official Git website, and there always
 is a portable version.
@@ -29,7 +29,7 @@ preferred by many developers.
 
 
 ## GNU Make
-http://www.equation.com/servlet/equation.cmd?fa=make
+<http://www.equation.com/servlet/equation.cmd?fa=make>
 
 Unfortunately Git for Windows does not come with GNU make preinstalled, so
 we have to download it manually. Great guys at Equation Solution are regularly
@@ -39,7 +39,7 @@ Downloaded file has to be placed somewhere in PATH.
 
 
 ## GitHub with SSH keys
-https://help.github.com/articles/connecting-to-github-with-ssh/
+<https://help.github.com/articles/connecting-to-github-with-ssh/>
 
 I don't know if it is even possible to setup HTTPS authentication without
 installing GitHub Desktop, and SSH key authentication works with GitHub
@@ -51,7 +51,7 @@ and I don't have to worry about keys security, because they are not exposed
 to random computers.
 
 Official documentation recommends using HTTPS just because it's easier for
-newcomers (https://stackoverflow.com/questions/11041729)
+newcomers (<https://stackoverflow.com/questions/11041729>)
 - It does not require generating public/private keys and uploading the correct
   one to GitHub
 - HTTPS is allowed everywhere and SSH might be blocked by a firewall
