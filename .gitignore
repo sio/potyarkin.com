@@ -1,5 +1,6 @@
 # Temporary local files for Pelican development
 *.pid
+.*.swp
 init.bat
 
 # Development environment
