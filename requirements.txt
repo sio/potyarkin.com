@@ -1,0 +1,3 @@
+# Use these packages to setup development venv
+pelican
+Markdown
