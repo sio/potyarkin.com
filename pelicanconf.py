@@ -25,7 +25,7 @@ LINKS = ()
 
 # Social widget
 SOCIAL = [
-    ('calendar', '/archives.html'),
+    ('calendar', '/archive/'),
     ('tags', '/tags.html'),
     ('email', 'sio.wtf@gmail.com'),
     ('github', 'https://github.com/sio'),
@@ -44,6 +44,7 @@ DEFAULT_DATE = "fs"  # get post's date from filesystem
 ARTICLE_PATHS = ['posts',]
 ARTICLE_URL = '{category}/{date:%Y}/{slug}/'
 ARTICLE_SAVE_AS = '{category}/{date:%Y}/{slug}/index.html'
+ARCHIVES_SAVE_AS = 'archive/index.html'
 YEAR_ARCHIVE_SAVE_AS = 'archive/{date:%Y}/index.html'
 PAGE_URL = '{slug}/'
 PAGE_SAVE_AS = '{slug}/index.html'
