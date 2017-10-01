@@ -1,4 +1,5 @@
 title: Portable development setup for Python on Windows
+tags: python, windows, bookmarks
 date: 2017-09-20
 
 ## WinPython
