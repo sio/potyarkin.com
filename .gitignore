@@ -1,7 +1,7 @@
 # Temporary local files for Pelican development
 *.pid
 .*.swp
-init.bat
+*.bat
 
 # Development environment
 blog-build/
