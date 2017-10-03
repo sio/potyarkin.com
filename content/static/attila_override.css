@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=PT+Sans');
 
 body {
-    font-family:"PT Sans"!important;
+    font-family:"PT Sans", Verdana, sans-serif;
 }
 .inner {
     max-width:40em!important;
