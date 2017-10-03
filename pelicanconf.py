@@ -49,7 +49,7 @@ LINKS = ()
 
 # Social widget
 SOCIAL = [
-    ('calendar', '/archive/'),
+    ('archive', '/archive/'),
     ('tags', '/tags.html'),
     ('email', 'mailto:sio.wtf@gmail.com'),
     ('github', 'https://github.com/sio'),
