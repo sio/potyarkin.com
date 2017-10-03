@@ -13,3 +13,6 @@
 [submodule "plugins/pelican-plugins"]
 	path = plugins/pelican-plugins
 	url = https://github.com/getpelican/pelican-plugins.git
+[submodule "themes/attila"]
+	path = themes/attila
+	url = https://github.com/arulrajnet/attila.git
