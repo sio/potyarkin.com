@@ -43,6 +43,7 @@ DEFAULT_DATE = "fs"  # get post's date from filesystem
 
 STATIC_PATHS = [
     'images',
+    'static',
     'static/CNAME'
     ]
 EXTRA_PATH_METADATA = {
@@ -57,7 +58,13 @@ YEAR_ARCHIVE_SAVE_AS = 'archive/{date:%Y}/index.html'
 PAGE_URL = '{slug}/'
 PAGE_SAVE_AS = '{slug}/index.html'
 
-THEME = "themes/pelican-hyde"
+# Configuring current theme
+THEME = "themes/attila"
+CSS_OVERRIDE = ["static/attila_override.css"]
+HEADER_COLOR = "rgb(242,106,61)"
+MENUITEMS = [(name.title(), url) for name, url in SOCIAL]
+SOCIAL.append(("feed", "docs/feeds/all.atom.xml"))
+
 PLUGIN_PATHS = [
     'plugins/pelican-plugins']
 PLUGINS = [
