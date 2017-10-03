@@ -53,6 +53,7 @@ to random computers.
 
 Official documentation recommends using HTTPS just because it's easier for
 newcomers (<https://stackoverflow.com/questions/11041729>)
+
 - It does not require generating public/private keys and uploading the correct
   one to GitHub
 - HTTPS is allowed everywhere and SSH might be blocked by a firewall
