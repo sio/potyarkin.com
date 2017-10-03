@@ -38,7 +38,9 @@ drive. That way I can develop anywhere I want, Windows comes as a given (sadly),
 and I don't have to worry about keys security, because they are not exposed
 to random computers.&lt;/p&gt;
 &lt;p&gt;Official documentation recommends using HTTPS just because it's easier for
-newcomers (&lt;a href="https://stackoverflow.com/questions/11041729"&gt;https://stackoverflow.com/questions/11041729&lt;/a&gt;)
-- It does not require generating public/private keys and uploading the correct
-  one to GitHub
-- HTTPS is allowed everywhere and SSH might be blocked by a firewall&lt;/p&gt;</content><category term="python"></category><category term="windows"></category><category term="bookmarks"></category></entry></feed>
+newcomers (&lt;a href="https://stackoverflow.com/questions/11041729"&gt;https://stackoverflow.com/questions/11041729&lt;/a&gt;)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It does not require generating public/private keys and uploading the correct
+  one to GitHub&lt;/li&gt;
+&lt;li&gt;HTTPS is allowed everywhere and SSH might be blocked by a firewall&lt;/li&gt;
+&lt;/ul&gt;</content><category term="python"></category><category term="windows"></category><category term="bookmarks"></category></entry></feed>
