@@ -1,0 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Sans');
+
+body {
+    font-family:"PT Sans"!important;
+}
+.inner {
+    max-width:40em!important;
+}
