@@ -27,7 +27,7 @@ LINKS = ()
 SOCIAL = [
     ('calendar', '/archive/'),
     ('tags', '/tags.html'),
-    ('email', 'sio.wtf@gmail.com'),
+    ('email', 'mailto:sio.wtf@gmail.com'),
     ('github', 'https://github.com/sio'),
     ]
 
