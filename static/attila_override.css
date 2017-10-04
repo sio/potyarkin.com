@@ -1,8 +1,39 @@
+/* Pretty fonts, thanks to Google */
 @import url('https://fonts.googleapis.com/css?family=PT+Sans');
-
 body {
     font-family:"PT Sans", Verdana, sans-serif;
 }
+
+/* Wider page */
 .inner {
-    max-width:40em!important;
+    max-width:40em;
+}
+
+/* More conventional bullet list marker */
+ul>li:before {
+    margin-top: -0.05em;
+    content: "–";
+}
+
+/* Cleaner print style */
+@media print {
+    html {
+        font-size:40%;
+    }
+    .inner {
+        max-width:100%;
+    }
+    #navigation, .post-cover {
+        display:none;
+    }
+    #post-header {
+        background-color: white!important;
+        padding:2em 0 0 0!important;
+    }
+    .post {
+        padding-top:0;
+    }
+    h1 {
+        color: black!important
+    }
 }
