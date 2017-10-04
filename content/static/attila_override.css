@@ -14,3 +14,26 @@ ul>li:before {
     margin-top: -0.05em;
     content: "–";
 }
+
+/* Cleaner print style */
+@media print {
+    html {
+        font-size:40%;
+    }
+    .inner {
+        max-width:100%;
+    }
+    #navigation, .post-cover {
+        display:none;
+    }
+    #post-header {
+        background-color: white!important;
+        padding:2em 0 0 0!important;
+    }
+    .post {
+        padding-top:0;
+    }
+    h1 {
+        color: black!important
+    }
+}
