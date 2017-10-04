@@ -1,13 +1,15 @@
+/* Pretty fonts, thanks to Google */
 @import url('https://fonts.googleapis.com/css?family=PT+Sans');
-
 body {
     font-family:"PT Sans", Verdana, sans-serif;
 }
 
+/* Wider page */
 .inner {
-    max-width:40em!important;
+    max-width:40em;
 }
 
+/* More conventional bullet list marker */
 ul>li:before {
     content: "–";
 }
