@@ -11,5 +11,6 @@ body {
 
 /* More conventional bullet list marker */
 ul>li:before {
+    margin-top: -0.05em;
     content: "–";
 }
