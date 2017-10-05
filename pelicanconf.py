@@ -32,8 +32,8 @@ YEAR_ARCHIVE_SAVE_AS = 'archive/{date:%Y}/index.html'
 
 # Custom configuration for potyarkin.ml
 AUTHOR = 'Vitaly Potyarkin'
-BIO = 'Unsorted ramblings, sometimes related to programming'
-SITENAME = 'Randomize'
+SITENAME = 'Orange Sun'
+SITESUBTITLE = 'Unsorted ramblings, sometimes related to programming'
 SITEURL = ''
 TIMEZONE = 'Europe/Moscow'
 
