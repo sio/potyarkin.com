@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 
-  <title>Portable development setup for Python on Windows</title>
+  <title>Temporary virtual environment for Python</title>
 
 
   <meta name="HandheldFriendly" content="True" />
@@ -41,33 +41,33 @@
   <![endif]-->
 
 
-    <link href="http://potyarkin.ml/posts/2017/portable-development-setup-for-python-on-windows/" rel="canonical" />
+    <link href="http://potyarkin.ml/posts/2017/temporary-virtual-environment-for-python/" rel="canonical" />
 
-        <meta name="description" content="WinPython https://winpython.github.io/ All-in-one distribution which comes with many difficult-to-build packages preinstalled. And their...">
+        <meta name="description" content="Using Python on Windows does not come as naturally as on Unix-like systems, so any help is appreciated. I wrote a batch script to...">
 
         <meta name="author" content="Vitaly Potyarkin">
 
-        <meta name="tags" content="python">
         <meta name="tags" content="windows">
-        <meta name="tags" content="bookmarks">
+        <meta name="tags" content="script">
+        <meta name="tags" content="gist">
 
 
 
 
 <!-- Open Graph -->
 <meta property="og:site_name" content="Orange Sun"/>
-<meta property="og:title" content="Portable development setup for Python on Windows"/>
-<meta property="og:description" content="WinPython https://winpython.github.io/ All-in-one distribution which comes with many difficult-to-build packages preinstalled. And their..."/>
+<meta property="og:title" content="Temporary virtual environment for Python"/>
+<meta property="og:description" content="Using Python on Windows does not come as naturally as on Unix-like systems, so any help is appreciated. I wrote a batch script to..."/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="http://potyarkin.ml/posts/2017/portable-development-setup-for-python-on-windows/"/>
+<meta property="og:url" content="http://potyarkin.ml/posts/2017/temporary-virtual-environment-for-python/"/>
 <meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2017-09-20 00:00:00+03:00"/>
+<meta property="article:published_time" content="2017-10-05 16:50:00+03:00"/>
 <meta property="article:modified_time" content=""/>
 <meta property="article:author" content="http://potyarkin.ml/author/vitaly-potyarkin.html">
 <meta property="article:section" content="posts"/>
-<meta property="article:tag" content="python"/>
 <meta property="article:tag" content="windows"/>
-<meta property="article:tag" content="bookmarks"/>
+<meta property="article:tag" content="script"/>
+<meta property="article:tag" content="gist"/>
 <meta property="og:image" content="http://potyarkin.ml/theme/images/post-bg.jpg">
 
 <!-- Twitter Card -->
@@ -76,9 +76,9 @@
 {
   "@context": "http://schema.org",
   "@type": "Article",
-  "name": "Portable development setup for Python on Windows",
-  "headline": "Portable development setup for Python on Windows",
-  "datePublished": "2017-09-20 00:00:00+03:00",
+  "name": "Temporary virtual environment for Python",
+  "headline": "Temporary virtual environment for Python",
+  "datePublished": "2017-10-05 16:50:00+03:00",
   "dateModified": "",
   "author": {
     "@type": "Person",
@@ -86,8 +86,8 @@
     "url": "http://potyarkin.ml/author/vitaly-potyarkin.html"
   },
   "image": "http://potyarkin.ml/theme/images/post-bg.jpg",
-  "url": "http://potyarkin.ml/posts/2017/portable-development-setup-for-python-on-windows/",
-  "description": "WinPython https://winpython.github.io/ All-in-one distribution which comes with many difficult-to-build packages preinstalled. And their..."
+  "url": "http://potyarkin.ml/posts/2017/temporary-virtual-environment-for-python/",
+  "description": "Using Python on Windows does not come as naturally as on Unix-like systems, so any help is appreciated. I wrote a batch script to..."
 }
 </script>
 </head>
@@ -126,11 +126,11 @@
             <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
           </span>
         </nav>
-        <h1 class="post-title">Portable development setup for Python on Windows</h1>
+        <h1 class="post-title">Temporary virtual environment for Python</h1>
         <!-- TODO : Proper class for headline -->
         <span class="post-meta">
                 <a href="http://potyarkin.ml/author/vitaly-potyarkin.html">Vitaly Potyarkin</a>
-            | <time datetime="2017-09-20">2017-09-20</time>
+            | <time datetime="2017-10-05">2017-10-05</time>
         </span>
         <!-- TODO : Modified check -->
             <div class="post-cover cover" style="background-color: rgb(242,106,61)">
@@ -145,64 +145,52 @@
         <article class="post">
         <div class="inner">
             <section class="post-content">
-                <h2>WinPython</h2>
-<p><a href="https://winpython.github.io/">https://winpython.github.io/</a></p>
-<p>All-in-one distribution which comes with many difficult-to-build packages
-preinstalled. And their ...-Zero version is great for thumb drives!</p>
-<p>Pip works just fine, but installing packages that require C compiler is
-always a pain on Windows. May be I should look into conda and see if it
-offers a portable variant.</p>
-<p><strong>NOTE:</strong> there are unofficial binary wheels for most common Python packages
-at <a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/">http://www.lfd.uci.edu/~gohlke/pythonlibs/</a> The site's hosting is a little
-unreliable, so it might take a few trys to fetch a package.</p>
-<h2>Git Portable</h2>
-<p><a href="https://git-scm.com/download/win">https://git-scm.com/download/win</a></p>
-<p>Git for Windows is now recommended by official Git website, and there always
-is a portable version.</p>
-<p>This package provides not only Git but also bash and a basic MSYS environment
-(coreutils, sed, grep, awk, etc) which make life on Window <em>so much</em> easier!
-Also, it comes with VIM preinstalled, which is a damn good editor and is
-preferred by many developers.</p>
-<h2>GNU Make</h2>
-<p><a href="http://www.equation.com/servlet/equation.cmd?fa=make">http://www.equation.com/servlet/equation.cmd?fa=make</a></p>
-<p>Unfortunately Git for Windows does not come with GNU make preinstalled, so
-we have to download it manually. Great guys at Equation Solution are regularly
-building standalone versions of GNU Make for 32-bit and 64-bit Windows.</p>
-<p>Downloaded file has to be placed somewhere in PATH.</p>
-<h2>GitHub with SSH keys</h2>
-<p><a href="https://help.github.com/articles/connecting-to-github-with-ssh/">https://help.github.com/articles/connecting-to-github-with-ssh/</a></p>
-<p>I don't know if it is even possible to setup HTTPS authentication without
-installing GitHub Desktop, and SSH key authentication works with GitHub
-same as everywhere.</p>
-<p>I keep the keys on my laptop and the rest of the environment is on a thumb
-drive. That way I can develop anywhere I want, Windows comes as a given (sadly),
-and I don't have to worry about keys security, because they are not exposed
-to random computers.</p>
-<p>Official documentation recommends using HTTPS just because it's easier for
-newcomers (<a href="https://stackoverflow.com/questions/11041729">https://stackoverflow.com/questions/11041729</a>)</p>
-<ul>
-<li>It does not require generating public/private keys and uploading the correct
-  one to GitHub</li>
-<li>HTTPS is allowed everywhere and SSH might be blocked by a firewall</li>
-</ul>
+                <p>Using Python on Windows does not come as naturally as on Unix-like systems, so
+any help is appreciated.</p>
+<p>I wrote a batch script to automate creation, setup and deletion of Python virtual
+environment. This can come handy when you want to test something in a clean env,
+or to play with <code>pip install</code> and get acquainted with a new package from PyPI.</p>
+<h2>venv-temp.bat</h2>
+<p>You can download the script from
+<a href="https://gist.github.com/sio/fbc46ae41607b206ce9099dc8485df34">https://gist.github.com/sio/...</a></p>
+<p>The code is licensed under a permissive opensource license (Apache License,
+Version 2.0) so feel free to use it for your hobby and work projects.</p>
+<p>Report any bugs, ideas, feature requests via GitHub issues/comments -
+all feedback is welcome!</p>
+<h2>Installation</h2>
+<p>Downloaded script does not require any installation.</p>
+<p>If <code>python</code> is not available from your <code>%PATH%</code>, you have to specify the location
+of <code>python.exe</code> in the script (change the value of <code>PYTHON</code> variable).</p>
+<h2>Usage</h2>
+<p>Launch the script from <code>cmd.exe</code> to read all error output (if any) or by
+double-clicking if you're confident it works on your system.</p>
+<p>After you're done experimenting and are ready to discard the venv, just end shell
+session with <code>exit</code> - the script will take care of cleanup.</p>
+<p>If you close the
+terminal window without typing <code>exit</code>, the script will be terminated before it
+performs cleanup. This has no harmful consequences except taking 20-50MB of disk
+space. Old venv directory will be purged before reusing, so no changes you've
+made will affect the environment you'll get next time.</p>
+<p><strong>NOTE:</strong> If you have no internet connection, the script remains usable, but <code>pip</code>
+will print a lot of error messages while trying to update itself. Don't worry, that's ok.</p>
             </section>
 
             <section class="post-info">
                 <div class="post-share">
-                    <a class="twitter" href="https://twitter.com/share?text=Portable development setup for Python on Windows&amp;url=http://potyarkin.ml/posts/2017/portable-development-setup-for-python-on-windows/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <a class="twitter" href="https://twitter.com/share?text=Temporary virtual environment for Python&amp;url=http://potyarkin.ml/posts/2017/temporary-virtual-environment-for-python/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
                     </a>
-                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://potyarkin.ml/posts/2017/portable-development-setup-for-python-on-windows/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://potyarkin.ml/posts/2017/temporary-virtual-environment-for-python/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
                     </a>
-                    <a class="googleplus" href="https://plus.google.com/share?url=http://potyarkin.ml/posts/2017/portable-development-setup-for-python-on-windows/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <a class="googleplus" href="https://plus.google.com/share?url=http://potyarkin.ml/posts/2017/temporary-virtual-environment-for-python/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
                     </a>
                     <div class="clear"></div>
                 </div>
 
                 <aside class="post-tags">
-<a href="http://potyarkin.ml/tag/python.html">python</a><a href="http://potyarkin.ml/tag/windows.html">windows</a><a href="http://potyarkin.ml/tag/bookmarks.html">bookmarks</a>                </aside>
+<a href="http://potyarkin.ml/tag/windows.html">windows</a><a href="http://potyarkin.ml/tag/script.html">script</a><a href="http://potyarkin.ml/tag/gist.html">gist</a>                </aside>
 
                 <div class="clear"></div>
 
