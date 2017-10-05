@@ -43,7 +43,8 @@ All command-line parameters are passed on to the `git` command.
 When the script is launched without parameters, `git-projects.sh` checks the
 status of each repo.
 
-Repositories are sorted in alphabetical order by paths listed in `PROJECT_LIST`.
+Repositories are processed in alphabetical order sorted by paths
+listed in `PROJECT_LIST`.
 
 
 ## Examples
