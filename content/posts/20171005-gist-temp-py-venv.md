@@ -6,7 +6,7 @@ Using Python on Windows does not come as naturally as on Unix-like systems, so
 any help is appreciated.
 
 I wrote a batch script to automate creation, setup and deletion of Python virtual
-environment. This can come handy when you want to test something in a clean env,
+environment. This can come in handy when you want to test something in a clean env,
 or to play with `pip install` and get acquainted with a new package from PyPI.
 
 
