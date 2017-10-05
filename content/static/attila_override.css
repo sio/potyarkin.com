@@ -17,23 +17,28 @@ ul>li:before {
 
 /* Cleaner print style */
 @media print {
-    html {
-        font-size:40%;
+    html * {
+        font-size:12pt!important;
+        color:black!important;
     }
+    body {line-height:1.3em;}
+    h1 {font-size:125%!important;}
+    h2 {font-size:115%!important;}
+    h3 {font-size:110%!important;}
+    p ul ol {margin:0.5em auto!important;}
     .inner {
-        max-width:100%;
+        max-width:100%!important;
     }
-    #navigation, .post-cover {
-        display:none;
+    #menu, #navigation,
+    .blog-cover, .post-cover,
+    .progress-container {
+        display:none!important;
     }
-    #post-header {
+    #blog-header, #post-header {
         background-color: white!important;
         padding:2em 0 0 0!important;
     }
     .post {
-        padding-top:0;
-    }
-    h1 {
-        color: black!important
+        padding-top:0!important;
     }
 }
