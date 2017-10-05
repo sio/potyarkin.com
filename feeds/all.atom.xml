@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun</title><link href="http://potyarkin.ml/" rel="alternate"></link><link href="http://potyarkin.ml/feeds/all.atom.xml" rel="self"></link><id>http://potyarkin.ml/</id><updated>2017-10-05T16:50:00+03:00</updated><entry><title>Temporary virtual environment for Python</title><link href="http://potyarkin.ml/posts/2017/temporary-virtual-environment-for-python/" rel="alternate"></link><published>2017-10-05T16:50:00+03:00</published><updated>2017-10-05T16:50:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2017-10-05:/posts/2017/temporary-virtual-environment-for-python/</id><summary type="html">&lt;p&gt;Using Python on Windows does not come as naturally as on Unix-like systems, so
 any help is appreciated.&lt;/p&gt;
 &lt;p&gt;I wrote a batch script to automate creation, setup and deletion of Python virtual
-environment. This can come handy when you want to test something in a clean env,
-or to play …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Using Python on Windows does not come as naturally as on Unix-like systems, so
+environment. This can come in handy when you want to test something in a clean env,
+or to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Using Python on Windows does not come as naturally as on Unix-like systems, so
 any help is appreciated.&lt;/p&gt;
 &lt;p&gt;I wrote a batch script to automate creation, setup and deletion of Python virtual
-environment. This can come handy when you want to test something in a clean env,
+environment. This can come in handy when you want to test something in a clean env,
 or to play with &lt;code&gt;pip install&lt;/code&gt; and get acquainted with a new package from PyPI.&lt;/p&gt;
 &lt;h2&gt;venv-temp.bat&lt;/h2&gt;
 &lt;p&gt;You can download the script from
@@ -68,7 +68,8 @@ all feedback is welcome!&lt;/p&gt;
 &lt;p&gt;All command-line parameters are passed on to the &lt;code&gt;git&lt;/code&gt; command.
 When the script is launched without parameters, &lt;code&gt;git-projects.sh&lt;/code&gt; checks the
 status of each repo.&lt;/p&gt;
-&lt;p&gt;Repositories are sorted in alphabetical order by paths listed in &lt;code&gt;PROJECT_LIST&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Repositories are processed in alphabetical order sorted by paths
+listed in &lt;code&gt;PROJECT_LIST&lt;/code&gt;.&lt;/p&gt;
 &lt;h2&gt;Examples&lt;/h2&gt;
 &lt;h3&gt;Refreshing your memory&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ ./git-projects.sh log --oneline -3 --no-decorate
