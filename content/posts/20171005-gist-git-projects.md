@@ -5,10 +5,10 @@ date: 2017-10-05 15:40
 If you work with more than one git project simultaneously, you often need to
 do the same maintenance tasks in each cloned repository:
 
-- check if there are some changes waiting to be pushed
+- check if there are some changes waiting to be pushed,
 - check remote URLs for all repos (e.g. when considering to switch from HTTPS
-  authentication with GitHub to using SSH keys)
-- view last commit messages to refresh your memory
+  authentication with GitHub to using SSH keys),
+- view last commit messages to refresh your memory.
 
 Doing so with standard tools would involve a lot of `cd`-ing, and the
 inconvenience would deter you from checking all repos frequently.
