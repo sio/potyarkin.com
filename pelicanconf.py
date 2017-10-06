@@ -19,6 +19,7 @@ STATIC_PATHS = [
     ]
 EXTRA_PATH_METADATA = {
     'static/CNAME': {'path': 'CNAME'},
+    'static/favicon.ico': {'path': 'favicon.ico'},
     'static/README-for-docs.md': {'path': 'README.md'},
     'static/google684a6a967bc36817.html': {'path': 'google684a6a967bc36817.html'},
     }
