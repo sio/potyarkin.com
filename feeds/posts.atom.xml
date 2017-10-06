@@ -33,15 +33,15 @@ made will affect the environment you'll get next time.&lt;/p&gt;
 will print a lot of error messages while trying to update itself. Don't worry, that's ok.&lt;/p&gt;</content><category term="windows"></category><category term="script"></category><category term="gist"></category></entry><entry><title>Execute the same git subcommand in all local repositories</title><link href="http://potyarkin.ml/posts/2017/execute-the-same-git-subcommand-in-all-local-repositories/" rel="alternate"></link><published>2017-10-05T15:40:00+03:00</published><updated>2017-10-05T15:40:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2017-10-05:/posts/2017/execute-the-same-git-subcommand-in-all-local-repositories/</id><summary type="html">&lt;p&gt;If you work with more than one git project simultaneously, you often need to
 do the same maintenance tasks in each cloned repository:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;check if there are some changes waiting to be pushed&lt;/li&gt;
+&lt;li&gt;check if there are some changes waiting to be pushed,&lt;/li&gt;
 &lt;li&gt;check remote URLs for all repos (e.g. when considering to switch from HTTPS
   authentication with GitHub …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;If you work with more than one git project simultaneously, you often need to
 do the same maintenance tasks in each cloned repository:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;check if there are some changes waiting to be pushed&lt;/li&gt;
+&lt;li&gt;check if there are some changes waiting to be pushed,&lt;/li&gt;
 &lt;li&gt;check remote URLs for all repos (e.g. when considering to switch from HTTPS
-  authentication with GitHub to using SSH keys)&lt;/li&gt;
-&lt;li&gt;view last commit messages to refresh your memory&lt;/li&gt;
+  authentication with GitHub to using SSH keys),&lt;/li&gt;
+&lt;li&gt;view last commit messages to refresh your memory.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Doing so with standard tools would involve a lot of &lt;code&gt;cd&lt;/code&gt;-ing, and the
 inconvenience would deter you from checking all repos frequently.&lt;/p&gt;
