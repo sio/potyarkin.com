@@ -6,7 +6,7 @@ environment. This can come in handy when you want to test something in a clean e
 or to …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vitaly Potyarkin</dc:creator><pubDate>Thu, 05 Oct 2017 16:50:00 +0300</pubDate><guid isPermaLink="false">tag:potyarkin.ml,2017-10-05:/posts/2017/temporary-virtual-environment-for-python/</guid><category>windows</category><category>script</category><category>gist</category></item><item><title>Execute the same git subcommand in all local repositories</title><link>http://potyarkin.ml/posts/2017/execute-the-same-git-subcommand-in-all-local-repositories/</link><description>&lt;p&gt;If you work with more than one git project simultaneously, you often need to
 do the same maintenance tasks in each cloned repository:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;check if there are some changes waiting to be pushed&lt;/li&gt;
+&lt;li&gt;check if there are some changes waiting to be pushed,&lt;/li&gt;
 &lt;li&gt;check remote URLs for all repos (e.g. when considering to switch from HTTPS
   authentication with GitHub …&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vitaly Potyarkin</dc:creator><pubDate>Thu, 05 Oct 2017 15:40:00 +0300</pubDate><guid isPermaLink="false">tag:potyarkin.ml,2017-10-05:/posts/2017/execute-the-same-git-subcommand-in-all-local-repositories/</guid><category>bash</category><category>script</category><category>gist</category></item><item><title>Portable development setup for Python on Windows</title><link>http://potyarkin.ml/posts/2017/portable-development-setup-for-python-on-windows/</link><description>&lt;h2&gt;WinPython&lt;/h2&gt;
 &lt;p&gt;&lt;a href="https://winpython.github.io/"&gt;https://winpython.github.io/&lt;/a&gt;&lt;/p&gt;
