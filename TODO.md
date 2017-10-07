@@ -16,6 +16,7 @@
     - Localization = bad, internationalization = good
     - It's all abstractions anyway
     - Documentation localization = documentation translation = good
+    - Content localization = definitely good
     - UI localization ~~ so-so
     - If customer is paying for localization - why not
     - Opensource contributors... Can't force people, but those skills can
