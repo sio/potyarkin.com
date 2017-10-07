@@ -71,4 +71,4 @@ THEME = 'themes/attila'
 CSS_OVERRIDE = ['static/attila_override.css']
 HEADER_COLOR = 'rgb(242,106,61)'
 MENUITEMS = [(name.title(), url) for name, url in SOCIAL]
-SOCIAL.append(('feed', 'feeds/all.atom.xml'))
+SOCIAL.append(('feed', '/feeds/all.atom.xml'))
