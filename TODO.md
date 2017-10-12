@@ -22,3 +22,5 @@
     - Opensource contributors... Can't force people, but those skills can
       bring more benefit elsewhere (documentation, issue tracker: confirming
       bugs, "advertising")
+    - Remove, clear, uninstall -> удалить
+    - Insert, paste -> вставить
