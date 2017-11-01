@@ -43,6 +43,7 @@ always treat the `each` statement as a function [because it is][2] a shortcut
 for function definition.)
 
 The parameters are:
+
 - **start**: a function that takes zero arguments and returns the first loop
   item.
 - **condition**: a function that takes one argument (loop item) and returns
