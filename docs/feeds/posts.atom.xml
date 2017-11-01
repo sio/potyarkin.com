@@ -1,5 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - posts</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/posts.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2017-10-05T16:50:00+03:00</updated><entry><title>Temporary virtual environment for Python</title><link href="https://potyarkin.ml/posts/2017/temporary-virtual-environment-for-python/" rel="alternate"></link><published>2017-10-05T16:50:00+03:00</published><updated>2017-10-05T16:50:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2017-10-05:/posts/2017/temporary-virtual-environment-for-python/</id><summary type="html">&lt;p&gt;Using Python on Windows does not come as naturally as on Unix-like systems, so
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - posts</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/posts.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2017-10-31T00:00:00+03:00</updated><entry><title>Loops in Power Query M language</title><link href="https://potyarkin.ml/posts/2017/loops-in-power-query-m-language/" rel="alternate"></link><published>2017-10-31T00:00:00+03:00</published><updated>2017-10-31T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2017-10-31:/posts/2017/loops-in-power-query-m-language/</id><summary type="html">&lt;p&gt;Power Query Formula Language (also known as M language) is sometimes difficult
+to get your head around. This article explains how someone familiar with loops
+in other programming languages can approach the same concept in M language.&lt;/p&gt;
+&lt;p&gt;First of all let's look at the &lt;a href="https://msdn.microsoft.com/en-us/library/mt211003.aspx"&gt;definition&lt;/a&gt; given by Microsoft:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The Power …&lt;/p&gt;&lt;/blockquote&gt;</summary><content type="html">&lt;p&gt;Power Query Formula Language (also known as M language) is sometimes difficult
+to get your head around. This article explains how someone familiar with loops
+in other programming languages can approach the same concept in M language.&lt;/p&gt;
+&lt;p&gt;First of all let's look at the &lt;a href="https://msdn.microsoft.com/en-us/library/mt211003.aspx"&gt;definition&lt;/a&gt; given by Microsoft:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The Power Query M formula language is optimized for building highly flexible
+data mashup queries. It's a &lt;strong&gt;functional&lt;/strong&gt;, case sensitive language similar
+to F#, which can be used with Power BI Desktop, Power Query in Excel, and Get
+&amp;amp; Transform in Excel 2016.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;"Functional" is the key word&lt;/h2&gt;
+&lt;p&gt;Understanding (and accepting) that M is entirely different from most common
+programming languages has helped me as much as (maybe even more than) the
+exhaustive reference at MSDN. Functional language implies declarative
+programming paradigm: you describe &lt;em&gt;what&lt;/em&gt; you want the computer to do instead
+of telling &lt;em&gt;how&lt;/em&gt; to do it. If you're familiar with LISP or Erlang or Haskell, M
+might not look so foreign to you.&lt;/p&gt;
+&lt;p&gt;The code in M is not an explicit sequence of steps that will always be executed
+in the same order, it is just a bunch of ground rules that allow the computer
+to arrive to the solution. You can check that the order of lines within the
+&lt;code&gt;let&lt;/code&gt; statement doesn't matter: as long as all necessary intermediate steps are
+described, Power Query will produce the same result even if you rearrange them
+randomly.&lt;/p&gt;
+&lt;p&gt;And that is the reason you don't get familiar control flow statements. &lt;em&gt;If&lt;/em&gt; is
+kinda there, but it has its own quirks too. Loops are out of the question,
+unless you somehow manage to implement the function that does the looping for
+you. But...&lt;/p&gt;
+&lt;p&gt;There already is such a function! It is &lt;code&gt;List.Generate&lt;/code&gt;!&lt;/p&gt;
+&lt;h2&gt;List.Generate&lt;/h2&gt;
+&lt;p&gt;This function takes 3 or 4 parameters, all of them functions.  (You should
+always treat the &lt;code&gt;each&lt;/code&gt; statement as a function &lt;a href="https://msdn.microsoft.com/en-us/library/mt185361.aspx"&gt;because it is&lt;/a&gt; a shortcut
+for function definition.)&lt;/p&gt;
+&lt;p&gt;The parameters are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;start&lt;/strong&gt;: a function that takes zero arguments and returns the first loop
+  item.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;condition&lt;/strong&gt;: a function that takes one argument (loop item) and returns
+  boolean value. If this function returns &lt;code&gt;false&lt;/code&gt; the iteration stops,
+  otherwise the loop item is added to the list of results. This function will
+  be called at the end of each iteration.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;next&lt;/strong&gt;: a function that takes one argument (loop item) and returns the next
+  loop item. This is the worker body of the loop. Be careful to return the next
+  item as the same data type with the same structure, because the returned
+  value will be fed to &lt;code&gt;condition()&lt;/code&gt; and &lt;code&gt;next()&lt;/code&gt; functions later. This
+  function will be called at the beginning of each iteration.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;transform&lt;/strong&gt;: optional argument. A function that takes one argument - the
+  item from the list of results and transforms it into something else.  This
+  function gets called once per each item in the list of results, and the list
+  of values it returns becomes the return value of &lt;code&gt;List.Generate&lt;/code&gt;. If
+  &lt;code&gt;transform()&lt;/code&gt; function is not specified, &lt;code&gt;List.Generate&lt;/code&gt; will return the list
+  of items at the moment when &lt;code&gt;condition()&lt;/code&gt; returns &lt;code&gt;false&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;List.Generate&lt;/code&gt; might be easier to understand with the following pseudocode:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;List&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Generate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;start&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;condition&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;next&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;transform&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;results&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;item&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;start&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;condition&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;results&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;item&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;next&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;transform&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;output&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;results&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;transform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;output&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;results&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;A simple example&lt;/h2&gt;
+&lt;p&gt;We will generate a table of data points for plotting a parabola. Internally we
+will be storing each item as the record with &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt; fields.  After that we
+will transform that data into a Power Query table for output.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;let
+    data = List.Generate(
+        () =&amp;gt; [x=-10, y=100],
+        each [x]&amp;lt;=10,
+        each [x=[x]+1, y=x*x]
+    ),
+    output = Table.FromRecords(data)
+in output
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;In this example &lt;code&gt;start()&lt;/code&gt; is an anonymous function that always returns the
+first data point, &lt;code&gt;condition()&lt;/code&gt; and &lt;code&gt;next()&lt;/code&gt; are also functions even though
+they are written using &lt;code&gt;each&lt;/code&gt; shortcut. There is no &lt;code&gt;transform()&lt;/code&gt; function
+because it is an optional parameter.&lt;/p&gt;
+&lt;h2&gt;An example from real world&lt;/h2&gt;
+&lt;p&gt;In the real world you will not need the &lt;code&gt;List.Generate&lt;/code&gt; magic for such simple
+tasks, but you will still need it. Here is how I've used it recently.&lt;/p&gt;
+&lt;p&gt;Assume you have a list of tables that contain the data in the same format but
+for different time periods or for different locations. You have a separate list
+of locations (in the correct order), but each individual table does not contain
+that information. That's why combining all these tables into one would create a
+mess: you have to know which row comes from what table.&lt;/p&gt;
+&lt;p&gt;This can be done with &lt;code&gt;List.Generate&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;NamedTables = List.Generate(
+    () =&amp;gt; [i=-1, table=#table({},{})],  // initialize loop variables
+    each [i] &amp;lt; List.Count(Tables),
+    each [
+        i=[i]+1,
+        table=Table.AddColumn(Tables{i}, &amp;quot;TableName&amp;quot;, each Names{i})
+    ],
+    each [table]
+),
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This code snippet assumes you have the list of tables in the &lt;code&gt;Tables&lt;/code&gt; variable
+and the list of their respective names in the &lt;code&gt;Names&lt;/code&gt; variable. The loop starts
+with index of -1 and an empty table, and adds a "TableName" column to each of
+the tables. After this modification the tables can be safely combined with
+&lt;code&gt;Table.Combine(NamedTables)&lt;/code&gt; - no data loss will occur.&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Using &lt;code&gt;List.Generate&lt;/code&gt; should be considered a last-ditch attempt to looping. M
+has dedicated iterative functions for most common looping tasks, so please
+check the standard library reference before creating such C-style loops
+manually. They are rather hard to read, and readability counts!&lt;/p&gt;
+&lt;p&gt;I hope this article will help you to understand the Power Query Formula
+Language a little more. It is a powerful tool and even though it is not
+perfect, I hope you will find a lot of uses for it in your data crunching
+tasks.&lt;/p&gt;
+&lt;h2&gt;An afterthought&lt;/h2&gt;
+&lt;p&gt;Also, please keep in mind that the dot symbol in &lt;code&gt;List.Generate&lt;/code&gt; does not have
+the same meaning as in other languages either. There are no object methods in
+M, and there are no namespaces, so the dot is just another character without
+any special meaning.  It could have been a dash or an underscore - it wouldn't
+have mattered.&lt;/p&gt;</content><category term="m"></category><category term="excel"></category><category term="power-query"></category></entry><entry><title>Temporary virtual environment for Python</title><link href="https://potyarkin.ml/posts/2017/temporary-virtual-environment-for-python/" rel="alternate"></link><published>2017-10-05T16:50:00+03:00</published><updated>2017-10-05T16:50:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2017-10-05:/posts/2017/temporary-virtual-environment-for-python/</id><summary type="html">&lt;p&gt;Using Python on Windows does not come as naturally as on Unix-like systems, so
 any help is appreciated.&lt;/p&gt;
 &lt;p&gt;I wrote a batch script to automate creation, setup and deletion of Python virtual
 environment. This can come in handy when you want to test something in a clean env,

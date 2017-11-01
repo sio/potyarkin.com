@@ -1,5 +1,7 @@
 /* Pretty fonts, thanks to Google */
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,500,700&amp;subset=cyrillic,cyrillic-ext,latin-ext');
 @import url('https://fonts.googleapis.com/css?family=PT+Sans');
+
 body {
     font-family:"PT Sans", Verdana, sans-serif;
 }
@@ -41,4 +43,9 @@ ul>li:before {
     .post {
         padding-top:0!important;
     }
+}
+
+/* Narrow margins for inline code */
+code, tt {
+    padding: 0.2em 0.4em;
 }
