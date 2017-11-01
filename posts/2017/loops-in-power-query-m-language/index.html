@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>Loops in Power Query M language</title>
+
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="https://potyarkin.ml/" rel="canonical" />
+
+  <!-- Feed -->
+      <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Orange Sun Full Atom Feed" />
+
+  <link href="https://potyarkin.ml/theme/css/style.css" type="text/css" rel="stylesheet" />
+
+  <!-- Code highlight color scheme -->
+      <link href="https://potyarkin.ml/theme/css/code_blocks/github.css" rel="stylesheet">
+
+    <!-- CSS specified by the user -->
+
+
+    <link href="https://potyarkin.ml/static/attila_override.css" type="text/css" rel="stylesheet" />
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+    <link href="https://potyarkin.ml/posts/2017/loops-in-power-query-m-language/" rel="canonical" />
+
+        <meta name="description" content="Power Query Formula Language (also known as M language) is sometimes difficult to get your head around. This article explains how...">
+
+        <meta name="author" content="Vitaly Potyarkin">
+
+        <meta name="tags" content="m">
+        <meta name="tags" content="excel">
+        <meta name="tags" content="power-query">
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="Orange Sun"/>
+<meta property="og:title" content="Loops in Power Query M language"/>
+<meta property="og:description" content="Power Query Formula Language (also known as M language) is sometimes difficult to get your head around. This article explains how..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://potyarkin.ml/posts/2017/loops-in-power-query-m-language/"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2017-10-31 00:00:00+03:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://potyarkin.ml/author/vitaly-potyarkin.html">
+<meta property="article:section" content="posts"/>
+<meta property="article:tag" content="m"/>
+<meta property="article:tag" content="excel"/>
+<meta property="article:tag" content="power-query"/>
+<meta property="og:image" content="https://potyarkin.ml/theme/images/post-bg.jpg">
+
+<!-- Twitter Card -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "Loops in Power Query M language",
+  "headline": "Loops in Power Query M language",
+  "datePublished": "2017-10-31 00:00:00+03:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Vitaly Potyarkin",
+    "url": "https://potyarkin.ml/author/vitaly-potyarkin.html"
+  },
+  "image": "https://potyarkin.ml/theme/images/post-bg.jpg",
+  "url": "https://potyarkin.ml/posts/2017/loops-in-power-query-m-language/",
+  "description": "Power Query Formula Language (also known as M language) is sometimes difficult to get your head around. This article explains how..."
+}
+</script>
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
+
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+          <li><a href="/archive/" role="presentation">Archive</a></li>
+          <li><a href="/tags.html" role="presentation">Tags</a></li>
+          <li><a href="mailto:sio.wtf@gmail.com" role="presentation">Email</a></li>
+          <li><a href="https://github.com/sio" role="presentation">Github</a></li>
+
+
+        <li class="nav-rss"><a href="/feeds/all.atom.xml"><i class="ic ic-rss"></i> Subscribe</a></li>
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="post-header" class="has-cover">
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="https://potyarkin.ml/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Loops in Power Query M language</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="https://potyarkin.ml/author/vitaly-potyarkin.html">Vitaly Potyarkin</a>
+            | <time datetime="2017-10-31">2017-10-31</time>
+        </span>
+        <!-- TODO : Modified check -->
+            <div class="post-cover cover" style="background-color: rgb(242,106,61)">
+      </div>
+    </header>
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <p>Power Query Formula Language (also known as M language) is sometimes difficult
+to get your head around. This article explains how someone familiar with loops
+in other programming languages can approach the same concept in M language.</p>
+<p>First of all let's look at the <a href="https://msdn.microsoft.com/en-us/library/mt211003.aspx">definition</a> given by Microsoft:</p>
+<blockquote>
+<p>The Power Query M formula language is optimized for building highly flexible
+data mashup queries. It's a <strong>functional</strong>, case sensitive language similar
+to F#, which can be used with Power BI Desktop, Power Query in Excel, and Get
+&amp; Transform in Excel 2016.</p>
+</blockquote>
+<h2>"Functional" is the key word</h2>
+<p>Understanding (and accepting) that M is entirely different from most common
+programming languages has helped me as much as (maybe even more than) the
+exhaustive reference at MSDN. Functional language implies declarative
+programming paradigm: you describe <em>what</em> you want the computer to do instead
+of telling <em>how</em> to do it. If you're familiar with LISP or Erlang or Haskell, M
+might not look so foreign to you.</p>
+<p>The code in M is not an explicit sequence of steps that will always be executed
+in the same order, it is just a bunch of ground rules that allow the computer
+to arrive to the solution. You can check that the order of lines within the
+<code>let</code> statement doesn't matter: as long as all necessary intermediate steps are
+described, Power Query will produce the same result even if you rearrange them
+randomly.</p>
+<p>And that is the reason you don't get familiar control flow statements. <em>If</em> is
+kinda there, but it has its own quirks too. Loops are out of the question,
+unless you somehow manage to implement the function that does the looping for
+you. But...</p>
+<p>There already is such a function! It is <code>List.Generate</code>!</p>
+<h2>List.Generate</h2>
+<p>This function takes 3 or 4 parameters, all of them functions.  (You should
+always treat the <code>each</code> statement as a function <a href="https://msdn.microsoft.com/en-us/library/mt185361.aspx">because it is</a> a shortcut
+for function definition.)</p>
+<p>The parameters are:</p>
+<ul>
+<li><strong>start</strong>: a function that takes zero arguments and returns the first loop
+  item.</li>
+<li><strong>condition</strong>: a function that takes one argument (loop item) and returns
+  boolean value. If this function returns <code>false</code> the iteration stops,
+  otherwise the loop item is added to the list of results. This function will
+  be called at the end of each iteration.</li>
+<li><strong>next</strong>: a function that takes one argument (loop item) and returns the next
+  loop item. This is the worker body of the loop. Be careful to return the next
+  item as the same data type with the same structure, because the returned
+  value will be fed to <code>condition()</code> and <code>next()</code> functions later. This
+  function will be called at the beginning of each iteration.</li>
+<li><strong>transform</strong>: optional argument. A function that takes one argument - the
+  item from the list of results and transforms it into something else.  This
+  function gets called once per each item in the list of results, and the list
+  of values it returns becomes the return value of <code>List.Generate</code>. If
+  <code>transform()</code> function is not specified, <code>List.Generate</code> will return the list
+  of items at the moment when <code>condition()</code> returns <code>false</code>.</li>
+</ul>
+<p><code>List.Generate</code> might be easier to understand with the following pseudocode:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">List</span><span class="o">.</span><span class="n">Generate</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="nb">next</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="n">item</span> <span class="o">=</span> <span class="n">start</span><span class="p">()</span>
+    <span class="k">while</span> <span class="n">condition</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">transform</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transform</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">results</span>
+    <span class="k">return</span> <span class="n">output</span>
+</pre></div>
+
+
+<h2>A simple example</h2>
+<p>We will generate a table of data points for plotting a parabola. Internally we
+will be storing each item as the record with <code>x</code> and <code>y</code> fields.  After that we
+will transform that data into a Power Query table for output.</p>
+<div class="highlight"><pre><span></span>let
+    data = List.Generate(
+        () =&gt; [x=-10, y=100],
+        each [x]&lt;=10,
+        each [x=[x]+1, y=x*x]
+    ),
+    output = Table.FromRecords(data)
+in output
+</pre></div>
+
+
+<p>In this example <code>start()</code> is an anonymous function that always returns the
+first data point, <code>condition()</code> and <code>next()</code> are also functions even though
+they are written using <code>each</code> shortcut. There is no <code>transform()</code> function
+because it is an optional parameter.</p>
+<h2>An example from real world</h2>
+<p>In the real world you will not need the <code>List.Generate</code> magic for such simple
+tasks, but you will still need it. Here is how I've used it recently.</p>
+<p>Assume you have a list of tables that contain the data in the same format but
+for different time periods or for different locations. You have a separate list
+of locations (in the correct order), but each individual table does not contain
+that information. That's why combining all these tables into one would create a
+mess: you have to know which row comes from what table.</p>
+<p>This can be done with <code>List.Generate</code>:</p>
+<div class="highlight"><pre><span></span>NamedTables = List.Generate(
+    () =&gt; [i=-1, table=#table({},{})],  // initialize loop variables
+    each [i] &lt; List.Count(Tables),
+    each [
+        i=[i]+1,
+        table=Table.AddColumn(Tables{i}, &quot;TableName&quot;, each Names{i})
+    ],
+    each [table]
+),
+</pre></div>
+
+
+<p>This code snippet assumes you have the list of tables in the <code>Tables</code> variable
+and the list of their respective names in the <code>Names</code> variable. The loop starts
+with index of -1 and an empty table, and adds a "TableName" column to each of
+the tables. After this modification the tables can be safely combined with
+<code>Table.Combine(NamedTables)</code> - no data loss will occur.</p>
+<h2>Conclusion</h2>
+<p>Using <code>List.Generate</code> should be considered a last-ditch attempt to looping. M
+has dedicated iterative functions for most common looping tasks, so please
+check the standard library reference before creating such C-style loops
+manually. They are rather hard to read, and readability counts!</p>
+<p>I hope this article will help you to understand the Power Query Formula
+Language a little more. It is a powerful tool and even though it is not
+perfect, I hope you will find a lot of uses for it in your data crunching
+tasks.</p>
+<h2>An afterthought</h2>
+<p>Also, please keep in mind that the dot symbol in <code>List.Generate</code> does not have
+the same meaning as in other languages either. There are no object methods in
+M, and there are no namespaces, so the dot is just another character without
+any special meaning.  It could have been a dash or an underscore - it wouldn't
+have mattered.</p>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Loops in Power Query M language&amp;url=https://potyarkin.ml/posts/2017/loops-in-power-query-m-language/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://potyarkin.ml/posts/2017/loops-in-power-query-m-language/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=https://potyarkin.ml/posts/2017/loops-in-power-query-m-language/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="https://potyarkin.ml/tag/m.html">m</a><a href="https://potyarkin.ml/tag/excel.html">excel</a><a href="https://potyarkin.ml/tag/power-query.html">power-query</a>                </aside>
+
+                <div class="clear"></div>
+
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+
+
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script type="text/javascript" src="https://potyarkin.ml/theme/js/script.js"></script>
+
+</body>
+</html>
