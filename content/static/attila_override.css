@@ -50,6 +50,14 @@ ul>li:before {
         margin: 0!important;
         padding: 0!important;
     }
+    h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid!important;
+        break-after: avoid-page!important;
+    }
+    ul, ol {
+        page-break-before: avoid!important;
+        break-before: avoid-page!important;
+    }
 }
 
 /* Narrow margins for inline code */
