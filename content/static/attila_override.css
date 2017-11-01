@@ -1,5 +1,7 @@
 /* Pretty fonts, thanks to Google */
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,500,700&amp;subset=cyrillic,cyrillic-ext,latin-ext');
 @import url('https://fonts.googleapis.com/css?family=PT+Sans');
+
 body {
     font-family:"PT Sans", Verdana, sans-serif;
 }
