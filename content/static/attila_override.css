@@ -19,6 +19,9 @@ ul>li:before {
 
 /* Cleaner print style */
 @media print {
+    #blog-header h1 a {
+        font-size:130%!important;
+    }
     html * {
         font-size:12pt!important;
         color:black!important;
@@ -39,6 +42,7 @@ ul>li:before {
     #blog-header, #post-header {
         background-color: white!important;
         padding:2em 0 0 0!important;
+        margin-bottom:2em!important;
     }
     .post {
         padding-top:0!important;
