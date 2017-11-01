@@ -48,4 +48,5 @@ ul>li:before {
 /* Narrow margins for inline code */
 code, tt {
     padding: 0.2em 0.4em;
+    margin: 0;
 }
