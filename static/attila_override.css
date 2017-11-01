@@ -19,6 +19,9 @@ ul>li:before {
 
 /* Cleaner print style */
 @media print {
+    #blog-header h1 a {
+        font-size:130%!important;
+    }
     html * {
         font-size:12pt!important;
         color:black!important;
@@ -39,16 +42,25 @@ ul>li:before {
     #blog-header, #post-header {
         background-color: white!important;
         padding:2em 0 0 0!important;
+        margin-bottom:2em!important;
     }
     .post {
         padding-top:0!important;
     }
     code, tt {
-        border: none;
-        background: none;
-        top: 0;
-        margin: 0;
-        padding: 0;
+        border: none!important;
+        background: none!important;
+        top: 0!important;
+        margin: 0!important;
+        padding: 0!important;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid!important;
+        break-after: avoid-page!important;
+    }
+    ul, ol {
+        page-break-before: avoid!important;
+        break-before: avoid-page!important;
     }
 }
 
