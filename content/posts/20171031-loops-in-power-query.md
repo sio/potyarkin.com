@@ -36,9 +36,11 @@ you. But...
 
 There already is such a function! It is `List.Generate`!
 
-## List.Generate This function takes 3 or 4 parameters, all of them functions.
-(You should always treat the `each` statement as a function [because it is][2]
-a shortcut for function definition.)
+## List.Generate
+
+This function takes 3 or 4 parameters, all of them functions.  (You should
+always treat the `each` statement as a function [because it is][2] a shortcut
+for function definition.)
 
 The parameters are:
 - **start**: a function that takes zero arguments and returns the first loop
@@ -78,9 +80,9 @@ def List.Generate(start, condition, next, transform=None):
 
 ## A simple example
 
-We will generate a table of data points for plotting a parabola.  While
-generating we will be storing each item in the record with `x` and `y` fields.
-After that we will transform that data into a Power Query table for output.
+We will generate a table of data points for plotting a parabola. Internally we
+will be storing each item as the record with `x` and `y` fields.  After that we
+will transform that data into a Power Query table for output.
 
 ```
 let
@@ -130,6 +132,11 @@ the tables. After this modification the tables can be safely combined with
 `Table.Combine(NamedTables)` - no data loss will occur.
 
 ## Conclusion
+
+Using `List.Generate` should be considered a last-ditch attempt to looping. M
+has dedicated iterative functions for most common looping tasks, so please
+check the standard library reference before creating such C-style loops
+manually. They are rather hard to read, and readability counts!
 
 I hope this article will help you to understand the Power Query Formula
 Language a little more. It is a powerful tool and even though it is not
