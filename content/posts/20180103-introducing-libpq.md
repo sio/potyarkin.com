@@ -51,7 +51,7 @@ useful. If not - go write some new ones, you have the tools now!
 LibPQ is built in such way that you do not need me (or anyone else) to approve
 of your work.  Save your code to any convenient location, and LibPQ will help
 you to import it into your workbooks. You can even keep your modules private,
-no pressure here.
+no pressure here. Have fun and enjoy your coding!
 
 [LibPQ]: https://github.com/sio/LibPQ
 [UnitTest]: https://github.com/sio/LibPQ/blob/master/UNITTESTING.md
