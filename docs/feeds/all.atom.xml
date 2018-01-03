@@ -1,5 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/all.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2017-10-31T00:00:00+03:00</updated><entry><title>Loops in Power Query M language</title><link href="https://potyarkin.ml/posts/2017/loops-in-power-query-m-language/" rel="alternate"></link><published>2017-10-31T00:00:00+03:00</published><updated>2017-10-31T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2017-10-31:/posts/2017/loops-in-power-query-m-language/</id><summary type="html">&lt;p&gt;Power Query Formula Language (also known as M language) is sometimes difficult
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/all.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2018-01-03T00:00:00+03:00</updated><entry><title>Expanding Power Query standard library - introducing LibPQ</title><link href="https://potyarkin.ml/posts/2018/expanding-power-query-standard-library-introducing-libpq/" rel="alternate"></link><published>2018-01-03T00:00:00+03:00</published><updated>2018-01-03T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-01-03:/posts/2018/expanding-power-query-standard-library-introducing-libpq/</id><summary type="html">&lt;p&gt;Power Query formula language (also known as M language) is a very capable yet
+not very flexible tool. It lacks some features taken for granted by developers
+who are used to other programming languages such as compatibility with version
+control systems, extensibility by third-party libraries, etc.&lt;/p&gt;
+&lt;p&gt;That is why I …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Power Query formula language (also known as M language) is a very capable yet
+not very flexible tool. It lacks some features taken for granted by developers
+who are used to other programming languages such as compatibility with version
+control systems, extensibility by third-party libraries, etc.&lt;/p&gt;
+&lt;p&gt;That is why I have started &lt;strong&gt;&lt;a href="https://github.com/sio/LibPQ"&gt;LibPQ&lt;/a&gt;&lt;/strong&gt; - an open-source M language library
+meant to expand the standard library and to make it easier for others to do so.
+Its main features are:&lt;/p&gt;
+&lt;h3&gt;Importing source code from plain text files located on disk or on the web&lt;/h3&gt;
+&lt;p&gt;LibPQ stores its modules as plain text files with &lt;code&gt;*.pq&lt;/code&gt; extension.  Detaching
+source code from the workbooks that execute it has a lot of advantages:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The source code can be managed by version control system such as git&lt;/li&gt;
+&lt;li&gt;Multiple workbooks referring to the same module will always use the same
+  (latest) code&lt;/li&gt;
+&lt;li&gt;It encourages splitting your code into smaller reusable units&lt;/li&gt;
+&lt;li&gt;You can edit the source code with any editor you like (autocompletion and
+  syntax highlighting are nice features even though Power Query's Advanced
+  Editor does not have them)&lt;/li&gt;
+&lt;li&gt;Sharing your code and collaborating becomes much easier&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Supporting several import locations ordered by priority&lt;/h3&gt;
+&lt;p&gt;LibPQ does not dictate where you store your source code. Inspired by Python's
+&lt;a href="https://docs.python.org/3/library/sys.html#sys.path"&gt;&lt;code&gt;sys.path&lt;/code&gt;&lt;/a&gt; it enables specifying unlimited number of local and/or
+remote sources (ordered by priority). When importing a module, LibPQ will check
+these sources one by one until the required module is found.&lt;/p&gt;
+&lt;h3&gt;Unit testing framework&lt;/h3&gt;
+&lt;p&gt;Having source code detached from the workbooks encourages you to improve and
+refactor existing modules. To make sure you do not introduce regressions you
+should cover your code with unit tests.&lt;/p&gt;
+&lt;p&gt;There are no unit testing tools in standard library, but LibPQ offers a basic
+unit testing framework that supports test discovery, grouping tests into test
+suites and comes with a bunch of handy assertion functions. To learn more read
+this &lt;a href="https://github.com/sio/LibPQ/blob/master/UNITTESTING.md"&gt;help page&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;A collection of general purpose functions and queries&lt;/h3&gt;
+&lt;p&gt;And last, LibPQ contains some general purpose modules that you might find
+useful. If not - go write some new ones, you have the tools now!&lt;/p&gt;
+&lt;p&gt;LibPQ is built in such way that you do not need me (or anyone else) to approve
+of your work.  Save your code to any convenient location, and LibPQ will help
+you to import it into your workbooks. You can even keep your modules private,
+no pressure here. Have fun and enjoy your coding!&lt;/p&gt;</content><category term="m"></category><category term="excel"></category><category term="power-query"></category><category term="LibPQ"></category></entry><entry><title>Loops in Power Query M language</title><link href="https://potyarkin.ml/posts/2017/loops-in-power-query-m-language/" rel="alternate"></link><published>2017-10-31T00:00:00+03:00</published><updated>2017-10-31T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2017-10-31:/posts/2017/loops-in-power-query-m-language/</id><summary type="html">&lt;p&gt;Power Query Formula Language (also known as M language) is sometimes difficult
 to get your head around. This article explains how someone familiar with loops
 in other programming languages can approach the same concept in M language.&lt;/p&gt;
 &lt;p&gt;First of all let's look at the &lt;a href="https://msdn.microsoft.com/en-us/library/mt211003.aspx"&gt;definition&lt;/a&gt; given by Microsoft:&lt;/p&gt;
