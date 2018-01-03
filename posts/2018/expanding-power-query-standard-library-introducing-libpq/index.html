@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>Expanding Power Query standard library - introducing LibPQ</title>
+
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="https://potyarkin.ml/" rel="canonical" />
+
+  <!-- Feed -->
+      <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Orange Sun Full Atom Feed" />
+
+  <link href="https://potyarkin.ml/theme/css/style.css" type="text/css" rel="stylesheet" />
+
+  <!-- Code highlight color scheme -->
+      <link href="https://potyarkin.ml/theme/css/code_blocks/github.css" rel="stylesheet">
+
+    <!-- CSS specified by the user -->
+
+
+    <link href="https://potyarkin.ml/static/attila_override.css" type="text/css" rel="stylesheet" />
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+    <link href="https://potyarkin.ml/posts/2018/expanding-power-query-standard-library-introducing-libpq/" rel="canonical" />
+
+        <meta name="description" content="Power Query formula language (also known as M language) is a very capable yet not very flexible tool. It lacks some features taken for...">
+
+        <meta name="author" content="Vitaly Potyarkin">
+
+        <meta name="tags" content="m">
+        <meta name="tags" content="excel">
+        <meta name="tags" content="power-query">
+        <meta name="tags" content="LibPQ">
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="Orange Sun"/>
+<meta property="og:title" content="Expanding Power Query standard library - introducing LibPQ"/>
+<meta property="og:description" content="Power Query formula language (also known as M language) is a very capable yet not very flexible tool. It lacks some features taken for..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://potyarkin.ml/posts/2018/expanding-power-query-standard-library-introducing-libpq/"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-01-03 00:00:00+03:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://potyarkin.ml/author/vitaly-potyarkin.html">
+<meta property="article:section" content="posts"/>
+<meta property="article:tag" content="m"/>
+<meta property="article:tag" content="excel"/>
+<meta property="article:tag" content="power-query"/>
+<meta property="article:tag" content="LibPQ"/>
+<meta property="og:image" content="https://potyarkin.ml/theme/images/post-bg.jpg">
+
+<!-- Twitter Card -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "Expanding Power Query standard library - introducing LibPQ",
+  "headline": "Expanding Power Query standard library - introducing LibPQ",
+  "datePublished": "2018-01-03 00:00:00+03:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Vitaly Potyarkin",
+    "url": "https://potyarkin.ml/author/vitaly-potyarkin.html"
+  },
+  "image": "https://potyarkin.ml/theme/images/post-bg.jpg",
+  "url": "https://potyarkin.ml/posts/2018/expanding-power-query-standard-library-introducing-libpq/",
+  "description": "Power Query formula language (also known as M language) is a very capable yet not very flexible tool. It lacks some features taken for..."
+}
+</script>
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
+
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+          <li><a href="/archive/" role="presentation">Archive</a></li>
+          <li><a href="/tags.html" role="presentation">Tags</a></li>
+          <li><a href="mailto:sio.wtf@gmail.com" role="presentation">Email</a></li>
+          <li><a href="https://github.com/sio" role="presentation">Github</a></li>
+
+
+        <li class="nav-rss"><a href="/feeds/all.atom.xml"><i class="ic ic-rss"></i> Subscribe</a></li>
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="post-header" class="has-cover">
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="https://potyarkin.ml/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Expanding Power Query standard library - introducing LibPQ</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="https://potyarkin.ml/author/vitaly-potyarkin.html">Vitaly Potyarkin</a>
+            | <time datetime="2018-01-03">2018-01-03</time>
+        </span>
+        <!-- TODO : Modified check -->
+            <div class="post-cover cover" style="background-color: rgb(242,106,61)">
+      </div>
+    </header>
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <p>Power Query formula language (also known as M language) is a very capable yet
+not very flexible tool. It lacks some features taken for granted by developers
+who are used to other programming languages such as compatibility with version
+control systems, extensibility by third-party libraries, etc.</p>
+<p>That is why I have started <strong><a href="https://github.com/sio/LibPQ">LibPQ</a></strong> - an open-source M language library
+meant to expand the standard library and to make it easier for others to do so.
+Its main features are:</p>
+<h3>Importing source code from plain text files located on disk or on the web</h3>
+<p>LibPQ stores its modules as plain text files with <code>*.pq</code> extension.  Detaching
+source code from the workbooks that execute it has a lot of advantages:</p>
+<ul>
+<li>The source code can be managed by version control system such as git</li>
+<li>Multiple workbooks referring to the same module will always use the same
+  (latest) code</li>
+<li>It encourages splitting your code into smaller reusable units</li>
+<li>You can edit the source code with any editor you like (autocompletion and
+  syntax highlighting are nice features even though Power Query's Advanced
+  Editor does not have them)</li>
+<li>Sharing your code and collaborating becomes much easier</li>
+</ul>
+<h3>Supporting several import locations ordered by priority</h3>
+<p>LibPQ does not dictate where you store your source code. Inspired by Python's
+<a href="https://docs.python.org/3/library/sys.html#sys.path"><code>sys.path</code></a> it enables specifying unlimited number of local and/or
+remote sources (ordered by priority). When importing a module, LibPQ will check
+these sources one by one until the required module is found.</p>
+<h3>Unit testing framework</h3>
+<p>Having source code detached from the workbooks encourages you to improve and
+refactor existing modules. To make sure you do not introduce regressions you
+should cover your code with unit tests.</p>
+<p>There are no unit testing tools in standard library, but LibPQ offers a basic
+unit testing framework that supports test discovery, grouping tests into test
+suites and comes with a bunch of handy assertion functions. To learn more read
+this <a href="https://github.com/sio/LibPQ/blob/master/UNITTESTING.md">help page</a>.</p>
+<h3>A collection of general purpose functions and queries</h3>
+<p>And last, LibPQ contains some general purpose modules that you might find
+useful. If not - go write some new ones, you have the tools now!</p>
+<p>LibPQ is built in such way that you do not need me (or anyone else) to approve
+of your work.  Save your code to any convenient location, and LibPQ will help
+you to import it into your workbooks. You can even keep your modules private,
+no pressure here. Have fun and enjoy your coding!</p>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Expanding Power Query standard library - introducing LibPQ&amp;url=https://potyarkin.ml/posts/2018/expanding-power-query-standard-library-introducing-libpq/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://potyarkin.ml/posts/2018/expanding-power-query-standard-library-introducing-libpq/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=https://potyarkin.ml/posts/2018/expanding-power-query-standard-library-introducing-libpq/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="https://potyarkin.ml/tag/m.html">m</a><a href="https://potyarkin.ml/tag/excel.html">excel</a><a href="https://potyarkin.ml/tag/power-query.html">power-query</a><a href="https://potyarkin.ml/tag/libpq.html">LibPQ</a>                </aside>
+
+                <div class="clear"></div>
+
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+
+
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script type="text/javascript" src="https://potyarkin.ml/theme/js/script.js"></script>
+
+</body>
+</html>
