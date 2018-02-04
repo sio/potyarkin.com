@@ -35,7 +35,7 @@ should cover your code with unit tests.&lt;/p&gt;
 &lt;p&gt;There are no unit testing tools in standard library, but LibPQ offers a basic
 unit testing framework that supports test discovery, grouping tests into test
 suites and comes with a bunch of handy assertion functions. To learn more read
-this &lt;a href="https://github.com/sio/LibPQ/blob/master/UNITTESTING.md"&gt;help page&lt;/a&gt;.&lt;/p&gt;
+this &lt;a href="https://github.com/sio/LibPQ/blob/master/Docs/UnitTesting.md"&gt;help page&lt;/a&gt;.&lt;/p&gt;
 &lt;h3&gt;A collection of general purpose functions and queries&lt;/h3&gt;
 &lt;p&gt;And last, LibPQ contains some general purpose modules that you might find
 useful. If not - go write some new ones, you have the tools now!&lt;/p&gt;
