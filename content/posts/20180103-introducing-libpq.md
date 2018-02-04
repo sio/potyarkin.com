@@ -54,5 +54,5 @@ you to import it into your workbooks. You can even keep your modules private,
 no pressure here. Have fun and enjoy your coding!
 
 [LibPQ]: https://github.com/sio/LibPQ
-[UnitTest]: https://github.com/sio/LibPQ/blob/master/UNITTESTING.md
+[UnitTest]: https://github.com/sio/LibPQ/blob/master/Docs/UnitTesting.md
 [sys.path]: https://docs.python.org/3/library/sys.html#sys.path
