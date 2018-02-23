@@ -1,10 +1,10 @@
-title: Roads and Bridges - essay on sustaining modern digital infrastructure
+title: Roads and Bridges - sustaining modern digital infrastructure
 tags: bookmarks, opensource
 date: 2018-02-23
 
 This week I have stumbled upon a very thorough review of existing problems and
 hidden costs of sustaining modern (open source) digital infrastructure. Here it
-is - [Roads and Bridges: The Unseen Labor Behind Our Digital
+is: [Roads and Bridges - The Unseen Labor Behind Our Digital
 Infrastructure][original] by *Nadia Eghbal*.
 
 The essay was created with support from the Ford Foundation and is published on
@@ -25,4 +25,4 @@ source software for granted. The costs of building it are just payed by others,
 may be you can figure out how to help them?
 
 [original]: https://www.fordfoundation.org/library/reports-and-studies/roads-and-bridges-the-unseen-labor-behind-our-digital-infrastructure/
-[mirror]: #
+[mirror]: {attach}/static/roads-and-bridges.pdf
