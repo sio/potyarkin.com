@@ -29,8 +29,25 @@ ARTICLE_URL = '{category}/{date:%Y}/{slug}/'
 ARTICLE_SAVE_AS = '{category}/{date:%Y}/{slug}/index.html'
 PAGE_URL = '{slug}/'
 PAGE_SAVE_AS = '{slug}/index.html'
+ARCHIVES_URL = 'archive/'
 ARCHIVES_SAVE_AS = 'archive/index.html'
+YEAR_ARCHIVE_URL = 'archive/{date:%Y}/'
 YEAR_ARCHIVE_SAVE_AS = 'archive/{date:%Y}/index.html'
+TAG_URL = 'tags/{slug}/'
+TAG_SAVE_AS = 'tags/{slug}/index.html'
+TAGS_URL = 'tags/'
+TAGS_SAVE_AS = 'tags/index.html'
+CATEGORY_URL = 'category/{slug}/'
+CATEGORY_SAVE_AS = 'category/{slug}/index.html'
+CATEGORIES_URL = 'category/'
+CATEGORIES_SAVE_AS = 'category/index.html'
+AUTHOR_URL = 'author/{slug}/'
+AUTHOR_SAVE_AS = 'author/{slug}/index.html'
+AUTHORS_SAVE_AS = ''
+PAGINATION_PATTERNS = (
+    (1, '{base_name}/', '{base_name}/index.html'),
+    (2, '{base_name}/{number}/', '{base_name}/{number}/index.html'),
+)
 
 # Custom configuration for potyarkin.ml
 AUTHOR = 'Vitaly Potyarkin'
@@ -52,7 +69,7 @@ LINKS = ()
 # Social widget
 SOCIAL = [
     ('archive', '/archive/'),
-    ('tags', '/tags.html'),
+    ('tags', '/tags/'),
     ('email', 'mailto:sio.wtf@gmail.com'),
     ('github', 'https://github.com/sio'),
     ]
