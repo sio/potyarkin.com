@@ -25,4 +25,4 @@ source software for granted. The costs of building it are just payed by others,
 may be you can figure out how to help them?
 
 [original]: https://www.fordfoundation.org/library/reports-and-studies/roads-and-bridges-the-unseen-labor-behind-our-digital-infrastructure/
-[mirror]: {attach}/static/roads-and-bridges.pdf
+[mirror]: {attach}/resources/roads-and-bridges.pdf
