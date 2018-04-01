@@ -69,7 +69,7 @@ Here is what [UnitTest.Discover] function will do when invoked:
 
 In the screenshot above we invoke [UnitTest.Discover] with `compact_output =
 false` but when you'll have dozens of test cases you'll probably prefer default
-behavior to group test results by status.
+behavior (group test results by status).
 
 ## More about UnitTest in LibPQ
 
