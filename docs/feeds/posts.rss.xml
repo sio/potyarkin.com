@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Orange Sun - posts</title><link>https://potyarkin.ml/</link><description>Unsorted ramblings, sometimes related to programming</description><lastBuildDate>Fri, 23 Feb 2018 00:00:00 +0300</lastBuildDate><item><title>Roads and Bridges - sustaining modern digital infrastructure</title><link>https://potyarkin.ml/posts/2018/roads-and-bridges-sustaining-modern-digital-infrastructure/</link><description>&lt;p&gt;This week I have stumbled upon a very thorough review of existing problems and
+<rss version="2.0"><channel><title>Orange Sun - posts</title><link>https://potyarkin.ml/</link><description>Unsorted ramblings, sometimes related to programming</description><lastBuildDate>Sun, 01 Apr 2018 12:00:00 +0300</lastBuildDate><item><title>Unit testing in Power Query M Language</title><link>https://potyarkin.ml/posts/2018/unit-testing-in-power-query-m-language/</link><description>&lt;p&gt;As you code base gets bigger,
+&lt;a href="https://en.wikipedia.org/wiki/Test_automation"&gt;test automation&lt;/a&gt; becomes more
+and more important. This applies to any development platform, including Power
+Query / PowerBI. If you reuse your code and improve some low level function
+later, test automation allows you to make sure your changes did not break
+anything that depends …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vitaly Potyarkin</dc:creator><pubDate>Sun, 01 Apr 2018 12:00:00 +0300</pubDate><guid isPermaLink="false">tag:potyarkin.ml,2018-04-01:/posts/2018/unit-testing-in-power-query-m-language/</guid><category>m</category><category>power-query</category><category>LibPQ</category></item><item><title>Getting started with LibPQ</title><link>https://potyarkin.ml/posts/2018/getting-started-with-libpq/</link><description>&lt;p&gt;This is a step by step guide to getting started with &lt;a href="https://potyarkin.ml/posts/2018/expanding-power-query-standard-library-introducing-libpq/"&gt;LibPQ&lt;/a&gt;, an illustrated
+version of &lt;a href="https://github.com/sio/LibPQ/blob/master/README.md#installation-and-usage"&gt;"Installation and usage"&lt;/a&gt; section of the official
+documentation.&lt;/p&gt;
+&lt;h2&gt;Installation&lt;/h2&gt;
+&lt;h3&gt;LibPQ source code&lt;/h3&gt;
+&lt;p&gt;The source code of the library has to be present in each workbook that uses it.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Create a new blank query: &lt;code&gt;Data …&lt;/code&gt;&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vitaly Potyarkin</dc:creator><pubDate>Sun, 01 Apr 2018 00:00:00 +0300</pubDate><guid isPermaLink="false">tag:potyarkin.ml,2018-04-01:/posts/2018/getting-started-with-libpq/</guid><category>m</category><category>power-query</category><category>LibPQ</category></item><item><title>Roads and Bridges - sustaining modern digital infrastructure</title><link>https://potyarkin.ml/posts/2018/roads-and-bridges-sustaining-modern-digital-infrastructure/</link><description>&lt;p&gt;This week I have stumbled upon a very thorough review of existing problems and
 hidden costs of sustaining modern (open source) digital infrastructure. Here it
 is: &lt;a href="https://www.fordfoundation.org/library/reports-and-studies/roads-and-bridges-the-unseen-labor-behind-our-digital-infrastructure/"&gt;Roads and Bridges - The Unseen Labor Behind Our Digital
 Infrastructure&lt;/a&gt; by &lt;em&gt;Nadia Eghbal&lt;/em&gt;.&lt;/p&gt;
