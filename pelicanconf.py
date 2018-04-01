@@ -16,6 +16,7 @@ ARTICLE_PATHS = [
 STATIC_PATHS = [
     'images',
     'static',
+    'resources',
     ]
 EXTRA_PATH_METADATA = {
     'static/CNAME': {'path': 'CNAME'},
