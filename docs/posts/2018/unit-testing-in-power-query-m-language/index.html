@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>Unit testing in Power Query M Language</title>
+
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="https://potyarkin.ml/" rel="canonical" />
+
+  <!-- Feed -->
+      <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Orange Sun Full Atom Feed" />
+
+  <link href="https://potyarkin.ml/theme/css/style.css" type="text/css" rel="stylesheet" />
+
+  <!-- Code highlight color scheme -->
+      <link href="https://potyarkin.ml/theme/css/code_blocks/github.css" rel="stylesheet">
+
+    <!-- CSS specified by the user -->
+
+
+    <link href="https://potyarkin.ml/static/attila_override.css" type="text/css" rel="stylesheet" />
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+    <link href="https://potyarkin.ml/posts/2018/unit-testing-in-power-query-m-language/" rel="canonical" />
+
+        <meta name="description" content="As you code base gets bigger, test automation becomes more and more important. This applies to any development platform, including Power...">
+
+        <meta name="author" content="Vitaly Potyarkin">
+
+        <meta name="tags" content="m">
+        <meta name="tags" content="power-query">
+        <meta name="tags" content="LibPQ">
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="Orange Sun"/>
+<meta property="og:title" content="Unit testing in Power Query M Language"/>
+<meta property="og:description" content="As you code base gets bigger, test automation becomes more and more important. This applies to any development platform, including Power..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://potyarkin.ml/posts/2018/unit-testing-in-power-query-m-language/"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-04-01 12:00:00+03:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://potyarkin.ml/author/vitaly-potyarkin/">
+<meta property="article:section" content="posts"/>
+<meta property="article:tag" content="m"/>
+<meta property="article:tag" content="power-query"/>
+<meta property="article:tag" content="LibPQ"/>
+<meta property="og:image" content="https://potyarkin.ml/theme/images/post-bg.jpg">
+
+<!-- Twitter Card -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "Unit testing in Power Query M Language",
+  "headline": "Unit testing in Power Query M Language",
+  "datePublished": "2018-04-01 12:00:00+03:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Vitaly Potyarkin",
+    "url": "https://potyarkin.ml/author/vitaly-potyarkin/"
+  },
+  "image": "https://potyarkin.ml/theme/images/post-bg.jpg",
+  "url": "https://potyarkin.ml/posts/2018/unit-testing-in-power-query-m-language/",
+  "description": "As you code base gets bigger, test automation becomes more and more important. This applies to any development platform, including Power..."
+}
+</script>
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
+
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+          <li><a href="/archive/" role="presentation">Archive</a></li>
+          <li><a href="/tags/" role="presentation">Tags</a></li>
+          <li><a href="mailto:sio.wtf@gmail.com" role="presentation">Email</a></li>
+          <li><a href="https://github.com/sio" role="presentation">Github</a></li>
+
+
+        <li class="nav-rss"><a href="/feeds/all.atom.xml"><i class="ic ic-rss"></i> Subscribe</a></li>
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="post-header" class="has-cover">
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="https://potyarkin.ml/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Unit testing in Power Query M Language</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="https://potyarkin.ml/author/vitaly-potyarkin/">Vitaly Potyarkin</a>
+            | <time datetime="2018-04-01">2018-04-01</time>
+        </span>
+        <!-- TODO : Modified check -->
+            <div class="post-cover cover" style="background-color: rgb(242,106,61)">
+      </div>
+    </header>
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <p>As you code base gets bigger,
+<a href="https://en.wikipedia.org/wiki/Test_automation">test automation</a> becomes more
+and more important. This applies to any development platform, including Power
+Query / PowerBI. If you reuse your code and improve some low level function
+later, test automation allows you to make sure your changes did not break
+anything that depends on the part of code you've just modified.</p>
+<p>As far as I know, there are no tools that allow us to perform automated testing
+of functions and queries written in Power Query M language. That's why I've
+built a simple unit testing framework into <a href="https://github.com/sio/LibPQ">LibPQ</a>.</p>
+<h2>LibPQ UnitTest framework</h2>
+<p>The <a href="https://github.com/sio/LibPQ/blob/master/Docs/UnitTesting.md">UnitTest</a> framework is modelled after the only other unit testing tool I
+have experience with: Python's
+<a href="https://docs.python.org/3/library/unittest.html">unittest</a>. It offers the
+following features:</p>
+<ul>
+<li>Test suites to arbitrarily group individual test cases</li>
+<li>Assertion functions to test simple statements</li>
+<li>Subtests to execute the same test on a sequence of sample inputs</li>
+<li>Test runner and test discovery functions to execute your test suites</li>
+<li>Test results table that can be analyzed either manually or with any
+  automation tool you create</li>
+</ul>
+<p>Inner workings of the test framework are described in the
+<a href="https://github.com/sio/LibPQ/blob/master/Docs/UnitTesting.md">documentation</a>. This article will demonstrate how it works.</p>
+<h2>UnitTest demo</h2>
+<p>All modules described here are imported with LibPQ, so a basic familiarity with the library is assumed (<a href="https://github.com/sio/LibPQ/blob/master/README.md">readme</a>, <a href="https://potyarkin.ml/posts/2018/getting-started-with-libpq/">getting started</a>).</p>
+<p>Let's create a basic test suite and save it in the directory listed in <code>LibPQPath</code>:</p>
+<div class="highlight"><pre><span></span><span class="cm">/* DemoTests.pq - sample test suite */</span>
+<span class="p">[</span>
+    <span class="nx">Assert</span> <span class="o">=</span> <span class="nx">LibPQ</span><span class="p">(</span><span class="s2">&quot;UnitTest.Assert&quot;</span><span class="p">),</span>
+    <span class="nx">testFirstTest</span> <span class="o">=</span> <span class="nx">Assert</span><span class="p">[</span><span class="nx">Equal</span><span class="p">](</span><span class="mi">6</span><span class="o">*</span><span class="mi">7</span><span class="p">,</span> <span class="mi">42</span><span class="p">),</span>
+    <span class="nx">testAlwaysFail</span> <span class="o">=</span> <span class="nx">Assert</span><span class="p">[</span><span class="nx">Equal</span><span class="p">](</span><span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">)</span>
+<span class="p">]</span> <span class="nx">meta</span> <span class="p">[</span><span class="nx">LibPQ</span><span class="p">.</span><span class="nx">TestSuite</span> <span class="o">=</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+
+
+<p>The test suite is a record (note the square brackets surrounding the code) that
+contains:</p>
+<ul>
+<li>Two test cases (values prefixed with "test")<ul>
+<li>The first test will pass because 6 times 7 is 42</li>
+<li>The second test will always fail because "foo" and "bar" are different
+strings</li>
+</ul>
+</li>
+<li>And one related value: <code>Assert</code> is a helper for building test functions. Its
+  use is not required, but makes writing tests much easier.</li>
+</ul>
+<p>The last line contains metadata that marks the test suite as such and allows
+test discovery tools to distinguish it from just another record.</p>
+<p>Here is what <a href="https://github.com/sio/LibPQ/blob/master/Modules/UnitTest.Discover.pq">UnitTest.Discover</a> function will do when invoked:</p>
+<ul>
+<li>Search all locally available modules for valid test suites (hence the metadata)</li>
+<li>Execute each located test suite with <a href="https://github.com/sio/LibPQ/blob/master/Modules/UnitTest.Run.pq">UnitTest.Run</a></li>
+<li>Return the test results as a table, reporting as much data about the failed
+  tests as possible</li>
+</ul>
+<p><a href="https://potyarkin.ml/posts/2018/unit-testing-in-power-query-m-language/libpq-unittest-long.png"><img alt="Test results" src="https://potyarkin.ml/posts/2018/unit-testing-in-power-query-m-language/libpq-unittest-long.png"></a></p>
+<p>In the screenshot above we invoke <a href="https://github.com/sio/LibPQ/blob/master/Modules/UnitTest.Discover.pq">UnitTest.Discover</a> with <code>compact_output =
+false</code> but when you'll have dozens of test cases you'll probably prefer default
+behavior (group test results by status).</p>
+<h2>More about UnitTest in LibPQ</h2>
+<p>If you liked the idea of unit testing M language code, check out the main
+<a href="https://github.com/sio/LibPQ/blob/master/Docs/UnitTesting.md">UnitTest</a> documentation and a more extensive <a href="https://github.com/sio/LibPQ/blob/master/Samples/Tests.Sample.pq">test sample</a> that makes use of
+subtests.</p>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Unit testing in Power Query M Language&amp;url=https://potyarkin.ml/posts/2018/unit-testing-in-power-query-m-language/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://potyarkin.ml/posts/2018/unit-testing-in-power-query-m-language/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=https://potyarkin.ml/posts/2018/unit-testing-in-power-query-m-language/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="https://potyarkin.ml/tags/m/">m</a><a href="https://potyarkin.ml/tags/power-query/">power-query</a><a href="https://potyarkin.ml/tags/libpq/">LibPQ</a>                </aside>
+
+                <div class="clear"></div>
+
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+
+
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script type="text/javascript" src="https://potyarkin.ml/theme/js/script.js"></script>
+
+</body>
+</html>
