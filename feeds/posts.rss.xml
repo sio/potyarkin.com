@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Orange Sun - posts</title><link>https://potyarkin.ml/</link><description>Unsorted ramblings, sometimes related to programming</description><lastBuildDate>Sun, 01 Apr 2018 12:00:00 +0300</lastBuildDate><item><title>Unit testing in Power Query M Language</title><link>https://potyarkin.ml/posts/2018/unit-testing-in-power-query-m-language/</link><description>&lt;p&gt;As you code base gets bigger,
+<rss version="2.0"><channel><title>Orange Sun - posts</title><link>https://potyarkin.ml/</link><description>Unsorted ramblings, sometimes related to programming</description><lastBuildDate>Sun, 01 Apr 2018 12:00:00 +0300</lastBuildDate><item><title>Unit testing in Power Query M Language</title><link>https://potyarkin.ml/posts/2018/unit-testing-in-power-query-m-language/</link><description>&lt;p&gt;As your code base gets bigger,
 &lt;a href="https://en.wikipedia.org/wiki/Test_automation"&gt;test automation&lt;/a&gt; becomes more
 and more important. This applies to any development platform, including Power
 Query / PowerBI. If you reuse your code and improve some low level function
