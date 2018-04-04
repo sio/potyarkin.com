@@ -82,6 +82,7 @@ PLUGIN_PATHS = [
     'plugins/pelican-plugins',
     ]
 PLUGINS = [
+    'neighbors',
     ]
 
 # Configuring current theme
