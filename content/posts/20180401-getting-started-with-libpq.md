@@ -77,7 +77,7 @@ later:
 - Place the module into any location listed in `LibPQPath` and it will become
   available for importing
 
-If you have any futher questions about LibPQ please create an [issue] on GitHub
+If you have any further questions about LibPQ please create an [issue] on GitHub
 or contact me via [e-mail].
 
 [LibPQ]: {filename}20180103-introducing-libpq.md
