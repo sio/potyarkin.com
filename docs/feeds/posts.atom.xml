@@ -136,7 +136,7 @@ later:&lt;/p&gt;
 &lt;li&gt;Place the module into any location listed in &lt;code&gt;LibPQPath&lt;/code&gt; and it will become
   available for importing&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;If you have any futher questions about LibPQ please create an &lt;a href="https://github.com/sio/LibPQ/issues"&gt;issue&lt;/a&gt; on GitHub
+&lt;p&gt;If you have any further questions about LibPQ please create an &lt;a href="https://github.com/sio/LibPQ/issues"&gt;issue&lt;/a&gt; on GitHub
 or contact me via &lt;a href="mailto:sio.wtf@gmail.com"&gt;e-mail&lt;/a&gt;.&lt;/p&gt;</content><category term="m"></category><category term="power-query"></category><category term="LibPQ"></category></entry><entry><title>Roads and Bridges - sustaining modern digital infrastructure</title><link href="https://potyarkin.ml/posts/2018/roads-and-bridges-sustaining-modern-digital-infrastructure/" rel="alternate"></link><published>2018-02-23T00:00:00+03:00</published><updated>2018-02-23T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-02-23:/posts/2018/roads-and-bridges-sustaining-modern-digital-infrastructure/</id><summary type="html">&lt;p&gt;This week I have stumbled upon a very thorough review of existing problems and
 hidden costs of sustaining modern (open source) digital infrastructure. Here it
 is: &lt;a href="https://www.fordfoundation.org/library/reports-and-studies/roads-and-bridges-the-unseen-labor-behind-our-digital-infrastructure/"&gt;Roads and Bridges - The Unseen Labor Behind Our Digital
