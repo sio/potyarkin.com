@@ -2,7 +2,7 @@ title: Unit testing in Power Query M Language
 tags: m, power-query, LibPQ
 date: 2018-04-01 12:00
 
-As you code base gets bigger,
+As your code base gets bigger,
 [test automation](https://en.wikipedia.org/wiki/Test_automation) becomes more
 and more important. This applies to any development platform, including Power
 Query / PowerBI. If you reuse your code and improve some low level function
