@@ -32,7 +32,7 @@ version 7.0, if I recall correctly. And that was one large useless book.
 Because the authors used the English version of that editor and all we've had
 was the translated one.
 
-You might think it was a mistake on the authors's part, but they were smart and
+You might think it was a mistake on the authors' part, but they were smart and
 experienced people. They knew it was pointless to reference a translated version
 because no professional user would have used Russian interface at that time.
 And they knew that the next version might come with totally different
