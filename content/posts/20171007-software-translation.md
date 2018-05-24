@@ -67,6 +67,8 @@ superhuman - he could not possibly track all the developers and understand all
 their intentions. So we shipped some embarrassing translation errors... I'm
 glad no lives depended on that software!
 
+## Lost in translation
+
 I concede that our team was lacking in terms of organizational skills, after
 all we were just part-time volunteers. But the translators hired by big
 corporations are merely human too, and they make mistakes. Especially when the
@@ -82,7 +84,6 @@ confusing. Especially since all users are already accustomed to it :)
 
 ## Unsearchable error messages
 ## Untranslatable abstractions
-## Lost in translation
 
 > This has been stewing for quite some time... At least since 2012, when I've
 > read [this](https://joeyh.name/blog/entry/on_localization_and_progress/).
