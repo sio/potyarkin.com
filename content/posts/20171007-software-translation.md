@@ -25,7 +25,8 @@ the times I've seen it.
 
 The moment software is translated its documentation becomes fragmented and
 incomplete. Even if the developer translates 100% of official documentation
-they will still lose everything written by others.
+they will still lose everything written by others (blog posts, forum questions,
+bug reports).
 
 I was twelve when a friend of mine gave me a book on photo editing. The authors
 explained how images are stored on computers, what is the difference between
