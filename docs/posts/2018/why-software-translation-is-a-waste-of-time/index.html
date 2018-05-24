@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>Why software translation is a waste of time</title>
+
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="https://potyarkin.ml/" rel="canonical" />
+
+  <!-- Feed -->
+      <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Orange Sun Full Atom Feed" />
+
+  <link href="https://potyarkin.ml/theme/css/style.css" type="text/css" rel="stylesheet" />
+
+  <!-- Code highlight color scheme -->
+      <link href="https://potyarkin.ml/theme/css/code_blocks/github.css" rel="stylesheet">
+
+    <!-- CSS specified by the user -->
+
+
+    <link href="https://potyarkin.ml/static/attila_override.css" type="text/css" rel="stylesheet" />
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+    <link href="https://potyarkin.ml/posts/2018/why-software-translation-is-a-waste-of-time/" rel="canonical" />
+
+        <meta name="description" content="Disclaimer: I am not a professional software developer, and my opinion might not be as authoritative as yours. My native language is not...">
+
+        <meta name="author" content="Vitaly Potyarkin">
+
+        <meta name="tags" content="l10n">
+        <meta name="tags" content="i18n">
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="Orange Sun"/>
+<meta property="og:title" content="Why software translation is a waste of time"/>
+<meta property="og:description" content="Disclaimer: I am not a professional software developer, and my opinion might not be as authoritative as yours. My native language is not..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://potyarkin.ml/posts/2018/why-software-translation-is-a-waste-of-time/"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-05-24 00:00:00+03:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://potyarkin.ml/author/vitaly-potyarkin/">
+<meta property="article:section" content="posts"/>
+<meta property="article:tag" content="l10n"/>
+<meta property="article:tag" content="i18n"/>
+<meta property="og:image" content="https://potyarkin.ml/theme/images/post-bg.jpg">
+
+<!-- Twitter Card -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "Why software translation is a waste of time",
+  "headline": "Why software translation is a waste of time",
+  "datePublished": "2018-05-24 00:00:00+03:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Vitaly Potyarkin",
+    "url": "https://potyarkin.ml/author/vitaly-potyarkin/"
+  },
+  "image": "https://potyarkin.ml/theme/images/post-bg.jpg",
+  "url": "https://potyarkin.ml/posts/2018/why-software-translation-is-a-waste-of-time/",
+  "description": "Disclaimer: I am not a professional software developer, and my opinion might not be as authoritative as yours. My native language is not..."
+}
+</script>
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
+
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+          <li><a href="/archive/" role="presentation">Archive</a></li>
+          <li><a href="/tags/" role="presentation">Tags</a></li>
+          <li><a href="mailto:sio.wtf@gmail.com" role="presentation">Email</a></li>
+          <li><a href="https://github.com/sio" role="presentation">Github</a></li>
+
+
+        <li class="nav-rss"><a href="/feeds/all.atom.xml"><i class="ic ic-rss"></i> Subscribe</a></li>
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="post-header" class="has-cover">
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="https://potyarkin.ml/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Why software translation is a waste of time</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="https://potyarkin.ml/author/vitaly-potyarkin/">Vitaly Potyarkin</a>
+            | <time datetime="2018-05-24">2018-05-24</time>
+        </span>
+        <!-- TODO : Modified check -->
+            <div class="post-cover cover" style="background-color: rgb(242,106,61)">
+      </div>
+    </header>
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <blockquote>
+<p><strong>Disclaimer</strong>: I am not a professional software developer, and my opinion
+might not be as authoritative as yours.</p>
+</blockquote>
+<p>My native language is not English and since my first encounter with computers I
+have used multiple localized and non-localized computer programs. All these
+years of <em>"user experience"</em> have led me to believe that software localization
+is more often harmful than not.</p>
+<p>Software translation is a waste of time. Generally.</p>
+<p>I am not against localization as a whole. It has many positive aspects like
+supporting foreign date and currency formats, right-to-left writing or
+alphabetical sorting. But translating user interface, configuration files,
+error and log messages to other languages had destructive consequences most of
+the times I've seen it.</p>
+<h2>Documentation loss</h2>
+<p>The moment software is translated its documentation becomes fragmented and
+incomplete. Even if the developer translates 100% of official documentation
+they will still lose everything written by others (blog posts, forum questions,
+bug reports).</p>
+<p>I was twelve when a friend of mine gave me a book on photo editing. The authors
+explained how images are stored on computers, what is the difference between
+raster and vector graphics, but the narrative was mostly centered on using Adobe Photoshop -
+version 7.0, if I recall correctly. And that was one large useless book.
+Because the authors used the English version of that editor and all we've had
+was the translated one.</p>
+<p>You might think it was a mistake on the authors' part, but they were smart and
+experienced people. They knew it was pointless to reference a translated version
+because no professional user would have used Russian interface at that time.
+And they knew that the next version might come with totally different
+translation for the same UI elements.</p>
+<h2>Incomplete or wrong translation is worse than no translation at all</h2>
+<p>If you are not sure you can afford a good translation, don't do one. I can not
+stress enough how confusing it is to have a piece of software that uses your
+native language, and not to be able to understand the meaning of its messages
+without translating them back to English first. This happens all the time when
+software is translated by people who do not use it daily and do not understand
+all the usecases there are.</p>
+<p>I took part in translation of an open source program once. I was a student and
+I've had a lot of free time, so I thought I could do some good and contribute
+back to the software I thought was worthy.</p>
+<p>It was a social media plugin for a bigger application. We had a team of maybe a
+dozen volunteer translators and a coordinator with write access to the source
+control system. Usually he would email us a day before the next release with a
+file containing strings that needed to be translated. And then the farce
+started.</p>
+<p>Those of us who were available at the moment started translating. We didn't
+know where in the application we would later see those strings. Even if we
+weren't lazy (guilty) and would've launched non-localized development version
+of the application, we would not have been able to match 100% of new strings to
+all the places they'd be used at. The coordinator was not any less blind than
+the rest of us. He knew a lot about the application code base, but he was not a
+superhuman - he could not possibly track all the developers and understand all
+their intentions. So we shipped some embarrassing translation errors... I'm
+glad no lives depended on that software!</p>
+<h2>Lost in translation</h2>
+<p>I concede that our team was lacking in terms of organizational skills, after
+all we were just part-time volunteers. But the translators hired by big
+corporations are merely human too, and they make mistakes. Especially when the
+headquarters is pressuring to ship a new product.</p>
+<p>For more than ten years Microsoft Excel, a flagman spreadsheet application used
+by millions, has had two duplicate entries in row/column context menu: "Вставить"
+and "Вставить". The first one had a nice icon and meant "Paste (copied cells)"
+and the second one was iconless and meant "Insert (new row/column)". They've
+removed the text from the first one now, converting it to a button. Ambiguity
+still remains (the pop-up text for the button is the same) but is less
+confusing. Especially since users are already accustomed to it :)</p>
+<h2>Unsearchable error messages</h2>
+<p>Have you ever received a cryptic error message and had no idea what it meant?
+I'm sure you have. That message would only become more cryptic if it was
+translated. And if the error is not exactly common or the app is not popular in
+your country, Google will not be able to help you either.</p>
+<p>So, for the sake of your users' sanity, please do not ever localize error
+messages and log files! Help people to help themselves.</p>
+<h2>Untranslatable abstractions</h2>
+<p>Some ideas are just so new, or the problem domain is so narrow that there is no
+point translating the terms. The concept of <code>File</code> was foreign to every person
+seeing the computer for the first time - but that knowledge is easily acquired.
+It would not have been any easier explaining that same concept and labeling it
+<code>Файл</code> (Russian translation), so why bother introducing two terms?</p>
+<p>"File" ship has long sailed, but new abstractions are being introduced every
+day. Translating them to multiple languages just slows their adoption and
+hinders communication between users.</p>
+<h2>Afterword</h2>
+<p>I'm not hoping we will wake up one day and The Tower of Babel didn't happen.
+This rant is mostly useless, but if at any time because of it a software
+developer will decide that their users are educated enough to understand
+written English or a software user will decide to acquire entry-level English
+skills, I'll consider my time well spent.</p>
+<blockquote>
+<p>This has been stewing for quite some time... At least since 2012, after I've
+read <a href="https://joeyh.name/blog/entry/on_localization_and_progress/">this</a>.</p>
+</blockquote>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Why software translation is a waste of time&amp;url=https://potyarkin.ml/posts/2018/why-software-translation-is-a-waste-of-time/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://potyarkin.ml/posts/2018/why-software-translation-is-a-waste-of-time/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=https://potyarkin.ml/posts/2018/why-software-translation-is-a-waste-of-time/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="https://potyarkin.ml/tags/l10n/">l10n</a><a href="https://potyarkin.ml/tags/i18n/">i18n</a>                </aside>
+
+                <div class="clear"></div>
+
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <a class="post-nav-prev" href="https://potyarkin.ml/posts/2018/unit-testing-in-power-query-m-language/">
+                        <section class="post-nav-teaser">
+                            <i class="ic ic-arrow-right"></i>
+                                <h2 class="post-nav-title">Unit testing in Power Query M Language</h2>
+                            <p class="post-nav-excerpt">As your code base gets bigger, test automation becomes more and more important. This...</p>
+                        </section>
+                    </a>
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+
+
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script type="text/javascript" src="https://potyarkin.ml/theme/js/script.js"></script>
+
+</body>
+</html>
