@@ -33,7 +33,7 @@ Because the authors used the English version of that editor and all we've had
 was the translated one.
 
 You might think it was a mistake on the authors's part, but they were smart and
-experienced people. They knew it was pointless referencing a translated version
+experienced people. They knew it was pointless to reference a translated version
 because no professional user would have used Russian interface at that time.
 And they knew that the next version might come with totally different
 translation for the same UI elements.
@@ -75,12 +75,12 @@ corporations are merely human too, and they make mistakes. Especially when the
 headquarters is pressuring to ship a new product.
 
 For more than ten years Microsoft Excel, a flagman spreadsheet application used
-by millions, has had two duplicate items in row/column context menu: "Вставить"
+by millions, has had two duplicate entries in row/column context menu: "Вставить"
 and "Вставить". The first one had a nice icon and meant "Paste (copied cells)"
 and the second one was iconless and meant "Insert (new row/column)". They've
 removed the text from the first one now, converting it to a button. Ambiguity
 still remains (the pop-up text for the button is the same) but is less
-confusing. Especially since all users are already accustomed to it :)
+confusing. Especially since users are already accustomed to it :)
 
 ## Unsearchable error messages
 
@@ -112,5 +112,5 @@ developer will decide that their users are educated enough to understand
 written English or a software user will decide to acquire entry-level English
 skills, I'll consider my time well spent.
 
-> This has been stewing for quite some time... At least since 2012, when I've
+> This has been stewing for quite some time... At least since 2012, after I've
 > read [this](https://joeyh.name/blog/entry/on_localization_and_progress/).
