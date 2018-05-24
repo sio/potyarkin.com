@@ -1,6 +1,6 @@
 title: Why software translation is a waste of time
 tags: l10n, i18n
-date: 2017-05-24
+date: 2018-05-24
 
 > **Disclaimer**: I am not a professional software developer, and my opinion
 > might not be as authoritative as yours.
