@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Orange Sun</title><link>https://potyarkin.ml/</link><description>Unsorted ramblings, sometimes related to programming</description><lastBuildDate>Sun, 01 Apr 2018 12:00:00 +0300</lastBuildDate><item><title>Unit testing in Power Query M Language</title><link>https://potyarkin.ml/posts/2018/unit-testing-in-power-query-m-language/</link><description>&lt;p&gt;As your code base gets bigger,
+<rss version="2.0"><channel><title>Orange Sun</title><link>https://potyarkin.ml/</link><description>Unsorted ramblings, sometimes related to programming</description><lastBuildDate>Thu, 24 May 2018 00:00:00 +0300</lastBuildDate><item><title>Why software translation is a waste of time</title><link>https://potyarkin.ml/posts/2018/why-software-translation-is-a-waste-of-time/</link><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Disclaimer&lt;/strong&gt;: I am not a professional software developer, and my opinion
+might not be as authoritative as yours.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;My native language is not English and since my first encounter with computers I
+have used multiple localized and non-localized computer programs. All these
+years of &lt;em&gt;"user experience"&lt;/em&gt; have led me to …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vitaly Potyarkin</dc:creator><pubDate>Thu, 24 May 2018 00:00:00 +0300</pubDate><guid isPermaLink="false">tag:potyarkin.ml,2018-05-24:/posts/2018/why-software-translation-is-a-waste-of-time/</guid><category>l10n</category><category>i18n</category></item><item><title>Unit testing in Power Query M Language</title><link>https://potyarkin.ml/posts/2018/unit-testing-in-power-query-m-language/</link><description>&lt;p&gt;As your code base gets bigger,
 &lt;a href="https://en.wikipedia.org/wiki/Test_automation"&gt;test automation&lt;/a&gt; becomes more
 and more important. This applies to any development platform, including Power
 Query / PowerBI. If you reuse your code and improve some low level function
