@@ -38,7 +38,7 @@ because no professional user would have used Russian interface at that time.
 And they knew that the next version might come with totally different
 translation for the same UI elements.
 
-## Waste of resources
+## Incomplete or wrong translation is worse than no translation at all
 
 If you are not sure you can afford a good translation, don't do one. I can not
 stress enough how confusing it is to have a piece of software that uses your
