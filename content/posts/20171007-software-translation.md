@@ -51,6 +51,35 @@ I took part in translation of an open source program once. I was a student and
 I've had a lot of free time, so I thought I could do some good and contribute
 back to the software I thought was worthy.
 
+It was a social media plugin for a bigger application. We had a team of maybe a
+dozen volunteer translators and a coordinator with write access to the source
+control system. Usually he would email us a day before the next release with a
+file containing strings that needed to be translated. And then the farce
+started.
+
+Those of us who were available at the moment started translating. We didn't
+know where in the application we would later see those strings. Even if we
+weren't lazy (guilty) and would've launched non-localized development version
+of the application, we would not have been able to match 100% of new strings to
+all the places they'd be used at. The coordinator was not any less blind than
+the rest of us. He knew a lot about the application code base, but he was not a
+superhuman - he could not possibly track all the developers and understand
+their intentions. So we shipped some embarrassing translation errors... I'm
+glad no lives depended on that software!
+
+I concede that our team was lacking in terms of organizational skills, after
+all we were just part-time volunteers. But the translators hired by big
+corporations are merely human too, and they make mistakes. Especially when the
+headquarters is pressuring to ship a new product.
+
+For more than ten years Microsoft Excel, a flagman spreadsheet application used
+by millions, has had two duplicate items in row/column context menu: "Вставить"
+and "Вставить". The first one had a nice icon and meant "Paste (copied cells)"
+and the second one was iconless and meant "Insert (new row/column)". They've
+removed the text from the first one now, converting it to a button. Ambiguity
+still remains (the pop-up text for the button is the same) but is less
+confusing. Especially since all users are already accustomed to it :)
+
 ## Unsearchable error messages
 ## Untranslatable abstractions
 ## Lost in translation
