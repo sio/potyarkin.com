@@ -5,6 +5,9 @@ date: 2017-10-07 23:10
 > **Disclaimer**: I am not a professional software developer, and my opinion
 > might not be as authoritative as yours.
 
+> This has been stewing for quite some time!.. At least since 2012, when I've
+> read [this](https://joeyh.name/blog/entry/on_localization_and_progress/)
+
 My native language is not English and since my first encounter with computers I
 have used multiple localized and non-localized computer programs. And all these
 years of *"user experience"* have led me to believe that software localization
