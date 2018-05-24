@@ -83,7 +83,34 @@ still remains (the pop-up text for the button is the same) but is less
 confusing. Especially since all users are already accustomed to it :)
 
 ## Unsearchable error messages
+
+Have you ever received a cryptic error message and had no idea what it meant?
+I'm sure you have. That message would only become more cryptic if it was
+translated. And if the error is not exactly common or the app is not popular in
+your country, Google will not be able to help you either.
+
+So, for the sake of your users' sanity, please do not ever localize error
+messages and log files! Help people to help themselves.
+
 ## Untranslatable abstractions
+
+Some ideas are just so new, or the problem domain is so narrow that there is no
+point translating the terms. The concept of `File` was foreign to every person
+seeing the computer for the first time - but that knowledge is easily acquired.
+It would not have been any easier explaining that same concept and labeling it
+`Файл` (Russian translation), so why bother introducing two terms?
+
+"File" ship has long sailed, but new abstractions are being introduced every
+day. Translating them to multiple languages just slows their adoption and
+hinders communication between users.
+
+## Afterword
+
+I'm not hoping we will wake up one day and The Tower of Babel didn't happen.
+This rant is mostly useless, but if at any time because of it a software
+developer will decide that their users are educated enough to understand
+written English or a software user will decide to acquire entry-level English
+skills, I'll consider my time well spent.
 
 > This has been stewing for quite some time... At least since 2012, when I've
 > read [this](https://joeyh.name/blog/entry/on_localization_and_progress/).
