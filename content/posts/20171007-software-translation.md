@@ -27,7 +27,7 @@ bug reports).
 
 I was twelve when a friend of mine gave me a book on photo editing. The authors
 explained how images are stored on computers, what is the difference between
-raster and vector graphics, but it was mostly centered on using Adobe Photoshop -
+raster and vector graphics, but the narrative was mostly centered on using Adobe Photoshop -
 version 7.0, if I recall correctly. And that was one large useless book.
 Because the authors used the English version of that editor and all we've had
 was the translated one.
@@ -63,7 +63,7 @@ weren't lazy (guilty) and would've launched non-localized development version
 of the application, we would not have been able to match 100% of new strings to
 all the places they'd be used at. The coordinator was not any less blind than
 the rest of us. He knew a lot about the application code base, but he was not a
-superhuman - he could not possibly track all the developers and understand
+superhuman - he could not possibly track all the developers and understand all
 their intentions. So we shipped some embarrassing translation errors... I'm
 glad no lives depended on that software!
 
@@ -85,4 +85,4 @@ confusing. Especially since all users are already accustomed to it :)
 ## Lost in translation
 
 > This has been stewing for quite some time... At least since 2012, when I've
-> read [this](https://joeyh.name/blog/entry/on_localization_and_progress/)
+> read [this](https://joeyh.name/blog/entry/on_localization_and_progress/).
