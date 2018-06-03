@@ -12,7 +12,7 @@ Excel does not match what you'd expect from a mature application:
 - It might add quotes that are inconsistent with the rest of the file.
 
 If you're collaborating on the CSV file with others, their Excel version might
-have different tastes and produce incompatible output.  Even if you're the only
+have different defaults and produce incompatible output.  Even if you're the only
 one working on that CSV, you can forget about clean diffs and sensible atomic
 commits to your version control system.
 
@@ -20,7 +20,7 @@ The only solution is not to overwrite CSV files you've opened with Excel. Use
 another tool designed specifically for dealing with CSV or edit the file
 manually in the text editor of your choosing.
 
-I wrote a small helper tool to append data rows to the CSV files from Excel that
+I wrote a small helper utility to append data rows to the CSV files from Excel that
 ensures you won't mess up the existing data. This is a one-day hobby project, and
 Excel serves more as the UI toolkit and runtime environment than as the
 spreadsheet application, so you should be careful if you decide to rely on that
