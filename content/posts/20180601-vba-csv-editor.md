@@ -31,5 +31,19 @@ Here is the code:
 - [Main VBA module][CSVAppend.bas]
 - The resulting [application], packaged in a workbook.
 
+The application reads user input from named ranges, opens the required file,
+parses CSV header and displays a submission form for a new data row. Upon
+submission it combines new values into a CSV string and appends it to the file.
+All data manipulation is done in VBA. This app could have and should have been
+written in any modern language - it would probably have cleaner code. Excel is
+super easy to draft a simple UI though :)
+
+The code is pretty straightforward so I'll highlight only the most interesting
+parts.
+
+## Reading and writing Unicode with VBA
+
+Visual Basic for Applications is a hopelessly outdated environment.
+
 [CSVAppend.bas]:
 [application]:
