@@ -1,4 +1,4 @@
-title: Turn Excel into a CSV editor with VBA
+title: Excel as a CSV editor (with VBA)
 tags: excel, vba, gist
 date: 2018-06-01
 
@@ -20,18 +20,20 @@ The only solution is not to overwrite CSV files you've opened with Excel. Use
 another tool designed specifically for dealing with CSV or edit the file
 manually in the text editor of your choosing.
 
+## Append to CSV with VBA
+
 I wrote a small helper utility to append data rows to the CSV files from Excel that
 ensures you won't mess up the existing data. This is a one-day hobby project, and
 Excel serves more as the UI toolkit and runtime environment than as the
 spreadsheet application, so you should be careful if you decide to rely on that
-code. The project is licensed under the Apache License, Version 2.0.
+code. The project is licensed under the [Apache License, Version 2.0][license].
 
 Here is the code:
 
 - [Main VBA module][CSVAppend.bas]
 - The resulting [application], packaged in a workbook.
 
-The application reads user input from named ranges, opens the required file,
+The application reads parameters from named ranges, opens the required file,
 parses CSV header and displays a submission form for a new data row. Upon
 submission it combines new values into a CSV string and appends it to the file.
 All data manipulation is done in VBA. This app could have and should have been
@@ -43,7 +45,38 @@ parts.
 
 ## Reading and writing Unicode with VBA
 
-Visual Basic for Applications is a hopelessly outdated environment.
+Visual Basic for Applications is a hopelessly outdated environment. Unicode
+support can be achieved only with the help of COM interoperability, namely the
+`ADODB.Stream` object. This object provides a very comfortable interface for
+reading and writing text files in a bytestream mode, and also handles character
+encoding nicely.
+
+Appending to a file is done via combination of seeking to the end of stream
+and writing the new data.
+
+## CSV packing and unpacking
+
+I'm not exactly proud of how CSV string manipulations are implemented in the code.
+If VBA would've provided some nicer regex capabilities or a CSV-aware library it
+would've been better. I know about `VBScript.RegExp`, but it's an overkill for a
+small task my app was created to accomplish.
+
+Current implementation can not handle a quote symbol in the middle of the field
+value. This is a known bug.
+
+## Demo
+
+This the main and the only UI my utility offers. Inputs and buttons are meant to
+be self explaining. No value conversion is done when saving - the value of the
+cell is written as is, quotes are added if delimiter character occurs within
+the value.
+
+[![CSV Append][screenshot]][screenshot]
+
+The project is published for educational and archival purposes. I'll be glad if
+you'll find any use for it.
 
 [CSVAppend.bas]:
 [application]:
+[license]: http://www.apache.org/licenses/LICENSE-2.0
+[screenshot]: {attach}/resources/csv-append.png
