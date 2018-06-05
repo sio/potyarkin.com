@@ -83,7 +83,7 @@ ID,Column1,Column2,Column3 with very long header,"Column4, with delimiter in the
 The project is published for educational and archival purposes. I'll be glad if
 you'll find any use for it.
 
-[CSVAppend.bas]:
-[application]:
+[CSVAppend.bas]: https://github.com/sio/CSV-Append/blob/master/CSVAppend.bas
+[application]: https://github.com/sio/CSV-Append/raw/master/CSV-Editor.xlsm
 [license]: http://www.apache.org/licenses/LICENSE-2.0
 [screenshot]: {attach}/resources/csv-append.png
