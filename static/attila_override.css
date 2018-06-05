@@ -69,3 +69,12 @@ code, tt {
     padding: 0.2em 0.4em;
     margin: 0;
 }
+
+/* Do not scale images up */
+.post-content img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
