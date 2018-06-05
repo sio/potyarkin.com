@@ -71,6 +71,13 @@ be self explaining. No value conversion is done when saving - the value of the
 cell is written as is, quotes are added if delimiter character occurs within
 the value.
 
+Screenshot below is produced after loading demo CSV file with the following
+header:
+
+```
+ID,Column1,Column2,Column3 with very long header,"Column4, with delimiter in the name"
+```
+
 [![CSV Append][screenshot]][screenshot]
 
 The project is published for educational and archival purposes. I'll be glad if
