@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>Excel as a CSV editor (with VBA)</title>
+
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="https://potyarkin.ml/" rel="canonical" />
+
+  <!-- Feed -->
+      <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Orange Sun Full Atom Feed" />
+
+  <link href="https://potyarkin.ml/theme/css/style.css" type="text/css" rel="stylesheet" />
+
+  <!-- Code highlight color scheme -->
+      <link href="https://potyarkin.ml/theme/css/code_blocks/github.css" rel="stylesheet">
+
+    <!-- CSS specified by the user -->
+
+
+    <link href="https://potyarkin.ml/static/attila_override.css" type="text/css" rel="stylesheet" />
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+    <link href="https://potyarkin.ml/posts/2018/excel-as-a-csv-editor-with-vba/" rel="canonical" />
+
+        <meta name="description" content="One might think that Excel is a decent CSV editor as it is, but it's not. It is a very capable CSV reader, I do not dispute that. When...">
+
+        <meta name="author" content="Vitaly Potyarkin">
+
+        <meta name="tags" content="excel">
+        <meta name="tags" content="vba">
+        <meta name="tags" content="gist">
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="Orange Sun"/>
+<meta property="og:title" content="Excel as a CSV editor (with VBA)"/>
+<meta property="og:description" content="One might think that Excel is a decent CSV editor as it is, but it's not. It is a very capable CSV reader, I do not dispute that. When..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://potyarkin.ml/posts/2018/excel-as-a-csv-editor-with-vba/"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-06-01 00:00:00+03:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://potyarkin.ml/author/vitaly-potyarkin/">
+<meta property="article:section" content="posts"/>
+<meta property="article:tag" content="excel"/>
+<meta property="article:tag" content="vba"/>
+<meta property="article:tag" content="gist"/>
+<meta property="og:image" content="https://potyarkin.ml/theme/images/post-bg.jpg">
+
+<!-- Twitter Card -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "Excel as a CSV editor (with VBA)",
+  "headline": "Excel as a CSV editor (with VBA)",
+  "datePublished": "2018-06-01 00:00:00+03:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Vitaly Potyarkin",
+    "url": "https://potyarkin.ml/author/vitaly-potyarkin/"
+  },
+  "image": "https://potyarkin.ml/theme/images/post-bg.jpg",
+  "url": "https://potyarkin.ml/posts/2018/excel-as-a-csv-editor-with-vba/",
+  "description": "One might think that Excel is a decent CSV editor as it is, but it's not. It is a very capable CSV reader, I do not dispute that. When..."
+}
+</script>
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
+
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+          <li><a href="/archive/" role="presentation">Archive</a></li>
+          <li><a href="/tags/" role="presentation">Tags</a></li>
+          <li><a href="mailto:sio.wtf@gmail.com" role="presentation">Email</a></li>
+          <li><a href="https://github.com/sio" role="presentation">Github</a></li>
+
+
+        <li class="nav-rss"><a href="/feeds/all.atom.xml"><i class="ic ic-rss"></i> Subscribe</a></li>
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="post-header" class="has-cover">
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="https://potyarkin.ml/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Excel as a CSV editor (with VBA)</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="https://potyarkin.ml/author/vitaly-potyarkin/">Vitaly Potyarkin</a>
+            | <time datetime="2018-06-01">2018-06-01</time>
+        </span>
+        <!-- TODO : Modified check -->
+            <div class="post-cover cover" style="background-color: rgb(242,106,61)">
+      </div>
+    </header>
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <p>One might think that Excel is a decent CSV editor as it is, but it's not. It is
+a very capable CSV reader, I do not dispute that. When it comes to writing though,
+Excel does not match what you'd expect from a mature application:</p>
+<ul>
+<li>It might change the delimiter character arbitrarily;</li>
+<li>It might write numbers in the regional format that does not map to a number
+  anywhere outside Excel;</li>
+<li>It might add quotes that are inconsistent with the rest of the file.</li>
+</ul>
+<p>If you're collaborating on the CSV file with others, their Excel version might
+have different defaults and produce incompatible output.  Even if you're the only
+one working on that CSV, you can forget about clean diffs and sensible atomic
+commits to your version control system.</p>
+<p>The only solution is not to overwrite CSV files you've opened with Excel. Use
+another tool designed specifically for dealing with CSV or edit the file
+manually in the text editor of your choosing.</p>
+<h2>Append to CSV with VBA</h2>
+<p>I wrote a small helper utility to append data rows to the CSV files from Excel that
+ensures you won't mess up the existing data. This is a one-day hobby project, and
+Excel serves more as the UI toolkit and runtime environment than as the
+spreadsheet application, so you should be careful if you decide to rely on that
+code. The project is licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.</p>
+<p>Here is the code:</p>
+<ul>
+<li><a href="https://github.com/sio/CSV-Append/blob/master/CSVAppend.bas">Main VBA module</a></li>
+<li>The resulting <a href="https://github.com/sio/CSV-Append/raw/master/CSV-Editor.xlsm">application</a>, packaged in a workbook.</li>
+</ul>
+<p>The application reads parameters from named ranges, opens the required file,
+parses CSV header and displays a submission form for a new data row. Upon
+submission it combines new values into a CSV string and appends it to the file.
+All data manipulation is done in VBA. This app could have and should have been
+written in any modern language - it would probably have cleaner code. Excel is
+super easy to draft a simple UI though :)</p>
+<p>The code is pretty straightforward so I'll highlight only the most interesting
+parts.</p>
+<h2>Reading and writing Unicode with VBA</h2>
+<p>Visual Basic for Applications is a hopelessly outdated environment. Unicode
+support can be achieved only with the help of COM interoperability, namely the
+<code>ADODB.Stream</code> object. This object provides a very comfortable interface for
+reading and writing text files in a bytestream mode, and also handles character
+encoding nicely.</p>
+<p>Appending to a file is done via combination of seeking to the end of stream
+and writing the new data.</p>
+<h2>CSV packing and unpacking</h2>
+<p>I'm not exactly proud of how CSV string manipulations are implemented in the code.
+If VBA would've provided some nicer regex capabilities or a CSV-aware library it
+would've been better. I know about <code>VBScript.RegExp</code>, but it's an overkill for a
+small task my app was created to accomplish.</p>
+<p>Current implementation can not handle a quote symbol in the middle of the field
+value. This is a known bug.</p>
+<h2>Demo</h2>
+<p>This the main and the only UI my utility offers. Inputs and buttons are meant to
+be self explaining. No value conversion is done when saving - the value of the
+cell is written as is, quotes are added if delimiter character occurs within
+the value.</p>
+<p>Screenshot below is produced after loading demo CSV file with the following
+header:</p>
+<div class="highlight"><pre><span></span>ID,Column1,Column2,Column3 with very long header,&quot;Column4, with delimiter in the name&quot;
+</pre></div>
+
+
+<p><a href="https://potyarkin.ml/posts/2018/excel-as-a-csv-editor-with-vba/csv-append.png"><img alt="CSV Append" src="https://potyarkin.ml/posts/2018/excel-as-a-csv-editor-with-vba/csv-append.png"></a></p>
+<p>The project is published for educational and archival purposes. I'll be glad if
+you'll find any use for it.</p>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Excel as a CSV editor (with VBA)&amp;url=https://potyarkin.ml/posts/2018/excel-as-a-csv-editor-with-vba/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://potyarkin.ml/posts/2018/excel-as-a-csv-editor-with-vba/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=https://potyarkin.ml/posts/2018/excel-as-a-csv-editor-with-vba/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="https://potyarkin.ml/tags/excel/">excel</a><a href="https://potyarkin.ml/tags/vba/">vba</a><a href="https://potyarkin.ml/tags/gist/">gist</a>                </aside>
+
+                <div class="clear"></div>
+
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <a class="post-nav-prev" href="https://potyarkin.ml/posts/2018/why-software-translation-is-a-waste-of-time/">
+                        <section class="post-nav-teaser">
+                            <i class="ic ic-arrow-right"></i>
+                                <h2 class="post-nav-title">Why software translation is a waste of time</h2>
+                            <p class="post-nav-excerpt">Disclaimer: I am not a professional software developer, and my opinion might not be as...</p>
+                        </section>
+                    </a>
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+
+
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script type="text/javascript" src="https://potyarkin.ml/theme/js/script.js"></script>
+
+</body>
+</html>
