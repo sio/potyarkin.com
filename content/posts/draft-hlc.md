@@ -1,3 +1,5 @@
+title: Accidental submersion into web development
+
 ## The Library Problem
 
 ## Naive foray into application architecture
