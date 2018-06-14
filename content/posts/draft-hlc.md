@@ -61,6 +61,7 @@ we don't know while remaining unaware about the very fact of not knowing.
 
 ### ORM
 ### Multi-threading
+### Database migrations
 ### JavaScript is a lot of work
 ### Modular design
 ### MVC
