@@ -10,7 +10,7 @@ didn't even know I was about to start developing one.
 The initial idea was that of a "document". It had to contain some essential
 information about every book we own and (optionally) a second list of books we
 want to acquire. Excel spreadsheet seemed like a natural fit. We are both
-spending a better half of each workday jungling spreadsheets in Excel, so
+spending a better half of each workday juggling spreadsheets in Excel, so
 developing and maintaining such "document" appeared doable.
 
 I have started drafting the column structure, applied some formatting tweaks and
