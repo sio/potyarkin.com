@@ -2,6 +2,29 @@ title: Accidental submersion into web development
 
 ## The Library Problem
 
+I love reading books. My wife loves reading books. We enjoy shopping for books
+and we live a ten minute commute away from a huge used books store. That means
+we have a lot of books. Like, really a lot. A little more than one thousand.
+
+We have lost count how many times we've bought a book that we already owned. And
+even more often we had foregone buying a book we liked because we were sure we
+have already bought it - only to find out we've been mistaken and have just held
+the same book in hands when we were in that same store the last time. And that
+was a problem. The Library Problem.
+
+We needed a way to catalog all our books. The catalog had to be accessible from
+mobile devices (to look up a book while at the book store) and to be easy to
+use. That is to add and edit book information, of which we've needed plenty: in
+addition to standard set of author, title and publishing year we wanted to be
+able to track book series and keep the list of missing books to look out for the
+next time.
+
+I admit my research into the subject matter was not scientifically thorough.
+I've dug up several comparisons of existing tools and have read several blog
+posts of people who have faced the same problem before. I particularly recommend
+[this one][blog]. And I have decided that no pre-existing tool will meet our
+growing expectations.
+
 ## Naive foray into application architecture
 
 I have never developed an application for any end user other than myself and I
@@ -95,4 +118,5 @@ course, there are plenty of improvements to be made (you can see how long the
 TODO list is), but the maintenance itself requires almost zero attention now
 and I can happily switch from being a developer to becoming the end user.
 
+[blog]: http://www.zackgrossbart.com/hackito/the-library-problem/
 [source]: https://github.com/sio/HomeLibraryCatalog
