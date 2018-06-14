@@ -34,8 +34,9 @@ road was leading me nowhere. It was difficult and even if all the difficulties
 were to be overcome it imposed some suboptimal compromises on us:
 
 - Single table storage limited the data structures we would be able to enter and
-  view. If the book was written by two authors, which one should come first?
-  How would we do column filtering in that case? What about sort order?
+  view. If the book was written by two authors, which one should come first in
+  the "author" string?  How would we do column filtering in that case? What
+  about sort order?
 - The local nature of storage meant there had to be one designated place for
   making changes (home laptop). Any changes made in other locations (smartphone,
   thumb drive) had to be agreed to be declared discardable.
