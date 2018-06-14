@@ -85,7 +85,7 @@ The application supports:
   barcode scanner and don't have the time to clean up automatic metadata on each
   one of them
 - Adding 1-to-5 star ratings and text reviews to any book in the library
-- Searching for books by exact metadata matches and with wildcards
+- Searching for books by exact metadata match and with wildcards
 
 You can access [the source code][source] on GitHub and see the site in action at
 https://morebooks.ml (registration is for family members only, sorry).  Of
