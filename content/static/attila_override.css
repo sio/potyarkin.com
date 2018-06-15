@@ -78,3 +78,13 @@ code, tt {
     margin-left: auto;
     margin-right: auto;
 }
+
+/* Do not highlight links in headings */
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+    border-bottom: none!important;
+}
