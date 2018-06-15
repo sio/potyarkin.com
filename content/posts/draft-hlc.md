@@ -211,6 +211,23 @@ There probably exists a proper solution to multithreaded SQLite access, but so
 far I have not guessed what keywords to ask Google for it.
 
 ### Database migrations
+
+I was aware that changing database schema after the database was populated is
+hard and can lead to data loss. So I have put a lot of thought into designing
+it. I've even fired up GraphViz and created a [nice chart][schema] that I've
+printed out and looked at on commute. I wanted the database schema to be
+iron-clad and to require no changes in future.
+
+I was very naive.
+
+Of course it would require changes. Everything around us changes, we change, our
+expectations towards software change. At that point I understood that updating
+database manually was not a solution: there would be no trace left whether the
+schema was updated, which changes were introduced and which version does it
+correspond now to. So I've coded a simple [transition] module that would do that
+work for me. And later I've learned that the process I was automating is called
+[database migration], and there are tools written by professionals for it.
+
 ### JavaScript is a lot of work
 ### Modular design
 ### MVC
@@ -251,5 +268,8 @@ and I can happily switch from being a developer to becoming the end user.
 [TableEntityWithID]: https://github.com/sio/HomeLibraryCatalog/blob/1452531ec05f049c6a758530d7f526f05c188ba1/hlc/items.py#L37
 [ThreadItemPool]: https://github.com/sio/HomeLibraryCatalog/blob/1452531ec05f049c6a758530d7f526f05c188ba1/hlc/web.py#L1173
 [blog]: http://www.zackgrossbart.com/hackito/the-library-problem/
+[database migration]: https://en.wikipedia.org/wiki/Schema_migration
 [relational model]: https://en.wikipedia.org/wiki/Relational_model#History
+[schema]: https://github.com/sio/HomeLibraryCatalog/blob/master/docs/relations.gv.pdf
 [source]: https://github.com/sio/HomeLibraryCatalog
+[transition]: https://github.com/sio/HomeLibraryCatalog/blob/master/hlc/db_transition.py
