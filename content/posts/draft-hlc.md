@@ -184,6 +184,30 @@ I consider my ORM to be a valuable educational experience even if it somewhat
 stalled the overall progress of the project.
 
 ### Multi-threading
+
+While I was developing the application I was using Bottle's builtin wsgiref web
+server. Running that server in production environment is not recommended because
+it was not built to withstand all the nastiness of open Internet. It is also a
+single threaded server which means it can not accept a request until it's done
+serving the previous one. The single-threadiness did not concern me - my app was
+intended to be used by two or three users tops and simultaneous requests would
+happen very seldom. Yet all the proper web servers (Apache, Nginx etc) are
+created to scale up to thousands and millions of users. Of course, they are
+multithreaded and multiprocessing. My application was not ready for that. Some
+would say SQLite is not ready for that either.
+
+At first I considered crippling Apache to use only a single thread or switching
+to another server that can operate in a single thread mode. OpenShift seduced me
+with maintenance-free setup of Apache and I've abandoned that idea.
+
+The code I've come up with to use a different instance of some objects for each
+thread is [rather ugly][ThreadItemPool]. And it works only 90% of the time. So I
+just restart the Python workers every hour to avoid HTTP 500 errors when the
+database gets locked up. Not the best engineering decision of mine.
+
+There probably exists a proper solution to multithreaded SQLite access, but so
+far I have not guessed what keywords to ask Google for it.
+
 ### Database migrations
 ### JavaScript is a lot of work
 ### Modular design
@@ -218,11 +242,12 @@ and I can happily switch from being a developer to becoming the end user.
 
 [Bottle]: https://bottlepy.org/
 [Freenom]: https://freenom.com/
+[ORM]: https://en.wikipedia.org/wiki/Object-relational_mapping
 [OpenShift]: https://www.openshift.com/
 [SQL]: https://github.com/sio/HomeLibraryCatalog/blob/1452531ec05f049c6a758530d7f526f05c188ba1/hlc/db.py#L356
 [TANSTAAFL]: https://en.wikipedia.org/wiki/The_Moon_Is_a_Harsh_Mistress
 [TableEntityWithID]: https://github.com/sio/HomeLibraryCatalog/blob/1452531ec05f049c6a758530d7f526f05c188ba1/hlc/items.py#L37
+[ThreadItemPool]: https://github.com/sio/HomeLibraryCatalog/blob/1452531ec05f049c6a758530d7f526f05c188ba1/hlc/web.py#L1173
 [blog]: http://www.zackgrossbart.com/hackito/the-library-problem/
 [relational model]: https://en.wikipedia.org/wiki/Relational_model#History
 [source]: https://github.com/sio/HomeLibraryCatalog
-[ORM]: https://en.wikipedia.org/wiki/Object-relational_mapping
