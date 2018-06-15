@@ -171,9 +171,9 @@ hints that there exist a whole other class of libraries called Object-Relational
 Mappers ([ORM]). And I was not clever enough to deduce that on my own.
 
 But I wasn't too dumb either. I figured that repeating myself every time I
-needed to run a simple query was wrong. So I stashed that code away into `SQL`
+needed to run a simple query was wrong. So I stashed that code away into [SQL]
 class. I figured that Book and Author objects require a lot of common methods to
-interact with database. So I separated that code into `TableEntityWithID` class.
+interact with database. So I separated that code into [TableEntityWithID] class.
 I have essentially implemented an ORM without knowing what ORM is. Of course, it
 is far inferior to SQLAlchemy and the likes. Of course, I will never use it in
 another project now that I know that there are industry standard solutions in
@@ -219,7 +219,9 @@ and I can happily switch from being a developer to becoming the end user.
 [Bottle]: https://bottlepy.org/
 [Freenom]: https://freenom.com/
 [OpenShift]: https://www.openshift.com/
+[SQL]: https://github.com/sio/HomeLibraryCatalog/blob/1452531ec05f049c6a758530d7f526f05c188ba1/hlc/db.py#L356
 [TANSTAAFL]: https://en.wikipedia.org/wiki/The_Moon_Is_a_Harsh_Mistress
+[TableEntityWithID]: https://github.com/sio/HomeLibraryCatalog/blob/1452531ec05f049c6a758530d7f526f05c188ba1/hlc/items.py#L37
 [blog]: http://www.zackgrossbart.com/hackito/the-library-problem/
 [relational model]: https://en.wikipedia.org/wiki/Relational_model#History
 [source]: https://github.com/sio/HomeLibraryCatalog
