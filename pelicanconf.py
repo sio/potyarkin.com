@@ -17,13 +17,24 @@ STATIC_PATHS = [
     'images',
     'static',
     'resources',
-    ]
+
 EXTRA_PATH_METADATA = {
     'static/CNAME': {'path': 'CNAME'},
     'static/favicon.ico': {'path': 'favicon.ico'},
     'static/README-for-docs.md': {'path': 'README.md'},
     'static/google684a6a967bc36817.html': {'path': 'google684a6a967bc36817.html'},
     }
+
+# Markdown customization
+MARKDOWN = {
+    'extension_configs': {
+        'markdown.extensions.codehilite': {'css_class': 'highlight'},
+        'markdown.extensions.extra': {},
+        'markdown.extensions.meta': {},
+        'markdown.extensions.toc': {},
+    },
+    'output_format': 'html5',
+}
 
 # Cleaner URL paths
 ARTICLE_URL = '{category}/{date:%Y}/{slug}/'
