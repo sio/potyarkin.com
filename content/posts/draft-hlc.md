@@ -74,6 +74,53 @@ I'm glad I did not waste more time pursuing this path, but it was still hard to
 let go. It took quite some time for me to return to this project afterwards.
 
 ### Local database driven application with web interface
+
+A relational database was the logical solution to spreadsheet limitations.
+Store authors separate from books and manage how the former *relate* to the
+latter! Scientists who pioneered the [relational model] in 1970s were pure
+geniuses and now the whole world relies on their work.
+
+I drafted the database schema on a piece of paper and have discussed it
+extensively with my wife. That's probably the point where book reviews were
+added to the requirements list. The database idea made me very enthusiastic and
+had swallowed a lot of free time, but that idea alone could not provide a
+complete solution for the problem at hand.
+
+Data input and representation are what the Library project was all about. Yet
+relational database management systems provide only the storage solution, not
+the full package (if you don't take Microsoft Access into account). So I had to
+figure out how to implement the user interface on my own. I chose to write it in
+Python because I was somewhat familiar with the language and I enjoy how clean
+and readable Python code is. I'm not a programmer, so other options were either
+learning a new language or choosing between VBA and Bash, none of which could be
+considered enjoyable.
+
+I have briefly considered building a conventional desktop GUI. The UserForm
+experience was still fresh and rather traumatic, so I was reluctant to dive into
+another UI toolkit. Even if I were to, which one should I have chosen? Qt seemed
+nice, but its Python support reports were contradictory. GTK? Installing it was
+rather tricky in Windows. Something non-crossplatform? And what about my Linux
+laptop?
+
+I've had a bunch of HTML templates left from XML/XSLT operations and they could
+be trivially transformed to be used in conjunction with the database. While the
+catalog pages could be statically generated, the data input required some sort
+of server to interact with. And I've had zero experience with that.
+
+Quick Google search has introduced me to the concept of web frameworks and I
+have semi-randomly chosen [Bottle]. At that moment I've had no intention to
+expose it to the open network, the app and the database were to be stored on the
+USB stick and launched locally when needed. Smartphone interaction was planned
+either via LAN or using saved HTML pages for read-only access when not at home.
+Bottle uses no dependencies other than standard library and the whole framework
+is packaged into a single file. It was perfect for the portable app scenario.
+
+After the development started and I saw how difficult it is to make a web
+application, I've decided there is no point to confine the result of all that
+labor to a single computer. Why use static (maybe even outdated) HTML dumps on
+the smartphone when we could access full functionality of the application via
+web site?
+
 ### Traditional web application
 
 ## The unknown unknowns
@@ -118,5 +165,7 @@ course, there are plenty of improvements to be made (you can see how long the
 TODO list is), but the maintenance itself requires almost zero attention now
 and I can happily switch from being a developer to becoming the end user.
 
+[Bottle]: https://bottlepy.org/
 [blog]: http://www.zackgrossbart.com/hackito/the-library-problem/
+[relational model]: https://en.wikipedia.org/wiki/Relational_model#History
 [source]: https://github.com/sio/HomeLibraryCatalog
