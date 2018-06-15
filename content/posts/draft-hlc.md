@@ -25,6 +25,8 @@ posts of people who have faced the same problem before. I particularly recommend
 [this one][blog]. And I have decided that no pre-existing tool will meet our
 growing expectations.
 
+[TOC]
+
 ## Naive foray into application architecture
 
 I have never developed an application for any end user other than myself and I
