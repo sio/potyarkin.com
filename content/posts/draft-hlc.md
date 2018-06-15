@@ -6,11 +6,11 @@ I love reading books. My wife loves reading books. We enjoy shopping for books
 and we live a ten minute commute away from a huge used books store. That means
 we have a lot of books. Like, really a lot. A little more than one thousand.
 
-We have lost count how many times we've bought a book that we already owned. And
-even more often we had foregone buying a book we liked because we were sure we
-have already bought it - only to find out we've been mistaken and have just held
-the same book in hands when we were in that same store the last time. And that
-was a problem. The Library Problem.
+We have lost count how many times we've bought a book that we already owned.
+Even more often we had foregone buying a book we liked because we were sure we
+have already bought it - only to find out we've been mistaken and have only
+considered buying that very book earlier. This has become a problem. The Library
+Problem.
 
 We needed a way to catalog all our books. The catalog had to be accessible from
 mobile devices (to look up a book while at the book store) and to be easy to
