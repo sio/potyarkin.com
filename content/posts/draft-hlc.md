@@ -236,7 +236,7 @@ with any JS framework so I thought that avoiding to learn one would compensate
 for the inconvenience. I'm not sure it did.
 
 Most of my JS code is written intuitively, with no awareness of best practises
-and filled with "code smells". Writing from scratch was sometimes quite
+and is filled with "code smells". Writing from scratch was sometimes quite
 educating, e.g with AJAX calls - I understand and can explain them better than
 ever before. Overall conclusion is that JavaScript is hard. And that frameworks
 probably exist for a reason. If I'll do another web app project, I'll probably
@@ -244,6 +244,15 @@ look into some lightweight framework to save time writing JS, which I find not
 very enjoyable.
 
 ### Modular design
+
+One might think splitting code into modules comes naturally. At least I did. And
+I was wrong. When I was not specifically thinking about their size some modules
+tended to grow large. A thousand lines is pretty hard to do a quick overview on,
+and even harder to split after the fact. Some modularity has to be designed from
+the beginning.
+
+I don't know how I could've avoided that. Guess it comes with the experience.
+
 ### MVC
 
 ## It works!
