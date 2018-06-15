@@ -215,7 +215,7 @@ far I have not guessed what keywords to ask Google for it.
 I was aware that changing database schema after the database was populated is
 hard and can lead to data loss. So I have put a lot of thought into designing
 it. I've even fired up GraphViz and created a [nice chart][schema] that I've
-printed out and looked at on commute. I wanted the database schema to be
+printed out and looked at on the commute. I wanted the database schema to be
 iron-clad and to require no changes in future.
 
 I was very naive.
@@ -245,11 +245,11 @@ very enjoyable.
 
 ### Modular design
 
-One might think splitting code into modules comes naturally. At least I did. And
-I was wrong. When I was not specifically thinking about their size some modules
-tended to grow large. A thousand lines is pretty hard to do a quick overview on,
-and even harder to split after the fact. Some modularity has to be designed from
-the beginning.
+One might think that splitting code into modules comes naturally. At least I
+did. And I was wrong. When I was not specifically thinking about their size some
+modules tended to grow large. A thousand lines is pretty hard to do a quick
+overview on, and even harder to split after the fact. Some modularity has to be
+designed from the beginning.
 
 I don't know how I could've avoided that. Guess it comes with the experience.
 
