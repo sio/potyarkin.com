@@ -123,6 +123,34 @@ web site?
 
 ### Traditional web application
 
+The development was already going on, powered by Python and Bottle. What I was
+missing was the server to host my application at. Turns out launching a web site
+can be very cheap these days! Even as cheap as free.
+
+I've started with a free domain name from [Freenom] and a free hosting from Red
+Hat's [OpenShift]. Both of them have had upsides and downsides but no downsides
+were significant enough to turn down the price of free. Freenom domains are
+considered low quality from SEO standpoint, but that was completely irrelevant
+in my case. OpenShift server had to receive at least one http request every 24
+hours to stay awake, and I've cheated that with a cron job on my router. No
+inconveniences whatsoever.
+
+I have to digress to emphasize: OpenShift was great! It was easy to set up and
+very convenient to use. Its documentation was very thorough and up to date.
+OpenShift has introduced me to some concepts I would have not encountered
+otherwise, like automated deploying after git push and handling proper wsgi
+server. And all of that was for free. I'm very thankful to Red Hat for that.
+
+Unfortunately, as Mr. Heinlein [used to reiterate][TANSTAAFL], there ain't no
+such thing as a free lunch. Red Hat could not pay the bills for all the computer
+enthusiasts forever and version 3 of OpenShift imposed much tighter restrictions
+on the free accounts. I've had to move to a cheap virtual private server and to
+learn to set up and maintain an Apache instance on my own. New VPS was sometimes
+too slow compared to what OpenShift has offered and I might need to migrate to
+another hosting provider later, but everything was fine for now.
+
+I could concentrate on the development.
+
 ## The unknown unknowns
 
 Little did I know that while I was keeping myself busy with seemingly important
@@ -166,6 +194,9 @@ TODO list is), but the maintenance itself requires almost zero attention now
 and I can happily switch from being a developer to becoming the end user.
 
 [Bottle]: https://bottlepy.org/
+[Freenom]: https://freenom.com/
+[OpenShift]: https://www.openshift.com/
+[TANSTAAFL]: https://en.wikipedia.org/wiki/The_Moon_Is_a_Harsh_Mistress
 [blog]: http://www.zackgrossbart.com/hackito/the-library-problem/
 [relational model]: https://en.wikipedia.org/wiki/Relational_model#History
 [source]: https://github.com/sio/HomeLibraryCatalog
