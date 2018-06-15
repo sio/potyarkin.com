@@ -229,6 +229,20 @@ work for me. And later I've learned that the process I was automating is called
 [database migration], and there are tools written by professionals for it.
 
 ### JavaScript is a lot of work
+
+I tried to avoid adding dependencies whenever I could. So I've decided to write
+what little client-side logic I needed in pure JavaScript. I have no experience
+with any JS framework so I thought that avoiding to learn one would compensate
+for the inconvenience. I'm not sure it did.
+
+Most of my JS code is written intuitively, with no awareness of best practises
+and filled with "code smells". Writing from scratch was sometimes quite
+educating, e.g with AJAX calls - I understand and can explain them better than
+ever before. Overall conclusion is that JavaScript is hard. And that frameworks
+probably exist for a reason. If I'll do another web app project, I'll probably
+look into some lightweight framework to save time writing JS, which I find not
+very enjoyable.
+
 ### Modular design
 ### MVC
 
