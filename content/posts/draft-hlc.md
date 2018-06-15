@@ -255,6 +255,17 @@ I don't know how I could've avoided that. Guess it comes with the experience.
 
 ### MVC
 
+This is another example of a sensible principle that's hard to come by without
+someone teaching you. [Model-View-Controller][MVC] is a logical extension of
+modularity principle which I was totally unaware about. I have made some
+intuitive steps in the right direction, but overall my application is a soup of
+interleaved components. That complicates maintenance and further development and
+makes the code more difficult to understand for other developers.
+
+If I would've gone with a bigger framework like Flask or Django, MVC mindset
+might have been forced down on me. For a newbie who doesn't know anything some
+dictatorship isn't that bad.
+
 ## It works!
 
 After all the difficulties and complications (both expected and unexpected) I
@@ -284,6 +295,7 @@ and I can happily switch from being a developer to becoming the end user.
 
 [Bottle]: https://bottlepy.org/
 [Freenom]: https://freenom.com/
+[MVC]: https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller
 [ORM]: https://en.wikipedia.org/wiki/Object-relational_mapping
 [OpenShift]: https://www.openshift.com/
 [SQL]: https://github.com/sio/HomeLibraryCatalog/blob/1452531ec05f049c6a758530d7f526f05c188ba1/hlc/db.py#L356
