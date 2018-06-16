@@ -148,8 +148,8 @@
                 <p>This is a step by step guide to getting started with <a href="https://potyarkin.ml/posts/2018/expanding-power-query-standard-library-introducing-libpq/">LibPQ</a>, an illustrated
 version of <a href="https://github.com/sio/LibPQ/blob/master/README.md#installation-and-usage">"Installation and usage"</a> section of the official
 documentation.</p>
-<h2>Installation</h2>
-<h3>LibPQ source code</h3>
+<h2 id="installation"><a class="toclink" href="#installation">Installation</a></h2>
+<h3 id="libpq-source-code"><a class="toclink" href="#libpq-source-code">LibPQ source code</a></h3>
 <p>The source code of the library has to be present in each workbook that uses it.</p>
 <ul>
 <li>Create a new blank query: <code>Data &gt; Get &amp; Transform &gt; From Other Sources &gt;
@@ -159,7 +159,7 @@ documentation.</p>
 <li>Save new query under the name <code>LibPQ</code></li>
 </ul>
 <p><a href="https://potyarkin.ml/posts/2018/getting-started-with-libpq/libpq-main-module.png"><img alt="Main module of LibPQ" src="https://potyarkin.ml/posts/2018/getting-started-with-libpq/libpq-main-module.png"></a></p>
-<h3>Specifying modules location</h3>
+<h3 id="specifying-modules-location"><a class="toclink" href="#specifying-modules-location">Specifying modules location</a></h3>
 <p>After the previous step LibPQ doesn't know yet where it should get the modules'
 source code from. You can specify an unlimited number of local and web locations
 where the modules are saved:</p>
@@ -184,10 +184,10 @@ locations are checked.</p>
   module collections while using personal modules with colliding names
   without any problems.</li>
 </ul>
-<h3>Reusable template</h3>
+<h3 id="reusable-template"><a class="toclink" href="#reusable-template">Reusable template</a></h3>
 <p>It is not necessary to repeat the installation steps every time you want to use LibPQ. You can add LibPQ to an empty workbook and save is as a template for future use.</p>
-<h2>Usage</h2>
-<h3>Importing existing module</h3>
+<h2 id="usage"><a class="toclink" href="#usage">Usage</a></h2>
+<h3 id="importing-existing-module"><a class="toclink" href="#importing-existing-module">Importing existing module</a></h3>
 <p>Import any available module with <code>LibPQ("ModuleName")</code> when writing your
 queries in Advanced editor. LibPQ will search for the file named
 <code>ModuleName.pq</code> in all locations that you've listed in LibPQPath. If the module
@@ -197,7 +197,7 @@ is found, its source code will be evaluated and the result will be returned.</p>
 <p>That works because <code>LibPQPath</code> contains reference to
 <code>https://raw.githubusercontent.com/sio/LibPQ/master/Modules/</code>, where the source
 code for <code>Date.Parse.pq</code> is located.</p>
-<h3>Creating a new module</h3>
+<h3 id="creating-a-new-module"><a class="toclink" href="#creating-a-new-module">Creating a new module</a></h3>
 <p>You can save any reusable Power Query function or query to be imported by LibPQ
 later:</p>
 <ul>

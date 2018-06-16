@@ -158,14 +158,14 @@ inconvenience would deter you from checking all repos frequently.</p>
 <p>That's why I wrote a simple bash script that helps to <em>automate the boring
 stuff</em>. The script is well-documented, so I won't discuss implementation
 details here.</p>
-<h2>git-projects.sh</h2>
+<h2 id="git-projectssh"><a class="toclink" href="#git-projectssh">git-projects.sh</a></h2>
 <p>You can download the script from
 <a href="https://gist.github.com/sio/227da259cad7bb549c69909ba428884c">https://gist.github.com/sio/...</a></p>
 <p>The code is licensed under a permissive opensource license (Apache License,
 Version 2.0) so feel free to use it for your hobby and work projects.</p>
 <p>Report any bugs, ideas, feature requests via GitHub issues/comments -
 all feedback is welcome!</p>
-<h2>Installation</h2>
+<h2 id="installation"><a class="toclink" href="#installation">Installation</a></h2>
 <ul>
 <li>Download the script from GitHub, add execution permissions</li>
 <li>List the paths to the local clones of your git repos in a text
@@ -174,14 +174,14 @@ all feedback is welcome!</p>
 <li>Update the value of <code>PROJECT_LIST</code> variable with the path of the file
   you've just created</li>
 </ul>
-<h2>Usage</h2>
+<h2 id="usage"><a class="toclink" href="#usage">Usage</a></h2>
 <p>All command-line parameters are passed on to the <code>git</code> command.
 When the script is launched without parameters, <code>git-projects.sh</code> checks the
 status of each repo.</p>
 <p>Repositories are processed in alphabetical order sorted by paths
 listed in <code>PROJECT_LIST</code>.</p>
-<h2>Examples</h2>
-<h3>Refreshing your memory</h3>
+<h2 id="examples"><a class="toclink" href="#examples">Examples</a></h2>
+<h3 id="refreshing-your-memory"><a class="toclink" href="#refreshing-your-memory">Refreshing your memory</a></h3>
 <div class="highlight"><pre><span></span>$ ./git-projects.sh log --oneline -3 --no-decorate
 
 HomeLibraryCatalog
@@ -201,7 +201,7 @@ a24e4f2 More familiar Home and Backspace behavior
 </pre></div>
 
 
-<h3>View latest tag (if any)</h3>
+<h3 id="view-latest-tag-if-any"><a class="toclink" href="#view-latest-tag-if-any">View latest tag (if any)</a></h3>
 <div class="highlight"><pre><span></span>$ ./git-projects.sh describe --tags --always
 
 HomeLibraryCatalog
@@ -215,7 +215,7 @@ bc33836
 </pre></div>
 
 
-<h3>Checking project status</h3>
+<h3 id="checking-project-status"><a class="toclink" href="#checking-project-status">Checking project status</a></h3>
 <div class="highlight"><pre><span></span>$ ./git-projects.sh
 
 HomeLibraryCatalog

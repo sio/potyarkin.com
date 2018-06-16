@@ -25,6 +25,20 @@ EXTRA_PATH_METADATA = {
     'static/google684a6a967bc36817.html': {'path': 'google684a6a967bc36817.html'},
     }
 
+# Markdown customization
+MARKDOWN = {
+    'extension_configs': {
+        'markdown.extensions.codehilite': {'css_class': 'highlight'},
+        'markdown.extensions.extra': {},
+        'markdown.extensions.meta': {},
+        'markdown.extensions.toc': {
+            'anchorlink': True,
+            'title': 'Contents',
+        },
+    },
+    'output_format': 'html5',
+}
+
 # Cleaner URL paths
 ARTICLE_URL = '{category}/{date:%Y}/{slug}/'
 ARTICLE_SAVE_AS = '{category}/{date:%Y}/{slug}/index.html'

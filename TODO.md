@@ -8,9 +8,3 @@
 - Generate sitemap.xml?
 
 # Next article ideas
-
-- Building HomeLibraryCatalog
-    - Learning from the very beginning
-    - Constantly changing requirements
-    - Working with client(s), kind of
-    - Describe good and not so good solutions
