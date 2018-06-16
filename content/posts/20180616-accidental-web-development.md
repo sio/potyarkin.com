@@ -21,7 +21,7 @@ addition to standard set of author, title and publishing year we wanted to be
 able to track book series and keep the list of missing books to look out for the
 next time.
 
-I admit my research into the subject matter was not scientifically thorough.
+I admit that my research into the subject matter was not scientifically thorough.
 I've dug up several comparisons of existing tools and have read several blog
 posts of people who have faced the same problem before. I particularly recommend
 [this one][blog]. And I have decided that no pre-existing tool will meet our
@@ -239,7 +239,7 @@ for the inconvenience. I'm not sure it did.
 
 Most of my JS code is written intuitively, with no awareness of best practises
 and is filled with "code smells". Writing from scratch was sometimes quite
-educating, e.g with AJAX calls - I understand and can explain them better than
+educating, e.g with AJAX calls - now I understand and can explain them better than
 ever before. Overall conclusion is that JavaScript is hard. And that frameworks
 probably exist for a reason. If I'll do another web app project, I'll probably
 look into some lightweight framework to save time writing JS, which I find not
@@ -290,7 +290,7 @@ The application supports:
 - Searching for books by exact metadata match and with wildcards
 
 You can access [the source code][source] on GitHub and see the site in action at
-https://morebooks.ml (registration is for family members only, sorry).  Of
+<https://morebooks.ml> (registration is for family members only, sorry).  Of
 course, there are plenty of improvements to be made (you can see how long the
 TODO list is), but the maintenance itself requires almost zero attention now
 and I can happily switch from being a developer to becoming the end user.
