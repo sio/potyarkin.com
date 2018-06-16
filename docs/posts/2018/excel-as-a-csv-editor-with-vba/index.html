@@ -161,7 +161,7 @@ commits to your version control system.</p>
 <p>The only solution is not to overwrite CSV files you've opened with Excel. Use
 another tool designed specifically for dealing with CSV or edit the file
 manually in the text editor of your choosing.</p>
-<h2>Append to CSV with VBA</h2>
+<h2 id="append-to-csv-with-vba"><a class="toclink" href="#append-to-csv-with-vba">Append to CSV with VBA</a></h2>
 <p>I wrote a small helper utility to append data rows to the CSV files from Excel that
 ensures you won't mess up the existing data. This is a one-day hobby project, and
 Excel serves more as the UI toolkit and runtime environment than as the
@@ -180,7 +180,7 @@ written in any modern language - it would probably have cleaner code. Excel is
 super easy to draft a simple UI though :)</p>
 <p>The code is pretty straightforward so I'll highlight only the most interesting
 parts.</p>
-<h2>Reading and writing Unicode with VBA</h2>
+<h2 id="reading-and-writing-unicode-with-vba"><a class="toclink" href="#reading-and-writing-unicode-with-vba">Reading and writing Unicode with VBA</a></h2>
 <p>Visual Basic for Applications is a hopelessly outdated environment. Unicode
 support can be achieved only with the help of COM interoperability, namely the
 <code>ADODB.Stream</code> object. This object provides a very comfortable interface for
@@ -188,14 +188,14 @@ reading and writing text files in a bytestream mode, and also handles character
 encoding nicely.</p>
 <p>Appending to a file is done via combination of seeking to the end of stream
 and writing the new data.</p>
-<h2>CSV packing and unpacking</h2>
+<h2 id="csv-packing-and-unpacking"><a class="toclink" href="#csv-packing-and-unpacking">CSV packing and unpacking</a></h2>
 <p>I'm not exactly proud of how CSV string manipulations are implemented in the code.
 If VBA would've provided some nicer regex capabilities or a CSV-aware library it
 would've been better. I know about <code>VBScript.RegExp</code>, but it's an overkill for a
 small task my app was created to accomplish.</p>
 <p>Current implementation can not handle a quote symbol in the middle of the field
 value. This is a known bug.</p>
-<h2>Demo</h2>
+<h2 id="demo"><a class="toclink" href="#demo">Demo</a></h2>
 <p>This the main and the only UI my utility offers. Inputs and buttons are meant to
 be self explaining. No value conversion is done when saving - the value of the
 cell is written as is, quotes are added if delimiter character occurs within
@@ -235,6 +235,13 @@ you'll find any use for it.</p>
 
 
                 <aside class="post-nav">
+                    <a class="post-nav-next" href="https://potyarkin.ml/posts/2018/accidental-submersion-into-web-development/">
+                        <section class="post-nav-teaser">
+                            <i class="ic ic-arrow-left"></i>
+                                <h2 class="post-nav-title">Accidental submersion into web development</h2>
+                            <p class="post-nav-excerpt">The Library Problem I love reading books. My wife loves reading books. We enjoy...</p>
+                        </section>
+                    </a>
                     <a class="post-nav-prev" href="https://potyarkin.ml/posts/2018/why-software-translation-is-a-waste-of-time/">
                         <section class="post-nav-teaser">
                             <i class="ic ic-arrow-right"></i>

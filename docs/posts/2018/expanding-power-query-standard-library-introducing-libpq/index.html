@@ -154,7 +154,7 @@ control systems, extensibility by third-party libraries, etc.</p>
 <p>That is why I have started <strong><a href="https://github.com/sio/LibPQ">LibPQ</a></strong> - an open-source M language library
 meant to expand the standard library and to make it easier for others to do so.
 Its main features are:</p>
-<h3>Importing source code from plain text files located on disk or on the web</h3>
+<h3 id="importing-source-code-from-plain-text-files-located-on-disk-or-on-the-web"><a class="toclink" href="#importing-source-code-from-plain-text-files-located-on-disk-or-on-the-web">Importing source code from plain text files located on disk or on the web</a></h3>
 <p>LibPQ stores its modules as plain text files with <code>*.pq</code> extension.  Detaching
 source code from the workbooks that execute it has a lot of advantages:</p>
 <ul>
@@ -167,12 +167,12 @@ source code from the workbooks that execute it has a lot of advantages:</p>
   Editor does not have them)</li>
 <li>Sharing your code and collaborating becomes much easier</li>
 </ul>
-<h3>Supporting several import locations ordered by priority</h3>
+<h3 id="supporting-several-import-locations-ordered-by-priority"><a class="toclink" href="#supporting-several-import-locations-ordered-by-priority">Supporting several import locations ordered by priority</a></h3>
 <p>LibPQ does not dictate where you store your source code. Inspired by Python's
 <a href="https://docs.python.org/3/library/sys.html#sys.path"><code>sys.path</code></a> it enables specifying unlimited number of local and/or
 remote sources (ordered by priority). When importing a module, LibPQ will check
 these sources one by one until the required module is found.</p>
-<h3>Unit testing framework</h3>
+<h3 id="unit-testing-framework"><a class="toclink" href="#unit-testing-framework">Unit testing framework</a></h3>
 <p>Having source code detached from the workbooks encourages you to improve and
 refactor existing modules. To make sure you do not introduce regressions you
 should cover your code with unit tests.</p>
@@ -180,7 +180,7 @@ should cover your code with unit tests.</p>
 unit testing framework that supports test discovery, grouping tests into test
 suites and comes with a bunch of handy assertion functions. To learn more read
 this <a href="https://github.com/sio/LibPQ/blob/master/Docs/UnitTesting.md">help page</a>.</p>
-<h3>A collection of general purpose functions and queries</h3>
+<h3 id="a-collection-of-general-purpose-functions-and-queries"><a class="toclink" href="#a-collection-of-general-purpose-functions-and-queries">A collection of general purpose functions and queries</a></h3>
 <p>And last, LibPQ contains some general purpose modules that you might find
 useful. If not - go write some new ones, you have the tools now!</p>
 <p>LibPQ is built in such way that you do not need me (or anyone else) to approve

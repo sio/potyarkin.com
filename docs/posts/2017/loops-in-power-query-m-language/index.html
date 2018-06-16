@@ -155,7 +155,7 @@ data mashup queries. It's a <strong>functional</strong>, case sensitive language
 to F#, which can be used with Power BI Desktop, Power Query in Excel, and Get
 &amp; Transform in Excel 2016.</p>
 </blockquote>
-<h2>"Functional" is the key word</h2>
+<h2 id="functional-is-the-key-word"><a class="toclink" href="#functional-is-the-key-word">"Functional" is the key word</a></h2>
 <p>Understanding (and accepting) that M is entirely different from most common
 programming languages has helped me as much as (maybe even more than) the
 exhaustive reference at MSDN. Functional language implies declarative
@@ -173,7 +173,7 @@ kinda there, but it has its own quirks too. Loops are out of the question,
 unless you somehow manage to implement the function that does the looping for
 you. But...</p>
 <p>There already is such a function! It is <code>List.Generate</code>!</p>
-<h2>List.Generate</h2>
+<h2 id="listgenerate"><a class="toclink" href="#listgenerate">List.Generate</a></h2>
 <p>This function takes 3 or 4 parameters, all of them functions.  (You should
 always treat the <code>each</code> statement as a function <a href="https://msdn.microsoft.com/en-us/library/mt185361.aspx">because it is</a> a shortcut
 for function definition.)</p>
@@ -214,7 +214,7 @@ for function definition.)</p>
 </pre></div>
 
 
-<h2>A simple example</h2>
+<h2 id="a-simple-example"><a class="toclink" href="#a-simple-example">A simple example</a></h2>
 <p>We will generate a table of data points for plotting a parabola. Internally we
 will be storing each item as the record with <code>x</code> and <code>y</code> fields.  After that we
 will transform that data into a Power Query table for output.</p>
@@ -233,7 +233,7 @@ in output
 first data point, <code>condition()</code> and <code>next()</code> are also functions even though
 they are written using <code>each</code> shortcut. There is no <code>transform()</code> function
 because it is an optional parameter.</p>
-<h2>An example from real world</h2>
+<h2 id="an-example-from-real-world"><a class="toclink" href="#an-example-from-real-world">An example from real world</a></h2>
 <p>In the real world you will not need the <code>List.Generate</code> magic for such simple
 tasks, but you will still need it. Here is how I've used it recently.</p>
 <p>Assume you have a list of tables that contain the data in the same format but
@@ -259,7 +259,7 @@ and the list of their respective names in the <code>Names</code> variable. The l
 with index of -1 and an empty table, and adds a "TableName" column to each of
 the tables. After this modification the tables can be safely combined with
 <code>Table.Combine(NamedTables)</code> - no data loss will occur.</p>
-<h2>Conclusion</h2>
+<h2 id="conclusion"><a class="toclink" href="#conclusion">Conclusion</a></h2>
 <p>Using <code>List.Generate</code> should be considered a last-ditch attempt to looping. M
 has dedicated iterative functions for most common looping tasks, so please
 check the standard library reference before creating such C-style loops
@@ -268,7 +268,7 @@ manually. They are rather hard to read, and readability counts!</p>
 Language a little more. It is a powerful tool and even though it is not
 perfect, I hope you will find a lot of uses for it in your data crunching
 tasks.</p>
-<h2>An afterthought</h2>
+<h2 id="an-afterthought"><a class="toclink" href="#an-afterthought">An afterthought</a></h2>
 <p>Also, please keep in mind that the dot symbol in <code>List.Generate</code> does not have
 the same meaning as in other languages either. There are no object methods in
 M, and there are no namespaces, so the dot is just another character without
