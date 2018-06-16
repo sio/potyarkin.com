@@ -1,5 +1,264 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/all.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2018-06-01T00:00:00+03:00</updated><entry><title>Excel as a CSV editor (with VBA)</title><link href="https://potyarkin.ml/posts/2018/excel-as-a-csv-editor-with-vba/" rel="alternate"></link><published>2018-06-01T00:00:00+03:00</published><updated>2018-06-01T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-06-01:/posts/2018/excel-as-a-csv-editor-with-vba/</id><summary type="html">&lt;p&gt;One might think that Excel is a decent CSV editor as it is, but it's not. It is
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/all.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2018-06-16T00:00:00+03:00</updated><entry><title>Accidental submersion into web development</title><link href="https://potyarkin.ml/posts/2018/accidental-submersion-into-web-development/" rel="alternate"></link><published>2018-06-16T00:00:00+03:00</published><updated>2018-06-16T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-06-16:/posts/2018/accidental-submersion-into-web-development/</id><summary type="html">&lt;h2 id="the-library-problem"&gt;&lt;a class="toclink" href="#the-library-problem"&gt;The Library Problem&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I love reading books. My wife loves reading books. We enjoy shopping for books
+and we live a ten minute commute away from a huge used books store. That means
+we have a lot of books. Like, really a lot. A little more than one thousand.&lt;/p&gt;
+&lt;p&gt;We …&lt;/p&gt;</summary><content type="html">&lt;h2 id="the-library-problem"&gt;&lt;a class="toclink" href="#the-library-problem"&gt;The Library Problem&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I love reading books. My wife loves reading books. We enjoy shopping for books
+and we live a ten minute commute away from a huge used books store. That means
+we have a lot of books. Like, really a lot. A little more than one thousand.&lt;/p&gt;
+&lt;p&gt;We have lost count how many times we've bought a book that we already owned.
+Even more often we had foregone buying a book we liked because we were sure we
+have already bought it - only to find out we've been mistaken and have only
+considered buying that very book earlier. This has become a problem. The Library
+Problem.&lt;/p&gt;
+&lt;p&gt;We needed a way to catalog all our books. The catalog had to be accessible from
+mobile devices (to look up a book while at the book store) and to be easy to
+use. That is to add and edit book information, of which we've needed plenty: in
+addition to standard set of author, title and publishing year we wanted to be
+able to track book series and keep the list of missing books to look out for the
+next time.&lt;/p&gt;
+&lt;p&gt;I admit that my research into the subject matter was not scientifically thorough.
+I've dug up several comparisons of existing tools and have read several blog
+posts of people who have faced the same problem before. I particularly recommend
+&lt;a href="http://www.zackgrossbart.com/hackito/the-library-problem/"&gt;this one&lt;/a&gt;. And I have decided that no pre-existing tool will meet our
+growing expectations.&lt;/p&gt;
+&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Contents&lt;/span&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#the-library-problem"&gt;The Library Problem&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#naive-foray-into-application-architecture"&gt;Naive foray into application architecture&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#single-spreadsheet-approach"&gt;Single spreadsheet approach&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#local-database-driven-application-with-web-interface"&gt;Local database driven application with web interface&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#traditional-web-application"&gt;Traditional web application&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#the-unknown-unknowns"&gt;The unknown unknowns&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#orm"&gt;ORM&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#multi-threading"&gt;Multi-threading&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#database-migrations"&gt;Database migrations&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#javascript-is-a-lot-of-work"&gt;JavaScript is a lot of work&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#modular-design"&gt;Modular design&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#mvc"&gt;MVC&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#it-works"&gt;It works!&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;h2 id="naive-foray-into-application-architecture"&gt;&lt;a class="toclink" href="#naive-foray-into-application-architecture"&gt;Naive foray into application architecture&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I have never developed an application for any end user other than myself and I
+didn't even know I was about to start developing one.&lt;/p&gt;
+&lt;h3 id="single-spreadsheet-approach"&gt;&lt;a class="toclink" href="#single-spreadsheet-approach"&gt;Single spreadsheet approach&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;The initial idea was that of a "document". It had to contain some essential
+information about every book we own and (optionally) a second list of books we
+want to acquire. Excel spreadsheet seemed like a natural fit. We are both
+spending a better half of each workday juggling spreadsheets in Excel, so
+developing and maintaining such "document" appeared doable.&lt;/p&gt;
+&lt;p&gt;I have started drafting the column structure, applied some formatting tweaks and
+the skeleton of the "document" was ready. We have entered the test batch of
+books and were about to begin testing.&lt;/p&gt;
+&lt;p&gt;Obstacles arose when we were entering information for the first fifteen books.
+Manually typing in all the fields is tiresome and slow. Errors inevitably
+happen. What if I miss one letter in the author's name?  That book will be lost
+when applying filter on author column. We need autocompletion! What if I
+accidentally switch the order of digits in ISBN? We won't be able to do a web
+lookup for that book later. We have to write a custom ISBN validator in VBA!&lt;/p&gt;
+&lt;p&gt;And the spreadsheet began to amass VBA code, data validation and conditional
+formatting rules. Full-blown spaghetti style. Version control has become a
+problem. What's the difference between versions 0.0.13 and 0.0.19? I had only a
+vague idea.&lt;/p&gt;
+&lt;p&gt;I stopped myself when I was about to sketch up a UserForm for data input. Excel
+road was leading me nowhere. It was difficult and even if all the difficulties
+were to be overcome it imposed some suboptimal compromises on us:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Single table storage limited the data structures we would be able to enter and
+  view. If the book was written by two authors, which one should come first in
+  the "author" string?  How would we do column filtering in that case? What
+  about sort order?&lt;/li&gt;
+&lt;li&gt;The local nature of storage meant there had to be one designated place for
+  making changes (home laptop). Any changes made in other locations (smartphone,
+  thumb drive) had to be agreed to be declared discardable.&lt;/li&gt;
+&lt;li&gt;The spreadsheet had to be exported to HTML to be accessible from smartphones.
+  XML and XSLT made this possible but not very pleasant. Although, I am rather
+  proud of the VBA code I wrote to save/load XML data automatically upon opening
+  the workbook. The data was completely decoupled from the representation.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I'm glad I did not waste more time pursuing this path, but it was still hard to
+let go. It took quite some time for me to return to this project afterwards.&lt;/p&gt;
+&lt;h3 id="local-database-driven-application-with-web-interface"&gt;&lt;a class="toclink" href="#local-database-driven-application-with-web-interface"&gt;Local database driven application with web interface&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;A relational database was the logical solution to spreadsheet limitations.
+Store authors separate from books and manage how the former &lt;em&gt;relate&lt;/em&gt; to the
+latter! Scientists who pioneered the &lt;a href="https://en.wikipedia.org/wiki/Relational_model#History"&gt;relational model&lt;/a&gt; in 1970s were pure
+geniuses and now the whole world relies on their work.&lt;/p&gt;
+&lt;p&gt;I drafted the database schema on a piece of paper and have discussed it
+extensively with my wife. That's probably the point where book reviews were
+added to the requirements list. The database idea made me very enthusiastic and
+had swallowed a lot of free time, but that idea alone could not provide a
+complete solution for the problem at hand.&lt;/p&gt;
+&lt;p&gt;Data input and representation are what the Library project was all about. Yet
+relational database management systems provide only the storage solution, not
+the full package (if you don't take Microsoft Access into account). So I had to
+figure out how to implement the user interface on my own. I chose to write it in
+Python because I was somewhat familiar with the language and I enjoy how clean
+and readable Python code is. I'm not a programmer, so other options were either
+learning a new language or choosing between VBA and Bash, none of which could be
+considered enjoyable.&lt;/p&gt;
+&lt;p&gt;I have briefly considered building a conventional desktop GUI. The UserForm
+experience was still fresh and rather traumatic, so I was reluctant to dive into
+another UI toolkit. Even if I were to, which one should I have chosen? Qt seemed
+nice, but its Python support reports were contradictory. GTK? Installing it was
+rather tricky in Windows. Something non-crossplatform? And what about my Linux
+laptop?&lt;/p&gt;
+&lt;p&gt;I've had a bunch of HTML templates left from XML/XSLT operations and they could
+be trivially transformed to be used in conjunction with the database. While the
+catalog pages could be statically generated, the data input required some sort
+of server to interact with. And I've had zero experience with that.&lt;/p&gt;
+&lt;p&gt;Quick Google search has introduced me to the concept of web frameworks and I
+have semi-randomly chosen &lt;a href="https://bottlepy.org/"&gt;Bottle&lt;/a&gt;. At that moment I've had no intention to
+expose it to the open network, the app and the database were to be stored on the
+USB stick and launched locally when needed. Smartphone interaction was planned
+either via LAN or using saved HTML pages for read-only access when not at home.
+Bottle uses no dependencies other than standard library and the whole framework
+is packaged into a single file. It was perfect for the portable app scenario.&lt;/p&gt;
+&lt;p&gt;After the development started and I saw how difficult it is to make a web
+application, I've decided there is no point to confine the result of all that
+labor to a single computer. Why use static (maybe even outdated) HTML dumps on
+the smartphone when we could access full functionality of the application via
+web site?&lt;/p&gt;
+&lt;h3 id="traditional-web-application"&gt;&lt;a class="toclink" href="#traditional-web-application"&gt;Traditional web application&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;The development was already going on, powered by Python and Bottle. What I was
+missing was the server to host my application at. Turns out launching a web site
+can be very cheap these days! Even as cheap as free.&lt;/p&gt;
+&lt;p&gt;I've started with a free domain name from &lt;a href="https://freenom.com/"&gt;Freenom&lt;/a&gt; and a free hosting from Red
+Hat's &lt;a href="https://www.openshift.com/"&gt;OpenShift&lt;/a&gt;. Both of them have had upsides and downsides but no downsides
+were significant enough to turn down the price of free. Freenom domains are
+considered low quality from SEO standpoint, but that was completely irrelevant
+in my case. OpenShift server had to receive at least one http request every 24
+hours to stay awake, and I've cheated that with a cron job on my router. No
+inconveniences whatsoever.&lt;/p&gt;
+&lt;p&gt;I have to digress to emphasize: OpenShift was great! It was easy to set up and
+very convenient to use. Its documentation was very thorough and up to date.
+OpenShift has introduced me to some concepts I would have not encountered
+otherwise, like automated deploying after git push and handling proper wsgi
+server. And all of that was for free. I'm very thankful to Red Hat for that.&lt;/p&gt;
+&lt;p&gt;Unfortunately, as Mr. Heinlein &lt;a href="https://en.wikipedia.org/wiki/The_Moon_Is_a_Harsh_Mistress"&gt;used to reiterate&lt;/a&gt;, there ain't no
+such thing as a free lunch. Red Hat could not pay the bills for all the computer
+enthusiasts forever and version 3 of OpenShift imposed much tighter restrictions
+on the free accounts. I've had to move to a cheap virtual private server and to
+learn to set up and maintain an Apache instance on my own. New VPS was sometimes
+too slow compared to what OpenShift has offered and I might need to migrate to
+another hosting provider later, but everything was fine for now.&lt;/p&gt;
+&lt;p&gt;I could concentrate on the development.&lt;/p&gt;
+&lt;h2 id="the-unknown-unknowns"&gt;&lt;a class="toclink" href="#the-unknown-unknowns"&gt;The unknown unknowns&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Little did I know that while I was keeping myself busy with seemingly important
+problems such as whether to store images as blobs in database or as files on the
+file system a number of much more important problems were creeping up behind me.
+Donald Rumsfeld has called these things &lt;em&gt;the unknown unknowns&lt;/em&gt; - the things that
+we don't know while remaining unaware about the very fact of not knowing.&lt;/p&gt;
+&lt;h3 id="orm"&gt;&lt;a class="toclink" href="#orm"&gt;ORM&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;SQLite to store data. Web framework to interact with user. Python to glue them
+together. The need in all these parts comes naturally, you could not "forget" to
+use any one of them. Yet they are not the only parts that are needed.&lt;/p&gt;
+&lt;p&gt;Nowhere in Python's database API documentation it says that composing each query
+individually is highly inefficient in a database-driven application. No one
+hints that there exist a whole other class of libraries called Object-Relational
+Mappers (&lt;a href="https://en.wikipedia.org/wiki/Object-relational_mapping"&gt;ORM&lt;/a&gt;). And I was not clever enough to deduce that on my own.&lt;/p&gt;
+&lt;p&gt;But I wasn't too dumb either. I figured that repeating myself every time I
+needed to run a simple query was wrong. So I stashed that code away into &lt;a href="https://github.com/sio/HomeLibraryCatalog/blob/1452531ec05f049c6a758530d7f526f05c188ba1/hlc/db.py#L356"&gt;SQL&lt;/a&gt;
+class. I figured that Book and Author objects require a lot of common methods to
+interact with database. So I separated that code into &lt;a href="https://github.com/sio/HomeLibraryCatalog/blob/1452531ec05f049c6a758530d7f526f05c188ba1/hlc/items.py#L37"&gt;TableEntityWithID&lt;/a&gt; class.
+I have essentially implemented an ORM without knowing what ORM is. Of course, it
+is far inferior to SQLAlchemy and the likes. Of course, I will never use it in
+another project now that I know that there are industry standard solutions in
+this area. But I see no point in replacing my (suboptimal) implementation now.
+Because it works and nothing is broken and nothing is missing.&lt;/p&gt;
+&lt;p&gt;I consider my ORM to be a valuable educational experience even if it somewhat
+stalled the overall progress of the project.&lt;/p&gt;
+&lt;h3 id="multi-threading"&gt;&lt;a class="toclink" href="#multi-threading"&gt;Multi-threading&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;While I was developing the application I was using Bottle's builtin wsgiref web
+server. Running that server in production environment is not recommended because
+it was not built to withstand all the nastiness of open Internet. It is also a
+single threaded server which means it can not accept a request until it's done
+serving the previous one. The single-threadiness did not concern me - my app was
+intended to be used by two or three users tops and simultaneous requests would
+happen very seldom. Yet all the proper web servers (Apache, Nginx etc) are
+created to scale up to thousands and millions of users. Of course, they are
+multithreaded and multiprocessing. My application was not ready for that. Some
+would say SQLite is not ready for that either.&lt;/p&gt;
+&lt;p&gt;At first I considered crippling Apache to use only a single thread or switching
+to another server that can operate in a single thread mode. OpenShift seduced me
+with maintenance-free setup of Apache and I've abandoned that idea.&lt;/p&gt;
+&lt;p&gt;The code I've come up with to use a different instance of some objects for each
+thread is &lt;a href="https://github.com/sio/HomeLibraryCatalog/blob/1452531ec05f049c6a758530d7f526f05c188ba1/hlc/web.py#L1173"&gt;rather ugly&lt;/a&gt;. And it works only 90% of the time. So I
+just restart the Python workers every hour to avoid HTTP 500 errors when the
+database gets locked up. Not the best engineering decision of mine.&lt;/p&gt;
+&lt;p&gt;There probably exists a proper solution to multithreaded SQLite access, but so
+far I have not guessed what keywords to ask Google for it.&lt;/p&gt;
+&lt;h3 id="database-migrations"&gt;&lt;a class="toclink" href="#database-migrations"&gt;Database migrations&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;I was aware that changing database schema after the database was populated is
+hard and can lead to data loss. So I have put a lot of thought into designing
+it. I've even fired up GraphViz and created a &lt;a href="https://github.com/sio/HomeLibraryCatalog/blob/master/docs/relations.gv.pdf"&gt;nice chart&lt;/a&gt; that I've
+printed out and looked at on the commute. I wanted the database schema to be
+iron-clad and to require no changes in future.&lt;/p&gt;
+&lt;p&gt;I was very naive.&lt;/p&gt;
+&lt;p&gt;Of course it would require changes. Everything around us changes, we change, our
+expectations towards software change. At that point I understood that updating
+database manually was not a solution: there would be no trace left whether the
+schema was updated, which changes were introduced and which version does it
+correspond now to. So I've coded a simple &lt;a href="https://github.com/sio/HomeLibraryCatalog/blob/master/hlc/db_transition.py"&gt;transition&lt;/a&gt; module that would do that
+work for me. And later I've learned that the process I was automating is called
+&lt;a href="https://en.wikipedia.org/wiki/Schema_migration"&gt;database migration&lt;/a&gt;, and there are tools written by professionals for it.&lt;/p&gt;
+&lt;h3 id="javascript-is-a-lot-of-work"&gt;&lt;a class="toclink" href="#javascript-is-a-lot-of-work"&gt;JavaScript is a lot of work&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;I tried to avoid adding dependencies whenever I could. So I've decided to write
+what little client-side logic I needed in pure JavaScript. I have no experience
+with any JS framework so I thought that avoiding to learn one would compensate
+for the inconvenience. I'm not sure it did.&lt;/p&gt;
+&lt;p&gt;Most of my JS code is written intuitively, with no awareness of best practises
+and is filled with "code smells". Writing from scratch was sometimes quite
+educating, e.g with AJAX calls - now I understand and can explain them better than
+ever before. Overall conclusion is that JavaScript is hard. And that frameworks
+probably exist for a reason. If I'll do another web app project, I'll probably
+look into some lightweight framework to save time writing JS, which I find not
+very enjoyable.&lt;/p&gt;
+&lt;h3 id="modular-design"&gt;&lt;a class="toclink" href="#modular-design"&gt;Modular design&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;One might think that splitting code into modules comes naturally. At least I
+did. And I was wrong. When I was not specifically thinking about their size some
+modules tended to grow large. A thousand lines is pretty hard to do a quick
+overview on, and even harder to split after the fact. Some modularity has to be
+designed from the beginning.&lt;/p&gt;
+&lt;p&gt;I don't know how I could've avoided that. Guess it comes with the experience.&lt;/p&gt;
+&lt;h3 id="mvc"&gt;&lt;a class="toclink" href="#mvc"&gt;MVC&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;This is another example of a sensible principle that's hard to come by without
+someone teaching you. &lt;a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller"&gt;Model-View-Controller&lt;/a&gt; is a logical extension of
+modularity principle which I was totally unaware about. I have made some
+intuitive steps in the right direction, but overall my application is a soup of
+interleaved components. That complicates maintenance and further development and
+makes the code more difficult to understand for other developers.&lt;/p&gt;
+&lt;p&gt;If I would've gone with a bigger framework like Flask or Django, MVC mindset
+might have been forced down on me. For a newbie who doesn't know anything some
+dictatorship isn't that bad.&lt;/p&gt;
+&lt;h2 id="it-works"&gt;&lt;a class="toclink" href="#it-works"&gt;It works!&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;After all the difficulties and complications (both expected and unexpected) I
+can proudly say that the Library project is a success. The website is up and
+running for almost a year. There has been no significant downtimes and no data
+loss, most of our books have been catalogued. And most important, me and my wife
+do enjoy using it!&lt;/p&gt;
+&lt;p&gt;The application supports:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Creating and editing book entries.&lt;/li&gt;
+&lt;li&gt;Storing and displaying book metadata, cover thumbnail and arbitrary related
+  files. Each book can be connected with any number of authors, series and/or
+  tags.&lt;/li&gt;
+&lt;li&gt;Using ISBN to fetch book information from several third-party sources&lt;/li&gt;
+&lt;li&gt;Queuing ISBNs for input. This is helpful when you process a lot of books with
+  barcode scanner and don't have the time to clean up automatic metadata on each
+  one of them&lt;/li&gt;
+&lt;li&gt;Adding 1-to-5 star ratings and text reviews to any book in the library&lt;/li&gt;
+&lt;li&gt;Searching for books by exact metadata match and with wildcards&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You can access &lt;a href="https://github.com/sio/HomeLibraryCatalog"&gt;the source code&lt;/a&gt; on GitHub and see the site in action at
+&lt;a href="https://morebooks.ml"&gt;https://morebooks.ml&lt;/a&gt; (registration is for family members only, sorry).  Of
+course, there are plenty of improvements to be made (you can see how long the
+TODO list is), but the maintenance itself requires almost zero attention now
+and I can happily switch from being a developer to becoming the end user.&lt;/p&gt;</content><category term="python"></category><category term="web"></category><category term="HomeLibraryCatalog"></category></entry><entry><title>Excel as a CSV editor (with VBA)</title><link href="https://potyarkin.ml/posts/2018/excel-as-a-csv-editor-with-vba/" rel="alternate"></link><published>2018-06-01T00:00:00+03:00</published><updated>2018-06-01T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-06-01:/posts/2018/excel-as-a-csv-editor-with-vba/</id><summary type="html">&lt;p&gt;One might think that Excel is a decent CSV editor as it is, but it's not. It is
 a very capable CSV reader, I do not dispute that. When it comes to writing though,
 Excel does not match what you'd expect from a mature application:&lt;/p&gt;
 &lt;ul&gt;
@@ -19,7 +278,7 @@ commits to your version control system.&lt;/p&gt;
 &lt;p&gt;The only solution is not to overwrite CSV files you've opened with Excel. Use
 another tool designed specifically for dealing with CSV or edit the file
 manually in the text editor of your choosing.&lt;/p&gt;
-&lt;h2&gt;Append to CSV with VBA&lt;/h2&gt;
+&lt;h2 id="append-to-csv-with-vba"&gt;&lt;a class="toclink" href="#append-to-csv-with-vba"&gt;Append to CSV with VBA&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I wrote a small helper utility to append data rows to the CSV files from Excel that
 ensures you won't mess up the existing data. This is a one-day hobby project, and
 Excel serves more as the UI toolkit and runtime environment than as the
@@ -38,7 +297,7 @@ written in any modern language - it would probably have cleaner code. Excel is
 super easy to draft a simple UI though :)&lt;/p&gt;
 &lt;p&gt;The code is pretty straightforward so I'll highlight only the most interesting
 parts.&lt;/p&gt;
-&lt;h2&gt;Reading and writing Unicode with VBA&lt;/h2&gt;
+&lt;h2 id="reading-and-writing-unicode-with-vba"&gt;&lt;a class="toclink" href="#reading-and-writing-unicode-with-vba"&gt;Reading and writing Unicode with VBA&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Visual Basic for Applications is a hopelessly outdated environment. Unicode
 support can be achieved only with the help of COM interoperability, namely the
 &lt;code&gt;ADODB.Stream&lt;/code&gt; object. This object provides a very comfortable interface for
@@ -46,14 +305,14 @@ reading and writing text files in a bytestream mode, and also handles character
 encoding nicely.&lt;/p&gt;
 &lt;p&gt;Appending to a file is done via combination of seeking to the end of stream
 and writing the new data.&lt;/p&gt;
-&lt;h2&gt;CSV packing and unpacking&lt;/h2&gt;
+&lt;h2 id="csv-packing-and-unpacking"&gt;&lt;a class="toclink" href="#csv-packing-and-unpacking"&gt;CSV packing and unpacking&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I'm not exactly proud of how CSV string manipulations are implemented in the code.
 If VBA would've provided some nicer regex capabilities or a CSV-aware library it
 would've been better. I know about &lt;code&gt;VBScript.RegExp&lt;/code&gt;, but it's an overkill for a
 small task my app was created to accomplish.&lt;/p&gt;
 &lt;p&gt;Current implementation can not handle a quote symbol in the middle of the field
 value. This is a known bug.&lt;/p&gt;
-&lt;h2&gt;Demo&lt;/h2&gt;
+&lt;h2 id="demo"&gt;&lt;a class="toclink" href="#demo"&gt;Demo&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;This the main and the only UI my utility offers. Inputs and buttons are meant to
 be self explaining. No value conversion is done when saving - the value of the
 cell is written as is, quotes are added if delimiter character occurs within
@@ -86,7 +345,7 @@ supporting foreign date and currency formats, right-to-left writing or
 alphabetical sorting. But translating user interface, configuration files,
 error and log messages to other languages had destructive consequences most of
 the times I've seen it.&lt;/p&gt;
-&lt;h2&gt;Documentation loss&lt;/h2&gt;
+&lt;h2 id="documentation-loss"&gt;&lt;a class="toclink" href="#documentation-loss"&gt;Documentation loss&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;The moment software is translated its documentation becomes fragmented and
 incomplete. Even if the developer translates 100% of official documentation
 they will still lose everything written by others (blog posts, forum questions,
@@ -102,7 +361,7 @@ experienced people. They knew it was pointless to reference a translated version
 because no professional user would have used Russian interface at that time.
 And they knew that the next version might come with totally different
 translation for the same UI elements.&lt;/p&gt;
-&lt;h2&gt;Incomplete or wrong translation is worse than no translation at all&lt;/h2&gt;
+&lt;h2 id="incomplete-or-wrong-translation-is-worse-than-no-translation-at-all"&gt;&lt;a class="toclink" href="#incomplete-or-wrong-translation-is-worse-than-no-translation-at-all"&gt;Incomplete or wrong translation is worse than no translation at all&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;If you are not sure you can afford a good translation, don't do one. I can not
 stress enough how confusing it is to have a piece of software that uses your
 native language, and not to be able to understand the meaning of its messages
@@ -126,7 +385,7 @@ the rest of us. He knew a lot about the application code base, but he was not a
 superhuman - he could not possibly track all the developers and understand all
 their intentions. So we shipped some embarrassing translation errors... I'm
 glad no lives depended on that software!&lt;/p&gt;
-&lt;h2&gt;Lost in translation&lt;/h2&gt;
+&lt;h2 id="lost-in-translation"&gt;&lt;a class="toclink" href="#lost-in-translation"&gt;Lost in translation&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I concede that our team was lacking in terms of organizational skills, after
 all we were just part-time volunteers. But the translators hired by big
 corporations are merely human too, and they make mistakes. Especially when the
@@ -138,14 +397,14 @@ and the second one was iconless and meant "Insert (new row/column)". They've
 removed the text from the first one now, converting it to a button. Ambiguity
 still remains (the pop-up text for the button is the same) but is less
 confusing. Especially since users are already accustomed to it :)&lt;/p&gt;
-&lt;h2&gt;Unsearchable error messages&lt;/h2&gt;
+&lt;h2 id="unsearchable-error-messages"&gt;&lt;a class="toclink" href="#unsearchable-error-messages"&gt;Unsearchable error messages&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Have you ever received a cryptic error message and had no idea what it meant?
 I'm sure you have. That message would only become more cryptic if it was
 translated. And if the error is not exactly common or the app is not popular in
 your country, Google will not be able to help you either.&lt;/p&gt;
 &lt;p&gt;So, for the sake of your users' sanity, please do not ever localize error
 messages and log files! Help people to help themselves.&lt;/p&gt;
-&lt;h2&gt;Untranslatable abstractions&lt;/h2&gt;
+&lt;h2 id="untranslatable-abstractions"&gt;&lt;a class="toclink" href="#untranslatable-abstractions"&gt;Untranslatable abstractions&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Some ideas are just so new, or the problem domain is so narrow that there is no
 point translating the terms. The concept of &lt;code&gt;File&lt;/code&gt; was foreign to every person
 seeing the computer for the first time - but that knowledge is easily acquired.
@@ -154,7 +413,7 @@ It would not have been any easier explaining that same concept and labeling it
 &lt;p&gt;"File" ship has long sailed, but new abstractions are being introduced every
 day. Translating them to multiple languages just slows their adoption and
 hinders communication between users.&lt;/p&gt;
-&lt;h2&gt;Afterword&lt;/h2&gt;
+&lt;h2 id="afterword"&gt;&lt;a class="toclink" href="#afterword"&gt;Afterword&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I'm not hoping we will wake up one day and The Tower of Babel didn't happen.
 This rant is mostly useless, but if at any time because of it a software
 developer will decide that their users are educated enough to understand
@@ -177,7 +436,7 @@ anything that depends on the part of code you've just modified.&lt;/p&gt;
 &lt;p&gt;As far as I know, there are no tools that allow us to perform automated testing
 of functions and queries written in Power Query M language. That's why I've
 built a simple unit testing framework into &lt;a href="https://github.com/sio/LibPQ"&gt;LibPQ&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;LibPQ UnitTest framework&lt;/h2&gt;
+&lt;h2 id="libpq-unittest-framework"&gt;&lt;a class="toclink" href="#libpq-unittest-framework"&gt;LibPQ UnitTest framework&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;The &lt;a href="https://github.com/sio/LibPQ/blob/master/Docs/UnitTesting.md"&gt;UnitTest&lt;/a&gt; framework is modelled after the only other unit testing tool I
 have experience with: Python's
 &lt;a href="https://docs.python.org/3/library/unittest.html"&gt;unittest&lt;/a&gt;. It offers the
@@ -192,7 +451,7 @@ following features:&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;Inner workings of the test framework are described in the
 &lt;a href="https://github.com/sio/LibPQ/blob/master/Docs/UnitTesting.md"&gt;documentation&lt;/a&gt;. This article will demonstrate how it works.&lt;/p&gt;
-&lt;h2&gt;UnitTest demo&lt;/h2&gt;
+&lt;h2 id="unittest-demo"&gt;&lt;a class="toclink" href="#unittest-demo"&gt;UnitTest demo&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;All modules described here are imported with LibPQ, so a basic familiarity with the library is assumed (&lt;a href="https://github.com/sio/LibPQ/blob/master/README.md"&gt;readme&lt;/a&gt;, &lt;a href="https://potyarkin.ml/posts/2018/getting-started-with-libpq/"&gt;getting started&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;Let's create a basic test suite and save it in the directory listed in &lt;code&gt;LibPQPath&lt;/code&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cm"&gt;/* DemoTests.pq - sample test suite */&lt;/span&gt;
@@ -229,21 +488,21 @@ test discovery tools to distinguish it from just another record.&lt;/p&gt;
 &lt;p&gt;In the screenshot above we invoke &lt;a href="https://github.com/sio/LibPQ/blob/master/Modules/UnitTest.Discover.pq"&gt;UnitTest.Discover&lt;/a&gt; with &lt;code&gt;compact_output =
 false&lt;/code&gt; but when you'll have dozens of test cases you'll probably prefer default
 behavior (group test results by status).&lt;/p&gt;
-&lt;h2&gt;More about UnitTest in LibPQ&lt;/h2&gt;
+&lt;h2 id="more-about-unittest-in-libpq"&gt;&lt;a class="toclink" href="#more-about-unittest-in-libpq"&gt;More about UnitTest in LibPQ&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;If you liked the idea of unit testing M language code, check out the main
 &lt;a href="https://github.com/sio/LibPQ/blob/master/Docs/UnitTesting.md"&gt;UnitTest&lt;/a&gt; documentation and a more extensive &lt;a href="https://github.com/sio/LibPQ/blob/master/Samples/Tests.Sample.pq"&gt;test sample&lt;/a&gt; that makes use of
 subtests.&lt;/p&gt;</content><category term="m"></category><category term="power-query"></category><category term="LibPQ"></category></entry><entry><title>Getting started with LibPQ</title><link href="https://potyarkin.ml/posts/2018/getting-started-with-libpq/" rel="alternate"></link><published>2018-04-01T00:00:00+03:00</published><updated>2018-04-01T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-04-01:/posts/2018/getting-started-with-libpq/</id><summary type="html">&lt;p&gt;This is a step by step guide to getting started with &lt;a href="https://potyarkin.ml/posts/2018/expanding-power-query-standard-library-introducing-libpq/"&gt;LibPQ&lt;/a&gt;, an illustrated
 version of &lt;a href="https://github.com/sio/LibPQ/blob/master/README.md#installation-and-usage"&gt;"Installation and usage"&lt;/a&gt; section of the official
 documentation.&lt;/p&gt;
-&lt;h2&gt;Installation&lt;/h2&gt;
-&lt;h3&gt;LibPQ source code&lt;/h3&gt;
+&lt;h2 id="installation"&gt;&lt;a class="toclink" href="#installation"&gt;Installation&lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id="libpq-source-code"&gt;&lt;a class="toclink" href="#libpq-source-code"&gt;LibPQ source code&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;The source code of the library has to be present in each workbook that uses it.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Create a new blank query: &lt;code&gt;Data …&lt;/code&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;This is a step by step guide to getting started with &lt;a href="https://potyarkin.ml/posts/2018/expanding-power-query-standard-library-introducing-libpq/"&gt;LibPQ&lt;/a&gt;, an illustrated
 version of &lt;a href="https://github.com/sio/LibPQ/blob/master/README.md#installation-and-usage"&gt;"Installation and usage"&lt;/a&gt; section of the official
 documentation.&lt;/p&gt;
-&lt;h2&gt;Installation&lt;/h2&gt;
-&lt;h3&gt;LibPQ source code&lt;/h3&gt;
+&lt;h2 id="installation"&gt;&lt;a class="toclink" href="#installation"&gt;Installation&lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id="libpq-source-code"&gt;&lt;a class="toclink" href="#libpq-source-code"&gt;LibPQ source code&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;The source code of the library has to be present in each workbook that uses it.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Create a new blank query: &lt;code&gt;Data &amp;gt; Get &amp;amp; Transform &amp;gt; From Other Sources &amp;gt;
@@ -253,7 +512,7 @@ documentation.&lt;/p&gt;
 &lt;li&gt;Save new query under the name &lt;code&gt;LibPQ&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;a href="https://potyarkin.ml/posts/2018/getting-started-with-libpq/libpq-main-module.png"&gt;&lt;img alt="Main module of LibPQ" src="https://potyarkin.ml/posts/2018/getting-started-with-libpq/libpq-main-module.png"&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h3&gt;Specifying modules location&lt;/h3&gt;
+&lt;h3 id="specifying-modules-location"&gt;&lt;a class="toclink" href="#specifying-modules-location"&gt;Specifying modules location&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;After the previous step LibPQ doesn't know yet where it should get the modules'
 source code from. You can specify an unlimited number of local and web locations
 where the modules are saved:&lt;/p&gt;
@@ -278,10 +537,10 @@ locations are checked.&lt;/p&gt;
   module collections while using personal modules with colliding names
   without any problems.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3&gt;Reusable template&lt;/h3&gt;
+&lt;h3 id="reusable-template"&gt;&lt;a class="toclink" href="#reusable-template"&gt;Reusable template&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;It is not necessary to repeat the installation steps every time you want to use LibPQ. You can add LibPQ to an empty workbook and save is as a template for future use.&lt;/p&gt;
-&lt;h2&gt;Usage&lt;/h2&gt;
-&lt;h3&gt;Importing existing module&lt;/h3&gt;
+&lt;h2 id="usage"&gt;&lt;a class="toclink" href="#usage"&gt;Usage&lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id="importing-existing-module"&gt;&lt;a class="toclink" href="#importing-existing-module"&gt;Importing existing module&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Import any available module with &lt;code&gt;LibPQ("ModuleName")&lt;/code&gt; when writing your
 queries in Advanced editor. LibPQ will search for the file named
 &lt;code&gt;ModuleName.pq&lt;/code&gt; in all locations that you've listed in LibPQPath. If the module
@@ -291,7 +550,7 @@ is found, its source code will be evaluated and the result will be returned.&lt;
 &lt;p&gt;That works because &lt;code&gt;LibPQPath&lt;/code&gt; contains reference to
 &lt;code&gt;https://raw.githubusercontent.com/sio/LibPQ/master/Modules/&lt;/code&gt;, where the source
 code for &lt;code&gt;Date.Parse.pq&lt;/code&gt; is located.&lt;/p&gt;
-&lt;h3&gt;Creating a new module&lt;/h3&gt;
+&lt;h3 id="creating-a-new-module"&gt;&lt;a class="toclink" href="#creating-a-new-module"&gt;Creating a new module&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;You can save any reusable Power Query function or query to be imported by LibPQ
 later:&lt;/p&gt;
 &lt;ul&gt;
@@ -333,7 +592,7 @@ control systems, extensibility by third-party libraries, etc.&lt;/p&gt;
 &lt;p&gt;That is why I have started &lt;strong&gt;&lt;a href="https://github.com/sio/LibPQ"&gt;LibPQ&lt;/a&gt;&lt;/strong&gt; - an open-source M language library
 meant to expand the standard library and to make it easier for others to do so.
 Its main features are:&lt;/p&gt;
-&lt;h3&gt;Importing source code from plain text files located on disk or on the web&lt;/h3&gt;
+&lt;h3 id="importing-source-code-from-plain-text-files-located-on-disk-or-on-the-web"&gt;&lt;a class="toclink" href="#importing-source-code-from-plain-text-files-located-on-disk-or-on-the-web"&gt;Importing source code from plain text files located on disk or on the web&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;LibPQ stores its modules as plain text files with &lt;code&gt;*.pq&lt;/code&gt; extension.  Detaching
 source code from the workbooks that execute it has a lot of advantages:&lt;/p&gt;
 &lt;ul&gt;
@@ -346,12 +605,12 @@ source code from the workbooks that execute it has a lot of advantages:&lt;/p&gt
   Editor does not have them)&lt;/li&gt;
 &lt;li&gt;Sharing your code and collaborating becomes much easier&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3&gt;Supporting several import locations ordered by priority&lt;/h3&gt;
+&lt;h3 id="supporting-several-import-locations-ordered-by-priority"&gt;&lt;a class="toclink" href="#supporting-several-import-locations-ordered-by-priority"&gt;Supporting several import locations ordered by priority&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;LibPQ does not dictate where you store your source code. Inspired by Python's
 &lt;a href="https://docs.python.org/3/library/sys.html#sys.path"&gt;&lt;code&gt;sys.path&lt;/code&gt;&lt;/a&gt; it enables specifying unlimited number of local and/or
 remote sources (ordered by priority). When importing a module, LibPQ will check
 these sources one by one until the required module is found.&lt;/p&gt;
-&lt;h3&gt;Unit testing framework&lt;/h3&gt;
+&lt;h3 id="unit-testing-framework"&gt;&lt;a class="toclink" href="#unit-testing-framework"&gt;Unit testing framework&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Having source code detached from the workbooks encourages you to improve and
 refactor existing modules. To make sure you do not introduce regressions you
 should cover your code with unit tests.&lt;/p&gt;
@@ -359,7 +618,7 @@ should cover your code with unit tests.&lt;/p&gt;
 unit testing framework that supports test discovery, grouping tests into test
 suites and comes with a bunch of handy assertion functions. To learn more read
 this &lt;a href="https://github.com/sio/LibPQ/blob/master/Docs/UnitTesting.md"&gt;help page&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;A collection of general purpose functions and queries&lt;/h3&gt;
+&lt;h3 id="a-collection-of-general-purpose-functions-and-queries"&gt;&lt;a class="toclink" href="#a-collection-of-general-purpose-functions-and-queries"&gt;A collection of general purpose functions and queries&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;And last, LibPQ contains some general purpose modules that you might find
 useful. If not - go write some new ones, you have the tools now!&lt;/p&gt;
 &lt;p&gt;LibPQ is built in such way that you do not need me (or anyone else) to approve
@@ -380,7 +639,7 @@ data mashup queries. It's a &lt;strong&gt;functional&lt;/strong&gt;, case sensit
 to F#, which can be used with Power BI Desktop, Power Query in Excel, and Get
 &amp;amp; Transform in Excel 2016.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2&gt;"Functional" is the key word&lt;/h2&gt;
+&lt;h2 id="functional-is-the-key-word"&gt;&lt;a class="toclink" href="#functional-is-the-key-word"&gt;"Functional" is the key word&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Understanding (and accepting) that M is entirely different from most common
 programming languages has helped me as much as (maybe even more than) the
 exhaustive reference at MSDN. Functional language implies declarative
@@ -398,7 +657,7 @@ kinda there, but it has its own quirks too. Loops are out of the question,
 unless you somehow manage to implement the function that does the looping for
 you. But...&lt;/p&gt;
 &lt;p&gt;There already is such a function! It is &lt;code&gt;List.Generate&lt;/code&gt;!&lt;/p&gt;
-&lt;h2&gt;List.Generate&lt;/h2&gt;
+&lt;h2 id="listgenerate"&gt;&lt;a class="toclink" href="#listgenerate"&gt;List.Generate&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;This function takes 3 or 4 parameters, all of them functions.  (You should
 always treat the &lt;code&gt;each&lt;/code&gt; statement as a function &lt;a href="https://msdn.microsoft.com/en-us/library/mt185361.aspx"&gt;because it is&lt;/a&gt; a shortcut
 for function definition.)&lt;/p&gt;
@@ -439,7 +698,7 @@ for function definition.)&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2&gt;A simple example&lt;/h2&gt;
+&lt;h2 id="a-simple-example"&gt;&lt;a class="toclink" href="#a-simple-example"&gt;A simple example&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;We will generate a table of data points for plotting a parabola. Internally we
 will be storing each item as the record with &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt; fields.  After that we
 will transform that data into a Power Query table for output.&lt;/p&gt;
@@ -458,7 +717,7 @@ in output
 first data point, &lt;code&gt;condition()&lt;/code&gt; and &lt;code&gt;next()&lt;/code&gt; are also functions even though
 they are written using &lt;code&gt;each&lt;/code&gt; shortcut. There is no &lt;code&gt;transform()&lt;/code&gt; function
 because it is an optional parameter.&lt;/p&gt;
-&lt;h2&gt;An example from real world&lt;/h2&gt;
+&lt;h2 id="an-example-from-real-world"&gt;&lt;a class="toclink" href="#an-example-from-real-world"&gt;An example from real world&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;In the real world you will not need the &lt;code&gt;List.Generate&lt;/code&gt; magic for such simple
 tasks, but you will still need it. Here is how I've used it recently.&lt;/p&gt;
 &lt;p&gt;Assume you have a list of tables that contain the data in the same format but
@@ -484,7 +743,7 @@ and the list of their respective names in the &lt;code&gt;Names&lt;/code&gt; var
 with index of -1 and an empty table, and adds a "TableName" column to each of
 the tables. After this modification the tables can be safely combined with
 &lt;code&gt;Table.Combine(NamedTables)&lt;/code&gt; - no data loss will occur.&lt;/p&gt;
-&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;h2 id="conclusion"&gt;&lt;a class="toclink" href="#conclusion"&gt;Conclusion&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Using &lt;code&gt;List.Generate&lt;/code&gt; should be considered a last-ditch attempt to looping. M
 has dedicated iterative functions for most common looping tasks, so please
 check the standard library reference before creating such C-style loops
@@ -493,7 +752,7 @@ manually. They are rather hard to read, and readability counts!&lt;/p&gt;
 Language a little more. It is a powerful tool and even though it is not
 perfect, I hope you will find a lot of uses for it in your data crunching
 tasks.&lt;/p&gt;
-&lt;h2&gt;An afterthought&lt;/h2&gt;
+&lt;h2 id="an-afterthought"&gt;&lt;a class="toclink" href="#an-afterthought"&gt;An afterthought&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Also, please keep in mind that the dot symbol in &lt;code&gt;List.Generate&lt;/code&gt; does not have
 the same meaning as in other languages either. There are no object methods in
 M, and there are no namespaces, so the dot is just another character without
@@ -507,18 +766,18 @@ any help is appreciated.&lt;/p&gt;
 &lt;p&gt;I wrote a batch script to automate creation, setup and deletion of Python virtual
 environment. This can come in handy when you want to test something in a clean env,
 or to play with &lt;code&gt;pip install&lt;/code&gt; and get acquainted with a new package from PyPI.&lt;/p&gt;
-&lt;h2&gt;venv-temp.bat&lt;/h2&gt;
+&lt;h2 id="venv-tempbat"&gt;&lt;a class="toclink" href="#venv-tempbat"&gt;venv-temp.bat&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;You can download the script from
 &lt;a href="https://gist.github.com/sio/fbc46ae41607b206ce9099dc8485df34"&gt;https://gist.github.com/sio/...&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;The code is licensed under a permissive opensource license (Apache License,
 Version 2.0) so feel free to use it for your hobby and work projects.&lt;/p&gt;
 &lt;p&gt;Report any bugs, ideas, feature requests via GitHub issues/comments -
 all feedback is welcome!&lt;/p&gt;
-&lt;h2&gt;Installation&lt;/h2&gt;
+&lt;h2 id="installation"&gt;&lt;a class="toclink" href="#installation"&gt;Installation&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Downloaded script does not require any installation.&lt;/p&gt;
 &lt;p&gt;If &lt;code&gt;python&lt;/code&gt; is not available from your &lt;code&gt;%PATH%&lt;/code&gt;, you have to specify the location
 of &lt;code&gt;python.exe&lt;/code&gt; in the script (change the value of &lt;code&gt;PYTHON&lt;/code&gt; variable).&lt;/p&gt;
-&lt;h2&gt;Usage&lt;/h2&gt;
+&lt;h2 id="usage"&gt;&lt;a class="toclink" href="#usage"&gt;Usage&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Launch the script from &lt;code&gt;cmd.exe&lt;/code&gt; to read all error output (if any) or by
 double-clicking if you're confident it works on your system.&lt;/p&gt;
 &lt;p&gt;After you're done experimenting and are ready to discard the venv, just end shell
@@ -547,14 +806,14 @@ inconvenience would deter you from checking all repos frequently.&lt;/p&gt;
 &lt;p&gt;That's why I wrote a simple bash script that helps to &lt;em&gt;automate the boring
 stuff&lt;/em&gt;. The script is well-documented, so I won't discuss implementation
 details here.&lt;/p&gt;
-&lt;h2&gt;git-projects.sh&lt;/h2&gt;
+&lt;h2 id="git-projectssh"&gt;&lt;a class="toclink" href="#git-projectssh"&gt;git-projects.sh&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;You can download the script from
 &lt;a href="https://gist.github.com/sio/227da259cad7bb549c69909ba428884c"&gt;https://gist.github.com/sio/...&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;The code is licensed under a permissive opensource license (Apache License,
 Version 2.0) so feel free to use it for your hobby and work projects.&lt;/p&gt;
 &lt;p&gt;Report any bugs, ideas, feature requests via GitHub issues/comments -
 all feedback is welcome!&lt;/p&gt;
-&lt;h2&gt;Installation&lt;/h2&gt;
+&lt;h2 id="installation"&gt;&lt;a class="toclink" href="#installation"&gt;Installation&lt;/a&gt;&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Download the script from GitHub, add execution permissions&lt;/li&gt;
 &lt;li&gt;List the paths to the local clones of your git repos in a text
@@ -563,14 +822,14 @@ all feedback is welcome!&lt;/p&gt;
 &lt;li&gt;Update the value of &lt;code&gt;PROJECT_LIST&lt;/code&gt; variable with the path of the file
   you've just created&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;Usage&lt;/h2&gt;
+&lt;h2 id="usage"&gt;&lt;a class="toclink" href="#usage"&gt;Usage&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;All command-line parameters are passed on to the &lt;code&gt;git&lt;/code&gt; command.
 When the script is launched without parameters, &lt;code&gt;git-projects.sh&lt;/code&gt; checks the
 status of each repo.&lt;/p&gt;
 &lt;p&gt;Repositories are processed in alphabetical order sorted by paths
 listed in &lt;code&gt;PROJECT_LIST&lt;/code&gt;.&lt;/p&gt;
-&lt;h2&gt;Examples&lt;/h2&gt;
-&lt;h3&gt;Refreshing your memory&lt;/h3&gt;
+&lt;h2 id="examples"&gt;&lt;a class="toclink" href="#examples"&gt;Examples&lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id="refreshing-your-memory"&gt;&lt;a class="toclink" href="#refreshing-your-memory"&gt;Refreshing your memory&lt;/a&gt;&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ ./git-projects.sh log --oneline -3 --no-decorate
 
 HomeLibraryCatalog
@@ -590,7 +849,7 @@ a24e4f2 More familiar Home and Backspace behavior
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h3&gt;View latest tag (if any)&lt;/h3&gt;
+&lt;h3 id="view-latest-tag-if-any"&gt;&lt;a class="toclink" href="#view-latest-tag-if-any"&gt;View latest tag (if any)&lt;/a&gt;&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ ./git-projects.sh describe --tags --always
 
 HomeLibraryCatalog
@@ -604,7 +863,7 @@ bc33836
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h3&gt;Checking project status&lt;/h3&gt;
+&lt;h3 id="checking-project-status"&gt;&lt;a class="toclink" href="#checking-project-status"&gt;Checking project status&lt;/a&gt;&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ ./git-projects.sh
 
 HomeLibraryCatalog
@@ -624,12 +883,12 @@ On branch master
 Your branch is up-to-date with &lt;span class="s1"&gt;&amp;#39;origin/master&amp;#39;&lt;/span&gt;.
 
 nothing to commit, working tree clean
-&lt;/pre&gt;&lt;/div&gt;</content><category term="bash"></category><category term="script"></category><category term="gist"></category></entry><entry><title>Portable development setup for Python on Windows</title><link href="https://potyarkin.ml/posts/2017/portable-development-setup-for-python-on-windows/" rel="alternate"></link><published>2017-09-20T00:00:00+03:00</published><updated>2017-09-20T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2017-09-20:/posts/2017/portable-development-setup-for-python-on-windows/</id><summary type="html">&lt;h2&gt;WinPython&lt;/h2&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="bash"></category><category term="script"></category><category term="gist"></category></entry><entry><title>Portable development setup for Python on Windows</title><link href="https://potyarkin.ml/posts/2017/portable-development-setup-for-python-on-windows/" rel="alternate"></link><published>2017-09-20T00:00:00+03:00</published><updated>2017-09-20T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2017-09-20:/posts/2017/portable-development-setup-for-python-on-windows/</id><summary type="html">&lt;h2 id="winpython"&gt;&lt;a class="toclink" href="#winpython"&gt;WinPython&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;a href="https://winpython.github.io/"&gt;https://winpython.github.io/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;All-in-one distribution which comes with many difficult-to-build packages
 preinstalled. And their ...-Zero version is great for thumb drives!&lt;/p&gt;
 &lt;p&gt;Pip works just fine, but installing packages that require C compiler is
-always a pain on Windows. May be I should look into conda and see if …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;WinPython&lt;/h2&gt;
+always a pain on Windows. May be I should look into conda and see if …&lt;/p&gt;</summary><content type="html">&lt;h2 id="winpython"&gt;&lt;a class="toclink" href="#winpython"&gt;WinPython&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;a href="https://winpython.github.io/"&gt;https://winpython.github.io/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;All-in-one distribution which comes with many difficult-to-build packages
 preinstalled. And their ...-Zero version is great for thumb drives!&lt;/p&gt;
@@ -639,7 +898,7 @@ offers a portable variant.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; there are unofficial binary wheels for most common Python packages
 at &lt;a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/"&gt;http://www.lfd.uci.edu/~gohlke/pythonlibs/&lt;/a&gt; The site's hosting is a little
 unreliable, so it might take a few trys to fetch a package.&lt;/p&gt;
-&lt;h2&gt;Git Portable&lt;/h2&gt;
+&lt;h2 id="git-portable"&gt;&lt;a class="toclink" href="#git-portable"&gt;Git Portable&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;a href="https://git-scm.com/download/win"&gt;https://git-scm.com/download/win&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Git for Windows is now recommended by official Git website, and there always
 is a portable version.&lt;/p&gt;
@@ -647,13 +906,13 @@ is a portable version.&lt;/p&gt;
 (coreutils, sed, grep, awk, etc) which make life on Window &lt;em&gt;so much&lt;/em&gt; easier!
 Also, it comes with VIM preinstalled, which is a damn good editor and is
 preferred by many developers.&lt;/p&gt;
-&lt;h2&gt;GNU Make&lt;/h2&gt;
+&lt;h2 id="gnu-make"&gt;&lt;a class="toclink" href="#gnu-make"&gt;GNU Make&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;a href="http://www.equation.com/servlet/equation.cmd?fa=make"&gt;http://www.equation.com/servlet/equation.cmd?fa=make&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Unfortunately Git for Windows does not come with GNU make preinstalled, so
 we have to download it manually. Great guys at Equation Solution are regularly
 building standalone versions of GNU Make for 32-bit and 64-bit Windows.&lt;/p&gt;
 &lt;p&gt;Downloaded file has to be placed somewhere in PATH.&lt;/p&gt;
-&lt;h2&gt;GitHub with SSH keys&lt;/h2&gt;
+&lt;h2 id="github-with-ssh-keys"&gt;&lt;a class="toclink" href="#github-with-ssh-keys"&gt;GitHub with SSH keys&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;a href="https://help.github.com/articles/connecting-to-github-with-ssh/"&gt;https://help.github.com/articles/connecting-to-github-with-ssh/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;I don't know if it is even possible to setup HTTPS authentication without
 installing GitHub Desktop, and SSH key authentication works with GitHub
