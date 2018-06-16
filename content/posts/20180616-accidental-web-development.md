@@ -1,4 +1,6 @@
 title: Accidental submersion into web development
+tags: python, web, HomeLibraryCatalog
+date: 2018-06-16
 
 ## The Library Problem
 
