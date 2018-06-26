@@ -6,6 +6,7 @@ title: Liberating effect of Ansible
     - Idempotent behavior
     - Version control. Infractructure as a code
 - Consumer approach to servers
+    - Disposable servers!
     - Metaphor: moving into an apartment vs the hotel room (hotel rider list for
       a celebrity)
     - Why copy shell and cli configs? You ain't gonna use them
