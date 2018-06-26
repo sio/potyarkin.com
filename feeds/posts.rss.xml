@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Orange Sun - posts</title><link>https://potyarkin.ml/</link><description>Unsorted ramblings, sometimes related to programming</description><lastBuildDate>Sat, 16 Jun 2018 00:00:00 +0300</lastBuildDate><item><title>Accidental submersion into web development</title><link>https://potyarkin.ml/posts/2018/accidental-submersion-into-web-development/</link><description>&lt;h2 id="the-library-problem"&gt;&lt;a class="toclink" href="#the-library-problem"&gt;The Library Problem&lt;/a&gt;&lt;/h2&gt;
+<rss version="2.0"><channel><title>Orange Sun - posts</title><link>https://potyarkin.ml/</link><description>Unsorted ramblings, sometimes related to programming</description><lastBuildDate>Tue, 26 Jun 2018 00:00:00 +0300</lastBuildDate><item><title>Liberating effect of Ansible</title><link>https://potyarkin.ml/posts/2018/liberating-effect-of-ansible/</link><description>&lt;p&gt;Maintaining two or three Linux machines is not that hard of a task. For many
+years I have thought it was not worth the effort to automate - regular backups
+and version-controlled configuration files seemed to be just enough.&lt;/p&gt;
+&lt;p&gt;And then Ansible had blown my mind.&lt;/p&gt;
+&lt;h2 id="history"&gt;&lt;a class="toclink" href="#history"&gt;History&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;It all started with …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vitaly Potyarkin</dc:creator><pubDate>Tue, 26 Jun 2018 00:00:00 +0300</pubDate><guid isPermaLink="false">tag:potyarkin.ml,2018-06-26:/posts/2018/liberating-effect-of-ansible/</guid><category>ansible</category><category>web</category><category>server</category><category>automation</category></item><item><title>Accidental submersion into web development</title><link>https://potyarkin.ml/posts/2018/accidental-submersion-into-web-development/</link><description>&lt;h2 id="the-library-problem"&gt;&lt;a class="toclink" href="#the-library-problem"&gt;The Library Problem&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I love reading books. My wife loves reading books. We enjoy shopping for books
 and we live a ten minute commute away from a huge used books store. That means
 we have a lot of books. Like, really a lot. A little more than one thousand.&lt;/p&gt;
