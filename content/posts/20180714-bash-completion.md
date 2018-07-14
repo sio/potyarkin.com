@@ -56,7 +56,7 @@ To enable the described behavior source [**this file**][gist] from your
   applied. Instead the quote is closed with a matching character after expanding
   the path.
 - If [bash-completion] package is already in use, this code will safely override
-  its `_filedir` function automatically. No extra configuration is required.
+  its `_filedir` function. No extra configuration is required.
 
 Watch a demo screencast to see this feature in action:
 [![asciicast](https://asciinema.org/a/0zhzOYbkF22pWLmbx1RHCYyqQ.png)](https://asciinema.org/a/0zhzOYbkF22pWLmbx1RHCYyqQ)
