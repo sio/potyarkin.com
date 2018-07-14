@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Orange Sun</title><link>https://potyarkin.ml/</link><description>Unsorted ramblings, sometimes related to programming</description><lastBuildDate>Tue, 26 Jun 2018 00:00:00 +0300</lastBuildDate><item><title>Liberating effect of Ansible</title><link>https://potyarkin.ml/posts/2018/liberating-effect-of-ansible/</link><description>&lt;p&gt;Maintaining two or three Linux machines is not that hard of a task. For many
+<rss version="2.0"><channel><title>Orange Sun</title><link>https://potyarkin.ml/</link><description>Unsorted ramblings, sometimes related to programming</description><lastBuildDate>Sat, 14 Jul 2018 00:00:00 +0300</lastBuildDate><item><title>Enhanced file path completion in bash (like in zsh)</title><link>https://potyarkin.ml/posts/2018/enhanced-file-path-completion-in-bash-like-in-zsh/</link><description>&lt;p&gt;Zsh offers a lot of significant improvements over traditional shell experience.
+Some of those can also be implemented in bash, but others are not. For a long
+time I've thought that advanced file path expansion is something that can't be
+done in bash. Today I prove myself wrong.&lt;/p&gt;
+&lt;h2 id="background"&gt;&lt;a class="toclink" href="#background"&gt;Background&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;When …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vitaly Potyarkin</dc:creator><pubDate>Sat, 14 Jul 2018 00:00:00 +0300</pubDate><guid isPermaLink="false">tag:potyarkin.ml,2018-07-14:/posts/2018/enhanced-file-path-completion-in-bash-like-in-zsh/</guid><category>bash</category><category>gist</category></item><item><title>Liberating effect of Ansible</title><link>https://potyarkin.ml/posts/2018/liberating-effect-of-ansible/</link><description>&lt;p&gt;Maintaining two or three Linux machines is not that hard of a task. For many
 years I have thought it was not worth the effort to automate - regular backups
 and version-controlled configuration files seemed to be just enough.&lt;/p&gt;
 &lt;p&gt;And then Ansible had blown my mind.&lt;/p&gt;
