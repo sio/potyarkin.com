@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>Enhanced file path completion in bash (like in zsh)</title>
+
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="https://potyarkin.ml/" rel="canonical" />
+
+  <!-- Feed -->
+      <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Orange Sun Full Atom Feed" />
+
+  <link href="https://potyarkin.ml/theme/css/style.css" type="text/css" rel="stylesheet" />
+
+  <!-- Code highlight color scheme -->
+      <link href="https://potyarkin.ml/theme/css/code_blocks/github.css" rel="stylesheet">
+
+    <!-- CSS specified by the user -->
+
+
+    <link href="https://potyarkin.ml/static/attila_override.css" type="text/css" rel="stylesheet" />
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+  <link href="https://potyarkin.ml/posts/2018/enhanced-file-path-completion-in-bash-like-in-zsh/" rel="canonical" />
+
+    <meta name="description" content="Zsh offers a lot of significant improvements over traditional shell experience. Some of those can also be implemented in bash, but...">
+
+    <meta name="author" content="Vitaly Potyarkin">
+
+    <meta name="tags" content="bash">
+    <meta name="tags" content="gist">
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="Orange Sun"/>
+<meta property="og:title" content="Enhanced file path completion in bash (like in zsh)"/>
+<meta property="og:description" content="Zsh offers a lot of significant improvements over traditional shell experience. Some of those can also be implemented in bash, but..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://potyarkin.ml/posts/2018/enhanced-file-path-completion-in-bash-like-in-zsh/"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-07-14 00:00:00+03:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://potyarkin.ml/author/vitaly-potyarkin/">
+<meta property="article:section" content="posts"/>
+<meta property="article:tag" content="bash"/>
+<meta property="article:tag" content="gist"/>
+<meta property="og:image" content="https://potyarkin.ml/theme/images/post-bg.jpg">
+
+<!-- Twitter Card -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "Enhanced file path completion in bash (like in zsh)",
+  "headline": "Enhanced file path completion in bash (like in zsh)",
+  "datePublished": "2018-07-14 00:00:00+03:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Vitaly Potyarkin",
+    "url": "https://potyarkin.ml/author/vitaly-potyarkin/"
+  },
+  "image": "https://potyarkin.ml/theme/images/post-bg.jpg",
+  "url": "https://potyarkin.ml/posts/2018/enhanced-file-path-completion-in-bash-like-in-zsh/",
+  "description": "Zsh offers a lot of significant improvements over traditional shell experience. Some of those can also be implemented in bash, but..."
+}
+</script>
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
+
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+          <li><a href="/archive/" role="presentation">Archive</a></li>
+          <li><a href="/tags/" role="presentation">Tags</a></li>
+          <li><a href="mailto:sio.wtf@gmail.com" role="presentation">Email</a></li>
+          <li><a href="https://github.com/sio" role="presentation">Github</a></li>
+
+
+        <li class="nav-rss"><a href="/feeds/all.atom.xml"><i class="ic ic-rss"></i> Subscribe</a></li>
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="post-header" class="has-cover">
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="https://potyarkin.ml/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Enhanced file path completion in bash (like in zsh)</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="https://potyarkin.ml/author/vitaly-potyarkin/">Vitaly Potyarkin</a>
+            | <time datetime="2018-07-14">2018-07-14</time>
+        </span>
+        <!-- TODO : Modified check -->
+            <div class="post-cover cover" style="background-color: rgb(242,106,61)">
+      </div>
+    </header>
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <p>Zsh offers a lot of significant improvements over traditional shell experience.
+Some of those can also be implemented in bash, but others are not. For a long
+time I've thought that advanced file path expansion is something that can't be
+done in bash. Today I prove myself wrong.</p>
+<h2 id="background"><a class="toclink" href="#background">Background</a></h2>
+<p>When the Tab key is pressed, zsh expands incomplete file path assuming any of
+its elements might be incomplete, while bash expands only the last piece. For
+example: <code>cd /u/s/app&lt;Tab&gt;</code> will produce nothing in bash, but will be expanded
+to <code>cd /usr/share/applications</code> in zsh.</p>
+<p>This feature is a huge time saver, but it does not justify switching the shell
+completely (for me). So I've been looking for a way to enable the same behavior
+in bash.</p>
+<p>The solution had to be:</p>
+<ul>
+<li>Portable between Linux and Windows (msys);</li>
+<li>Implemented in configuration files or short scripts that can be carried
+  around easily. No third-party tools like <code>fzf</code> that would require system-wide
+  installation or other tricks to enable.</li>
+</ul>
+<p>All I've been able to find was
+<a href="https://stackoverflow.com/q/25076611">this StackOverflow thread</a>.
+Accepted answer suggests using a new bash function that is later bound to Tab
+keypress. The function provided is a quick hack that was not tested thoroughly
+and has problems with spaces in file path. The author recommends to use his
+function along with the default completer, not instead of it, so it was not
+what I needed.</p>
+<h2 id="workaround"><a class="toclink" href="#workaround">Workaround</a></h2>
+<p>Typing <code>cd /u*/s*/app*&lt;Tab&gt;</code> is somewhat better but not as streamlined an
+experience as the one zsh offers.</p>
+<p>This turned out to be an inspiration for the proper completer function though.</p>
+<h2 id="better-solution"><a class="toclink" href="#better-solution">Better solution</a></h2>
+<p>I have coded a small function that adds wildcards to each element in the path
+and executes normal bash completion procedures with modified input. After a bit
+of documentation digging I've been able to inject this function into normal
+bash completion process. I'm pretty happy with path expansion now.</p>
+<p>To enable the described behavior source <a href="https://gist.github.com/sio/d237dd20826013d4982f965fe2d90cbd"><strong>this file</strong></a> from your
+~/.bashrc. Supported features are:</p>
+<ul>
+<li>Special characters in completed path are automatically escaped if present</li>
+<li>Tilde expressions are properly expanded (as per <a href="https://www.gnu.org/software/bash/manual/html_node/Tilde-Expansion.html">bash documentation</a>)</li>
+<li>If user had started writing the path in quotes, no character escaping is
+  applied. Instead the quote is closed with a matching character after expanding
+  the path.</li>
+<li>If <a href="https://salsa.debian.org/debian/bash-completion">bash-completion</a> package is already in use, this code will safely override
+  its <code>_filedir</code> function. No extra configuration is required.</li>
+</ul>
+<p>Watch a demo screencast to see this feature in action:
+<a href="https://asciinema.org/a/0zhzOYbkF22pWLmbx1RHCYyqQ"><img alt="asciicast" src="https://asciinema.org/a/0zhzOYbkF22pWLmbx1RHCYyqQ.png"></a></p>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Enhanced file path completion in bash (like in zsh)&amp;url=https://potyarkin.ml/posts/2018/enhanced-file-path-completion-in-bash-like-in-zsh/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://potyarkin.ml/posts/2018/enhanced-file-path-completion-in-bash-like-in-zsh/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=https://potyarkin.ml/posts/2018/enhanced-file-path-completion-in-bash-like-in-zsh/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="https://potyarkin.ml/tags/bash/">bash</a><a href="https://potyarkin.ml/tags/gist/">gist</a>                </aside>
+
+                <div class="clear"></div>
+
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <a class="post-nav-prev" href="https://potyarkin.ml/posts/2018/liberating-effect-of-ansible/">
+                        <section class="post-nav-teaser">
+                            <i class="ic ic-arrow-right"></i>
+                                <h2 class="post-nav-title">Liberating effect of Ansible</h2>
+                            <p class="post-nav-excerpt">Maintaining two or three Linux machines is not that hard of a task. For many years I...</p>
+                        </section>
+                    </a>
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+
+
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script type="text/javascript" src="https://potyarkin.ml/theme/js/script.js"></script>
+
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121532727-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-121532727-1', { 'anonymize_ip': true });
+    </script>
+</body>
+</html>
