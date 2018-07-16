@@ -64,4 +64,4 @@ Watch a demo screencast to see this feature in action:
 
 [bash-completion]: https://salsa.debian.org/debian/bash-completion
 [bash documentation]: https://www.gnu.org/software/bash/manual/html_node/Tilde-Expansion.html
-[gist]: https://gist.github.com/sio/d237dd20826013d4982f965fe2d90cbd
+[gist]: https://github.com/sio/bash-complete-partial-path/blob/master/bash_completion
