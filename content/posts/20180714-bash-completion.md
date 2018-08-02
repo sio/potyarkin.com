@@ -48,7 +48,7 @@ of documentation digging I've been able to inject this function into normal
 bash completion process. I'm pretty happy with path expansion now.
 
 To enable the described behavior source [**this file**][gist] from your
-~/.bashrc. Supported features are:
+~/.bashrc and run `_bcpp --defaults`. Supported features are:
 
 - Special characters in completed path are automatically escaped if present
 - Tilde expressions are properly expanded (as per [bash documentation])
