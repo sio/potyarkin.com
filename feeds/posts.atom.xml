@@ -40,7 +40,7 @@ and executes normal bash completion procedures with modified input. After a bit
 of documentation digging I've been able to inject this function into normal
 bash completion process. I'm pretty happy with path expansion now.&lt;/p&gt;
 &lt;p&gt;To enable the described behavior source &lt;a href="https://github.com/sio/bash-complete-partial-path/blob/master/bash_completion"&gt;&lt;strong&gt;this file&lt;/strong&gt;&lt;/a&gt; from your
-~/.bashrc. Supported features are:&lt;/p&gt;
+~/.bashrc and run &lt;code&gt;_bcpp --defaults&lt;/code&gt;. Supported features are:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Special characters in completed path are automatically escaped if present&lt;/li&gt;
 &lt;li&gt;Tilde expressions are properly expanded (as per &lt;a href="https://www.gnu.org/software/bash/manual/html_node/Tilde-Expansion.html"&gt;bash documentation&lt;/a&gt;)&lt;/li&gt;

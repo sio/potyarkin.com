@@ -179,7 +179,7 @@ and executes normal bash completion procedures with modified input. After a bit
 of documentation digging I've been able to inject this function into normal
 bash completion process. I'm pretty happy with path expansion now.</p>
 <p>To enable the described behavior source <a href="https://github.com/sio/bash-complete-partial-path/blob/master/bash_completion"><strong>this file</strong></a> from your
-~/.bashrc. Supported features are:</p>
+~/.bashrc and run <code>_bcpp --defaults</code>. Supported features are:</p>
 <ul>
 <li>Special characters in completed path are automatically escaped if present</li>
 <li>Tilde expressions are properly expanded (as per <a href="https://www.gnu.org/software/bash/manual/html_node/Tilde-Expansion.html">bash documentation</a>)</li>
