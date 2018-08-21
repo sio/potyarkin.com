@@ -71,7 +71,7 @@ in *Edit -> Input Devices*).
     [released][input-wacom-0.39.0] in March 2018
 
 
-## System log messages (for reference)
+## Log messages (for reference)
 
 #### Debian 9 (Stretch) without proper driver
 
