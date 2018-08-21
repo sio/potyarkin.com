@@ -4,7 +4,6 @@ tags: linux, hardware, Debian
 ```
 TODO:
 - Add dmesg logs
-- Test $(uname -m) shortcut
 ```
 
 I believe there are many people who run Debian Stable as their main desktop OS.
@@ -39,8 +38,14 @@ Debian overall at the same (stable) version.
 To enable support for One by Wacom in Debian Stretch you need to:
 
 - [Add backports][backports] to your sources.list
+
 - Install newer kernel from backports:
-  `apt-get -t stretch-backports install linux-image-$(uname -m)`
+  `apt-get -t stretch-backports install linux-image-amd64`
+
+  If you're running Debian on different CPU architecture, replace `-amd64` with
+  the corresponding suffix, like `-686-pae` for older 32-bit computers or
+  `-arm64` for ARMv8 CPUs).
+
 - Reboot your computer
 
 That's it! Newer kernel will have updated drivers for your graphics tablet and
