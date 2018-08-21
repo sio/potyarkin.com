@@ -24,7 +24,7 @@ Git for Windows is now recommended by official Git website, and there always
 is a portable version.
 
 This package provides not only Git but also bash and a basic MSYS environment
-(coreutils, sed, grep, awk, etc) which make life on Window *so much* easier!
+(coreutils, sed, grep, awk, etc) which make life on Windows *so much* easier!
 Also, it comes with VIM preinstalled, which is a damn good editor and is
 preferred by many developers.
 
