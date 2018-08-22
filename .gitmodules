@@ -7,9 +7,6 @@
 [submodule "themes/Flex"]
 	path = themes/Flex
 	url = https://github.com/alexandrevicenzi/Flex.git
-[submodule "themes/minimalX"]
-	path = themes/minimalX
-	url = https://github.com/art1fa/minimalX.git
 [submodule "plugins/pelican-plugins"]
 	path = plugins/pelican-plugins
 	url = https://github.com/getpelican/pelican-plugins.git
