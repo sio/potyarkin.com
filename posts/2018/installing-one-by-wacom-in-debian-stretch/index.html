@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>Installing One by Wacom in Debian Stretch</title>
+
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="https://potyarkin.ml/" rel="canonical" />
+
+  <!-- Feed -->
+      <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Orange Sun Full Atom Feed" />
+
+  <link href="https://potyarkin.ml/theme/css/style.css" type="text/css" rel="stylesheet" />
+
+  <!-- Code highlight color scheme -->
+      <link href="https://potyarkin.ml/theme/css/code_blocks/github.css" rel="stylesheet">
+
+    <!-- CSS specified by the user -->
+
+
+    <link href="https://potyarkin.ml/static/attila_override.css" type="text/css" rel="stylesheet" />
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+  <link href="https://potyarkin.ml/posts/2018/installing-one-by-wacom-in-debian-stretch/" rel="canonical" />
+
+    <meta name="description" content="I believe there are many people who run Debian Stable as their main desktop OS. This article is a short how-to on enabling newer...">
+
+    <meta name="author" content="Vitaly Potyarkin">
+
+    <meta name="tags" content="linux">
+    <meta name="tags" content="hardware">
+    <meta name="tags" content="Debian">
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="Orange Sun"/>
+<meta property="og:title" content="Installing One by Wacom in Debian Stretch"/>
+<meta property="og:description" content="I believe there are many people who run Debian Stable as their main desktop OS. This article is a short how-to on enabling newer..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://potyarkin.ml/posts/2018/installing-one-by-wacom-in-debian-stretch/"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-08-22 00:00:00+03:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://potyarkin.ml/author/vitaly-potyarkin/">
+<meta property="article:section" content="posts"/>
+<meta property="article:tag" content="linux"/>
+<meta property="article:tag" content="hardware"/>
+<meta property="article:tag" content="Debian"/>
+<meta property="og:image" content="https://potyarkin.ml/theme/images/post-bg.jpg">
+
+<!-- Twitter Card -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "Installing One by Wacom in Debian Stretch",
+  "headline": "Installing One by Wacom in Debian Stretch",
+  "datePublished": "2018-08-22 00:00:00+03:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Vitaly Potyarkin",
+    "url": "https://potyarkin.ml/author/vitaly-potyarkin/"
+  },
+  "image": "https://potyarkin.ml/theme/images/post-bg.jpg",
+  "url": "https://potyarkin.ml/posts/2018/installing-one-by-wacom-in-debian-stretch/",
+  "description": "I believe there are many people who run Debian Stable as their main desktop OS. This article is a short how-to on enabling newer..."
+}
+</script>
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
+
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+          <li><a href="/archive/" role="presentation">Archive</a></li>
+          <li><a href="/tags/" role="presentation">Tags</a></li>
+          <li><a href="mailto:sio.wtf@gmail.com" role="presentation">Email</a></li>
+          <li><a href="https://github.com/sio" role="presentation">Github</a></li>
+
+
+        <li class="nav-rss"><a href="/feeds/all.atom.xml"><i class="ic ic-rss"></i> Subscribe</a></li>
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="post-header" class="has-cover">
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="https://potyarkin.ml/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Installing One by Wacom in Debian Stretch</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="https://potyarkin.ml/author/vitaly-potyarkin/">Vitaly Potyarkin</a>
+            | <time datetime="2018-08-22">2018-08-22</time>
+        </span>
+        <!-- TODO : Modified check -->
+            <div class="post-cover cover" style="background-color: rgb(242,106,61)">
+      </div>
+    </header>
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <p>I believe there are many people who run Debian Stable as their main desktop OS.
+This article is a short how-to on enabling newer hardware in Debian Stable
+without switching to another version or distribution.</p>
+<h2 id="one-by-wacom"><a class="toclink" href="#one-by-wacom">One by Wacom</a></h2>
+<p>Wacom has released their new graphics tablet, <a href="https://www.wacom.com/en-cn/products/pen-tablets/one-by-wacom">One by Wacom</a> in the Fall of 2017
+(judging by the dates of reviews in online shops). Linux drivers for this model
+(Small: CTL-472, Medium: CTL-672) were added to the <a href="https://github.com/linuxwacom/input-wacom">git repo</a> in
+December 2017 and were released in March 2018 (<a href="https://github.com/linuxwacom/input-wacom/releases/tag/input-wacom-0.39.0">input-wacom-0.39.0</a>).</p>
+<p>That is several months after the current Debian Stable (Stretch) was released
+(June 2017). So there is exactly zero chance of it containing drivers for that
+hardware - "stable" means no new software except security updates gets
+introduced during the lifetime of the release (until at least 2020).</p>
+<p>Fortunately, you don't need to switch distribution to use newer hardware. You
+don't even need to compile anything from source. Even more so, <strong>PLEASE DON'T
+INSTALL INPUT-WACOM FROM SOURCE</strong>, that will most likely lead to some undesired
+side effects.</p>
+<h2 id="debian-backports"><a class="toclink" href="#debian-backports">Debian backports</a></h2>
+<p>Backports project was created exactly for cases like this. It allows users to
+install newer versions of some packages without breaking anything while keeping
+Debian overall at the same (stable) version.</p>
+<p>To enable support for One by Wacom in Debian Stretch you need to:</p>
+<ul>
+<li><a href="https://backports.debian.org/Instructions/">Add backports</a> to your sources.list</li>
+<li>Install newer kernel from backports:
+  <code>apt-get -t stretch-backports install linux-image-amd64</code>.
+  If you're running Debian on different CPU architecture, replace <code>-amd64</code> with
+  the corresponding suffix, like <code>-686-pae</code> for older 32-bit computers or
+  <code>-arm64</code> for ARMv8 CPUs).</li>
+<li>Reboot your computer</li>
+</ul>
+<p>That's it! Newer kernel will have updated drivers for your graphics tablet and
+it will be detected automatically. You can start using it right away or tweak
+some pressure options in your favorite graphics application (e.g. for Gimp it's
+in <em>Edit -&gt; Input Devices</em>).</p>
+<h2 id="further-reading"><a class="toclink" href="#further-reading">Further reading</a></h2>
+<ul>
+<li><a href="https://wiki.archlinux.org/index.php/wacom_tablet#Configuration">Arch wiki</a> - if you want to fine tune your graphics tablet</li>
+<li><a href="https://wiki.debian.org/WacomTablets">Debian wiki</a></li>
+</ul>
+<h2 id="timeline-recap"><a class="toclink" href="#timeline-recap">Timeline recap</a></h2>
+<ul>
+<li><a href="https://www.debian.org/News/2017/20170617">Debian 9</a> (Stretch) was released in June 2017 and will be supported until
+  at least 2020</li>
+<li><a href="https://www.wacom.com/en-cn/products/pen-tablets/one-by-wacom">One by Wacom</a> (Small: CTL-472, Medium: CTL-672)<ul>
+<li>Available in retail: Fall 2017 (judging by the dates of reviews in online
+  shops)</li>
+<li>Driver for Linux: <a href="https://github.com/linuxwacom/input-wacom/commit/b12529e589dae810f0b6ef0b22f67b3860f86cde">patch</a> added in December 2017, drivers
+  <a href="https://github.com/linuxwacom/input-wacom/releases/tag/input-wacom-0.39.0">released</a> in March 2018</li>
+</ul>
+</li>
+</ul>
+<h2 id="log-messages-for-reference"><a class="toclink" href="#log-messages-for-reference">Log messages (for reference)</a></h2>
+<h4 id="debian-9-stretch-without-proper-driver"><a class="toclink" href="#debian-9-stretch-without-proper-driver">Debian 9 (Stretch) without proper driver</a></h4>
+<div class="highlight"><pre><span></span># dmesg|grep -i wacom
+usb 5-1: Manufacturer: Wacom Co.,Ltd.
+input: Wacom Co.,Ltd. CTL-472 Pen as /devices/pci0000:00/0000:00:1d.0/usb5/5-1/5-1:1.0/0003:056A:037A.0001/input/input95
+wacom 0003:056A:037A.0001: hidraw0: USB HID v1.10 Mouse [Wacom Co.,Ltd. CTL-472] on usb-0000:00:1d.0-1/input0
+wacom 0003:056A:037A.0002: Unknown device_type for &#39;Wacom Co.,Ltd. CTL-472&#39;. Ignoring.
+</pre></div>
+
+
+<h4 id="debian-with-updated-kernel-from-backports"><a class="toclink" href="#debian-with-updated-kernel-from-backports">Debian with updated kernel from backports</a></h4>
+<div class="highlight"><pre><span></span># dmesg|grep -i wacom
+usb 6-1: Manufacturer: Wacom Co.,Ltd.
+input: Wacom Co.,Ltd. CTL-472 as /devices/pci0000:00/0000:00:1d.0/usb6/6-1/6-1:1.0/0003:056A:037A.0001/input/input23
+hid-generic 0003:056A:037A.0001: input,hiddev0,hidraw0: USB HID v1.10 Mouse [Wacom Co.,Ltd. CTL-472] on usb-0000:00:1d.0-1/input0
+hid-generic 0003:056A:037A.0002: hiddev1,hidraw1: USB HID v1.10 Device [Wacom Co.,Ltd. CTL-472] on usb-0000:00:1d.0-1/input1
+input: Wacom One by Wacom S Pen as /devices/pci0000:00/0000:00:1d.0/usb6/6-1/6-1:1.0/0003:056A:037A.0001/input/input24
+wacom 0003:056A:037A.0001: hidraw0: USB HID v1.10 Mouse [Wacom Co.,Ltd. CTL-472] on usb-0000:00:1d.0-1/input0
+</pre></div>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Installing One by Wacom in Debian Stretch&amp;url=https://potyarkin.ml/posts/2018/installing-one-by-wacom-in-debian-stretch/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://potyarkin.ml/posts/2018/installing-one-by-wacom-in-debian-stretch/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=https://potyarkin.ml/posts/2018/installing-one-by-wacom-in-debian-stretch/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="https://potyarkin.ml/tags/linux/">linux</a><a href="https://potyarkin.ml/tags/hardware/">hardware</a><a href="https://potyarkin.ml/tags/debian/">Debian</a>                </aside>
+
+                <div class="clear"></div>
+
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <a class="post-nav-prev" href="https://potyarkin.ml/posts/2018/enhanced-file-path-completion-in-bash-like-in-zsh/">
+                        <section class="post-nav-teaser">
+                            <i class="ic ic-arrow-right"></i>
+                                <h2 class="post-nav-title">Enhanced file path completion in bash (like in zsh)</h2>
+                            <p class="post-nav-excerpt">Zsh offers a lot of significant improvements over traditional shell experience. Some...</p>
+                        </section>
+                    </a>
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+
+
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script type="text/javascript" src="https://potyarkin.ml/theme/js/script.js"></script>
+
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121532727-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-121532727-1', { 'anonymize_ip': true });
+    </script>
+</body>
+</html>
