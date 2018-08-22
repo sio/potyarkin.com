@@ -35,14 +35,11 @@ Debian overall at the same (stable) version.
 To enable support for One by Wacom in Debian Stretch you need to:
 
 - [Add backports][backports] to your sources.list
-
 - Install newer kernel from backports:
-  `apt-get -t stretch-backports install linux-image-amd64`
-
+  `apt-get -t stretch-backports install linux-image-amd64`.
   If you're running Debian on different CPU architecture, replace `-amd64` with
   the corresponding suffix, like `-686-pae` for older 32-bit computers or
   `-arm64` for ARMv8 CPUs).
-
 - Reboot your computer
 
 That's it! Newer kernel will have updated drivers for your graphics tablet and
@@ -62,10 +59,10 @@ in *Edit -> Input Devices*).
 - [Debian 9] (Stretch) was released in June 2017 and will be supported until
   at least 2020
 - [One by Wacom] (Small: CTL-472, Medium: CTL-672)
-  - Available in retail: Fall 2017 (judging by the dates of reviews in online
-    shops)
-  - Driver for Linux: [patch] added in December 2017, drivers
-    [released][input-wacom-0.39.0] in March 2018
+    - Available in retail: Fall 2017 (judging by the dates of reviews in online
+      shops)
+    - Driver for Linux: [patch] added in December 2017, drivers
+      [released][input-wacom-0.39.0] in March 2018
 
 
 ## Log messages (for reference)
