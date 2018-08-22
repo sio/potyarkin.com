@@ -1,10 +1,7 @@
 title: Installing One by Wacom in Debian Stretch
 tags: linux, hardware, Debian
+date: 2018-08-22
 
-```
-TODO:
-- Add dmesg logs
-```
 
 I believe there are many people who run Debian Stable as their main desktop OS.
 This article is a short how-to on enabling newer hardware in Debian Stable
@@ -77,14 +74,22 @@ in *Edit -> Input Devices*).
 
 ```
 # dmesg|grep -i wacom
-TODO
+usb 5-1: Manufacturer: Wacom Co.,Ltd.
+input: Wacom Co.,Ltd. CTL-472 Pen as /devices/pci0000:00/0000:00:1d.0/usb5/5-1/5-1:1.0/0003:056A:037A.0001/input/input95
+wacom 0003:056A:037A.0001: hidraw0: USB HID v1.10 Mouse [Wacom Co.,Ltd. CTL-472] on usb-0000:00:1d.0-1/input0
+wacom 0003:056A:037A.0002: Unknown device_type for 'Wacom Co.,Ltd. CTL-472'. Ignoring.
 ```
 
 #### Debian with updated kernel from backports
 
 ```
 # dmesg|grep -i wacom
-TODO
+usb 6-1: Manufacturer: Wacom Co.,Ltd.
+input: Wacom Co.,Ltd. CTL-472 as /devices/pci0000:00/0000:00:1d.0/usb6/6-1/6-1:1.0/0003:056A:037A.0001/input/input23
+hid-generic 0003:056A:037A.0001: input,hiddev0,hidraw0: USB HID v1.10 Mouse [Wacom Co.,Ltd. CTL-472] on usb-0000:00:1d.0-1/input0
+hid-generic 0003:056A:037A.0002: hiddev1,hidraw1: USB HID v1.10 Device [Wacom Co.,Ltd. CTL-472] on usb-0000:00:1d.0-1/input1
+input: Wacom One by Wacom S Pen as /devices/pci0000:00/0000:00:1d.0/usb6/6-1/6-1:1.0/0003:056A:037A.0001/input/input24
+wacom 0003:056A:037A.0001: hidraw0: USB HID v1.10 Mouse [Wacom Co.,Ltd. CTL-472] on usb-0000:00:1d.0-1/input0
 ```
 
 [Arch wiki]: https://wiki.archlinux.org/index.php/wacom_tablet#Configuration
