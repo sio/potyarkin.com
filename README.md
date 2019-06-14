@@ -1,15 +1,18 @@
 # Personal blog powered by Pelican and Python
+
 This repo contains content and configuration for my static website <http://potyarkin.ml>
 
-
 ### Proudly powered by Pelican and Python
+
 - <https://blog.getpelican.com/>
 - <https://www.python.org/>
 
 
 # License and copyright
+
 ### Site configuration, content and documentation
-Copyright © 2017 Vitaly Potyarkin
+
+Copyright © 2017-2019 Vitaly Potyarkin
 ```
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use these files except in compliance with the License.
