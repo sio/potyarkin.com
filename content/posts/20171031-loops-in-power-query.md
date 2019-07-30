@@ -63,6 +63,7 @@ The parameters are:
   of items at the moment when `condition()` returns `false`.
 
 `List.Generate` might be easier to understand with the following pseudocode:
+
 ```python
 def List.Generate(start, condition, next, transform=None):
     results = list()
@@ -85,7 +86,7 @@ We will generate a table of data points for plotting a parabola. Internally we
 will be storing each item as the record with `x` and `y` fields.  After that we
 will transform that data into a Power Query table for output.
 
-```
+```javascript
 let
     data = List.Generate(
         () => [x=-10, y=100],
@@ -114,7 +115,7 @@ mess: you have to know which row comes from what table.
 
 This can be done with `List.Generate`:
 
-```
+```javascript
 NamedTables = List.Generate(
     () => [i=-1, table=#table({},{})],  // initialize loop variables
     each [i] < List.Count(Tables),
