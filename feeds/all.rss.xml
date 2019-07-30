@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Orange Sun</title><link>https://potyarkin.ml/</link><description>Unsorted ramblings, sometimes related to programming</description><lastBuildDate>Wed, 22 Aug 2018 00:00:00 +0300</lastBuildDate><item><title>Installing One by Wacom in Debian Stretch</title><link>https://potyarkin.ml/posts/2018/installing-one-by-wacom-in-debian-stretch/</link><description>&lt;p&gt;I believe there are many people who run Debian Stable as their main desktop OS.
+<rss version="2.0"><channel><title>Orange Sun</title><link>https://potyarkin.ml/</link><description>Unsorted ramblings, sometimes related to programming</description><lastBuildDate>Tue, 30 Jul 2019 00:00:00 +0300</lastBuildDate><item><title>On dotfiles management</title><link>https://potyarkin.ml/posts/2019/on-dotfiles-management/</link><description>&lt;p&gt;This will be yet another description of dotfiles management by some random
+person on the Internet. I will try to explain what my setup is like and why it
+is that way.&lt;/p&gt;
+&lt;p&gt;If you're not yet using version control software for your configuration files
+I strongly encourage you to start …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vitaly Potyarkin</dc:creator><pubDate>Tue, 30 Jul 2019 00:00:00 +0300</pubDate><guid isPermaLink="false">tag:potyarkin.ml,2019-07-30:/posts/2019/on-dotfiles-management/</guid><category>linux</category><category>windows</category><category>automation</category><category>bash</category></item><item><title>Installing One by Wacom in Debian Stretch</title><link>https://potyarkin.ml/posts/2018/installing-one-by-wacom-in-debian-stretch/</link><description>&lt;p&gt;I believe there are many people who run Debian Stable as their main desktop OS.
 This article is a short how-to on enabling newer hardware in Debian Stable
 without switching to another version or distribution.&lt;/p&gt;
 &lt;h2 id="one-by-wacom"&gt;&lt;a class="toclink" href="#one-by-wacom"&gt;One by Wacom&lt;/a&gt;&lt;/h2&gt;

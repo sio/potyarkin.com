@@ -218,14 +218,14 @@ for function definition.)</p>
 <p>We will generate a table of data points for plotting a parabola. Internally we
 will be storing each item as the record with <code>x</code> and <code>y</code> fields.  After that we
 will transform that data into a Power Query table for output.</p>
-<div class="highlight"><pre><span></span>let
-    data = List.Generate(
-        () =&gt; [x=-10, y=100],
-        each [x]&lt;=10,
-        each [x=[x]+1, y=x*x]
-    ),
-    output = Table.FromRecords(data)
-in output
+<div class="highlight"><pre><span></span><span class="kd">let</span>
+    <span class="nx">data</span> <span class="o">=</span> <span class="nx">List</span><span class="p">.</span><span class="nx">Generate</span><span class="p">(</span>
+        <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">[</span><span class="nx">x</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="nx">y</span><span class="o">=</span><span class="mi">100</span><span class="p">],</span>
+        <span class="nx">each</span> <span class="p">[</span><span class="nx">x</span><span class="p">]</span><span class="o">&lt;=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="nx">each</span> <span class="p">[</span><span class="nx">x</span><span class="o">=</span><span class="p">[</span><span class="nx">x</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nx">y</span><span class="o">=</span><span class="nx">x</span><span class="o">*</span><span class="nx">x</span><span class="p">]</span>
+    <span class="p">),</span>
+    <span class="nx">output</span> <span class="o">=</span> <span class="nx">Table</span><span class="p">.</span><span class="nx">FromRecords</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+<span class="k">in</span> <span class="nx">output</span>
 </pre></div>
 
 
@@ -242,15 +242,15 @@ of locations (in the correct order), but each individual table does not contain
 that information. That's why combining all these tables into one would create a
 mess: you have to know which row comes from what table.</p>
 <p>This can be done with <code>List.Generate</code>:</p>
-<div class="highlight"><pre><span></span>NamedTables = List.Generate(
-    () =&gt; [i=-1, table=#table({},{})],  // initialize loop variables
-    each [i] &lt; List.Count(Tables),
-    each [
-        i=[i]+1,
-        table=Table.AddColumn(Tables{i}, &quot;TableName&quot;, each Names{i})
-    ],
-    each [table]
-),
+<div class="highlight"><pre><span></span><span class="nx">NamedTables</span> <span class="o">=</span> <span class="nx">List</span><span class="p">.</span><span class="nx">Generate</span><span class="p">(</span>
+    <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">[</span><span class="nx">i</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="nx">table</span><span class="o">=</span><span class="err">#</span><span class="nx">table</span><span class="p">({},{})],</span>  <span class="c1">// initialize loop variables</span>
+    <span class="nx">each</span> <span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nx">List</span><span class="p">.</span><span class="nx">Count</span><span class="p">(</span><span class="nx">Tables</span><span class="p">),</span>
+    <span class="nx">each</span> <span class="p">[</span>
+        <span class="nx">i</span><span class="o">=</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span>
+        <span class="nx">table</span><span class="o">=</span><span class="nx">Table</span><span class="p">.</span><span class="nx">AddColumn</span><span class="p">(</span><span class="nx">Tables</span><span class="p">{</span><span class="nx">i</span><span class="p">},</span> <span class="s2">&quot;TableName&quot;</span><span class="p">,</span> <span class="nx">each</span> <span class="nx">Names</span><span class="p">{</span><span class="nx">i</span><span class="p">})</span>
+    <span class="p">],</span>
+    <span class="nx">each</span> <span class="p">[</span><span class="nx">table</span><span class="p">]</span>
+<span class="p">),</span>
 </pre></div>
 
 
