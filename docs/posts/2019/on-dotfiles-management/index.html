@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>On dotfiles management</title>
+
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="https://potyarkin.ml/" rel="canonical" />
+
+  <!-- Feed -->
+      <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Orange Sun Full Atom Feed" />
+
+  <link href="https://potyarkin.ml/theme/css/style.css" type="text/css" rel="stylesheet" />
+
+  <!-- Code highlight color scheme -->
+      <link href="https://potyarkin.ml/theme/css/code_blocks/github.css" rel="stylesheet">
+
+    <!-- CSS specified by the user -->
+
+
+    <link href="https://potyarkin.ml/static/attila_override.css" type="text/css" rel="stylesheet" />
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+  <link href="https://potyarkin.ml/posts/2019/on-dotfiles-management/" rel="canonical" />
+
+    <meta name="description" content="This will be yet another description of dotfiles management by some random person on the Internet. I will try to explain what my setup...">
+
+    <meta name="author" content="Vitaly Potyarkin">
+
+    <meta name="tags" content="linux">
+    <meta name="tags" content="windows">
+    <meta name="tags" content="automation">
+    <meta name="tags" content="bash">
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="Orange Sun"/>
+<meta property="og:title" content="On dotfiles management"/>
+<meta property="og:description" content="This will be yet another description of dotfiles management by some random person on the Internet. I will try to explain what my setup..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://potyarkin.ml/posts/2019/on-dotfiles-management/"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-07-30 00:00:00+03:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://potyarkin.ml/author/vitaly-potyarkin/">
+<meta property="article:section" content="posts"/>
+<meta property="article:tag" content="linux"/>
+<meta property="article:tag" content="windows"/>
+<meta property="article:tag" content="automation"/>
+<meta property="article:tag" content="bash"/>
+<meta property="og:image" content="https://potyarkin.ml/theme/images/post-bg.jpg">
+
+<!-- Twitter Card -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "On dotfiles management",
+  "headline": "On dotfiles management",
+  "datePublished": "2019-07-30 00:00:00+03:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Vitaly Potyarkin",
+    "url": "https://potyarkin.ml/author/vitaly-potyarkin/"
+  },
+  "image": "https://potyarkin.ml/theme/images/post-bg.jpg",
+  "url": "https://potyarkin.ml/posts/2019/on-dotfiles-management/",
+  "description": "This will be yet another description of dotfiles management by some random person on the Internet. I will try to explain what my setup..."
+}
+</script>
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
+
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+          <li><a href="/archive/" role="presentation">Archive</a></li>
+          <li><a href="/tags/" role="presentation">Tags</a></li>
+          <li><a href="mailto:sio.wtf@gmail.com" role="presentation">Email</a></li>
+          <li><a href="https://github.com/sio" role="presentation">Github</a></li>
+
+
+        <li class="nav-rss"><a href="/feeds/all.atom.xml"><i class="ic ic-rss"></i> Subscribe</a></li>
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="post-header" class="has-cover">
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="https://potyarkin.ml/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">On dotfiles management</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="https://potyarkin.ml/author/vitaly-potyarkin/">Vitaly Potyarkin</a>
+            | <time datetime="2019-07-30">2019-07-30</time>
+        </span>
+        <!-- TODO : Modified check -->
+            <div class="post-cover cover" style="background-color: rgb(242,106,61)">
+      </div>
+    </header>
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <p>This will be yet another description of dotfiles management by some random
+person on the Internet. I will try to explain what my setup is like and why it
+is that way.</p>
+<p>If you're not yet using version control software for your configuration files
+I strongly encourage you to start doing so, whichever way you like. These
+pages are good places to start:</p>
+<ul>
+<li><a href="http://dotfiles.github.io/">An unofficial guide to dotfiles on GitHub</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Dotfiles">Arch wiki article on dotfiles</a></li>
+</ul>
+<h2 id="my-chosen-approach"><a class="toclink" href="#my-chosen-approach">My chosen approach</a></h2>
+<p>After several attempts that have spanned across many years I've understood
+that neither tracking home directory directly with Git nor symlinking all of
+the dotfiles from a single directory tree is working for me. Both ways lead to
+a mess in the repository and made the whole endeavor of tracking changes
+cognitively expensive, so I inevitably started slacking off.</p>
+<p>I've looked at the existing tools that are meant to automate some of the
+process and did not find one that would suit all my needs. I've ended up
+writing a small shell <a href="https://gitlab.com/sio/server_common/blob/master/dotfiles/bootstrap.sh">script</a> that takes care of dotfiles installation but
+the main value for me is in the repo layout, not the script itself.</p>
+<p>All configuration files are grouped into directories by topic. These
+directories are somewhat similar to packages in GNU <a href="https://www.gnu.org/software/stow/">stow</a>. Topic directories
+recreate the directory structure for the target location, by default $HOME.
+Files that are meant to be installed into target location have to contain an
+appropriate suffix at the end of filename (any other files are ignored):</p>
+<ul>
+<li><code>.copy</code> - for files to be copied over to new location</li>
+<li><code>.link</code> - for files to be linked to from new location</li>
+<li><code>.append</code> - for files to be appended to the target file</li>
+</ul>
+<p>Default behavior may be altered by a <code>dotfiles.meta</code> file placed into the
+topic directory. It is essentially a shell script that is being sourced during
+topic installation. Its main purpose is to provide alternative values for
+PREFIX and SCOPE variables:</p>
+<ul>
+<li>PREFIX value determines target directory where the dotfiles will be placed.
+  Also if PREFIX is set the dotfiles will not get an extra dot in front of
+  their filename (which is the default behavior otherwise).</li>
+<li>SCOPE variable may be used to indicate that a topic requires root privileges
+  to be installed (<code>SCOPE=system</code>).</li>
+</ul>
+<p>Multiple topics may be installed at once either by providing all of their
+names as command line arguments or by listing them all in a text file and
+providing path to that file as an argument to the installation <a href="https://gitlab.com/sio/server_common/blob/master/dotfiles/bootstrap.sh">script</a>.</p>
+<h2 id="examples"><a class="toclink" href="#examples">Examples</a></h2>
+<ul>
+<li><code>topic-foo/vimrc.link</code> will be symlinked from <code>~/.vimrc</code></li>
+<li><code>topic-bar/bashrc.copy</code> will be copied over to <code>~/.bashrc</code></li>
+<li><code>topic-baz/default/keyboard.copy</code> with <code>PREFIX=/etc</code> will be copied to <code>/etc/default/keyboard</code></li>
+<li><code>topic-baz/file/without/valid/suffix</code> will be ignored</li>
+</ul>
+<p>More examples may be found in my <a href="https://gitlab.com/sio/server_common/tree/master/dotfiles">dotfiles repo</a>.</p>
+<h2 id="comparison-with-existing-tools"><a class="toclink" href="#comparison-with-existing-tools">Comparison with existing tools</a></h2>
+<h4 id="strengths"><a class="toclink" href="#strengths">Strengths</a></h4>
+<ul>
+<li>Very small number of dependencies makes this script usable across all my
+  Linux and Windows machines. It requires only the core GNU userland: bash,
+  coreutils, find and grep.</li>
+<li>Multiple install actions are supported (copy, link, append) unlike <a href="https://www.gnu.org/software/stow/">stow</a>
+  that only makes symlinks. More than that, my script detects if it's being
+  executed on Windows machine and copies over any file that was meant to be
+  symlinked - because symlinks on Windows are so tricky they're might as well
+  be not supported at all.</li>
+<li>Destination directory may be specified for each topic individually which
+  makes it possible to install topics targeting different directories in one
+  run.</li>
+<li>Simple partial deployment. If machine requires only a subset of topics
+  tracked in the repository it is easy to list them all in a plain text file
+  or to provide them as command line arguments to the bootstrap script.
+  <a href="https://thelocehiliosan.github.io/yadm/">yadm</a>, for example does not provide such ability.</li>
+<li>Dotfiles are not hidden in the repo by default. It makes no sense to have
+  <code>~/.bashrc</code> point to <code>repo/bash/.bashrc</code> instead of <code>repo/bash/bashrc</code>, so
+  dots are added automatically for topics with default target PREFIX.</li>
+<li>All operations are reversible because all overwritten files are backed up
+  beforehand.</li>
+</ul>
+<h4 id="weaknesses"><a class="toclink" href="#weaknesses">Weaknesses</a></h4>
+<ul>
+<li>Single pass execution. It means some topics may be left partially configured
+  in case of errors. <a href="https://www.gnu.org/software/stow/">stow</a> is a good example of cautious approach. This is an
+  implementation detail and may be fixed in later versions of bootstrap
+  script.</li>
+<li>No support for tree folding/unfolding. I consider that an overkill for
+  simple configuration management.</li>
+<li>No automated reverse operation. In case you want to undo the changes made by
+  this <a href="https://gitlab.com/sio/server_common/blob/master/dotfiles/bootstrap.sh">script</a> you'll have to restore backups manually from <code>$DOTFILES_BACKUP</code></li>
+</ul>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=On dotfiles management&amp;url=https://potyarkin.ml/posts/2019/on-dotfiles-management/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://potyarkin.ml/posts/2019/on-dotfiles-management/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=https://potyarkin.ml/posts/2019/on-dotfiles-management/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="https://potyarkin.ml/tags/linux/">linux</a><a href="https://potyarkin.ml/tags/windows/">windows</a><a href="https://potyarkin.ml/tags/automation/">automation</a><a href="https://potyarkin.ml/tags/bash/">bash</a>                </aside>
+
+                <div class="clear"></div>
+
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <a class="post-nav-prev" href="https://potyarkin.ml/posts/2018/installing-one-by-wacom-in-debian-stretch/">
+                        <section class="post-nav-teaser">
+                            <i class="ic ic-arrow-right"></i>
+                                <h2 class="post-nav-title">Installing One by Wacom in Debian Stretch</h2>
+                            <p class="post-nav-excerpt">I believe there are many people who run Debian Stable as their main desktop OS. This...</p>
+                        </section>
+                    </a>
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+
+
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script type="text/javascript" src="https://potyarkin.ml/theme/js/script.js"></script>
+
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121532727-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-121532727-1', { 'anonymize_ip': true });
+    </script>
+</body>
+</html>

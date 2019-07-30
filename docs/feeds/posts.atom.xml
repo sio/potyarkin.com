@@ -1,5 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - posts</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/posts.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2018-08-22T00:00:00+03:00</updated><entry><title>Installing One by Wacom in Debian Stretch</title><link href="https://potyarkin.ml/posts/2018/installing-one-by-wacom-in-debian-stretch/" rel="alternate"></link><published>2018-08-22T00:00:00+03:00</published><updated>2018-08-22T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-08-22:/posts/2018/installing-one-by-wacom-in-debian-stretch/</id><summary type="html">&lt;p&gt;I believe there are many people who run Debian Stable as their main desktop OS.
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - posts</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/posts.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2019-07-30T00:00:00+03:00</updated><entry><title>On dotfiles management</title><link href="https://potyarkin.ml/posts/2019/on-dotfiles-management/" rel="alternate"></link><published>2019-07-30T00:00:00+03:00</published><updated>2019-07-30T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2019-07-30:/posts/2019/on-dotfiles-management/</id><summary type="html">&lt;p&gt;This will be yet another description of dotfiles management by some random
+person on the Internet. I will try to explain what my setup is like and why it
+is that way.&lt;/p&gt;
+&lt;p&gt;If you're not yet using version control software for your configuration files
+I strongly encourage you to start …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This will be yet another description of dotfiles management by some random
+person on the Internet. I will try to explain what my setup is like and why it
+is that way.&lt;/p&gt;
+&lt;p&gt;If you're not yet using version control software for your configuration files
+I strongly encourage you to start doing so, whichever way you like. These
+pages are good places to start:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://dotfiles.github.io/"&gt;An unofficial guide to dotfiles on GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://wiki.archlinux.org/index.php/Dotfiles"&gt;Arch wiki article on dotfiles&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="my-chosen-approach"&gt;&lt;a class="toclink" href="#my-chosen-approach"&gt;My chosen approach&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;After several attempts that have spanned across many years I've understood
+that neither tracking home directory directly with Git nor symlinking all of
+the dotfiles from a single directory tree is working for me. Both ways lead to
+a mess in the repository and made the whole endeavor of tracking changes
+cognitively expensive, so I inevitably started slacking off.&lt;/p&gt;
+&lt;p&gt;I've looked at the existing tools that are meant to automate some of the
+process and did not find one that would suit all my needs. I've ended up
+writing a small shell &lt;a href="https://gitlab.com/sio/server_common/blob/master/dotfiles/bootstrap.sh"&gt;script&lt;/a&gt; that takes care of dotfiles installation but
+the main value for me is in the repo layout, not the script itself.&lt;/p&gt;
+&lt;p&gt;All configuration files are grouped into directories by topic. These
+directories are somewhat similar to packages in GNU &lt;a href="https://www.gnu.org/software/stow/"&gt;stow&lt;/a&gt;. Topic directories
+recreate the directory structure for the target location, by default $HOME.
+Files that are meant to be installed into target location have to contain an
+appropriate suffix at the end of filename (any other files are ignored):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;.copy&lt;/code&gt; - for files to be copied over to new location&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.link&lt;/code&gt; - for files to be linked to from new location&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.append&lt;/code&gt; - for files to be appended to the target file&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Default behavior may be altered by a &lt;code&gt;dotfiles.meta&lt;/code&gt; file placed into the
+topic directory. It is essentially a shell script that is being sourced during
+topic installation. Its main purpose is to provide alternative values for
+PREFIX and SCOPE variables:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PREFIX value determines target directory where the dotfiles will be placed.
+  Also if PREFIX is set the dotfiles will not get an extra dot in front of
+  their filename (which is the default behavior otherwise).&lt;/li&gt;
+&lt;li&gt;SCOPE variable may be used to indicate that a topic requires root privileges
+  to be installed (&lt;code&gt;SCOPE=system&lt;/code&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Multiple topics may be installed at once either by providing all of their
+names as command line arguments or by listing them all in a text file and
+providing path to that file as an argument to the installation &lt;a href="https://gitlab.com/sio/server_common/blob/master/dotfiles/bootstrap.sh"&gt;script&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="examples"&gt;&lt;a class="toclink" href="#examples"&gt;Examples&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;topic-foo/vimrc.link&lt;/code&gt; will be symlinked from &lt;code&gt;~/.vimrc&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;topic-bar/bashrc.copy&lt;/code&gt; will be copied over to &lt;code&gt;~/.bashrc&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;topic-baz/default/keyboard.copy&lt;/code&gt; with &lt;code&gt;PREFIX=/etc&lt;/code&gt; will be copied to &lt;code&gt;/etc/default/keyboard&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;topic-baz/file/without/valid/suffix&lt;/code&gt; will be ignored&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;More examples may be found in my &lt;a href="https://gitlab.com/sio/server_common/tree/master/dotfiles"&gt;dotfiles repo&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="comparison-with-existing-tools"&gt;&lt;a class="toclink" href="#comparison-with-existing-tools"&gt;Comparison with existing tools&lt;/a&gt;&lt;/h2&gt;
+&lt;h4 id="strengths"&gt;&lt;a class="toclink" href="#strengths"&gt;Strengths&lt;/a&gt;&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Very small number of dependencies makes this script usable across all my
+  Linux and Windows machines. It requires only the core GNU userland: bash,
+  coreutils, find and grep.&lt;/li&gt;
+&lt;li&gt;Multiple install actions are supported (copy, link, append) unlike &lt;a href="https://www.gnu.org/software/stow/"&gt;stow&lt;/a&gt;
+  that only makes symlinks. More than that, my script detects if it's being
+  executed on Windows machine and copies over any file that was meant to be
+  symlinked - because symlinks on Windows are so tricky they're might as well
+  be not supported at all.&lt;/li&gt;
+&lt;li&gt;Destination directory may be specified for each topic individually which
+  makes it possible to install topics targeting different directories in one
+  run.&lt;/li&gt;
+&lt;li&gt;Simple partial deployment. If machine requires only a subset of topics
+  tracked in the repository it is easy to list them all in a plain text file
+  or to provide them as command line arguments to the bootstrap script.
+  &lt;a href="https://thelocehiliosan.github.io/yadm/"&gt;yadm&lt;/a&gt;, for example does not provide such ability.&lt;/li&gt;
+&lt;li&gt;Dotfiles are not hidden in the repo by default. It makes no sense to have
+  &lt;code&gt;~/.bashrc&lt;/code&gt; point to &lt;code&gt;repo/bash/.bashrc&lt;/code&gt; instead of &lt;code&gt;repo/bash/bashrc&lt;/code&gt;, so
+  dots are added automatically for topics with default target PREFIX.&lt;/li&gt;
+&lt;li&gt;All operations are reversible because all overwritten files are backed up
+  beforehand.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="weaknesses"&gt;&lt;a class="toclink" href="#weaknesses"&gt;Weaknesses&lt;/a&gt;&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Single pass execution. It means some topics may be left partially configured
+  in case of errors. &lt;a href="https://www.gnu.org/software/stow/"&gt;stow&lt;/a&gt; is a good example of cautious approach. This is an
+  implementation detail and may be fixed in later versions of bootstrap
+  script.&lt;/li&gt;
+&lt;li&gt;No support for tree folding/unfolding. I consider that an overkill for
+  simple configuration management.&lt;/li&gt;
+&lt;li&gt;No automated reverse operation. In case you want to undo the changes made by
+  this &lt;a href="https://gitlab.com/sio/server_common/blob/master/dotfiles/bootstrap.sh"&gt;script&lt;/a&gt; you'll have to restore backups manually from &lt;code&gt;$DOTFILES_BACKUP&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><category term="linux"></category><category term="windows"></category><category term="automation"></category><category term="bash"></category></entry><entry><title>Installing One by Wacom in Debian Stretch</title><link href="https://potyarkin.ml/posts/2018/installing-one-by-wacom-in-debian-stretch/" rel="alternate"></link><published>2018-08-22T00:00:00+03:00</published><updated>2018-08-22T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-08-22:/posts/2018/installing-one-by-wacom-in-debian-stretch/</id><summary type="html">&lt;p&gt;I believe there are many people who run Debian Stable as their main desktop OS.
 This article is a short how-to on enabling newer hardware in Debian Stable
 without switching to another version or distribution.&lt;/p&gt;
 &lt;h2 id="one-by-wacom"&gt;&lt;a class="toclink" href="#one-by-wacom"&gt;One by Wacom&lt;/a&gt;&lt;/h2&gt;
@@ -906,14 +996,14 @@ for function definition.)&lt;/p&gt;
 &lt;p&gt;We will generate a table of data points for plotting a parabola. Internally we
 will be storing each item as the record with &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt; fields.  After that we
 will transform that data into a Power Query table for output.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;let
-    data = List.Generate(
-        () =&amp;gt; [x=-10, y=100],
-        each [x]&amp;lt;=10,
-        each [x=[x]+1, y=x*x]
-    ),
-    output = Table.FromRecords(data)
-in output
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;let&lt;/span&gt;
+    &lt;span class="nx"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;List&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Generate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;y&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+        &lt;span class="nx"&gt;each&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;=&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="nx"&gt;each&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;y&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="nx"&gt;output&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Table&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;FromRecords&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="nx"&gt;output&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -930,15 +1020,15 @@ of locations (in the correct order), but each individual table does not contain
 that information. That's why combining all these tables into one would create a
 mess: you have to know which row comes from what table.&lt;/p&gt;
 &lt;p&gt;This can be done with &lt;code&gt;List.Generate&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;NamedTables = List.Generate(
-    () =&amp;gt; [i=-1, table=#table({},{})],  // initialize loop variables
-    each [i] &amp;lt; List.Count(Tables),
-    each [
-        i=[i]+1,
-        table=Table.AddColumn(Tables{i}, &amp;quot;TableName&amp;quot;, each Names{i})
-    ],
-    each [table]
-),
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nx"&gt;NamedTables&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;List&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Generate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;table&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="nx"&gt;table&lt;/span&gt;&lt;span class="p"&gt;({},{})],&lt;/span&gt;  &lt;span class="c1"&gt;// initialize loop variables&lt;/span&gt;
+    &lt;span class="nx"&gt;each&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nx"&gt;List&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Count&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;Tables&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="nx"&gt;each&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+        &lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="nx"&gt;table&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nx"&gt;Table&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;AddColumn&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;Tables&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;TableName&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;each&lt;/span&gt; &lt;span class="nx"&gt;Names&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+    &lt;span class="p"&gt;],&lt;/span&gt;
+    &lt;span class="nx"&gt;each&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;table&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="p"&gt;),&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
