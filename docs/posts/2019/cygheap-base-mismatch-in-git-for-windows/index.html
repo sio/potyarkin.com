@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>Cygheap base mismatch in Git for Windows</title>
+
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="https://potyarkin.ml/" rel="canonical" />
+
+  <!-- Feed -->
+      <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Orange Sun Full Atom Feed" />
+
+  <link href="https://potyarkin.ml/theme/css/style.css" type="text/css" rel="stylesheet" />
+
+  <!-- Code highlight color scheme -->
+      <link href="https://potyarkin.ml/theme/css/code_blocks/github.css" rel="stylesheet">
+
+    <!-- CSS specified by the user -->
+
+
+    <link href="https://potyarkin.ml/static/attila_override.css" type="text/css" rel="stylesheet" />
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+  <link href="https://potyarkin.ml/posts/2019/cygheap-base-mismatch-in-git-for-windows/" rel="canonical" />
+
+    <meta name="description" content="This error has haunted me for several months: 4 [main] head (6660) C:\...\usr\bin\head.exe:r *** fatal error - cygheap base mismatch...">
+
+    <meta name="author" content="Vitaly Potyarkin">
+
+    <meta name="tags" content="bash">
+    <meta name="tags" content="windows">
+    <meta name="tags" content="git">
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="Orange Sun"/>
+<meta property="og:title" content="Cygheap base mismatch in Git for Windows"/>
+<meta property="og:description" content="This error has haunted me for several months: 4 [main] head (6660) C:\...\usr\bin\head.exe:r *** fatal error - cygheap base mismatch..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://potyarkin.ml/posts/2019/cygheap-base-mismatch-in-git-for-windows/"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-08-26 00:00:00+03:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://potyarkin.ml/author/vitaly-potyarkin/">
+<meta property="article:section" content="posts"/>
+<meta property="article:tag" content="bash"/>
+<meta property="article:tag" content="windows"/>
+<meta property="article:tag" content="git"/>
+<meta property="og:image" content="https://potyarkin.ml/theme/images/post-bg.jpg">
+
+<!-- Twitter Card -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "Cygheap base mismatch in Git for Windows",
+  "headline": "Cygheap base mismatch in Git for Windows",
+  "datePublished": "2019-08-26 00:00:00+03:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Vitaly Potyarkin",
+    "url": "https://potyarkin.ml/author/vitaly-potyarkin/"
+  },
+  "image": "https://potyarkin.ml/theme/images/post-bg.jpg",
+  "url": "https://potyarkin.ml/posts/2019/cygheap-base-mismatch-in-git-for-windows/",
+  "description": "This error has haunted me for several months: 4 [main] head (6660) C:\...\usr\bin\head.exe:r *** fatal error - cygheap base mismatch..."
+}
+</script>
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
+
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+          <li><a href="/archive/" role="presentation">Archive</a></li>
+          <li><a href="/tags/" role="presentation">Tags</a></li>
+          <li><a href="mailto:sio.wtf@gmail.com" role="presentation">Email</a></li>
+          <li><a href="https://github.com/sio" role="presentation">Github</a></li>
+
+
+        <li class="nav-rss"><a href="/feeds/all.atom.xml"><i class="ic ic-rss"></i> Subscribe</a></li>
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="post-header" class="has-cover">
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="https://potyarkin.ml/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Cygheap base mismatch in Git for Windows</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="https://potyarkin.ml/author/vitaly-potyarkin/">Vitaly Potyarkin</a>
+            | <time datetime="2019-08-26">2019-08-26</time>
+        </span>
+        <!-- TODO : Modified check -->
+            <div class="post-cover cover" style="background-color: rgb(242,106,61)">
+      </div>
+    </header>
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <p>This error has haunted me for several months:</p>
+<div class="highlight"><pre><span></span>4 [main] head (6660) C:\...\usr\bin\head.exe:r
+*** fatal error - cygheap base mismatch detected - 0x612C7410/0xAF7410.
+
+This problem is probably due to using incompatible versions of the cygwin DLL.
+Search for cygwin1.dll using the Windows Start-&gt;Find/Search facility
+and delete all but the most recent version.  The most recent version *should*
+reside in x:\cygwin\bin, where &#39;x&#39; is the drive on which you have
+installed the cygwin distribution.  Rebooting is also suggested if you
+are unable to find another cygwin DLL.
+</pre></div>
+
+
+<p>The tricky part is I am not even using Cygwin. I'm running bash with Git for
+Windows <a href="https://git-scm.com/download/win">as published at the official website</a>.</p>
+<p>I've tried suggested solution from the error message, googled around quite a
+bit, I've even dabbled with Windows Security settings (ASLR) - nothing helped
+and have almost made my peace with the fact that every fifth commandline action
+will fail loudly.</p>
+<p>And yet after recent release I've decided to try one more time. This time I've
+downloaded the portable build for 64-bit architecture, and it worked! I don't
+know if it was the fact that I was previously running a 32-bit Git and bash on
+64-bit Windows 7 or if Git maintainers have tweaked their build process for 2.23.</p>
+<p>If you're experiencing segmentation faults while running bash from Git for
+Windows package, you should check for <strong>architecture mismatch</strong> with your OS
+and/or for <strong>newer (2.23+) Git version</strong>.</p>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Cygheap base mismatch in Git for Windows&amp;url=https://potyarkin.ml/posts/2019/cygheap-base-mismatch-in-git-for-windows/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://potyarkin.ml/posts/2019/cygheap-base-mismatch-in-git-for-windows/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=https://potyarkin.ml/posts/2019/cygheap-base-mismatch-in-git-for-windows/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="https://potyarkin.ml/tags/bash/">bash</a><a href="https://potyarkin.ml/tags/windows/">windows</a><a href="https://potyarkin.ml/tags/git/">git</a>                </aside>
+
+                <div class="clear"></div>
+
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <a class="post-nav-prev" href="https://potyarkin.ml/posts/2019/on-dotfiles-management/">
+                        <section class="post-nav-teaser">
+                            <i class="ic ic-arrow-right"></i>
+                                <h2 class="post-nav-title">On dotfiles management</h2>
+                            <p class="post-nav-excerpt">This will be yet another description of dotfiles management by some random person on...</p>
+                        </section>
+                    </a>
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+
+
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script type="text/javascript" src="https://potyarkin.ml/theme/js/script.js"></script>
+
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121532727-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-121532727-1', { 'anonymize_ip': true });
+    </script>
+</body>
+</html>

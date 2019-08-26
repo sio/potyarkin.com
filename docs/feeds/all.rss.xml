@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Orange Sun</title><link>https://potyarkin.ml/</link><description>Unsorted ramblings, sometimes related to programming</description><lastBuildDate>Tue, 30 Jul 2019 00:00:00 +0300</lastBuildDate><item><title>On dotfiles management</title><link>https://potyarkin.ml/posts/2019/on-dotfiles-management/</link><description>&lt;p&gt;This will be yet another description of dotfiles management by some random
+<rss version="2.0"><channel><title>Orange Sun</title><link>https://potyarkin.ml/</link><description>Unsorted ramblings, sometimes related to programming</description><lastBuildDate>Mon, 26 Aug 2019 00:00:00 +0300</lastBuildDate><item><title>Cygheap base mismatch in Git for Windows</title><link>https://potyarkin.ml/posts/2019/cygheap-base-mismatch-in-git-for-windows/</link><description>&lt;p&gt;This error has haunted me for several months:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;4 [main] head (6660) C:\...\usr\bin\head.exe:r
+*** fatal error - cygheap base mismatch detected - 0x612C7410/0xAF7410.
+
+This problem is probably due to using incompatible versions of the cygwin DLL.
+Search for cygwin1.dll using the Windows Start-&amp;gt;Find/Search facility …&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vitaly Potyarkin</dc:creator><pubDate>Mon, 26 Aug 2019 00:00:00 +0300</pubDate><guid isPermaLink="false">tag:potyarkin.ml,2019-08-26:/posts/2019/cygheap-base-mismatch-in-git-for-windows/</guid><category>bash</category><category>windows</category><category>git</category></item><item><title>On dotfiles management</title><link>https://potyarkin.ml/posts/2019/on-dotfiles-management/</link><description>&lt;p&gt;This will be yet another description of dotfiles management by some random
 person on the Internet. I will try to explain what my setup is like and why it
 is that way.&lt;/p&gt;
 &lt;p&gt;If you're not yet using version control software for your configuration files
