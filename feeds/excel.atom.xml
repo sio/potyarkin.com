@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - excel</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/excel.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2018-06-01T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Excel as a CSV editor (with VBA)</title><link href="https://potyarkin.ml/posts/2018/excel-as-a-csv-editor-with-vba/" rel="alternate"></link><published>2018-06-01T00:00:00+03:00</published><updated>2018-06-01T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-06-01:/posts/2018/excel-as-a-csv-editor-with-vba/</id><summary type="html">&lt;p&gt;One might think that Excel is a decent CSV editor as it is, but it's not. It is
+a very capable CSV reader, I do not dispute that. When it comes to writing though,
+Excel does not match what you'd expect from a mature application:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It might change the delimiter …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;One might think that Excel is a decent CSV editor as it is, but it's not. It is
+a very capable CSV reader, I do not dispute that. When it comes to writing though,
+Excel does not match what you'd expect from a mature application:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It might change the delimiter character arbitrarily;&lt;/li&gt;
+&lt;li&gt;It might write numbers in the regional format that does not map to a number
+  anywhere outside Excel;&lt;/li&gt;
+&lt;li&gt;It might add quotes that are inconsistent with the rest of the file.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you're collaborating on the CSV file with others, their Excel version might
+have different defaults and produce incompatible output.  Even if you're the only
+one working on that CSV, you can forget about clean diffs and sensible atomic
+commits to your version control system.&lt;/p&gt;
+&lt;p&gt;The only solution is not to overwrite CSV files you've opened with Excel. Use
+another tool designed specifically for dealing with CSV or edit the file
+manually in the text editor of your choosing.&lt;/p&gt;
+&lt;h2 id="append-to-csv-with-vba"&gt;&lt;a class="toclink" href="#append-to-csv-with-vba"&gt;Append to CSV with VBA&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I wrote a small helper utility to append data rows to the CSV files from Excel that
+ensures you won't mess up the existing data. This is a one-day hobby project, and
+Excel serves more as the UI toolkit and runtime environment than as the
+spreadsheet application, so you should be careful if you decide to rely on that
+code. The project is licensed under the &lt;a href="http://www.apache.org/licenses/LICENSE-2.0"&gt;Apache License, Version 2.0&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Here is the code:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/sio/CSV-Append/blob/master/CSVAppend.bas"&gt;Main VBA module&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;The resulting &lt;a href="https://github.com/sio/CSV-Append/raw/master/CSV-Editor.xlsm"&gt;application&lt;/a&gt;, packaged in a workbook.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The application reads parameters from named ranges, opens the required file,
+parses CSV header and displays a submission form for a new data row. Upon
+submission it combines new values into a CSV string and appends it to the file.
+All data manipulation is done in VBA. This app could have and should have been
+written in any modern language - it would probably have cleaner code. Excel is
+super easy to draft a simple UI though :)&lt;/p&gt;
+&lt;p&gt;The code is pretty straightforward so I'll highlight only the most interesting
+parts.&lt;/p&gt;
+&lt;h2 id="reading-and-writing-unicode-with-vba"&gt;&lt;a class="toclink" href="#reading-and-writing-unicode-with-vba"&gt;Reading and writing Unicode with VBA&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Visual Basic for Applications is a hopelessly outdated environment. Unicode
+support can be achieved only with the help of COM interoperability, namely the
+&lt;code&gt;ADODB.Stream&lt;/code&gt; object. This object provides a very comfortable interface for
+reading and writing text files in a bytestream mode, and also handles character
+encoding nicely.&lt;/p&gt;
+&lt;p&gt;Appending to a file is done via combination of seeking to the end of stream
+and writing the new data.&lt;/p&gt;
+&lt;h2 id="csv-packing-and-unpacking"&gt;&lt;a class="toclink" href="#csv-packing-and-unpacking"&gt;CSV packing and unpacking&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I'm not exactly proud of how CSV string manipulations are implemented in the code.
+If VBA would've provided some nicer regex capabilities or a CSV-aware library it
+would've been better. I know about &lt;code&gt;VBScript.RegExp&lt;/code&gt;, but it's an overkill for a
+small task my app was created to accomplish.&lt;/p&gt;
+&lt;p&gt;Current implementation can not handle a quote symbol in the middle of the field
+value. This is a known bug.&lt;/p&gt;
+&lt;h2 id="demo"&gt;&lt;a class="toclink" href="#demo"&gt;Demo&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;This the main and the only UI my utility offers. Inputs and buttons are meant to
+be self explaining. No value conversion is done when saving - the value of the
+cell is written as is, quotes are added if delimiter character occurs within
+the value.&lt;/p&gt;
+&lt;p&gt;Screenshot below is produced after loading demo CSV file with the following
+header:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ID,Column1,Column2,Column3 with very long header,&amp;quot;Column4, with delimiter in the name&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;a href="https://potyarkin.ml/posts/2018/excel-as-a-csv-editor-with-vba/csv-append.png"&gt;&lt;img alt="CSV Append" src="https://potyarkin.ml/posts/2018/excel-as-a-csv-editor-with-vba/csv-append.png"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The project is published for educational and archival purposes. I'll be glad if
+you'll find any use for it.&lt;/p&gt;</content><category term="excel"></category><category term="vba"></category><category term="gist"></category></entry><entry><title>Expanding Power Query standard library - introducing LibPQ</title><link href="https://potyarkin.ml/posts/2018/expanding-power-query-standard-library-introducing-libpq/" rel="alternate"></link><published>2018-01-03T00:00:00+03:00</published><updated>2018-01-03T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-01-03:/posts/2018/expanding-power-query-standard-library-introducing-libpq/</id><summary type="html">&lt;p&gt;Power Query formula language (also known as M language) is a very capable yet
+not very flexible tool. It lacks some features taken for granted by developers
+who are used to other programming languages such as compatibility with version
+control systems, extensibility by third-party libraries, etc.&lt;/p&gt;
+&lt;p&gt;That is why I …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Power Query formula language (also known as M language) is a very capable yet
+not very flexible tool. It lacks some features taken for granted by developers
+who are used to other programming languages such as compatibility with version
+control systems, extensibility by third-party libraries, etc.&lt;/p&gt;
+&lt;p&gt;That is why I have started &lt;strong&gt;&lt;a href="https://github.com/sio/LibPQ"&gt;LibPQ&lt;/a&gt;&lt;/strong&gt; - an open-source M language library
+meant to expand the standard library and to make it easier for others to do so.
+Its main features are:&lt;/p&gt;
+&lt;h3 id="importing-source-code-from-plain-text-files-located-on-disk-or-on-the-web"&gt;&lt;a class="toclink" href="#importing-source-code-from-plain-text-files-located-on-disk-or-on-the-web"&gt;Importing source code from plain text files located on disk or on the web&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;LibPQ stores its modules as plain text files with &lt;code&gt;*.pq&lt;/code&gt; extension.  Detaching
+source code from the workbooks that execute it has a lot of advantages:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The source code can be managed by version control system such as git&lt;/li&gt;
+&lt;li&gt;Multiple workbooks referring to the same module will always use the same
+  (latest) code&lt;/li&gt;
+&lt;li&gt;It encourages splitting your code into smaller reusable units&lt;/li&gt;
+&lt;li&gt;You can edit the source code with any editor you like (autocompletion and
+  syntax highlighting are nice features even though Power Query's Advanced
+  Editor does not have them)&lt;/li&gt;
+&lt;li&gt;Sharing your code and collaborating becomes much easier&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="supporting-several-import-locations-ordered-by-priority"&gt;&lt;a class="toclink" href="#supporting-several-import-locations-ordered-by-priority"&gt;Supporting several import locations ordered by priority&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;LibPQ does not dictate where you store your source code. Inspired by Python's
+&lt;a href="https://docs.python.org/3/library/sys.html#sys.path"&gt;&lt;code&gt;sys.path&lt;/code&gt;&lt;/a&gt; it enables specifying unlimited number of local and/or
+remote sources (ordered by priority). When importing a module, LibPQ will check
+these sources one by one until the required module is found.&lt;/p&gt;
+&lt;h3 id="unit-testing-framework"&gt;&lt;a class="toclink" href="#unit-testing-framework"&gt;Unit testing framework&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Having source code detached from the workbooks encourages you to improve and
+refactor existing modules. To make sure you do not introduce regressions you
+should cover your code with unit tests.&lt;/p&gt;
+&lt;p&gt;There are no unit testing tools in standard library, but LibPQ offers a basic
+unit testing framework that supports test discovery, grouping tests into test
+suites and comes with a bunch of handy assertion functions. To learn more read
+this &lt;a href="https://github.com/sio/LibPQ/blob/master/Docs/UnitTesting.md"&gt;help page&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id="a-collection-of-general-purpose-functions-and-queries"&gt;&lt;a class="toclink" href="#a-collection-of-general-purpose-functions-and-queries"&gt;A collection of general purpose functions and queries&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;And last, LibPQ contains some general purpose modules that you might find
+useful. If not - go write some new ones, you have the tools now!&lt;/p&gt;
+&lt;p&gt;LibPQ is built in such way that you do not need me (or anyone else) to approve
+of your work.  Save your code to any convenient location, and LibPQ will help
+you to import it into your workbooks. You can even keep your modules private,
+no pressure here. Have fun and enjoy your coding!&lt;/p&gt;</content><category term="m"></category><category term="excel"></category><category term="power-query"></category><category term="LibPQ"></category></entry><entry><title>Loops in Power Query M language</title><link href="https://potyarkin.ml/posts/2017/loops-in-power-query-m-language/" rel="alternate"></link><published>2017-10-31T00:00:00+03:00</published><updated>2017-10-31T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2017-10-31:/posts/2017/loops-in-power-query-m-language/</id><summary type="html">&lt;p&gt;Power Query Formula Language (also known as M language) is sometimes difficult
+to get your head around. This article explains how someone familiar with loops
+in other programming languages can approach the same concept in M language.&lt;/p&gt;
+&lt;p&gt;First of all let's look at the &lt;a href="https://msdn.microsoft.com/en-us/library/mt211003.aspx"&gt;definition&lt;/a&gt; given by Microsoft:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The Power …&lt;/p&gt;&lt;/blockquote&gt;</summary><content type="html">&lt;p&gt;Power Query Formula Language (also known as M language) is sometimes difficult
+to get your head around. This article explains how someone familiar with loops
+in other programming languages can approach the same concept in M language.&lt;/p&gt;
+&lt;p&gt;First of all let's look at the &lt;a href="https://msdn.microsoft.com/en-us/library/mt211003.aspx"&gt;definition&lt;/a&gt; given by Microsoft:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The Power Query M formula language is optimized for building highly flexible
+data mashup queries. It's a &lt;strong&gt;functional&lt;/strong&gt;, case sensitive language similar
+to F#, which can be used with Power BI Desktop, Power Query in Excel, and Get
+&amp;amp; Transform in Excel 2016.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="functional-is-the-key-word"&gt;&lt;a class="toclink" href="#functional-is-the-key-word"&gt;"Functional" is the key word&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Understanding (and accepting) that M is entirely different from most common
+programming languages has helped me as much as (maybe even more than) the
+exhaustive reference at MSDN. Functional language implies declarative
+programming paradigm: you describe &lt;em&gt;what&lt;/em&gt; you want the computer to do instead
+of telling &lt;em&gt;how&lt;/em&gt; to do it. If you're familiar with LISP or Erlang or Haskell, M
+might not look so foreign to you.&lt;/p&gt;
+&lt;p&gt;The code in M is not an explicit sequence of steps that will always be executed
+in the same order, it is just a bunch of ground rules that allow the computer
+to arrive to the solution. You can check that the order of lines within the
+&lt;code&gt;let&lt;/code&gt; statement doesn't matter: as long as all necessary intermediate steps are
+described, Power Query will produce the same result even if you rearrange them
+randomly.&lt;/p&gt;
+&lt;p&gt;And that is the reason you don't get familiar control flow statements. &lt;em&gt;If&lt;/em&gt; is
+kinda there, but it has its own quirks too. Loops are out of the question,
+unless you somehow manage to implement the function that does the looping for
+you. But...&lt;/p&gt;
+&lt;p&gt;There already is such a function! It is &lt;code&gt;List.Generate&lt;/code&gt;!&lt;/p&gt;
+&lt;h2 id="listgenerate"&gt;&lt;a class="toclink" href="#listgenerate"&gt;List.Generate&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;This function takes 3 or 4 parameters, all of them functions.  (You should
+always treat the &lt;code&gt;each&lt;/code&gt; statement as a function &lt;a href="https://msdn.microsoft.com/en-us/library/mt185361.aspx"&gt;because it is&lt;/a&gt; a shortcut
+for function definition.)&lt;/p&gt;
+&lt;p&gt;The parameters are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;start&lt;/strong&gt;: a function that takes zero arguments and returns the first loop
+  item.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;condition&lt;/strong&gt;: a function that takes one argument (loop item) and returns
+  boolean value. If this function returns &lt;code&gt;false&lt;/code&gt; the iteration stops,
+  otherwise the loop item is added to the list of results. This function will
+  be called at the end of each iteration.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;next&lt;/strong&gt;: a function that takes one argument (loop item) and returns the next
+  loop item. This is the worker body of the loop. Be careful to return the next
+  item as the same data type with the same structure, because the returned
+  value will be fed to &lt;code&gt;condition()&lt;/code&gt; and &lt;code&gt;next()&lt;/code&gt; functions later. This
+  function will be called at the beginning of each iteration.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;transform&lt;/strong&gt;: optional argument. A function that takes one argument - the
+  item from the list of results and transforms it into something else.  This
+  function gets called once per each item in the list of results, and the list
+  of values it returns becomes the return value of &lt;code&gt;List.Generate&lt;/code&gt;. If
+  &lt;code&gt;transform()&lt;/code&gt; function is not specified, &lt;code&gt;List.Generate&lt;/code&gt; will return the list
+  of items at the moment when &lt;code&gt;condition()&lt;/code&gt; returns &lt;code&gt;false&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;List.Generate&lt;/code&gt; might be easier to understand with the following pseudocode:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;List&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Generate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;start&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;condition&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;next&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;transform&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;results&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;item&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;start&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;condition&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;results&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;item&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;next&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;transform&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;output&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;results&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;transform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;output&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;results&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="a-simple-example"&gt;&lt;a class="toclink" href="#a-simple-example"&gt;A simple example&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;We will generate a table of data points for plotting a parabola. Internally we
+will be storing each item as the record with &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt; fields.  After that we
+will transform that data into a Power Query table for output.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;let&lt;/span&gt;
+    &lt;span class="nx"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;List&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Generate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;y&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+        &lt;span class="nx"&gt;each&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;=&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="nx"&gt;each&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;y&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="nx"&gt;output&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Table&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;FromRecords&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="nx"&gt;output&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;In this example &lt;code&gt;start()&lt;/code&gt; is an anonymous function that always returns the
+first data point, &lt;code&gt;condition()&lt;/code&gt; and &lt;code&gt;next()&lt;/code&gt; are also functions even though
+they are written using &lt;code&gt;each&lt;/code&gt; shortcut. There is no &lt;code&gt;transform()&lt;/code&gt; function
+because it is an optional parameter.&lt;/p&gt;
+&lt;h2 id="an-example-from-real-world"&gt;&lt;a class="toclink" href="#an-example-from-real-world"&gt;An example from real world&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;In the real world you will not need the &lt;code&gt;List.Generate&lt;/code&gt; magic for such simple
+tasks, but you will still need it. Here is how I've used it recently.&lt;/p&gt;
+&lt;p&gt;Assume you have a list of tables that contain the data in the same format but
+for different time periods or for different locations. You have a separate list
+of locations (in the correct order), but each individual table does not contain
+that information. That's why combining all these tables into one would create a
+mess: you have to know which row comes from what table.&lt;/p&gt;
+&lt;p&gt;This can be done with &lt;code&gt;List.Generate&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nx"&gt;NamedTables&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;List&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Generate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;table&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="nx"&gt;table&lt;/span&gt;&lt;span class="p"&gt;({},{})],&lt;/span&gt;  &lt;span class="c1"&gt;// initialize loop variables&lt;/span&gt;
+    &lt;span class="nx"&gt;each&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nx"&gt;List&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Count&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;Tables&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="nx"&gt;each&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+        &lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="nx"&gt;table&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nx"&gt;Table&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;AddColumn&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;Tables&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;TableName&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;each&lt;/span&gt; &lt;span class="nx"&gt;Names&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+    &lt;span class="p"&gt;],&lt;/span&gt;
+    &lt;span class="nx"&gt;each&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;table&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="p"&gt;),&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This code snippet assumes you have the list of tables in the &lt;code&gt;Tables&lt;/code&gt; variable
+and the list of their respective names in the &lt;code&gt;Names&lt;/code&gt; variable. The loop starts
+with index of -1 and an empty table, and adds a "TableName" column to each of
+the tables. After this modification the tables can be safely combined with
+&lt;code&gt;Table.Combine(NamedTables)&lt;/code&gt; - no data loss will occur.&lt;/p&gt;
+&lt;h2 id="conclusion"&gt;&lt;a class="toclink" href="#conclusion"&gt;Conclusion&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Using &lt;code&gt;List.Generate&lt;/code&gt; should be considered a last-ditch attempt to looping. M
+has dedicated iterative functions for most common looping tasks, so please
+check the standard library reference before creating such C-style loops
+manually. They are rather hard to read, and readability counts!&lt;/p&gt;
+&lt;p&gt;I hope this article will help you to understand the Power Query Formula
+Language a little more. It is a powerful tool and even though it is not
+perfect, I hope you will find a lot of uses for it in your data crunching
+tasks.&lt;/p&gt;
+&lt;h2 id="an-afterthought"&gt;&lt;a class="toclink" href="#an-afterthought"&gt;An afterthought&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Also, please keep in mind that the dot symbol in &lt;code&gt;List.Generate&lt;/code&gt; does not have
+the same meaning as in other languages either. There are no object methods in
+M, and there are no namespaces, so the dot is just another character without
+any special meaning.  It could have been a dash or an underscore - it wouldn't
+have mattered.&lt;/p&gt;</content><category term="m"></category><category term="excel"></category><category term="power-query"></category></entry></feed>

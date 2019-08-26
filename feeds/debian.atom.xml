@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - Debian</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/debian.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2018-08-22T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Installing One by Wacom in Debian Stretch</title><link href="https://potyarkin.ml/posts/2018/installing-one-by-wacom-in-debian-stretch/" rel="alternate"></link><published>2018-08-22T00:00:00+03:00</published><updated>2018-08-22T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-08-22:/posts/2018/installing-one-by-wacom-in-debian-stretch/</id><summary type="html">&lt;p&gt;I believe there are many people who run Debian Stable as their main desktop OS.
+This article is a short how-to on enabling newer hardware in Debian Stable
+without switching to another version or distribution.&lt;/p&gt;
+&lt;h2 id="one-by-wacom"&gt;&lt;a class="toclink" href="#one-by-wacom"&gt;One by Wacom&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Wacom has released their new graphics tablet, &lt;a href="https://www.wacom.com/en-cn/products/pen-tablets/one-by-wacom"&gt;One by Wacom&lt;/a&gt; in the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I believe there are many people who run Debian Stable as their main desktop OS.
+This article is a short how-to on enabling newer hardware in Debian Stable
+without switching to another version or distribution.&lt;/p&gt;
+&lt;h2 id="one-by-wacom"&gt;&lt;a class="toclink" href="#one-by-wacom"&gt;One by Wacom&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Wacom has released their new graphics tablet, &lt;a href="https://www.wacom.com/en-cn/products/pen-tablets/one-by-wacom"&gt;One by Wacom&lt;/a&gt; in the Fall of 2017
+(judging by the dates of reviews in online shops). Linux drivers for this model
+(Small: CTL-472, Medium: CTL-672) were added to the &lt;a href="https://github.com/linuxwacom/input-wacom"&gt;git repo&lt;/a&gt; in
+December 2017 and were released in March 2018 (&lt;a href="https://github.com/linuxwacom/input-wacom/releases/tag/input-wacom-0.39.0"&gt;input-wacom-0.39.0&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;That is several months after the current Debian Stable (Stretch) was released
+(June 2017). So there is exactly zero chance of it containing drivers for that
+hardware - "stable" means no new software except security updates gets
+introduced during the lifetime of the release (until at least 2020).&lt;/p&gt;
+&lt;p&gt;Fortunately, you don't need to switch distribution to use newer hardware. You
+don't even need to compile anything from source. Even more so, &lt;strong&gt;PLEASE DON'T
+INSTALL INPUT-WACOM FROM SOURCE&lt;/strong&gt;, that will most likely lead to some undesired
+side effects.&lt;/p&gt;
+&lt;h2 id="debian-backports"&gt;&lt;a class="toclink" href="#debian-backports"&gt;Debian backports&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Backports project was created exactly for cases like this. It allows users to
+install newer versions of some packages without breaking anything while keeping
+Debian overall at the same (stable) version.&lt;/p&gt;
+&lt;p&gt;To enable support for One by Wacom in Debian Stretch you need to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://backports.debian.org/Instructions/"&gt;Add backports&lt;/a&gt; to your sources.list&lt;/li&gt;
+&lt;li&gt;Install newer kernel from backports:
+  &lt;code&gt;apt-get -t stretch-backports install linux-image-amd64&lt;/code&gt;.
+  If you're running Debian on different CPU architecture, replace &lt;code&gt;-amd64&lt;/code&gt; with
+  the corresponding suffix, like &lt;code&gt;-686-pae&lt;/code&gt; for older 32-bit computers or
+  &lt;code&gt;-arm64&lt;/code&gt; for ARMv8 CPUs).&lt;/li&gt;
+&lt;li&gt;Reboot your computer&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;That's it! Newer kernel will have updated drivers for your graphics tablet and
+it will be detected automatically. You can start using it right away or tweak
+some pressure options in your favorite graphics application (e.g. for Gimp it's
+in &lt;em&gt;Edit -&amp;gt; Input Devices&lt;/em&gt;).&lt;/p&gt;
+&lt;h2 id="further-reading"&gt;&lt;a class="toclink" href="#further-reading"&gt;Further reading&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://wiki.archlinux.org/index.php/wacom_tablet#Configuration"&gt;Arch wiki&lt;/a&gt; - if you want to fine tune your graphics tablet&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://wiki.debian.org/WacomTablets"&gt;Debian wiki&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="timeline-recap"&gt;&lt;a class="toclink" href="#timeline-recap"&gt;Timeline recap&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.debian.org/News/2017/20170617"&gt;Debian 9&lt;/a&gt; (Stretch) was released in June 2017 and will be supported until
+  at least 2020&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.wacom.com/en-cn/products/pen-tablets/one-by-wacom"&gt;One by Wacom&lt;/a&gt; (Small: CTL-472, Medium: CTL-672)&lt;ul&gt;
+&lt;li&gt;Available in retail: Fall 2017 (judging by the dates of reviews in online
+  shops)&lt;/li&gt;
+&lt;li&gt;Driver for Linux: &lt;a href="https://github.com/linuxwacom/input-wacom/commit/b12529e589dae810f0b6ef0b22f67b3860f86cde"&gt;patch&lt;/a&gt; added in December 2017, drivers
+  &lt;a href="https://github.com/linuxwacom/input-wacom/releases/tag/input-wacom-0.39.0"&gt;released&lt;/a&gt; in March 2018&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="log-messages-for-reference"&gt;&lt;a class="toclink" href="#log-messages-for-reference"&gt;Log messages (for reference)&lt;/a&gt;&lt;/h2&gt;
+&lt;h4 id="debian-9-stretch-without-proper-driver"&gt;&lt;a class="toclink" href="#debian-9-stretch-without-proper-driver"&gt;Debian 9 (Stretch) without proper driver&lt;/a&gt;&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# dmesg|grep -i wacom
+usb 5-1: Manufacturer: Wacom Co.,Ltd.
+input: Wacom Co.,Ltd. CTL-472 Pen as /devices/pci0000:00/0000:00:1d.0/usb5/5-1/5-1:1.0/0003:056A:037A.0001/input/input95
+wacom 0003:056A:037A.0001: hidraw0: USB HID v1.10 Mouse [Wacom Co.,Ltd. CTL-472] on usb-0000:00:1d.0-1/input0
+wacom 0003:056A:037A.0002: Unknown device_type for &amp;#39;Wacom Co.,Ltd. CTL-472&amp;#39;. Ignoring.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4 id="debian-with-updated-kernel-from-backports"&gt;&lt;a class="toclink" href="#debian-with-updated-kernel-from-backports"&gt;Debian with updated kernel from backports&lt;/a&gt;&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# dmesg|grep -i wacom
+usb 6-1: Manufacturer: Wacom Co.,Ltd.
+input: Wacom Co.,Ltd. CTL-472 as /devices/pci0000:00/0000:00:1d.0/usb6/6-1/6-1:1.0/0003:056A:037A.0001/input/input23
+hid-generic 0003:056A:037A.0001: input,hiddev0,hidraw0: USB HID v1.10 Mouse [Wacom Co.,Ltd. CTL-472] on usb-0000:00:1d.0-1/input0
+hid-generic 0003:056A:037A.0002: hiddev1,hidraw1: USB HID v1.10 Device [Wacom Co.,Ltd. CTL-472] on usb-0000:00:1d.0-1/input1
+input: Wacom One by Wacom S Pen as /devices/pci0000:00/0000:00:1d.0/usb6/6-1/6-1:1.0/0003:056A:037A.0001/input/input24
+wacom 0003:056A:037A.0001: hidraw0: USB HID v1.10 Mouse [Wacom Co.,Ltd. CTL-472] on usb-0000:00:1d.0-1/input0
+&lt;/pre&gt;&lt;/div&gt;</content><category term="linux"></category><category term="hardware"></category><category term="Debian"></category></entry></feed>

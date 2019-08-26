@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - opensource</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/opensource.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2018-02-23T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Roads and Bridges - sustaining modern digital infrastructure</title><link href="https://potyarkin.ml/posts/2018/roads-and-bridges-sustaining-modern-digital-infrastructure/" rel="alternate"></link><published>2018-02-23T00:00:00+03:00</published><updated>2018-02-23T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-02-23:/posts/2018/roads-and-bridges-sustaining-modern-digital-infrastructure/</id><summary type="html">&lt;p&gt;This week I have stumbled upon a very thorough review of existing problems and
+hidden costs of sustaining modern (open source) digital infrastructure. Here it
+is: &lt;a href="https://www.fordfoundation.org/library/reports-and-studies/roads-and-bridges-the-unseen-labor-behind-our-digital-infrastructure/"&gt;Roads and Bridges - The Unseen Labor Behind Our Digital
+Infrastructure&lt;/a&gt; by &lt;em&gt;Nadia Eghbal&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;The essay was created with support from the Ford Foundation and …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This week I have stumbled upon a very thorough review of existing problems and
+hidden costs of sustaining modern (open source) digital infrastructure. Here it
+is: &lt;a href="https://www.fordfoundation.org/library/reports-and-studies/roads-and-bridges-the-unseen-labor-behind-our-digital-infrastructure/"&gt;Roads and Bridges - The Unseen Labor Behind Our Digital
+Infrastructure&lt;/a&gt; by &lt;em&gt;Nadia Eghbal&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;The essay was created with support from the Ford Foundation and is published on
+their website under a Creative Commons license. Unfortunately, that website
+denies access to users from certain countries (like Russia), so here is a
+&lt;a href="https://potyarkin.ml/posts/2018/roads-and-bridges-sustaining-modern-digital-infrastructure/roads-and-bridges.pdf"&gt;mirror of PDF version&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The author discusses important and often overlooked topics of why open source
+software gets built and by whom, of who pays the costs of building and
+maintaining that software and of how to ensure that the software we all rely
+upon continues to be &lt;em&gt;reliable&lt;/em&gt;. The essay poses more questions than it
+answers, but I still consider it the best read on the topic of sustaining open
+source development.&lt;/p&gt;
+&lt;p&gt;In my case Nadia Eghbal was "preaching to the converted" so this post is me
+trying to spread her word. Please read her essay and please do not take open
+source software for granted. The costs of building it are just payed by others,
+may be you can figure out how to help them?&lt;/p&gt;</content><category term="bookmarks"></category><category term="opensource"></category></entry></feed>

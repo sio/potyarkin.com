@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - automation</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/automation.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2019-07-30T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>On dotfiles management</title><link href="https://potyarkin.ml/posts/2019/on-dotfiles-management/" rel="alternate"></link><published>2019-07-30T00:00:00+03:00</published><updated>2019-07-30T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2019-07-30:/posts/2019/on-dotfiles-management/</id><summary type="html">&lt;p&gt;This will be yet another description of dotfiles management by some random
+person on the Internet. I will try to explain what my setup is like and why it
+is that way.&lt;/p&gt;
+&lt;p&gt;If you're not yet using version control software for your configuration files
+I strongly encourage you to start …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This will be yet another description of dotfiles management by some random
+person on the Internet. I will try to explain what my setup is like and why it
+is that way.&lt;/p&gt;
+&lt;p&gt;If you're not yet using version control software for your configuration files
+I strongly encourage you to start doing so, whichever way you like. These
+pages are good places to start:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://dotfiles.github.io/"&gt;An unofficial guide to dotfiles on GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://wiki.archlinux.org/index.php/Dotfiles"&gt;Arch wiki article on dotfiles&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="my-chosen-approach"&gt;&lt;a class="toclink" href="#my-chosen-approach"&gt;My chosen approach&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;After several attempts that have spanned across many years I've understood
+that neither tracking home directory directly with Git nor symlinking all of
+the dotfiles from a single directory tree is working for me. Both ways lead to
+a mess in the repository and made the whole endeavor of tracking changes
+cognitively expensive, so I inevitably started slacking off.&lt;/p&gt;
+&lt;p&gt;I've looked at the existing tools that are meant to automate some of the
+process and did not find one that would suit all my needs. I've ended up
+writing a small shell &lt;a href="https://gitlab.com/sio/server_common/blob/master/dotfiles/bootstrap.sh"&gt;script&lt;/a&gt; that takes care of dotfiles installation but
+the main value for me is in the repo layout, not the script itself.&lt;/p&gt;
+&lt;p&gt;All configuration files are grouped into directories by topic. These
+directories are somewhat similar to packages in GNU &lt;a href="https://www.gnu.org/software/stow/"&gt;stow&lt;/a&gt;. Topic directories
+recreate the directory structure for the target location, by default $HOME.
+Files that are meant to be installed into target location have to contain an
+appropriate suffix at the end of filename (any other files are ignored):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;.copy&lt;/code&gt; - for files to be copied over to new location&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.link&lt;/code&gt; - for files to be linked to from new location&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.append&lt;/code&gt; - for files to be appended to the target file&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Default behavior may be altered by a &lt;code&gt;dotfiles.meta&lt;/code&gt; file placed into the
+topic directory. It is essentially a shell script that is being sourced during
+topic installation. Its main purpose is to provide alternative values for
+PREFIX and SCOPE variables:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PREFIX value determines target directory where the dotfiles will be placed.
+  Also if PREFIX is set the dotfiles will not get an extra dot in front of
+  their filename (which is the default behavior otherwise).&lt;/li&gt;
+&lt;li&gt;SCOPE variable may be used to indicate that a topic requires root privileges
+  to be installed (&lt;code&gt;SCOPE=system&lt;/code&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Multiple topics may be installed at once either by providing all of their
+names as command line arguments or by listing them all in a text file and
+providing path to that file as an argument to the installation &lt;a href="https://gitlab.com/sio/server_common/blob/master/dotfiles/bootstrap.sh"&gt;script&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="examples"&gt;&lt;a class="toclink" href="#examples"&gt;Examples&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;topic-foo/vimrc.link&lt;/code&gt; will be symlinked from &lt;code&gt;~/.vimrc&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;topic-bar/bashrc.copy&lt;/code&gt; will be copied over to &lt;code&gt;~/.bashrc&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;topic-baz/default/keyboard.copy&lt;/code&gt; with &lt;code&gt;PREFIX=/etc&lt;/code&gt; will be copied to &lt;code&gt;/etc/default/keyboard&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;topic-baz/file/without/valid/suffix&lt;/code&gt; will be ignored&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;More examples may be found in my &lt;a href="https://gitlab.com/sio/server_common/tree/master/dotfiles"&gt;dotfiles repo&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="comparison-with-existing-tools"&gt;&lt;a class="toclink" href="#comparison-with-existing-tools"&gt;Comparison with existing tools&lt;/a&gt;&lt;/h2&gt;
+&lt;h4 id="strengths"&gt;&lt;a class="toclink" href="#strengths"&gt;Strengths&lt;/a&gt;&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Very small number of dependencies makes this script usable across all my
+  Linux and Windows machines. It requires only the core GNU userland: bash,
+  coreutils, find and grep.&lt;/li&gt;
+&lt;li&gt;Multiple install actions are supported (copy, link, append) unlike &lt;a href="https://www.gnu.org/software/stow/"&gt;stow&lt;/a&gt;
+  that only makes symlinks. More than that, my script detects if it's being
+  executed on Windows machine and copies over any file that was meant to be
+  symlinked - because symlinks on Windows are so tricky they're might as well
+  be not supported at all.&lt;/li&gt;
+&lt;li&gt;Destination directory may be specified for each topic individually which
+  makes it possible to install topics targeting different directories in one
+  run.&lt;/li&gt;
+&lt;li&gt;Simple partial deployment. If machine requires only a subset of topics
+  tracked in the repository it is easy to list them all in a plain text file
+  or to provide them as command line arguments to the bootstrap script.
+  &lt;a href="https://thelocehiliosan.github.io/yadm/"&gt;yadm&lt;/a&gt;, for example does not provide such ability.&lt;/li&gt;
+&lt;li&gt;Dotfiles are not hidden in the repo by default. It makes no sense to have
+  &lt;code&gt;~/.bashrc&lt;/code&gt; point to &lt;code&gt;repo/bash/.bashrc&lt;/code&gt; instead of &lt;code&gt;repo/bash/bashrc&lt;/code&gt;, so
+  dots are added automatically for topics with default target PREFIX.&lt;/li&gt;
+&lt;li&gt;All operations are reversible because all overwritten files are backed up
+  beforehand.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="weaknesses"&gt;&lt;a class="toclink" href="#weaknesses"&gt;Weaknesses&lt;/a&gt;&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Single pass execution. It means some topics may be left partially configured
+  in case of errors. &lt;a href="https://www.gnu.org/software/stow/"&gt;stow&lt;/a&gt; is a good example of cautious approach. This is an
+  implementation detail and may be fixed in later versions of bootstrap
+  script.&lt;/li&gt;
+&lt;li&gt;No support for tree folding/unfolding. I consider that an overkill for
+  simple configuration management.&lt;/li&gt;
+&lt;li&gt;No automated reverse operation. In case you want to undo the changes made by
+  this &lt;a href="https://gitlab.com/sio/server_common/blob/master/dotfiles/bootstrap.sh"&gt;script&lt;/a&gt; you'll have to restore backups manually from &lt;code&gt;$DOTFILES_BACKUP&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><category term="linux"></category><category term="windows"></category><category term="automation"></category><category term="bash"></category></entry><entry><title>Liberating effect of Ansible</title><link href="https://potyarkin.ml/posts/2018/liberating-effect-of-ansible/" rel="alternate"></link><published>2018-06-26T00:00:00+03:00</published><updated>2018-06-26T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-06-26:/posts/2018/liberating-effect-of-ansible/</id><summary type="html">&lt;p&gt;Maintaining two or three Linux machines is not that hard of a task. For many
+years I have thought it was not worth the effort to automate - regular backups
+and version-controlled configuration files seemed to be just enough.&lt;/p&gt;
+&lt;p&gt;And then Ansible had blown my mind.&lt;/p&gt;
+&lt;h2 id="history"&gt;&lt;a class="toclink" href="#history"&gt;History&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;It all started with …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Maintaining two or three Linux machines is not that hard of a task. For many
+years I have thought it was not worth the effort to automate - regular backups
+and version-controlled configuration files seemed to be just enough.&lt;/p&gt;
+&lt;p&gt;And then Ansible had blown my mind.&lt;/p&gt;
+&lt;h2 id="history"&gt;&lt;a class="toclink" href="#history"&gt;History&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;It all started with a web server and a series of subpar hosting providers.
+Setting that server up for the first time was an adventure. Repeating the setup
+for the first relocation has given me a chance to introduce some improvements
+but was otherwise uneventful. I started dreading the process when the need for
+the third iteration had arisen. I was willing to put up with sluggishness and
+several short downtimes just to delay the move to a new server. That was not OK.&lt;/p&gt;
+&lt;p&gt;Automating has clearly become a worthwhile task. I chose Ansible because it
+doesn't require any special software on the controlled machines and because it
+is mature enough to remain backwards compatible after updates. There are
+numerous reviews of pros and cons of different configuration management systems,
+but that's outside the scope of this article.&lt;/p&gt;
+&lt;h2 id="unexpected-outcome"&gt;&lt;a class="toclink" href="#unexpected-outcome"&gt;Unexpected outcome&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Ansible has definitely succeeded at the task I've thrown it at. That was
+expected. What I couldn't foresee is how this experience would affect my
+mindset - it was like a breath of fresh air! I have suddenly started to
+understand why there exists all the buzz around &lt;em&gt;the cloud&lt;/em&gt; and why cloud
+service providers are dominating the market of virtual servers.&lt;/p&gt;
+&lt;h3 id="certainty"&gt;&lt;a class="toclink" href="#certainty"&gt;Certainty&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;With my Ansible playbook I did not just automate the setup process, I created an
+enforceable specification of what my server has to be like. At any time in the
+future after executing the same playbook I can be certain that all configurable
+parameters will be at the values I've defined.&lt;/p&gt;
+&lt;p&gt;Idempotent behavior allows me to run the playbook again and again without fear
+of breaking anything. It should be noted though, that not all Ansible modules
+are idempotent and one should always check the documentation before
+incorporating a new module into the playbook.&lt;/p&gt;
+&lt;h3 id="immutability"&gt;&lt;a class="toclink" href="#immutability"&gt;Immutability&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;There is even an option to take it one step further to truly &lt;a href="https://www.digitalocean.com/community/tutorials/what-is-immutable-infrastructure"&gt;immutable
+infrastructure&lt;/a&gt; where any server can die at any point and no harm will be done.
+This approach is for a bigger scale than a humble hobby project, though.&lt;/p&gt;
+&lt;p&gt;I have limited the immutability effort to a gentle reminder in /etc/motd and a
+policy among administrators (me, myself and I) that no configuration changes are
+to be made via shell connection.&lt;/p&gt;
+&lt;h3 id="disposability"&gt;&lt;a class="toclink" href="#disposability"&gt;Disposability&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Now it is incredibly easy for me to replicate that web server. It requires only
+one command and a short coffee break. That means I can switch the hosting
+provider at any moment I want. Choosing the hosting company has become a
+non-issue: I invest only a minimal payment and no labor at all. If I don't like
+what I get I'll be gone in no time.&lt;/p&gt;
+&lt;p&gt;Easy replication also means I can fire up another server for testing purposes,
+then destroy it in a couple of hours and it will cost me only a few cents
+because of hourly billing that most providers offer nowadays.&lt;/p&gt;
+&lt;h3 id="emotional-detachment"&gt;&lt;a class="toclink" href="#emotional-detachment"&gt;Emotional detachment&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Setting up a new server used to be somewhat similar to moving into a new
+apartment.  First, there was scrupulous comparing of offers, after that a
+dramatic moment of signing the lease and then the silent minutes alone in empty
+apartment, staring at the walls. Each server was important and loved, breaking
+or destroying it on purpose was unthinkable.&lt;/p&gt;
+&lt;p&gt;Now it's more like checking into a room at the hotel. And you get to be a
+celebrity and send the rider list in advance, so that everything is set up to
+your liking when you arrive. You can also check out at any moment without
+worrying about the lease. There is no need to lug your favorite vimrc along
+because you won't be editing anything there, in fact you'll hardly ever spend
+any time logged in at all.&lt;/p&gt;
+&lt;p&gt;Randy Bias has summed this attitude in the &lt;a href="http://cloudscaling.com/blog/cloud-computing/the-history-of-pets-vs-cattle/"&gt;pets versus cattle&lt;/a&gt; analogy. I think
+it's quite on point even when you're managing a single machine, not the fleet of
+servers.&lt;/p&gt;
+&lt;h3 id="infrastructure-as-code"&gt;&lt;a class="toclink" href="#infrastructure-as-code"&gt;Infrastructure as code&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;And last, but not least, all you do with Ansible is automatically documented in
+the playbook. You can use any version control system to track when any
+particular change was introduced and why. That allows to revert the unwanted
+changes as easily as was introducing them in the first place.&lt;/p&gt;
+&lt;h2 id="afterword"&gt;&lt;a class="toclink" href="#afterword"&gt;Afterword&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;When you're outside the professional IT crowd it is not obvious that the cloud
+infrastructure and the corresponding tools are within the reach of hobbyist
+enthusiasts. But they are and they offer just as much value for personal
+projects as they do in production environment.&lt;/p&gt;
+&lt;p&gt;If you find yourself tinkering with Linux administration more than once a week
+it'll be worthwhile to try out Ansible or some other configuration management
+tool.&lt;/p&gt;</content><category term="ansible"></category><category term="web"></category><category term="server"></category><category term="automation"></category></entry></feed>
