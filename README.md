@@ -8,7 +8,7 @@ This repo contains content and configuration for my static website <http://potya
 - <https://www.python.org/>
 
 
-# License and copyright
+## License and copyright
 
 ### Site configuration, content and documentation
 
