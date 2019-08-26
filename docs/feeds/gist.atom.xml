@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - gist</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/gist.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2018-07-14T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Enhanced file path completion in bash (like in zsh)</title><link href="https://potyarkin.ml/posts/2018/enhanced-file-path-completion-in-bash-like-in-zsh/" rel="alternate"></link><published>2018-07-14T00:00:00+03:00</published><updated>2018-07-14T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-07-14:/posts/2018/enhanced-file-path-completion-in-bash-like-in-zsh/</id><summary type="html">&lt;p&gt;Zsh offers a lot of significant improvements over traditional shell experience.
+Some of those can also be implemented in bash, but others are not. For a long
+time I've thought that advanced file path expansion is something that can't be
+done in bash. Today I prove myself wrong.&lt;/p&gt;
+&lt;h2 id="background"&gt;&lt;a class="toclink" href="#background"&gt;Background&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;When …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Zsh offers a lot of significant improvements over traditional shell experience.
+Some of those can also be implemented in bash, but others are not. For a long
+time I've thought that advanced file path expansion is something that can't be
+done in bash. Today I prove myself wrong.&lt;/p&gt;
+&lt;h2 id="background"&gt;&lt;a class="toclink" href="#background"&gt;Background&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;When the Tab key is pressed, zsh expands incomplete file path assuming any of
+its elements might be incomplete, while bash expands only the last piece. For
+example: &lt;code&gt;cd /u/s/app&amp;lt;Tab&amp;gt;&lt;/code&gt; will produce nothing in bash, but will be expanded
+to &lt;code&gt;cd /usr/share/applications&lt;/code&gt; in zsh.&lt;/p&gt;
+&lt;p&gt;This feature is a huge time saver, but it does not justify switching the shell
+completely (for me). So I've been looking for a way to enable the same behavior
+in bash.&lt;/p&gt;
+&lt;p&gt;The solution had to be:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Portable between Linux and Windows (msys);&lt;/li&gt;
+&lt;li&gt;Implemented in configuration files or short scripts that can be carried
+  around easily. No third-party tools like &lt;code&gt;fzf&lt;/code&gt; that would require system-wide
+  installation or other tricks to enable.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All I've been able to find was
+&lt;a href="https://stackoverflow.com/q/25076611"&gt;this StackOverflow thread&lt;/a&gt;.
+Accepted answer suggests using a new bash function that is later bound to Tab
+keypress. The function provided is a quick hack that was not tested thoroughly
+and has problems with spaces in file path. The author recommends to use his
+function along with the default completer, not instead of it, so it was not
+what I needed.&lt;/p&gt;
+&lt;h2 id="workaround"&gt;&lt;a class="toclink" href="#workaround"&gt;Workaround&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Typing &lt;code&gt;cd /u*/s*/app*&amp;lt;Tab&amp;gt;&lt;/code&gt; is somewhat better but not as streamlined an
+experience as the one zsh offers.&lt;/p&gt;
+&lt;p&gt;This turned out to be an inspiration for the proper completer function though.&lt;/p&gt;
+&lt;h2 id="better-solution"&gt;&lt;a class="toclink" href="#better-solution"&gt;Better solution&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I have coded a small function that adds wildcards to each element in the path
+and executes normal bash completion procedures with modified input. After a bit
+of documentation digging I've been able to inject this function into normal
+bash completion process. I'm pretty happy with path expansion now.&lt;/p&gt;
+&lt;p&gt;To enable the described behavior source &lt;a href="https://github.com/sio/bash-complete-partial-path/blob/master/bash_completion"&gt;&lt;strong&gt;this file&lt;/strong&gt;&lt;/a&gt; from your
+~/.bashrc and run &lt;code&gt;_bcpp --defaults&lt;/code&gt;. Supported features are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Special characters in completed path are automatically escaped if present&lt;/li&gt;
+&lt;li&gt;Tilde expressions are properly expanded (as per &lt;a href="https://www.gnu.org/software/bash/manual/html_node/Tilde-Expansion.html"&gt;bash documentation&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;If user had started writing the path in quotes, no character escaping is
+  applied. Instead the quote is closed with a matching character after expanding
+  the path.&lt;/li&gt;
+&lt;li&gt;If &lt;a href="https://salsa.debian.org/debian/bash-completion"&gt;bash-completion&lt;/a&gt; package is already in use, this code will safely override
+  its &lt;code&gt;_filedir&lt;/code&gt; function. No extra configuration is required.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Watch a demo screencast to see this feature in action:
+&lt;a href="https://asciinema.org/a/0zhzOYbkF22pWLmbx1RHCYyqQ"&gt;&lt;img alt="asciicast" src="https://asciinema.org/a/0zhzOYbkF22pWLmbx1RHCYyqQ.png"&gt;&lt;/a&gt;&lt;/p&gt;</content><category term="bash"></category><category term="gist"></category></entry><entry><title>Excel as a CSV editor (with VBA)</title><link href="https://potyarkin.ml/posts/2018/excel-as-a-csv-editor-with-vba/" rel="alternate"></link><published>2018-06-01T00:00:00+03:00</published><updated>2018-06-01T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-06-01:/posts/2018/excel-as-a-csv-editor-with-vba/</id><summary type="html">&lt;p&gt;One might think that Excel is a decent CSV editor as it is, but it's not. It is
+a very capable CSV reader, I do not dispute that. When it comes to writing though,
+Excel does not match what you'd expect from a mature application:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It might change the delimiter …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;One might think that Excel is a decent CSV editor as it is, but it's not. It is
+a very capable CSV reader, I do not dispute that. When it comes to writing though,
+Excel does not match what you'd expect from a mature application:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It might change the delimiter character arbitrarily;&lt;/li&gt;
+&lt;li&gt;It might write numbers in the regional format that does not map to a number
+  anywhere outside Excel;&lt;/li&gt;
+&lt;li&gt;It might add quotes that are inconsistent with the rest of the file.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you're collaborating on the CSV file with others, their Excel version might
+have different defaults and produce incompatible output.  Even if you're the only
+one working on that CSV, you can forget about clean diffs and sensible atomic
+commits to your version control system.&lt;/p&gt;
+&lt;p&gt;The only solution is not to overwrite CSV files you've opened with Excel. Use
+another tool designed specifically for dealing with CSV or edit the file
+manually in the text editor of your choosing.&lt;/p&gt;
+&lt;h2 id="append-to-csv-with-vba"&gt;&lt;a class="toclink" href="#append-to-csv-with-vba"&gt;Append to CSV with VBA&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I wrote a small helper utility to append data rows to the CSV files from Excel that
+ensures you won't mess up the existing data. This is a one-day hobby project, and
+Excel serves more as the UI toolkit and runtime environment than as the
+spreadsheet application, so you should be careful if you decide to rely on that
+code. The project is licensed under the &lt;a href="http://www.apache.org/licenses/LICENSE-2.0"&gt;Apache License, Version 2.0&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Here is the code:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/sio/CSV-Append/blob/master/CSVAppend.bas"&gt;Main VBA module&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;The resulting &lt;a href="https://github.com/sio/CSV-Append/raw/master/CSV-Editor.xlsm"&gt;application&lt;/a&gt;, packaged in a workbook.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The application reads parameters from named ranges, opens the required file,
+parses CSV header and displays a submission form for a new data row. Upon
+submission it combines new values into a CSV string and appends it to the file.
+All data manipulation is done in VBA. This app could have and should have been
+written in any modern language - it would probably have cleaner code. Excel is
+super easy to draft a simple UI though :)&lt;/p&gt;
+&lt;p&gt;The code is pretty straightforward so I'll highlight only the most interesting
+parts.&lt;/p&gt;
+&lt;h2 id="reading-and-writing-unicode-with-vba"&gt;&lt;a class="toclink" href="#reading-and-writing-unicode-with-vba"&gt;Reading and writing Unicode with VBA&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Visual Basic for Applications is a hopelessly outdated environment. Unicode
+support can be achieved only with the help of COM interoperability, namely the
+&lt;code&gt;ADODB.Stream&lt;/code&gt; object. This object provides a very comfortable interface for
+reading and writing text files in a bytestream mode, and also handles character
+encoding nicely.&lt;/p&gt;
+&lt;p&gt;Appending to a file is done via combination of seeking to the end of stream
+and writing the new data.&lt;/p&gt;
+&lt;h2 id="csv-packing-and-unpacking"&gt;&lt;a class="toclink" href="#csv-packing-and-unpacking"&gt;CSV packing and unpacking&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I'm not exactly proud of how CSV string manipulations are implemented in the code.
+If VBA would've provided some nicer regex capabilities or a CSV-aware library it
+would've been better. I know about &lt;code&gt;VBScript.RegExp&lt;/code&gt;, but it's an overkill for a
+small task my app was created to accomplish.&lt;/p&gt;
+&lt;p&gt;Current implementation can not handle a quote symbol in the middle of the field
+value. This is a known bug.&lt;/p&gt;
+&lt;h2 id="demo"&gt;&lt;a class="toclink" href="#demo"&gt;Demo&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;This the main and the only UI my utility offers. Inputs and buttons are meant to
+be self explaining. No value conversion is done when saving - the value of the
+cell is written as is, quotes are added if delimiter character occurs within
+the value.&lt;/p&gt;
+&lt;p&gt;Screenshot below is produced after loading demo CSV file with the following
+header:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ID,Column1,Column2,Column3 with very long header,&amp;quot;Column4, with delimiter in the name&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;a href="https://potyarkin.ml/posts/2018/excel-as-a-csv-editor-with-vba/csv-append.png"&gt;&lt;img alt="CSV Append" src="https://potyarkin.ml/posts/2018/excel-as-a-csv-editor-with-vba/csv-append.png"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The project is published for educational and archival purposes. I'll be glad if
+you'll find any use for it.&lt;/p&gt;</content><category term="excel"></category><category term="vba"></category><category term="gist"></category></entry><entry><title>Temporary virtual environment for Python</title><link href="https://potyarkin.ml/posts/2017/temporary-virtual-environment-for-python/" rel="alternate"></link><published>2017-10-05T16:50:00+03:00</published><updated>2017-10-05T16:50:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2017-10-05:/posts/2017/temporary-virtual-environment-for-python/</id><summary type="html">&lt;p&gt;Using Python on Windows does not come as naturally as on Unix-like systems, so
+any help is appreciated.&lt;/p&gt;
+&lt;p&gt;I wrote a batch script to automate creation, setup and deletion of Python virtual
+environment. This can come in handy when you want to test something in a clean env,
+or to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Using Python on Windows does not come as naturally as on Unix-like systems, so
+any help is appreciated.&lt;/p&gt;
+&lt;p&gt;I wrote a batch script to automate creation, setup and deletion of Python virtual
+environment. This can come in handy when you want to test something in a clean env,
+or to play with &lt;code&gt;pip install&lt;/code&gt; and get acquainted with a new package from PyPI.&lt;/p&gt;
+&lt;h2 id="venv-tempbat"&gt;&lt;a class="toclink" href="#venv-tempbat"&gt;venv-temp.bat&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;You can download the script from
+&lt;a href="https://gist.github.com/sio/fbc46ae41607b206ce9099dc8485df34"&gt;https://gist.github.com/sio/...&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The code is licensed under a permissive opensource license (Apache License,
+Version 2.0) so feel free to use it for your hobby and work projects.&lt;/p&gt;
+&lt;p&gt;Report any bugs, ideas, feature requests via GitHub issues/comments -
+all feedback is welcome!&lt;/p&gt;
+&lt;h2 id="installation"&gt;&lt;a class="toclink" href="#installation"&gt;Installation&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Downloaded script does not require any installation.&lt;/p&gt;
+&lt;p&gt;If &lt;code&gt;python&lt;/code&gt; is not available from your &lt;code&gt;%PATH%&lt;/code&gt;, you have to specify the location
+of &lt;code&gt;python.exe&lt;/code&gt; in the script (change the value of &lt;code&gt;PYTHON&lt;/code&gt; variable).&lt;/p&gt;
+&lt;h2 id="usage"&gt;&lt;a class="toclink" href="#usage"&gt;Usage&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Launch the script from &lt;code&gt;cmd.exe&lt;/code&gt; to read all error output (if any) or by
+double-clicking if you're confident it works on your system.&lt;/p&gt;
+&lt;p&gt;After you're done experimenting and are ready to discard the venv, just end shell
+session with &lt;code&gt;exit&lt;/code&gt; - the script will take care of cleanup.&lt;/p&gt;
+&lt;p&gt;If you close the
+terminal window without typing &lt;code&gt;exit&lt;/code&gt;, the script will be terminated before it
+performs cleanup. This has no harmful consequences except taking 20-50MB of disk
+space. Old venv directory will be purged before reusing, so no changes you've
+made will affect the environment you'll get next time.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; If you have no internet connection, the script remains usable, but &lt;code&gt;pip&lt;/code&gt;
+will print a lot of error messages while trying to update itself. Don't worry, that's ok.&lt;/p&gt;</content><category term="windows"></category><category term="script"></category><category term="gist"></category></entry><entry><title>Execute the same git subcommand in all local repositories</title><link href="https://potyarkin.ml/posts/2017/execute-the-same-git-subcommand-in-all-local-repositories/" rel="alternate"></link><published>2017-10-05T15:40:00+03:00</published><updated>2017-10-05T15:40:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2017-10-05:/posts/2017/execute-the-same-git-subcommand-in-all-local-repositories/</id><summary type="html">&lt;p&gt;If you work with more than one git project simultaneously, you often need to
+do the same maintenance tasks in each cloned repository:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;check if there are some changes waiting to be pushed,&lt;/li&gt;
+&lt;li&gt;check remote URLs for all repos (e.g. when considering to switch from HTTPS
+  authentication with GitHub …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;If you work with more than one git project simultaneously, you often need to
+do the same maintenance tasks in each cloned repository:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;check if there are some changes waiting to be pushed,&lt;/li&gt;
+&lt;li&gt;check remote URLs for all repos (e.g. when considering to switch from HTTPS
+  authentication with GitHub to using SSH keys),&lt;/li&gt;
+&lt;li&gt;view last commit messages to refresh your memory.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Doing so with standard tools would involve a lot of &lt;code&gt;cd&lt;/code&gt;-ing, and the
+inconvenience would deter you from checking all repos frequently.&lt;/p&gt;
+&lt;p&gt;That's why I wrote a simple bash script that helps to &lt;em&gt;automate the boring
+stuff&lt;/em&gt;. The script is well-documented, so I won't discuss implementation
+details here.&lt;/p&gt;
+&lt;h2 id="git-projectssh"&gt;&lt;a class="toclink" href="#git-projectssh"&gt;git-projects.sh&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;You can download the script from
+&lt;a href="https://gist.github.com/sio/227da259cad7bb549c69909ba428884c"&gt;https://gist.github.com/sio/...&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The code is licensed under a permissive opensource license (Apache License,
+Version 2.0) so feel free to use it for your hobby and work projects.&lt;/p&gt;
+&lt;p&gt;Report any bugs, ideas, feature requests via GitHub issues/comments -
+all feedback is welcome!&lt;/p&gt;
+&lt;h2 id="installation"&gt;&lt;a class="toclink" href="#installation"&gt;Installation&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Download the script from GitHub, add execution permissions&lt;/li&gt;
+&lt;li&gt;List the paths to the local clones of your git repos in a text
+  file (one path per line). If you're using relative paths they must
+  be valid relative to the location of the script&lt;/li&gt;
+&lt;li&gt;Update the value of &lt;code&gt;PROJECT_LIST&lt;/code&gt; variable with the path of the file
+  you've just created&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="usage"&gt;&lt;a class="toclink" href="#usage"&gt;Usage&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;All command-line parameters are passed on to the &lt;code&gt;git&lt;/code&gt; command.
+When the script is launched without parameters, &lt;code&gt;git-projects.sh&lt;/code&gt; checks the
+status of each repo.&lt;/p&gt;
+&lt;p&gt;Repositories are processed in alphabetical order sorted by paths
+listed in &lt;code&gt;PROJECT_LIST&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id="examples"&gt;&lt;a class="toclink" href="#examples"&gt;Examples&lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id="refreshing-your-memory"&gt;&lt;a class="toclink" href="#refreshing-your-memory"&gt;Refreshing your memory&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ ./git-projects.sh log --oneline -3 --no-decorate
+
+HomeLibraryCatalog
+b5808f6 Always check the db before showing first run page
+72d2481 Remove /quit route
+75c707b Clean up destructors &lt;span class="k"&gt;for&lt;/span&gt; WebUI and CatalogueDB
+
+OpenShiftApp
+b260276 Deploy from GitHub
+05e0206 Deploy from GitHub
+54e5cf1 Deploy from GitHub
+
+server_common
+bc33836 Indentation rule &lt;span class="k"&gt;for&lt;/span&gt; Makefiles
+72fb92a Use proper syntax &lt;span class="k"&gt;for&lt;/span&gt; TODO in GitHub Flavored Markdown
+a24e4f2 More familiar Home and Backspace behavior
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3 id="view-latest-tag-if-any"&gt;&lt;a class="toclink" href="#view-latest-tag-if-any"&gt;View latest tag (if any)&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ ./git-projects.sh describe --tags --always
+
+HomeLibraryCatalog
+v0.1.0-71-gb5808f6
+
+OpenShiftApp
+b260276
+
+server_common
+bc33836
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3 id="checking-project-status"&gt;&lt;a class="toclink" href="#checking-project-status"&gt;Checking project status&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ ./git-projects.sh
+
+HomeLibraryCatalog
+On branch master
+Your branch is up-to-date with &lt;span class="s1"&gt;&amp;#39;origin/master&amp;#39;&lt;/span&gt;.
+
+nothing to commit, working tree clean
+
+OpenShiftApp
+On branch master
+Your branch is up-to-date with &lt;span class="s1"&gt;&amp;#39;origin/master&amp;#39;&lt;/span&gt;.
+
+nothing to commit, working tree clean
+
+server_common
+On branch master
+Your branch is up-to-date with &lt;span class="s1"&gt;&amp;#39;origin/master&amp;#39;&lt;/span&gt;.
+
+nothing to commit, working tree clean
+&lt;/pre&gt;&lt;/div&gt;</content><category term="bash"></category><category term="script"></category><category term="gist"></category></entry></feed>

@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - python</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/python.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2018-06-16T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Accidental submersion into web development</title><link href="https://potyarkin.ml/posts/2018/accidental-submersion-into-web-development/" rel="alternate"></link><published>2018-06-16T00:00:00+03:00</published><updated>2018-06-16T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-06-16:/posts/2018/accidental-submersion-into-web-development/</id><summary type="html">&lt;h2 id="the-library-problem"&gt;&lt;a class="toclink" href="#the-library-problem"&gt;The Library Problem&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I love reading books. My wife loves reading books. We enjoy shopping for books
+and we live a ten minute commute away from a huge used books store. That means
+we have a lot of books. Like, really a lot. A little more than one thousand.&lt;/p&gt;
+&lt;p&gt;We …&lt;/p&gt;</summary><content type="html">&lt;h2 id="the-library-problem"&gt;&lt;a class="toclink" href="#the-library-problem"&gt;The Library Problem&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I love reading books. My wife loves reading books. We enjoy shopping for books
+and we live a ten minute commute away from a huge used books store. That means
+we have a lot of books. Like, really a lot. A little more than one thousand.&lt;/p&gt;
+&lt;p&gt;We have lost count how many times we've bought a book that we already owned.
+Even more often we had foregone buying a book we liked because we were sure we
+have already bought it - only to find out we've been mistaken and have only
+considered buying that very book earlier. This has become a problem. The Library
+Problem.&lt;/p&gt;
+&lt;p&gt;We needed a way to catalog all our books. The catalog had to be accessible from
+mobile devices (to look up a book while at the book store) and to be easy to
+use. That is to add and edit book information, of which we've needed plenty: in
+addition to standard set of author, title and publishing year we wanted to be
+able to track book series and keep the list of missing books to look out for the
+next time.&lt;/p&gt;
+&lt;p&gt;I admit that my research into the subject matter was not scientifically thorough.
+I've dug up several comparisons of existing tools and have read several blog
+posts of people who have faced the same problem before. I particularly recommend
+&lt;a href="http://www.zackgrossbart.com/hackito/the-library-problem/"&gt;this one&lt;/a&gt;. And I have decided that no pre-existing tool will meet our
+growing expectations.&lt;/p&gt;
+&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Contents&lt;/span&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#the-library-problem"&gt;The Library Problem&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#naive-foray-into-application-architecture"&gt;Naive foray into application architecture&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#single-spreadsheet-approach"&gt;Single spreadsheet approach&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#local-database-driven-application-with-web-interface"&gt;Local database driven application with web interface&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#traditional-web-application"&gt;Traditional web application&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#the-unknown-unknowns"&gt;The unknown unknowns&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#orm"&gt;ORM&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#multi-threading"&gt;Multi-threading&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#database-migrations"&gt;Database migrations&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#javascript-is-a-lot-of-work"&gt;JavaScript is a lot of work&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#modular-design"&gt;Modular design&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#mvc"&gt;MVC&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#it-works"&gt;It works!&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;h2 id="naive-foray-into-application-architecture"&gt;&lt;a class="toclink" href="#naive-foray-into-application-architecture"&gt;Naive foray into application architecture&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I have never developed an application for any end user other than myself and I
+didn't even know I was about to start developing one.&lt;/p&gt;
+&lt;h3 id="single-spreadsheet-approach"&gt;&lt;a class="toclink" href="#single-spreadsheet-approach"&gt;Single spreadsheet approach&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;The initial idea was that of a "document". It had to contain some essential
+information about every book we own and (optionally) a second list of books we
+want to acquire. Excel spreadsheet seemed like a natural fit. We are both
+spending a better half of each workday juggling spreadsheets in Excel, so
+developing and maintaining such "document" appeared doable.&lt;/p&gt;
+&lt;p&gt;I have started drafting the column structure, applied some formatting tweaks and
+the skeleton of the "document" was ready. We have entered the test batch of
+books and were about to begin testing.&lt;/p&gt;
+&lt;p&gt;Obstacles arose when we were entering information for the first fifteen books.
+Manually typing in all the fields is tiresome and slow. Errors inevitably
+happen. What if I miss one letter in the author's name?  That book will be lost
+when applying filter on author column. We need autocompletion! What if I
+accidentally switch the order of digits in ISBN? We won't be able to do a web
+lookup for that book later. We have to write a custom ISBN validator in VBA!&lt;/p&gt;
+&lt;p&gt;And the spreadsheet began to amass VBA code, data validation and conditional
+formatting rules. Full-blown spaghetti style. Version control has become a
+problem. What's the difference between versions 0.0.13 and 0.0.19? I had only a
+vague idea.&lt;/p&gt;
+&lt;p&gt;I stopped myself when I was about to sketch up a UserForm for data input. Excel
+road was leading me nowhere. It was difficult and even if all the difficulties
+were to be overcome it imposed some suboptimal compromises on us:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Single table storage limited the data structures we would be able to enter and
+  view. If the book was written by two authors, which one should come first in
+  the "author" string?  How would we do column filtering in that case? What
+  about sort order?&lt;/li&gt;
+&lt;li&gt;The local nature of storage meant there had to be one designated place for
+  making changes (home laptop). Any changes made in other locations (smartphone,
+  thumb drive) had to be agreed to be declared discardable.&lt;/li&gt;
+&lt;li&gt;The spreadsheet had to be exported to HTML to be accessible from smartphones.
+  XML and XSLT made this possible but not very pleasant. Although, I am rather
+  proud of the VBA code I wrote to save/load XML data automatically upon opening
+  the workbook. The data was completely decoupled from the representation.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I'm glad I did not waste more time pursuing this path, but it was still hard to
+let go. It took quite some time for me to return to this project afterwards.&lt;/p&gt;
+&lt;h3 id="local-database-driven-application-with-web-interface"&gt;&lt;a class="toclink" href="#local-database-driven-application-with-web-interface"&gt;Local database driven application with web interface&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;A relational database was the logical solution to spreadsheet limitations.
+Store authors separate from books and manage how the former &lt;em&gt;relate&lt;/em&gt; to the
+latter! Scientists who pioneered the &lt;a href="https://en.wikipedia.org/wiki/Relational_model#History"&gt;relational model&lt;/a&gt; in 1970s were pure
+geniuses and now the whole world relies on their work.&lt;/p&gt;
+&lt;p&gt;I drafted the database schema on a piece of paper and have discussed it
+extensively with my wife. That's probably the point where book reviews were
+added to the requirements list. The database idea made me very enthusiastic and
+had swallowed a lot of free time, but that idea alone could not provide a
+complete solution for the problem at hand.&lt;/p&gt;
+&lt;p&gt;Data input and representation are what the Library project was all about. Yet
+relational database management systems provide only the storage solution, not
+the full package (if you don't take Microsoft Access into account). So I had to
+figure out how to implement the user interface on my own. I chose to write it in
+Python because I was somewhat familiar with the language and I enjoy how clean
+and readable Python code is. I'm not a programmer, so other options were either
+learning a new language or choosing between VBA and Bash, none of which could be
+considered enjoyable.&lt;/p&gt;
+&lt;p&gt;I have briefly considered building a conventional desktop GUI. The UserForm
+experience was still fresh and rather traumatic, so I was reluctant to dive into
+another UI toolkit. Even if I were to, which one should I have chosen? Qt seemed
+nice, but its Python support reports were contradictory. GTK? Installing it was
+rather tricky in Windows. Something non-crossplatform? And what about my Linux
+laptop?&lt;/p&gt;
+&lt;p&gt;I've had a bunch of HTML templates left from XML/XSLT operations and they could
+be trivially transformed to be used in conjunction with the database. While the
+catalog pages could be statically generated, the data input required some sort
+of server to interact with. And I've had zero experience with that.&lt;/p&gt;
+&lt;p&gt;Quick Google search has introduced me to the concept of web frameworks and I
+have semi-randomly chosen &lt;a href="https://bottlepy.org/"&gt;Bottle&lt;/a&gt;. At that moment I've had no intention to
+expose it to the open network, the app and the database were to be stored on the
+USB stick and launched locally when needed. Smartphone interaction was planned
+either via LAN or using saved HTML pages for read-only access when not at home.
+Bottle uses no dependencies other than standard library and the whole framework
+is packaged into a single file. It was perfect for the portable app scenario.&lt;/p&gt;
+&lt;p&gt;After the development started and I saw how difficult it is to make a web
+application, I've decided there is no point to confine the result of all that
+labor to a single computer. Why use static (maybe even outdated) HTML dumps on
+the smartphone when we could access full functionality of the application via
+web site?&lt;/p&gt;
+&lt;h3 id="traditional-web-application"&gt;&lt;a class="toclink" href="#traditional-web-application"&gt;Traditional web application&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;The development was already going on, powered by Python and Bottle. What I was
+missing was the server to host my application at. Turns out launching a web site
+can be very cheap these days! Even as cheap as free.&lt;/p&gt;
+&lt;p&gt;I've started with a free domain name from &lt;a href="https://freenom.com/"&gt;Freenom&lt;/a&gt; and a free hosting from Red
+Hat's &lt;a href="https://www.openshift.com/"&gt;OpenShift&lt;/a&gt;. Both of them have had upsides and downsides but no downsides
+were significant enough to turn down the price of free. Freenom domains are
+considered low quality from SEO standpoint, but that was completely irrelevant
+in my case. OpenShift server had to receive at least one http request every 24
+hours to stay awake, and I've cheated that with a cron job on my router. No
+inconveniences whatsoever.&lt;/p&gt;
+&lt;p&gt;I have to digress to emphasize: OpenShift was great! It was easy to set up and
+very convenient to use. Its documentation was very thorough and up to date.
+OpenShift has introduced me to some concepts I would have not encountered
+otherwise, like automated deploying after git push and handling proper wsgi
+server. And all of that was for free. I'm very thankful to Red Hat for that.&lt;/p&gt;
+&lt;p&gt;Unfortunately, as Mr. Heinlein &lt;a href="https://en.wikipedia.org/wiki/The_Moon_Is_a_Harsh_Mistress"&gt;used to reiterate&lt;/a&gt;, there ain't no
+such thing as a free lunch. Red Hat could not pay the bills for all the computer
+enthusiasts forever and version 3 of OpenShift imposed much tighter restrictions
+on the free accounts. I've had to move to a cheap virtual private server and to
+learn to set up and maintain an Apache instance on my own. New VPS was sometimes
+too slow compared to what OpenShift has offered and I might need to migrate to
+another hosting provider later, but everything was fine for now.&lt;/p&gt;
+&lt;p&gt;I could concentrate on the development.&lt;/p&gt;
+&lt;h2 id="the-unknown-unknowns"&gt;&lt;a class="toclink" href="#the-unknown-unknowns"&gt;The unknown unknowns&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Little did I know that while I was keeping myself busy with seemingly important
+problems such as whether to store images as blobs in database or as files on the
+file system a number of much more important problems were creeping up behind me.
+Donald Rumsfeld has called these things &lt;em&gt;the unknown unknowns&lt;/em&gt; - the things that
+we don't know while remaining unaware about the very fact of not knowing.&lt;/p&gt;
+&lt;h3 id="orm"&gt;&lt;a class="toclink" href="#orm"&gt;ORM&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;SQLite to store data. Web framework to interact with user. Python to glue them
+together. The need in all these parts comes naturally, you could not "forget" to
+use any one of them. Yet they are not the only parts that are needed.&lt;/p&gt;
+&lt;p&gt;Nowhere in Python's database API documentation it says that composing each query
+individually is highly inefficient in a database-driven application. No one
+hints that there exist a whole other class of libraries called Object-Relational
+Mappers (&lt;a href="https://en.wikipedia.org/wiki/Object-relational_mapping"&gt;ORM&lt;/a&gt;). And I was not clever enough to deduce that on my own.&lt;/p&gt;
+&lt;p&gt;But I wasn't too dumb either. I figured that repeating myself every time I
+needed to run a simple query was wrong. So I stashed that code away into &lt;a href="https://github.com/sio/HomeLibraryCatalog/blob/1452531ec05f049c6a758530d7f526f05c188ba1/hlc/db.py#L356"&gt;SQL&lt;/a&gt;
+class. I figured that Book and Author objects require a lot of common methods to
+interact with database. So I separated that code into &lt;a href="https://github.com/sio/HomeLibraryCatalog/blob/1452531ec05f049c6a758530d7f526f05c188ba1/hlc/items.py#L37"&gt;TableEntityWithID&lt;/a&gt; class.
+I have essentially implemented an ORM without knowing what ORM is. Of course, it
+is far inferior to SQLAlchemy and the likes. Of course, I will never use it in
+another project now that I know that there are industry standard solutions in
+this area. But I see no point in replacing my (suboptimal) implementation now.
+Because it works and nothing is broken and nothing is missing.&lt;/p&gt;
+&lt;p&gt;I consider my ORM to be a valuable educational experience even if it somewhat
+stalled the overall progress of the project.&lt;/p&gt;
+&lt;h3 id="multi-threading"&gt;&lt;a class="toclink" href="#multi-threading"&gt;Multi-threading&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;While I was developing the application I was using Bottle's builtin wsgiref web
+server. Running that server in production environment is not recommended because
+it was not built to withstand all the nastiness of open Internet. It is also a
+single threaded server which means it can not accept a request until it's done
+serving the previous one. The single-threadiness did not concern me - my app was
+intended to be used by two or three users tops and simultaneous requests would
+happen very seldom. Yet all the proper web servers (Apache, Nginx etc) are
+created to scale up to thousands and millions of users. Of course, they are
+multithreaded and multiprocessing. My application was not ready for that. Some
+would say SQLite is not ready for that either.&lt;/p&gt;
+&lt;p&gt;At first I considered crippling Apache to use only a single thread or switching
+to another server that can operate in a single thread mode. OpenShift seduced me
+with maintenance-free setup of Apache and I've abandoned that idea.&lt;/p&gt;
+&lt;p&gt;The code I've come up with to use a different instance of some objects for each
+thread is &lt;a href="https://github.com/sio/HomeLibraryCatalog/blob/1452531ec05f049c6a758530d7f526f05c188ba1/hlc/web.py#L1173"&gt;rather ugly&lt;/a&gt;. And it works only 90% of the time. So I
+just restart the Python workers every hour to avoid HTTP 500 errors when the
+database gets locked up. Not the best engineering decision of mine.&lt;/p&gt;
+&lt;p&gt;There probably exists a proper solution to multithreaded SQLite access, but so
+far I have not guessed what keywords to ask Google for it.&lt;/p&gt;
+&lt;h3 id="database-migrations"&gt;&lt;a class="toclink" href="#database-migrations"&gt;Database migrations&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;I was aware that changing database schema after the database was populated is
+hard and can lead to data loss. So I have put a lot of thought into designing
+it. I've even fired up GraphViz and created a &lt;a href="https://github.com/sio/HomeLibraryCatalog/blob/master/docs/relations.gv.pdf"&gt;nice chart&lt;/a&gt; that I've
+printed out and looked at on the commute. I wanted the database schema to be
+iron-clad and to require no changes in future.&lt;/p&gt;
+&lt;p&gt;I was very naive.&lt;/p&gt;
+&lt;p&gt;Of course it would require changes. Everything around us changes, we change, our
+expectations towards software change. At that point I understood that updating
+database manually was not a solution: there would be no trace left whether the
+schema was updated, which changes were introduced and which version does it
+correspond now to. So I've coded a simple &lt;a href="https://github.com/sio/HomeLibraryCatalog/blob/master/hlc/db_transition.py"&gt;transition&lt;/a&gt; module that would do that
+work for me. And later I've learned that the process I was automating is called
+&lt;a href="https://en.wikipedia.org/wiki/Schema_migration"&gt;database migration&lt;/a&gt;, and there are tools written by professionals for it.&lt;/p&gt;
+&lt;h3 id="javascript-is-a-lot-of-work"&gt;&lt;a class="toclink" href="#javascript-is-a-lot-of-work"&gt;JavaScript is a lot of work&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;I tried to avoid adding dependencies whenever I could. So I've decided to write
+what little client-side logic I needed in pure JavaScript. I have no experience
+with any JS framework so I thought that avoiding to learn one would compensate
+for the inconvenience. I'm not sure it did.&lt;/p&gt;
+&lt;p&gt;Most of my JS code is written intuitively, with no awareness of best practises
+and is filled with "code smells". Writing from scratch was sometimes quite
+educating, e.g with AJAX calls - now I understand and can explain them better than
+ever before. Overall conclusion is that JavaScript is hard. And that frameworks
+probably exist for a reason. If I'll do another web app project, I'll probably
+look into some lightweight framework to save time writing JS, which I find not
+very enjoyable.&lt;/p&gt;
+&lt;h3 id="modular-design"&gt;&lt;a class="toclink" href="#modular-design"&gt;Modular design&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;One might think that splitting code into modules comes naturally. At least I
+did. And I was wrong. When I was not specifically thinking about their size some
+modules tended to grow large. A thousand lines is pretty hard to do a quick
+overview on, and even harder to split after the fact. Some modularity has to be
+designed from the beginning.&lt;/p&gt;
+&lt;p&gt;I don't know how I could've avoided that. Guess it comes with the experience.&lt;/p&gt;
+&lt;h3 id="mvc"&gt;&lt;a class="toclink" href="#mvc"&gt;MVC&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;This is another example of a sensible principle that's hard to come by without
+someone teaching you. &lt;a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller"&gt;Model-View-Controller&lt;/a&gt; is a logical extension of
+modularity principle which I was totally unaware about. I have made some
+intuitive steps in the right direction, but overall my application is a soup of
+interleaved components. That complicates maintenance and further development and
+makes the code more difficult to understand for other developers.&lt;/p&gt;
+&lt;p&gt;If I would've gone with a bigger framework like Flask or Django, MVC mindset
+might have been forced down on me. For a newbie who doesn't know anything some
+dictatorship isn't that bad.&lt;/p&gt;
+&lt;h2 id="it-works"&gt;&lt;a class="toclink" href="#it-works"&gt;It works!&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;After all the difficulties and complications (both expected and unexpected) I
+can proudly say that the Library project is a success. The website is up and
+running for almost a year. There has been no significant downtimes and no data
+loss, most of our books have been catalogued. And most important, me and my wife
+do enjoy using it!&lt;/p&gt;
+&lt;p&gt;The application supports:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Creating and editing book entries.&lt;/li&gt;
+&lt;li&gt;Storing and displaying book metadata, cover thumbnail and arbitrary related
+  files. Each book can be connected with any number of authors, series and/or
+  tags.&lt;/li&gt;
+&lt;li&gt;Using ISBN to fetch book information from several third-party sources&lt;/li&gt;
+&lt;li&gt;Queuing ISBNs for input. This is helpful when you process a lot of books with
+  barcode scanner and don't have the time to clean up automatic metadata on each
+  one of them&lt;/li&gt;
+&lt;li&gt;Adding 1-to-5 star ratings and text reviews to any book in the library&lt;/li&gt;
+&lt;li&gt;Searching for books by exact metadata match and with wildcards&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You can access &lt;a href="https://github.com/sio/HomeLibraryCatalog"&gt;the source code&lt;/a&gt; on GitHub and see the site in action at
+&lt;a href="https://morebooks.ml"&gt;https://morebooks.ml&lt;/a&gt; (registration is for family members only, sorry).  Of
+course, there are plenty of improvements to be made (you can see how long the
+TODO list is), but the maintenance itself requires almost zero attention now
+and I can happily switch from being a developer to becoming the end user.&lt;/p&gt;</content><category term="python"></category><category term="web"></category><category term="HomeLibraryCatalog"></category></entry><entry><title>Portable development setup for Python on Windows</title><link href="https://potyarkin.ml/posts/2017/portable-development-setup-for-python-on-windows/" rel="alternate"></link><published>2017-09-20T00:00:00+03:00</published><updated>2017-09-20T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2017-09-20:/posts/2017/portable-development-setup-for-python-on-windows/</id><summary type="html">&lt;h2 id="winpython"&gt;&lt;a class="toclink" href="#winpython"&gt;WinPython&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://winpython.github.io/"&gt;https://winpython.github.io/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;All-in-one distribution which comes with many difficult-to-build packages
+preinstalled. And their ...-Zero version is great for thumb drives!&lt;/p&gt;
+&lt;p&gt;Pip works just fine, but installing packages that require C compiler is
+always a pain on Windows. May be I should look into conda and see if …&lt;/p&gt;</summary><content type="html">&lt;h2 id="winpython"&gt;&lt;a class="toclink" href="#winpython"&gt;WinPython&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://winpython.github.io/"&gt;https://winpython.github.io/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;All-in-one distribution which comes with many difficult-to-build packages
+preinstalled. And their ...-Zero version is great for thumb drives!&lt;/p&gt;
+&lt;p&gt;Pip works just fine, but installing packages that require C compiler is
+always a pain on Windows. May be I should look into conda and see if it
+offers a portable variant.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; there are unofficial binary wheels for most common Python packages
+at &lt;a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/"&gt;http://www.lfd.uci.edu/~gohlke/pythonlibs/&lt;/a&gt; The site's hosting is a little
+unreliable, so it might take a few trys to fetch a package.&lt;/p&gt;
+&lt;h2 id="git-portable"&gt;&lt;a class="toclink" href="#git-portable"&gt;Git Portable&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://git-scm.com/download/win"&gt;https://git-scm.com/download/win&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Git for Windows is now recommended by official Git website, and there always
+is a portable version.&lt;/p&gt;
+&lt;p&gt;This package provides not only Git but also bash and a basic MSYS environment
+(coreutils, sed, grep, awk, etc) which make life on Windows &lt;em&gt;so much&lt;/em&gt; easier!
+Also, it comes with VIM preinstalled, which is a damn good editor and is
+preferred by many developers.&lt;/p&gt;
+&lt;h2 id="gnu-make"&gt;&lt;a class="toclink" href="#gnu-make"&gt;GNU Make&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://www.equation.com/servlet/equation.cmd?fa=make"&gt;http://www.equation.com/servlet/equation.cmd?fa=make&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Unfortunately Git for Windows does not come with GNU make preinstalled, so
+we have to download it manually. Great guys at Equation Solution are regularly
+building standalone versions of GNU Make for 32-bit and 64-bit Windows.&lt;/p&gt;
+&lt;p&gt;Downloaded file has to be placed somewhere in PATH.&lt;/p&gt;
+&lt;h2 id="github-with-ssh-keys"&gt;&lt;a class="toclink" href="#github-with-ssh-keys"&gt;GitHub with SSH keys&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://help.github.com/articles/connecting-to-github-with-ssh/"&gt;https://help.github.com/articles/connecting-to-github-with-ssh/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I don't know if it is even possible to setup HTTPS authentication without
+installing GitHub Desktop, and SSH key authentication works with GitHub
+same as everywhere.&lt;/p&gt;
+&lt;p&gt;I keep the keys on my laptop and the rest of the environment is on a thumb
+drive. That way I can develop anywhere I want, Windows comes as a given (sadly),
+and I don't have to worry about keys security, because they are not exposed
+to random computers.&lt;/p&gt;
+&lt;p&gt;Official documentation recommends using HTTPS just because it's easier for
+newcomers (&lt;a href="https://stackoverflow.com/questions/11041729"&gt;https://stackoverflow.com/questions/11041729&lt;/a&gt;)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It does not require generating public/private keys and uploading the correct
+  one to GitHub&lt;/li&gt;
+&lt;li&gt;HTTPS is allowed everywhere and SSH might be blocked by a firewall&lt;/li&gt;
+&lt;/ul&gt;</content><category term="python"></category><category term="windows"></category><category term="bookmarks"></category></entry></feed>

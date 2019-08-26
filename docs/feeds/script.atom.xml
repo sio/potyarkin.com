@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - script</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/script.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2017-10-05T16:50:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Temporary virtual environment for Python</title><link href="https://potyarkin.ml/posts/2017/temporary-virtual-environment-for-python/" rel="alternate"></link><published>2017-10-05T16:50:00+03:00</published><updated>2017-10-05T16:50:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2017-10-05:/posts/2017/temporary-virtual-environment-for-python/</id><summary type="html">&lt;p&gt;Using Python on Windows does not come as naturally as on Unix-like systems, so
+any help is appreciated.&lt;/p&gt;
+&lt;p&gt;I wrote a batch script to automate creation, setup and deletion of Python virtual
+environment. This can come in handy when you want to test something in a clean env,
+or to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Using Python on Windows does not come as naturally as on Unix-like systems, so
+any help is appreciated.&lt;/p&gt;
+&lt;p&gt;I wrote a batch script to automate creation, setup and deletion of Python virtual
+environment. This can come in handy when you want to test something in a clean env,
+or to play with &lt;code&gt;pip install&lt;/code&gt; and get acquainted with a new package from PyPI.&lt;/p&gt;
+&lt;h2 id="venv-tempbat"&gt;&lt;a class="toclink" href="#venv-tempbat"&gt;venv-temp.bat&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;You can download the script from
+&lt;a href="https://gist.github.com/sio/fbc46ae41607b206ce9099dc8485df34"&gt;https://gist.github.com/sio/...&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The code is licensed under a permissive opensource license (Apache License,
+Version 2.0) so feel free to use it for your hobby and work projects.&lt;/p&gt;
+&lt;p&gt;Report any bugs, ideas, feature requests via GitHub issues/comments -
+all feedback is welcome!&lt;/p&gt;
+&lt;h2 id="installation"&gt;&lt;a class="toclink" href="#installation"&gt;Installation&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Downloaded script does not require any installation.&lt;/p&gt;
+&lt;p&gt;If &lt;code&gt;python&lt;/code&gt; is not available from your &lt;code&gt;%PATH%&lt;/code&gt;, you have to specify the location
+of &lt;code&gt;python.exe&lt;/code&gt; in the script (change the value of &lt;code&gt;PYTHON&lt;/code&gt; variable).&lt;/p&gt;
+&lt;h2 id="usage"&gt;&lt;a class="toclink" href="#usage"&gt;Usage&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Launch the script from &lt;code&gt;cmd.exe&lt;/code&gt; to read all error output (if any) or by
+double-clicking if you're confident it works on your system.&lt;/p&gt;
+&lt;p&gt;After you're done experimenting and are ready to discard the venv, just end shell
+session with &lt;code&gt;exit&lt;/code&gt; - the script will take care of cleanup.&lt;/p&gt;
+&lt;p&gt;If you close the
+terminal window without typing &lt;code&gt;exit&lt;/code&gt;, the script will be terminated before it
+performs cleanup. This has no harmful consequences except taking 20-50MB of disk
+space. Old venv directory will be purged before reusing, so no changes you've
+made will affect the environment you'll get next time.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; If you have no internet connection, the script remains usable, but &lt;code&gt;pip&lt;/code&gt;
+will print a lot of error messages while trying to update itself. Don't worry, that's ok.&lt;/p&gt;</content><category term="windows"></category><category term="script"></category><category term="gist"></category></entry><entry><title>Execute the same git subcommand in all local repositories</title><link href="https://potyarkin.ml/posts/2017/execute-the-same-git-subcommand-in-all-local-repositories/" rel="alternate"></link><published>2017-10-05T15:40:00+03:00</published><updated>2017-10-05T15:40:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2017-10-05:/posts/2017/execute-the-same-git-subcommand-in-all-local-repositories/</id><summary type="html">&lt;p&gt;If you work with more than one git project simultaneously, you often need to
+do the same maintenance tasks in each cloned repository:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;check if there are some changes waiting to be pushed,&lt;/li&gt;
+&lt;li&gt;check remote URLs for all repos (e.g. when considering to switch from HTTPS
+  authentication with GitHub …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;If you work with more than one git project simultaneously, you often need to
+do the same maintenance tasks in each cloned repository:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;check if there are some changes waiting to be pushed,&lt;/li&gt;
+&lt;li&gt;check remote URLs for all repos (e.g. when considering to switch from HTTPS
+  authentication with GitHub to using SSH keys),&lt;/li&gt;
+&lt;li&gt;view last commit messages to refresh your memory.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Doing so with standard tools would involve a lot of &lt;code&gt;cd&lt;/code&gt;-ing, and the
+inconvenience would deter you from checking all repos frequently.&lt;/p&gt;
+&lt;p&gt;That's why I wrote a simple bash script that helps to &lt;em&gt;automate the boring
+stuff&lt;/em&gt;. The script is well-documented, so I won't discuss implementation
+details here.&lt;/p&gt;
+&lt;h2 id="git-projectssh"&gt;&lt;a class="toclink" href="#git-projectssh"&gt;git-projects.sh&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;You can download the script from
+&lt;a href="https://gist.github.com/sio/227da259cad7bb549c69909ba428884c"&gt;https://gist.github.com/sio/...&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The code is licensed under a permissive opensource license (Apache License,
+Version 2.0) so feel free to use it for your hobby and work projects.&lt;/p&gt;
+&lt;p&gt;Report any bugs, ideas, feature requests via GitHub issues/comments -
+all feedback is welcome!&lt;/p&gt;
+&lt;h2 id="installation"&gt;&lt;a class="toclink" href="#installation"&gt;Installation&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Download the script from GitHub, add execution permissions&lt;/li&gt;
+&lt;li&gt;List the paths to the local clones of your git repos in a text
+  file (one path per line). If you're using relative paths they must
+  be valid relative to the location of the script&lt;/li&gt;
+&lt;li&gt;Update the value of &lt;code&gt;PROJECT_LIST&lt;/code&gt; variable with the path of the file
+  you've just created&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="usage"&gt;&lt;a class="toclink" href="#usage"&gt;Usage&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;All command-line parameters are passed on to the &lt;code&gt;git&lt;/code&gt; command.
+When the script is launched without parameters, &lt;code&gt;git-projects.sh&lt;/code&gt; checks the
+status of each repo.&lt;/p&gt;
+&lt;p&gt;Repositories are processed in alphabetical order sorted by paths
+listed in &lt;code&gt;PROJECT_LIST&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id="examples"&gt;&lt;a class="toclink" href="#examples"&gt;Examples&lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id="refreshing-your-memory"&gt;&lt;a class="toclink" href="#refreshing-your-memory"&gt;Refreshing your memory&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ ./git-projects.sh log --oneline -3 --no-decorate
+
+HomeLibraryCatalog
+b5808f6 Always check the db before showing first run page
+72d2481 Remove /quit route
+75c707b Clean up destructors &lt;span class="k"&gt;for&lt;/span&gt; WebUI and CatalogueDB
+
+OpenShiftApp
+b260276 Deploy from GitHub
+05e0206 Deploy from GitHub
+54e5cf1 Deploy from GitHub
+
+server_common
+bc33836 Indentation rule &lt;span class="k"&gt;for&lt;/span&gt; Makefiles
+72fb92a Use proper syntax &lt;span class="k"&gt;for&lt;/span&gt; TODO in GitHub Flavored Markdown
+a24e4f2 More familiar Home and Backspace behavior
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3 id="view-latest-tag-if-any"&gt;&lt;a class="toclink" href="#view-latest-tag-if-any"&gt;View latest tag (if any)&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ ./git-projects.sh describe --tags --always
+
+HomeLibraryCatalog
+v0.1.0-71-gb5808f6
+
+OpenShiftApp
+b260276
+
+server_common
+bc33836
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3 id="checking-project-status"&gt;&lt;a class="toclink" href="#checking-project-status"&gt;Checking project status&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ ./git-projects.sh
+
+HomeLibraryCatalog
+On branch master
+Your branch is up-to-date with &lt;span class="s1"&gt;&amp;#39;origin/master&amp;#39;&lt;/span&gt;.
+
+nothing to commit, working tree clean
+
+OpenShiftApp
+On branch master
+Your branch is up-to-date with &lt;span class="s1"&gt;&amp;#39;origin/master&amp;#39;&lt;/span&gt;.
+
+nothing to commit, working tree clean
+
+server_common
+On branch master
+Your branch is up-to-date with &lt;span class="s1"&gt;&amp;#39;origin/master&amp;#39;&lt;/span&gt;.
+
+nothing to commit, working tree clean
+&lt;/pre&gt;&lt;/div&gt;</content><category term="bash"></category><category term="script"></category><category term="gist"></category></entry></feed>

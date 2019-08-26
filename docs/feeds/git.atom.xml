@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - git</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/git.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2019-08-26T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Cygheap base mismatch in Git for Windows</title><link href="https://potyarkin.ml/posts/2019/cygheap-base-mismatch-in-git-for-windows/" rel="alternate"></link><published>2019-08-26T00:00:00+03:00</published><updated>2019-08-26T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2019-08-26:/posts/2019/cygheap-base-mismatch-in-git-for-windows/</id><summary type="html">&lt;p&gt;This error has haunted me for several months:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;4 [main] head (6660) C:\...\usr\bin\head.exe:r
+*** fatal error - cygheap base mismatch detected - 0x612C7410/0xAF7410.
+
+This problem is probably due to using incompatible versions of the cygwin DLL.
+Search for cygwin1.dll using the Windows Start-&amp;gt;Find/Search facility …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;This error has haunted me for several months:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;4 [main] head (6660) C:\...\usr\bin\head.exe:r
+*** fatal error - cygheap base mismatch detected - 0x612C7410/0xAF7410.
+
+This problem is probably due to using incompatible versions of the cygwin DLL.
+Search for cygwin1.dll using the Windows Start-&amp;gt;Find/Search facility
+and delete all but the most recent version.  The most recent version *should*
+reside in x:\cygwin\bin, where &amp;#39;x&amp;#39; is the drive on which you have
+installed the cygwin distribution.  Rebooting is also suggested if you
+are unable to find another cygwin DLL.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The tricky part is I am not even using Cygwin. I'm running bash with Git for
+Windows &lt;a href="https://git-scm.com/download/win"&gt;as published at the official website&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I've tried suggested solution from the error message, googled around quite a
+bit, I've even dabbled with Windows Security settings (ASLR) - nothing helped
+and have almost made my peace with the fact that every fifth commandline action
+will fail loudly.&lt;/p&gt;
+&lt;p&gt;And yet after recent release I've decided to try one more time. This time I've
+downloaded the portable build for 64-bit architecture, and it worked! I don't
+know if it was the fact that I was previously running a 32-bit Git and bash on
+64-bit Windows 7 or if Git maintainers have tweaked their build process for 2.23.&lt;/p&gt;
+&lt;p&gt;If you're experiencing segmentation faults while running bash from Git for
+Windows package, you should check for &lt;strong&gt;architecture mismatch&lt;/strong&gt; with your OS
+and/or for &lt;strong&gt;newer (2.23+) Git version&lt;/strong&gt;.&lt;/p&gt;</content><category term="bash"></category><category term="windows"></category><category term="git"></category></entry></feed>

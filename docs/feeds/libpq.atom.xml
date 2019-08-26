@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - LibPQ</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/libpq.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2018-04-01T12:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Unit testing in Power Query M Language</title><link href="https://potyarkin.ml/posts/2018/unit-testing-in-power-query-m-language/" rel="alternate"></link><published>2018-04-01T12:00:00+03:00</published><updated>2018-04-01T12:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-04-01:/posts/2018/unit-testing-in-power-query-m-language/</id><summary type="html">&lt;p&gt;As your code base gets bigger,
+&lt;a href="https://en.wikipedia.org/wiki/Test_automation"&gt;test automation&lt;/a&gt; becomes more
+and more important. This applies to any development platform, including Power
+Query / PowerBI. If you reuse your code and improve some low level function
+later, test automation allows you to make sure your changes did not break
+anything that depends …&lt;/p&gt;</summary><content type="html">&lt;p&gt;As your code base gets bigger,
+&lt;a href="https://en.wikipedia.org/wiki/Test_automation"&gt;test automation&lt;/a&gt; becomes more
+and more important. This applies to any development platform, including Power
+Query / PowerBI. If you reuse your code and improve some low level function
+later, test automation allows you to make sure your changes did not break
+anything that depends on the part of code you've just modified.&lt;/p&gt;
+&lt;p&gt;As far as I know, there are no tools that allow us to perform automated testing
+of functions and queries written in Power Query M language. That's why I've
+built a simple unit testing framework into &lt;a href="https://github.com/sio/LibPQ"&gt;LibPQ&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="libpq-unittest-framework"&gt;&lt;a class="toclink" href="#libpq-unittest-framework"&gt;LibPQ UnitTest framework&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;The &lt;a href="https://github.com/sio/LibPQ/blob/master/Docs/UnitTesting.md"&gt;UnitTest&lt;/a&gt; framework is modelled after the only other unit testing tool I
+have experience with: Python's
+&lt;a href="https://docs.python.org/3/library/unittest.html"&gt;unittest&lt;/a&gt;. It offers the
+following features:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Test suites to arbitrarily group individual test cases&lt;/li&gt;
+&lt;li&gt;Assertion functions to test simple statements&lt;/li&gt;
+&lt;li&gt;Subtests to execute the same test on a sequence of sample inputs&lt;/li&gt;
+&lt;li&gt;Test runner and test discovery functions to execute your test suites&lt;/li&gt;
+&lt;li&gt;Test results table that can be analyzed either manually or with any
+  automation tool you create&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Inner workings of the test framework are described in the
+&lt;a href="https://github.com/sio/LibPQ/blob/master/Docs/UnitTesting.md"&gt;documentation&lt;/a&gt;. This article will demonstrate how it works.&lt;/p&gt;
+&lt;h2 id="unittest-demo"&gt;&lt;a class="toclink" href="#unittest-demo"&gt;UnitTest demo&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;All modules described here are imported with LibPQ, so a basic familiarity with the library is assumed (&lt;a href="https://github.com/sio/LibPQ/blob/master/README.md"&gt;readme&lt;/a&gt;, &lt;a href="https://potyarkin.ml/posts/2018/getting-started-with-libpq/"&gt;getting started&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;Let's create a basic test suite and save it in the directory listed in &lt;code&gt;LibPQPath&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cm"&gt;/* DemoTests.pq - sample test suite */&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="nx"&gt;Assert&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;LibPQ&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;UnitTest.Assert&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="nx"&gt;testFirstTest&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Assert&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;Equal&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;42&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="nx"&gt;testAlwaysFail&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Assert&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;Equal&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;foo&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;bar&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="nx"&gt;meta&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;LibPQ&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;TestSuite&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The test suite is a record (note the square brackets surrounding the code) that
+contains:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Two test cases (values prefixed with "test")&lt;ul&gt;
+&lt;li&gt;The first test will pass because 6 times 7 is 42&lt;/li&gt;
+&lt;li&gt;The second test will always fail because "foo" and "bar" are different
+strings&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;And one related value: &lt;code&gt;Assert&lt;/code&gt; is a helper for building test functions. Its
+  use is not required, but makes writing tests much easier.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The last line contains metadata that marks the test suite as such and allows
+test discovery tools to distinguish it from just another record.&lt;/p&gt;
+&lt;p&gt;Here is what &lt;a href="https://github.com/sio/LibPQ/blob/master/Modules/UnitTest.Discover.pq"&gt;UnitTest.Discover&lt;/a&gt; function will do when invoked:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Search all locally available modules for valid test suites (hence the metadata)&lt;/li&gt;
+&lt;li&gt;Execute each located test suite with &lt;a href="https://github.com/sio/LibPQ/blob/master/Modules/UnitTest.Run.pq"&gt;UnitTest.Run&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Return the test results as a table, reporting as much data about the failed
+  tests as possible&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href="https://potyarkin.ml/posts/2018/unit-testing-in-power-query-m-language/libpq-unittest-long.png"&gt;&lt;img alt="Test results" src="https://potyarkin.ml/posts/2018/unit-testing-in-power-query-m-language/libpq-unittest-long.png"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;In the screenshot above we invoke &lt;a href="https://github.com/sio/LibPQ/blob/master/Modules/UnitTest.Discover.pq"&gt;UnitTest.Discover&lt;/a&gt; with &lt;code&gt;compact_output =
+false&lt;/code&gt; but when you'll have dozens of test cases you'll probably prefer default
+behavior (group test results by status).&lt;/p&gt;
+&lt;h2 id="more-about-unittest-in-libpq"&gt;&lt;a class="toclink" href="#more-about-unittest-in-libpq"&gt;More about UnitTest in LibPQ&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;If you liked the idea of unit testing M language code, check out the main
+&lt;a href="https://github.com/sio/LibPQ/blob/master/Docs/UnitTesting.md"&gt;UnitTest&lt;/a&gt; documentation and a more extensive &lt;a href="https://github.com/sio/LibPQ/blob/master/Samples/Tests.Sample.pq"&gt;test sample&lt;/a&gt; that makes use of
+subtests.&lt;/p&gt;</content><category term="m"></category><category term="power-query"></category><category term="LibPQ"></category></entry><entry><title>Getting started with LibPQ</title><link href="https://potyarkin.ml/posts/2018/getting-started-with-libpq/" rel="alternate"></link><published>2018-04-01T00:00:00+03:00</published><updated>2018-04-01T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-04-01:/posts/2018/getting-started-with-libpq/</id><summary type="html">&lt;p&gt;This is a step by step guide to getting started with &lt;a href="https://potyarkin.ml/posts/2018/expanding-power-query-standard-library-introducing-libpq/"&gt;LibPQ&lt;/a&gt;, an illustrated
+version of &lt;a href="https://github.com/sio/LibPQ/blob/master/README.md#installation-and-usage"&gt;"Installation and usage"&lt;/a&gt; section of the official
+documentation.&lt;/p&gt;
+&lt;h2 id="installation"&gt;&lt;a class="toclink" href="#installation"&gt;Installation&lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id="libpq-source-code"&gt;&lt;a class="toclink" href="#libpq-source-code"&gt;LibPQ source code&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;The source code of the library has to be present in each workbook that uses it.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Create a new blank query: &lt;code&gt;Data …&lt;/code&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;This is a step by step guide to getting started with &lt;a href="https://potyarkin.ml/posts/2018/expanding-power-query-standard-library-introducing-libpq/"&gt;LibPQ&lt;/a&gt;, an illustrated
+version of &lt;a href="https://github.com/sio/LibPQ/blob/master/README.md#installation-and-usage"&gt;"Installation and usage"&lt;/a&gt; section of the official
+documentation.&lt;/p&gt;
+&lt;h2 id="installation"&gt;&lt;a class="toclink" href="#installation"&gt;Installation&lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id="libpq-source-code"&gt;&lt;a class="toclink" href="#libpq-source-code"&gt;LibPQ source code&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;The source code of the library has to be present in each workbook that uses it.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Create a new blank query: &lt;code&gt;Data &amp;gt; Get &amp;amp; Transform &amp;gt; From Other Sources &amp;gt;
+  Blank Query&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Go to "Advanced editor" and replace the query code with the contents of
+  &lt;a href="https://potyarkin.ml/posts/2018/expanding-power-query-standard-library-introducing-libpq/"&gt;&lt;code&gt;LibPQ.pq&lt;/code&gt;&lt;/a&gt; (switch to "Raw" view to make selecting easier)&lt;/li&gt;
+&lt;li&gt;Save new query under the name &lt;code&gt;LibPQ&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href="https://potyarkin.ml/posts/2018/getting-started-with-libpq/libpq-main-module.png"&gt;&lt;img alt="Main module of LibPQ" src="https://potyarkin.ml/posts/2018/getting-started-with-libpq/libpq-main-module.png"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="specifying-modules-location"&gt;&lt;a class="toclink" href="#specifying-modules-location"&gt;Specifying modules location&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;After the previous step LibPQ doesn't know yet where it should get the modules'
+source code from. You can specify an unlimited number of local and web locations
+where the modules are saved:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Create a new blank query and name it &lt;code&gt;LibPQPath&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Copy the contents of &lt;a href="https://github.com/sio/LibPQ/blob/master/LibPQPath-sample.pq"&gt;LibPQPath-sample.pq&lt;/a&gt; and modify it in Advanced editor.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href="https://potyarkin.ml/posts/2018/getting-started-with-libpq/libpq-path-editor.png"&gt;&lt;img alt="LibPQ-Path" src="https://potyarkin.ml/posts/2018/getting-started-with-libpq/libpq-path-editor.png"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;LibPQ will search for your modules first in local directories (in order they
+are listed), then in web locations. If the module is found, no further
+locations are checked.&lt;/p&gt;
+&lt;p&gt;It helps with the name collisions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Let's say you have a module &lt;code&gt;FavoritePets.pq&lt;/code&gt; stored in your module
+  collection at &lt;code&gt;http://yoursite.com/PowerQueryModules/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;At the same time you use some modules from a friend's module collection
+  at &lt;code&gt;http://friendname.com/PowerQueryModules/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;If your friend adds a module with the same name to their collection, all
+  you need to do to ignore it is to make sure that your collection address
+  is higher in the &lt;code&gt;LibPQPath&lt;/code&gt; than your friend's.&lt;/li&gt;
+&lt;li&gt;That works both ways: you and your friend can continue sharing your
+  module collections while using personal modules with colliding names
+  without any problems.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="reusable-template"&gt;&lt;a class="toclink" href="#reusable-template"&gt;Reusable template&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;It is not necessary to repeat the installation steps every time you want to use LibPQ. You can add LibPQ to an empty workbook and save is as a template for future use.&lt;/p&gt;
+&lt;h2 id="usage"&gt;&lt;a class="toclink" href="#usage"&gt;Usage&lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id="importing-existing-module"&gt;&lt;a class="toclink" href="#importing-existing-module"&gt;Importing existing module&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Import any available module with &lt;code&gt;LibPQ("ModuleName")&lt;/code&gt; when writing your
+queries in Advanced editor. LibPQ will search for the file named
+&lt;code&gt;ModuleName.pq&lt;/code&gt; in all locations that you've listed in LibPQPath. If the module
+is found, its source code will be evaluated and the result will be returned.&lt;/p&gt;
+&lt;p&gt;For example, let's import &lt;code&gt;Date.Parse&lt;/code&gt; from standard LibPQ collection:&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://potyarkin.ml/posts/2018/getting-started-with-libpq/libpq-date-parse.png"&gt;&lt;img alt="Date.Parse" src="https://potyarkin.ml/posts/2018/getting-started-with-libpq/libpq-date-parse.png"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;That works because &lt;code&gt;LibPQPath&lt;/code&gt; contains reference to
+&lt;code&gt;https://raw.githubusercontent.com/sio/LibPQ/master/Modules/&lt;/code&gt;, where the source
+code for &lt;code&gt;Date.Parse.pq&lt;/code&gt; is located.&lt;/p&gt;
+&lt;h3 id="creating-a-new-module"&gt;&lt;a class="toclink" href="#creating-a-new-module"&gt;Creating a new module&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;You can save any reusable Power Query function or query to be imported by LibPQ
+later:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Copy the code of that module to any text editor (I recommend Notepad++) and
+  save it with &lt;code&gt;*.pq&lt;/code&gt; extension&lt;/li&gt;
+&lt;li&gt;Place the module into any location listed in &lt;code&gt;LibPQPath&lt;/code&gt; and it will become
+  available for importing&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you have any further questions about LibPQ please create an &lt;a href="https://github.com/sio/LibPQ/issues"&gt;issue&lt;/a&gt; on GitHub
+or contact me via &lt;a href="mailto:sio.wtf@gmail.com"&gt;e-mail&lt;/a&gt;.&lt;/p&gt;</content><category term="m"></category><category term="power-query"></category><category term="LibPQ"></category></entry><entry><title>Expanding Power Query standard library - introducing LibPQ</title><link href="https://potyarkin.ml/posts/2018/expanding-power-query-standard-library-introducing-libpq/" rel="alternate"></link><published>2018-01-03T00:00:00+03:00</published><updated>2018-01-03T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-01-03:/posts/2018/expanding-power-query-standard-library-introducing-libpq/</id><summary type="html">&lt;p&gt;Power Query formula language (also known as M language) is a very capable yet
+not very flexible tool. It lacks some features taken for granted by developers
+who are used to other programming languages such as compatibility with version
+control systems, extensibility by third-party libraries, etc.&lt;/p&gt;
+&lt;p&gt;That is why I …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Power Query formula language (also known as M language) is a very capable yet
+not very flexible tool. It lacks some features taken for granted by developers
+who are used to other programming languages such as compatibility with version
+control systems, extensibility by third-party libraries, etc.&lt;/p&gt;
+&lt;p&gt;That is why I have started &lt;strong&gt;&lt;a href="https://github.com/sio/LibPQ"&gt;LibPQ&lt;/a&gt;&lt;/strong&gt; - an open-source M language library
+meant to expand the standard library and to make it easier for others to do so.
+Its main features are:&lt;/p&gt;
+&lt;h3 id="importing-source-code-from-plain-text-files-located-on-disk-or-on-the-web"&gt;&lt;a class="toclink" href="#importing-source-code-from-plain-text-files-located-on-disk-or-on-the-web"&gt;Importing source code from plain text files located on disk or on the web&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;LibPQ stores its modules as plain text files with &lt;code&gt;*.pq&lt;/code&gt; extension.  Detaching
+source code from the workbooks that execute it has a lot of advantages:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The source code can be managed by version control system such as git&lt;/li&gt;
+&lt;li&gt;Multiple workbooks referring to the same module will always use the same
+  (latest) code&lt;/li&gt;
+&lt;li&gt;It encourages splitting your code into smaller reusable units&lt;/li&gt;
+&lt;li&gt;You can edit the source code with any editor you like (autocompletion and
+  syntax highlighting are nice features even though Power Query's Advanced
+  Editor does not have them)&lt;/li&gt;
+&lt;li&gt;Sharing your code and collaborating becomes much easier&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="supporting-several-import-locations-ordered-by-priority"&gt;&lt;a class="toclink" href="#supporting-several-import-locations-ordered-by-priority"&gt;Supporting several import locations ordered by priority&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;LibPQ does not dictate where you store your source code. Inspired by Python's
+&lt;a href="https://docs.python.org/3/library/sys.html#sys.path"&gt;&lt;code&gt;sys.path&lt;/code&gt;&lt;/a&gt; it enables specifying unlimited number of local and/or
+remote sources (ordered by priority). When importing a module, LibPQ will check
+these sources one by one until the required module is found.&lt;/p&gt;
+&lt;h3 id="unit-testing-framework"&gt;&lt;a class="toclink" href="#unit-testing-framework"&gt;Unit testing framework&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Having source code detached from the workbooks encourages you to improve and
+refactor existing modules. To make sure you do not introduce regressions you
+should cover your code with unit tests.&lt;/p&gt;
+&lt;p&gt;There are no unit testing tools in standard library, but LibPQ offers a basic
+unit testing framework that supports test discovery, grouping tests into test
+suites and comes with a bunch of handy assertion functions. To learn more read
+this &lt;a href="https://github.com/sio/LibPQ/blob/master/Docs/UnitTesting.md"&gt;help page&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id="a-collection-of-general-purpose-functions-and-queries"&gt;&lt;a class="toclink" href="#a-collection-of-general-purpose-functions-and-queries"&gt;A collection of general purpose functions and queries&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;And last, LibPQ contains some general purpose modules that you might find
+useful. If not - go write some new ones, you have the tools now!&lt;/p&gt;
+&lt;p&gt;LibPQ is built in such way that you do not need me (or anyone else) to approve
+of your work.  Save your code to any convenient location, and LibPQ will help
+you to import it into your workbooks. You can even keep your modules private,
+no pressure here. Have fun and enjoy your coding!&lt;/p&gt;</content><category term="m"></category><category term="excel"></category><category term="power-query"></category><category term="LibPQ"></category></entry></feed>

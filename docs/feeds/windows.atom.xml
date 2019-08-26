@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - windows</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/windows.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2019-08-26T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Cygheap base mismatch in Git for Windows</title><link href="https://potyarkin.ml/posts/2019/cygheap-base-mismatch-in-git-for-windows/" rel="alternate"></link><published>2019-08-26T00:00:00+03:00</published><updated>2019-08-26T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2019-08-26:/posts/2019/cygheap-base-mismatch-in-git-for-windows/</id><summary type="html">&lt;p&gt;This error has haunted me for several months:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;4 [main] head (6660) C:\...\usr\bin\head.exe:r
+*** fatal error - cygheap base mismatch detected - 0x612C7410/0xAF7410.
+
+This problem is probably due to using incompatible versions of the cygwin DLL.
+Search for cygwin1.dll using the Windows Start-&amp;gt;Find/Search facility …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;This error has haunted me for several months:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;4 [main] head (6660) C:\...\usr\bin\head.exe:r
+*** fatal error - cygheap base mismatch detected - 0x612C7410/0xAF7410.
+
+This problem is probably due to using incompatible versions of the cygwin DLL.
+Search for cygwin1.dll using the Windows Start-&amp;gt;Find/Search facility
+and delete all but the most recent version.  The most recent version *should*
+reside in x:\cygwin\bin, where &amp;#39;x&amp;#39; is the drive on which you have
+installed the cygwin distribution.  Rebooting is also suggested if you
+are unable to find another cygwin DLL.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The tricky part is I am not even using Cygwin. I'm running bash with Git for
+Windows &lt;a href="https://git-scm.com/download/win"&gt;as published at the official website&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I've tried suggested solution from the error message, googled around quite a
+bit, I've even dabbled with Windows Security settings (ASLR) - nothing helped
+and have almost made my peace with the fact that every fifth commandline action
+will fail loudly.&lt;/p&gt;
+&lt;p&gt;And yet after recent release I've decided to try one more time. This time I've
+downloaded the portable build for 64-bit architecture, and it worked! I don't
+know if it was the fact that I was previously running a 32-bit Git and bash on
+64-bit Windows 7 or if Git maintainers have tweaked their build process for 2.23.&lt;/p&gt;
+&lt;p&gt;If you're experiencing segmentation faults while running bash from Git for
+Windows package, you should check for &lt;strong&gt;architecture mismatch&lt;/strong&gt; with your OS
+and/or for &lt;strong&gt;newer (2.23+) Git version&lt;/strong&gt;.&lt;/p&gt;</content><category term="bash"></category><category term="windows"></category><category term="git"></category></entry><entry><title>On dotfiles management</title><link href="https://potyarkin.ml/posts/2019/on-dotfiles-management/" rel="alternate"></link><published>2019-07-30T00:00:00+03:00</published><updated>2019-07-30T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2019-07-30:/posts/2019/on-dotfiles-management/</id><summary type="html">&lt;p&gt;This will be yet another description of dotfiles management by some random
+person on the Internet. I will try to explain what my setup is like and why it
+is that way.&lt;/p&gt;
+&lt;p&gt;If you're not yet using version control software for your configuration files
+I strongly encourage you to start …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This will be yet another description of dotfiles management by some random
+person on the Internet. I will try to explain what my setup is like and why it
+is that way.&lt;/p&gt;
+&lt;p&gt;If you're not yet using version control software for your configuration files
+I strongly encourage you to start doing so, whichever way you like. These
+pages are good places to start:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://dotfiles.github.io/"&gt;An unofficial guide to dotfiles on GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://wiki.archlinux.org/index.php/Dotfiles"&gt;Arch wiki article on dotfiles&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="my-chosen-approach"&gt;&lt;a class="toclink" href="#my-chosen-approach"&gt;My chosen approach&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;After several attempts that have spanned across many years I've understood
+that neither tracking home directory directly with Git nor symlinking all of
+the dotfiles from a single directory tree is working for me. Both ways lead to
+a mess in the repository and made the whole endeavor of tracking changes
+cognitively expensive, so I inevitably started slacking off.&lt;/p&gt;
+&lt;p&gt;I've looked at the existing tools that are meant to automate some of the
+process and did not find one that would suit all my needs. I've ended up
+writing a small shell &lt;a href="https://gitlab.com/sio/server_common/blob/master/dotfiles/bootstrap.sh"&gt;script&lt;/a&gt; that takes care of dotfiles installation but
+the main value for me is in the repo layout, not the script itself.&lt;/p&gt;
+&lt;p&gt;All configuration files are grouped into directories by topic. These
+directories are somewhat similar to packages in GNU &lt;a href="https://www.gnu.org/software/stow/"&gt;stow&lt;/a&gt;. Topic directories
+recreate the directory structure for the target location, by default $HOME.
+Files that are meant to be installed into target location have to contain an
+appropriate suffix at the end of filename (any other files are ignored):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;.copy&lt;/code&gt; - for files to be copied over to new location&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.link&lt;/code&gt; - for files to be linked to from new location&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.append&lt;/code&gt; - for files to be appended to the target file&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Default behavior may be altered by a &lt;code&gt;dotfiles.meta&lt;/code&gt; file placed into the
+topic directory. It is essentially a shell script that is being sourced during
+topic installation. Its main purpose is to provide alternative values for
+PREFIX and SCOPE variables:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PREFIX value determines target directory where the dotfiles will be placed.
+  Also if PREFIX is set the dotfiles will not get an extra dot in front of
+  their filename (which is the default behavior otherwise).&lt;/li&gt;
+&lt;li&gt;SCOPE variable may be used to indicate that a topic requires root privileges
+  to be installed (&lt;code&gt;SCOPE=system&lt;/code&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Multiple topics may be installed at once either by providing all of their
+names as command line arguments or by listing them all in a text file and
+providing path to that file as an argument to the installation &lt;a href="https://gitlab.com/sio/server_common/blob/master/dotfiles/bootstrap.sh"&gt;script&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="examples"&gt;&lt;a class="toclink" href="#examples"&gt;Examples&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;topic-foo/vimrc.link&lt;/code&gt; will be symlinked from &lt;code&gt;~/.vimrc&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;topic-bar/bashrc.copy&lt;/code&gt; will be copied over to &lt;code&gt;~/.bashrc&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;topic-baz/default/keyboard.copy&lt;/code&gt; with &lt;code&gt;PREFIX=/etc&lt;/code&gt; will be copied to &lt;code&gt;/etc/default/keyboard&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;topic-baz/file/without/valid/suffix&lt;/code&gt; will be ignored&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;More examples may be found in my &lt;a href="https://gitlab.com/sio/server_common/tree/master/dotfiles"&gt;dotfiles repo&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="comparison-with-existing-tools"&gt;&lt;a class="toclink" href="#comparison-with-existing-tools"&gt;Comparison with existing tools&lt;/a&gt;&lt;/h2&gt;
+&lt;h4 id="strengths"&gt;&lt;a class="toclink" href="#strengths"&gt;Strengths&lt;/a&gt;&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Very small number of dependencies makes this script usable across all my
+  Linux and Windows machines. It requires only the core GNU userland: bash,
+  coreutils, find and grep.&lt;/li&gt;
+&lt;li&gt;Multiple install actions are supported (copy, link, append) unlike &lt;a href="https://www.gnu.org/software/stow/"&gt;stow&lt;/a&gt;
+  that only makes symlinks. More than that, my script detects if it's being
+  executed on Windows machine and copies over any file that was meant to be
+  symlinked - because symlinks on Windows are so tricky they're might as well
+  be not supported at all.&lt;/li&gt;
+&lt;li&gt;Destination directory may be specified for each topic individually which
+  makes it possible to install topics targeting different directories in one
+  run.&lt;/li&gt;
+&lt;li&gt;Simple partial deployment. If machine requires only a subset of topics
+  tracked in the repository it is easy to list them all in a plain text file
+  or to provide them as command line arguments to the bootstrap script.
+  &lt;a href="https://thelocehiliosan.github.io/yadm/"&gt;yadm&lt;/a&gt;, for example does not provide such ability.&lt;/li&gt;
+&lt;li&gt;Dotfiles are not hidden in the repo by default. It makes no sense to have
+  &lt;code&gt;~/.bashrc&lt;/code&gt; point to &lt;code&gt;repo/bash/.bashrc&lt;/code&gt; instead of &lt;code&gt;repo/bash/bashrc&lt;/code&gt;, so
+  dots are added automatically for topics with default target PREFIX.&lt;/li&gt;
+&lt;li&gt;All operations are reversible because all overwritten files are backed up
+  beforehand.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="weaknesses"&gt;&lt;a class="toclink" href="#weaknesses"&gt;Weaknesses&lt;/a&gt;&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Single pass execution. It means some topics may be left partially configured
+  in case of errors. &lt;a href="https://www.gnu.org/software/stow/"&gt;stow&lt;/a&gt; is a good example of cautious approach. This is an
+  implementation detail and may be fixed in later versions of bootstrap
+  script.&lt;/li&gt;
+&lt;li&gt;No support for tree folding/unfolding. I consider that an overkill for
+  simple configuration management.&lt;/li&gt;
+&lt;li&gt;No automated reverse operation. In case you want to undo the changes made by
+  this &lt;a href="https://gitlab.com/sio/server_common/blob/master/dotfiles/bootstrap.sh"&gt;script&lt;/a&gt; you'll have to restore backups manually from &lt;code&gt;$DOTFILES_BACKUP&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><category term="linux"></category><category term="windows"></category><category term="automation"></category><category term="bash"></category></entry><entry><title>Temporary virtual environment for Python</title><link href="https://potyarkin.ml/posts/2017/temporary-virtual-environment-for-python/" rel="alternate"></link><published>2017-10-05T16:50:00+03:00</published><updated>2017-10-05T16:50:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2017-10-05:/posts/2017/temporary-virtual-environment-for-python/</id><summary type="html">&lt;p&gt;Using Python on Windows does not come as naturally as on Unix-like systems, so
+any help is appreciated.&lt;/p&gt;
+&lt;p&gt;I wrote a batch script to automate creation, setup and deletion of Python virtual
+environment. This can come in handy when you want to test something in a clean env,
+or to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Using Python on Windows does not come as naturally as on Unix-like systems, so
+any help is appreciated.&lt;/p&gt;
+&lt;p&gt;I wrote a batch script to automate creation, setup and deletion of Python virtual
+environment. This can come in handy when you want to test something in a clean env,
+or to play with &lt;code&gt;pip install&lt;/code&gt; and get acquainted with a new package from PyPI.&lt;/p&gt;
+&lt;h2 id="venv-tempbat"&gt;&lt;a class="toclink" href="#venv-tempbat"&gt;venv-temp.bat&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;You can download the script from
+&lt;a href="https://gist.github.com/sio/fbc46ae41607b206ce9099dc8485df34"&gt;https://gist.github.com/sio/...&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The code is licensed under a permissive opensource license (Apache License,
+Version 2.0) so feel free to use it for your hobby and work projects.&lt;/p&gt;
+&lt;p&gt;Report any bugs, ideas, feature requests via GitHub issues/comments -
+all feedback is welcome!&lt;/p&gt;
+&lt;h2 id="installation"&gt;&lt;a class="toclink" href="#installation"&gt;Installation&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Downloaded script does not require any installation.&lt;/p&gt;
+&lt;p&gt;If &lt;code&gt;python&lt;/code&gt; is not available from your &lt;code&gt;%PATH%&lt;/code&gt;, you have to specify the location
+of &lt;code&gt;python.exe&lt;/code&gt; in the script (change the value of &lt;code&gt;PYTHON&lt;/code&gt; variable).&lt;/p&gt;
+&lt;h2 id="usage"&gt;&lt;a class="toclink" href="#usage"&gt;Usage&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Launch the script from &lt;code&gt;cmd.exe&lt;/code&gt; to read all error output (if any) or by
+double-clicking if you're confident it works on your system.&lt;/p&gt;
+&lt;p&gt;After you're done experimenting and are ready to discard the venv, just end shell
+session with &lt;code&gt;exit&lt;/code&gt; - the script will take care of cleanup.&lt;/p&gt;
+&lt;p&gt;If you close the
+terminal window without typing &lt;code&gt;exit&lt;/code&gt;, the script will be terminated before it
+performs cleanup. This has no harmful consequences except taking 20-50MB of disk
+space. Old venv directory will be purged before reusing, so no changes you've
+made will affect the environment you'll get next time.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; If you have no internet connection, the script remains usable, but &lt;code&gt;pip&lt;/code&gt;
+will print a lot of error messages while trying to update itself. Don't worry, that's ok.&lt;/p&gt;</content><category term="windows"></category><category term="script"></category><category term="gist"></category></entry><entry><title>Portable development setup for Python on Windows</title><link href="https://potyarkin.ml/posts/2017/portable-development-setup-for-python-on-windows/" rel="alternate"></link><published>2017-09-20T00:00:00+03:00</published><updated>2017-09-20T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2017-09-20:/posts/2017/portable-development-setup-for-python-on-windows/</id><summary type="html">&lt;h2 id="winpython"&gt;&lt;a class="toclink" href="#winpython"&gt;WinPython&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://winpython.github.io/"&gt;https://winpython.github.io/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;All-in-one distribution which comes with many difficult-to-build packages
+preinstalled. And their ...-Zero version is great for thumb drives!&lt;/p&gt;
+&lt;p&gt;Pip works just fine, but installing packages that require C compiler is
+always a pain on Windows. May be I should look into conda and see if …&lt;/p&gt;</summary><content type="html">&lt;h2 id="winpython"&gt;&lt;a class="toclink" href="#winpython"&gt;WinPython&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://winpython.github.io/"&gt;https://winpython.github.io/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;All-in-one distribution which comes with many difficult-to-build packages
+preinstalled. And their ...-Zero version is great for thumb drives!&lt;/p&gt;
+&lt;p&gt;Pip works just fine, but installing packages that require C compiler is
+always a pain on Windows. May be I should look into conda and see if it
+offers a portable variant.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; there are unofficial binary wheels for most common Python packages
+at &lt;a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/"&gt;http://www.lfd.uci.edu/~gohlke/pythonlibs/&lt;/a&gt; The site's hosting is a little
+unreliable, so it might take a few trys to fetch a package.&lt;/p&gt;
+&lt;h2 id="git-portable"&gt;&lt;a class="toclink" href="#git-portable"&gt;Git Portable&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://git-scm.com/download/win"&gt;https://git-scm.com/download/win&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Git for Windows is now recommended by official Git website, and there always
+is a portable version.&lt;/p&gt;
+&lt;p&gt;This package provides not only Git but also bash and a basic MSYS environment
+(coreutils, sed, grep, awk, etc) which make life on Windows &lt;em&gt;so much&lt;/em&gt; easier!
+Also, it comes with VIM preinstalled, which is a damn good editor and is
+preferred by many developers.&lt;/p&gt;
+&lt;h2 id="gnu-make"&gt;&lt;a class="toclink" href="#gnu-make"&gt;GNU Make&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://www.equation.com/servlet/equation.cmd?fa=make"&gt;http://www.equation.com/servlet/equation.cmd?fa=make&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Unfortunately Git for Windows does not come with GNU make preinstalled, so
+we have to download it manually. Great guys at Equation Solution are regularly
+building standalone versions of GNU Make for 32-bit and 64-bit Windows.&lt;/p&gt;
+&lt;p&gt;Downloaded file has to be placed somewhere in PATH.&lt;/p&gt;
+&lt;h2 id="github-with-ssh-keys"&gt;&lt;a class="toclink" href="#github-with-ssh-keys"&gt;GitHub with SSH keys&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://help.github.com/articles/connecting-to-github-with-ssh/"&gt;https://help.github.com/articles/connecting-to-github-with-ssh/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I don't know if it is even possible to setup HTTPS authentication without
+installing GitHub Desktop, and SSH key authentication works with GitHub
+same as everywhere.&lt;/p&gt;
+&lt;p&gt;I keep the keys on my laptop and the rest of the environment is on a thumb
+drive. That way I can develop anywhere I want, Windows comes as a given (sadly),
+and I don't have to worry about keys security, because they are not exposed
+to random computers.&lt;/p&gt;
+&lt;p&gt;Official documentation recommends using HTTPS just because it's easier for
+newcomers (&lt;a href="https://stackoverflow.com/questions/11041729"&gt;https://stackoverflow.com/questions/11041729&lt;/a&gt;)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It does not require generating public/private keys and uploading the correct
+  one to GitHub&lt;/li&gt;
+&lt;li&gt;HTTPS is allowed everywhere and SSH might be blocked by a firewall&lt;/li&gt;
+&lt;/ul&gt;</content><category term="python"></category><category term="windows"></category><category term="bookmarks"></category></entry></feed>
