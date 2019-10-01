@@ -41,7 +41,7 @@
 
 
 
-    <meta name="description" content="I often use Makefiles not just as a build tool but as a handy way to execute sequences of commands. And the commands I've found myself...">
+    <meta name="description" content="I often use Makefiles not just as a build tool but as a handy way to execute sequences of commands. The commands I've found myself...">
 
     <meta name="author" content="Vitaly Potyarkin">
 
@@ -54,7 +54,7 @@
 <!-- Open Graph -->
 <meta property="og:site_name" content="Orange Sun"/>
 <meta property="og:title" content="Manage Python virtual environment from your Makefile"/>
-<meta property="og:description" content="I often use Makefiles not just as a build tool but as a handy way to execute sequences of commands. And the commands I've found myself..."/>
+<meta property="og:description" content="I often use Makefiles not just as a build tool but as a handy way to execute sequences of commands. The commands I've found myself..."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="https://potyarkin.ml/posts/2019/manage-python-virtual-environment-from-your-makefile/"/>
 <meta property="og:type" content="article"/>
@@ -83,7 +83,7 @@
   },
   "image": "https://potyarkin.ml/theme/images/post-bg.jpg",
   "url": "https://potyarkin.ml/posts/2019/manage-python-virtual-environment-from-your-makefile/",
-  "description": "I often use Makefiles not just as a build tool but as a handy way to execute sequences of commands. And the commands I've found myself..."
+  "description": "I often use Makefiles not just as a build tool but as a handy way to execute sequences of commands. The commands I've found myself..."
 }
 </script>
 </head>
@@ -142,7 +142,7 @@
         <div class="inner">
             <section class="post-content">
                 <p>I often use Makefiles not just as a build tool but as a handy way to execute
-sequences of commands. And the commands I've found myself executing again and
+sequences of commands. The commands I've found myself executing again and
 again lately are the ones to manage Python virtual environments:</p>
 <ul>
 <li>Create new venv</li>
@@ -177,7 +177,7 @@ to be explicitly invoked. Instead, you write make targets that depend on
   into venv (<code>pip install -e</code>) - all changes to the source code will
   immediately affect the package in virtual environment.</li>
 </ul>
-<p>And all these steps will be repeated in case <code>requirements.txt</code> or <code>setup.py</code>
+<p>All these steps will be repeated in case <code>requirements.txt</code> or <code>setup.py</code>
 is modified. That means you'll never have to worry about syncing venv with its
 description. Add new dependency to <code>setup.py</code> and consider it installed,
 because there is no way it'll be forgotten the next time you invoke <code>make</code>.</p>
