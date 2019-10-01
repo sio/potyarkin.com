@@ -3,7 +3,7 @@ date: 2019-10-01
 tags: python, automation
 
 I often use Makefiles not just as a build tool but as a handy way to execute
-sequences of commands. And the commands I've found myself executing again and
+sequences of commands. The commands I've found myself executing again and
 again lately are the ones to manage Python virtual environments:
 
 - Create new venv
@@ -41,7 +41,7 @@ Despite its apparent simplicity this Makefile will do very much when invoked:
   into venv (`pip install -e`) - all changes to the source code will
   immediately affect the package in virtual environment.
 
-And all these steps will be repeated in case `requirements.txt` or `setup.py`
+All these steps will be repeated in case `requirements.txt` or `setup.py`
 is modified. That means you'll never have to worry about syncing venv with its
 description. Add new dependency to `setup.py` and consider it installed,
 because there is no way it'll be forgotten the next time you invoke `make`.
