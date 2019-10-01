@@ -1,5 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/all.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2019-08-26T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Cygheap base mismatch in Git for Windows</title><link href="https://potyarkin.ml/posts/2019/cygheap-base-mismatch-in-git-for-windows/" rel="alternate"></link><published>2019-08-26T00:00:00+03:00</published><updated>2019-08-26T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2019-08-26:/posts/2019/cygheap-base-mismatch-in-git-for-windows/</id><summary type="html">&lt;p&gt;This error has haunted me for several months:&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/all.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2019-10-01T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Manage Python virtual environment from your Makefile</title><link href="https://potyarkin.ml/posts/2019/manage-python-virtual-environment-from-your-makefile/" rel="alternate"></link><published>2019-10-01T00:00:00+03:00</published><updated>2019-10-01T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2019-10-01:/posts/2019/manage-python-virtual-environment-from-your-makefile/</id><summary type="html">&lt;p&gt;I often use Makefiles not just as a build tool but as a handy way to execute
+sequences of commands. And the commands I've found myself executing again and
+again lately are the ones to manage Python virtual environments:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Create new venv&lt;/li&gt;
+&lt;li&gt;Update pip to the latest version that enables …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;I often use Makefiles not just as a build tool but as a handy way to execute
+sequences of commands. And the commands I've found myself executing again and
+again lately are the ones to manage Python virtual environments:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Create new venv&lt;/li&gt;
+&lt;li&gt;Update pip to the latest version that enables all the cool new features&lt;/li&gt;
+&lt;li&gt;Install project requirements&lt;/li&gt;
+&lt;li&gt;Delete venv and redo it again to see if everything still works from clean slate&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The process is tedious and begs to be automated. And Makefile is a good fit
+because in addition to basic scripting capabilities it offers proper
+dependency handling that simplifies the task quite a bit.&lt;/p&gt;
+&lt;p&gt;The outcome of my attempts at such automation is &lt;a href="https://github.com/sio/Makefile.venv"&gt;Makefile.venv&lt;/a&gt; - a Makefile
+that seamlessly handles all virtual environment routines without ever needing
+to be explicitly invoked. Instead, you write make targets that depend on
+&lt;code&gt;venv&lt;/code&gt; and refer to all executables in virtual environment via
+&lt;code&gt;$(VENV)/executable&lt;/code&gt;, e.g. &lt;code&gt;$(VENV)/python&lt;/code&gt; or &lt;code&gt;$(VENV)/pip&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Using &lt;a href="https://github.com/sio/Makefile.venv"&gt;Makefile.venv&lt;/a&gt; is easy:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;test&lt;/span&gt;
+&lt;span class="nf"&gt;test&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;venv&lt;/span&gt;
+    &lt;span class="k"&gt;$(&lt;/span&gt;VENV&lt;span class="k"&gt;)&lt;/span&gt;/python -m unittest
+
+&lt;span class="cp"&gt;include Makefile.venv  # All the magic happens here&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Despite its apparent simplicity this Makefile will do very much when invoked:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A virtual environment will be created in current directory&lt;/li&gt;
+&lt;li&gt;Pip will be automatically updated to the latest version&lt;/li&gt;
+&lt;li&gt;Project requirements will be installed (both &lt;code&gt;requirements.txt&lt;/code&gt; and
+  &lt;code&gt;setup.py&lt;/code&gt; are supported)&lt;/li&gt;
+&lt;li&gt;If &lt;code&gt;setup.py&lt;/code&gt; is present, the project will be installed in development mode
+  into venv (&lt;code&gt;pip install -e&lt;/code&gt;) - all changes to the source code will
+  immediately affect the package in virtual environment.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And all these steps will be repeated in case &lt;code&gt;requirements.txt&lt;/code&gt; or &lt;code&gt;setup.py&lt;/code&gt;
+is modified. That means you'll never have to worry about syncing venv with its
+description. Add new dependency to &lt;code&gt;setup.py&lt;/code&gt; and consider it installed,
+because there is no way it'll be forgotten the next time you invoke &lt;code&gt;make&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;If you'll need to debug something interactively, there are &lt;code&gt;make python&lt;/code&gt; and
+&lt;code&gt;make ipython&lt;/code&gt; for REPL and &lt;code&gt;make bash&lt;/code&gt; (or &lt;code&gt;shell&lt;/code&gt; or &lt;code&gt;zsh&lt;/code&gt;) for shell, but I
+rarely use those. Most of the time running &lt;code&gt;make&lt;/code&gt; with my targets for
+executing the entry point or running unit tests is enough. In fact, I've
+noticed that after introducing &lt;a href="https://github.com/sio/Makefile.venv"&gt;Makefile.venv&lt;/a&gt; into my workflow I've
+completely stopped activating virtual environments manually.&lt;/p&gt;
+&lt;p&gt;I encourage you to try &lt;a href="https://github.com/sio/Makefile.venv"&gt;Makefile.venv&lt;/a&gt; and hope you'll find this approach
+useful. If you have some comments or would like to point out the faults of
+using Makefiles for venv, please shoot me an e-mail or create an &lt;a href="https://github.com/sio/Makefile.venv/issue"&gt;issue&lt;/a&gt; at
+GitHub project's page.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;PS: &lt;a href="https://github.com/sio/Makefile.venv"&gt;Makefile.venv&lt;/a&gt; was inspired by &lt;a href="https://stackoverflow.com/questions/24736146"&gt;this StackOverflow
+thread&lt;/a&gt; and by &lt;a href="http://blog.bottlepy.org/2012/07/16/virtualenv-and-makefiles.html"&gt;this blog post&lt;/a&gt; from the authors of
+Bottle.py&lt;/p&gt;
+&lt;/blockquote&gt;</content><category term="python"></category><category term="automation"></category></entry><entry><title>Cygheap base mismatch in Git for Windows</title><link href="https://potyarkin.ml/posts/2019/cygheap-base-mismatch-in-git-for-windows/" rel="alternate"></link><published>2019-08-26T00:00:00+03:00</published><updated>2019-08-26T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2019-08-26:/posts/2019/cygheap-base-mismatch-in-git-for-windows/</id><summary type="html">&lt;p&gt;This error has haunted me for several months:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;4 [main] head (6660) C:\...\usr\bin\head.exe:r
 *** fatal error - cygheap base mismatch detected - 0x612C7410/0xAF7410.
 
