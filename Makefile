@@ -1,5 +1,4 @@
-PY?=python
-PELICAN?=pelican
+PELICAN?=$(VENV)/pelican
 PELICANOPTS=
 
 BASEDIR=$(CURDIR)
@@ -36,25 +35,35 @@ help:
 	@echo 'Set the RELATIVE variable to 1 to enable relative urls                    '
 	@echo '                                                                          '
 
-html:
+html: venv
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS)
 
-publish:
+publish: venv
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(PUBLISHCONF) $(PELICANOPTS)
 
-profile:
-	$(PY) $(PROFILER) $(INPUTDIR) -o $(OUTPUTDIR) -s $(PUBLISHCONF) $(PELICANOPTS)
+profile: venv
+	$(VENV)/python $(PROFILER) $(INPUTDIR) -o $(OUTPUTDIR) -s $(PUBLISHCONF) $(PELICANOPTS)
 
 clean:
 	[ ! -d $(OUTPUTDIR) ] || rm -rf $(OUTPUTDIR)
 
-regenerate:
+regenerate: venv
 	$(PELICAN) -r $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS)
 
-devserver:
+devserver: venv
 	$(PELICAN) -lr $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS)
 
-serve:
-	cd $(OUTPUTDIR) && $(PY) -m pelican.server $(PORT)
+serve: venv
+	cd $(OUTPUTDIR) && $(VENV)/python -m pelican.server $(PORT)
 
 .PHONY: html help clean regenerate serve devserver publish
+
+
+include Makefile.venv
+Makefile.venv:
+	curl \
+		-o Makefile.fetched \
+		-L "https://github.com/sio/Makefile.venv/raw/v2019.09.30/Makefile.venv"
+	echo "d28c07037c3e18657da987749738cfbb30c5956c9fdf96edf319f3df2eddc255 *Makefile.fetched" \
+		| sha256sum --check - \
+		&& mv Makefile.fetched Makefile.venv
