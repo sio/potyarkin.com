@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0"><channel><title>Orange Sun</title><link>https://potyarkin.ml/</link><description>Unsorted ramblings, sometimes related to programming</description><lastBuildDate>Tue, 01 Oct 2019 00:00:00 +0300</lastBuildDate><item><title>Manage Python virtual environment from your Makefile</title><link>https://potyarkin.ml/posts/2019/manage-python-virtual-environment-from-your-makefile/</link><description>&lt;p&gt;I often use Makefiles not just as a build tool but as a handy way to execute
-sequences of commands. And the commands I've found myself executing again and
+sequences of commands. The commands I've found myself executing again and
 again lately are the ones to manage Python virtual environments:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Create new venv&lt;/li&gt;
-&lt;li&gt;Update pip to the latest version that enables …&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vitaly Potyarkin</dc:creator><pubDate>Tue, 01 Oct 2019 00:00:00 +0300</pubDate><guid isPermaLink="false">tag:potyarkin.ml,2019-10-01:/posts/2019/manage-python-virtual-environment-from-your-makefile/</guid><category>python</category><category>automation</category></item><item><title>Cygheap base mismatch in Git for Windows</title><link>https://potyarkin.ml/posts/2019/cygheap-base-mismatch-in-git-for-windows/</link><description>&lt;p&gt;This error has haunted me for several months:&lt;/p&gt;
+&lt;li&gt;Update pip to the latest version that enables all …&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vitaly Potyarkin</dc:creator><pubDate>Tue, 01 Oct 2019 00:00:00 +0300</pubDate><guid isPermaLink="false">tag:potyarkin.ml,2019-10-01:/posts/2019/manage-python-virtual-environment-from-your-makefile/</guid><category>python</category><category>automation</category></item><item><title>Cygheap base mismatch in Git for Windows</title><link>https://potyarkin.ml/posts/2019/cygheap-base-mismatch-in-git-for-windows/</link><description>&lt;p&gt;This error has haunted me for several months:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;4 [main] head (6660) C:\...\usr\bin\head.exe:r
 *** fatal error - cygheap base mismatch detected - 0x612C7410/0xAF7410.
 

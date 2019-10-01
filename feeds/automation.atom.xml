@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - automation</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/automation.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2019-10-01T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Manage Python virtual environment from your Makefile</title><link href="https://potyarkin.ml/posts/2019/manage-python-virtual-environment-from-your-makefile/" rel="alternate"></link><published>2019-10-01T00:00:00+03:00</published><updated>2019-10-01T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2019-10-01:/posts/2019/manage-python-virtual-environment-from-your-makefile/</id><summary type="html">&lt;p&gt;I often use Makefiles not just as a build tool but as a handy way to execute
-sequences of commands. And the commands I've found myself executing again and
+sequences of commands. The commands I've found myself executing again and
 again lately are the ones to manage Python virtual environments:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Create new venv&lt;/li&gt;
-&lt;li&gt;Update pip to the latest version that enables …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;I often use Makefiles not just as a build tool but as a handy way to execute
-sequences of commands. And the commands I've found myself executing again and
+&lt;li&gt;Update pip to the latest version that enables all …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;I often use Makefiles not just as a build tool but as a handy way to execute
+sequences of commands. The commands I've found myself executing again and
 again lately are the ones to manage Python virtual environments:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Create new venv&lt;/li&gt;
@@ -40,7 +40,7 @@ to be explicitly invoked. Instead, you write make targets that depend on
   into venv (&lt;code&gt;pip install -e&lt;/code&gt;) - all changes to the source code will
   immediately affect the package in virtual environment.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;And all these steps will be repeated in case &lt;code&gt;requirements.txt&lt;/code&gt; or &lt;code&gt;setup.py&lt;/code&gt;
+&lt;p&gt;All these steps will be repeated in case &lt;code&gt;requirements.txt&lt;/code&gt; or &lt;code&gt;setup.py&lt;/code&gt;
 is modified. That means you'll never have to worry about syncing venv with its
 description. Add new dependency to &lt;code&gt;setup.py&lt;/code&gt; and consider it installed,
 because there is no way it'll be forgotten the next time you invoke &lt;code&gt;make&lt;/code&gt;.&lt;/p&gt;
