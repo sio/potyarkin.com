@@ -1,4 +1,5 @@
 # Virtual environment in Makefile
+.venv/
 Makefile.venv
 
 # Byte-compiled / optimized / DLL files
