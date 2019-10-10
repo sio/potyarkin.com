@@ -12,7 +12,7 @@ later, test automation allows you to make sure your changes did not break
 anything that depends on the part of code you've just modified.&lt;/p&gt;
 &lt;p&gt;As far as I know, there are no tools that allow us to perform automated testing
 of functions and queries written in Power Query M language. That's why I've
-built a simple unit testing framework into &lt;a href="https://github.com/sio/LibPQ"&gt;LibPQ&lt;/a&gt;.&lt;/p&gt;
+built a simple unit testing framework into &lt;a href="https://libpq.ml"&gt;LibPQ&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id="libpq-unittest-framework"&gt;&lt;a class="toclink" href="#libpq-unittest-framework"&gt;LibPQ UnitTest framework&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;The &lt;a href="https://libpq.ml/Docs/UnitTesting"&gt;UnitTest&lt;/a&gt; framework is modelled after the only other unit testing tool I
 have experience with: Python's
