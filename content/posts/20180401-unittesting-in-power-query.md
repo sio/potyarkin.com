@@ -80,8 +80,8 @@ subtests.
 [LibPQ]: https://github.com/sio/LibPQ
 [UnitTest.Discover]: https://github.com/sio/LibPQ/blob/master/Modules/UnitTest.Discover.pq
 [UnitTest.Run]: https://github.com/sio/LibPQ/blob/master/Modules/UnitTest.Run.pq
-[UnitTest]: https://github.com/sio/LibPQ/blob/master/Docs/UnitTesting.md
-[readme]: https://github.com/sio/LibPQ/blob/master/README.md
+[UnitTest]: https://libpq.ml/Docs/UnitTesting
+[readme]: https://libpq.ml
 [test sample]: https://github.com/sio/LibPQ/blob/master/Samples/Tests.Sample.pq
 
 [getting started]: {filename}20180401-getting-started-with-libpq.md
