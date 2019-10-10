@@ -74,7 +74,7 @@ control systems, extensibility by third-party libraries, etc.&lt;/p&gt;
 not very flexible tool. It lacks some features taken for granted by developers
 who are used to other programming languages such as compatibility with version
 control systems, extensibility by third-party libraries, etc.&lt;/p&gt;
-&lt;p&gt;That is why I have started &lt;strong&gt;&lt;a href="https://github.com/sio/LibPQ"&gt;LibPQ&lt;/a&gt;&lt;/strong&gt; - an open-source M language library
+&lt;p&gt;That is why I have started &lt;strong&gt;&lt;a href="https://libpq.ml"&gt;LibPQ&lt;/a&gt;&lt;/strong&gt; - an open-source M language library
 meant to expand the standard library and to make it easier for others to do so.
 Its main features are:&lt;/p&gt;
 &lt;h3 id="importing-source-code-from-plain-text-files-located-on-disk-or-on-the-web"&gt;&lt;a class="toclink" href="#importing-source-code-from-plain-text-files-located-on-disk-or-on-the-web"&gt;Importing source code from plain text files located on disk or on the web&lt;/a&gt;&lt;/h3&gt;
@@ -102,7 +102,7 @@ should cover your code with unit tests.&lt;/p&gt;
 &lt;p&gt;There are no unit testing tools in standard library, but LibPQ offers a basic
 unit testing framework that supports test discovery, grouping tests into test
 suites and comes with a bunch of handy assertion functions. To learn more read
-this &lt;a href="https://github.com/sio/LibPQ/blob/master/Docs/UnitTesting.md"&gt;help page&lt;/a&gt;.&lt;/p&gt;
+this &lt;a href="https://libpq.ml/Docs/UnitTesting/"&gt;help page&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id="a-collection-of-general-purpose-functions-and-queries"&gt;&lt;a class="toclink" href="#a-collection-of-general-purpose-functions-and-queries"&gt;A collection of general purpose functions and queries&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;And last, LibPQ contains some general purpose modules that you might find
 useful. If not - go write some new ones, you have the tools now!&lt;/p&gt;

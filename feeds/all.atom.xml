@@ -820,7 +820,7 @@ anything that depends on the part of code you've just modified.&lt;/p&gt;
 of functions and queries written in Power Query M language. That's why I've
 built a simple unit testing framework into &lt;a href="https://github.com/sio/LibPQ"&gt;LibPQ&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id="libpq-unittest-framework"&gt;&lt;a class="toclink" href="#libpq-unittest-framework"&gt;LibPQ UnitTest framework&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;The &lt;a href="https://github.com/sio/LibPQ/blob/master/Docs/UnitTesting.md"&gt;UnitTest&lt;/a&gt; framework is modelled after the only other unit testing tool I
+&lt;p&gt;The &lt;a href="https://libpq.ml/Docs/UnitTesting"&gt;UnitTest&lt;/a&gt; framework is modelled after the only other unit testing tool I
 have experience with: Python's
 &lt;a href="https://docs.python.org/3/library/unittest.html"&gt;unittest&lt;/a&gt;. It offers the
 following features:&lt;/p&gt;
@@ -833,9 +833,9 @@ following features:&lt;/p&gt;
   automation tool you create&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Inner workings of the test framework are described in the
-&lt;a href="https://github.com/sio/LibPQ/blob/master/Docs/UnitTesting.md"&gt;documentation&lt;/a&gt;. This article will demonstrate how it works.&lt;/p&gt;
+&lt;a href="https://libpq.ml/Docs/UnitTesting"&gt;documentation&lt;/a&gt;. This article will demonstrate how it works.&lt;/p&gt;
 &lt;h2 id="unittest-demo"&gt;&lt;a class="toclink" href="#unittest-demo"&gt;UnitTest demo&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;All modules described here are imported with LibPQ, so a basic familiarity with the library is assumed (&lt;a href="https://github.com/sio/LibPQ/blob/master/README.md"&gt;readme&lt;/a&gt;, &lt;a href="https://potyarkin.ml/posts/2018/getting-started-with-libpq/"&gt;getting started&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;All modules described here are imported with LibPQ, so a basic familiarity with the library is assumed (&lt;a href="https://libpq.ml"&gt;readme&lt;/a&gt;, &lt;a href="https://potyarkin.ml/posts/2018/getting-started-with-libpq/"&gt;getting started&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;Let's create a basic test suite and save it in the directory listed in &lt;code&gt;LibPQPath&lt;/code&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cm"&gt;/* DemoTests.pq - sample test suite */&lt;/span&gt;
 &lt;span class="p"&gt;[&lt;/span&gt;
@@ -873,16 +873,16 @@ false&lt;/code&gt; but when you'll have dozens of test cases you'll probably pre
 behavior (group test results by status).&lt;/p&gt;
 &lt;h2 id="more-about-unittest-in-libpq"&gt;&lt;a class="toclink" href="#more-about-unittest-in-libpq"&gt;More about UnitTest in LibPQ&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;If you liked the idea of unit testing M language code, check out the main
-&lt;a href="https://github.com/sio/LibPQ/blob/master/Docs/UnitTesting.md"&gt;UnitTest&lt;/a&gt; documentation and a more extensive &lt;a href="https://github.com/sio/LibPQ/blob/master/Samples/Tests.Sample.pq"&gt;test sample&lt;/a&gt; that makes use of
+&lt;a href="https://libpq.ml/Docs/UnitTesting"&gt;UnitTest&lt;/a&gt; documentation and a more extensive &lt;a href="https://github.com/sio/LibPQ/blob/master/Samples/Tests.Sample.pq"&gt;test sample&lt;/a&gt; that makes use of
 subtests.&lt;/p&gt;</content><category term="m"></category><category term="power-query"></category><category term="LibPQ"></category></entry><entry><title>Getting started with LibPQ</title><link href="https://potyarkin.ml/posts/2018/getting-started-with-libpq/" rel="alternate"></link><published>2018-04-01T00:00:00+03:00</published><updated>2018-04-01T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-04-01:/posts/2018/getting-started-with-libpq/</id><summary type="html">&lt;p&gt;This is a step by step guide to getting started with &lt;a href="https://potyarkin.ml/posts/2018/expanding-power-query-standard-library-introducing-libpq/"&gt;LibPQ&lt;/a&gt;, an illustrated
-version of &lt;a href="https://github.com/sio/LibPQ/blob/master/README.md#installation-and-usage"&gt;"Installation and usage"&lt;/a&gt; section of the official
+version of &lt;a href="https://libpq.ml/#installation-and-usage"&gt;"Installation and usage"&lt;/a&gt; section of the official
 documentation.&lt;/p&gt;
 &lt;h2 id="installation"&gt;&lt;a class="toclink" href="#installation"&gt;Installation&lt;/a&gt;&lt;/h2&gt;
 &lt;h3 id="libpq-source-code"&gt;&lt;a class="toclink" href="#libpq-source-code"&gt;LibPQ source code&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;The source code of the library has to be present in each workbook that uses it.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Create a new blank query: &lt;code&gt;Data …&lt;/code&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;This is a step by step guide to getting started with &lt;a href="https://potyarkin.ml/posts/2018/expanding-power-query-standard-library-introducing-libpq/"&gt;LibPQ&lt;/a&gt;, an illustrated
-version of &lt;a href="https://github.com/sio/LibPQ/blob/master/README.md#installation-and-usage"&gt;"Installation and usage"&lt;/a&gt; section of the official
+version of &lt;a href="https://libpq.ml/#installation-and-usage"&gt;"Installation and usage"&lt;/a&gt; section of the official
 documentation.&lt;/p&gt;
 &lt;h2 id="installation"&gt;&lt;a class="toclink" href="#installation"&gt;Installation&lt;/a&gt;&lt;/h2&gt;
 &lt;h3 id="libpq-source-code"&gt;&lt;a class="toclink" href="#libpq-source-code"&gt;LibPQ source code&lt;/a&gt;&lt;/h3&gt;
@@ -972,7 +972,7 @@ control systems, extensibility by third-party libraries, etc.&lt;/p&gt;
 not very flexible tool. It lacks some features taken for granted by developers
 who are used to other programming languages such as compatibility with version
 control systems, extensibility by third-party libraries, etc.&lt;/p&gt;
-&lt;p&gt;That is why I have started &lt;strong&gt;&lt;a href="https://github.com/sio/LibPQ"&gt;LibPQ&lt;/a&gt;&lt;/strong&gt; - an open-source M language library
+&lt;p&gt;That is why I have started &lt;strong&gt;&lt;a href="https://libpq.ml"&gt;LibPQ&lt;/a&gt;&lt;/strong&gt; - an open-source M language library
 meant to expand the standard library and to make it easier for others to do so.
 Its main features are:&lt;/p&gt;
 &lt;h3 id="importing-source-code-from-plain-text-files-located-on-disk-or-on-the-web"&gt;&lt;a class="toclink" href="#importing-source-code-from-plain-text-files-located-on-disk-or-on-the-web"&gt;Importing source code from plain text files located on disk or on the web&lt;/a&gt;&lt;/h3&gt;
@@ -1000,7 +1000,7 @@ should cover your code with unit tests.&lt;/p&gt;
 &lt;p&gt;There are no unit testing tools in standard library, but LibPQ offers a basic
 unit testing framework that supports test discovery, grouping tests into test
 suites and comes with a bunch of handy assertion functions. To learn more read
-this &lt;a href="https://github.com/sio/LibPQ/blob/master/Docs/UnitTesting.md"&gt;help page&lt;/a&gt;.&lt;/p&gt;
+this &lt;a href="https://libpq.ml/Docs/UnitTesting/"&gt;help page&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id="a-collection-of-general-purpose-functions-and-queries"&gt;&lt;a class="toclink" href="#a-collection-of-general-purpose-functions-and-queries"&gt;A collection of general purpose functions and queries&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;And last, LibPQ contains some general purpose modules that you might find
 useful. If not - go write some new ones, you have the tools now!&lt;/p&gt;
