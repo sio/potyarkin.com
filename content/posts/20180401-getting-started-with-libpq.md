@@ -83,7 +83,7 @@ or contact me via [e-mail].
 [LibPQ]: {filename}20180103-introducing-libpq.md
 [LibPQ.pq]: https://github.com/sio/LibPQ/blob/master/LibPQ.pq
 [LibPQPath-sample.pq]: https://github.com/sio/LibPQ/blob/master/LibPQPath-sample.pq
-[Installation]: https://github.com/sio/LibPQ/blob/master/README.md#installation-and-usage
+[Installation]: https://libpq.ml/#installation-and-usage
 [issue]: https://github.com/sio/LibPQ/issues
 [e-mail]: mailto:sio.wtf@gmail.com
 
