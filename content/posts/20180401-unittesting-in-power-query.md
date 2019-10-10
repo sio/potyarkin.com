@@ -77,7 +77,7 @@ If you liked the idea of unit testing M language code, check out the main
 [UnitTest] documentation and a more extensive [test sample] that makes use of
 subtests.
 
-[LibPQ]: https://github.com/sio/LibPQ
+[LibPQ]: https://libpq.ml
 [UnitTest.Discover]: https://github.com/sio/LibPQ/blob/master/Modules/UnitTest.Discover.pq
 [UnitTest.Run]: https://github.com/sio/LibPQ/blob/master/Modules/UnitTest.Run.pq
 [UnitTest]: https://libpq.ml/Docs/UnitTesting
