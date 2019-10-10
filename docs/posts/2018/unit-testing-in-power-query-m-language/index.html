@@ -153,7 +153,7 @@ anything that depends on the part of code you've just modified.</p>
 of functions and queries written in Power Query M language. That's why I've
 built a simple unit testing framework into <a href="https://github.com/sio/LibPQ">LibPQ</a>.</p>
 <h2 id="libpq-unittest-framework"><a class="toclink" href="#libpq-unittest-framework">LibPQ UnitTest framework</a></h2>
-<p>The <a href="https://github.com/sio/LibPQ/blob/master/Docs/UnitTesting.md">UnitTest</a> framework is modelled after the only other unit testing tool I
+<p>The <a href="https://libpq.ml/Docs/UnitTesting">UnitTest</a> framework is modelled after the only other unit testing tool I
 have experience with: Python's
 <a href="https://docs.python.org/3/library/unittest.html">unittest</a>. It offers the
 following features:</p>
@@ -166,9 +166,9 @@ following features:</p>
   automation tool you create</li>
 </ul>
 <p>Inner workings of the test framework are described in the
-<a href="https://github.com/sio/LibPQ/blob/master/Docs/UnitTesting.md">documentation</a>. This article will demonstrate how it works.</p>
+<a href="https://libpq.ml/Docs/UnitTesting">documentation</a>. This article will demonstrate how it works.</p>
 <h2 id="unittest-demo"><a class="toclink" href="#unittest-demo">UnitTest demo</a></h2>
-<p>All modules described here are imported with LibPQ, so a basic familiarity with the library is assumed (<a href="https://github.com/sio/LibPQ/blob/master/README.md">readme</a>, <a href="https://potyarkin.ml/posts/2018/getting-started-with-libpq/">getting started</a>).</p>
+<p>All modules described here are imported with LibPQ, so a basic familiarity with the library is assumed (<a href="https://libpq.ml">readme</a>, <a href="https://potyarkin.ml/posts/2018/getting-started-with-libpq/">getting started</a>).</p>
 <p>Let's create a basic test suite and save it in the directory listed in <code>LibPQPath</code>:</p>
 <div class="highlight"><pre><span></span><span class="cm">/* DemoTests.pq - sample test suite */</span>
 <span class="p">[</span>
@@ -206,7 +206,7 @@ false</code> but when you'll have dozens of test cases you'll probably prefer de
 behavior (group test results by status).</p>
 <h2 id="more-about-unittest-in-libpq"><a class="toclink" href="#more-about-unittest-in-libpq">More about UnitTest in LibPQ</a></h2>
 <p>If you liked the idea of unit testing M language code, check out the main
-<a href="https://github.com/sio/LibPQ/blob/master/Docs/UnitTesting.md">UnitTest</a> documentation and a more extensive <a href="https://github.com/sio/LibPQ/blob/master/Samples/Tests.Sample.pq">test sample</a> that makes use of
+<a href="https://libpq.ml/Docs/UnitTesting">UnitTest</a> documentation and a more extensive <a href="https://github.com/sio/LibPQ/blob/master/Samples/Tests.Sample.pq">test sample</a> that makes use of
 subtests.</p>
             </section>
 
