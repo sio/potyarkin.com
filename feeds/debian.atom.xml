@@ -72,4 +72,4 @@ hid-generic 0003:056A:037A.0001: input,hiddev0,hidraw0: USB HID v1.10 Mouse [Wac
 hid-generic 0003:056A:037A.0002: hiddev1,hidraw1: USB HID v1.10 Device [Wacom Co.,Ltd. CTL-472] on usb-0000:00:1d.0-1/input1
 input: Wacom One by Wacom S Pen as /devices/pci0000:00/0000:00:1d.0/usb6/6-1/6-1:1.0/0003:056A:037A.0001/input/input24
 wacom 0003:056A:037A.0001: hidraw0: USB HID v1.10 Mouse [Wacom Co.,Ltd. CTL-472] on usb-0000:00:1d.0-1/input0
-&lt;/pre&gt;&lt;/div&gt;</content><category term="linux"></category><category term="hardware"></category><category term="Debian"></category></entry></feed>
+&lt;/pre&gt;&lt;/div&gt;</content><category term="posts"></category><category term="linux"></category><category term="hardware"></category><category term="Debian"></category></entry></feed>

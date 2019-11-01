@@ -78,7 +78,7 @@ enthusiasts. But they are and they offer just as much value for personal
 projects as they do in production environment.&lt;/p&gt;
 &lt;p&gt;If you find yourself tinkering with Linux administration more than once a week
 it'll be worthwhile to try out Ansible or some other configuration management
-tool.&lt;/p&gt;</content><category term="ansible"></category><category term="web"></category><category term="server"></category><category term="automation"></category></entry><entry><title>Accidental submersion into web development</title><link href="https://potyarkin.ml/posts/2018/accidental-submersion-into-web-development/" rel="alternate"></link><published>2018-06-16T00:00:00+03:00</published><updated>2018-06-16T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-06-16:/posts/2018/accidental-submersion-into-web-development/</id><summary type="html">&lt;h2 id="the-library-problem"&gt;&lt;a class="toclink" href="#the-library-problem"&gt;The Library Problem&lt;/a&gt;&lt;/h2&gt;
+tool.&lt;/p&gt;</content><category term="posts"></category><category term="ansible"></category><category term="web"></category><category term="server"></category><category term="automation"></category></entry><entry><title>Accidental submersion into web development</title><link href="https://potyarkin.ml/posts/2018/accidental-submersion-into-web-development/" rel="alternate"></link><published>2018-06-16T00:00:00+03:00</published><updated>2018-06-16T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-06-16:/posts/2018/accidental-submersion-into-web-development/</id><summary type="html">&lt;h2 id="the-library-problem"&gt;&lt;a class="toclink" href="#the-library-problem"&gt;The Library Problem&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I love reading books. My wife loves reading books. We enjoy shopping for books
 and we live a ten minute commute away from a huge used books store. That means
 we have a lot of books. Like, really a lot. A little more than one thousand.&lt;/p&gt;
@@ -337,4 +337,4 @@ do enjoy using it!&lt;/p&gt;
 &lt;a href="https://morebooks.ml"&gt;https://morebooks.ml&lt;/a&gt; (registration is for family members only, sorry).  Of
 course, there are plenty of improvements to be made (you can see how long the
 TODO list is), but the maintenance itself requires almost zero attention now
-and I can happily switch from being a developer to becoming the end user.&lt;/p&gt;</content><category term="python"></category><category term="web"></category><category term="HomeLibraryCatalog"></category></entry></feed>
+and I can happily switch from being a developer to becoming the end user.&lt;/p&gt;</content><category term="posts"></category><category term="python"></category><category term="web"></category><category term="HomeLibraryCatalog"></category></entry></feed>

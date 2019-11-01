@@ -89,7 +89,7 @@ providing path to that file as an argument to the installation &lt;a href="https
   simple configuration management.&lt;/li&gt;
 &lt;li&gt;No automated reverse operation. In case you want to undo the changes made by
   this &lt;a href="https://gitlab.com/sio/server_common/blob/master/dotfiles/bootstrap.sh"&gt;script&lt;/a&gt; you'll have to restore backups manually from &lt;code&gt;$DOTFILES_BACKUP&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><category term="linux"></category><category term="windows"></category><category term="automation"></category><category term="bash"></category></entry><entry><title>Installing One by Wacom in Debian Stretch</title><link href="https://potyarkin.ml/posts/2018/installing-one-by-wacom-in-debian-stretch/" rel="alternate"></link><published>2018-08-22T00:00:00+03:00</published><updated>2018-08-22T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-08-22:/posts/2018/installing-one-by-wacom-in-debian-stretch/</id><summary type="html">&lt;p&gt;I believe there are many people who run Debian Stable as their main desktop OS.
+&lt;/ul&gt;</content><category term="posts"></category><category term="linux"></category><category term="windows"></category><category term="automation"></category><category term="bash"></category></entry><entry><title>Installing One by Wacom in Debian Stretch</title><link href="https://potyarkin.ml/posts/2018/installing-one-by-wacom-in-debian-stretch/" rel="alternate"></link><published>2018-08-22T00:00:00+03:00</published><updated>2018-08-22T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-08-22:/posts/2018/installing-one-by-wacom-in-debian-stretch/</id><summary type="html">&lt;p&gt;I believe there are many people who run Debian Stable as their main desktop OS.
 This article is a short how-to on enabling newer hardware in Debian Stable
 without switching to another version or distribution.&lt;/p&gt;
 &lt;h2 id="one-by-wacom"&gt;&lt;a class="toclink" href="#one-by-wacom"&gt;One by Wacom&lt;/a&gt;&lt;/h2&gt;
@@ -162,4 +162,4 @@ hid-generic 0003:056A:037A.0001: input,hiddev0,hidraw0: USB HID v1.10 Mouse [Wac
 hid-generic 0003:056A:037A.0002: hiddev1,hidraw1: USB HID v1.10 Device [Wacom Co.,Ltd. CTL-472] on usb-0000:00:1d.0-1/input1
 input: Wacom One by Wacom S Pen as /devices/pci0000:00/0000:00:1d.0/usb6/6-1/6-1:1.0/0003:056A:037A.0001/input/input24
 wacom 0003:056A:037A.0001: hidraw0: USB HID v1.10 Mouse [Wacom Co.,Ltd. CTL-472] on usb-0000:00:1d.0-1/input0
-&lt;/pre&gt;&lt;/div&gt;</content><category term="linux"></category><category term="hardware"></category><category term="Debian"></category></entry></feed>
+&lt;/pre&gt;&lt;/div&gt;</content><category term="posts"></category><category term="linux"></category><category term="hardware"></category><category term="Debian"></category></entry></feed>
