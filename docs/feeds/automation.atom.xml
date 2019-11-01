@@ -58,7 +58,7 @@ GitHub project's page.&lt;/p&gt;
 &lt;p&gt;PS: &lt;a href="https://github.com/sio/Makefile.venv"&gt;Makefile.venv&lt;/a&gt; was inspired by &lt;a href="https://stackoverflow.com/questions/24736146"&gt;this StackOverflow
 thread&lt;/a&gt; and by &lt;a href="http://blog.bottlepy.org/2012/07/16/virtualenv-and-makefiles.html"&gt;this blog post&lt;/a&gt; from the authors of
 Bottle.py&lt;/p&gt;
-&lt;/blockquote&gt;</content><category term="python"></category><category term="automation"></category></entry><entry><title>On dotfiles management</title><link href="https://potyarkin.ml/posts/2019/on-dotfiles-management/" rel="alternate"></link><published>2019-07-30T00:00:00+03:00</published><updated>2019-07-30T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2019-07-30:/posts/2019/on-dotfiles-management/</id><summary type="html">&lt;p&gt;This will be yet another description of dotfiles management by some random
+&lt;/blockquote&gt;</content><category term="posts"></category><category term="python"></category><category term="automation"></category></entry><entry><title>On dotfiles management</title><link href="https://potyarkin.ml/posts/2019/on-dotfiles-management/" rel="alternate"></link><published>2019-07-30T00:00:00+03:00</published><updated>2019-07-30T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2019-07-30:/posts/2019/on-dotfiles-management/</id><summary type="html">&lt;p&gt;This will be yet another description of dotfiles management by some random
 person on the Internet. I will try to explain what my setup is like and why it
 is that way.&lt;/p&gt;
 &lt;p&gt;If you're not yet using version control software for your configuration files
@@ -148,7 +148,7 @@ providing path to that file as an argument to the installation &lt;a href="https
   simple configuration management.&lt;/li&gt;
 &lt;li&gt;No automated reverse operation. In case you want to undo the changes made by
   this &lt;a href="https://gitlab.com/sio/server_common/blob/master/dotfiles/bootstrap.sh"&gt;script&lt;/a&gt; you'll have to restore backups manually from &lt;code&gt;$DOTFILES_BACKUP&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><category term="linux"></category><category term="windows"></category><category term="automation"></category><category term="bash"></category></entry><entry><title>Liberating effect of Ansible</title><link href="https://potyarkin.ml/posts/2018/liberating-effect-of-ansible/" rel="alternate"></link><published>2018-06-26T00:00:00+03:00</published><updated>2018-06-26T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-06-26:/posts/2018/liberating-effect-of-ansible/</id><summary type="html">&lt;p&gt;Maintaining two or three Linux machines is not that hard of a task. For many
+&lt;/ul&gt;</content><category term="posts"></category><category term="linux"></category><category term="windows"></category><category term="automation"></category><category term="bash"></category></entry><entry><title>Liberating effect of Ansible</title><link href="https://potyarkin.ml/posts/2018/liberating-effect-of-ansible/" rel="alternate"></link><published>2018-06-26T00:00:00+03:00</published><updated>2018-06-26T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-06-26:/posts/2018/liberating-effect-of-ansible/</id><summary type="html">&lt;p&gt;Maintaining two or three Linux machines is not that hard of a task. For many
 years I have thought it was not worth the effort to automate - regular backups
 and version-controlled configuration files seemed to be just enough.&lt;/p&gt;
 &lt;p&gt;And then Ansible had blown my mind.&lt;/p&gt;
@@ -227,4 +227,4 @@ enthusiasts. But they are and they offer just as much value for personal
 projects as they do in production environment.&lt;/p&gt;
 &lt;p&gt;If you find yourself tinkering with Linux administration more than once a week
 it'll be worthwhile to try out Ansible or some other configuration management
-tool.&lt;/p&gt;</content><category term="ansible"></category><category term="web"></category><category term="server"></category><category term="automation"></category></entry></feed>
+tool.&lt;/p&gt;</content><category term="posts"></category><category term="ansible"></category><category term="web"></category><category term="server"></category><category term="automation"></category></entry></feed>

@@ -30,7 +30,7 @@ performs cleanup. This has no harmful consequences except taking 20-50MB of disk
 space. Old venv directory will be purged before reusing, so no changes you've
 made will affect the environment you'll get next time.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; If you have no internet connection, the script remains usable, but &lt;code&gt;pip&lt;/code&gt;
-will print a lot of error messages while trying to update itself. Don't worry, that's ok.&lt;/p&gt;</content><category term="windows"></category><category term="script"></category><category term="gist"></category></entry><entry><title>Execute the same git subcommand in all local repositories</title><link href="https://potyarkin.ml/posts/2017/execute-the-same-git-subcommand-in-all-local-repositories/" rel="alternate"></link><published>2017-10-05T15:40:00+03:00</published><updated>2017-10-05T15:40:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2017-10-05:/posts/2017/execute-the-same-git-subcommand-in-all-local-repositories/</id><summary type="html">&lt;p&gt;If you work with more than one git project simultaneously, you often need to
+will print a lot of error messages while trying to update itself. Don't worry, that's ok.&lt;/p&gt;</content><category term="posts"></category><category term="windows"></category><category term="script"></category><category term="gist"></category></entry><entry><title>Execute the same git subcommand in all local repositories</title><link href="https://potyarkin.ml/posts/2017/execute-the-same-git-subcommand-in-all-local-repositories/" rel="alternate"></link><published>2017-10-05T15:40:00+03:00</published><updated>2017-10-05T15:40:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2017-10-05:/posts/2017/execute-the-same-git-subcommand-in-all-local-repositories/</id><summary type="html">&lt;p&gt;If you work with more than one git project simultaneously, you often need to
 do the same maintenance tasks in each cloned repository:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;check if there are some changes waiting to be pushed,&lt;/li&gt;
@@ -125,4 +125,4 @@ On branch master
 Your branch is up-to-date with &lt;span class="s1"&gt;&amp;#39;origin/master&amp;#39;&lt;/span&gt;.
 
 nothing to commit, working tree clean
-&lt;/pre&gt;&lt;/div&gt;</content><category term="bash"></category><category term="script"></category><category term="gist"></category></entry></feed>
+&lt;/pre&gt;&lt;/div&gt;</content><category term="posts"></category><category term="bash"></category><category term="script"></category><category term="gist"></category></entry></feed>

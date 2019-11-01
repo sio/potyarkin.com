@@ -29,4 +29,4 @@ know if it was the fact that I was previously running a 32-bit Git and bash on
 64-bit Windows 7 or if Git maintainers have tweaked their build process for 2.23.&lt;/p&gt;
 &lt;p&gt;If you're experiencing segmentation faults while running bash from Git for
 Windows package, you should check for &lt;strong&gt;architecture mismatch&lt;/strong&gt; with your OS
-and/or for &lt;strong&gt;newer (2.23+) Git version&lt;/strong&gt;.&lt;/p&gt;</content><category term="bash"></category><category term="windows"></category><category term="git"></category></entry></feed>
+and/or for &lt;strong&gt;newer (2.23+) Git version&lt;/strong&gt;.&lt;/p&gt;</content><category term="posts"></category><category term="bash"></category><category term="windows"></category><category term="git"></category></entry></feed>

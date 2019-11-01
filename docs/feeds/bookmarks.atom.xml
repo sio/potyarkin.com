@@ -20,7 +20,7 @@ source development.&lt;/p&gt;
 &lt;p&gt;In my case Nadia Eghbal was "preaching to the converted" so this post is me
 trying to spread her word. Please read her essay and please do not take open
 source software for granted. The costs of building it are just payed by others,
-may be you can figure out how to help them?&lt;/p&gt;</content><category term="bookmarks"></category><category term="opensource"></category></entry><entry><title>Portable development setup for Python on Windows</title><link href="https://potyarkin.ml/posts/2017/portable-development-setup-for-python-on-windows/" rel="alternate"></link><published>2017-09-20T00:00:00+03:00</published><updated>2017-09-20T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2017-09-20:/posts/2017/portable-development-setup-for-python-on-windows/</id><summary type="html">&lt;h2 id="winpython"&gt;&lt;a class="toclink" href="#winpython"&gt;WinPython&lt;/a&gt;&lt;/h2&gt;
+may be you can figure out how to help them?&lt;/p&gt;</content><category term="posts"></category><category term="bookmarks"></category><category term="opensource"></category></entry><entry><title>Portable development setup for Python on Windows</title><link href="https://potyarkin.ml/posts/2017/portable-development-setup-for-python-on-windows/" rel="alternate"></link><published>2017-09-20T00:00:00+03:00</published><updated>2017-09-20T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2017-09-20:/posts/2017/portable-development-setup-for-python-on-windows/</id><summary type="html">&lt;h2 id="winpython"&gt;&lt;a class="toclink" href="#winpython"&gt;WinPython&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;a href="https://winpython.github.io/"&gt;https://winpython.github.io/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;All-in-one distribution which comes with many difficult-to-build packages
 preinstalled. And their ...-Zero version is great for thumb drives!&lt;/p&gt;
@@ -64,4 +64,4 @@ newcomers (&lt;a href="https://stackoverflow.com/questions/11041729"&gt;https://
 &lt;li&gt;It does not require generating public/private keys and uploading the correct
   one to GitHub&lt;/li&gt;
 &lt;li&gt;HTTPS is allowed everywhere and SSH might be blocked by a firewall&lt;/li&gt;
-&lt;/ul&gt;</content><category term="python"></category><category term="windows"></category><category term="bookmarks"></category></entry></feed>
+&lt;/ul&gt;</content><category term="posts"></category><category term="python"></category><category term="windows"></category><category term="bookmarks"></category></entry></feed>
