@@ -30,7 +30,8 @@ to be explicitly invoked. Instead, you write make targets that depend on
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Despite its apparent simplicity this Makefile will do very much when invoked:&lt;/p&gt;
+&lt;p&gt;Despite its apparent simplicity this Makefile will do very much when invoked
+(watch a &lt;a href="https://asciinema.org/a/279646"&gt;screencast&lt;/a&gt;):&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;A virtual environment will be created in current directory&lt;/li&gt;
 &lt;li&gt;Pip will be automatically updated to the latest version&lt;/li&gt;
