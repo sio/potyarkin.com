@@ -31,7 +31,8 @@ test: venv
 include Makefile.venv  # All the magic happens here
 ```
 
-Despite its apparent simplicity this Makefile will do very much when invoked:
+Despite its apparent simplicity this Makefile will do very much when invoked
+(watch a [screencast](https://asciinema.org/a/279646)):
 
 - A virtual environment will be created in current directory
 - Pip will be automatically updated to the latest version
