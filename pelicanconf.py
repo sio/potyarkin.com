@@ -38,6 +38,7 @@ MARKDOWN = {
             'anchorlink': True,
             'title': 'Contents',
         },
+        'markdown.extensions.sane_lists': {},
     },
     'output_format': 'html5',
 }

@@ -8,6 +8,11 @@ This article is a short how-to on enabling newer hardware in Debian Stable
 without switching to another version or distribution.
 
 
+> **NOTE:** This article was written in 2018, new Debian Stable (Buster) has
+> been released since. The instructions below were written for Debian Stretch
+> and have not been tested with other releases.
+
+
 ## One by Wacom
 
 Wacom has released their new graphics tablet, [One by Wacom] in the Fall of 2017
@@ -34,7 +39,11 @@ Debian overall at the same (stable) version.
 
 To enable support for One by Wacom in Debian Stretch you need to:
 
-- [Add backports][backports] to your sources.list
+- [Add stretch-backports][backports] to your sources.list.<br/>
+  _**Update (2019-11-15):**
+  Now that page contains instructions for Debian Buster. If you wish to enable
+  backports in Debian Stretch you still can follow them while replacing every
+  occurence of "buster-backports" with "stretch-backports"_
 - Install newer kernel from backports:
   `apt-get -t stretch-backports install linux-image-amd64`.
   If you're running Debian on different CPU architecture, replace `-amd64` with
