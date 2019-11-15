@@ -92,10 +92,16 @@ providing path to that file as an argument to the installation &lt;a href="https
 &lt;/ul&gt;</content><category term="posts"></category><category term="linux"></category><category term="windows"></category><category term="automation"></category><category term="bash"></category></entry><entry><title>Installing One by Wacom in Debian Stretch</title><link href="https://potyarkin.ml/posts/2018/installing-one-by-wacom-in-debian-stretch/" rel="alternate"></link><published>2018-08-22T00:00:00+03:00</published><updated>2018-08-22T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-08-22:/posts/2018/installing-one-by-wacom-in-debian-stretch/</id><summary type="html">&lt;p&gt;I believe there are many people who run Debian Stable as their main desktop OS.
 This article is a short how-to on enabling newer hardware in Debian Stable
 without switching to another version or distribution.&lt;/p&gt;
-&lt;h2 id="one-by-wacom"&gt;&lt;a class="toclink" href="#one-by-wacom"&gt;One by Wacom&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Wacom has released their new graphics tablet, &lt;a href="https://www.wacom.com/en-cn/products/pen-tablets/one-by-wacom"&gt;One by Wacom&lt;/a&gt; in the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I believe there are many people who run Debian Stable as their main desktop OS.
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; This article was written in 2018, new Debian Stable (Buster) has
+been released since …&lt;/p&gt;&lt;/blockquote&gt;</summary><content type="html">&lt;p&gt;I believe there are many people who run Debian Stable as their main desktop OS.
 This article is a short how-to on enabling newer hardware in Debian Stable
 without switching to another version or distribution.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; This article was written in 2018, new Debian Stable (Buster) has
+been released since. The instructions below were written for Debian Stretch
+and have not been tested with other releases.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id="one-by-wacom"&gt;&lt;a class="toclink" href="#one-by-wacom"&gt;One by Wacom&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Wacom has released their new graphics tablet, &lt;a href="https://www.wacom.com/en-cn/products/pen-tablets/one-by-wacom"&gt;One by Wacom&lt;/a&gt; in the Fall of 2017
 (judging by the dates of reviews in online shops). Linux drivers for this model
@@ -115,7 +121,11 @@ install newer versions of some packages without breaking anything while keeping
 Debian overall at the same (stable) version.&lt;/p&gt;
 &lt;p&gt;To enable support for One by Wacom in Debian Stretch you need to:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="https://backports.debian.org/Instructions/"&gt;Add backports&lt;/a&gt; to your sources.list&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://backports.debian.org/Instructions/"&gt;Add stretch-backports&lt;/a&gt; to your sources.list.&lt;br/&gt;
+  &lt;em&gt;&lt;strong&gt;Update (2019-11-15):&lt;/strong&gt;
+  Now that page contains instructions for Debian Buster. If you wish to enable
+  backports in Debian Stretch you still can follow them while replacing every
+  occurence of "buster-backports" with "stretch-backports"&lt;/em&gt;&lt;/li&gt;
 &lt;li&gt;Install newer kernel from backports:
   &lt;code&gt;apt-get -t stretch-backports install linux-image-amd64&lt;/code&gt;.
   If you're running Debian on different CPU architecture, replace &lt;code&gt;-amd64&lt;/code&gt; with

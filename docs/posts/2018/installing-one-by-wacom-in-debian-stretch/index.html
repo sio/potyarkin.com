@@ -146,6 +146,11 @@
                 <p>I believe there are many people who run Debian Stable as their main desktop OS.
 This article is a short how-to on enabling newer hardware in Debian Stable
 without switching to another version or distribution.</p>
+<blockquote>
+<p><strong>NOTE:</strong> This article was written in 2018, new Debian Stable (Buster) has
+been released since. The instructions below were written for Debian Stretch
+and have not been tested with other releases.</p>
+</blockquote>
 <h2 id="one-by-wacom"><a class="toclink" href="#one-by-wacom">One by Wacom</a></h2>
 <p>Wacom has released their new graphics tablet, <a href="https://www.wacom.com/en-cn/products/pen-tablets/one-by-wacom">One by Wacom</a> in the Fall of 2017
 (judging by the dates of reviews in online shops). Linux drivers for this model
@@ -165,7 +170,11 @@ install newer versions of some packages without breaking anything while keeping
 Debian overall at the same (stable) version.</p>
 <p>To enable support for One by Wacom in Debian Stretch you need to:</p>
 <ul>
-<li><a href="https://backports.debian.org/Instructions/">Add backports</a> to your sources.list</li>
+<li><a href="https://backports.debian.org/Instructions/">Add stretch-backports</a> to your sources.list.<br/>
+  <em><strong>Update (2019-11-15):</strong>
+  Now that page contains instructions for Debian Buster. If you wish to enable
+  backports in Debian Stretch you still can follow them while replacing every
+  occurence of "buster-backports" with "stretch-backports"</em></li>
 <li>Install newer kernel from backports:
   <code>apt-get -t stretch-backports install linux-image-amd64</code>.
   If you're running Debian on different CPU architecture, replace <code>-amd64</code> with
