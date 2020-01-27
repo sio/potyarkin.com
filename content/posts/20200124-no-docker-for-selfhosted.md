@@ -44,9 +44,9 @@ Docker/Kubernetes security, I will highlight only a subset of problems below.
 - **Images from untrusted sources**
 
   In addition to the points above you put enormous amount of trust into people
-  who provide the container you're running. In container-less scenario you're
-  required to trust the vendor who provides you the base OS and the developer
-  who provides you the custom applications you run upon that OS. When
+  who provide the container you're running. In containerless scenario you're
+  required to trust the vendor who provides the base OS and the developer
+  who provides the custom applications you run upon that OS. When
   containers come into play, you must extend your trust to the maintainer of
   the container image, to the vendors who provide the base image that image is
   built upon, to all the developers who provide any piece of code included
@@ -54,7 +54,35 @@ Docker/Kubernetes security, I will highlight only a subset of problems below.
   a vulnerability into the resulting container, simple incompetence of any of
   the parties involved may be just enough.
 
-Docker and Kubernetes are great tools that solve real world
-problems but using them in a secure manner requires continuous dedicated
-effort. For enterprise deployments the benefits of containerization usually
-outweight the extra maintenace cost, but for hobbyist use I'm not so sure.
+This is why containerizing any workload comes with a significant extra cost of
+designing and automating security maintenance procedures. It is easy to skip
+this step when you're a hobbyist - but that's just burying your head in the
+sand and waiting for some script kiddie or botnet to hijack your network.
+
+Here is a rough overview of the required overhead:
+
+- You need to run only containers that are based on the images you've built
+  yourself. This is the only way you can ensure swift rebuilding in case one
+  of the base images provides a security update. This step may include running
+  your own image registry and build service.
+- You need to audit every Dockerfile you intend to build. This can only be
+  done manually. And you need to check all the base images in the chain up to
+  either a `FROM scratch` stanza or to a base image from trusted list.
+- You need to maintain a list of trusted base images that come from vendors
+  with good reputation in regards to handling security issues.
+- You need to blacklist any image that does not come either from a trusted
+  list or from a Dockerfile you've audited yourself.
+- You need to setup automated image rebuilds and container rollouts:
+    a) on schedule
+    b) on any update in the base image dependency chain
+- You need to setup automated vulnerability monitoring for the images you're
+  running. This will require a lot more effort than subscribing to RSS feed of
+  your distro security announcements - as it would've been the case with
+  containerless deployment.
+
+Add that on top of usual container orchestration chores - and bare metal
+suddenly becomes attractive. Docker and Kubernetes are great tools that solve
+real world problems but using them in a secure manner requires continuous
+dedicated effort. For enterprise deployments the benefits of containerization
+usually outweigh the extra maintenance cost, but for hobbyist use I'm not so
+sure.
