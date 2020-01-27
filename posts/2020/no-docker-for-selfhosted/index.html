@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>Don't blindly trust Docker for the selfhosted stuff</title>
+
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+<link href="https://potyarkin.ml/posts/2020/no-docker-for-selfhosted/" rel="canonical" />
+  <!-- Feed -->
+      <link href="/feeds/" type="application/atom+xml" rel="alternate" title="Orange Sun Full Atom Feed" />
+
+  <link href="https://potyarkin.ml/theme/css/style.css" type="text/css" rel="stylesheet" />
+
+  <!-- Code highlight color scheme -->
+      <link href="https://potyarkin.ml/theme/css/code_blocks/github.css" rel="stylesheet">
+
+    <!-- CSS specified by the user -->
+
+
+    <link href="https://potyarkin.ml/static/attila_override.css" type="text/css" rel="stylesheet" />
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+
+    <meta name="description" content="It is my strong belief that you shouldn't go crazy with all-things-docker when deploying selfhosted services at home. Online forums,...">
+
+    <meta name="author" content="Vitaly Potyarkin">
+
+    <meta name="tags" content="docker">
+    <meta name="tags" content="kubernetes">
+    <meta name="tags" content="automation">
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="Orange Sun"/>
+<meta property="og:title" content="Don't blindly trust Docker for the selfhosted stuff"/>
+<meta property="og:description" content="It is my strong belief that you shouldn't go crazy with all-things-docker when deploying selfhosted services at home. Online forums,..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://potyarkin.ml/posts/2020/no-docker-for-selfhosted/"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2020-01-27 00:00:00+03:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://potyarkin.ml/">
+<meta property="article:section" content="posts"/>
+<meta property="article:tag" content="docker"/>
+<meta property="article:tag" content="kubernetes"/>
+<meta property="article:tag" content="automation"/>
+<meta property="og:image" content="https://potyarkin.ml/theme/images/post-bg.jpg">
+
+<!-- Twitter Card -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "Don't blindly trust Docker for the selfhosted stuff",
+  "headline": "Don't blindly trust Docker for the selfhosted stuff",
+  "datePublished": "2020-01-27 00:00:00+03:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Vitaly Potyarkin",
+    "url": "https://potyarkin.ml/"
+  },
+  "image": "https://potyarkin.ml/theme/images/post-bg.jpg",
+  "url": "https://potyarkin.ml/posts/2020/no-docker-for-selfhosted/",
+  "description": "It is my strong belief that you shouldn't go crazy with all-things-docker when deploying selfhosted services at home. Online forums,..."
+}
+</script>
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
+
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+          <li><a href="/archive/" role="presentation">Archive</a></li>
+          <li><a href="/tags/" role="presentation">Tags</a></li>
+          <li><a href="mailto:sio.wtf@gmail.com" role="presentation">Email</a></li>
+          <li><a href="https://github.com/sio" role="presentation">Github</a></li>
+
+
+        <li class="nav-rss"><a href="/feeds/"><i class="ic ic-rss"></i> Subscribe</a></li>
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="post-header" class="has-cover">
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="https://potyarkin.ml/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Don't blindly trust Docker for the selfhosted stuff</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="https://potyarkin.ml/">Vitaly Potyarkin</a>
+            | <time datetime="2020-01-27">2020-01-27</time>
+        </span>
+        <!-- TODO : Modified check -->
+            <div class="post-cover cover" style="background-color: rgb(242,106,61)">
+      </div>
+    </header>
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <p>It is my strong belief that you shouldn't go crazy with <em>all-things-docker</em>
+when deploying selfhosted services at home. Online forums, especially
+<a href="https://reddit.com/r/selfhosted/">r/selfhosted</a>, seem to foster an opinion that providing a <code>Dockerfile</code> or
+better yet a <code>docker-compose.yml</code> or even prebuilt public images on Docker Hub
+is an acceptable way to distribute software targeting the selfhosting crowd.</p>
+<p>I agree it is very convenient to deploy complex multipart services via these
+tools. But the way many people appear to be doing that is a <em>security
+nightmare</em>! This is how we get to encounter <a href="https://www.computerweekly.com/news/252437100/Heartbleed-and-WannaCry-thriving-in-Docker-community">Heartbleed in the
+wild</a> four years after it should've been extinct.</p>
+<p>There are <a href="https://kubernetes.io/docs/tasks/administer-cluster/securing-a-cluster/#protecting-cluster-components-from-compromise">many</a> comprehensive <a href="https://www.stackrox.com/post/2019/07/kubernetes-security-101/">writeups</a> on
+Docker/Kubernetes security, I will highlight only a subset of problems below.</p>
+<ul>
+<li>
+<p><strong>Shared libraries</strong></p>
+<p>Running each service in its separate container results in having a
+separate set of shared libraries for each one of those services. It is
+convenient when you need to provide multiple incompatible dependencies at
+once, but that way the burden of tracking the state of all those
+dependencies lies on the user. Host OS can not tell you that one of the
+containers still ships a vulnerable version of some critical library -
+it's up to you to monitor and fix that.</p>
+</li>
+<li>
+<p><strong>Container rebuilding</strong></p>
+<p>Fixing anything related to the container requires rebuilding the image.
+When you're using images from public registries you can not initiate image
+rebuild even when you know it's needed. Your best option is to contact the
+original uploader and to convince them to rebuild. That may take
+significant time during which the containers running that image remain
+vulnerable.</p>
+</li>
+<li>
+<p><strong>Images from untrusted sources</strong></p>
+<p>In addition to the points above you put enormous amount of trust into
+people who provide the container you're running. In containerless scenario
+you're required to trust the vendor who provides the base OS and the
+developer who provides the custom applications you run upon that OS. When
+containers come into play, you must extend your trust to the maintainer of
+the container image, to the vendors who provide the base image that image
+is built upon, to all the developers who provide any piece of code
+included into that container. It does not even require malicious intent to
+introduce a vulnerability into the resulting container, simple
+incompetence of any of the parties involved may be just enough.</p>
+</li>
+</ul>
+<p>This is why containerizing any workload comes with a significant extra cost of
+designing and automating security maintenance procedures. It is easy to skip
+this step when you're a hobbyist - but that's just burying your head in the
+sand and waiting for some script kiddie or botnet to hijack your network.</p>
+<p>Here is a rough overview of the required overhead:</p>
+<ul>
+<li>You need to run only containers that are based on the images you've built
+  yourself. This is the only way you can ensure swift rebuilding in case one
+  of the base images provides a security update. This step may include running
+  your own image registry and build service.</li>
+<li>You need to audit every Dockerfile you intend to build. This can only be
+  done manually. And you need to check all the base images in the chain up to
+  either a <code>FROM scratch</code> stanza or to a base image from trusted list.</li>
+<li>You need to maintain a list of trusted base images that come from vendors
+  with good reputation in regards to handling security issues.</li>
+<li>You need to blacklist any image that does not come either from a trusted
+  list or from a Dockerfile you've audited yourself.</li>
+<li>You need to setup automated image rebuilds and container rollouts:
+    a) on schedule
+    b) on any update in the base image dependency chain</li>
+<li>You need to setup automated vulnerability monitoring for the images you're
+  running. This will require a lot more effort than subscribing to RSS feed of
+  your distro security announcements - as it would've been the case with
+  containerless deployment.</li>
+</ul>
+<p>Add that on top of usual container orchestration chores - and bare metal
+suddenly becomes attractive. Docker and Kubernetes are great tools that solve
+real world problems but using them in a secure manner requires continuous
+dedicated effort. For enterprise deployments the benefits of containerization
+usually outweigh the extra maintenance cost, but for hobbyist use I'm not so
+sure.</p>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Don't blindly trust Docker for the selfhosted stuff&amp;url=https://potyarkin.ml/posts/2020/no-docker-for-selfhosted/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://potyarkin.ml/posts/2020/no-docker-for-selfhosted/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=https://potyarkin.ml/posts/2020/no-docker-for-selfhosted/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="https://potyarkin.ml/tags/docker/">docker</a><a href="https://potyarkin.ml/tags/kubernetes/">kubernetes</a><a href="https://potyarkin.ml/tags/automation/">automation</a>                </aside>
+
+                <div class="clear"></div>
+
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <a class="post-nav-prev" href="https://potyarkin.ml/posts/2019/manage-python-virtual-environment-from-your-makefile/">
+                        <section class="post-nav-teaser">
+                            <i class="ic ic-arrow-right"></i>
+                                <h2 class="post-nav-title">Manage Python virtual environment from your Makefile</h2>
+                            <p class="post-nav-excerpt">I often use Makefiles not just as a build tool but as a handy way to execute sequences...</p>
+                        </section>
+                    </a>
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+
+
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://potyarkin.ml/theme/js/script.js"></script>
+
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121532727-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-121532727-1', { 'anonymize_ip': true });
+    </script>
+</body>
+</html>
