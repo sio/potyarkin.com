@@ -24,36 +24,37 @@ Docker/Kubernetes security, I will highlight only a subset of problems below.
 [security-docs]: https://kubernetes.io/docs/tasks/administer-cluster/securing-a-cluster/#protecting-cluster-components-from-compromise
 [security-101]: https://www.stackrox.com/post/2019/07/kubernetes-security-101/
 
-- **Shared libraries**
+  - **Shared libraries**
 
-  Running each service in its separate container results in having a separate
-  set of shared libraries for each one of those services. It is convenient
-  when you need to provide multiple incompatible dependencies at once, but
-  that way the burden of tracking the state of all those dependencies lies on
-  the user. Host OS can not tell you that one of the containers still ships a
-  vulnerable version of some critical library - it's up to you to monitor and
-  fix that.
+    Running each service in its separate container results in having a
+    separate set of shared libraries for each one of those services. It is
+    convenient when you need to provide multiple incompatible dependencies at
+    once, but that way the burden of tracking the state of all those
+    dependencies lies on the user. Host OS can not tell you that one of the
+    containers still ships a vulnerable version of some critical library -
+    it's up to you to monitor and fix that.
 
-- **Container rebuilding**
+  - **Container rebuilding**
 
-  Fixing anything related to the container requires rebuilding the image. When
-  you're using images from public registries you can not initiate image
-  rebuild even when you know it's needed. Your best option is to contact the
-  original uploader and to convince them to rebuild. That may take significant
-  time during which the containers running that image remain vulnerable.
+    Fixing anything related to the container requires rebuilding the image.
+    When you're using images from public registries you can not initiate image
+    rebuild even when you know it's needed. Your best option is to contact the
+    original uploader and to convince them to rebuild. That may take
+    significant time during which the containers running that image remain
+    vulnerable.
 
-- **Images from untrusted sources**
+  - **Images from untrusted sources**
 
-  In addition to the points above you put enormous amount of trust into people
-  who provide the container you're running. In containerless scenario you're
-  required to trust the vendor who provides the base OS and the developer
-  who provides the custom applications you run upon that OS. When
-  containers come into play, you must extend your trust to the maintainer of
-  the container image, to the vendors who provide the base image that image is
-  built upon, to all the developers who provide any piece of code included
-  into that container. It does not even require malicious intent to introduce
-  a vulnerability into the resulting container, simple incompetence of any of
-  the parties involved may be just enough.
+    In addition to the points above you put enormous amount of trust into
+    people who provide the container you're running. In containerless scenario
+    you're required to trust the vendor who provides the base OS and the
+    developer who provides the custom applications you run upon that OS. When
+    containers come into play, you must extend your trust to the maintainer of
+    the container image, to the vendors who provide the base image that image
+    is built upon, to all the developers who provide any piece of code
+    included into that container. It does not even require malicious intent to
+    introduce a vulnerability into the resulting container, simple
+    incompetence of any of the parties involved may be just enough.
 
 This is why containerizing any workload comes with a significant extra cost of
 designing and automating security maintenance procedures. It is easy to skip
