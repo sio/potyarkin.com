@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - docker</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/docker.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2020-01-27T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Don't blindly trust Docker for the selfhosted stuff</title><link href="https://potyarkin.ml/posts/2020/no-docker-for-selfhosted/" rel="alternate"></link><published>2020-01-27T00:00:00+03:00</published><updated>2020-01-27T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-01-27:/posts/2020/no-docker-for-selfhosted/</id><summary type="html">&lt;p&gt;It is my strong belief that you shouldn't go crazy with &lt;em&gt;all-things-docker&lt;/em&gt;
+when deploying selfhosted services at home. Online forums, especially
+&lt;a href="https://reddit.com/r/selfhosted/"&gt;r/selfhosted&lt;/a&gt;, seem to foster an opinion that providing a &lt;code&gt;Dockerfile&lt;/code&gt; or
+better yet a &lt;code&gt;docker-compose.yml&lt;/code&gt; or even prebuilt public images on Docker Hub
+is an acceptable way …&lt;/p&gt;</summary><content type="html">&lt;p&gt;It is my strong belief that you shouldn't go crazy with &lt;em&gt;all-things-docker&lt;/em&gt;
+when deploying selfhosted services at home. Online forums, especially
+&lt;a href="https://reddit.com/r/selfhosted/"&gt;r/selfhosted&lt;/a&gt;, seem to foster an opinion that providing a &lt;code&gt;Dockerfile&lt;/code&gt; or
+better yet a &lt;code&gt;docker-compose.yml&lt;/code&gt; or even prebuilt public images on Docker Hub
+is an acceptable way to distribute software targeting the selfhosting crowd.&lt;/p&gt;
+&lt;p&gt;I agree it is very convenient to deploy complex multipart services via these
+tools. But the way many people appear to be doing that is a &lt;em&gt;security
+nightmare&lt;/em&gt;! This is how we get to encounter &lt;a href="https://www.computerweekly.com/news/252437100/Heartbleed-and-WannaCry-thriving-in-Docker-community"&gt;Heartbleed in the
+wild&lt;/a&gt; four years after it should've been extinct.&lt;/p&gt;
+&lt;p&gt;There are &lt;a href="https://kubernetes.io/docs/tasks/administer-cluster/securing-a-cluster/#protecting-cluster-components-from-compromise"&gt;many&lt;/a&gt; comprehensive &lt;a href="https://www.stackrox.com/post/2019/07/kubernetes-security-101/"&gt;writeups&lt;/a&gt; on
+Docker/Kubernetes security, I will highlight only a subset of problems below.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Shared libraries&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Running each service in its separate container results in having a
+separate set of shared libraries for each one of those services. It is
+convenient when you need to provide multiple incompatible dependencies at
+once, but that way the burden of tracking the state of all those
+dependencies lies on the user. Host OS can not tell you that one of the
+containers still ships a vulnerable version of some critical library -
+it's up to you to monitor and fix that.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Container rebuilding&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Fixing anything related to the container requires rebuilding the image.
+When you're using images from public registries you can not initiate image
+rebuild even when you know it's needed. Your best option is to contact the
+original uploader and to convince them to rebuild. That may take
+significant time during which the containers running that image remain
+vulnerable.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Images from untrusted sources&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;In addition to the points above you put enormous amount of trust into
+people who provide the container you're running. In containerless scenario
+you're required to trust the vendor who provides the base OS and the
+developer who provides the custom applications you run upon that OS. When
+containers come into play, you must extend your trust to the maintainer of
+the container image, to the vendors who provide the base image that image
+is built upon, to all the developers who provide any piece of code
+included into that container. It does not even require malicious intent to
+introduce a vulnerability into the resulting container, simple
+incompetence of any of the parties involved may be just enough.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This is why containerizing any workload comes with a significant extra cost of
+designing and automating security maintenance procedures. It is easy to skip
+this step when you're a hobbyist - but that's just burying your head in the
+sand and waiting for some script kiddie or botnet to hijack your network.&lt;/p&gt;
+&lt;p&gt;Here is a rough overview of the required overhead:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;You need to run only containers that are based on the images you've built
+  yourself. This is the only way you can ensure swift rebuilding in case one
+  of the base images provides a security update. This step may include running
+  your own image registry and build service.&lt;/li&gt;
+&lt;li&gt;You need to audit every Dockerfile you intend to build. This can only be
+  done manually. And you need to check all the base images in the chain up to
+  either a &lt;code&gt;FROM scratch&lt;/code&gt; stanza or to a base image from trusted list.&lt;/li&gt;
+&lt;li&gt;You need to maintain a list of trusted base images that come from vendors
+  with good reputation in regards to handling security issues.&lt;/li&gt;
+&lt;li&gt;You need to blacklist any image that does not come either from a trusted
+  list or from a Dockerfile you've audited yourself.&lt;/li&gt;
+&lt;li&gt;You need to setup automated image rebuilds and container rollouts:
+    a) on schedule
+    b) on any update in the base image dependency chain&lt;/li&gt;
+&lt;li&gt;You need to setup automated vulnerability monitoring for the images you're
+  running. This will require a lot more effort than subscribing to RSS feed of
+  your distro security announcements - as it would've been the case with
+  containerless deployment.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Add that on top of usual container orchestration chores - and bare metal
+suddenly becomes attractive. Docker and Kubernetes are great tools that solve
+real world problems but using them in a secure manner requires continuous
+dedicated effort. For enterprise deployments the benefits of containerization
+usually outweigh the extra maintenance cost, but for hobbyist use I'm not so
+sure.&lt;/p&gt;</content><category term="posts"></category><category term="docker"></category><category term="kubernetes"></category><category term="automation"></category></entry></feed>

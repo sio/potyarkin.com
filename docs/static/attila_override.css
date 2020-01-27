@@ -73,6 +73,14 @@ code, tt {
     margin: 0;
 }
 
+/* Smaller padding between paragraphs */
+p, ul, ol {
+    margin: 1.5em auto;
+}
+li p {
+    margin: 1em auto;
+}
+
 /* Do not scale images up */
 .post-content img {
     width: auto;
