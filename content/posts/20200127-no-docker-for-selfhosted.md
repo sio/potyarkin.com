@@ -1,6 +1,7 @@
 title: Don't blindly trust Docker for the selfhosted stuff
 slug: no-docker-for-selfhosted
 tags: docker, kubernetes, automation
+date: 2020-01-27
 
 It is my strong belief that you shouldn't go crazy with _all-things-docker_
 when deploying selfhosted services at home. Online forums, especially
