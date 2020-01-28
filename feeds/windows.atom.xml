@@ -1,5 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - windows</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/windows.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2019-08-26T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Cygheap base mismatch in Git for Windows</title><link href="https://potyarkin.ml/posts/2019/cygheap-base-mismatch-in-git-for-windows/" rel="alternate"></link><published>2019-08-26T00:00:00+03:00</published><updated>2019-08-26T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2019-08-26:/posts/2019/cygheap-base-mismatch-in-git-for-windows/</id><summary type="html">&lt;p&gt;This error has haunted me for several months:&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - windows</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/windows.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2020-01-28T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Cygwin CI journey</title><link href="https://potyarkin.ml/posts/2020/cygwin-ci-journey/" rel="alternate"></link><published>2020-01-28T00:00:00+03:00</published><updated>2020-01-28T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-01-28:/posts/2020/cygwin-ci-journey/</id><summary type="html">&lt;p&gt;Setting up Cygwin CI environment for testing one of my projects took more
+than fifty trial-and-error attempts - that's why I think it will be useful to
+leave some written notes on the issues I've encountered. Here is the end
+&lt;a href="https://github.com/sio/Makefile.venv/blob/master/.github/workflows/test.yml"&gt;result&lt;/a&gt; - GitHub CI running some Makefile tests in Cygwin.&lt;/p&gt;
+&lt;h2 id="cygwin-gotchas"&gt;&lt;a class="toclink" href="#cygwin-gotchas"&gt;Cygwin gotchas …&lt;/a&gt;&lt;/h2&gt;</summary><content type="html">&lt;p&gt;Setting up Cygwin CI environment for testing one of my projects took more
+than fifty trial-and-error attempts - that's why I think it will be useful to
+leave some written notes on the issues I've encountered. Here is the end
+&lt;a href="https://github.com/sio/Makefile.venv/blob/master/.github/workflows/test.yml"&gt;result&lt;/a&gt; - GitHub CI running some Makefile tests in Cygwin.&lt;/p&gt;
+&lt;h2 id="cygwin-gotchas"&gt;&lt;a class="toclink" href="#cygwin-gotchas"&gt;Cygwin gotchas&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Cygwin installer likes to fail silently, providing only cryptic exit codes
+    (&lt;code&gt;127&lt;/code&gt; or &lt;code&gt;-1073741571&lt;/code&gt;)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;%CYGWIN_ROOT%\setup.exe --quiet-mode --verbose --no-desktop --download --local-install --no-verify --site %CYGWIN_MIRROR% --local-package-dir %CYGWIN_PACKAGE_CACHE% --root %CYGWIN_ROOT%
+Starting cygwin install, version 2.897
+User has backup/restore rights
+io_stream_cygfile: fopen(/etc/setup/setup.rc) failed 2 No such file or directory
+Current Directory: cache\cygwin-packages
+Could not open service McShield for query, start and stop. McAfee may not be installed, or we don&amp;#39;t have access.
+root: d:\a\Makefile.venv\Makefile.venv\cache\cygwin system
+Selected local directory: cache\cygwin-packages
+##[error]Process completed with exit code -1073741571.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;At least some of those errors can be avoided by providing full absolute
+paths to the installer and any argument values instead of relative
+ones.&lt;/p&gt;
+&lt;p&gt;In the end I've switched to Chocolatey to handle the installation for me.
+It's certainly better but still requires calling &lt;code&gt;setup.exe&lt;/code&gt; to install
+custom packages.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Since Cygwin installation and configuration are usually pretty slow (~3
+    min), CI setup benefits a lot from caching this step between runs.
+    Unfortunately, default GitHub actions for caching can't help with Cygwin
+    root, because Windows is pretty hostile to an average Joe trying to make
+    symlinks.&lt;/p&gt;
+&lt;p&gt;Instead, I've added a separate step that calls &lt;code&gt;tar --dereference&lt;/code&gt;
+explicitly and leaves only a simple archive for the caching action to
+handle. Please note that tar uses exit code &lt;code&gt;1&lt;/code&gt; to indicate that
+everything was OK, but some warnings were printed to stderr. Also, order
+of command line arguments matters, at least for &lt;code&gt;--exclude&lt;/code&gt; values. That
+was pretty unexpected for me.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You need to be careful when invoking apps under Cygwin - some environment
+    variables may be inherited from &lt;code&gt;cmd&lt;/code&gt; session. For example, &lt;code&gt;$PATH&lt;/code&gt;
+    will almost certainly point to binaries outside Cygwin root. I found that
+    explicitly defining &lt;code&gt;$PATH&lt;/code&gt; simplifies matters a lot.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="powershellcmd-peculiarities"&gt;&lt;a class="toclink" href="#powershellcmd-peculiarities"&gt;PowerShell/cmd peculiarities&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Since host OS is still Windows, you get to encounter all the usual
+PowerShell/cmd quirks. I tripped over the fact that PowerShell does not like
+double-dashed --GNU-style options, and over weird nested quotes required to
+properly combine environment variables and special characters in one value in
+cmd.&lt;/p&gt;
+&lt;h2 id="github-ci"&gt;&lt;a class="toclink" href="#github-ci"&gt;GitHub CI&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Some of my attempts were just me trying to work around GitHub CI limitations.
+For example, dynamically calculating the value of environment variable based
+on values of other variables. This looks quite ugly:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Use absolute path for CYGWIN_ROOT&lt;/span&gt;
+  &lt;span class="nt"&gt;run&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;echo &amp;quot;::set-env name=CYGWIN_ROOT::${env:GITHUB_WORKSPACE}\${env:CYGWIN_ROOT}&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I've also failed at proper syntax for YAML multiline strings more times than
+I'm comfortable admitting :)&lt;/p&gt;</content><category term="posts"></category><category term="windows"></category><category term="cygwin"></category><category term="automation"></category><category term="ci"></category></entry><entry><title>Cygheap base mismatch in Git for Windows</title><link href="https://potyarkin.ml/posts/2019/cygheap-base-mismatch-in-git-for-windows/" rel="alternate"></link><published>2019-08-26T00:00:00+03:00</published><updated>2019-08-26T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2019-08-26:/posts/2019/cygheap-base-mismatch-in-git-for-windows/</id><summary type="html">&lt;p&gt;This error has haunted me for several months:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;4 [main] head (6660) C:\...\usr\bin\head.exe:r
 *** fatal error - cygheap base mismatch detected - 0x612C7410/0xAF7410.
 
