@@ -78,7 +78,7 @@ p, ul, ol {
     margin: 1.5em auto;
 }
 li p {
-    margin: 1em auto;
+    margin: auto;
 }
 
 /* Do not scale images up */
