@@ -36,6 +36,10 @@ run the jobs it's good at while delegating the more demanding jobs to Cirrus
 CI. All status reports are gathered by GitLab CI and failure notifications
 arrive uniformly to my inbox regardless of where the build was executed.
 
+![Cirrus jobs in GitLab CI][diagram]
+
+[diagram]: {attach}/resources/cirrus-gitlab.png
+
 [Cirrus CI]: https://cirrus-ci.org/
 [custom clone script]: https://cirrus-ci.org/guide/tips-and-tricks/#custom-clone-command
 [API]: https://cirrus-ci.org/api/
