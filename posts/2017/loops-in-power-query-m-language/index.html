@@ -196,7 +196,7 @@ for function definition.)</p>
   of items at the moment when <code>condition()</code> returns <code>false</code>.</li>
 </ul>
 <p><code>List.Generate</code> might be easier to understand with the following pseudocode:</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">List</span><span class="o">.</span><span class="n">Generate</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="nb">next</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">List</span><span class="o">.</span><span class="n">Generate</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="nb">next</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">results</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
     <span class="n">item</span> <span class="o">=</span> <span class="n">start</span><span class="p">()</span>
     <span class="k">while</span> <span class="n">condition</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
@@ -209,14 +209,14 @@ for function definition.)</p>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">output</span> <span class="o">=</span> <span class="n">results</span>
     <span class="k">return</span> <span class="n">output</span>
-</pre></div>
+</code></pre></div>
 
 
 <h2 id="a-simple-example"><a class="toclink" href="#a-simple-example">A simple example</a></h2>
 <p>We will generate a table of data points for plotting a parabola. Internally we
 will be storing each item as the record with <code>x</code> and <code>y</code> fields.  After that we
 will transform that data into a Power Query table for output.</p>
-<div class="highlight"><pre><span></span><span class="kd">let</span>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span>
     <span class="nx">data</span> <span class="o">=</span> <span class="nx">List</span><span class="p">.</span><span class="nx">Generate</span><span class="p">(</span>
         <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">[</span><span class="nx">x</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="nx">y</span><span class="o">=</span><span class="mi">100</span><span class="p">],</span>
         <span class="nx">each</span> <span class="p">[</span><span class="nx">x</span><span class="p">]</span><span class="o">&lt;=</span><span class="mi">10</span><span class="p">,</span>
@@ -224,7 +224,7 @@ will transform that data into a Power Query table for output.</p>
     <span class="p">),</span>
     <span class="nx">output</span> <span class="o">=</span> <span class="nx">Table</span><span class="p">.</span><span class="nx">FromRecords</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
 <span class="k">in</span> <span class="nx">output</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>In this example <code>start()</code> is an anonymous function that always returns the
@@ -240,7 +240,7 @@ of locations (in the correct order), but each individual table does not contain
 that information. That's why combining all these tables into one would create a
 mess: you have to know which row comes from what table.</p>
 <p>This can be done with <code>List.Generate</code>:</p>
-<div class="highlight"><pre><span></span><span class="nx">NamedTables</span> <span class="o">=</span> <span class="nx">List</span><span class="p">.</span><span class="nx">Generate</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nx">NamedTables</span> <span class="o">=</span> <span class="nx">List</span><span class="p">.</span><span class="nx">Generate</span><span class="p">(</span>
     <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">[</span><span class="nx">i</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="nx">table</span><span class="o">=</span><span class="err">#</span><span class="nx">table</span><span class="p">({},{})],</span>  <span class="c1">// initialize loop variables</span>
     <span class="nx">each</span> <span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nx">List</span><span class="p">.</span><span class="nx">Count</span><span class="p">(</span><span class="nx">Tables</span><span class="p">),</span>
     <span class="nx">each</span> <span class="p">[</span>
@@ -249,7 +249,7 @@ mess: you have to know which row comes from what table.</p>
     <span class="p">],</span>
     <span class="nx">each</span> <span class="p">[</span><span class="nx">table</span><span class="p">]</span>
 <span class="p">),</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>This code snippet assumes you have the list of tables in the <code>Tables</code> variable

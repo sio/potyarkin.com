@@ -72,13 +72,17 @@ code, tt {
     padding: 0.2em 0.4em;
     margin: 0;
 }
+pre code {
+    margin:0!important;
+    padding:0!important;
+}
 
 /* Smaller padding between paragraphs */
 p, ul, ol {
     margin: 1.5em auto;
 }
 li p {
-    margin: 1em auto;
+    margin: auto;
 }
 
 /* Do not scale images up */

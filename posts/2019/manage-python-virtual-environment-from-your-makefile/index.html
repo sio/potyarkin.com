@@ -159,12 +159,12 @@ to be explicitly invoked. Instead, you write make targets that depend on
 <code>venv</code> and refer to all executables in virtual environment via
 <code>$(VENV)/executable</code>, e.g. <code>$(VENV)/python</code> or <code>$(VENV)/pip</code>.</p>
 <p>Using <a href="https://github.com/sio/Makefile.venv">Makefile.venv</a> is easy:</p>
-<div class="highlight"><pre><span></span><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">test</span>
+<div class="highlight"><pre><span></span><code><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">test</span>
 <span class="nf">test</span><span class="o">:</span> <span class="n">venv</span>
     <span class="k">$(</span>VENV<span class="k">)</span>/python -m unittest
 
 <span class="cp">include Makefile.venv  # All the magic happens here</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Despite its apparent simplicity this Makefile will do very much when invoked

@@ -154,7 +154,7 @@ leave some written notes on the issues I've encountered. Here is the end
 <li>
 <p>Cygwin installer likes to fail silently, providing only cryptic exit codes
     (<code>127</code> or <code>-1073741571</code>)</p>
-<div class="highlight"><pre><span></span>%CYGWIN_ROOT%\setup.exe --quiet-mode --verbose --no-desktop --download --local-install --no-verify --site %CYGWIN_MIRROR% --local-package-dir %CYGWIN_PACKAGE_CACHE% --root %CYGWIN_ROOT%
+<div class="highlight"><pre><span></span><code>%CYGWIN_ROOT%\setup.exe --quiet-mode --verbose --no-desktop --download --local-install --no-verify --site %CYGWIN_MIRROR% --local-package-dir %CYGWIN_PACKAGE_CACHE% --root %CYGWIN_ROOT%
 Starting cygwin install, version 2.897
 User has backup/restore rights
 io_stream_cygfile: fopen(/etc/setup/setup.rc) failed 2 No such file or directory
@@ -163,7 +163,7 @@ Could not open service McShield for query, start and stop. McAfee may not be ins
 root: d:\a\Makefile.venv\Makefile.venv\cache\cygwin system
 Selected local directory: cache\cygwin-packages
 ##[error]Process completed with exit code -1073741571.
-</pre></div>
+</code></pre></div>
 
 
 <p>At least some of those errors can be avoided by providing full absolute
@@ -203,9 +203,9 @@ cmd.</p>
 <p>Some of my attempts were just me trying to work around GitHub CI limitations.
 For example, dynamically calculating the value of environment variable based
 on values of other variables. This looks quite ugly:</p>
-<div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Use absolute path for CYGWIN_ROOT</span>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Use absolute path for CYGWIN_ROOT</span>
   <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">echo &quot;::set-env name=CYGWIN_ROOT::${env:GITHUB_WORKSPACE}\${env:CYGWIN_ROOT}&quot;</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>I've also failed at proper syntax for YAML multiline strings more times than
@@ -236,6 +236,13 @@ I'm comfortable admitting :)</p>
 
 
                 <aside class="post-nav">
+                    <a class="post-nav-next" href="https://potyarkin.ml/posts/2020/cirrus-ci-integration-for-gitlab-projects/">
+                        <section class="post-nav-teaser">
+                            <i class="ic ic-arrow-left"></i>
+                                <h2 class="post-nav-title">Cirrus CI integration for GitLab projects</h2>
+                            <p class="post-nav-excerpt">Cirrus CI is a relatively new hosted CI service that offers several unique features....</p>
+                        </section>
+                    </a>
                     <a class="post-nav-prev" href="https://potyarkin.ml/posts/2020/no-docker-for-selfhosted/">
                         <section class="post-nav-teaser">
                             <i class="ic ic-arrow-right"></i>

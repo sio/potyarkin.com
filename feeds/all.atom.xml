@@ -1,5 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/all.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2020-01-28T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Cygwin CI journey</title><link href="https://potyarkin.ml/posts/2020/cygwin-ci-journey/" rel="alternate"></link><published>2020-01-28T00:00:00+03:00</published><updated>2020-01-28T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-01-28:/posts/2020/cygwin-ci-journey/</id><summary type="html">&lt;p&gt;Setting up Cygwin CI environment for testing one of my projects took more
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/all.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2020-02-18T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Cirrus CI integration for GitLab projects</title><link href="https://potyarkin.ml/posts/2020/cirrus-ci-integration-for-gitlab-projects/" rel="alternate"></link><published>2020-02-18T00:00:00+03:00</published><updated>2020-02-18T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-02-18:/posts/2020/cirrus-ci-integration-for-gitlab-projects/</id><summary type="html">&lt;p&gt;&lt;a href="https://cirrus-ci.org/"&gt;Cirrus CI&lt;/a&gt; is a relatively new hosted CI service that offers several unique
+features. It's probably the only CI provider to offer full virtualization
+(KVM) or FreeBSD runners for free. Currently their business model is centered
+around GitHub Marketplace and only the projects hosted at GitHub are
+supported.&lt;/p&gt;
+&lt;p&gt;Fortunately Cirrus …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://cirrus-ci.org/"&gt;Cirrus CI&lt;/a&gt; is a relatively new hosted CI service that offers several unique
+features. It's probably the only CI provider to offer full virtualization
+(KVM) or FreeBSD runners for free. Currently their business model is centered
+around GitHub Marketplace and only the projects hosted at GitHub are
+supported.&lt;/p&gt;
+&lt;p&gt;Fortunately Cirrus CI provides a very capable GraphQL &lt;a href="https://cirrus-ci.org/api/"&gt;API&lt;/a&gt;. Thanks to that I
+was able to write a simple command line tool to trigger CI builds with custom
+configuration: &lt;a href="https://github.com/sio/cirrus-run"&gt;cirrus-run&lt;/a&gt;. It reads a local YAML file and executes Cirrus
+CI build with that configuration. You can execute the build against any
+GitHub repo you're allowed to access.&lt;/p&gt;
+&lt;p&gt;Since build configuration is not provided by the repo the job may have no
+relation to it. You can execute any number of jobs for any number of projects
+against a single dummy holding repo at GitHub - which is the approach I
+suggest to use for setting up integration with other source code hosting
+platforms.&lt;/p&gt;
+&lt;p&gt;Here is how I've set it up with GitLab:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Project repo is hosted at GitLab&lt;/li&gt;
+&lt;li&gt;Each push triggers a &lt;a href="https://gitlab.com/sio/server_common/-/jobs/441624574"&gt;new build&lt;/a&gt; in GitLab CI.
+    The only purpose of that build is to execute &lt;code&gt;cirrus-run&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://github.com/sio/cirrus-run"&gt;cirrus-run&lt;/a&gt; triggers the &lt;a href="https://cirrus-ci.com/task/5420732842770432"&gt;real build&lt;/a&gt; in Cirrus CI, waits for it to
+    complete and reports the results.&lt;/p&gt;
+&lt;p&gt;Cirrus CI build is owned by a dummy GitHub repo that contains only one
+initial commit. Providing &lt;a href="https://cirrus-ci.org/guide/tips-and-tricks/#custom-clone-command"&gt;custom clone script&lt;/a&gt; allows to skip cloning
+that dummy repo.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;That allows me to continue using GitLab to host my project and GitLab CI to
+run the jobs it's good at while delegating the more demanding jobs to Cirrus
+CI. All status reports are gathered by GitLab CI and failure notifications
+arrive uniformly to my inbox regardless of where the build was executed.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://gitlab.com/sio/server_common/pipelines/118955114"&gt;&lt;img alt="Cirrus jobs in GitLab CI" src="https://potyarkin.ml/posts/2020/cirrus-ci-integration-for-gitlab-projects/cirrus-gitlab.png"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Configuration files that enable the workflow described above:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://gitlab.com/sio/server_common/-/blob/795a204b90ddfd95e36d2753d9c7ea6d3a9f6573/.gitlab-ci.yml#L46-55"&gt;GitLab CI&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://gitlab.com/sio/server_common/-/blob/795a204b90ddfd95e36d2753d9c7ea6d3a9f6573/.cirrus.yml.j2"&gt;Cirrus CI&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><category term="posts"></category><category term="automation"></category><category term="ci"></category></entry><entry><title>Cygwin CI journey</title><link href="https://potyarkin.ml/posts/2020/cygwin-ci-journey/" rel="alternate"></link><published>2020-01-28T00:00:00+03:00</published><updated>2020-01-28T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-01-28:/posts/2020/cygwin-ci-journey/</id><summary type="html">&lt;p&gt;Setting up Cygwin CI environment for testing one of my projects took more
 than fifty trial-and-error attempts - that's why I think it will be useful to
 leave some written notes on the issues I've encountered. Here is the end
 &lt;a href="https://github.com/sio/Makefile.venv/blob/master/.github/workflows/test.yml"&gt;result&lt;/a&gt; - GitHub CI running some Makefile tests in Cygwin.&lt;/p&gt;
@@ -12,7 +54,7 @@ leave some written notes on the issues I've encountered. Here is the end
 &lt;li&gt;
 &lt;p&gt;Cygwin installer likes to fail silently, providing only cryptic exit codes
     (&lt;code&gt;127&lt;/code&gt; or &lt;code&gt;-1073741571&lt;/code&gt;)&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;%CYGWIN_ROOT%\setup.exe --quiet-mode --verbose --no-desktop --download --local-install --no-verify --site %CYGWIN_MIRROR% --local-package-dir %CYGWIN_PACKAGE_CACHE% --root %CYGWIN_ROOT%
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;%CYGWIN_ROOT%\setup.exe --quiet-mode --verbose --no-desktop --download --local-install --no-verify --site %CYGWIN_MIRROR% --local-package-dir %CYGWIN_PACKAGE_CACHE% --root %CYGWIN_ROOT%
 Starting cygwin install, version 2.897
 User has backup/restore rights
 io_stream_cygfile: fopen(/etc/setup/setup.rc) failed 2 No such file or directory
@@ -21,7 +63,7 @@ Could not open service McShield for query, start and stop. McAfee may not be ins
 root: d:\a\Makefile.venv\Makefile.venv\cache\cygwin system
 Selected local directory: cache\cygwin-packages
 ##[error]Process completed with exit code -1073741571.
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;At least some of those errors can be avoided by providing full absolute
@@ -61,9 +103,9 @@ cmd.&lt;/p&gt;
 &lt;p&gt;Some of my attempts were just me trying to work around GitHub CI limitations.
 For example, dynamically calculating the value of environment variable based
 on values of other variables. This looks quite ugly:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Use absolute path for CYGWIN_ROOT&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Use absolute path for CYGWIN_ROOT&lt;/span&gt;
   &lt;span class="nt"&gt;run&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;echo &amp;quot;::set-env name=CYGWIN_ROOT::${env:GITHUB_WORKSPACE}\${env:CYGWIN_ROOT}&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;I've also failed at proper syntax for YAML multiline strings more times than
@@ -169,12 +211,12 @@ to be explicitly invoked. Instead, you write make targets that depend on
 &lt;code&gt;venv&lt;/code&gt; and refer to all executables in virtual environment via
 &lt;code&gt;$(VENV)/executable&lt;/code&gt;, e.g. &lt;code&gt;$(VENV)/python&lt;/code&gt; or &lt;code&gt;$(VENV)/pip&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Using &lt;a href="https://github.com/sio/Makefile.venv"&gt;Makefile.venv&lt;/a&gt; is easy:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;test&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;test&lt;/span&gt;
 &lt;span class="nf"&gt;test&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;venv&lt;/span&gt;
     &lt;span class="k"&gt;$(&lt;/span&gt;VENV&lt;span class="k"&gt;)&lt;/span&gt;/python -m unittest
 
 &lt;span class="cp"&gt;include Makefile.venv  # All the magic happens here&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Despite its apparent simplicity this Makefile will do very much when invoked
@@ -207,12 +249,12 @@ GitHub project's page.&lt;/p&gt;
 thread&lt;/a&gt; and by &lt;a href="http://blog.bottlepy.org/2012/07/16/virtualenv-and-makefiles.html"&gt;this blog post&lt;/a&gt; from the authors of
 Bottle.py&lt;/p&gt;
 &lt;/blockquote&gt;</content><category term="posts"></category><category term="python"></category><category term="automation"></category></entry><entry><title>Cygheap base mismatch in Git for Windows</title><link href="https://potyarkin.ml/posts/2019/cygheap-base-mismatch-in-git-for-windows/" rel="alternate"></link><published>2019-08-26T00:00:00+03:00</published><updated>2019-08-26T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2019-08-26:/posts/2019/cygheap-base-mismatch-in-git-for-windows/</id><summary type="html">&lt;p&gt;This error has haunted me for several months:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;4 [main] head (6660) C:\...\usr\bin\head.exe:r
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;4 [main] head (6660) C:\...\usr\bin\head.exe:r
 *** fatal error - cygheap base mismatch detected - 0x612C7410/0xAF7410.
 
 This problem is probably due to using incompatible versions of the cygwin DLL.
-Search for cygwin1.dll using the Windows Start-&amp;gt;Find/Search facility …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;This error has haunted me for several months:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;4 [main] head (6660) C:\...\usr\bin\head.exe:r
+Search for cygwin1.dll using the Windows Start-&amp;gt;Find/Search facility …&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;This error has haunted me for several months:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;4 [main] head (6660) C:\...\usr\bin\head.exe:r
 *** fatal error - cygheap base mismatch detected - 0x612C7410/0xAF7410.
 
 This problem is probably due to using incompatible versions of the cygwin DLL.
@@ -221,7 +263,7 @@ and delete all but the most recent version.  The most recent version *should*
 reside in x:\cygwin\bin, where &amp;#39;x&amp;#39; is the drive on which you have
 installed the cygwin distribution.  Rebooting is also suggested if you
 are unable to find another cygwin DLL.
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;The tricky part is I am not even using Cygwin. I'm running bash with Git for
@@ -393,23 +435,23 @@ in &lt;em&gt;Edit -&amp;gt; Input Devices&lt;/em&gt;).&lt;/p&gt;
 &lt;/ul&gt;
 &lt;h2 id="log-messages-for-reference"&gt;&lt;a class="toclink" href="#log-messages-for-reference"&gt;Log messages (for reference)&lt;/a&gt;&lt;/h2&gt;
 &lt;h4 id="debian-9-stretch-without-proper-driver"&gt;&lt;a class="toclink" href="#debian-9-stretch-without-proper-driver"&gt;Debian 9 (Stretch) without proper driver&lt;/a&gt;&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# dmesg|grep -i wacom
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;# dmesg|grep -i wacom
 usb 5-1: Manufacturer: Wacom Co.,Ltd.
 input: Wacom Co.,Ltd. CTL-472 Pen as /devices/pci0000:00/0000:00:1d.0/usb5/5-1/5-1:1.0/0003:056A:037A.0001/input/input95
 wacom 0003:056A:037A.0001: hidraw0: USB HID v1.10 Mouse [Wacom Co.,Ltd. CTL-472] on usb-0000:00:1d.0-1/input0
 wacom 0003:056A:037A.0002: Unknown device_type for &amp;#39;Wacom Co.,Ltd. CTL-472&amp;#39;. Ignoring.
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h4 id="debian-with-updated-kernel-from-backports"&gt;&lt;a class="toclink" href="#debian-with-updated-kernel-from-backports"&gt;Debian with updated kernel from backports&lt;/a&gt;&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# dmesg|grep -i wacom
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;# dmesg|grep -i wacom
 usb 6-1: Manufacturer: Wacom Co.,Ltd.
 input: Wacom Co.,Ltd. CTL-472 as /devices/pci0000:00/0000:00:1d.0/usb6/6-1/6-1:1.0/0003:056A:037A.0001/input/input23
 hid-generic 0003:056A:037A.0001: input,hiddev0,hidraw0: USB HID v1.10 Mouse [Wacom Co.,Ltd. CTL-472] on usb-0000:00:1d.0-1/input0
 hid-generic 0003:056A:037A.0002: hiddev1,hidraw1: USB HID v1.10 Device [Wacom Co.,Ltd. CTL-472] on usb-0000:00:1d.0-1/input1
 input: Wacom One by Wacom S Pen as /devices/pci0000:00/0000:00:1d.0/usb6/6-1/6-1:1.0/0003:056A:037A.0001/input/input24
 wacom 0003:056A:037A.0001: hidraw0: USB HID v1.10 Mouse [Wacom Co.,Ltd. CTL-472] on usb-0000:00:1d.0-1/input0
-&lt;/pre&gt;&lt;/div&gt;</content><category term="posts"></category><category term="linux"></category><category term="hardware"></category><category term="Debian"></category></entry><entry><title>Enhanced file path completion in bash (like in zsh)</title><link href="https://potyarkin.ml/posts/2018/enhanced-file-path-completion-in-bash-like-in-zsh/" rel="alternate"></link><published>2018-07-14T00:00:00+03:00</published><updated>2018-07-14T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-07-14:/posts/2018/enhanced-file-path-completion-in-bash-like-in-zsh/</id><summary type="html">&lt;p&gt;Zsh offers a lot of significant improvements over traditional shell experience.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="posts"></category><category term="linux"></category><category term="hardware"></category><category term="Debian"></category></entry><entry><title>Enhanced file path completion in bash (like in zsh)</title><link href="https://potyarkin.ml/posts/2018/enhanced-file-path-completion-in-bash-like-in-zsh/" rel="alternate"></link><published>2018-07-14T00:00:00+03:00</published><updated>2018-07-14T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-07-14:/posts/2018/enhanced-file-path-completion-in-bash-like-in-zsh/</id><summary type="html">&lt;p&gt;Zsh offers a lot of significant improvements over traditional shell experience.
 Some of those can also be implemented in bash, but others are not. For a long
 time I've thought that advanced file path expansion is something that can't be
 done in bash. Today I prove myself wrong.&lt;/p&gt;
@@ -860,8 +902,8 @@ cell is written as is, quotes are added if delimiter character occurs within
 the value.&lt;/p&gt;
 &lt;p&gt;Screenshot below is produced after loading demo CSV file with the following
 header:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ID,Column1,Column2,Column3 with very long header,&amp;quot;Column4, with delimiter in the name&amp;quot;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;ID,Column1,Column2,Column3 with very long header,&amp;quot;Column4, with delimiter in the name&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;&lt;a href="https://potyarkin.ml/posts/2018/excel-as-a-csv-editor-with-vba/csv-append.png"&gt;&lt;img alt="CSV Append" src="https://potyarkin.ml/posts/2018/excel-as-a-csv-editor-with-vba/csv-append.png"&gt;&lt;/a&gt;&lt;/p&gt;
@@ -995,13 +1037,13 @@ following features:&lt;/p&gt;
 &lt;h2 id="unittest-demo"&gt;&lt;a class="toclink" href="#unittest-demo"&gt;UnitTest demo&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;All modules described here are imported with LibPQ, so a basic familiarity with the library is assumed (&lt;a href="https://libpq.ml"&gt;readme&lt;/a&gt;, &lt;a href="https://potyarkin.ml/posts/2018/getting-started-with-libpq/"&gt;getting started&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;Let's create a basic test suite and save it in the directory listed in &lt;code&gt;LibPQPath&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cm"&gt;/* DemoTests.pq - sample test suite */&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cm"&gt;/* DemoTests.pq - sample test suite */&lt;/span&gt;
 &lt;span class="p"&gt;[&lt;/span&gt;
     &lt;span class="nx"&gt;Assert&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;LibPQ&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;UnitTest.Assert&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
     &lt;span class="nx"&gt;testFirstTest&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Assert&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;Equal&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;42&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
     &lt;span class="nx"&gt;testAlwaysFail&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Assert&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;Equal&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;foo&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;bar&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="nx"&gt;meta&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;LibPQ&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;TestSuite&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;The test suite is a record (note the square brackets surrounding the code) that
@@ -1223,7 +1265,7 @@ for function definition.)&lt;/p&gt;
   of items at the moment when &lt;code&gt;condition()&lt;/code&gt; returns &lt;code&gt;false&lt;/code&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;code&gt;List.Generate&lt;/code&gt; might be easier to understand with the following pseudocode:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;List&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Generate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;start&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;condition&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;next&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;transform&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;List&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Generate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;start&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;condition&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;next&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;transform&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;results&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
     &lt;span class="n"&gt;item&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;start&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
     &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;condition&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
@@ -1236,14 +1278,14 @@ for function definition.)&lt;/p&gt;
     &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
         &lt;span class="n"&gt;output&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;results&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h2 id="a-simple-example"&gt;&lt;a class="toclink" href="#a-simple-example"&gt;A simple example&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;We will generate a table of data points for plotting a parabola. Internally we
 will be storing each item as the record with &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt; fields.  After that we
 will transform that data into a Power Query table for output.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;let&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kd"&gt;let&lt;/span&gt;
     &lt;span class="nx"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;List&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Generate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
         &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;y&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
         &lt;span class="nx"&gt;each&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;=&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
@@ -1251,7 +1293,7 @@ will transform that data into a Power Query table for output.&lt;/p&gt;
     &lt;span class="p"&gt;),&lt;/span&gt;
     &lt;span class="nx"&gt;output&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Table&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;FromRecords&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="nx"&gt;output&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;In this example &lt;code&gt;start()&lt;/code&gt; is an anonymous function that always returns the
@@ -1267,7 +1309,7 @@ of locations (in the correct order), but each individual table does not contain
 that information. That's why combining all these tables into one would create a
 mess: you have to know which row comes from what table.&lt;/p&gt;
 &lt;p&gt;This can be done with &lt;code&gt;List.Generate&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nx"&gt;NamedTables&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;List&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Generate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nx"&gt;NamedTables&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;List&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Generate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
     &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;table&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="nx"&gt;table&lt;/span&gt;&lt;span class="p"&gt;({},{})],&lt;/span&gt;  &lt;span class="c1"&gt;// initialize loop variables&lt;/span&gt;
     &lt;span class="nx"&gt;each&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nx"&gt;List&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Count&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;Tables&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
     &lt;span class="nx"&gt;each&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
@@ -1276,7 +1318,7 @@ mess: you have to know which row comes from what table.&lt;/p&gt;
     &lt;span class="p"&gt;],&lt;/span&gt;
     &lt;span class="nx"&gt;each&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;table&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;span class="p"&gt;),&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;This code snippet assumes you have the list of tables in the &lt;code&gt;Tables&lt;/code&gt; variable
@@ -1371,7 +1413,7 @@ status of each repo.&lt;/p&gt;
 listed in &lt;code&gt;PROJECT_LIST&lt;/code&gt;.&lt;/p&gt;
 &lt;h2 id="examples"&gt;&lt;a class="toclink" href="#examples"&gt;Examples&lt;/a&gt;&lt;/h2&gt;
 &lt;h3 id="refreshing-your-memory"&gt;&lt;a class="toclink" href="#refreshing-your-memory"&gt;Refreshing your memory&lt;/a&gt;&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ ./git-projects.sh log --oneline -3 --no-decorate
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ ./git-projects.sh log --oneline -3 --no-decorate
 
 HomeLibraryCatalog
 b5808f6 Always check the db before showing first run page
@@ -1387,11 +1429,11 @@ server_common
 bc33836 Indentation rule &lt;span class="k"&gt;for&lt;/span&gt; Makefiles
 72fb92a Use proper syntax &lt;span class="k"&gt;for&lt;/span&gt; TODO in GitHub Flavored Markdown
 a24e4f2 More familiar Home and Backspace behavior
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3 id="view-latest-tag-if-any"&gt;&lt;a class="toclink" href="#view-latest-tag-if-any"&gt;View latest tag (if any)&lt;/a&gt;&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ ./git-projects.sh describe --tags --always
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ ./git-projects.sh describe --tags --always
 
 HomeLibraryCatalog
 v0.1.0-71-gb5808f6
@@ -1401,11 +1443,11 @@ b260276
 
 server_common
 bc33836
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3 id="checking-project-status"&gt;&lt;a class="toclink" href="#checking-project-status"&gt;Checking project status&lt;/a&gt;&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ ./git-projects.sh
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ ./git-projects.sh
 
 HomeLibraryCatalog
 On branch master
@@ -1424,7 +1466,7 @@ On branch master
 Your branch is up-to-date with &lt;span class="s1"&gt;&amp;#39;origin/master&amp;#39;&lt;/span&gt;.
 
 nothing to commit, working tree clean
-&lt;/pre&gt;&lt;/div&gt;</content><category term="posts"></category><category term="bash"></category><category term="script"></category><category term="gist"></category></entry><entry><title>Portable development setup for Python on Windows</title><link href="https://potyarkin.ml/posts/2017/portable-development-setup-for-python-on-windows/" rel="alternate"></link><published>2017-09-20T00:00:00+03:00</published><updated>2017-09-20T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2017-09-20:/posts/2017/portable-development-setup-for-python-on-windows/</id><summary type="html">&lt;h2 id="winpython"&gt;&lt;a class="toclink" href="#winpython"&gt;WinPython&lt;/a&gt;&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="posts"></category><category term="bash"></category><category term="script"></category><category term="gist"></category></entry><entry><title>Portable development setup for Python on Windows</title><link href="https://potyarkin.ml/posts/2017/portable-development-setup-for-python-on-windows/" rel="alternate"></link><published>2017-09-20T00:00:00+03:00</published><updated>2017-09-20T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2017-09-20:/posts/2017/portable-development-setup-for-python-on-windows/</id><summary type="html">&lt;h2 id="winpython"&gt;&lt;a class="toclink" href="#winpython"&gt;WinPython&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;a href="https://winpython.github.io/"&gt;https://winpython.github.io/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;All-in-one distribution which comes with many difficult-to-build packages
 preinstalled. And their ...-Zero version is great for thumb drives!&lt;/p&gt;

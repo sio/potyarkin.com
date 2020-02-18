@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - bash</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/bash.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2019-08-26T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Cygheap base mismatch in Git for Windows</title><link href="https://potyarkin.ml/posts/2019/cygheap-base-mismatch-in-git-for-windows/" rel="alternate"></link><published>2019-08-26T00:00:00+03:00</published><updated>2019-08-26T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2019-08-26:/posts/2019/cygheap-base-mismatch-in-git-for-windows/</id><summary type="html">&lt;p&gt;This error has haunted me for several months:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;4 [main] head (6660) C:\...\usr\bin\head.exe:r
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;4 [main] head (6660) C:\...\usr\bin\head.exe:r
 *** fatal error - cygheap base mismatch detected - 0x612C7410/0xAF7410.
 
 This problem is probably due to using incompatible versions of the cygwin DLL.
-Search for cygwin1.dll using the Windows Start-&amp;gt;Find/Search facility …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;This error has haunted me for several months:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;4 [main] head (6660) C:\...\usr\bin\head.exe:r
+Search for cygwin1.dll using the Windows Start-&amp;gt;Find/Search facility …&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;This error has haunted me for several months:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;4 [main] head (6660) C:\...\usr\bin\head.exe:r
 *** fatal error - cygheap base mismatch detected - 0x612C7410/0xAF7410.
 
 This problem is probably due to using incompatible versions of the cygwin DLL.
@@ -14,7 +14,7 @@ and delete all but the most recent version.  The most recent version *should*
 reside in x:\cygwin\bin, where &amp;#39;x&amp;#39; is the drive on which you have
 installed the cygwin distribution.  Rebooting is also suggested if you
 are unable to find another cygwin DLL.
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;The tricky part is I am not even using Cygwin. I'm running bash with Git for
@@ -213,7 +213,7 @@ status of each repo.&lt;/p&gt;
 listed in &lt;code&gt;PROJECT_LIST&lt;/code&gt;.&lt;/p&gt;
 &lt;h2 id="examples"&gt;&lt;a class="toclink" href="#examples"&gt;Examples&lt;/a&gt;&lt;/h2&gt;
 &lt;h3 id="refreshing-your-memory"&gt;&lt;a class="toclink" href="#refreshing-your-memory"&gt;Refreshing your memory&lt;/a&gt;&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ ./git-projects.sh log --oneline -3 --no-decorate
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ ./git-projects.sh log --oneline -3 --no-decorate
 
 HomeLibraryCatalog
 b5808f6 Always check the db before showing first run page
@@ -229,11 +229,11 @@ server_common
 bc33836 Indentation rule &lt;span class="k"&gt;for&lt;/span&gt; Makefiles
 72fb92a Use proper syntax &lt;span class="k"&gt;for&lt;/span&gt; TODO in GitHub Flavored Markdown
 a24e4f2 More familiar Home and Backspace behavior
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3 id="view-latest-tag-if-any"&gt;&lt;a class="toclink" href="#view-latest-tag-if-any"&gt;View latest tag (if any)&lt;/a&gt;&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ ./git-projects.sh describe --tags --always
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ ./git-projects.sh describe --tags --always
 
 HomeLibraryCatalog
 v0.1.0-71-gb5808f6
@@ -243,11 +243,11 @@ b260276
 
 server_common
 bc33836
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3 id="checking-project-status"&gt;&lt;a class="toclink" href="#checking-project-status"&gt;Checking project status&lt;/a&gt;&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ ./git-projects.sh
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ ./git-projects.sh
 
 HomeLibraryCatalog
 On branch master
@@ -266,4 +266,4 @@ On branch master
 Your branch is up-to-date with &lt;span class="s1"&gt;&amp;#39;origin/master&amp;#39;&lt;/span&gt;.
 
 nothing to commit, working tree clean
-&lt;/pre&gt;&lt;/div&gt;</content><category term="posts"></category><category term="bash"></category><category term="script"></category><category term="gist"></category></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="posts"></category><category term="bash"></category><category term="script"></category><category term="gist"></category></entry></feed>

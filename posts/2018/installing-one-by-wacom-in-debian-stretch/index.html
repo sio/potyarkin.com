@@ -205,23 +205,23 @@ in <em>Edit -&gt; Input Devices</em>).</p>
 </ul>
 <h2 id="log-messages-for-reference"><a class="toclink" href="#log-messages-for-reference">Log messages (for reference)</a></h2>
 <h4 id="debian-9-stretch-without-proper-driver"><a class="toclink" href="#debian-9-stretch-without-proper-driver">Debian 9 (Stretch) without proper driver</a></h4>
-<div class="highlight"><pre><span></span># dmesg|grep -i wacom
+<div class="highlight"><pre><span></span><code># dmesg|grep -i wacom
 usb 5-1: Manufacturer: Wacom Co.,Ltd.
 input: Wacom Co.,Ltd. CTL-472 Pen as /devices/pci0000:00/0000:00:1d.0/usb5/5-1/5-1:1.0/0003:056A:037A.0001/input/input95
 wacom 0003:056A:037A.0001: hidraw0: USB HID v1.10 Mouse [Wacom Co.,Ltd. CTL-472] on usb-0000:00:1d.0-1/input0
 wacom 0003:056A:037A.0002: Unknown device_type for &#39;Wacom Co.,Ltd. CTL-472&#39;. Ignoring.
-</pre></div>
+</code></pre></div>
 
 
 <h4 id="debian-with-updated-kernel-from-backports"><a class="toclink" href="#debian-with-updated-kernel-from-backports">Debian with updated kernel from backports</a></h4>
-<div class="highlight"><pre><span></span># dmesg|grep -i wacom
+<div class="highlight"><pre><span></span><code># dmesg|grep -i wacom
 usb 6-1: Manufacturer: Wacom Co.,Ltd.
 input: Wacom Co.,Ltd. CTL-472 as /devices/pci0000:00/0000:00:1d.0/usb6/6-1/6-1:1.0/0003:056A:037A.0001/input/input23
 hid-generic 0003:056A:037A.0001: input,hiddev0,hidraw0: USB HID v1.10 Mouse [Wacom Co.,Ltd. CTL-472] on usb-0000:00:1d.0-1/input0
 hid-generic 0003:056A:037A.0002: hiddev1,hidraw1: USB HID v1.10 Device [Wacom Co.,Ltd. CTL-472] on usb-0000:00:1d.0-1/input1
 input: Wacom One by Wacom S Pen as /devices/pci0000:00/0000:00:1d.0/usb6/6-1/6-1:1.0/0003:056A:037A.0001/input/input24
 wacom 0003:056A:037A.0001: hidraw0: USB HID v1.10 Mouse [Wacom Co.,Ltd. CTL-472] on usb-0000:00:1d.0-1/input0
-</pre></div>
+</code></pre></div>
             </section>
 
             <section class="post-info">
