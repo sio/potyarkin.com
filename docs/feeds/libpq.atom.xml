@@ -31,13 +31,13 @@ following features:&lt;/p&gt;
 &lt;h2 id="unittest-demo"&gt;&lt;a class="toclink" href="#unittest-demo"&gt;UnitTest demo&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;All modules described here are imported with LibPQ, so a basic familiarity with the library is assumed (&lt;a href="https://libpq.ml"&gt;readme&lt;/a&gt;, &lt;a href="https://potyarkin.ml/posts/2018/getting-started-with-libpq/"&gt;getting started&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;Let's create a basic test suite and save it in the directory listed in &lt;code&gt;LibPQPath&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cm"&gt;/* DemoTests.pq - sample test suite */&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cm"&gt;/* DemoTests.pq - sample test suite */&lt;/span&gt;
 &lt;span class="p"&gt;[&lt;/span&gt;
     &lt;span class="nx"&gt;Assert&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;LibPQ&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;UnitTest.Assert&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
     &lt;span class="nx"&gt;testFirstTest&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Assert&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;Equal&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;42&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
     &lt;span class="nx"&gt;testAlwaysFail&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Assert&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;Equal&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;foo&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;bar&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="nx"&gt;meta&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;LibPQ&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;TestSuite&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;The test suite is a record (note the square brackets surrounding the code) that

@@ -22,12 +22,12 @@ to be explicitly invoked. Instead, you write make targets that depend on
 &lt;code&gt;venv&lt;/code&gt; and refer to all executables in virtual environment via
 &lt;code&gt;$(VENV)/executable&lt;/code&gt;, e.g. &lt;code&gt;$(VENV)/python&lt;/code&gt; or &lt;code&gt;$(VENV)/pip&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Using &lt;a href="https://github.com/sio/Makefile.venv"&gt;Makefile.venv&lt;/a&gt; is easy:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;test&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;test&lt;/span&gt;
 &lt;span class="nf"&gt;test&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;venv&lt;/span&gt;
     &lt;span class="k"&gt;$(&lt;/span&gt;VENV&lt;span class="k"&gt;)&lt;/span&gt;/python -m unittest
 
 &lt;span class="cp"&gt;include Makefile.venv  # All the magic happens here&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Despite its apparent simplicity this Makefile will do very much when invoked
