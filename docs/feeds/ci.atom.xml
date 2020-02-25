@@ -9,9 +9,10 @@ service would allow nested virtualization. Those who required such
 functionality had to maintain their own CI runners on their own
 infrastructure. Things changed when Google Cloud introduced &lt;a href="https://cloud.google.com/compute/docs/instances/enable-nested-virtualization-vm-instances"&gt;nested
 KVM&lt;/a&gt; support.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://cirrus-ci.org/"&gt;Cirrus CI&lt;/a&gt; was probably the first CI service to officially support
-nested virtualization in free tier. There are reports that Travis CI currently
-also provides such feature but no public announcement has been made yet.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://cirrus-ci.org/"&gt;Cirrus CI&lt;/a&gt; was probably the first CI service to &lt;a href="https://cirrus-ci.org/guide/linux/#kvm-enabled-privileged-containers"&gt;officially
+support&lt;/a&gt; nested virtualization in free tier. There are reports
+that Travis CI currently also provides such feature but no public announcement
+has been made yet.&lt;/p&gt;
 &lt;p&gt;It turns out I was the first person to try using Libvirt in Cirrus CI (I've
 even hit a previously unknown &lt;a href="https://github.com/cirruslabs/cirrus-ci-docs/issues/564"&gt;bug&lt;/a&gt; which was promptly fixed by their staff).
 Since the process has some subtle differences to the popular documented use
