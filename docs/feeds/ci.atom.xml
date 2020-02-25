@@ -1,5 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - ci</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/ci.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2020-02-18T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Cirrus CI integration for GitLab projects</title><link href="https://potyarkin.ml/posts/2020/cirrus-ci-integration-for-gitlab-projects/" rel="alternate"></link><published>2020-02-18T00:00:00+03:00</published><updated>2020-02-18T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-02-18:/posts/2020/cirrus-ci-integration-for-gitlab-projects/</id><summary type="html">&lt;p&gt;&lt;a href="https://cirrus-ci.org/"&gt;Cirrus CI&lt;/a&gt; is a relatively new hosted CI service that offers several unique
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - ci</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/ci.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2020-02-25T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Running Libvirt (KVM) in Cirrus CI</title><link href="https://potyarkin.ml/posts/2020/running-libvirt-kvm-in-cirrus-ci/" rel="alternate"></link><published>2020-02-25T00:00:00+03:00</published><updated>2020-02-25T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-02-25:/posts/2020/running-libvirt-kvm-in-cirrus-ci/</id><summary type="html">&lt;p&gt;Up until the middle of 2019 it was very unusual to even expect that any CI
+service would allow nested virtualization. Those who required such
+functionality had to maintain their own CI runners on their own
+infrastructure. Things changed when Google Cloud introduced &lt;a href="https://cloud.google.com/compute/docs/instances/enable-nested-virtualization-vm-instances"&gt;nested
+KVM&lt;/a&gt; support.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://cirrus-ci.org/"&gt;Cirrus CI&lt;/a&gt; was probably …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Up until the middle of 2019 it was very unusual to even expect that any CI
+service would allow nested virtualization. Those who required such
+functionality had to maintain their own CI runners on their own
+infrastructure. Things changed when Google Cloud introduced &lt;a href="https://cloud.google.com/compute/docs/instances/enable-nested-virtualization-vm-instances"&gt;nested
+KVM&lt;/a&gt; support.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://cirrus-ci.org/"&gt;Cirrus CI&lt;/a&gt; was probably the first CI service to officially support
+nested virtualization in free tier. There are reports that Travis CI currently
+also provides such feature but no public announcement has been made yet.&lt;/p&gt;
+&lt;p&gt;It turns out I was the first person to try using Libvirt in Cirrus CI (I've
+even hit a previously unknown &lt;a href="https://github.com/cirruslabs/cirrus-ci-docs/issues/564"&gt;bug&lt;/a&gt; which was promptly fixed by their staff).
+Since the process has some subtle differences to the popular documented use
+cases I've decided to describe it here.&lt;/p&gt;
+&lt;h2 id="hypervisor-environment"&gt;&lt;a class="toclink" href="#hypervisor-environment"&gt;Hypervisor environment&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Cirrus CI uses Docker images as environment for their runners. It
+significantly simplifies the setup and enables efficient caching between runs.&lt;/p&gt;
+&lt;p&gt;Since popular Docker images do not include any hypervisor packages we need to
+build our own image. I've decided to add the required packages to Debian base
+image. The whole &lt;a href="https://gitlab.com/sio/server_common/-/blob/master/ansible/tests/Dockerfile.host-kvm"&gt;Dockerfile&lt;/a&gt; is essentially one &lt;code&gt;apt-get&lt;/code&gt; statement.&lt;/p&gt;
+&lt;p&gt;Keep in mind that libvirt package in Debian drops root privileges when
+launching &lt;code&gt;qemu-kvm&lt;/code&gt;. You'll either need to disable that in
+&lt;code&gt;/etc/libvirt/qemu.conf&lt;/code&gt; (as I did) or to change permissions for &lt;code&gt;/dev/kvm&lt;/code&gt; to
+allow access by &lt;code&gt;libvirtd&lt;/code&gt; user.&lt;/p&gt;
+&lt;h2 id="required-system-services"&gt;&lt;a class="toclink" href="#required-system-services"&gt;Required system services&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Default entry point for CI runner is not customizable in Cirrus CI - it's an
+agent process that communicates with CI service and sends progress reports you
+see in web interface. Because of that no systemd units are started automatically
+as it would have been the case on a normal system. More than that, starting
+systemd manually also looks impossible.&lt;/p&gt;
+&lt;p&gt;That means all the daemons required by libvirt must be started manually (see
+documentation on &lt;a href="https://cirrus-ci.org/guide/writing-tasks/#background-script-instruction"&gt;background_script&lt;/a&gt; syntax):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# .cirrus.yml&lt;/span&gt;
+&lt;span class="nt"&gt;dbus_background_script&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;mkdir -p /var/run/dbus&lt;/span&gt;
+  &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;/usr/bin/dbus-daemon --system --nofork --nopidfile&lt;/span&gt;
+&lt;span class="nt"&gt;virtlogd_background_script&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;/usr/sbin/virtlogd&lt;/span&gt;
+&lt;span class="nt"&gt;libvirtd_background_script&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;sleep 2 &amp;amp;&amp;amp; /usr/sbin/libvirtd&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="firewall-configuration"&gt;&lt;a class="toclink" href="#firewall-configuration"&gt;Firewall configuration&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Hypervisor kernel is provided as is, and it currently runs legacy iptables
+firewall. Trying to use iptables-nft (which is the default in current Debian)
+produces a misconfigured guest network that is hard to debug.&lt;/p&gt;
+&lt;p&gt;That's why we need to tell Debian to use legacy iptables interface across the whole
+system:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# .cirrus.yml&lt;/span&gt;
+&lt;span class="nt"&gt;iptables_legacy_script&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;update-alternatives --set iptables /usr/sbin/iptables-legacy&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="_1"&gt;&lt;a class="toclink" href="#_1"&gt;&amp;nbsp;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;That's it! Following these steps I was able to execute Libvirt (via
+Vagrant-Libvirt, via Molecule) in Cirrus CI environment. &lt;a href="https://gitlab.com/sio/server_common/-/blob/master/.cirrus.yml.j2"&gt;Full configuration&lt;/a&gt;
+is available here, it includes some extra caching steps and many debug
+statements that helped me to implement this process in the first place.&lt;/p&gt;</content><category term="posts"></category><category term="ci"></category><category term="automation"></category></entry><entry><title>Cirrus CI integration for GitLab projects</title><link href="https://potyarkin.ml/posts/2020/cirrus-ci-integration-for-gitlab-projects/" rel="alternate"></link><published>2020-02-18T00:00:00+03:00</published><updated>2020-02-18T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-02-18:/posts/2020/cirrus-ci-integration-for-gitlab-projects/</id><summary type="html">&lt;p&gt;&lt;a href="https://cirrus-ci.org/"&gt;Cirrus CI&lt;/a&gt; is a relatively new hosted CI service that offers several unique
 features. It's probably the only CI provider to offer full virtualization
 (KVM) or FreeBSD runners for free. Currently their business model is centered
 around GitHub Marketplace and only the projects hosted at GitHub are
