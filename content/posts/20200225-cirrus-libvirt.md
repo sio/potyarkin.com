@@ -30,7 +30,7 @@ image. The whole [Dockerfile] is essentially one `apt-get` statement.
 Keep in mind that libvirt package in Debian drops root privileges when
 launching `qemu-kvm`. You'll either need to disable that in
 `/etc/libvirt/qemu.conf` (as I did) or to change permissions for `/dev/kvm` to
-allow access by `libvirtd` user.
+allow access by `libvirt-qemu` user.
 
 ## Required system services
 
