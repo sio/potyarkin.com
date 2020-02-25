@@ -163,7 +163,7 @@ image. The whole <a href="https://gitlab.com/sio/server_common/-/blob/master/ans
 <p>Keep in mind that libvirt package in Debian drops root privileges when
 launching <code>qemu-kvm</code>. You'll either need to disable that in
 <code>/etc/libvirt/qemu.conf</code> (as I did) or to change permissions for <code>/dev/kvm</code> to
-allow access by <code>libvirtd</code> user.</p>
+allow access by <code>libvirt-qemu</code> user.</p>
 <h2 id="required-system-services"><a class="toclink" href="#required-system-services">Required system services</a></h2>
 <p>Default entry point for CI runner is not customizable in Cirrus CI - it's an
 agent process that communicates with CI service and sends progress reports you
