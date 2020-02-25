@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>Running Libvirt (KVM) in Cirrus CI</title>
+
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+<link href="https://potyarkin.ml/posts/2020/running-libvirt-kvm-in-cirrus-ci/" rel="canonical" />
+  <!-- Feed -->
+      <link href="/feeds/" type="application/atom+xml" rel="alternate" title="Orange Sun Full Atom Feed" />
+
+  <link href="https://potyarkin.ml/theme/css/style.css" type="text/css" rel="stylesheet" />
+
+  <!-- Code highlight color scheme -->
+      <link href="https://potyarkin.ml/theme/css/code_blocks/github.css" rel="stylesheet">
+
+    <!-- CSS specified by the user -->
+
+
+    <link href="https://potyarkin.ml/static/attila_override.css" type="text/css" rel="stylesheet" />
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+
+    <meta name="description" content="Up until the middle of 2019 it was very unusual to even expect that any CI service would allow nested virtualization. Those who required...">
+
+    <meta name="author" content="Vitaly Potyarkin">
+
+    <meta name="tags" content="ci">
+    <meta name="tags" content="automation">
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="Orange Sun"/>
+<meta property="og:title" content="Running Libvirt (KVM) in Cirrus CI"/>
+<meta property="og:description" content="Up until the middle of 2019 it was very unusual to even expect that any CI service would allow nested virtualization. Those who required..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://potyarkin.ml/posts/2020/running-libvirt-kvm-in-cirrus-ci/"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2020-02-25 00:00:00+03:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://potyarkin.ml/">
+<meta property="article:section" content="posts"/>
+<meta property="article:tag" content="ci"/>
+<meta property="article:tag" content="automation"/>
+<meta property="og:image" content="https://potyarkin.ml/theme/images/post-bg.jpg">
+
+<!-- Twitter Card -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "Running Libvirt (KVM) in Cirrus CI",
+  "headline": "Running Libvirt (KVM) in Cirrus CI",
+  "datePublished": "2020-02-25 00:00:00+03:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Vitaly Potyarkin",
+    "url": "https://potyarkin.ml/"
+  },
+  "image": "https://potyarkin.ml/theme/images/post-bg.jpg",
+  "url": "https://potyarkin.ml/posts/2020/running-libvirt-kvm-in-cirrus-ci/",
+  "description": "Up until the middle of 2019 it was very unusual to even expect that any CI service would allow nested virtualization. Those who required..."
+}
+</script>
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
+
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+          <li><a href="/archive/" role="presentation">Archive</a></li>
+          <li><a href="/tags/" role="presentation">Tags</a></li>
+          <li><a href="mailto:sio.wtf@gmail.com" role="presentation">Email</a></li>
+          <li><a href="https://github.com/sio" role="presentation">Github</a></li>
+
+
+        <li class="nav-rss"><a href="/feeds/"><i class="ic ic-rss"></i> Subscribe</a></li>
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="post-header" class="has-cover">
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="https://potyarkin.ml/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Running Libvirt (KVM) in Cirrus CI</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="https://potyarkin.ml/">Vitaly Potyarkin</a>
+            | <time datetime="2020-02-25">2020-02-25</time>
+        </span>
+        <!-- TODO : Modified check -->
+            <div class="post-cover cover" style="background-color: rgb(242,106,61)">
+      </div>
+    </header>
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <p>Up until the middle of 2019 it was very unusual to even expect that any CI
+service would allow nested virtualization. Those who required such
+functionality had to maintain their own CI runners on their own
+infrastructure. Things changed when Google Cloud introduced <a href="https://cloud.google.com/compute/docs/instances/enable-nested-virtualization-vm-instances">nested
+KVM</a> support.</p>
+<p><a href="https://cirrus-ci.org/">Cirrus CI</a> was probably the first CI service to officially support
+nested virtualization in free tier. There are reports that Travis CI currently
+also provides such feature but no public announcement has been made yet.</p>
+<p>It turns out I was the first person to try using Libvirt in Cirrus CI (I've
+even hit a previously unknown <a href="https://github.com/cirruslabs/cirrus-ci-docs/issues/564">bug</a> which was promptly fixed by their staff).
+Since the process has some subtle differences to the popular documented use
+cases I've decided to describe it here.</p>
+<h2 id="hypervisor-environment"><a class="toclink" href="#hypervisor-environment">Hypervisor environment</a></h2>
+<p>Cirrus CI uses Docker images as environment for their runners. It
+significantly simplifies the setup and enables efficient caching between runs.</p>
+<p>Since popular Docker images do not include any hypervisor packages we need to
+build our own image. I've decided to add the required packages to Debian base
+image. The whole <a href="https://gitlab.com/sio/server_common/-/blob/master/ansible/tests/Dockerfile.host-kvm">Dockerfile</a> is essentially one <code>apt-get</code> statement.</p>
+<p>Keep in mind that libvirt package in Debian drops root privileges when
+launching <code>qemu-kvm</code>. You'll either need to disable that in
+<code>/etc/libvirt/qemu.conf</code> (as I did) or to change permissions for <code>/dev/kvm</code> to
+allow access by <code>libvirtd</code> user.</p>
+<h2 id="required-system-services"><a class="toclink" href="#required-system-services">Required system services</a></h2>
+<p>Default entry point for CI runner is not customizable in Cirrus CI - it's an
+agent process that communicates with CI service and sends progress reports you
+see in web interface. Because of that no systemd units are started automatically
+as it would have been the case on a normal system. More than that, starting
+systemd manually also looks impossible.</p>
+<p>That means all the daemons required by libvirt must be started manually (see
+documentation on <a href="https://cirrus-ci.org/guide/writing-tasks/#background-script-instruction">background_script</a> syntax):</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># .cirrus.yml</span>
+<span class="nt">dbus_background_script</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mkdir -p /var/run/dbus</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/usr/bin/dbus-daemon --system --nofork --nopidfile</span>
+<span class="nt">virtlogd_background_script</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/usr/sbin/virtlogd</span>
+<span class="nt">libvirtd_background_script</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">sleep 2 &amp;&amp; /usr/sbin/libvirtd</span>
+</code></pre></div>
+
+
+<h2 id="firewall-configuration"><a class="toclink" href="#firewall-configuration">Firewall configuration</a></h2>
+<p>Hypervisor kernel is provided as is, and it currently runs legacy iptables
+firewall. Trying to use iptables-nft (which is the default in current Debian)
+produces a misconfigured guest network that is hard to debug.</p>
+<p>That's why we need to tell Debian to use legacy iptables interface across the whole
+system:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># .cirrus.yml</span>
+<span class="nt">iptables_legacy_script</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">update-alternatives --set iptables /usr/sbin/iptables-legacy</span>
+</code></pre></div>
+
+
+<h2 id="_1"><a class="toclink" href="#_1">&nbsp;</a></h2>
+<p>That's it! Following these steps I was able to execute Libvirt (via
+Vagrant-Libvirt, via Molecule) in Cirrus CI environment. <a href="https://gitlab.com/sio/server_common/-/blob/master/.cirrus.yml.j2">Full configuration</a>
+is available here, it includes some extra caching steps and many debug
+statements that helped me to implement this process in the first place.</p>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Running Libvirt (KVM) in Cirrus CI&amp;url=https://potyarkin.ml/posts/2020/running-libvirt-kvm-in-cirrus-ci/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://potyarkin.ml/posts/2020/running-libvirt-kvm-in-cirrus-ci/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=https://potyarkin.ml/posts/2020/running-libvirt-kvm-in-cirrus-ci/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="https://potyarkin.ml/tags/ci/">ci</a><a href="https://potyarkin.ml/tags/automation/">automation</a>                </aside>
+
+                <div class="clear"></div>
+
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <a class="post-nav-prev" href="https://potyarkin.ml/posts/2020/cirrus-ci-integration-for-gitlab-projects/">
+                        <section class="post-nav-teaser">
+                            <i class="ic ic-arrow-right"></i>
+                                <h2 class="post-nav-title">Cirrus CI integration for GitLab projects</h2>
+                            <p class="post-nav-excerpt">Cirrus CI is a relatively new hosted CI service that offers several unique features....</p>
+                        </section>
+                    </a>
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+
+
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://potyarkin.ml/theme/js/script.js"></script>
+
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121532727-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-121532727-1', { 'anonymize_ip': true });
+    </script>
+</body>
+</html>
