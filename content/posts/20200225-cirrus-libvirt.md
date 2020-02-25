@@ -8,9 +8,10 @@ functionality had to maintain their own CI runners on their own
 infrastructure. Things changed when Google Cloud introduced [nested
 KVM][google-cloud-kvm] support.
 
-[Cirrus CI][cirrus] was probably the first CI service to officially support
-nested virtualization in free tier. There are reports that Travis CI currently
-also provides such feature but no public announcement has been made yet.
+[Cirrus CI][cirrus] was probably the first CI service to [officially
+support][kvm-support] nested virtualization in free tier. There are reports
+that Travis CI currently also provides such feature but no public announcement
+has been made yet.
 
 It turns out I was the first person to try using Libvirt in Cirrus CI (I've
 even hit a previously unknown [bug] which was promptly fixed by their staff).
