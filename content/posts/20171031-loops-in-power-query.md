@@ -6,7 +6,7 @@ Power Query Formula Language (also known as M language) is sometimes difficult
 to get your head around. This article explains how someone familiar with loops
 in other programming languages can approach the same concept in M language.
 
-First of all let's look at the [definition][1] given by Microsoft:
+First of all let's look at the [definition] given by Microsoft:
 
 > The Power Query M formula language is optimized for building highly flexible
 > data mashup queries. It's a **functional**, case sensitive language similar
@@ -39,7 +39,7 @@ There already is such a function! It is `List.Generate`!
 ## List.Generate
 
 This function takes 3 or 4 parameters, all of them functions.  (You should
-always treat the `each` statement as a function [because it is][2] a shortcut
+always treat the `each` statement as a function [because it is][each] a shortcut
 for function definition.)
 
 The parameters are:
@@ -153,5 +153,5 @@ M, and there are no namespaces, so the dot is just another character without
 any special meaning.  It could have been a dash or an underscore - it wouldn't
 have mattered.
 
-[1]: https://msdn.microsoft.com/en-us/library/mt211003.aspx
-[2]: https://msdn.microsoft.com/en-us/library/mt185361.aspx
+[definition]: https://docs.microsoft.com/en-us/powerquery-m/
+[each]: https://docs.microsoft.com/en-us/powerquery-m/understanding-power-query-m-functions
