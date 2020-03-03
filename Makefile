@@ -63,7 +63,12 @@ include Makefile.venv
 Makefile.venv:
 	curl \
 		-o Makefile.fetched \
-		-L "https://github.com/sio/Makefile.venv/raw/v2019.10.01/Makefile.venv"
-	echo "736266610dd5189a9009a8890c6a2e63adfdf06f9e729c3696c5b315b90b206e *Makefile.fetched" \
+		-L "https://github.com/sio/Makefile.venv/raw/v2020.02.26/Makefile.venv"
+	echo "e0aeebe87c811fd9dfd892d4debb813262646e3e82691e8c4c214197c4ab6fac *Makefile.fetched" \
 		| sha256sum --check - \
 		&& mv Makefile.fetched Makefile.venv
+
+
+.PHONY: links
+links: $(VENV)/deadlinks
+	$(VENV)/deadlinks https://potyarkin.ml -n 10 -e
