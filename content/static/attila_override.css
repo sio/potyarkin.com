@@ -78,7 +78,7 @@ pre code {
 }
 
 /* Smaller padding between paragraphs */
-p, ul, ol {
+p, ul, ol, details {
     margin: 1.5em auto;
 }
 li p {
