@@ -78,7 +78,7 @@ pre code {
 }
 
 /* Smaller padding between paragraphs */
-p, ul, ol {
+p, ul, ol, details {
     margin: 1.5em auto;
 }
 li p {
@@ -90,6 +90,7 @@ li p {
     width: auto;
     height: auto;
     max-width: 100%;
+    max-height:  35em;
     margin-left: auto;
     margin-right: auto;
 }

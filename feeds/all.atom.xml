@@ -1,5 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/all.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2020-02-25T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Running Libvirt (KVM) in Cirrus CI</title><link href="https://potyarkin.ml/posts/2020/running-libvirt-kvm-in-cirrus-ci/" rel="alternate"></link><published>2020-02-25T00:00:00+03:00</published><updated>2020-02-25T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-02-25:/posts/2020/running-libvirt-kvm-in-cirrus-ci/</id><summary type="html">&lt;p&gt;Up until the middle of 2019 it was very unusual to even expect that any CI
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/all.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2020-04-04T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Pegatron Cape 7 nettop (thin client)</title><link href="https://potyarkin.ml/posts/2020/pegatron-cape-7/" rel="alternate"></link><published>2020-04-04T00:00:00+03:00</published><updated>2020-04-04T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-04-04:/posts/2020/pegatron-cape-7/</id><summary type="html">&lt;blockquote&gt;
+&lt;p&gt;Below are hardware details of an outdated compact computer that had since
+become available for low price on second-hand market. I bought mine for $15
+(in March 2020).&lt;/p&gt;
+&lt;p&gt;This post is inspired by &lt;a href="https://www.parkytowers.me.uk/thin/"&gt;ParkyTowers Thin Client
+Database&lt;/a&gt; - many thanks to David
+Parkinson for gathering and sharing all that knowledge!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Pegatron …&lt;/strong&gt;&lt;/p&gt;</summary><content type="html">&lt;blockquote&gt;
+&lt;p&gt;Below are hardware details of an outdated compact computer that had since
+become available for low price on second-hand market. I bought mine for $15
+(in March 2020).&lt;/p&gt;
+&lt;p&gt;This post is inspired by &lt;a href="https://www.parkytowers.me.uk/thin/"&gt;ParkyTowers Thin Client
+Database&lt;/a&gt; - many thanks to David
+Parkinson for gathering and sharing all that knowledge!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Pegatron Cape 7&lt;/strong&gt; was announced in early 2009 (&lt;a href="https://potyarkin.ml/resources/pegatron/booklet.pdf"&gt;marketing booklet&lt;/a&gt;
+is dated by 2009-04-13). It is based on Intel Atom 230 series CPU along with
+SiS 968/672 (models A, B, C, D) or nVidia Ion chipset (models E, F). The unit
+I have is model D, all further photos and description apply to that model.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://potyarkin.ml/gallery/pegatron/" title="More photos of Pegatron Cape 7"&gt;&lt;img alt="Pegatron Cape 7 photos" src="https://potyarkin.ml/resources/pegatron/thumb/0-overview.jpg"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The hardware is similar to &lt;a href="https://www.parkytowers.me.uk/thin/dell/fx160/"&gt;Dell
+FX160&lt;/a&gt; but is packaged into a
+significantly more compact case and uses external power supply. Pegatron is an
+&lt;a href="https://en.wikipedia.org/wiki/Original_design_manufacturer"&gt;ODM manufacturer&lt;/a&gt; which means the units were sold to end users under a
+variety of brand names. Mine was sold in Russia as &lt;strong&gt;Depo Sky 153&lt;/strong&gt;. I've also
+seen mentions of it being sold as &lt;a href="https://forums.vrzone.com/singapore-marketplace-garage-sales/487593-wts-pegatron-cape-7-mini-net-pc-brand-new.html"&gt;Pegasus CutePC&lt;/a&gt; in Indonesia, as unknown
+model under &lt;a href="https://produto.mercadolivre.com.br/MLB-1283040839-thin-cliente-intel-atom-memoria-ram-2gb-ddr2hd-160gb-c-w-_JM"&gt;iClient&lt;/a&gt; brand in Brazil, and under some local brand in Poland.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Cape 7&lt;/strong&gt; is capable of running mainstream operating systems (mine came with
+Windows XP preinstalled), general purpose Linux distributions are also
+supported.&lt;/p&gt;
+&lt;h2 id="specifications"&gt;&lt;a class="toclink" href="#specifications"&gt;Specifications&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Motherboard&lt;/strong&gt;: Pegatron IPP71-CP with SiS 672 northbridge and SiS 968 southbridge&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Processor&lt;/strong&gt;: Intel Atom 230 (1.6GHz, single core, two threads)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;RAM&lt;/strong&gt;: DDR2 SO-DIMM, 1GB by default (mine came with 2GB preinstalled by seller)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Video&lt;/strong&gt;: SiS Mirage 3&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Storage&lt;/strong&gt;: 2.5" SATA HDD&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Ports&lt;/strong&gt;:&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Network&lt;/strong&gt;: Realtek 8111EL 10/100/1000&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;USB&lt;/strong&gt;: 6 USB 2.0 ports (2 front, 4 back)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Video&lt;/strong&gt;: 1 DVI output (other Cape 7 models may use D-Sub or HDMI)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Audio&lt;/strong&gt;: 3.5mm audio out, 3.5mm microphone in - Realtek ALC662&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Serial&lt;/strong&gt;: none&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Parallel&lt;/strong&gt;: none&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PS/2&lt;/strong&gt;: none&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Other&lt;/strong&gt;: 1 unknown port (next to DCIN), probably for Wi-Fi antenna&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Power&lt;/strong&gt;: External power supply - 19V DC, 2A, 5.5mm x 2.5mm connector
+  (same as in many ASUS laptops)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Cooling&lt;/strong&gt;: passive, completely silent. One removable aluminum heatsink for
+  CPU, several thermal pads to transfer heat from northbridge/southbridge to
+  metal case frame. My device runs pretty hot even after changing the thermal
+  paste - I'll need to monitor how stable it is under workload.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Dimensions&lt;/strong&gt;: approx. 173 x 154 x 20mm, the bottom of the case is
+  slightly wider (26mm).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="processor"&gt;&lt;a class="toclink" href="#processor"&gt;Processor&lt;/a&gt;&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;Click to view &lt;strong&gt;/proc/cpuinfo&lt;/strong&gt;&lt;/summary&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;processor   : 0
+vendor_id   : GenuineIntel
+cpu family  : 6
+model       : 28
+model name  : Intel(R) Atom(TM) CPU  230   @ 1.60GHz
+stepping    : 2
+microcode   : 0x218
+cpu MHz     : 1599.527
+cache size  : 512 KB
+physical id : 0
+siblings    : 2
+core id     : 0
+cpu cores   : 1
+apicid      : 0
+initial apicid  : 0
+fpu     : yes
+fpu_exception   : yes
+cpuid level : 10
+wp      : yes
+flags       : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov
+pat clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx lm constant_tsc
+arch_perfmon pebs bts nopl cpuid aperfmperf pni dtes64 monitor ds_cpl tm2
+ssse3 cx16 xtpr pdcm movbe lahf_lm dtherm
+bugs        :
+bogomips    : 3199.05
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 32 bits physical, 48 bits virtual
+power management:
+
+processor   : 1
+vendor_id   : GenuineIntel
+cpu family  : 6
+model       : 28
+model name  : Intel(R) Atom(TM) CPU  230   @ 1.60GHz
+stepping    : 2
+microcode   : 0x218
+cpu MHz     : 1599.365
+cache size  : 512 KB
+physical id : 0
+siblings    : 2
+core id     : 0
+cpu cores   : 1
+apicid      : 1
+initial apicid  : 1
+fpu     : yes
+fpu_exception   : yes
+cpuid level : 10
+wp      : yes
+flags       : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov
+pat clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx lm constant_tsc
+arch_perfmon pebs bts nopl cpuid aperfmperf pni dtes64 monitor ds_cpl tm2
+ssse3 cx16 xtpr pdcm movbe lahf_lm dtherm
+bugs        :
+bogomips    : 3199.05
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 32 bits physical, 48 bits virtual
+power management:
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/details&gt;
+
+&lt;h2 id="pci"&gt;&lt;a class="toclink" href="#pci"&gt;PCI&lt;/a&gt;&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;Click to view &lt;strong&gt;lspci -nn&lt;/strong&gt;&lt;/summary&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;00:00.0 Host bridge [0600]: Silicon Integrated Systems [SiS] 671MX [1039:0671]
+00:01.0 PCI bridge [0604]: Silicon Integrated Systems [SiS] AGP Port (virtual PCI-to-PCI bridge) [1039:0003]
+00:02.0 ISA bridge [0601]: Silicon Integrated Systems [SiS] SiS968 [MuTIOL Media IO] [1039:0968] (rev 01)
+00:02.5 IDE interface [0101]: Silicon Integrated Systems [SiS] 5513 IDE Controller [1039:5513] (rev 01)
+00:03.0 USB controller [0c03]: Silicon Integrated Systems [SiS] USB 1.1 Controller [1039:7001] (rev 0f)
+00:03.1 USB controller [0c03]: Silicon Integrated Systems [SiS] USB 1.1 Controller [1039:7001] (rev 0f)
+00:03.3 USB controller [0c03]: Silicon Integrated Systems [SiS] USB 2.0 Controller [1039:7002]
+00:05.0 IDE interface [0101]: Silicon Integrated Systems [SiS] SATA Controller / IDE mode [1039:1183] (rev 03)
+00:06.0 PCI bridge [0604]: Silicon Integrated Systems [SiS] PCI-to-PCI bridge [1039:000a]
+00:0f.0 Audio device [0403]: Silicon Integrated Systems [SiS] Azalia Audio Controller [1039:7502]
+00:1f.0 PCI bridge [0604]: Silicon Integrated Systems [SiS] PCI-to-PCI bridge [1039:0004]
+01:00.0 VGA compatible controller [0300]: Silicon Integrated Systems [SiS] 771/671 PCIE VGA Display Adapter [1039:6351] (rev 10)
+02:00.0 Ethernet controller [0200]: Realtek Semiconductor Co., Ltd. RTL8111/8168/8411 PCI Express Gigabit Ethernet Controller [10ec:8168] (rev 03)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/details&gt;
+
+&lt;h2 id="disassembly"&gt;&lt;a class="toclink" href="#disassembly"&gt;Disassembly&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;The case can be opened without any tools. All visible screws are holding
+internal components, not the cover. Bottom corners of the cover are easy to
+get a grip of - pull gently on those and expand the opening until plastic
+locks click open one by one.&lt;/p&gt;
+&lt;h2 id="expansion"&gt;&lt;a class="toclink" href="#expansion"&gt;Expansion&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;RAM&lt;/strong&gt;: The unit accepts a single DDR2 SO-DIMM. Default module can be easily
+replaced with a larger one. I did not test with 4GB (DDR2 SO-DIMM of that size
+is expensive!), but I've seen multiple reports of 2GB working fine. My unit
+uses Kingston KVR800D2S6/2G module.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Storage&lt;/strong&gt;: Cape 7 provides conventional SATA slot with enough space to fit a
+laptop HDD or SATA SSD. Using SSD might not provide the expected performance
+benefit because SATA bus appears to be limited at 300 Mbps (37.6 MB/s) -
+numbers are from block diagram (page 15 of the &lt;a href="https://potyarkin.ml/resources/pegatron/booklet.pdf"&gt;booklet&lt;/a&gt;).&lt;/p&gt;
+&lt;h2 id="bios"&gt;&lt;a class="toclink" href="#bios"&gt;BIOS&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;BIOS is a standard AMI BIOS. Pressing &lt;strong&gt;Del&lt;/strong&gt; at startup opens setup screen,
+&lt;strong&gt;F8&lt;/strong&gt; shows a shorter boot menu to select a device for one-off boot.&lt;/p&gt;
+&lt;p&gt;BIOS supports booting from USB devices and network boot. There are also
+several configurable options for power management:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Power On by PCI Devices&lt;/li&gt;
+&lt;li&gt;Power On by RTC Alarm&lt;/li&gt;
+&lt;li&gt;Restore on AC Power Loss&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;See also: &lt;a href="https://potyarkin.ml/gallery/pegatron-bios/"&gt;screenshots from BIOS setup&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="pictures"&gt;&lt;a class="toclink" href="#pictures"&gt;Pictures&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;See &lt;a href="https://potyarkin.ml/gallery/pegatron/" title="More photos of Pegatron Cape 7"&gt;the gallery&lt;/a&gt; or download individual images in high resolution:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://potyarkin.ml/resources/pegatron/img/1-outlook.jpg"&gt;Nettop overview - standing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://potyarkin.ml/resources/pegatron/img/0-overview.jpg"&gt;Nettop overview - lying&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://potyarkin.ml/resources/pegatron/img/2-front.jpg"&gt;Front panel&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://potyarkin.ml/resources/pegatron/img/3-back.jpg"&gt;Back panel&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://potyarkin.ml/resources/pegatron/img/4-open.jpg"&gt;Open case&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://potyarkin.ml/resources/pegatron/img/5-motherboard-front.jpg"&gt;Motherboard (front)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://potyarkin.ml/resources/pegatron/img/6-motherboard-back.jpg"&gt;Motherboard (back)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://potyarkin.ml/resources/pegatron/img/7-case.jpg"&gt;Empty case (inside)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- internal links --&gt;
+
+&lt;!-- external links --&gt;</content><category term="posts"></category><category term="hardware"></category></entry><entry><title>Running Libvirt (KVM) in Cirrus CI</title><link href="https://potyarkin.ml/posts/2020/running-libvirt-kvm-in-cirrus-ci/" rel="alternate"></link><published>2020-02-25T00:00:00+03:00</published><updated>2020-02-25T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-02-25:/posts/2020/running-libvirt-kvm-in-cirrus-ci/</id><summary type="html">&lt;p&gt;Up until the middle of 2019 it was very unusual to even expect that any CI
 service would allow nested virtualization. Those who required such
 functionality had to maintain their own CI runners on their own
 infrastructure. Things changed when Google Cloud introduced &lt;a href="https://cloud.google.com/compute/docs/instances/enable-nested-virtualization-vm-instances"&gt;nested

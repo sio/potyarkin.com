@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Orange Sun</title><link>https://potyarkin.ml/</link><description>Unsorted ramblings, sometimes related to programming</description><lastBuildDate>Tue, 25 Feb 2020 00:00:00 +0300</lastBuildDate><item><title>Running Libvirt (KVM) in Cirrus CI</title><link>https://potyarkin.ml/posts/2020/running-libvirt-kvm-in-cirrus-ci/</link><description>&lt;p&gt;Up until the middle of 2019 it was very unusual to even expect that any CI
+<rss version="2.0"><channel><title>Orange Sun</title><link>https://potyarkin.ml/</link><description>Unsorted ramblings, sometimes related to programming</description><lastBuildDate>Sat, 04 Apr 2020 00:00:00 +0300</lastBuildDate><item><title>Pegatron Cape 7 nettop (thin client)</title><link>https://potyarkin.ml/posts/2020/pegatron-cape-7/</link><description>&lt;blockquote&gt;
+&lt;p&gt;Below are hardware details of an outdated compact computer that had since
+become available for low price on second-hand market. I bought mine for $15
+(in March 2020).&lt;/p&gt;
+&lt;p&gt;This post is inspired by &lt;a href="https://www.parkytowers.me.uk/thin/"&gt;ParkyTowers Thin Client
+Database&lt;/a&gt; - many thanks to David
+Parkinson for gathering and sharing all that knowledge!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Pegatron …&lt;/strong&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vitaly Potyarkin</dc:creator><pubDate>Sat, 04 Apr 2020 00:00:00 +0300</pubDate><guid isPermaLink="false">tag:potyarkin.ml,2020-04-04:/posts/2020/pegatron-cape-7/</guid><category>posts</category><category>hardware</category></item><item><title>Running Libvirt (KVM) in Cirrus CI</title><link>https://potyarkin.ml/posts/2020/running-libvirt-kvm-in-cirrus-ci/</link><description>&lt;p&gt;Up until the middle of 2019 it was very unusual to even expect that any CI
 service would allow nested virtualization. Those who required such
 functionality had to maintain their own CI runners on their own
 infrastructure. Things changed when Google Cloud introduced &lt;a href="https://cloud.google.com/compute/docs/instances/enable-nested-virtualization-vm-instances"&gt;nested
