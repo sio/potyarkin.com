@@ -1,6 +1,7 @@
 title: Pegatron Cape 7 nettop (thin client)
 tags: hardware,
 slug: pegatron-cape-7
+date: 2020-04-04
 
 > Below are hardware details of an outdated compact computer that had since
 > become available for low price on second-hand market. I bought mine for $15
