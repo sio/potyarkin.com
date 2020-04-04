@@ -51,7 +51,8 @@ supported.
   (same as in many ASUS laptops)
 - **Cooling**: passive, completely silent. One removable aluminum heatsink for
   CPU, several thermal pads to transfer heat from northbridge/southbridge to
-  metal case frame.
+  metal case frame. My device runs pretty hot even after changing the thermal
+  paste - I'll need to monitor how stable it is under workload.
 - **Dimensions**: approx. 173 x 154 x 20mm, the bottom of the case is
   slightly wider (26mm).
 
@@ -124,9 +125,6 @@ power management:
 </details>
 
 
-## BIOS <!-- TODO -->
-
-
 ## PCI
 
 <details>
@@ -170,6 +168,21 @@ benefit because SATA bus appears to be limited at 300 Mbps (37.6 MB/s) -
 numbers are from block diagram (page 15 of the [booklet]).
 
 
+## BIOS
+
+BIOS is a standard AMI BIOS. Pressing **Del** at startup opens setup screen,
+**F8** shows a shorter boot menu to select a device for one-off boot.
+
+BIOS supports booting from USB devices and network boot. There are also
+several configurable options for power management:
+
+- Power On by PCI Devices
+- Power On by RTC Alarm
+- Restore on AC Power Loss
+
+See also: [screenshots from BIOS setup][bios].
+
+
 ## Pictures
 
 See [the gallery][gallery] or download individual images in high resolution:
@@ -188,6 +201,7 @@ See [the gallery][gallery] or download individual images in high resolution:
 <!-- internal links -->
 [booklet]: {static}/resources/pegatron/booklet.pdf
 [gallery]: {filename}/pages/pegatron-photos.md "More photos of Pegatron Cape 7"
+[bios]: {filename}/pages/pegatron-bios.md
 [overview-thumb]: {static}/resources/pegatron/thumb/0-overview.jpg
 [overview]: {static}/resources/pegatron/img/0-overview.jpg
 [outlook]: {static}/resources/pegatron/img/1-outlook.jpg
