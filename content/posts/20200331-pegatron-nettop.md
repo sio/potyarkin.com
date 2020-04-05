@@ -48,7 +48,7 @@ supported.
     - **Parallel**: none
     - **PS/2**: none
     - **Other**: 1 unknown port (next to DCIN), probably for Wi-Fi antenna
-- **Power**: External power supply - 19V DC, 2A, 5.5mm x 2.5mm connector
+- **Power**: External power supply - 19V DC, 2.1A, 5.5mm x 2.5mm connector
   (same as in many ASUS laptops)
 - **Cooling**: passive, completely silent. One removable aluminum heatsink for
   CPU, several thermal pads to transfer heat from northbridge/southbridge to
