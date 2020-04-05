@@ -48,7 +48,7 @@ supported.&lt;/p&gt;
 &lt;li&gt;&lt;strong&gt;Other&lt;/strong&gt;: 1 unknown port (next to DCIN), probably for Wi-Fi antenna&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Power&lt;/strong&gt;: External power supply - 19V DC, 2A, 5.5mm x 2.5mm connector
+&lt;li&gt;&lt;strong&gt;Power&lt;/strong&gt;: External power supply - 19V DC, 2.1A, 5.5mm x 2.5mm connector
   (same as in many ASUS laptops)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Cooling&lt;/strong&gt;: passive, completely silent. One removable aluminum heatsink for
   CPU, several thermal pads to transfer heat from northbridge/southbridge to
