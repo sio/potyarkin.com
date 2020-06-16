@@ -158,9 +158,11 @@ replaced with a larger one. I did not test with 4GB (DDR2 SO-DIMM of that size
 is expensive!), but I've seen multiple reports of 2GB working fine. My unit
 uses Kingston KVR800D2S6/2G module.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Storage&lt;/strong&gt;: Cape 7 provides conventional SATA slot with enough space to fit a
-laptop HDD or SATA SSD. Using SSD might not provide the expected performance
-benefit because SATA bus appears to be limited at 300 Mbps (37.6 MB/s) -
-numbers are from block diagram (page 15 of the &lt;a href="https://potyarkin.ml/resources/pegatron/booklet.pdf"&gt;booklet&lt;/a&gt;).&lt;/p&gt;
+laptop HDD or SATA SSD. Thick 12.5mm drives fit only when HDD bracket is
+removed, but just barely - cover will be slightly bulged. Using SSD might not
+provide the expected performance benefit because SATA bus appears to be
+limited at 300 Mbps (37.6 MB/s) - numbers are from block diagram (page 15 of
+the &lt;a href="https://potyarkin.ml/resources/pegatron/booklet.pdf"&gt;booklet&lt;/a&gt;).&lt;/p&gt;
 &lt;h2 id="bios"&gt;&lt;a class="toclink" href="#bios"&gt;BIOS&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;BIOS is a standard AMI BIOS. Pressing &lt;strong&gt;Del&lt;/strong&gt; at startup opens setup screen,
 &lt;strong&gt;F8&lt;/strong&gt; shows a shorter boot menu to select a device for one-off boot.&lt;/p&gt;
