@@ -164,9 +164,11 @@ is expensive!), but I've seen multiple reports of 2GB working fine. My unit
 uses Kingston KVR800D2S6/2G module.
 
 **Storage**: Cape 7 provides conventional SATA slot with enough space to fit a
-laptop HDD or SATA SSD. Using SSD might not provide the expected performance
-benefit because SATA bus appears to be limited at 300 Mbps (37.6 MB/s) -
-numbers are from block diagram (page 15 of the [booklet]).
+laptop HDD or SATA SSD. Thick 12.5mm drives fit only when HDD bracket is
+removed, but just barely - cover will be slightly bulged. Using SSD might not
+provide the expected performance benefit because SATA bus appears to be
+limited at 300 Mbps (37.6 MB/s) - numbers are from block diagram (page 15 of
+the [booklet]).
 
 
 ## BIOS
