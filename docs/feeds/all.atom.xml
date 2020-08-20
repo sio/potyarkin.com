@@ -371,8 +371,8 @@ when deploying selfhosted services at home. Online forums, especially
 better yet a &lt;code&gt;docker-compose.yml&lt;/code&gt; or even prebuilt public images on Docker Hub
 is an acceptable way to distribute software targeting the selfhosting crowd.&lt;/p&gt;
 &lt;p&gt;I agree it is very convenient to deploy complex multipart services via these
-tools. But the way many people appear to be doing that is a &lt;em&gt;security
-nightmare&lt;/em&gt;! This is how we get to encounter &lt;a href="https://www.computerweekly.com/news/252437100/Heartbleed-and-WannaCry-thriving-in-Docker-community"&gt;Heartbleed in the
+tools. But the way many people appear to be doing that is a security
+nightmare! This is how we get to encounter &lt;a href="https://www.computerweekly.com/news/252437100/Heartbleed-and-WannaCry-thriving-in-Docker-community"&gt;Heartbleed in the
 wild&lt;/a&gt; four years after it should've been extinct.&lt;/p&gt;
 &lt;p&gt;There are &lt;a href="https://kubernetes.io/docs/tasks/administer-cluster/securing-a-cluster/#protecting-cluster-components-from-compromise"&gt;many&lt;/a&gt; comprehensive &lt;a href="https://www.stackrox.com/post/2019/07/kubernetes-security-101/"&gt;writeups&lt;/a&gt; on
 Docker/Kubernetes security, I will highlight only a subset of problems below.&lt;/p&gt;

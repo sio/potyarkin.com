@@ -12,8 +12,8 @@ is an acceptable way to distribute software targeting the selfhosting crowd.
 [r/selfhosted]: https://reddit.com/r/selfhosted/
 
 I agree it is very convenient to deploy complex multipart services via these
-tools. But the way many people appear to be doing that is a _security
-nightmare_! This is how we get to encounter [Heartbleed in the
+tools. But the way many people appear to be doing that is a security
+nightmare! This is how we get to encounter [Heartbleed in the
 wild][heartbleed] four years after it should've been extinct.
 
 [heartbleed]: https://www.computerweekly.com/news/252437100/Heartbleed-and-WannaCry-thriving-in-Docker-community
