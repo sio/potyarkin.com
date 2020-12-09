@@ -63,7 +63,6 @@ header:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;ID,Column1,Column2,Column3 with very long header,&amp;quot;Column4, with delimiter in the name&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;&lt;a href="https://potyarkin.ml/posts/2018/excel-as-a-csv-editor-with-vba/csv-append.png"&gt;&lt;img alt="CSV Append" src="https://potyarkin.ml/posts/2018/excel-as-a-csv-editor-with-vba/csv-append.png"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;The project is published for educational and archival purposes. I'll be glad if
 you'll find any use for it.&lt;/p&gt;</content><category term="posts"></category><category term="excel"></category><category term="vba"></category><category term="gist"></category></entry><entry><title>Expanding Power Query standard library - introducing LibPQ</title><link href="https://potyarkin.ml/posts/2018/expanding-power-query-standard-library-introducing-libpq/" rel="alternate"></link><published>2018-01-03T00:00:00+03:00</published><updated>2018-01-03T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-01-03:/posts/2018/expanding-power-query-standard-library-introducing-libpq/</id><summary type="html">&lt;p&gt;Power Query formula language (also known as M language) is a very capable yet
@@ -182,7 +181,6 @@ for function definition.)&lt;/p&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;h2 id="a-simple-example"&gt;&lt;a class="toclink" href="#a-simple-example"&gt;A simple example&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;We will generate a table of data points for plotting a parabola. Internally we
 will be storing each item as the record with &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt; fields.  After that we
@@ -196,7 +194,6 @@ will transform that data into a Power Query table for output.&lt;/p&gt;
     &lt;span class="nx"&gt;output&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Table&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;FromRecords&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="nx"&gt;output&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;In this example &lt;code&gt;start()&lt;/code&gt; is an anonymous function that always returns the
 first data point, &lt;code&gt;condition()&lt;/code&gt; and &lt;code&gt;next()&lt;/code&gt; are also functions even though
@@ -221,7 +218,6 @@ mess: you have to know which row comes from what table.&lt;/p&gt;
     &lt;span class="nx"&gt;each&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;table&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;span class="p"&gt;),&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;This code snippet assumes you have the list of tables in the &lt;code&gt;Tables&lt;/code&gt; variable
 and the list of their respective names in the &lt;code&gt;Names&lt;/code&gt; variable. The loop starts

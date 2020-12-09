@@ -23,7 +23,6 @@ Selected local directory: cache\cygwin-packages
 ##[error]Process completed with exit code -1073741571.
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;At least some of those errors can be avoided by providing full absolute
 paths to the installer and any argument values instead of relative
 ones.&lt;/p&gt;
@@ -65,7 +64,6 @@ on values of other variables. This looks quite ugly:&lt;/p&gt;
   &lt;span class="nt"&gt;run&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;echo &amp;quot;::set-env name=CYGWIN_ROOT::${env:GITHUB_WORKSPACE}\${env:CYGWIN_ROOT}&amp;quot;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;I've also failed at proper syntax for YAML multiline strings more times than
 I'm comfortable admitting :)&lt;/p&gt;</content><category term="posts"></category><category term="windows"></category><category term="cygwin"></category><category term="automation"></category><category term="ci"></category></entry><entry><title>Cygheap base mismatch in Git for Windows</title><link href="https://potyarkin.ml/posts/2019/cygheap-base-mismatch-in-git-for-windows/" rel="alternate"></link><published>2019-08-26T00:00:00+03:00</published><updated>2019-08-26T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2019-08-26:/posts/2019/cygheap-base-mismatch-in-git-for-windows/</id><summary type="html">&lt;p&gt;This error has haunted me for several months:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;4 [main] head (6660) C:\...\usr\bin\head.exe:r
@@ -83,7 +81,6 @@ reside in x:\cygwin\bin, where &amp;#39;x&amp;#39; is the drive on which you hav
 installed the cygwin distribution.  Rebooting is also suggested if you
 are unable to find another cygwin DLL.
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;The tricky part is I am not even using Cygwin. I'm running bash with Git for
 Windows &lt;a href="https://git-scm.com/download/win"&gt;as published at the official website&lt;/a&gt;.&lt;/p&gt;

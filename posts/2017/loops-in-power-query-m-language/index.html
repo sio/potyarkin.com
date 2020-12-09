@@ -211,7 +211,6 @@ for function definition.)</p>
     <span class="k">return</span> <span class="n">output</span>
 </code></pre></div>
 
-
 <h2 id="a-simple-example"><a class="toclink" href="#a-simple-example">A simple example</a></h2>
 <p>We will generate a table of data points for plotting a parabola. Internally we
 will be storing each item as the record with <code>x</code> and <code>y</code> fields.  After that we
@@ -225,7 +224,6 @@ will transform that data into a Power Query table for output.</p>
     <span class="nx">output</span> <span class="o">=</span> <span class="nx">Table</span><span class="p">.</span><span class="nx">FromRecords</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
 <span class="k">in</span> <span class="nx">output</span>
 </code></pre></div>
-
 
 <p>In this example <code>start()</code> is an anonymous function that always returns the
 first data point, <code>condition()</code> and <code>next()</code> are also functions even though
@@ -250,7 +248,6 @@ mess: you have to know which row comes from what table.</p>
     <span class="nx">each</span> <span class="p">[</span><span class="nx">table</span><span class="p">]</span>
 <span class="p">),</span>
 </code></pre></div>
-
 
 <p>This code snippet assumes you have the list of tables in the <code>Tables</code> variable
 and the list of their respective names in the <code>Names</code> variable. The loop starts

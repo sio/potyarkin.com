@@ -182,7 +182,6 @@ documentation on <a href="https://cirrus-ci.org/guide/writing-tasks/#background-
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">sleep 2 &amp;&amp; /usr/sbin/libvirtd</span>
 </code></pre></div>
 
-
 <h2 id="firewall-configuration"><a class="toclink" href="#firewall-configuration">Firewall configuration</a></h2>
 <p>Hypervisor kernel is provided as is, and it currently runs legacy iptables
 firewall. Trying to use iptables-nft (which is the default in current Debian)
@@ -193,7 +192,6 @@ system:</p>
 <span class="nt">iptables_legacy_script</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">update-alternatives --set iptables /usr/sbin/iptables-legacy</span>
 </code></pre></div>
-
 
 <h2 id="_1"><a class="toclink" href="#_1">&nbsp;</a></h2>
 <p>That's it! Following these steps I was able to execute Libvirt (via
