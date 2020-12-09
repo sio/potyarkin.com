@@ -63,7 +63,6 @@ header:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;ID,Column1,Column2,Column3 with very long header,&amp;quot;Column4, with delimiter in the name&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;&lt;a href="https://potyarkin.ml/posts/2018/excel-as-a-csv-editor-with-vba/csv-append.png"&gt;&lt;img alt="CSV Append" src="https://potyarkin.ml/posts/2018/excel-as-a-csv-editor-with-vba/csv-append.png"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;The project is published for educational and archival purposes. I'll be glad if
 you'll find any use for it.&lt;/p&gt;</content><category term="posts"></category><category term="excel"></category><category term="vba"></category><category term="gist"></category></entry></feed>

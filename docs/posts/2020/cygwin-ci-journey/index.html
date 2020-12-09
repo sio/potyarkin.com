@@ -165,7 +165,6 @@ Selected local directory: cache\cygwin-packages
 ##[error]Process completed with exit code -1073741571.
 </code></pre></div>
 
-
 <p>At least some of those errors can be avoided by providing full absolute
 paths to the installer and any argument values instead of relative
 ones.</p>
@@ -206,7 +205,6 @@ on values of other variables. This looks quite ugly:</p>
 <div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Use absolute path for CYGWIN_ROOT</span>
   <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">echo &quot;::set-env name=CYGWIN_ROOT::${env:GITHUB_WORKSPACE}\${env:CYGWIN_ROOT}&quot;</span>
 </code></pre></div>
-
 
 <p>I've also failed at proper syntax for YAML multiline strings more times than
 I'm comfortable admitting :)</p>

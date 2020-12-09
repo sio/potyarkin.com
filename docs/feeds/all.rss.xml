@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Orange Sun</title><link>https://potyarkin.ml/</link><description>Unsorted ramblings, sometimes related to programming</description><lastBuildDate>Sat, 04 Apr 2020 00:00:00 +0300</lastBuildDate><item><title>Pegatron Cape 7 nettop (thin client)</title><link>https://potyarkin.ml/posts/2020/pegatron-cape-7/</link><description>&lt;blockquote&gt;
+<rss version="2.0"><channel><title>Orange Sun</title><link>https://potyarkin.ml/</link><description>Unsorted ramblings, sometimes related to programming</description><lastBuildDate>Wed, 09 Dec 2020 00:00:00 +0300</lastBuildDate><item><title>Ansible apt module fails to install python3-apt on Debian Testing</title><link>https://potyarkin.ml/posts/2020/ansible-apt-debian-testing/</link><description>&lt;p&gt;I have encountered an unexpected Ansible failure today that turned out to be not
+a bug.&lt;/p&gt;
+&lt;p&gt;Ansible apt module had failed to auto install the required &lt;code&gt;python3-apt&lt;/code&gt;
+package - only on Debian Testing. Same playbook worked fine with Debian
+Stable.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;TASK [install some apt packages] *********************************************
+[WARNING]: Updating cache and auto-installing missing …&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vitaly Potyarkin</dc:creator><pubDate>Wed, 09 Dec 2020 00:00:00 +0300</pubDate><guid isPermaLink="false">tag:potyarkin.ml,2020-12-09:/posts/2020/ansible-apt-debian-testing/</guid><category>posts</category><category>ansible</category></item><item><title>Pegatron Cape 7 nettop (thin client)</title><link>https://potyarkin.ml/posts/2020/pegatron-cape-7/</link><description>&lt;blockquote&gt;
 &lt;p&gt;Below are hardware details of an outdated compact computer that had since
 become available for low price on second-hand market. I bought mine for $15
 (in March 2020).&lt;/p&gt;

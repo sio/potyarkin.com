@@ -187,7 +187,6 @@ several configurable options for power management:&lt;/p&gt;
 &lt;li&gt;&lt;a href="https://potyarkin.ml/resources/pegatron/img/7-case.jpg"&gt;Empty case (inside)&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;!-- internal links --&gt;
-
 &lt;!-- external links --&gt;</content><category term="posts"></category><category term="hardware"></category></entry><entry><title>Installing One by Wacom in Debian Stretch</title><link href="https://potyarkin.ml/posts/2018/installing-one-by-wacom-in-debian-stretch/" rel="alternate"></link><published>2018-08-22T00:00:00+03:00</published><updated>2018-08-22T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-08-22:/posts/2018/installing-one-by-wacom-in-debian-stretch/</id><summary type="html">&lt;p&gt;I believe there are many people who run Debian Stable as their main desktop OS.
 This article is a short how-to on enabling newer hardware in Debian Stable
 without switching to another version or distribution.&lt;/p&gt;
@@ -261,7 +260,6 @@ input: Wacom Co.,Ltd. CTL-472 Pen as /devices/pci0000:00/0000:00:1d.0/usb5/5-1/5
 wacom 0003:056A:037A.0001: hidraw0: USB HID v1.10 Mouse [Wacom Co.,Ltd. CTL-472] on usb-0000:00:1d.0-1/input0
 wacom 0003:056A:037A.0002: Unknown device_type for &amp;#39;Wacom Co.,Ltd. CTL-472&amp;#39;. Ignoring.
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;h4 id="debian-with-updated-kernel-from-backports"&gt;&lt;a class="toclink" href="#debian-with-updated-kernel-from-backports"&gt;Debian with updated kernel from backports&lt;/a&gt;&lt;/h4&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;# dmesg|grep -i wacom

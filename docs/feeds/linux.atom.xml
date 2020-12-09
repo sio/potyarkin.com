@@ -163,7 +163,6 @@ wacom 0003:056A:037A.0001: hidraw0: USB HID v1.10 Mouse [Wacom Co.,Ltd. CTL-472]
 wacom 0003:056A:037A.0002: Unknown device_type for &amp;#39;Wacom Co.,Ltd. CTL-472&amp;#39;. Ignoring.
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;h4 id="debian-with-updated-kernel-from-backports"&gt;&lt;a class="toclink" href="#debian-with-updated-kernel-from-backports"&gt;Debian with updated kernel from backports&lt;/a&gt;&lt;/h4&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;# dmesg|grep -i wacom
 usb 6-1: Manufacturer: Wacom Co.,Ltd.

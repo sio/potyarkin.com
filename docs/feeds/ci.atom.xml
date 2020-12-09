@@ -45,7 +45,6 @@ documentation on &lt;a href="https://cirrus-ci.org/guide/writing-tasks/#backgrou
   &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;sleep 2 &amp;amp;&amp;amp; /usr/sbin/libvirtd&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;h2 id="firewall-configuration"&gt;&lt;a class="toclink" href="#firewall-configuration"&gt;Firewall configuration&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Hypervisor kernel is provided as is, and it currently runs legacy iptables
 firewall. Trying to use iptables-nft (which is the default in current Debian)
@@ -56,7 +55,6 @@ system:&lt;/p&gt;
 &lt;span class="nt"&gt;iptables_legacy_script&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
   &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;update-alternatives --set iptables /usr/sbin/iptables-legacy&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;h2 id="_1"&gt;&lt;a class="toclink" href="#_1"&gt;&amp;nbsp;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;That's it! Following these steps I was able to execute Libvirt (via
@@ -128,7 +126,6 @@ Selected local directory: cache\cygwin-packages
 ##[error]Process completed with exit code -1073741571.
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;At least some of those errors can be avoided by providing full absolute
 paths to the installer and any argument values instead of relative
 ones.&lt;/p&gt;
@@ -169,7 +166,6 @@ on values of other variables. This looks quite ugly:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Use absolute path for CYGWIN_ROOT&lt;/span&gt;
   &lt;span class="nt"&gt;run&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;echo &amp;quot;::set-env name=CYGWIN_ROOT::${env:GITHUB_WORKSPACE}\${env:CYGWIN_ROOT}&amp;quot;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;I've also failed at proper syntax for YAML multiline strings more times than
 I'm comfortable admitting :)&lt;/p&gt;</content><category term="posts"></category><category term="windows"></category><category term="cygwin"></category><category term="automation"></category><category term="ci"></category></entry></feed>

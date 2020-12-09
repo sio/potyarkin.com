@@ -16,7 +16,6 @@ installed the cygwin distribution.  Rebooting is also suggested if you
 are unable to find another cygwin DLL.
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;The tricky part is I am not even using Cygwin. I'm running bash with Git for
 Windows &lt;a href="https://git-scm.com/download/win"&gt;as published at the official website&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;I've tried suggested solution from the error message, googled around quite a
