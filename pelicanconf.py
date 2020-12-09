@@ -7,7 +7,6 @@ PATH = 'content'
 LOCALE = 'C'
 DEFAULT_LANG = 'EN'
 DEFAULT_DATE_FORMAT = '%Y-%m-%d'
-DEFAULT_DATE = 'fs'  # get post's date from filesystem
 
 # Special paths inside content/
 ARTICLE_PATHS = [
