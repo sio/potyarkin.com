@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - router</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/router.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2022-01-31T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>D-Link DIR-825 (rev.B1) throughput test</title><link href="https://potyarkin.ml/posts/2022/d-link-dir-825-revb1-throughput-test/" rel="alternate"></link><published>2022-01-31T00:00:00+03:00</published><updated>2022-01-31T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-01-31:/posts/2022/d-link-dir-825-revb1-throughput-test/</id><summary type="html">&lt;p&gt;So, the year is 2022 and I'm still using D-Link &lt;a href="https://openwrt.org/toh/d-link/dir-825"&gt;DIR-825&lt;/a&gt;, rev.B1 as my edge
+router at home.&lt;/p&gt;
+&lt;p&gt;Thanks to the power of opensource it is running a modern and secure OS
+(OpenWRT) long after the manufacturer has abandoned this product.
+Even though OpenWRT (and Linux in general) has …&lt;/p&gt;</summary><content type="html">&lt;p&gt;So, the year is 2022 and I'm still using D-Link &lt;a href="https://openwrt.org/toh/d-link/dir-825"&gt;DIR-825&lt;/a&gt;, rev.B1 as my edge
+router at home.&lt;/p&gt;
+&lt;p&gt;Thanks to the power of opensource it is running a modern and secure OS
+(OpenWRT) long after the manufacturer has abandoned this product.
+Even though OpenWRT (and Linux in general) has increased the system
+requirements, DIR-825 still meets the minimal &lt;a href="https://openwrt.org/supported_devices/864_warning"&gt;8/64&lt;/a&gt; criteria.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Photo of D-Link DIR-825, rev.B1" src="https://potyarkin.ml/resources/dir825/router.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;To put things into perspective: I bought this very device in November, 2011
+for the equivalent of $120. Its WiFi standard is pretty outdated (802.11n),
+but that's enough since all my essential devices are hardwired.&lt;/p&gt;
+&lt;p&gt;Up until a few weeks ago it was pointless for me to think about router
+upgrade. The Ethernet cable coming into my apartment from ISP equipment was
+crimped to use only 2 twisted pairs which would never allow for speeds above
+100Mbit. And DIR-825 routes 100Mbit just fine. Thankfully, a completely
+unrelated incident occurred and an ISP technician was on site - I seized the
+opportunity and asked them to recrimp their end (&lt;em&gt;4 missing wires were just
+bent aside right before a connector, why would anyone do that?!&lt;/em&gt;)&lt;/p&gt;
+&lt;p&gt;Now that I have an option to upgrade above 100Mbit, the valid question is:
+&lt;em&gt;Will my DIR-825 be able to handle that?&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;To test router throughput I used two laptops booted into Debian 11 live image,
+one of them running a DHCP server and connected to WAN port of the router, the
+other one connected to one of LAN ports. I put together all the
+required commands into a &lt;a href="https://github.com/sio/router-throughput-test"&gt;Makefile&lt;/a&gt; to avoid having to memorize them - you
+might find this repo useful if you ever need to perform a similar test on
+your router.&lt;/p&gt;
+&lt;p&gt;To establish a &lt;a href="https://potyarkin.ml/resources/dir825/baseline.log"&gt;baseline&lt;/a&gt; I connected the laptops directly to each other
+without any routers or switches in between. I got the expected near-gigabit
+speeds: 932Mbps down, 941Mbps up - nothing unusual here.&lt;/p&gt;
+&lt;p&gt;Here are the test results with router in between
+(full logs: &lt;a href="https://potyarkin.ml/resources/dir825/test1.log"&gt;part one&lt;/a&gt;, &lt;a href="https://potyarkin.ml/resources/dir825/test2.log"&gt;part two&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;&lt;img alt="average: bidir 130/162Mbps, down 262Mbps, up 382Mbps" src="https://potyarkin.ml/resources/dir825/results.svg"&gt;&lt;/p&gt;
+&lt;p&gt;Maximum throughput was achieved in upload tests (&lt;em&gt;382Mbps&lt;/em&gt;). This is
+probably explained by having to process less firewall rules for outgoing
+traffic. Download speed even with a very basic iptables configuration was
+significantly less (&lt;em&gt;256Mbps&lt;/em&gt;), and bidirectional tests with
+simultaneous traffic in both directions confirm that ~300Mbps is a hardware
+limit (bidirectional speed was &lt;em&gt;130Mbps down + 162Mbps up =
+292Mbps total&lt;/em&gt;). top was showing 99% sirq load during these tests, but
+running a monitoring tool did not have any significant impact on the results
+(first 5 tests were executed before top was launched).&lt;/p&gt;
+&lt;h2 id="conclusion"&gt;&lt;a class="toclink" href="#conclusion"&gt;Conclusion&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;These tests show that while DIR-825 is a perfectly capable router for 100Mbps,
+it's completely out of its depth with faster connections. Even 300Mbps will
+frequently become underutilized if the traffic will happen to flow in both
+directions at once.&lt;/p&gt;
+&lt;p&gt;Looks like I finally need a new router after almost 11 years with DIR-825...&lt;/p&gt;</content><category term="posts"></category><category term="hardware"></category><category term="router"></category></entry></feed>

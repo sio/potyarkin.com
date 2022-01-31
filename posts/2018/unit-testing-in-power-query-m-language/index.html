@@ -173,9 +173,9 @@ following features:</p>
 <div class="highlight"><pre><span></span><code><span class="cm">/* DemoTests.pq - sample test suite */</span>
 <span class="p">[</span>
     <span class="nx">Assert</span> <span class="o">=</span> <span class="nx">LibPQ</span><span class="p">(</span><span class="s2">&quot;UnitTest.Assert&quot;</span><span class="p">),</span>
-    <span class="nx">testFirstTest</span> <span class="o">=</span> <span class="nx">Assert</span><span class="p">[</span><span class="nx">Equal</span><span class="p">](</span><span class="mi">6</span><span class="o">*</span><span class="mi">7</span><span class="p">,</span> <span class="mi">42</span><span class="p">),</span>
+    <span class="nx">testFirstTest</span> <span class="o">=</span> <span class="nx">Assert</span><span class="p">[</span><span class="nx">Equal</span><span class="p">](</span><span class="mf">6</span><span class="o">*</span><span class="mf">7</span><span class="p">,</span> <span class="mf">42</span><span class="p">),</span>
     <span class="nx">testAlwaysFail</span> <span class="o">=</span> <span class="nx">Assert</span><span class="p">[</span><span class="nx">Equal</span><span class="p">](</span><span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">)</span>
-<span class="p">]</span> <span class="nx">meta</span> <span class="p">[</span><span class="nx">LibPQ</span><span class="p">.</span><span class="nx">TestSuite</span> <span class="o">=</span> <span class="mi">1</span><span class="p">]</span>
+<span class="p">]</span> <span class="nx">meta</span> <span class="p">[</span><span class="nx">LibPQ</span><span class="p">.</span><span class="nx">TestSuite</span> <span class="o">=</span> <span class="mf">1</span><span class="p">]</span>
 </code></pre></div>
 
 <p>The test suite is a record (note the square brackets surrounding the code) that
