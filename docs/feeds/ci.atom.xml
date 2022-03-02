@@ -1,5 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - ci</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/ci.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2020-02-25T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Running Libvirt (KVM) in Cirrus CI</title><link href="https://potyarkin.ml/posts/2020/running-libvirt-kvm-in-cirrus-ci/" rel="alternate"></link><published>2020-02-25T00:00:00+03:00</published><updated>2020-02-25T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-02-25:/posts/2020/running-libvirt-kvm-in-cirrus-ci/</id><summary type="html">&lt;p&gt;Up until the middle of 2019 it was very unusual to even expect that any CI
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - ci</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/ci.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2022-03-02T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Unexpected workaround for Libvirt VMs with cgroups v2 in Cirrus CI</title><link href="https://potyarkin.ml/posts/2022/libvirt-cirrusci-workaround/" rel="alternate"></link><published>2022-03-02T00:00:00+03:00</published><updated>2022-03-02T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-03-02:/posts/2022/libvirt-cirrusci-workaround/</id><summary type="html">&lt;blockquote&gt;
+&lt;p&gt;Today I wrote a &lt;a href="https://gitlab.com/sio/server_common/-/commit/5777cfae5446e7056fd95408c10e5273cd6529fd"&gt;commit message&lt;/a&gt; that was several screens long.
+I think it deserves to be a blog post of its own&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Recently Cirrus CI builds that were using nested Libvirt VMs have started
+failing with the following error:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Call to virDomainCreateWithFlags failed: unable to open
+&amp;#39;/sys/fs/cgroup …&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;blockquote&gt;
+&lt;p&gt;Today I wrote a &lt;a href="https://gitlab.com/sio/server_common/-/commit/5777cfae5446e7056fd95408c10e5273cd6529fd"&gt;commit message&lt;/a&gt; that was several screens long.
+I think it deserves to be a blog post of its own&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Recently Cirrus CI builds that were using nested Libvirt VMs have started
+failing with the following error:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Call to virDomainCreateWithFlags failed: unable to open
+&amp;#39;/sys/fs/cgroup/machine/qemu-2-defaultdebian11-server.libvirt-qemu/&amp;#39;:
+No such file or directory
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;First recorded failure occured on
+&lt;a href="https://cirrus-ci.com/task/5115427394158592"&gt;February 25th, 2022&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Error message clearly indicates that the issue is related to Linux control
+groups (cgroups), and on a hunch I assumed that Cirrus CI (or Google Cloud)
+images were updated to use cgroups v2 by default. Unfortunately I haven't
+been recording debug information for cgroups before the failure, so I can
+not confirm my guess. Currently cgroups2 are in use, so the hypothesis stands.&lt;/p&gt;
+&lt;p&gt;Web search has led me to several useful pages:&lt;/p&gt;
+&lt;h4 id="redhat-bugzilla"&gt;&lt;a class="toclink" href="#redhat-bugzilla"&gt;&lt;a href="https://bugzilla.redhat.com/show_bug.cgi?id=1985377#c1"&gt;RedHat bugzilla&lt;/a&gt;&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;Running Libvirt from inside a container (similar to how Cirrus does) produced
+the same error.  The reason is that default cgroups mode was changed in podman
+when upgrading from cgroups v1 (host mode) to v2 (private mode).&lt;/p&gt;
+&lt;p&gt;I took note of this issue, but I moved on with my research since as a user
+I can not change the configuration of container runtime at Cirrus CI.&lt;/p&gt;
+&lt;h4 id="libvirt-documentation"&gt;&lt;a class="toclink" href="#libvirt-documentation"&gt;&lt;a href="https://libvirt.org/cgroups.html"&gt;Libvirt documentation&lt;/a&gt;&lt;/a&gt;&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Libvirt will not auto-create the cgroups directory to back this
+partition. In the future, libvirt / virsh will provide APIs / commands
+to create custom partitions, but currently this is left as an exercise
+for the administrator.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Based on the documentation quoted above I have tried to manually create
+the required cgroup with a simple &lt;code&gt;mkdir -p $CGROUP&lt;/code&gt;. Please note that
+Libvirt uses different cgroup layouts when running on systems with and
+without systemd. Cirrus CI runners use a different (non-systemd) init in
+their containers, so the cgroup path in our case is
+&lt;code&gt;$MOUNTPOINT/machine/qemu-$ID-$MACHINENAME.libvirt-qemu/&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Manual creation of cgroup did not lead to any changes in Libvirt behavior.
+Error message stayed the same: no such file or directory.&lt;/p&gt;
+&lt;p&gt;Report author at &lt;a href="https://bugzilla.redhat.com/show_bug.cgi?id=1985377#c1"&gt;RedHat bugzilla&lt;/a&gt; had mentioned that they had trouble
+with manually moving QEMU process into a different cgroup, so I've tried to do
+that and see if the error message will provide any further information.&lt;/p&gt;
+&lt;p&gt;I configured Cirrus CI to create a long-running background process and to
+migrate it to the newly created cgroup. I was expecting this to fail, so I
+did not comment out the code that later would launch a Libvirt VM on CI
+runner. &lt;em&gt;Imagine my surprise when the pipeline turned green!&lt;/em&gt; Not only did
+the migration succeed, but its success had somehow lead to the success of
+Libvirt VM!&lt;/p&gt;
+&lt;p&gt;A few trial runs later I noticed that the name of cgroup used in the first
+step does not even have to match the cgroup (or cgroups) that will be used
+by Libvirt domains.&lt;/p&gt;
+&lt;p&gt;This is why I'm adding this meaningless cgroups burn-in to my pipelines.
+"It ain't stupid if it works", right?&lt;/p&gt;
+&lt;h4 id="full-commit-diff"&gt;&lt;a class="toclink" href="#full-commit-diff"&gt;Full commit diff&lt;/a&gt;&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="gh"&gt;diff --git a/.cirrus.yml.j2 b/.cirrus.yml.j2&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gh"&gt;index 6d517ce..4b7fc8f 100644&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gd"&gt;--- a/.cirrus.yml.j2&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gi"&gt;+++ b/.cirrus.yml.j2&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gu"&gt;@@ -21,6 +21,8 @@ task:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;    # VENVDIR must be absolute path for &amp;#39;cd &amp;amp;&amp;amp; make&amp;#39; approach to work&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;    # VENVDIR should not be cached! Cirrus CI drops some binaries randomly&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="gi"&gt;+    CGROUP_WORKAROUND: /sys/fs/cgroup/machine/qemu-cgroup_workaround.libvirt-qemu&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gi"&gt;+&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;    # Pass values from cirrus-run environment&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;    CLONE_URL: &amp;quot;{{ CI_REPOSITORY_URL }}&amp;quot;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;    CLONE_SHA: &amp;quot;{{ CI_COMMIT_SHA }}&amp;quot;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gu"&gt;@@ -61,6 +63,16 @@ task:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;  libvirtd_background_script:&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;    - sleep 2 &amp;amp;&amp;amp; /usr/sbin/libvirtd&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="gi"&gt;+  # Workaround for cgroups v2&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gi"&gt;+  # I have no idea why or how this works (see commit message for a longer rant)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gi"&gt;+  cgroups_workaround_script:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gi"&gt;+    - mkdir -p &amp;quot;$CGROUP_WORKAROUND&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gi"&gt;+    - ls -lF &amp;quot;$CGROUP_WORKAROUND&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gi"&gt;+    - bash -c &amp;#39;echo $$ &amp;gt; /tmp/cgroups_workaround.pid; sleep infinity&amp;#39; &amp;amp;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gi"&gt;+    - sleep 1&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gi"&gt;+    - cat /tmp/cgroups_workaround.pid &amp;gt;&amp;gt; $CGROUP_WORKAROUND/cgroup.procs&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gi"&gt;+    - cat $CGROUP_WORKAROUND/cgroup.procs&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gi"&gt;+&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;  # Execute automated tests&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;  test_script:&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;    - cd ansible/tests&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gu"&gt;@@ -70,6 +82,9 @@ task:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;  always:&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;    cache_debug_script:&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;      - find &amp;quot;$HOME/cache&amp;quot; -type f || echo &amp;quot;Exit code: $?&amp;quot;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gi"&gt;+    cgroups_debug_script:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gi"&gt;+      - fgrep cgroup /proc/mounts || echo &amp;quot;Exit code: $?&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gi"&gt;+      - find /sys/fs/cgroup -exec ls -ldF {} \; || echo &amp;quot;Exit code: $?&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;    kvm_debug_script:&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;      - free -h&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;      - pstree -alT&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="posts"></category><category term="ci"></category><category term="automation"></category><category term="libvirt"></category></entry><entry><title>Running Libvirt (KVM) in Cirrus CI</title><link href="https://potyarkin.ml/posts/2020/running-libvirt-kvm-in-cirrus-ci/" rel="alternate"></link><published>2020-02-25T00:00:00+03:00</published><updated>2020-02-25T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-02-25:/posts/2020/running-libvirt-kvm-in-cirrus-ci/</id><summary type="html">&lt;p&gt;Up until the middle of 2019 it was very unusual to even expect that any CI
 service would allow nested virtualization. Those who required such
 functionality had to maintain their own CI runners on their own
 infrastructure. Things changed when Google Cloud introduced &lt;a href="https://cloud.google.com/compute/docs/instances/enable-nested-virtualization-vm-instances"&gt;nested
@@ -35,14 +137,14 @@ as it would have been the case on a normal system. More than that, starting
 systemd manually also looks impossible.&lt;/p&gt;
 &lt;p&gt;That means all the daemons required by libvirt must be started manually (see
 documentation on &lt;a href="https://cirrus-ci.org/guide/writing-tasks/#background-script-instruction"&gt;background_script&lt;/a&gt; syntax):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# .cirrus.yml&lt;/span&gt;
-&lt;span class="nt"&gt;dbus_background_script&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-  &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;mkdir -p /var/run/dbus&lt;/span&gt;
-  &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;/usr/bin/dbus-daemon --system --nofork --nopidfile&lt;/span&gt;
-&lt;span class="nt"&gt;virtlogd_background_script&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-  &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;/usr/sbin/virtlogd&lt;/span&gt;
-&lt;span class="nt"&gt;libvirtd_background_script&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-  &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;sleep 2 &amp;amp;&amp;amp; /usr/sbin/libvirtd&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# .cirrus.yml&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="nt"&gt;dbus_background_script&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;mkdir -p /var/run/dbus&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;/usr/bin/dbus-daemon --system --nofork --nopidfile&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="nt"&gt;virtlogd_background_script&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;/usr/sbin/virtlogd&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="nt"&gt;libvirtd_background_script&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;sleep 2 &amp;amp;&amp;amp; /usr/sbin/libvirtd&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2 id="firewall-configuration"&gt;&lt;a class="toclink" href="#firewall-configuration"&gt;Firewall configuration&lt;/a&gt;&lt;/h2&gt;
@@ -51,9 +153,9 @@ firewall. Trying to use iptables-nft (which is the default in current Debian)
 produces a misconfigured guest network that is hard to debug.&lt;/p&gt;
 &lt;p&gt;That's why we need to tell Debian to use legacy iptables interface across the whole
 system:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# .cirrus.yml&lt;/span&gt;
-&lt;span class="nt"&gt;iptables_legacy_script&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-  &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;update-alternatives --set iptables /usr/sbin/iptables-legacy&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# .cirrus.yml&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="nt"&gt;iptables_legacy_script&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;update-alternatives --set iptables /usr/sbin/iptables-legacy&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2 id="_1"&gt;&lt;a class="toclink" href="#_1"&gt;&amp;nbsp;&lt;/a&gt;&lt;/h2&gt;
@@ -163,8 +265,8 @@ cmd.&lt;/p&gt;
 &lt;p&gt;Some of my attempts were just me trying to work around GitHub CI limitations.
 For example, dynamically calculating the value of environment variable based
 on values of other variables. This looks quite ugly:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Use absolute path for CYGWIN_ROOT&lt;/span&gt;
-  &lt;span class="nt"&gt;run&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;echo &amp;quot;::set-env name=CYGWIN_ROOT::${env:GITHUB_WORKSPACE}\${env:CYGWIN_ROOT}&amp;quot;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;Use absolute path for CYGWIN_ROOT&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;run&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;echo &amp;quot;::set-env name=CYGWIN_ROOT::${env:GITHUB_WORKSPACE}\${env:CYGWIN_ROOT}&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;I've also failed at proper syntax for YAML multiline strings more times than

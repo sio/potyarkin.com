@@ -172,14 +172,14 @@ as it would have been the case on a normal system. More than that, starting
 systemd manually also looks impossible.</p>
 <p>That means all the daemons required by libvirt must be started manually (see
 documentation on <a href="https://cirrus-ci.org/guide/writing-tasks/#background-script-instruction">background_script</a> syntax):</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># .cirrus.yml</span>
-<span class="nt">dbus_background_script</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mkdir -p /var/run/dbus</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/usr/bin/dbus-daemon --system --nofork --nopidfile</span>
-<span class="nt">virtlogd_background_script</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/usr/sbin/virtlogd</span>
-<span class="nt">libvirtd_background_script</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">sleep 2 &amp;&amp; /usr/sbin/libvirtd</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># .cirrus.yml</span><span class="w"></span>
+<span class="nt">dbus_background_script</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mkdir -p /var/run/dbus</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/usr/bin/dbus-daemon --system --nofork --nopidfile</span><span class="w"></span>
+<span class="nt">virtlogd_background_script</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/usr/sbin/virtlogd</span><span class="w"></span>
+<span class="nt">libvirtd_background_script</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sleep 2 &amp;&amp; /usr/sbin/libvirtd</span><span class="w"></span>
 </code></pre></div>
 
 <h2 id="firewall-configuration"><a class="toclink" href="#firewall-configuration">Firewall configuration</a></h2>
@@ -188,9 +188,9 @@ firewall. Trying to use iptables-nft (which is the default in current Debian)
 produces a misconfigured guest network that is hard to debug.</p>
 <p>That's why we need to tell Debian to use legacy iptables interface across the whole
 system:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># .cirrus.yml</span>
-<span class="nt">iptables_legacy_script</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">update-alternatives --set iptables /usr/sbin/iptables-legacy</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># .cirrus.yml</span><span class="w"></span>
+<span class="nt">iptables_legacy_script</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">update-alternatives --set iptables /usr/sbin/iptables-legacy</span><span class="w"></span>
 </code></pre></div>
 
 <h2 id="_1"><a class="toclink" href="#_1">&nbsp;</a></h2>
