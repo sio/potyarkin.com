@@ -76,6 +76,9 @@ pre code {
     margin:0!important;
     padding:0!important;
 }
+code * {
+  white-space: pre!important;
+}
 
 /* Smaller padding between paragraphs */
 p, ul, ol, details {
