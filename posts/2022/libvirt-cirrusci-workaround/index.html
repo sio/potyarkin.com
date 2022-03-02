@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>Unexpected workaround for Libvirt VMs with cgroups v2 in Cirrus CI</title>
+
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+<link href="https://potyarkin.ml/posts/2022/libvirt-cirrusci-workaround/" rel="canonical" />
+  <!-- Feed -->
+      <link href="/feeds/" type="application/atom+xml" rel="alternate" title="Orange Sun Full Atom Feed" />
+
+  <link href="https://potyarkin.ml/theme/css/style.css" type="text/css" rel="stylesheet" />
+
+  <!-- Code highlight color scheme -->
+      <link href="https://potyarkin.ml/theme/css/code_blocks/github.css" rel="stylesheet">
+
+    <!-- CSS specified by the user -->
+
+
+    <link href="https://potyarkin.ml/static/attila_override.css" type="text/css" rel="stylesheet" />
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+
+    <meta name="description" content="Today I wrote a commit message that was several screens long. I think it deserves to be a blog post of its own Recently Cirrus CI builds...">
+
+    <meta name="author" content="Vitaly Potyarkin">
+
+    <meta name="tags" content="ci">
+    <meta name="tags" content="automation">
+    <meta name="tags" content="libvirt">
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="Orange Sun"/>
+<meta property="og:title" content="Unexpected workaround for Libvirt VMs with cgroups v2 in Cirrus CI"/>
+<meta property="og:description" content="Today I wrote a commit message that was several screens long. I think it deserves to be a blog post of its own Recently Cirrus CI builds..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://potyarkin.ml/posts/2022/libvirt-cirrusci-workaround/"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2022-03-02 00:00:00+03:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://potyarkin.ml/">
+<meta property="article:section" content="posts"/>
+<meta property="article:tag" content="ci"/>
+<meta property="article:tag" content="automation"/>
+<meta property="article:tag" content="libvirt"/>
+<meta property="og:image" content="https://potyarkin.ml/theme/images/post-bg.jpg">
+
+<!-- Twitter Card -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "Unexpected workaround for Libvirt VMs with cgroups v2 in Cirrus CI",
+  "headline": "Unexpected workaround for Libvirt VMs with cgroups v2 in Cirrus CI",
+  "datePublished": "2022-03-02 00:00:00+03:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Vitaly Potyarkin",
+    "url": "https://potyarkin.ml/"
+  },
+  "image": "https://potyarkin.ml/theme/images/post-bg.jpg",
+  "url": "https://potyarkin.ml/posts/2022/libvirt-cirrusci-workaround/",
+  "description": "Today I wrote a commit message that was several screens long. I think it deserves to be a blog post of its own Recently Cirrus CI builds..."
+}
+</script>
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
+
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+          <li><a href="/archive/" role="presentation">Archive</a></li>
+          <li><a href="/tags/" role="presentation">Tags</a></li>
+          <li><a href="mailto:sio.wtf@gmail.com" role="presentation">Email</a></li>
+          <li><a href="https://github.com/sio" role="presentation">Github</a></li>
+
+
+        <li class="nav-rss"><a href="/feeds/"><i class="ic ic-rss"></i> Subscribe</a></li>
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="post-header" class="has-cover">
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="https://potyarkin.ml/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Unexpected workaround for Libvirt VMs with cgroups v2 in Cirrus CI</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="https://potyarkin.ml/">Vitaly Potyarkin</a>
+            | <time datetime="2022-03-02">2022-03-02</time>
+        </span>
+        <!-- TODO : Modified check -->
+            <div class="post-cover cover" style="background-color: rgb(242,106,61)">
+      </div>
+    </header>
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <blockquote>
+<p>Today I wrote a <a href="https://gitlab.com/sio/server_common/-/commit/5777cfae5446e7056fd95408c10e5273cd6529fd">commit message</a> that was several screens long.
+I think it deserves to be a blog post of its own</p>
+</blockquote>
+<p>Recently Cirrus CI builds that were using nested Libvirt VMs have started
+failing with the following error:</p>
+<div class="highlight"><pre><span></span><code>Call to virDomainCreateWithFlags failed: unable to open
+&#39;/sys/fs/cgroup/machine/qemu-2-defaultdebian11-server.libvirt-qemu/&#39;:
+No such file or directory
+</code></pre></div>
+
+<p>First recorded failure occured on
+<a href="https://cirrus-ci.com/task/5115427394158592">February 25th, 2022</a></p>
+<p>Error message clearly indicates that the issue is related to Linux control
+groups (cgroups), and on a hunch I assumed that Cirrus CI (or Google Cloud)
+images were updated to use cgroups v2 by default. Unfortunately I haven't
+been recording debug information for cgroups before the failure, so I can
+not confirm my guess. Currently cgroups2 are in use, so the hypothesis stands.</p>
+<p>Web search has led me to several useful pages:</p>
+<h4 id="redhat-bugzilla"><a class="toclink" href="#redhat-bugzilla"><a href="https://bugzilla.redhat.com/show_bug.cgi?id=1985377#c1">RedHat bugzilla</a></a></h4>
+<p>Running Libvirt from inside a container (similar to how Cirrus does) produced
+the same error.  The reason is that default cgroups mode was changed in podman
+when upgrading from cgroups v1 (host mode) to v2 (private mode).</p>
+<p>I took note of this issue, but I moved on with my research since as a user
+I can not change the configuration of container runtime at Cirrus CI.</p>
+<h4 id="libvirt-documentation"><a class="toclink" href="#libvirt-documentation"><a href="https://libvirt.org/cgroups.html">Libvirt documentation</a></a></h4>
+<blockquote>
+<p>Libvirt will not auto-create the cgroups directory to back this
+partition. In the future, libvirt / virsh will provide APIs / commands
+to create custom partitions, but currently this is left as an exercise
+for the administrator.</p>
+</blockquote>
+<p>Based on the documentation quoted above I have tried to manually create
+the required cgroup with a simple <code>mkdir -p $CGROUP</code>. Please note that
+Libvirt uses different cgroup layouts when running on systems with and
+without systemd. Cirrus CI runners use a different (non-systemd) init in
+their containers, so the cgroup path in our case is
+<code>$MOUNTPOINT/machine/qemu-$ID-$MACHINENAME.libvirt-qemu/</code></p>
+<p>Manual creation of cgroup did not lead to any changes in Libvirt behavior.
+Error message stayed the same: no such file or directory.</p>
+<p>Report author at <a href="https://bugzilla.redhat.com/show_bug.cgi?id=1985377#c1">RedHat bugzilla</a> had mentioned that they had trouble
+with manually moving QEMU process into a different cgroup, so I've tried to do
+that and see if the error message will provide any further information.</p>
+<p>I configured Cirrus CI to create a long-running background process and to
+migrate it to the newly created cgroup. I was expecting this to fail, so I
+did not comment out the code that later would launch a Libvirt VM on CI
+runner. <em>Imagine my surprise when the pipeline turned green!</em> Not only did
+the migration succeed, but its success had somehow lead to the success of
+Libvirt VM!</p>
+<p>A few trial runs later I noticed that the name of cgroup used in the first
+step does not even have to match the cgroup (or cgroups) that will be used
+by Libvirt domains.</p>
+<p>This is why I'm adding this meaningless cgroups burn-in to my pipelines.
+"It ain't stupid if it works", right?</p>
+<h4 id="full-commit-diff"><a class="toclink" href="#full-commit-diff">Full commit diff</a></h4>
+<div class="highlight"><pre><span></span><code><span class="gh">diff --git a/.cirrus.yml.j2 b/.cirrus.yml.j2</span><span class="w"></span>
+<span class="gh">index 6d517ce..4b7fc8f 100644</span><span class="w"></span>
+<span class="gd">--- a/.cirrus.yml.j2</span><span class="w"></span>
+<span class="gi">+++ b/.cirrus.yml.j2</span><span class="w"></span>
+<span class="gu">@@ -21,6 +21,8 @@ task:</span><span class="w"></span>
+<span class="w"> </span>    # VENVDIR must be absolute path for &#39;cd &amp;&amp; make&#39; approach to work<span class="w"></span>
+<span class="w"> </span>    # VENVDIR should not be cached! Cirrus CI drops some binaries randomly<span class="w"></span>
+
+<span class="gi">+    CGROUP_WORKAROUND: /sys/fs/cgroup/machine/qemu-cgroup_workaround.libvirt-qemu</span><span class="w"></span>
+<span class="gi">+</span><span class="w"></span>
+<span class="w"> </span>    # Pass values from cirrus-run environment<span class="w"></span>
+<span class="w"> </span>    CLONE_URL: &quot;{{ CI_REPOSITORY_URL }}&quot;<span class="w"></span>
+<span class="w"> </span>    CLONE_SHA: &quot;{{ CI_COMMIT_SHA }}&quot;<span class="w"></span>
+<span class="gu">@@ -61,6 +63,16 @@ task:</span><span class="w"></span>
+<span class="w"> </span>  libvirtd_background_script:<span class="w"></span>
+<span class="w"> </span>    - sleep 2 &amp;&amp; /usr/sbin/libvirtd<span class="w"></span>
+
+<span class="gi">+  # Workaround for cgroups v2</span><span class="w"></span>
+<span class="gi">+  # I have no idea why or how this works (see commit message for a longer rant)</span><span class="w"></span>
+<span class="gi">+  cgroups_workaround_script:</span><span class="w"></span>
+<span class="gi">+    - mkdir -p &quot;$CGROUP_WORKAROUND&quot;</span><span class="w"></span>
+<span class="gi">+    - ls -lF &quot;$CGROUP_WORKAROUND&quot;</span><span class="w"></span>
+<span class="gi">+    - bash -c &#39;echo $$ &gt; /tmp/cgroups_workaround.pid; sleep infinity&#39; &amp;</span><span class="w"></span>
+<span class="gi">+    - sleep 1</span><span class="w"></span>
+<span class="gi">+    - cat /tmp/cgroups_workaround.pid &gt;&gt; $CGROUP_WORKAROUND/cgroup.procs</span><span class="w"></span>
+<span class="gi">+    - cat $CGROUP_WORKAROUND/cgroup.procs</span><span class="w"></span>
+<span class="gi">+</span><span class="w"></span>
+<span class="w"> </span>  # Execute automated tests<span class="w"></span>
+<span class="w"> </span>  test_script:<span class="w"></span>
+<span class="w"> </span>    - cd ansible/tests<span class="w"></span>
+<span class="gu">@@ -70,6 +82,9 @@ task:</span><span class="w"></span>
+<span class="w"> </span>  always:<span class="w"></span>
+<span class="w"> </span>    cache_debug_script:<span class="w"></span>
+<span class="w"> </span>      - find &quot;$HOME/cache&quot; -type f || echo &quot;Exit code: $?&quot;<span class="w"></span>
+<span class="gi">+    cgroups_debug_script:</span><span class="w"></span>
+<span class="gi">+      - fgrep cgroup /proc/mounts || echo &quot;Exit code: $?&quot;</span><span class="w"></span>
+<span class="gi">+      - find /sys/fs/cgroup -exec ls -ldF {} \; || echo &quot;Exit code: $?&quot;</span><span class="w"></span>
+<span class="w"> </span>    kvm_debug_script:<span class="w"></span>
+<span class="w"> </span>      - free -h<span class="w"></span>
+<span class="w"> </span>      - pstree -alT<span class="w"></span>
+</code></pre></div>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Unexpected workaround for Libvirt VMs with cgroups v2 in Cirrus CI&amp;url=https://potyarkin.ml/posts/2022/libvirt-cirrusci-workaround/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://potyarkin.ml/posts/2022/libvirt-cirrusci-workaround/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=https://potyarkin.ml/posts/2022/libvirt-cirrusci-workaround/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="https://potyarkin.ml/tags/ci/">ci</a><a href="https://potyarkin.ml/tags/automation/">automation</a><a href="https://potyarkin.ml/tags/libvirt/">libvirt</a>                </aside>
+
+                <div class="clear"></div>
+
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <a class="post-nav-prev" href="https://potyarkin.ml/posts/2022/d-link-dir-825-revb1-throughput-test/">
+                        <section class="post-nav-teaser">
+                            <i class="ic ic-arrow-right"></i>
+                                <h2 class="post-nav-title">D-Link DIR-825 (rev.B1) throughput test</h2>
+                            <p class="post-nav-excerpt">So, the year is 2022 and I'm still using D-Link DIR-825, rev.B1 as my edge router at...</p>
+                        </section>
+                    </a>
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+
+
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://potyarkin.ml/theme/js/script.js"></script>
+
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121532727-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-121532727-1', { 'anonymize_ip': true });
+    </script>
+</body>
+</html>
