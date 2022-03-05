@@ -41,7 +41,7 @@
 
 
 
-    <meta name="description" content="Today I wrote a commit message that was several screens long. I think it deserves to be a blog post of its own Recently Cirrus CI builds...">
+    <meta name="description" content="Today I wrote a commit message that was several screens long. I think it deserves to be a blog post of its own Update: the commit linked...">
 
     <meta name="author" content="Vitaly Potyarkin">
 
@@ -55,7 +55,7 @@
 <!-- Open Graph -->
 <meta property="og:site_name" content="Orange Sun"/>
 <meta property="og:title" content="Unexpected workaround for Libvirt VMs with cgroups v2 in Cirrus CI"/>
-<meta property="og:description" content="Today I wrote a commit message that was several screens long. I think it deserves to be a blog post of its own Recently Cirrus CI builds..."/>
+<meta property="og:description" content="Today I wrote a commit message that was several screens long. I think it deserves to be a blog post of its own Update: the commit linked..."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="https://potyarkin.ml/posts/2022/libvirt-cirrusci-workaround/"/>
 <meta property="og:type" content="article"/>
@@ -85,7 +85,7 @@
   },
   "image": "https://potyarkin.ml/theme/images/post-bg.jpg",
   "url": "https://potyarkin.ml/posts/2022/libvirt-cirrusci-workaround/",
-  "description": "Today I wrote a commit message that was several screens long. I think it deserves to be a blog post of its own Recently Cirrus CI builds..."
+  "description": "Today I wrote a commit message that was several screens long. I think it deserves to be a blog post of its own Update: the commit linked..."
 }
 </script>
 </head>
@@ -146,6 +146,9 @@
                 <blockquote>
 <p>Today I wrote a <a href="https://gitlab.com/sio/server_common/-/commit/5777cfae5446e7056fd95408c10e5273cd6529fd">commit message</a> that was several screens long.
 I think it deserves to be a blog post of its own</p>
+<p><em>Update:</em> the commit linked above required some <a href="https://gitlab.com/sio/server_common/-/commit/ebde5a880fc648be382a157454bc1ab17a8e0cd5">modification</a> to remove
+flakiness, but the workaround still stands. Diff provided in this blog post
+was updated to reflect current state of affairs</p>
 </blockquote>
 <p>Recently Cirrus CI builds that were using nested Libvirt VMs have started
 failing with the following error:</p>
@@ -199,7 +202,6 @@ by Libvirt domains.</p>
 "It ain't stupid if it works", right?</p>
 <h4 id="full-commit-diff"><a class="toclink" href="#full-commit-diff">Full commit diff</a></h4>
 <div class="highlight"><pre><span></span><code><span class="gh">diff --git a/.cirrus.yml.j2 b/.cirrus.yml.j2</span><span class="w"></span>
-<span class="gh">index 6d517ce..4b7fc8f 100644</span><span class="w"></span>
 <span class="gd">--- a/.cirrus.yml.j2</span><span class="w"></span>
 <span class="gi">+++ b/.cirrus.yml.j2</span><span class="w"></span>
 <span class="gu">@@ -21,6 +21,8 @@ task:</span><span class="w"></span>
@@ -217,7 +219,7 @@ by Libvirt domains.</p>
 
 <span class="gi">+  # Workaround for cgroups v2</span><span class="w"></span>
 <span class="gi">+  # I have no idea why or how this works (see commit message for a longer rant)</span><span class="w"></span>
-<span class="gi">+  cgroups_workaround_script:</span><span class="w"></span>
+<span class="gi">+  cgroups_workaround_background_script:</span><span class="w"></span>
 <span class="gi">+    - mkdir -p &quot;$CGROUP_WORKAROUND&quot;</span><span class="w"></span>
 <span class="gi">+    - ls -lF &quot;$CGROUP_WORKAROUND&quot;</span><span class="w"></span>
 <span class="gi">+    - bash -c &#39;echo $$ &gt; /tmp/cgroups_workaround.pid; sleep infinity&#39; &amp;</span><span class="w"></span>
