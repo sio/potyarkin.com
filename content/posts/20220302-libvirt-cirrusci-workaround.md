@@ -6,7 +6,12 @@ date: 2022-03-02
 > Today I wrote a [commit message] that was several screens long.
 > I think it deserves to be a blog post of its own
 
+> *Update:* the commit linked above required some [modification] to remove
+> flakiness, but the workaround still stands. Diff provided in this blog post
+> was updated to reflect current state of affairs
+
 [commit message]: https://gitlab.com/sio/server_common/-/commit/5777cfae5446e7056fd95408c10e5273cd6529fd
+[modification]: https://gitlab.com/sio/server_common/-/commit/ebde5a880fc648be382a157454bc1ab17a8e0cd5
 
 Recently Cirrus CI builds that were using nested Libvirt VMs have started
 failing with the following error:
@@ -77,7 +82,6 @@ This is why I'm adding this meaningless cgroups burn-in to my pipelines.
 
 ```diff
 diff --git a/.cirrus.yml.j2 b/.cirrus.yml.j2
-index 6d517ce..4b7fc8f 100644
 --- a/.cirrus.yml.j2
 +++ b/.cirrus.yml.j2
 @@ -21,6 +21,8 @@ task:
@@ -95,7 +99,7 @@ index 6d517ce..4b7fc8f 100644
 
 +  # Workaround for cgroups v2
 +  # I have no idea why or how this works (see commit message for a longer rant)
-+  cgroups_workaround_script:
++  cgroups_workaround_background_script:
 +    - mkdir -p "$CGROUP_WORKAROUND"
 +    - ls -lF "$CGROUP_WORKAROUND"
 +    - bash -c 'echo $$ > /tmp/cgroups_workaround.pid; sleep infinity' &
