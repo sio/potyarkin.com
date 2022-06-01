@@ -100,9 +100,7 @@ PLUGINS = [
     ]
 
 # Configuring current theme
-THEME = 'themes/attila'
-CSS_OVERRIDE = ['static/attila_override.css']
+THEME = 'themes/smallweb'
 HEADER_COLOR = 'rgb(242,106,61)'
 MENUITEMS = [(name.title(), url) for name, url in SOCIAL]
 SOCIAL.append(('feed', '/feeds/'))
-THEME_TEMPLATES_OVERRIDES = ['content/templates/']
