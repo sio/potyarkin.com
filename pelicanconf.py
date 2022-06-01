@@ -95,9 +95,6 @@ SOCIAL = [
 DEFAULT_PAGINATION = 5
 
 # Pelican plugins
-PLUGIN_PATHS = [
-    'plugins/pelican-plugins',
-    ]
 PLUGINS = [
     'neighbors',
     ]

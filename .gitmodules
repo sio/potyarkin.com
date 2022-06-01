@@ -1,15 +1,3 @@
-[submodule "themes/MinimalXY"]
-	path = themes/MinimalXY
-	url = https://github.com/petrnohejl/MinimalXY.git
-[submodule "themes/pelican-hyde"]
-	path = themes/pelican-hyde
-	url = https://github.com/jvanz/pelican-hyde.git
-[submodule "themes/Flex"]
-	path = themes/Flex
-	url = https://github.com/alexandrevicenzi/Flex.git
-[submodule "plugins/pelican-plugins"]
-	path = plugins/pelican-plugins
-	url = https://github.com/getpelican/pelican-plugins.git
 [submodule "themes/attila"]
 	path = themes/attila
 	url = https://github.com/arulrajnet/attila.git
