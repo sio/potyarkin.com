@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 
 # Page generator configuration
 PATH = 'content'
+DEFAULT_CATEGORY= 'posts'
 LOCALE = 'C'
 DEFAULT_LANG = 'EN'
 DEFAULT_DATE_FORMAT = '%Y-%m-%d'
@@ -55,8 +56,8 @@ TAG_URL = 'tags/{slug}/'
 TAG_SAVE_AS = 'tags/{slug}/index.html'
 TAGS_URL = 'tags/'
 TAGS_SAVE_AS = 'tags/index.html'
-CATEGORY_URL = ''
-CATEGORY_SAVE_AS = ''
+CATEGORY_URL = '{slug}/'
+CATEGORY_SAVE_AS = '{slug}/index.html'
 CATEGORIES_URL = ''
 CATEGORIES_SAVE_AS = ''
 AUTHOR_URL = ''
@@ -92,7 +93,7 @@ SOCIAL = [
     ('github', 'https://github.com/sio'),
     ]
 
-DEFAULT_PAGINATION = 5
+DEFAULT_PAGINATION = 10
 
 # Pelican plugins
 PLUGINS = [
@@ -100,7 +101,9 @@ PLUGINS = [
     ]
 
 # Configuring current theme
-THEME = 'themes/smallweb'
+from pelican.themes import smallweb
+THEME = smallweb.path()
+DISPLAY_CATEGORIES_ON_MENU = False
 HEADER_COLOR = 'rgb(242,106,61)'
 MENUITEMS = [(name.title(), url) for name, url in SOCIAL]
-SOCIAL.append(('feed', '/feeds/'))
+MENUITEMS.append(('feed', '/feeds/'))
