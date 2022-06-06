@@ -103,6 +103,7 @@ PLUGINS = [
 # Configuring current theme
 from pelican.themes import smallweb
 THEME = smallweb.path()
+THEME_TEMPLATES_OVERRIDES = ['content/templates/']
 DISPLAY_CATEGORIES_ON_MENU = False
 HEADER_COLOR = 'rgb(242,106,61)'
 MENUITEMS = [(name.title(), url) for name, url in SOCIAL]

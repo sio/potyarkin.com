@@ -1,0 +1,24 @@
+{% extends '!theme/page.html' %}
+
+{% block content %}
+<!-- Post content: based on Atilla theme -->
+<main class="content" role="main">
+    <article class="post">
+    <div class="inner">
+        <section class="post-content">
+          <h2>Feeds for all blog posts</h2>
+          <ul>
+              <li><a href="{{ SITEURL }}/feeds/all.atom.xml">Atom feed (default)</a></li>
+              <li><a href="{{ SITEURL }}/feeds/all.rss.xml">RSS feed (for legacy purposes)</a></li>
+          </ul>
+          <h2>Feeds for individual tags</h2>
+          <ul>
+          {% for tag, articles in tags|sort %}
+              <li><a href="{{ SITEURL }}/feeds/{{ tag.slug }}.atom.xml">{{ tag }}</a></li>
+          {% endfor %}
+          </ul>
+        </section>
+    </div>
+    </article>
+</main>
+{% endblock content %}
