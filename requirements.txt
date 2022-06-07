@@ -1,4 +1,4 @@
 pelican==4.7.2
 pelican-neighbors==1.2.0
-pelican-theme-smallweb>=2022.6.8
+pelican-theme-smallweb>=2022.6.9
 Markdown==3.3.7
