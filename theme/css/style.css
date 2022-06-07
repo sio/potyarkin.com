@@ -21,7 +21,7 @@
   --text-font-family: 'PT Sans', sans-serif;
 
   --heading-margin: 0.83em;
-  --micro-padding: 2px;
+  --micro-padding: 5px;
   --content-width: 42.6rem;
   --interface-width: calc(1.2 * var(--content-width));
   --button-radius: 1.5rem;
@@ -29,6 +29,10 @@
 }
 
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
 body {
   margin: 0;
   font-family: var(--text-font-family);
@@ -62,8 +66,14 @@ pre {
   overflow-x: auto;
 }
 code, code * {
-  white-space: pre!important;
   font-size: 1rem;
+}
+:not(pre) code {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+pre code, pre code * {
+  white-space: pre!important;
 }
 blockquote em {
   font-weight: 550;
@@ -82,7 +92,7 @@ blockquote em {
 }
 #menu {
   position: absolute;
-  padding-top: 3rem;
+  padding: 3rem 0 0 0;
   top: 0;
   left: 0;
   right: 0;
@@ -117,8 +127,8 @@ blockquote em {
 #menu .button {
   font-size: 80%;
   position: absolute;
-  right: 0.2em;
-  top: 0.2em;
+  right: 0.3em;
+  top: 0.3em;
   color: var(--text-color-inverted);
   border-color: var(--text-color-inverted);
   border-style: solid;
@@ -164,6 +174,7 @@ blockquote em {
   text-align: center;
   margin: 1rem auto;
   font-size: 80%;
+  line-height: 2;
 }
 .tag-cloud a,
 .article-tags a {
@@ -298,12 +309,15 @@ main:hover article.preview:not(:hover) {
 .neighbors {
   display: flex;
   flex-direction: row-reverse;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   font-size: 80%;
 }
 .neighbor {
   display: block;
-  max-width: 50%;
+  max-width: calc(0.5 * var(--content-width));
+  min-width: calc(min(100% - 2em, 0.3 * var(--content-width)));
   flex-grow: 1;
   flex-basis: 0px;
   color: var(--text-color);
