@@ -1,3 +1,6 @@
+# Rendered HTML
+/html/
+
 # Virtual environment in Makefile
 .venv/
 Makefile.venv
