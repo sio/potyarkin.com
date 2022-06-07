@@ -59,6 +59,7 @@ To enable the described behavior source [**this file**][gist] from your
   its `_filedir` function. No extra configuration is required.
 
 Watch a demo screencast to see this feature in action:
+
 [![asciicast](https://asciinema.org/a/0zhzOYbkF22pWLmbx1RHCYyqQ.png)](https://asciinema.org/a/0zhzOYbkF22pWLmbx1RHCYyqQ)
 
 
