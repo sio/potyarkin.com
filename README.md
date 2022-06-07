@@ -1,6 +1,6 @@
 # Personal blog powered by Pelican and Python
 
-This repo contains content and configuration for my static website <http://potyarkin.ml>
+This repo contains content and configuration for my static website <https://potyarkin.ml>
 
 ### Proudly powered by Pelican and Python
 
@@ -10,9 +10,8 @@ This repo contains content and configuration for my static website <http://potya
 
 ## License and copyright
 
-### Site configuration, content and documentation
+Copyright © 2017-2022 Vitaly Potyarkin
 
-Copyright © 2017-2019 Vitaly Potyarkin
 ```
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use these files except in compliance with the License.
@@ -26,9 +25,3 @@ Copyright © 2017-2019 Vitaly Potyarkin
    See the License for the specific language governing permissions and
    limitations under the License.
 ```
-
-### External sources (git submodules)
-
-*Plugins* and *themes* imported into this project as Git submodules are
-copyrighted by their respective owners. Check `LICENSE` and/or `README` files
-in the root directory of each submodule for licensing information.
