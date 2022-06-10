@@ -24,7 +24,7 @@ def path():
     return resource_filename(__name__, '')
 ```
 
-This adds a dependency on [setuptools], but it's already present in most
+This adds a dependency on [setuptools] but it's already present in most
 Python venvs anyways, so not a big deal.
 `pkg_resources` exposes full path to wherever pip installs the theme. It
 also handles unpacking to temporary directory if required (in case of wheels and
@@ -33,7 +33,7 @@ zipped installs).
 I have been using this trick for some time already, but only recently I noticed
 that Pelican plugins have [officially transitioned][pelican-plugins-pip] to
 being pip-installable. They use a clever hack of adding extra packages to
-`pelican.plugins` namespace and I though it'd be cool to use the same
+`pelican.plugins` namespace and I though it would be cool to use the same
 approach with themes.
 
 Turns out it's not easy to do with setuptools, but is [pretty
@@ -49,6 +49,12 @@ THEME = smallweb.path()
 All the end users need to do is to add another line mentioning my theme to
 whichever [file they use][requirements.txt] to create their Pelican venv.
 
+On developer side we need to create `pelican/themes/themename` folder
+structure and point poetry at `pelican` for top-level package name. All theme
+files should be placed into `pelican/themes/themename` and one extra
+`__init__.py` file should be added there to provide `path()` method.
+See [SmallWeb] repository for an example.
+
 [Pelican]: https://blog.getpelican.com/
 [setuptools]: https://setuptools.pypa.io/en/latest/userguide/index.html
 [installing-themes]: https://docs.getpelican.com/en/3.6.3/pelican-themes.html#installing-themes
@@ -56,3 +62,4 @@ whichever [file they use][requirements.txt] to create their Pelican venv.
 [poetry-config]: https://github.com/sio/pelican-smallweb/blob/master/pyproject.toml
 [my themes]: https://pypi.org/project/pelican-theme-smallweb/
 [requirements.txt]: https://github.com/sio/potyarkin.ml/blob/smallweb/requirements.txt#L3
+[SmallWeb]: https://github.com/sio/pelican-smallweb
