@@ -53,7 +53,7 @@ packages with a sole <code>__init__.py</code>:</p>
     <span class="k">return</span> <span class="n">resource_filename</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
 </code></pre></div>
 
-<p>This adds a dependency on <a href="https://setuptools.pypa.io/en/latest/userguide/index.html">setuptools</a>, but it's already present in most
+<p>This adds a dependency on <a href="https://setuptools.pypa.io/en/latest/userguide/index.html">setuptools</a> but it's already present in most
 Python venvs anyways, so not a big deal.
 <code>pkg_resources</code> exposes full path to wherever pip installs the theme. It
 also handles unpacking to temporary directory if required (in case of wheels and
@@ -61,7 +61,7 @@ zipped installs).</p>
 <p>I have been using this trick for some time already, but only recently I noticed
 that Pelican plugins have <a href="https://docs.getpelican.com/en/stable/plugins.html#namespace-plugin-structure">officially transitioned</a> to
 being pip-installable. They use a clever hack of adding extra packages to
-<code>pelican.plugins</code> namespace and I though it'd be cool to use the same
+<code>pelican.plugins</code> namespace and I though it would be cool to use the same
 approach with themes.</p>
 <p>Turns out it's not easy to do with setuptools, but is <a href="https://github.com/sio/pelican-smallweb/blob/master/pyproject.toml">pretty
 straightforward</a> with poetry. As a result I can now publish <a href="https://pypi.org/project/pelican-theme-smallweb/">my
@@ -72,7 +72,12 @@ themes</a> to PyPI and provide easy invocation instructions:</p>
 </code></pre></div>
 
 <p>All the end users need to do is to add another line mentioning my theme to
-whichever <a href="https://github.com/sio/potyarkin.ml/blob/smallweb/requirements.txt#L3">file they use</a> to create their Pelican venv.</p></article>
+whichever <a href="https://github.com/sio/potyarkin.ml/blob/smallweb/requirements.txt#L3">file they use</a> to create their Pelican venv.</p>
+<p>On developer side we need to create <code>pelican/themes/themename</code> folder
+structure and point poetry at <code>pelican</code> for top-level package name. All theme
+files should be placed into <code>pelican/themes/themename</code> and one extra
+<code>__init__.py</code> file should be added there to provide <code>path()</code> method.
+See <a href="https://github.com/sio/pelican-smallweb">SmallWeb</a> repository for an example.</p></article>
 <nav class="article-tags">
   <a href="https://potyarkin.ml/tags/pelican/">pelican</a>
   <a href="https://potyarkin.ml/tags/python/">python</a>

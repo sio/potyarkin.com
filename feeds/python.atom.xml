@@ -24,7 +24,7 @@ packages with a sole &lt;code&gt;__init__.py&lt;/code&gt;:&lt;/p&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;resource_filename&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;This adds a dependency on &lt;a href="https://setuptools.pypa.io/en/latest/userguide/index.html"&gt;setuptools&lt;/a&gt;, but it's already present in most
+&lt;p&gt;This adds a dependency on &lt;a href="https://setuptools.pypa.io/en/latest/userguide/index.html"&gt;setuptools&lt;/a&gt; but it's already present in most
 Python venvs anyways, so not a big deal.
 &lt;code&gt;pkg_resources&lt;/code&gt; exposes full path to wherever pip installs the theme. It
 also handles unpacking to temporary directory if required (in case of wheels and
@@ -32,7 +32,7 @@ zipped installs).&lt;/p&gt;
 &lt;p&gt;I have been using this trick for some time already, but only recently I noticed
 that Pelican plugins have &lt;a href="https://docs.getpelican.com/en/stable/plugins.html#namespace-plugin-structure"&gt;officially transitioned&lt;/a&gt; to
 being pip-installable. They use a clever hack of adding extra packages to
-&lt;code&gt;pelican.plugins&lt;/code&gt; namespace and I though it'd be cool to use the same
+&lt;code&gt;pelican.plugins&lt;/code&gt; namespace and I though it would be cool to use the same
 approach with themes.&lt;/p&gt;
 &lt;p&gt;Turns out it's not easy to do with setuptools, but is &lt;a href="https://github.com/sio/pelican-smallweb/blob/master/pyproject.toml"&gt;pretty
 straightforward&lt;/a&gt; with poetry. As a result I can now publish &lt;a href="https://pypi.org/project/pelican-theme-smallweb/"&gt;my
@@ -43,7 +43,12 @@ themes&lt;/a&gt; to PyPI and provide easy invocation instructions:&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;All the end users need to do is to add another line mentioning my theme to
-whichever &lt;a href="https://github.com/sio/potyarkin.ml/blob/smallweb/requirements.txt#L3"&gt;file they use&lt;/a&gt; to create their Pelican venv.&lt;/p&gt;</content><category term="posts"></category><category term="pelican"></category><category term="python"></category><category term="pip"></category></entry><entry><title>Manage Python virtual environment from your Makefile</title><link href="https://potyarkin.ml/posts/2019/manage-python-virtual-environment-from-your-makefile/" rel="alternate"></link><published>2019-10-01T00:00:00+03:00</published><updated>2019-10-01T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2019-10-01:/posts/2019/manage-python-virtual-environment-from-your-makefile/</id><summary type="html">&lt;p&gt;I often use Makefiles not just as a build tool but as a handy way to execute
+whichever &lt;a href="https://github.com/sio/potyarkin.ml/blob/smallweb/requirements.txt#L3"&gt;file they use&lt;/a&gt; to create their Pelican venv.&lt;/p&gt;
+&lt;p&gt;On developer side we need to create &lt;code&gt;pelican/themes/themename&lt;/code&gt; folder
+structure and point poetry at &lt;code&gt;pelican&lt;/code&gt; for top-level package name. All theme
+files should be placed into &lt;code&gt;pelican/themes/themename&lt;/code&gt; and one extra
+&lt;code&gt;__init__.py&lt;/code&gt; file should be added there to provide &lt;code&gt;path()&lt;/code&gt; method.
+See &lt;a href="https://github.com/sio/pelican-smallweb"&gt;SmallWeb&lt;/a&gt; repository for an example.&lt;/p&gt;</content><category term="posts"></category><category term="pelican"></category><category term="python"></category><category term="pip"></category></entry><entry><title>Manage Python virtual environment from your Makefile</title><link href="https://potyarkin.ml/posts/2019/manage-python-virtual-environment-from-your-makefile/" rel="alternate"></link><published>2019-10-01T00:00:00+03:00</published><updated>2019-10-01T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2019-10-01:/posts/2019/manage-python-virtual-environment-from-your-makefile/</id><summary type="html">&lt;p&gt;I often use Makefiles not just as a build tool but as a handy way to execute
 sequences of commands. The commands I've found myself executing again and
 again lately are the ones to manage Python virtual environments:&lt;/p&gt;
 &lt;ul&gt;
