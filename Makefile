@@ -54,7 +54,7 @@ devserver: venv
 	$(PELICAN) -lr $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS)
 
 serve: venv
-	$(VENV)/pelican --listen --port $(PORT) --bind 127.0.0.1 --output $(OUTPUTDIR)
+	$(VENV)/pelican --listen --autoreload --port $(PORT) --bind 127.0.0.1 --output $(OUTPUTDIR)
 
 .PHONY: html help clean regenerate serve devserver publish
 
