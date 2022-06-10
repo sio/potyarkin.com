@@ -1,17 +1,17 @@
 :root {  /* TODO: configure CSS variables from theme settings */
   --accent-color:  hsl(
     var(--accent-hue),
-    var(--accent-sat),
-    var(--accent-val)
+    var(--accent-saturation),
+    var(--accent-lightness)
   ); /* rgb(242,106,61) */
   --accent-color-darker: hsl(
     var(--accent-hue),
-    calc(var(--accent-sat) - 27.9%),
-    calc(var(--accent-val) - 11.9%)
+    calc(var(--accent-saturation) - 27.9%),
+    calc(var(--accent-lightness) - 11.9%)
   );
   --accent-hue: 15; /* TODO: convert from RGB in theme variables */
-  --accent-sat: 87.4%;
-  --accent-val: 59.4%;
+  --accent-saturation: 87.4%;
+  --accent-lightness: 59.4%;
 
   --text-color: black;
   --text-color-inverted: white;
@@ -37,7 +37,11 @@ body {
   margin: 0;
   font-family: var(--text-font-family);
   font-size: 107%;
-  text-align: justify;
+}
+@media (min-width: 32rem) {
+  body {
+    text-align: justify;
+  }
 }
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--heading-font-family);
@@ -73,10 +77,30 @@ code, code * {
   white-space: pre-wrap;
 }
 pre code, pre code * {
-  white-space: pre!important;
+  white-space: pre;
 }
 blockquote em {
   font-weight: 550;
+}
+
+
+/* Printer friendly */
+@media print {
+  :root {
+    --content-width: 100%;
+    --interface-width: 100%;
+  }
+  #menu,
+  .neighbors,
+  .page-footer {
+    visibility: collapse;
+  }
+  .page-header {
+    min-height: unset!important;
+  }
+  code, code * {
+    white-space: pre-wrap!important;
+  }
 }
 
 
