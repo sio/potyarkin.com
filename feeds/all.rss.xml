@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Orange Sun</title><link>https://potyarkin.ml/</link><description>Unsorted ramblings, sometimes related to programming</description><lastBuildDate>Wed, 02 Mar 2022 00:00:00 +0300</lastBuildDate><item><title>Unexpected workaround for Libvirt VMs with cgroups v2 in Cirrus CI</title><link>https://potyarkin.ml/posts/2022/libvirt-cirrusci-workaround/</link><description>&lt;blockquote&gt;
+<rss version="2.0"><channel><title>Orange Sun</title><link>https://potyarkin.ml/</link><description>Unsorted ramblings, sometimes related to programming</description><lastBuildDate>Fri, 10 Jun 2022 00:00:00 +0300</lastBuildDate><item><title>Pip-installable Pelican themes</title><link>https://potyarkin.ml/posts/2022/pip-install-pelican-theme/</link><description>&lt;p&gt;Installing &lt;a href="https://blog.getpelican.com/"&gt;Pelican&lt;/a&gt; themes &lt;a href="https://docs.getpelican.com/en/3.6.3/pelican-themes.html#installing-themes"&gt;the default way&lt;/a&gt; is not very
+pleasant:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;You need to invoke a separate CLI tool&lt;/li&gt;
+&lt;li&gt;You may need to create some symlinks and ensure that they don't go stale the
+  next time you use Pelican&lt;/li&gt;
+&lt;li&gt;Some people (me) have resorted to git submodules instead of official CLI …&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vitaly Potyarkin</dc:creator><pubDate>Fri, 10 Jun 2022 00:00:00 +0300</pubDate><guid isPermaLink="false">tag:potyarkin.ml,2022-06-10:/posts/2022/pip-install-pelican-theme/</guid><category>posts</category><category>pelican</category><category>python</category><category>pip</category></item><item><title>Unexpected workaround for Libvirt VMs with cgroups v2 in Cirrus CI</title><link>https://potyarkin.ml/posts/2022/libvirt-cirrusci-workaround/</link><description>&lt;blockquote&gt;
 &lt;p&gt;Today I wrote a &lt;a href="https://gitlab.com/sio/server_common/-/commit/5777cfae5446e7056fd95408c10e5273cd6529fd"&gt;commit message&lt;/a&gt; that was several screens long.
 I think it deserves to be a blog post of its own&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Update:&lt;/em&gt; the commit linked above required some &lt;a href="https://gitlab.com/sio/server_common/-/commit/ebde5a880fc648be382a157454bc1ab17a8e0cd5"&gt;modification&lt;/a&gt; to remove

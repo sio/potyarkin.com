@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Pip-installable Pelican themes</title>
+  <meta name="description" content="Orange Sun | Posts | Vitaly Potyarkin | 2022-06-10">
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="origin">
+  <meta name="generator" content="Pelican">
+  <link href="https://potyarkin.ml/posts/2022/pip-install-pelican-theme/" rel="canonical">
+<link href="https://potyarkin.ml/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Orange Sun Full Atom Feed" />
+<link href="https://potyarkin.ml/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="Orange Sun Full RSS Feed" />
+  <link href="https://potyarkin.ml/theme/css/style.css?cache=64fbfcf453ae04906b98f4c8e0c742f50d5103485c66b534387d07323ed722a8" type="text/css" rel="stylesheet">
+  <link href="https://potyarkin.ml/theme/css/fonts.css?cache=32c843bb3ce96eb9fb92f48c7a63dc133ab32e0d267a2e1453199c23403d5cd0" type="text/css" rel="stylesheet">
+</head>
+<body class="pelican-article">
+<nav id="menu">
+  <a href="#" class="close button">Close</a>
+  <a href="#menu" class="open button">Menu</a>
+  <ul class="menu-list">
+      <li><a href="/archive/">Archive</a></li>
+      <li><a href="/tags/">Tags</a></li>
+      <li><a href="mailto:sio.wtf@gmail.com">Email</a></li>
+      <li><a href="https://github.com/sio">Github</a></li>
+      <li><a href="/feeds/">feed</a></li>
+  </ul>
+</nav>  <header class="page-header">
+    <h1>Pip-installable Pelican themes</h1>
+    <span class="subtitle"><a href="https://potyarkin.ml/">Orange Sun</a> |
+<a href="https://potyarkin.ml/posts/">Posts</a> |   <a href="https://potyarkin.ml/">Vitaly Potyarkin</a>
+| 2022-06-10
+</span>
+  </header>
+<article class="full"><p>Installing <a href="https://blog.getpelican.com/">Pelican</a> themes <a href="https://docs.getpelican.com/en/3.6.3/pelican-themes.html#installing-themes">the default way</a> is not very
+pleasant:</p>
+<ul>
+<li>You need to invoke a separate CLI tool</li>
+<li>You may need to create some symlinks and ensure that they don't go stale the
+  next time you use Pelican</li>
+<li>Some people (me) have resorted to git submodules instead of official CLI</li>
+</ul>
+<p>As a workaround I've been packaging my Pelican themes into simple Python
+packages with a sole <code>__init__.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pkg_resources</span> <span class="kn">import</span> <span class="n">resource_filename</span>
+<span class="k">def</span> <span class="nf">path</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Return path to theme templates and assets</span>
+<span class="sd">    Use this value for THEME in Pelican settings</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">resource_filename</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>This adds a dependency on <a href="https://setuptools.pypa.io/en/latest/userguide/index.html">setuptools</a>, but it's already present in most
+Python venvs anyways, so not a big deal.
+<code>pkg_resources</code> exposes full path to wherever pip installs the theme. It
+also handles unpacking to temporary directory if required (in case of wheels and
+zipped installs).</p>
+<p>I have been using this trick for some time already, but only recently I noticed
+that Pelican plugins have <a href="https://docs.getpelican.com/en/stable/plugins.html#namespace-plugin-structure">officially transitioned</a> to
+being pip-installable. They use a clever hack of adding extra packages to
+<code>pelican.plugins</code> namespace and I though it'd be cool to use the same
+approach with themes.</p>
+<p>Turns out it's not easy to do with setuptools, but is <a href="https://github.com/sio/pelican-smallweb/blob/master/pyproject.toml">pretty
+straightforward</a> with poetry. As a result I can now publish <a href="https://pypi.org/project/pelican-theme-smallweb/">my
+themes</a> to PyPI and provide easy invocation instructions:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># pelicanconf.py</span>
+<span class="kn">from</span> <span class="nn">pelican.themes</span> <span class="kn">import</span> <span class="n">smallweb</span>
+<span class="n">THEME</span> <span class="o">=</span> <span class="n">smallweb</span><span class="o">.</span><span class="n">path</span><span class="p">()</span>
+</code></pre></div>
+
+<p>All the end users need to do is to add another line mentioning my theme to
+whichever <a href="https://github.com/sio/potyarkin.ml/blob/smallweb/requirements.txt#L3">file they use</a> to create their Pelican venv.</p></article>
+<nav class="article-tags">
+  <a href="https://potyarkin.ml/tags/pelican/">pelican</a>
+  <a href="https://potyarkin.ml/tags/python/">python</a>
+  <a href="https://potyarkin.ml/tags/pip/">pip</a>
+</nav>
+<nav class="neighbors">
+  <a class="neighbor neighbor-prev" href="https://potyarkin.ml/posts/2022/libvirt-cirrusci-workaround/">
+    <h1>Unexpected workaround for Libvirt VMs with cgroups v2 in Cirrus CI</h1>
+    <p>Today I wrote a commit message that was several screens long. I think it deserves to...</p>
+  </a>
+  <span class="neighbor"></span>
+</nav>
+<footer class="page-footer">
+  <section class="credits">
+        <span class="credits-left">
+          Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a>
+        </span>
+        <span class="credits-center">
+          <a href="https://potyarkin.ml/">Orange Sun</a>
+        </span>
+        <span class="credits-right">
+          Theme <a href="https://github.com/sio/pelican-smallweb" rel="nofollow">SmallWeb</a>
+        </span>
+  </section>
+</footer></body>
+</html>
