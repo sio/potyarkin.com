@@ -37,6 +37,8 @@ body {
   margin: 0;
   font-family: var(--text-font-family);
   font-size: 107%;
+  background-color: var(--page-color);
+  color: var(--text-color);
 }
 @media (min-width: 32rem) {
   body {
@@ -130,10 +132,13 @@ blockquote em {
   justify-content: space-around;
   align-items: stretch;
 }
+.menu-list > * {
+  flex-grow: 1;
+  flex-basis: 0px;
+}
 .menu-list a, .menu-list li {
   filter: none;
   display: block;
-  flex-grow: 1;
   border-radius: 1.5em;
 }
 .menu-list a:hover {
@@ -142,7 +147,7 @@ blockquote em {
 }
 .menu-list a {
   text-align: center;
-  padding: 1em 0;
+  padding: 1em 0.1em;
   text-decoration: none;
   color: var(--text-color-inverted);
   font-weight: bold;
@@ -270,7 +275,8 @@ blockquote em {
 }
 .page-header:after {
   content: '';
-  background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 100%);
+  background: linear-gradient(to bottom, transparent 0%, var(--text-color) 100%);
+  opacity: 0.5;
   position: absolute;
   top: 0;
   width: 100%;
