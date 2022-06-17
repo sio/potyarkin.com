@@ -108,4 +108,5 @@ DISPLAY_CATEGORIES_ON_MENU = False
 HEADER_COLOR = 'rgb(242,106,61)'
 MENUITEMS = [(name.title(), url) for name, url in SOCIAL]
 MENUITEMS.append(('feed', '/feeds/'))
+MENUITEMS.append(('bookmarks', '/bookmarks/'))
 SMALLWEB_HASHES = smallweb.hashes()
