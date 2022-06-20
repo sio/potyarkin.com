@@ -66,3 +66,8 @@ Makefile.venv:
 .PHONY: links
 links: $(VENV)/deadlinks
 	$(VENV)/deadlinks https://potyarkin.ml -n 10 -e
+
+
+.PHONY: bookmarks
+bookmarks: | venv
+	$(VENV)/python bookmarks.py
