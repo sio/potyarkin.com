@@ -230,8 +230,8 @@ status: hidden
 - [TinyPilot: Build a KVM Over IP for Under $100](https://mtlynch.io/tinypilot/) -
   use Raspberry Pi to emulate mouse/keyboard via USB OTG port and to capture
   and broadcast video signal with HDMI-USB dongle.
-- Declassified writings of German generals written for training of US military
-  immediately after World War II, published by [Center for Military
+- [Declassified writings of German generals written for training of US military
+  immediately after World War II, published by Center for Military
   History](https://history.army.mil/catalog/browse/title.html)
     - [Warfare in the Far North](https://history.army.mil/html/books/104/104-24/index.html)
     - [Military Improvisations in the Russian Campaign](https://history.army.mil/catalog/pubs/104/104-1.html)
