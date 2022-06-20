@@ -1,0 +1,35 @@
+{% extends '!theme/page.html' %}
+
+{% block subtitle %}
+<a href="{{ SITEURL }}/">{{ SITENAME }}</a> |
+Other blogs of likely interest |
+<a href="{{ SITEURL }}/blogroll.yml">Source</a>
+{% endblock %}
+
+{% block content %}
+{% set data = yaml("content/blogroll.yml") %}
+<article class="full">
+  {% for section in data %}{% if section.blogs %}
+  <h2>{{ section.section }}</h2>
+  <ul>
+    {% for blog in section.blogs %}
+    <li>
+      <p><strong>
+      <a href="{{ blog.url }}">{{ blog.title }}</a>
+      {% if blog.by|default(False) %}
+      by {{ blog.by }}
+      {% endif %}
+      </strong></p>
+      {% if blog.description|default(False) %}
+      {{ blog.description|md }}
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}{% endfor %}
+<blockquote>
+This page is also available in a machine readable form:
+<a href="{{ SITEURL }}/blogroll.yml">blogroll.yml</a>
+</blockquote>
+</article>
+{% endblock content %}

@@ -1,0 +1,195 @@
+#
+# Links to blogs I consider interesting
+#
+# This file is intentionally maintained in a machine-readable form, but
+# data format is not guaranteed to remain stable over time
+#
+
+- section: Linux
+  blogs:
+    - title: Wandering Thoughts
+      by: Chris Siebenmann at University of Toronto
+      url: https://utcc.utoronto.ca/~cks/space/blog/
+      feed:
+      description: |-
+        Fifteen years of almost daily articles on Unix/Linux and Python. Very
+        interesting findings on Unix history from a person who had experienced
+        most of it firsthand. Some less important news, scripts and
+        philosophical musings on the role of software in our lives.
+
+        The author hosts his blog at employer's hosting and domain name, so I
+        wouldn't be surprised if the blog would go offline one day. Let's hope
+        the Web Archive runs its spiders regularly.
+
+    - title: Drew DeVault's Blog
+      url: https://drewdevault.com/
+      feed:
+      description: |-
+        Personal tech blog from the creator of Sourcehut, a more transparent
+        alternative to GitHub.  Drew writes about being an entrepreneur in the
+        FOSS world, about sustainability of Open Source projects and about
+        tricky problems he uses Unix and Python knowledge to solve.
+
+    - title: unixsheikh.com
+      url: http://unixsheikh.com/
+      feed:
+      description: |-
+        Personal blog of old school Unix sysadmin. Pretty opinionated and
+        anti-establishment. Many good articles on OpenBSD,
+        networking/firewalling, ZFS vs other storage solutions, etc.
+
+    - title: Kushal Das' Blog
+      url: https://kushaldas.in/
+      feed:
+      description: |-
+        Tech blog from a Red Hat employee, Python contributor and Fedora developer.
+        Good articles on India FOSS scene, managing a LUG, privacy and security.
+
+    - title: Xe Iaso (Christine Dodrill)
+      url: https://xeiaso.net/blog
+      feed:
+      description: |-
+        NixOS and k8s in a homelab. Some deployment walkthroughs, some high-level
+        overviews of tech concepts - all in a monospace font with anime characters
+        in sidebars.
+
+- section: Homelab
+  blogs:
+    - title: blog.kroy.io
+      url: https://blog.kroy.io/
+      feed:
+      description: |-
+        Homelab enthusiast with a lot of informative writeups on hypervisors,
+        automation and routing. Lots of routing! BGP, VyOS, router benchmarks - the
+        fun stuff!
+
+    - title: OXcrag.net
+      url: https://oxcrag.net/
+      feed:
+      description: |-
+        A homelabber with view similar to mine: prefers plain Ubuntu/KVM to Proxmox,
+        uses Backblaze B2, builds routers from scratch with nftables...
+
+    - title: Blogging to Nowhere
+      by: Rob Connoly
+      url: https://webworxshop.com/
+      feed:
+      description: |-
+        First-person view of selfhosted obsession. Ansible, GitLab CI, Docker... All
+        the good stuff.
+
+    - title: Defend the planet
+      url: https://defendtheplanet.net
+      feed:
+      description: |-
+        Tinkering with ARM single-board computers, learning to solder, designing
+        robots, building Docker swarms and repairing Volkswagen T4. Cool blog.
+
+    - title: JankScale Datasystems
+      url: https://blog.jankscale.com/
+      feed:
+      description: |-
+        Personal datacenter in a metal container in a backyard. There will probably
+        be some interesting posts on IaC (implied by author's reddit flair)
+
+    - title: Just another Linux geek
+      url: https://blog.christophersmart.com
+      feed:
+      description: |-
+        Maintaining automatable homelab with Ansible, libvirt/KVM and Fedora. Some
+        OpenWRT sprinkled here and there.
+
+    - title: YetiOps
+      url: https://yetiops.net/posts/
+      feed:
+      description: |-
+        Homelab, Ansible, KVM, Terraform, Pulumi
+
+    - title: Adventurist Blog
+      by: Tom Jones
+      url: https://adventurist.me/page/1
+      feed:
+      description: |-
+        FreeBSD, electronics engineering, hacker camps and fests. Using serial
+        console for out-of-band server management (whitebox builds)
+
+- section: OpenBSD
+  blogs:
+    - title: Solène Rapenne
+      url: https://dataswamp.org/~solene/
+      feed:
+      description: |-
+        OpenBSD developer solene@. Also some posts on NixOS, reproducible builds,
+        game engines...
+
+    - title: Doing stupid things (with packets and OpenBSD)
+      url: https://doing-stupid-things.as59645.net/
+      feed:
+      description: |-
+        Sometimes, it is fun to do stupid things. This blog documents things done on
+        AS59645 to run a (mostly) OpenBSD only, self-hosted AS "the old way". Most
+        certainly NSFP (Not Safe for Production) and never reasonable.
+
+- section: Other IT related topics
+  blogs:
+    - title: Data, tech, and sometimes Nutella
+      by: Vicky Boykis
+      url: https://veekaybee.github.io/
+      feed:
+      description: |-
+        Some social insights into IT industry, articles about privacy in modern
+        world. Lots of links to Hacker News, Reddit trends, some posts about
+        Facebook, some posts about Python.
+
+    - title: /dev/lawyer
+      by: Kyle E. Mitchell
+      url: https://writing.kemitchell.com/
+      feed:
+      description: |-
+        A blog by a lawyer very knowledgeable of open source licenses. Kyle has
+        written several niche licenses that try to be better than the existing FOSS
+        ones. The blog is frequently updated with articles on open source
+        sustainability, free work and profiteering by industry from FOSS
+        contributors. There are also links to other blogs in the same field.
+
+    - title: The Webb Blog
+      by: Paul Anthony Webb
+      url: https://blog.webb.page/
+      feed:
+      description: |-
+        This author has an opinion on how the currently broken Internet can be
+        fixed. Let's see what happens...
+
+    - title: Bryan Cantrill and other blogs at DTrace.org
+      url: http://dtrace.org/blogs/
+      feed:
+      description: |-
+        A brilliant technologist and a good conference speaker who worked at Sun and
+        Joyent (SmartOS), and now have founded a new startup (Oxide). Other blogs at
+        DTrace.org are updated less frequently but usually are also interesting.
+
+- section: Politics
+  blogs:
+    - title: Scholar's Stage
+      by: Tanner Greer
+      url: https://scholars-stage.org/
+      feed:
+      description: |-
+        Essays of a westerner living in China. Unexpected sides of Chinese and
+        generally non-Western politics and economics. A lot of book reviews
+        (non-fiction).
+
+- section: Uncategorized new blogs
+  blogs:
+
+- section: Saved Google searches
+  blogs:
+    - title: inurl:(blog|wordpress|post)
+      url: https://www.google.com/search?q=inurl:(blog|wordpress|post)
+
+# Template for new entries:
+#   - title:
+#     by:
+#     url:
+#     feed:
+#     description: |-

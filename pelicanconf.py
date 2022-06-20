@@ -13,6 +13,10 @@ DEFAULT_DATE_FORMAT = '%Y-%m-%d'
 ARTICLE_PATHS = [
     'posts',
     ]
+PAGE_PATHS = [
+    'pages',
+    'blogroll.md',
+]
 STATIC_PATHS = [
     'images',
     'static',
@@ -110,3 +114,18 @@ MENUITEMS = [(name.title(), url) for name, url in SOCIAL]
 MENUITEMS.append(('feed', '/feeds/'))
 MENUITEMS.append(('bookmarks', '/bookmarks/'))
 SMALLWEB_HASHES = smallweb.hashes()
+
+
+# Jinja2 customization
+import os, sys
+sys.path.append(os.curdir)
+
+import helpers.yaml
+JINJA_GLOBALS = {
+    'yaml': helpers.yaml.read,
+}
+
+import helpers.markdown
+JINJA_FILTERS = {
+    'md': helpers.markdown.custom(MARKDOWN),
+}
