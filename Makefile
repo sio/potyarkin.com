@@ -47,12 +47,6 @@ profile: venv
 clean:
 	[ ! -d $(OUTPUTDIR) ] || rm -rf $(OUTPUTDIR)
 
-regenerate: venv
-	$(PELICAN) -r $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS)
-
-devserver: venv
-	$(PELICAN) -lr $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS)
-
 serve: venv
 	$(VENV)/pelican --listen --autoreload --port $(PORT) --bind 127.0.0.1 --output $(OUTPUTDIR)
 
