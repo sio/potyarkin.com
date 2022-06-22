@@ -114,6 +114,9 @@ MENUITEMS = [(name.title(), url) for name, url in SOCIAL]
 MENUITEMS.append(('feed', '/feeds/'))
 MENUITEMS.append(('bookmarks', '/bookmarks/'))
 SMALLWEB_HASHES = smallweb.hashes()
+CSS_OVERRIDE = [
+    'static/custom.css',
+]
 
 
 # Jinja2 customization
