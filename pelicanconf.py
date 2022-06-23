@@ -1,3 +1,7 @@
+import os, sys
+sys.path.append(os.curdir)
+
+
 # Page generator configuration
 PATH = 'content'
 DEFAULT_CATEGORY= 'posts'
@@ -111,14 +115,13 @@ MENUITEMS = [(name.title(), url) for name, url in SOCIAL]
 MENUITEMS.append(('feed', '/feeds/'))
 MENUITEMS.append(('bookmarks', '/bookmarks/'))
 SMALLWEB_HASHES = smallweb.hashes()
+from helpers import checksum
 CSS_OVERRIDE = [
-    'static/custom.css',
+    f'static/custom.css?cache={checksum.hash("content/static/custom.css")}',
 ]
 
 
 # Jinja2 customization
-import os, sys
-sys.path.append(os.curdir)
 
 import helpers.yaml
 JINJA_GLOBALS = {
