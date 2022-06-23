@@ -19,7 +19,11 @@
       {% if blog.by|default(False) %}
       by {{ blog.by }}
       {% endif %}
-      </strong></p>
+      </strong>
+      {% if blog.feed|default(False) %}
+      <a class="feed" href="{{ blog.feed}}">[feed]</a>
+      {% endif %}
+      </p>
       {% if blog.description|default(False) %}
       {{ blog.description|md }}
       {% endif %}

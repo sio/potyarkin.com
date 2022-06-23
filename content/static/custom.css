@@ -9,3 +9,12 @@
 .pelican-bookmarks article.full li {
   margin: 1em 0;
 }
+
+
+/* Feed links in blogroll */
+.pelican-blogroll a.feed {
+  visibility: hidden;
+}
+.pelican-blogroll li:hover a.feed {
+  visibility: visible;
+}
