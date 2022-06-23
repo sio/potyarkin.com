@@ -16,6 +16,7 @@ ARTICLE_PATHS = [
 PAGE_PATHS = [
     'pages',
     'blogroll.md',
+    'bookmarks.md',
 ]
 STATIC_PATHS = [
     'images',
@@ -128,7 +129,10 @@ JINJA_GLOBALS = {
     'yaml': helpers.yaml.read,
 }
 
+from datetime import datetime
 import helpers.markdown
 JINJA_FILTERS = {
     'md': helpers.markdown.custom(MARKDOWN),
+    'strftime': datetime.strftime,
+    'strptime': datetime.strptime,
 }

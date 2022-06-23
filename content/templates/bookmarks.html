@@ -1,0 +1,35 @@
+{% extends '!theme/page.html' %}
+
+{% block subtitle %}
+<a href="{{ SITEURL }}/">{{ SITENAME }}</a> |
+{{ page.subtitle }} |
+<a href="{{ SITEURL }}/bookmarks.yml">Source</a>
+{% endblock %}
+
+{% block content %}
+{% set data = yaml("content/bookmarks.yml") %}
+<article class="full">
+  {% for section in data %}{% if section.links %}
+  <h2>{{ section.period|strptime("%Y-%m")|strftime("%B %Y") }}</h2>
+  <ul>
+    {% for link in section.links %}
+    <li>
+      <p><strong>
+      <a href="{{ link.url }}">{{ link.title }}</a>
+      {% if link.by|default(False) %}
+      by {{ link.by }}
+      {% endif %}
+      </strong></p>
+      {% if link.description|default(False) %}
+      {{ link.description|md }}
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}{% endfor %}
+<blockquote>
+This page is also available in a machine readable form:
+<a href="{{ SITEURL }}/bookmarks.yml">bookmarks.yml</a>
+</blockquote>
+</article>
+{% endblock content %}
