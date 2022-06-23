@@ -46,9 +46,9 @@
     description: |-
       A bug from 2021 that affects about 5% of Linux Chrome installations.
       Password sync errors out when it encounters just one mangled row in SQLite
-      database. Check if you're affected by this error: <chrome://sync-internals/>
+      database. Check if you're affected by this error: `chrome://sync-internals/`
       (look for red/green row for 'Passwords' on the right side of screen),
-      workaround: enable <chrome://flags/#clean-undecryptable-passwords>, then
+      workaround: enable `chrome://flags/#clean-undecryptable-passwords`, then
       toggle sync off/on.
 
   - title: Science Abridged Beyond the Point of Usefulness
