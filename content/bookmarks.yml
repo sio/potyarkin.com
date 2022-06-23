@@ -44,7 +44,7 @@
   - title: Google Chrome loses all saved passwords on Linux
     url: https://bugs.chromium.org/p/chromium/issues/detail?id=1251355
     description: |-
-      a bug from 2021 that affects about 5% of Linux Chrome installations.
+      A bug from 2021 that affects about 5% of Linux Chrome installations.
       Password sync errors out when it encounters just one mangled row in SQLite
       database. Check if you're affected by this error: <chrome://sync-internals/>
       (look for red/green row for 'Passwords' on the right side of screen),
@@ -63,7 +63,7 @@
   - title: Cirros Linux
     url: https://github.com/cirros-dev/cirros
     description: |-
-      _(via [OpenStack images](https://docs.openstack.org/image-guide/obtain-images.html))_ -
+      _(Via [OpenStack images](https://docs.openstack.org/image-guide/obtain-images.html))_ -
       A minimal Linux distribution that was designed for use as a test image on
       clouds such as OpenStack Compute. Comes with cloud-init out of the box and
       supports insecure login by default (user: `cirros`, password: `gocubsgo`)
@@ -95,7 +95,7 @@
   - title: Extrepo
     url: https://grep.be/blog/en/computer/debian/Announcing_extrepo/
     description: |-
-      manage Debian external repositories in a safe manner. Google Chrome and
+      Manage Debian external repositories in a safe manner. Google Chrome and
       GitLab runner are already added into [repository database](https://salsa.debian.org/extrepo-team/extrepo-data)
 
   - title: |-
@@ -109,7 +109,8 @@
       A single developer designs and builds a cheap Linux handheld computer
       (Allwinner F1C100s, 533MHz, 32-64MB DDR, Buildroot)
 
-  - title: Bufferbloat Test by Waveform
+  - title: Bufferbloat Test
+    by: Waveform
     url: https://www.waveform.com/tools/bufferbloat
 
   - title: Constraint Programming
@@ -124,16 +125,17 @@
   links:
 
   - title: The Gradual Extinction of Softness
+    by: Chantha Nguon with Kim Green
     url: https://hippocampusmagazine.com/2021/11/the-gradual-extinction-of-softness-by-chantha-nguon-with-kim-green/
     description: |-
-      by Chantha Nguon with Kim Green. An essay about first hand experience of
+      An essay about first hand experience of
       Kambodian revolution (Khmer Rouge) and fleeing to Saigon. Going from a
       middle class 9-year old girl to a woman in a refugee camp to a founder of
       Women's Development Centre back in Cambodia.
 
   - title: b4cksp4ce
     url: https://0x08.in/
-    description: a hackspace in St. Petersburg
+    description: A hackspace in St. Petersburg
 
   - title: Bird flew from Alaska to Australia non-stop, 8,100 miles in 239 hours
     url: https://www.audubon.org/news/these-mighty-shorebirds-keep-breaking-flight-records-and-you-can-follow-along
@@ -257,7 +259,7 @@
 
   - title: Why Is Payroll Hard
     url: http://wiki.c2.com/?WhyIsPayrollHard
-    description: a real world description of why business logic is almost never algorithmic
+    description: A real world description of why business logic is almost never algorithmic
 
 
 - period: 2021-03
@@ -293,7 +295,7 @@
   - title: On the design on text editors
     url: https://arxiv.org/pdf/2008.06030.pdf
     description: |-
-      a short research paper that highlights numerous possibilities of
+      A short research paper that highlights numerous possibilities of
       text/code editor improvement with modern technology.
 
 
@@ -342,13 +344,13 @@
   - title: 'TinyPilot: Build a KVM Over IP for Under $100'
     url: https://mtlynch.io/tinypilot/
     description: |-
-      use Raspberry Pi to emulate mouse/keyboard via USB OTG port and to capture
+      Use Raspberry Pi to emulate mouse/keyboard via USB OTG port and to capture
       and broadcast video signal with HDMI-USB dongle.
 
   - title: |-
       Declassified writings of German generals written for training of US military
-      immediately after World War II, published by Center for Military
-      History
+      immediately after World War II
+    by: Center for Military History
     url: https://history.army.mil/catalog/browse/title.html
     description: |-
       - [Warfare in the Far North](https://history.army.mil/html/books/104/104-24/index.html)
@@ -365,7 +367,7 @@
   - title: Изготовление печатной платы с холодным переносом тонера
     url: http://myowndevice.ru/index.php/theory/item/12-delaem-pechatnuyu-platu
     description: |-
-      перенос тонера с помощью ацетона (1 часть ацетона, 2 части жидкости для
+      Перенос тонера с помощью ацетона (1 часть ацетона, 2 части жидкости для
       снятия лака без ацетона), травление перекисью водорода и лимонной кислотой.
 
 
@@ -435,12 +437,14 @@
       Python
 
   - title: Rethinking PID 1
+    by: Lennart Poettering
     url: http://0pointer.de/blog/projects/systemd.html
-    description: by Lennart Poettering - The article that started systemd era
+    description:  The article that started systemd era
 
   - title: Testing your Ansible roles with Molecule
+    by: Jeff Geerling
     url: https://www.jeffgeerling.com/blog/2018/testing-your-ansible-roles-molecule
-    description: by Jeff Geerling - Overview of automated testing for Ansible roles
+    description: Overview of automated testing for Ansible roles
 
   - title: Using molecule with GitLab CI
     url: https://univers-libre.net/posts/ansible-molecule-gitlab-ci.html
@@ -455,9 +459,9 @@
   links:
 
   - title: A philosophy of project governance
+    by: Drew DeVault
     url: https://drewdevault.com/2020/01/17/Effective-project-governance.html
     description: |-
-      by Drew DeVault -
       Reflections on software projects being intrinsically social systems that can
       not be programmed. Good arguments on why Code of Conduct must not be
       elevated to the position of highest authority.
@@ -489,9 +493,10 @@
       Agent is masked. Requires lots of null-byte padding though.
 
   - title: Patch workflow with Mutt
+    by: Greg Kroah-Hartman
     url: http://kroah.com/log/blog/2019/08/14/patch-workflow-with-mutt-2019/
     description: |-
-      by Greg Kroah-Hartman - Detailed description of email based kernel dev
+      Detailed description of email based kernel dev
       workflow. Notable references:
       [isync/mbsync](http://isync.sourceforge.net/),
       [aerc](https://aerc-mail.org/)
@@ -541,10 +546,11 @@
       presentations.
 
   - title: Nifty Assignments
+    by: Stanford University
     url: http://nifty.stanford.edu/
     description: |-
-      a collection of unusual
-      and interesting assignments for learning programming (by Stanford University).
+      A collection of unusual
+      and interesting assignments for learning programming
 
   - title: RISC Is Fundamentally Unscalable
     url: https://blackhole12.com/blog/risc-is-fundamentally-unscalable/
@@ -561,7 +567,7 @@
   - title: Мошенники и ЭЦП
     url: https://habr.com/ru/post/453596/
     description: |-
-      использование поддельной электронно-цифровой подписи для мошенничества
+      Использование поддельной электронно-цифровой подписи для мошенничества
       (создание юридических лиц, сделки с недвижимостью)
 
   - title: 'A belief in meritocracy is not only false: it’s bad for you'
