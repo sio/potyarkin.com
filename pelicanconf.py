@@ -1,11 +1,7 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*- #
-from __future__ import unicode_literals
-
 # Page generator configuration
 PATH = 'content'
 DEFAULT_CATEGORY= 'posts'
-LOCALE = 'C'
+LOCALE = 'C.utf8'
 DEFAULT_LANG = 'EN'
 DEFAULT_DATE_FORMAT = '%Y-%m-%d'
 
