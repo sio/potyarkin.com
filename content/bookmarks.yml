@@ -159,6 +159,7 @@
     description: |-
       Using `conserver` for out-of-band (OOB) management of whitebox servers via
       serial console. See also:
+
         - [Conserver](https://www.conserver.com/)
         - [Zonker's Greater Scroll of Console Knowledge](https://www.conserver.com/consoles/)
         - [Serial Console Server for the Poor](https://blog.zugschlus.de/archives/707-Serial-Console-Server-for-the-Poor-I.html) -
@@ -241,6 +242,7 @@
     url: https://gregoryszorc.com/blog/2021/04/06/surprisingly-slow/
     description: |-
       A writeup on possible performance bottlenecks with modern computing:
+
         - Automated environment detection
         - New process overhead
         - Closing file handles on Windows
@@ -468,6 +470,7 @@
     url: https://en.wikipedia.org/wiki/Rate_limiting
     description: |-
       Multiple approaches to implementing rate limits in your code.
+
         - [Token bucket](https://en.wikipedia.org/wiki/Token_bucket), also: in use with Python
           [aiohttp](https://quentin.pradet.me/blog/how-do-you-rate-limit-calls-with-aiohttp.html)
         - [Leaky bucket](https://en.wikipedia.org/wiki/Leaky_bucket)
