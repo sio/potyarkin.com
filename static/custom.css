@@ -1,0 +1,11 @@
+/* Smaller paragraph margins on bookmarks page */
+.pelican-bookmarks article.full li p,
+.pelican-bookmarks article.full li li {
+  margin: 0;
+}
+.pelican-bookmarks article.full li > p + p {
+  margin-top: 0.2em;
+}
+.pelican-bookmarks article.full li {
+  margin: 1em 0;
+}
