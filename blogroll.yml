@@ -10,7 +10,7 @@
     - title: Wandering Thoughts
       by: Chris Siebenmann at University of Toronto
       url: https://utcc.utoronto.ca/~cks/space/blog/
-      feed:
+      feed: https://utcc.utoronto.ca/~cks/space/blog/?atom
       description: |-
         Fifteen years of almost daily articles on Unix/Linux and Python. Very
         interesting findings on Unix history from a person who had experienced
@@ -23,7 +23,7 @@
 
     - title: Drew DeVault's Blog
       url: https://drewdevault.com/
-      feed:
+      feed: https://drewdevault.com/blog/index.xml
       description: |-
         Personal tech blog from the creator of Sourcehut, a more transparent
         alternative to GitHub.  Drew writes about being an entrepreneur in the
@@ -32,7 +32,7 @@
 
     - title: unixsheikh.com
       url: http://unixsheikh.com/
-      feed:
+      feed: https://unixsheikh.com/feed.rss
       description: |-
         Personal blog of old school Unix sysadmin. Pretty opinionated and
         anti-establishment. Many good articles on OpenBSD,
@@ -40,14 +40,14 @@
 
     - title: Kushal Das' Blog
       url: https://kushaldas.in/
-      feed:
+      feed: https://kushaldas.in/rss.xml
       description: |-
         Tech blog from a Red Hat employee, Python contributor and Fedora developer.
         Good articles on India FOSS scene, managing a LUG, privacy and security.
 
     - title: Xe Iaso (Christine Dodrill)
       url: https://xeiaso.net/blog
-      feed:
+      feed: https://xeiaso.net/blog.atom
       description: |-
         NixOS and k8s in a homelab. Some deployment walkthroughs, some high-level
         overviews of tech concepts - all in a monospace font with anime characters
@@ -57,7 +57,7 @@
   blogs:
     - title: blog.kroy.io
       url: https://blog.kroy.io/
-      feed:
+      feed: https://blog.kroy.io/feed/
       description: |-
         Homelab enthusiast with a lot of informative writeups on hypervisors,
         automation and routing. Lots of routing! BGP, VyOS, router benchmarks - the
@@ -65,7 +65,7 @@
 
     - title: OXcrag.net
       url: https://oxcrag.net/
-      feed:
+      feed: https://oxcrag.net/feed/
       description: |-
         A homelabber with view similar to mine: prefers plain Ubuntu/KVM to Proxmox,
         uses Backblaze B2, builds routers from scratch with nftables...
@@ -73,42 +73,42 @@
     - title: Blogging to Nowhere
       by: Rob Connoly
       url: https://webworxshop.com/
-      feed:
+      feed: https://webworxshop.com/feed
       description: |-
         First-person view of selfhosted obsession. Ansible, GitLab CI, Docker... All
         the good stuff.
 
     - title: Defend the planet
       url: https://defendtheplanet.net
-      feed:
+      feed: https://defendtheplanet.net/feed/
       description: |-
         Tinkering with ARM single-board computers, learning to solder, designing
         robots, building Docker swarms and repairing Volkswagen T4. Cool blog.
 
     - title: JankScale Datasystems
       url: https://blog.jankscale.com/
-      feed:
+      feed: https://blog.jankscale.com/rss/
       description: |-
         Personal datacenter in a metal container in a backyard. There will probably
         be some interesting posts on IaC (implied by author's reddit flair)
 
     - title: Just another Linux geek
       url: https://blog.christophersmart.com
-      feed:
+      feed: https://blog.christophersmart.com/feed/
       description: |-
         Maintaining automatable homelab with Ansible, libvirt/KVM and Fedora. Some
         OpenWRT sprinkled here and there.
 
     - title: YetiOps
       url: https://yetiops.net/posts/
-      feed:
+      feed: https://yetiops.net/posts/index.xml
       description: |-
         Homelab, Ansible, KVM, Terraform, Pulumi
 
     - title: Adventurist Blog
       by: Tom Jones
       url: https://adventurist.me/page/1
-      feed:
+      feed: https://adventurist.me/feed.xml
       description: |-
         FreeBSD, electronics engineering, hacker camps and fests. Using serial
         console for out-of-band server management (whitebox builds)
@@ -117,14 +117,14 @@
   blogs:
     - title: Solène Rapenne
       url: https://dataswamp.org/~solene/
-      feed:
+      feed: https://dataswamp.org/~solene/rss.xml
       description: |-
         OpenBSD developer solene@. Also some posts on NixOS, reproducible builds,
         game engines...
 
     - title: Doing stupid things (with packets and OpenBSD)
       url: https://doing-stupid-things.as59645.net/
-      feed:
+      feed: https://doing-stupid-things.as59645.net/feed.xml
       description: |-
         Sometimes, it is fun to do stupid things. This blog documents things done on
         AS59645 to run a (mostly) OpenBSD only, self-hosted AS "the old way". Most
@@ -135,7 +135,7 @@
     - title: Data, tech, and sometimes Nutella
       by: Vicky Boykis
       url: https://veekaybee.github.io/
-      feed:
+      feed: https://veekaybee.github.io/index.xml
       description: |-
         Some social insights into IT industry, articles about privacy in modern
         world. Lots of links to Hacker News, Reddit trends, some posts about
@@ -144,7 +144,7 @@
     - title: /dev/lawyer
       by: Kyle E. Mitchell
       url: https://writing.kemitchell.com/
-      feed:
+      feed: https://writing.kemitchell.com/atom.xml
       description: |-
         A blog by a lawyer very knowledgeable of open source licenses. Kyle has
         written several niche licenses that try to be better than the existing FOSS
@@ -155,14 +155,14 @@
     - title: The Webb Blog
       by: Paul Anthony Webb
       url: https://blog.webb.page/
-      feed:
+      feed: https://blog.webb.page/feed/atom
       description: |-
         This author has an opinion on how the currently broken Internet can be
         fixed. Let's see what happens...
 
     - title: Bryan Cantrill and other blogs at DTrace.org
       url: http://dtrace.org/blogs/
-      feed:
+      feed: http://dtrace.org/blogs/feed/
       description: |-
         A brilliant technologist and a good conference speaker who worked at Sun and
         Joyent (SmartOS), and now have founded a new startup (Oxide). Other blogs at
@@ -173,7 +173,7 @@
     - title: Scholar's Stage
       by: Tanner Greer
       url: https://scholars-stage.org/
-      feed:
+      feed: https://scholars-stage.org/feed/
       description: |-
         Essays of a westerner living in China. Unexpected sides of Chinese and
         generally non-Western politics and economics. A lot of book reviews
