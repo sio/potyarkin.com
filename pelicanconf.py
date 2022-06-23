@@ -5,7 +5,7 @@ sys.path.append(os.curdir)
 # Page generator configuration
 PATH = 'content'
 DEFAULT_CATEGORY= 'posts'
-LOCALE = 'C.utf8'
+LOCALE = 'en_GB.UTF-8'
 DEFAULT_LANG = 'EN'
 DEFAULT_DATE_FORMAT = '%Y-%m-%d'
 
