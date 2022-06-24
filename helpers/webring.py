@@ -28,7 +28,7 @@ def main():
     reader = CachingFeedReader('cache')
     webring = []
     for section in blogroll('content/blogroll.yml'):
-        for blog in section['blogs']:
+        for blog in section['blogs'] or []:
             if not 'feed' in blog:
                 continue
             try:
@@ -36,9 +36,9 @@ def main():
             except Exception:
                 log.exception(f'Error while fetching {blog["feed"]}')
                 continue
-            entries = sorted(feed.entries, key=lambda x: x.published_parsed, reverse=True)
+            entries = sorted(feed.entries, key=lambda x: x.updated_parsed, reverse=True)
             latest = entries[0]
-            webring.append(latest)
+            webring.append(dict(blog=blog, entry=latest))
     print(json.dumps(webring, **JSON_PARAMS))
 
 
