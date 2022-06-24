@@ -66,3 +66,12 @@ Makefile.venv:
 .PHONY: links
 links: $(VENV)/deadlinks
 	$(VENV)/deadlinks https://potyarkin.ml -n 10 -e
+
+.PHONY: test
+test: $(VENV)/pytest
+	$(VENV)/pytest
+
+
+.PHONY: webring
+webring:
+	$(VENV)/python -m helpers.webring
