@@ -2,6 +2,7 @@
 Fetch newest articles from my blogroll
 '''
 
+from argparse import ArgumentParser
 from datetime import datetime
 from hashlib import sha256
 from pathlib import Path
@@ -26,9 +27,10 @@ feedparser.USER_AGENT = 'helpers/webring.py +https://github.com/sio/potyarkin.ml
 
 
 def main():
-    reader = CachingFeedReader('cache')
+    args = parse_args()
+    reader = CachingFeedReader(args.cache)
     webring = []
-    for section in blogroll('content/blogroll.yml'):
+    for section in blogroll(args.blogroll):
         for blog in section['blogs'] or []:
             if not 'feed' in blog:
                 continue
@@ -40,7 +42,52 @@ def main():
             entries = sorted(feed.entries, key=lambda x: x.updated_parsed, reverse=True)
             latest = entries[0]
             webring.append(dict(blog=blog, entry=latest))
-    print(json.dumps(webring, **JSON_PARAMS))
+    if args.output:
+        args.output = open(args.output, 'w')
+    print(json.dumps(webring, **JSON_PARAMS), file=args.output)
+    if args.output:
+        args.output.close()
+
+
+def parse_args(*a, **ka):
+    parser = ArgumentParser(
+        description='Fetch newest articles from feeds in blogroll',
+    )
+    parser.add_argument(
+        'blogroll',
+        metavar='BLOGROLL',
+        type=Path,
+        help='Path to YAML file with blogroll sources',
+    )
+    parser.add_argument(
+        'output',
+        metavar='OUTPUT',
+        default=None,
+        nargs='?',
+        help='Path to output file, default: stdout',
+    )
+    parser.add_argument(
+        '--cache',
+        metavar='DIR',
+        type=Path,
+        default='cache/webring',
+        help='Path to cache directory, default: cache/webring',
+    )
+    parser.add_argument(
+        '--cache-mkdir',
+        dest='cache_mkdir',
+        action='store_true',
+        default=False,
+        help='Create cache directory if not exists',
+    )
+    args = parser.parse_args(*a, **ka)
+    if args.cache_mkdir:
+        args.cache.mkdir(parents=True, exist_ok=True)
+    if not args.cache.exists():
+        parser.error(f'cache directory does not exist: {args.cache}')
+    if not args.cache.is_dir():
+        parser.error(f'cache path is not a directory: {args.cache}')
+    return args
 
 
 def blogroll(filepath):
