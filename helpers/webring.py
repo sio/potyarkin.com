@@ -89,10 +89,11 @@ class FeedCache:
 
     def __init__(self, cachedir, title, url):
         sanitized_title = re.sub(r'\W', '_', title)
-        sanitized_title = re.sub(r'_+', '_', sanitized_title)
         url_hash = sha256(url.encode()).hexdigest()[-8:]
+        safe_dirname = f'{sanitized_title}_{url_hash}'
+        safe_dirname = re.sub(r'_+', '_', safe_dirname)
 
-        self._directory = cachedir / f'{sanitized_title}_{url_hash}'
+        self._directory = cachedir / safe_dirname
         self._metadata = self._directory / 'metadata'
         self._feed = self._directory / 'feed'
 
