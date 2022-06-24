@@ -17,5 +17,6 @@ eggs/
 .eggs/
 *.egg-info/
 
-# Feed cache
+# Webring
+/content/webring.json
 /cache/

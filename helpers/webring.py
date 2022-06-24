@@ -64,7 +64,7 @@ def parse_args(*a, **ka):
         metavar='OUTPUT',
         default=None,
         nargs='?',
-        help='Path to output file, default: stdout',
+        help='Path to output JSON file, default: stdout',
     )
     parser.add_argument(
         '--cache',
