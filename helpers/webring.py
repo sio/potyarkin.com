@@ -20,6 +20,7 @@ log = logging.getLogger(__name__)
 JSON_PARAMS = dict(
     indent=2,
     ensure_ascii=False,
+    default=repr,
 )
 
 
