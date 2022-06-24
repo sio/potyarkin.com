@@ -1,0 +1,36 @@
+{% extends '!theme/page.html' %}
+
+{% block subtitle %}
+<a href="{{ SITEURL }}/">{{ SITENAME }}</a> |
+{{ page.subtitle }} |
+<a href="{{ SITEURL }}/webring.json">Source</a>
+{% endblock %}
+
+{% block content %}
+{% set data = json("content/webring.json") %}
+<article class="full">
+  {% set section = namespace(name=null) %}
+  {% for item in data %}
+  {% if section.name != item.blog.section %}
+    {% set section.name = item.blog.section %}
+    {% if loop.index > 1 %}</ul>{% endif %}
+    <h2>{{ section.name }}</h2>
+    <ul>
+  {% endif %}
+  <li>
+    <p><strong>
+    <a href="{{ item.entry.link }}">{{ item.entry.title }}</a>
+    ::&nbsp;{{ item.blog.title }}
+    </strong></p>
+    {% if item.entry.summary|default(False) %}
+    <p>{{ item.entry.summary|striptags|striptags|striptags|truncate(200) }}</p>
+    {% endif %}
+  </li>
+  {% endfor %}
+  </ul>
+<blockquote>
+This page is also available in a machine readable form:
+<a href="{{ SITEURL }}/webring.json">webring.json</a>
+</blockquote>
+</article>
+{% endblock content %}

@@ -17,6 +17,7 @@ PAGE_PATHS = [
     'pages',
     'blogroll.md',
     'bookmarks.md',
+    'webring.md',
 ]
 STATIC_PATHS = [
     'images',
@@ -123,8 +124,10 @@ CSS_OVERRIDE = [
 
 # Jinja2 customization
 
+import helpers.json
 import helpers.yaml
 JINJA_GLOBALS = {
+    'json': helpers.json.read,
     'yaml': helpers.yaml.read,
 }
 
