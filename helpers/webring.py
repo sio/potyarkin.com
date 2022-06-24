@@ -22,6 +22,7 @@ JSON_PARAMS = dict(
     ensure_ascii=False,
     default=repr,
 )
+feedparser.USER_AGENT = 'helpers/webring.py +https://github.com/sio/potyarkin.ml'
 
 
 def main():
