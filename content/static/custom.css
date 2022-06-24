@@ -13,8 +13,8 @@
 
 /* Feed links in blogroll */
 .pelican-blogroll a.feed {
-  visibility: hidden;
+  display: none;
 }
 .pelican-blogroll li:hover a.feed {
-  visibility: visible;
+  display: inline;
 }
