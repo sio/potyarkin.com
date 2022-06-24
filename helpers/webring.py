@@ -65,13 +65,17 @@ class CachingFeedReader:
         if cache.exists():
             for key in ['etag', 'modified']:
                 if key in cache.metadata:
-                    fetch_params[key] = cache_metadata[key]
+                    fetch_params[key] = cache.metadata[key]
         feed = feedparser.parse(url, **fetch_params)
         if feed.status == 200:
             cache.save(feed)
             return feed
         elif cache.exists():
-            log.error(f'HTTP {feed.status}: {url}, continuing from cache: {cache.directory}')
+            if feed.status < 400:
+                report = log.info
+            else:
+                report = log.error
+            report(f'HTTP {feed.status}: {url}, continuing from {cache}')
             return cache.read()
         else:
             raise RuntimeError(f'HTTP {feed.status}: {url}')
@@ -96,6 +100,9 @@ class FeedCache:
         self._directory = cachedir / safe_dirname
         self._metadata = self._directory / 'metadata'
         self._feed = self._directory / 'feed'
+
+    def __repr__(self):
+        return f'{self.__class__.__name__}: {self._directory}'
 
     def timestamp(self):
         return datetime.now().timestamp()
