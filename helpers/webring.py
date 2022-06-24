@@ -17,6 +17,12 @@ logging.basicConfig(format='%(levelname)-8s %(message)s', level=logging.INFO)
 log = logging.getLogger(__name__)
 
 
+JSON_PARAMS = dict(
+    indent=2,
+    ensure_ascii=False,
+)
+
+
 def main():
     reader = CachingFeedReader('cache')
     webring = []
@@ -24,11 +30,15 @@ def main():
         for blog in section['blogs']:
             if not 'feed' in blog:
                 continue
-            feed = reader.feed(title=blog['title'], url=blog['feed'])
+            try:
+                feed = reader.feed(title=blog['title'], url=blog['feed'])
+            except Exception:
+                log.exception(f'Error while fetching {blog["feed"]}')
+                continue
             entries = sorted(feed.entries, key=lambda x: x.published_parsed, reverse=True)
             latest = entries[0]
             webring.append(latest)
-    print(json.dumps(webring, indent=2, ensure_ascii=False))
+    print(json.dumps(webring, **JSON_PARAMS))
 
 
 def blogroll(filepath):
@@ -116,7 +126,7 @@ class FeedCache:
         log.info(f'Saving cache: {self._directory}')
         self._directory.mkdir(exist_ok=True)
         with self._feed.open('w') as f:
-            json.dump(feed, f)
+            json.dump(feed, f, **JSON_PARAMS)
         metadata = dict()
         for key in ['etag', 'modified', 'modified_parsed']:
             if key in feed:
@@ -124,7 +134,7 @@ class FeedCache:
         metadata['cache_created'] = self.timestamp()
         metadata['version'] = self.METADATA_VERSION
         with self._metadata.open('w') as f:
-            json.dump(metadata, f)
+            json.dump(metadata, f, **JSON_PARAMS)
 
     def read(self):
         '''Read feed from cache'''

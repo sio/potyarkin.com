@@ -73,5 +73,5 @@ test: $(VENV)/pytest
 
 
 .PHONY: webring
-webring:
+webring: | venv
 	$(VENV)/python -m helpers.webring
