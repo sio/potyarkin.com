@@ -41,6 +41,7 @@ def main():
                 continue
             entries = sorted(feed.entries, key=lambda x: x.updated_parsed, reverse=True)
             latest = entries[0]
+            blog['section'] = section['section']
             webring.append(dict(blog=blog, entry=latest))
     if args.output:
         args.output = open(args.output, 'w')
