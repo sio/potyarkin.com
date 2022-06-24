@@ -16,3 +16,8 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: html
           publish_branch: html
+          commit_message: |-
+            render: ${{ github.event.head_commit.message }}
+
+            Render static website for GitHub pages from
+            commit
