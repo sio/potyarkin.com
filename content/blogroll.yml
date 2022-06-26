@@ -47,7 +47,7 @@
 
     - title: Xe Iaso (Christine Dodrill)
       url: https://xeiaso.net/blog
-      feed: https://xeiaso.net/blog.atom
+      feed: https://xeiaso.net/blog.rss
       description: |-
         NixOS and k8s in a homelab. Some deployment walkthroughs, some high-level
         overviews of tech concepts - all in a monospace font with anime characters
