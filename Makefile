@@ -74,6 +74,7 @@ test: $(VENV)/pytest
 
 .PHONY: webring
 webring: content/webring.json
+publish html serve: | webring
 
 .PHONY: content/webring.json
 content/webring.json: content/blogroll.yml helpers/webring.py | venv
