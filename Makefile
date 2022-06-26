@@ -75,5 +75,6 @@ test: $(VENV)/pytest
 .PHONY: webring
 webring: content/webring.json
 
+.PHONY: content/webring.json
 content/webring.json: content/blogroll.yml helpers/webring.py | venv
 	$(VENV)/python -m helpers.webring $< $@ --cache-mkdir
