@@ -47,7 +47,7 @@
 
     - title: Xe Iaso (Christine Dodrill)
       url: https://xeiaso.net/blog
-      feed: https://xeiaso.net/blog.atom
+      feed: https://xeiaso.net/blog.rss
       description: |-
         NixOS and k8s in a homelab. Some deployment walkthroughs, some high-level
         overviews of tech concepts - all in a monospace font with anime characters
@@ -73,7 +73,7 @@
     - title: Blogging to Nowhere
       by: Rob Connoly
       url: https://webworxshop.com/
-      feed: https://webworxshop.com/feed
+      feed: https://webworxshop.com/feed/
       description: |-
         First-person view of selfhosted obsession. Ansible, GitLab CI, Docker... All
         the good stuff.
@@ -134,8 +134,8 @@
   blogs:
     - title: Data, tech, and sometimes Nutella
       by: Vicky Boykis
-      url: https://veekaybee.github.io/
-      feed: https://veekaybee.github.io/index.xml
+      url: https://vickiboykis.com
+      feed: https://vickiboykis.com/index.xml
       description: |-
         Some social insights into IT industry, articles about privacy in modern
         world. Lots of links to Hacker News, Reddit trends, some posts about

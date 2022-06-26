@@ -18,3 +18,9 @@
 .pelican-blogroll li:hover a.feed {
   display: inline;
 }
+
+
+/* Custom templates with Markdown + JSON/YAML data source */
+article.full + article.full {
+  padding-top: 0;
+}
