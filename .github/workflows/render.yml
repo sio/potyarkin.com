@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - smallweb
+  schedule:
+    - cron: 45 4,16 * * *
 
 jobs:
   render:
