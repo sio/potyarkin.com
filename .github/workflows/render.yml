@@ -10,7 +10,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/cache@v3
+        with:
+          path: cache/pip
+          key: pip-${{ hashFiles('requirements.txt') }}
+      - uses: actions/cache@v3
+        with:
+          path: cache/webring
+          key: webring-${{ hashFiles('content/blogroll.yml') }}
       - run: make publish
+        env:
+          PIP_CACHE_DIR: cache/pip
       - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
