@@ -1216,6 +1216,73 @@
   },
   {
     "blog": {
+      "title": "Bryan Cantrill and other blogs at DTrace.org",
+      "url": "http://dtrace.org/blogs/",
+      "feed": "http://dtrace.org/blogs/feed/",
+      "description": "A brilliant technologist and a good conference speaker who worked at Sun and\nJoyent (SmartOS), and now have founded a new startup (Oxide). Other blogs at\nDTrace.org are updated less frequently but usually are also interesting.",
+      "section": "Other IT related topics"
+    },
+    "entry": {
+      "title": "Twitter Spaces, a few weeks in",
+      "title_detail": {
+        "type": "text/plain",
+        "language": null,
+        "base": "http://dtrace.org/blogs/feed/",
+        "value": "Twitter Spaces, a few weeks in"
+      },
+      "links": [
+        {
+          "rel": "alternate",
+          "type": "text/html",
+          "href": "http://dtrace.org/blogs/bmc/2021/05/02/twitter-spaces-a-few-weeks-in/"
+        }
+      ],
+      "link": "http://dtrace.org/blogs/bmc/2021/05/02/twitter-spaces-a-few-weeks-in/",
+      "comments": "http://dtrace.org/blogs/bmc/2021/05/02/twitter-spaces-a-few-weeks-in/#comments",
+      "published": "Mon, 03 May 2021 02:15:31 +0000",
+      "published_parsed": [
+        2021,
+        5,
+        3,
+        2,
+        15,
+        31,
+        0,
+        123,
+        0
+      ],
+      "authors": [
+        {
+          "name": "bmc"
+        }
+      ],
+      "author": "bmc",
+      "author_detail": {
+        "name": "bmc"
+      },
+      "id": "http://dtrace.org/blogs/bmc/?p=1149",
+      "guidislink": false,
+      "summary": "As a kid, I listened to a lot of talk radio. This was in the 80s, before the internet &#8212; and before the AM dial became fringe. I have fond memories of falling asleep to the likes of Bruce Williams who just gave damned good, level-headed advice. It was, at essence, both optimistic and temperate: [...]",
+      "summary_detail": {
+        "type": "text/html",
+        "language": null,
+        "base": "http://dtrace.org/blogs/feed/",
+        "value": "As a kid, I listened to a lot of talk radio. This was in the 80s, before the internet &#8212; and before the AM dial became fringe. I have fond memories of falling asleep to the likes of Bruce Williams who just gave damned good, level-headed advice. It was, at essence, both optimistic and temperate: [...]"
+      },
+      "content": [
+        {
+          "type": "text/html",
+          "language": null,
+          "base": "http://dtrace.org/blogs/feed/",
+          "value": "<p>As a kid, I listened to a lot of talk radio.  This was in the 80s, before the internet &#8212; and before the AM dial became fringe.  I have fond memories of falling asleep to the likes of <a href=\"https://en.wikipedia.org/wiki/Bruce_Williams_(talk_radio_host)\">Bruce Williams</a> who just gave damned good, level-headed advice.  It was, at essence, both optimistic and temperate:  a cool head to help people work through a tough spot.</p>\n<p>Nothing really replaced the call-in show:  talk radio devolved into poisonous echo chambers, while social networking gave people other outlets (too many!) to have conversations.  But these online conversations &#8212; the written word &#8212; lack something: Twitter&#8217;s tight form gives us the hot take, blogs (ahem!) give us the longer form, but it both cases, the conversations that result seem to either lose their sizzle or go thermonuclear.  Video is really great for some stuff (I have spoken about the rise of video and the <a href=\"https://www.youtube.com/watch?v=4PaWFYm0kEw\">preservation of oral tradition in software engineering</a>) &#8212; but the discussion quality there is even worse.  (When did YouTube comments become such a hellhole?!) And of course, TikTok has given us social, short-form video, which can be very entertaining, but isn&#8217;t really designed to induce any meaningful discussion.</p>\n<p>And of course, I love podcasts, and one of the reasons I was excited to <a href=\"http://dtrace.org/blogs/bmc/2019/12/02/the-soul-of-a-new-computer-company/\">start a company</a> was to get an excuse to make <a href=\"https://oxide.computer/podcast/\">the podcast that we ourselves always wanted</a>.  Podcasts are particularly great because you can <strong>do something else</strong> while listening to them:  they fill in that time when you&#8217;re doing the dishes or picking up the kids or whatever.  But podcasts obviously miss the interactivity entirely.  (Or mostly: let us not so quickly forget <a href=\"https://twitter.com/bcantrill/status/1261207048340951041\">TWiV reading my letter on-air</a>!)</p>\n<p>Into all of this, enter Clubhouse and the rise of social audio.  I had immediate Bruce Williams flashbacks, and was excited to participate.  But my choice of device makes me unwelcome in Clubhouse&#8217;s eyes:  their lack of an Android app is clearly not a mere temporary gap, but rather a deliberate deprioritization.  (I certainly honor a young company&#8217;s need to focus, but how else can one describe an exceedingly well-capitalized company adding in-app payments before addressing 75% of the market?!)  To me, the deprioritization of Android reflects Clubhouse&#8217;s deeper problem:  it is fundamentally elitist and exclusionary.  Avid Clubhouse users may claim that this was not always so, but <strong>it says it right there on the tin</strong>:  it is, at the end of the day, a <em>clubhouse</em> &#8212; not a cafe or a town square.  I personally have no interest in participating in venues that deliberately limit the participants:  I want to engage with the broadest possible cross-section, not some subset that has been manicured by circumstance or technology choice.  (For this same reason, I do not give talks unless the talk will be recorded and made freely available.)</p>\n<p>Given all of this, you can imagine my enthusiasm for Twitter Spaces: it captures the promise that I see in the medium &#8212; but addresses many of the problems with Clubhouse&#8217;s implementation.  I have been participating in them for the past few weeks and (excitingly!) found last week that I have the ability to create Spaces.  Here are my takeaways so far:</p>\n<ul>\n<li>\n<p><strong>This is an even bigger deal than I thought it was.</strong>  All of the strengths that I perceived in the medium seem to be even stronger than I thought they would be, and in particular &#8212; as with podcasts &#8212; I can have a conversation while I do something else.  It is really nice to have social networking time after which one looks back at a clean kitchen or a prepared meal!</p>\n</li>\n<li>\n<p><strong>Spaces have broadened the people I follow.</strong>  In every Space I have been in, I have come away following someone new.  I find one of the most interesting aspects of Twitter to be able to be a part of conversations and social circles that broaden our perspectives (socially, technically, or otherwise) &#8212; and Spaces takes this to a new level:  I find that I&#8217;m following people based on a comment that they make that I wouldn&#8217;t otherwise see in the din of my feed.</p>\n</li>\n<li>\n<p><strong>Spaces have felt very playful.</strong>  In so many ways, this reminds me of early social networking circa 2003 &#8212; or of first getting online a decade prior.  It just feels new, and fresh, and&#8230; fun!  For example, I was in one space where a security researcher that I revere was with their crew, all trying to find ways to hack the captioning.  (They made some interesting discoveries: because the captioning is done locally, they can actually reveal more about you than what you actually say!)  I was more or less laughing the whole time; it was delightful.</p>\n</li>\n<li>\n<p><strong>The content is golden.</strong>  If I have one complaint about Spaces, it&#8217;s that they aren&#8217;t publicly recorded &#8212; because there&#8217;s some great content here!  I am hoping that this gets added over time (obviously, opt-in and clear to all participants!), because speaking personally, I want to go back and listen to an awesome Space that I might have missed &#8212; and I want others to be able to do the same with any Space that I host.</p>\n</li>\n<li>\n<p><strong>People have been really nice!</strong>  Okay, this is a little one, but I think an essential one:  in every Space I&#8217;ve been in, the people have just been incredibly friendly and welcoming.  One of the challenges of the written word is that it&#8217;s too easy to be nasty:  our mirror neurons don&#8217;t fire when our damage is inflicted at a distance.  (Take it from the guy still trying to apologize for a Usenet comment from several decades ago!)  While it&#8217;s still obviously very early for Twitter Spaces, being in a spoken conversation makes us much more predisposed to empathy &#8212; and I&#8217;m optimistic that the medium will retain the decency that we have lost elsewhere, allowing us a venue to listen to and learn from other perspectives.   I also really like Twitter&#8217;s emphasis on safety &#8212; and I&#8217;m hopeful that the inevitable bad behavior that does crop up is taken care of pretty quickly.</p>\n</li>\n<li>\n<p><strong>Clubhouse is in trouble.</strong>  I have been in a couple of Spaces where Clubhouse comes up (indeed, one of the Spaces I was in was a security researcher reporting how poorly Clubhouse handled a pretty serious safety issue that she had found), and in all of those conversations, the tenor is more or less the same:  there was a brief moment last summer (especially, post George Floyd) when Clubhouse felt really important &#8212; profound, even &#8212; but their poor execution since has driven people away.  In this regard, my early social networking metaphor may be apt in more ways than one: Clubhouse feels like <a href=\"https://en.wikipedia.org/wiki/Friendster\">Friendster</a>.  And just as Friendster hit on something huge (social networking!) for the wrong reasons (the founder&#8217;s desire to find dates!), Clubhouse&#8217;s focus on listening to famous people feels misplaced.  (Speaking for myself, I am looking for conversations, not outtakes of <a href=\"https://en.wikipedia.org/wiki/Behind_the_Music\">Behind the Music</a>.)</p>\n</li>\n<li>\n<p><strong>Hosting has been rewarding.</strong>  So far, <a href=\"https://twitter.com/bcantrill/status/1386765936405872641\">I have hosted one Space</a>, convincing <a href=\"https://twitter.com/ahl\">Adam</a> to join me so I wouldn&#8217;t die alone.  I think it&#8217;s fair to say that Adam was somewhat skeptical going in, but came out seeing promise in the medium.  For example, one participant was dialing in from central Asia (where it was 4a!), and we ended up in a discussion on how insulated kids can become from the underlying mechanics of how computers actually work.  He decribed that growing up needing to rely on second-hand computers was an essential part of his own technical education &#8212; that having less made him need to understand more.  It was a moment that had everyone reflecting, and I&#8217;m honestly not sure how else that little interaction would have happened.</p>\n</li>\n</ul>\n<p>All in all, very positive and promising!  Of course, there are still lots of things to stub your toe on; this is still new, after all, and lots of stuff doesn&#8217;t work quite right.  And there&#8217;s also a lot to be figured out by those of us who will use the medium (reminder: retweets were invented by users, not by Twitter!).  For my part from a hosting perspective, I am going to take some inspiration from talk radio and experiment with both regularity and time-bounds:  Adam and I are going to host a Space again tomorrow (Monday) at 5p Pacific, keeping it again to about an hour.  (We appear to be aided in our time bounds last week by a memory leak that caused my app to abort after about an hour!)  So if you&#8217;re interested, drop on by &#8212; we&#8217;d love to hear what you have to say, which indeed is very much the whole point!</p>"
+        }
+      ],
+      "wfw_commentrss": "http://dtrace.org/blogs/bmc/2021/05/02/twitter-spaces-a-few-weeks-in/feed/",
+      "slash_comments": "0"
+    }
+  },
+  {
+    "blog": {
       "title": "Scholar's Stage",
       "by": "Tanner Greer",
       "url": "https://scholars-stage.org/",
