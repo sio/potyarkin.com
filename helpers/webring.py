@@ -120,16 +120,27 @@ class CachingFeedReader:
             cache.save(feed)
             return feed
         elif cache.exists():
-            if 'status' not in feed:
+            msg = None
+            if feed.bozo:
                 report = log.error
-                log.error(f'feed object has no status: {url}\n{feed}')
+                msg = f'Bozo: {feed.bozo_exception}'
+            elif 'status' not in feed:
+                report = log.error
+                msg = f'feed object has no status: {url}\n{feed}'
             elif feed.status < 400:
                 report = log.info
             else:
                 report = log.error
-            report(f'HTTP {feed.get("status")}: {url}, continuing from {cache}')
+            if not msg:
+                msg = f'HTTP {feed.get("status")}: {url}'
+            report(f'{msg}, continuing from {cache}')
             return cache.read()
         else:
+            if feed.bozo:
+                if isinstance(feed.bozo_exception, Exception):
+                    raise feed.bozo_exception
+                else:
+                    raise RuntimeError(f'Bozo: {feed.bozo_exception}')
             raise RuntimeError(f'HTTP {feed.status}: {url}')
 
     def _cache(self, title, url):
@@ -185,6 +196,8 @@ class FeedCache:
     def save(self, feed):
         '''Save feed to cache'''
         log.info(f'Saving cache: {self._directory}')
+        if feed.bozo:
+            log.warning(f'Feed contains parsing errors: {feed.bozo_exception} ({self})')
         self._directory.mkdir(exist_ok=True)
         with self._feed.open('w') as f:
             json.dump(feed, f, **JSON_PARAMS)
@@ -201,7 +214,10 @@ class FeedCache:
         '''Read feed from cache'''
         log.info(f'Reading cache: {self._directory}')
         with self._feed.open() as f:
-            return json.load(f, object_hook=feedparser.util.FeedParserDict)
+            feed = json.load(f, object_hook=feedparser.util.FeedParserDict)
+        if feed.bozo:
+            log.warning(f'Feed contains parsing errors: {feed.bozo_exception} ({self})')
+        return feed
 
 
 if __name__ == '__main__':
