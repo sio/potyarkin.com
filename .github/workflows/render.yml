@@ -12,14 +12,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: get current date for cache keys
+        id: date
+        run: |-
+          echo "::set-output name=date::$(/bin/date -u '+%Y%m%d')"
+          echo "::set-output name=month::$(/bin/date -u '+%Y%m')"
       - uses: actions/cache@v3
+        name: pip cache
         with:
           path: cache/pip
-          key: pip-${{ hashFiles('requirements.txt') }}
+          key: pip-${{ hashFiles('requirements.txt') }}-${{ steps.date.outputs.month }}
+          restore-keys: |
+            pip-${{ hashFiles('requirements.txt') }}
+            pip-
       - uses: actions/cache@v3
+        name: webring cache
         with:
           path: cache/webring
-          key: webring-${{ hashFiles('content/blogroll.yml') }}
+          key: webring-${{ hashFiles('content/blogroll.yml') }}-${{ steps.date.outputs.date }}
+          restore-keys: |
+            webring-${{ hashFiles('content/blogroll.yml') }}
+            webring-
       - run: make publish
         env:
           PIP_CACHE_DIR: cache/pip
