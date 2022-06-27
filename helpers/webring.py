@@ -116,15 +116,18 @@ class CachingFeedReader:
                 if key in cache.metadata:
                     fetch_params[key] = cache.metadata[key]
         feed = feedparser.parse(url, **fetch_params)
-        if feed.status == 200:
+        if feed.get('status') == 200:
             cache.save(feed)
             return feed
         elif cache.exists():
-            if feed.status < 400:
+            if 'status' not in feed:
+                report = log.error
+                log.error(f'feed object has no status: {url}\n{feed}')
+            elif feed.status < 400:
                 report = log.info
             else:
                 report = log.error
-            report(f'HTTP {feed.status}: {url}, continuing from {cache}')
+            report(f'HTTP {feed.get("status")}: {url}, continuing from {cache}')
             return cache.read()
         else:
             raise RuntimeError(f'HTTP {feed.status}: {url}')
