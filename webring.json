@@ -9,14 +9,14 @@
       "section": "Linux"
     },
     "entry": {
-      "id": "tag:cspace@cks.mef.org,2009-03-24:/blog/programming/GoInstallLimitation",
+      "id": "tag:cspace@cks.mef.org,2009-03-24:/blog/tech/DiskSizesAndPowersOfTwo",
       "guidislink": true,
-      "link": "https://utcc.utoronto.ca/~cks/space/blog/programming/GoInstallLimitation",
+      "link": "https://utcc.utoronto.ca/~cks/space/blog/tech/DiskSizesAndPowersOfTwo",
       "links": [
         {
           "rel": "alternate",
           "type": "text/html",
-          "href": "https://utcc.utoronto.ca/~cks/space/blog/programming/GoInstallLimitation"
+          "href": "https://utcc.utoronto.ca/~cks/space/blog/tech/DiskSizesAndPowersOfTwo"
         }
       ],
       "authors": [
@@ -33,46 +33,46 @@
           "type": "text/html",
           "language": null,
           "base": "https://utcc.utoronto.ca/~cks/space/blog/?atom",
-          "value": "<div class=\"wikitext\"><p>As all people dealing with Go programs know or are learning, now that\n<a href=\"https://utcc.utoronto.ca/~cks/space/blog/programming/Go117SaveACopy\">Go is module-only</a>, the way you install third\nparty Go programs from source is now '<code>go install &lt;name>@latest</code>',\nnot the old way of '<code>go get &lt;name></code>'. However, this is not always\na completely smooth process that just works, because it's possible\nto have Go programs in a state where they won't install this way.\nHere's an illustration:</p>\n\n<blockquote><pre style=\"white-space: pre-wrap;\">\n$ go install github.com/monsterxx03/gospy@latest\ngo: downloading github.com/monsterxx03/gospy v0.5.0\ngo: github.com/monsterxx03/gospy@latest (in github.com/monsterxx03/gospy@v0.5.0):\n    The go.mod file for the module providing named packages contains one or\n    more replace directives. It must not contain directives that would cause\n    it to be interpreted differently than if it were the main module.\n</pre>\n</blockquote>\n\n<p>What is happening here is that internally, gospy uses packages from\nits own repository (module) and one of them,\ngithub.com/monsterxx03/gospy/pkg/term, in turn uses\ngithub.com/gizak/termui/v3. However, the github.com/monsterxx03/gospy\nmodule has a replace directive for this termui module that changes\nit to github.com/monsterxx03/termui/v3.</p>\n\n<p>If you clone <a href=\"https://github.com/monsterxx03/gospy\">the repository</a>\nand run '<code>go install</code>' inside it, everything works and you wind up\nwith a <code>gospy</code> binary in your $HOME/go/bin. However, as we see here\n'<code>go install ...@latest</code>' works differently enough that the replace\ndirective causes this error. To fix the problem (ie, to build <code>gospy</code>\nor any program like it), you must clone the repository and run '<code>go\ninstall</code>' in the right place inside the repository.</p>\n\n<p>(Alternately you can file bugs with the upstream to get them to fix\nthis, for example by dropping the <code>replace</code> directive and directly using\nthe replacement in their code. But if the upstream is neglected, this\nmay not work very well.)</p>\n\n<p>Unsurprisingly, there is a long standing but closed Go issue on\nthis '<code>go install</code>' behavior, <a href=\"https://github.com/golang/go/issues/44840\">cmd/go: go install cmd@version\nerrors out when module with main package has replace directive\n#44840</a>. This was\nclosed more than a year ago in 2021 with a 'working as designed',\nand indeed the help for '<code>go install</code>' explicitly says about this\nmode:</p>\n\n<blockquote><p>No module is considered the \"main\" module. If the module containing\npackages named on the command line has a go.mod file, it must not\ncontain directives (replace and exclude) that would cause it to be\ninterpreted differently than if it were the main module. The module\nmust not require a higher version of itself.</p>\n</blockquote>\n\n<p>(The apparent Go reference for why this exists is <a href=\"https://github.com/golang/go/issues/40276\">issue #40276</a>, which I haven't tried\nto read through because I'm not that interested.)</p>\n\n<p>Possible this will be changed someday, especially since it seems\nto keep coming up over and over again; <a href=\"https://github.com/golang/go/issues/44840\">issue #44840</a> contains quite the\nlaundry list of projects that have hit this issue. Amusingly, <a href=\"https://github.com/golang/go/issues/45099\">one\nof the gopls releases hit this issue</a>.</p>\n\n<p>For now, if you're developing a Go program and you need to use\n<code>replace</code> directives in your <code>go.mod</code> during development, you'll\nhave to do some extra work. One option is to strip the <code>replace</code>\ndirectives out for releases (and you need to make releases, because\n'go install ...@master' won't work because of your replace directives).\nAnother option is to switch to using <a href=\"https://utcc.utoronto.ca/~cks/space/blog/programming/GoWorkspacesComing\">Go workspaces</a>\nfor local development and drop the go.mod replace directives entirely.\nIf you need to actually release a version of your program that uses\nthe replacement module, well, you're out of luck; you need to\nactually change your code to explicitly use the replacement module\nand drop the <code>replace</code> directive.</p>\n</div>"
+          "value": "<div class=\"wikitext\"><p>Recently <a href=\"https://utcc.utoronto.ca/~cks/space/blog/tech/HDDsNowSomewhatBetter\">I grumbled in an aside about how disk drive vendors use\ndecimal ('SI') numbers</a> instead of <a href=\"https://en.wikipedia.org/wiki/Binary_prefix\">IEC 'binary'\nnumbers</a>, which I and\nvarious other people consider more natural. You might wonder what makes\nbinary sizes more natural for disk drives, especially since vendors have\nbeen using decimal sizes for a long time. My answer is that it comes\ndown to sector size.</p>\n\n<p>Almost all disks have had 512 byte sectors for decades, and disks\nhave a user usable capacity that is an integer number of sectors.\nMost systems have then used sectors (or some power of two multiple\nof them) as the minimum filesystem allocation unit, and correspondingly\nthe unit of used and free space. This makes it power of two units\nup and down the stack (although there's no reason for disks to have\na power of two number of sectors).</p>\n\n<p>Neither of these is inevitable. There used to be disks with different\nsector sizes, or at least that could be formatted to them (<a href=\"https://try-as400.pocnet.net/wiki/Ordinary_Harddisks_on_the_AS/400\">one\nsource</a>\nsays that IBM AS/400s used 520 or 522 byte sectors, although even\nthen they stored 512 bytes of payload data; <a href=\"https://qseco.fr/research/demystifying-as400-dasd/\">also</a>). Filesystems\ncould allocate disk space in units other than sector size, but doing\nit in sectors makes life easier and for a long time writing to a\nsector was assumed to be atomic and to not touch any other sectors.</p>\n\n<p>(This is definitely not the case today for any sort of drive. SSDs\nfamously have natural write sizes very different from 512 byte\nsectors, and even conventional HDDs may do things like rewrite\nentire tracks at once.)</p>\n\n<p>Similar but stronger considerations apply for disk drive bandwidth\nnumbers. Systems read and write from almost all modern disk drives\nin some multiple of 512 byte 'sectors' (which these days are logical\nsectors instead of physical ones). This leads naturally to talking\nabout bandwidth per second in binary units, especially since other\nsorts of bandwidth are often also expressed in binary units.</p>\n\n<p>(The underlying network speeds are in decimal bits per second but\nwe usually talk about network bandwidth in bytes per second using\nbinary units. Well, network engineers may be different than system\nadministrators like me.)</p>\n\n<p>PS: The Wikipedia page on <a href=\"https://en.wikipedia.org/wiki/Disk_sector\">Disk sectors</a> says that the domination\nof 512 byte sectors were driven by the popularity of the IBM PC.</p>\n</div>\n<div> (<a href=\"https://utcc.utoronto.ca/~cks/space/blog/tech/DiskSizesAndPowersOfTwo?showcomments#comments\">One comment</a>.) </div>"
         }
       ],
-      "summary": "<div class=\"wikitext\"><p>As all people dealing with Go programs know or are learning, now that\n<a href=\"https://utcc.utoronto.ca/~cks/space/blog/programming/Go117SaveACopy\">Go is module-only</a>, the way you install third\nparty Go programs from source is now '<code>go install &lt;name>@latest</code>',\nnot the old way of '<code>go get &lt;name></code>'. However, this is not always\na completely smooth process that just works, because it's possible\nto have Go programs in a state where they won't install this way.\nHere's an illustration:</p>\n\n<blockquote><pre style=\"white-space: pre-wrap;\">\n$ go install github.com/monsterxx03/gospy@latest\ngo: downloading github.com/monsterxx03/gospy v0.5.0\ngo: github.com/monsterxx03/gospy@latest (in github.com/monsterxx03/gospy@v0.5.0):\n    The go.mod file for the module providing named packages contains one or\n    more replace directives. It must not contain directives that would cause\n    it to be interpreted differently than if it were the main module.\n</pre>\n</blockquote>\n\n<p>What is happening here is that internally, gospy uses packages from\nits own repository (module) and one of them,\ngithub.com/monsterxx03/gospy/pkg/term, in turn uses\ngithub.com/gizak/termui/v3. However, the github.com/monsterxx03/gospy\nmodule has a replace directive for this termui module that changes\nit to github.com/monsterxx03/termui/v3.</p>\n\n<p>If you clone <a href=\"https://github.com/monsterxx03/gospy\">the repository</a>\nand run '<code>go install</code>' inside it, everything works and you wind up\nwith a <code>gospy</code> binary in your $HOME/go/bin. However, as we see here\n'<code>go install ...@latest</code>' works differently enough that the replace\ndirective causes this error. To fix the problem (ie, to build <code>gospy</code>\nor any program like it), you must clone the repository and run '<code>go\ninstall</code>' in the right place inside the repository.</p>\n\n<p>(Alternately you can file bugs with the upstream to get them to fix\nthis, for example by dropping the <code>replace</code> directive and directly using\nthe replacement in their code. But if the upstream is neglected, this\nmay not work very well.)</p>\n\n<p>Unsurprisingly, there is a long standing but closed Go issue on\nthis '<code>go install</code>' behavior, <a href=\"https://github.com/golang/go/issues/44840\">cmd/go: go install cmd@version\nerrors out when module with main package has replace directive\n#44840</a>. This was\nclosed more than a year ago in 2021 with a 'working as designed',\nand indeed the help for '<code>go install</code>' explicitly says about this\nmode:</p>\n\n<blockquote><p>No module is considered the \"main\" module. If the module containing\npackages named on the command line has a go.mod file, it must not\ncontain directives (replace and exclude) that would cause it to be\ninterpreted differently than if it were the main module. The module\nmust not require a higher version of itself.</p>\n</blockquote>\n\n<p>(The apparent Go reference for why this exists is <a href=\"https://github.com/golang/go/issues/40276\">issue #40276</a>, which I haven't tried\nto read through because I'm not that interested.)</p>\n\n<p>Possible this will be changed someday, especially since it seems\nto keep coming up over and over again; <a href=\"https://github.com/golang/go/issues/44840\">issue #44840</a> contains quite the\nlaundry list of projects that have hit this issue. Amusingly, <a href=\"https://github.com/golang/go/issues/45099\">one\nof the gopls releases hit this issue</a>.</p>\n\n<p>For now, if you're developing a Go program and you need to use\n<code>replace</code> directives in your <code>go.mod</code> during development, you'll\nhave to do some extra work. One option is to strip the <code>replace</code>\ndirectives out for releases (and you need to make releases, because\n'go install ...@master' won't work because of your replace directives).\nAnother option is to switch to using <a href=\"https://utcc.utoronto.ca/~cks/space/blog/programming/GoWorkspacesComing\">Go workspaces</a>\nfor local development and drop the go.mod replace directives entirely.\nIf you need to actually release a version of your program that uses\nthe replacement module, well, you're out of luck; you need to\nactually change your code to explicitly use the replacement module\nand drop the <code>replace</code> directive.</p>\n</div>",
-      "title": "A limitation on what '<code>go install</code>' can install (as of Go 1.18)",
+      "summary": "<div class=\"wikitext\"><p>Recently <a href=\"https://utcc.utoronto.ca/~cks/space/blog/tech/HDDsNowSomewhatBetter\">I grumbled in an aside about how disk drive vendors use\ndecimal ('SI') numbers</a> instead of <a href=\"https://en.wikipedia.org/wiki/Binary_prefix\">IEC 'binary'\nnumbers</a>, which I and\nvarious other people consider more natural. You might wonder what makes\nbinary sizes more natural for disk drives, especially since vendors have\nbeen using decimal sizes for a long time. My answer is that it comes\ndown to sector size.</p>\n\n<p>Almost all disks have had 512 byte sectors for decades, and disks\nhave a user usable capacity that is an integer number of sectors.\nMost systems have then used sectors (or some power of two multiple\nof them) as the minimum filesystem allocation unit, and correspondingly\nthe unit of used and free space. This makes it power of two units\nup and down the stack (although there's no reason for disks to have\na power of two number of sectors).</p>\n\n<p>Neither of these is inevitable. There used to be disks with different\nsector sizes, or at least that could be formatted to them (<a href=\"https://try-as400.pocnet.net/wiki/Ordinary_Harddisks_on_the_AS/400\">one\nsource</a>\nsays that IBM AS/400s used 520 or 522 byte sectors, although even\nthen they stored 512 bytes of payload data; <a href=\"https://qseco.fr/research/demystifying-as400-dasd/\">also</a>). Filesystems\ncould allocate disk space in units other than sector size, but doing\nit in sectors makes life easier and for a long time writing to a\nsector was assumed to be atomic and to not touch any other sectors.</p>\n\n<p>(This is definitely not the case today for any sort of drive. SSDs\nfamously have natural write sizes very different from 512 byte\nsectors, and even conventional HDDs may do things like rewrite\nentire tracks at once.)</p>\n\n<p>Similar but stronger considerations apply for disk drive bandwidth\nnumbers. Systems read and write from almost all modern disk drives\nin some multiple of 512 byte 'sectors' (which these days are logical\nsectors instead of physical ones). This leads naturally to talking\nabout bandwidth per second in binary units, especially since other\nsorts of bandwidth are often also expressed in binary units.</p>\n\n<p>(The underlying network speeds are in decimal bits per second but\nwe usually talk about network bandwidth in bytes per second using\nbinary units. Well, network engineers may be different than system\nadministrators like me.)</p>\n\n<p>PS: The Wikipedia page on <a href=\"https://en.wikipedia.org/wiki/Disk_sector\">Disk sectors</a> says that the domination\nof 512 byte sectors were driven by the popularity of the IBM PC.</p>\n</div>\n<div> (<a href=\"https://utcc.utoronto.ca/~cks/space/blog/tech/DiskSizesAndPowersOfTwo?showcomments#comments\">One comment</a>.) </div>",
+      "title": "Modern disk sizes and powers of two",
       "title_detail": {
         "type": "text/html",
         "language": null,
         "base": "https://utcc.utoronto.ca/~cks/space/blog/?atom",
-        "value": "A limitation on what '<code>go install</code>' can install (as of Go 1.18)"
+        "value": "Modern disk sizes and powers of two"
       },
       "tags": [
         {
-          "term": "programming",
+          "term": "tech",
           "scheme": null,
           "label": null
         }
       ],
-      "updated": "2022-06-26T02:26:19Z",
+      "updated": "2022-06-27T02:16:07Z",
       "updated_parsed": [
         2022,
         6,
-        26,
+        27,
         2,
-        26,
-        19,
-        6,
-        177,
+        16,
+        7,
+        0,
+        178,
         0
       ],
-      "published": "2022-06-26T02:25:17Z",
+      "published": "2022-06-27T02:15:10Z",
       "published_parsed": [
         2022,
         6,
-        26,
+        27,
         2,
-        25,
-        17,
-        6,
-        177,
+        15,
+        10,
+        0,
+        178,
         0
       ]
     }
@@ -414,14 +414,6 @@
         "base": "https://oxcrag.net/feed/",
         "value": "A comment on an ancient post on my old blog reminded me of its existence. I&#8217;ve now imported the material from there to my own domain and so historic posts from way-back-when can be read here. The old site will stay online for the time being, to avoid breaking possible links."
       },
-      "content": [
-        {
-          "type": "text/html",
-          "language": null,
-          "base": "https://oxcrag.net/feed/",
-          "value": "<p>A comment on an ancient post on my old blog reminded me of its existence. I&#8217;ve now imported the material from there to my own domain and so historic posts from way-back-when can be read here. The old site will stay online for the time being, to avoid breaking possible links.</p>"
-        }
-      ],
       "wfw_commentrss": "https://oxcrag.net/2022/06/01/imported-my-old-blog/feed/",
       "slash_comments": "0"
     }
@@ -1072,57 +1064,57 @@
       "section": "Other IT related topics"
     },
     "entry": {
-      "title": "Priest Against Priesthood",
+      "title": "Legal Sources for Not-a-Lawyers",
       "title_detail": {
         "type": "text/html",
         "language": null,
         "base": "https://writing.kemitchell.com/atom.xml",
-        "value": "Priest Against Priesthood"
+        "value": "Legal Sources for Not-a-Lawyers"
       },
       "links": [
         {
-          "href": "https://writing.kemitchell.com/2022/06/12/Backus-Priesthood",
+          "href": "https://writing.kemitchell.com/2022/06/26/Legal-Sources-Not-a-Lawyers",
           "rel": "alternate",
           "type": "text/html",
-          "title": "Priest Against Priesthood"
+          "title": "Legal Sources for Not-a-Lawyers"
         }
       ],
-      "link": "https://writing.kemitchell.com/2022/06/12/Backus-Priesthood",
-      "published": "2022-06-12T03:37:43+00:00",
+      "link": "https://writing.kemitchell.com/2022/06/26/Legal-Sources-Not-a-Lawyers",
+      "published": "2022-06-26T22:28:47+00:00",
       "published_parsed": [
         2022,
         6,
-        12,
-        3,
-        37,
-        43,
+        26,
+        22,
+        28,
+        47,
         6,
-        163,
+        177,
         0
       ],
-      "updated": "2022-06-12T03:37:43+00:00",
+      "updated": "2022-06-26T22:28:47+00:00",
       "updated_parsed": [
         2022,
         6,
-        12,
-        3,
-        37,
-        43,
+        26,
+        22,
+        28,
+        47,
         6,
-        163,
+        177,
         0
       ],
-      "id": "https://writing.kemitchell.com/2022/06/12/Backus-Priesthood",
+      "id": "https://writing.kemitchell.com/2022/06/26/Legal-Sources-Not-a-Lawyers",
       "guidislink": false,
       "content": [
         {
           "type": "text/html",
           "language": null,
-          "base": "https://writing.kemitchell.com/2022/06/12/Backus-Priesthood",
-          "value": "<p><a href=\"https://en.wikipedia.org/wiki/John_Backus\">John Backus</a>, director of the FORTRAN team, co-inventor of Backus-Naur Form, and numerous computing award winner:</p>\n\n<blockquote>\n  <p>Just as Westerners and other frontier types developed a rather chauvinistic pride in their frontiersmanship, and a corresponding kind of conservatism that went with it, so many pioneering programmers in the fifties began to regard themselves as members of a priesthood, guarding skills and mysteries that were far too complex for ordinary people.  This feeling was really—I mean, it sounds silly to say that now, but it’s really true.  The feeling was noted in an article in fact at that same ONR symposium, in which…Brown and Carr…quoting them:</p>\n\n  <blockquote>\n    <p>Many professional machine users strongly oppose the use of decimal numbers.  To this group, the process of machine instruction was one that could not be turned over to the uninitiated.</p>\n  </blockquote>\n\n  <p>And that attitude really cooled very much the impetus for sophisticated programming aids.  Because the priesthood wanted, and they got, simple mechanical aids to help them with their drudgery, but they regarded plans for more ambitious systems really with a considerable hostility and derision if the purpose of that system was to make programming available to a larger population.  Because they felt, with some justice, that it was a rather arrogant enterprise to think that a mechanical process could do all the mysterious, inventive things they did to produce an efficient program.  So they were really opposed to those few mad revolutionaries that wanted to make programming easy enough so that everyone could do it.</p>\n</blockquote>\n\n<p>— John Backus, “Programming in America in the 1950s”, International Research Conference on the History of Computing at Los Alamos, 1976, at 34:33, available via <a href=\"https://www.youtube.com/watch?v=EylBknGtkqA&amp;t=877\">YouTube</a> or <a href=\"https://www.computerhistory.org/collections/catalog/102639682\">Computer History Museum</a></p>\n\n<p>Computer people will enjoy the brief talk in full.  I was struck not by any historical particular or any quotable quip, but by a personal sense of Backus’ gentleness and humility.</p>\n\n<p>Once cognizant of time pressure, John spent his few remaining minutes bragging on those he managed, who he did not feel got sufficient recognition.  He even takes time to name and thank an MIT professor who agreed to lend one of them on leave.  Given a question setting him up as pioneer of language standardization, in addition to everything else, he demurs.</p>"
+          "base": "https://writing.kemitchell.com/2022/06/26/Legal-Sources-Not-a-Lawyers",
+          "value": "<p>When non-lawyer folks ask me about reading some law for themselves, four sources come up again and again:</p>\n\n<h2 id=\"supreme-court-syllabi\">Supreme Court Syllabi</h2>\n\n<p>The <a href=\"https://supremecourt.gov\">US Supreme Court</a> has an in-house publishing department called the “Reporter of Decisions” that adds outline summaries, or “syllabi”, to the fronts of all major published court decisions.  For example, the first eight pages of the recent <a href=\"https://www.supremecourt.gov/opinions/21pdf/19-1392_6j37.pdf\">abortion decision in the <em>Dobbs</em> case</a> are all syllabus.</p>\n\n<p>Don’t get turned off by the cryptic, sentence-like runs of italicized names, abbreviations, and numbers.  These are legal “citations” that reference texts like other court decisions, statutes, regulations, scholarly articles, and so on.  It’s perfectly fine to skim the citations when reading for a general sense of what was decided and how it was justified.</p>\n\n<p>Note that the Reporter usually summarizes only the “opinion of the court”—the written decision that a majority of justices signed onto.  There may also be “concurring” and “dissenting” opinions in the PDF, agreeing or disagreeing with the opinion of the court.  For example, the dissenting opinion of Justice Breyer in <em>Dobbs</em> begins on PDF page 148.</p>\n\n<p>Don’t be afraid of the large PDF page counts.  Some opinions run long.  But the Reporter uses generous margins and type, designed for <a href=\"https://writing.kemitchell.com/2021/01/06/Printing-Booklets\">printing booklets</a> or marking up.  The justices also have a habit of heaping on supporting material at the ends of some opinions, like the appendices at the ends of <em>both</em> majority and dissent in <em>Dobbs</em>.  They take a lot of pages.  They’re rarely worth more than a quick skim.</p>\n\n<h2 id=\"model-jury-instructions\">Model Jury Instructions</h2>\n\n<p>When lawsuits go to trial before a jury, the judge ends up giving the jury a big packet of instructions for how to decide each legal claim in the case.  Because these instructions get used so much, and because screwing them up can require a trial do-over, appeals courts often publish big books of model jury instructions.  In other words, the appeals courts themselves publish summaries of legal rules specifically for non-lawyers to read, understand, and apply.</p>\n\n<p>Do not get too excited.  I wish I could say they went as far as using actual English.  But at least if it’s still legalese, it comes in smaller bites.</p>\n\n<p>Here in California, both the federal <a href=\"https://www.ce9.uscourts.gov/jury-instructions/node/105\">Ninth Circuit Court of Appeals</a> and the <a href=\"https://www.courts.ca.gov/partners/juryinstructions.htm\">California state courts</a> publish model jury instructions online.  They’re organized into criminal-law and civil-law sets, then broken down by subject.  The instructions themselves come with comments that cite important cases and statutes.</p>\n\n<p>The <a href=\"https://www.ce9.uscourts.gov/jury-instructions/sites/default/files/WPD/Civil_Instructions_2022_3_0.pdf\">Ninth Circuit civil instructions</a> have a whole section on copyright, starting on PDF page 392. The <a href=\"https://www.courts.ca.gov/partners/documents/Judicial_Council_of_California_Civil_Jury_Instructions.pdf\">2022 California civil instructions</a> have a whole series on contracts, starting on PDF page 153.</p>\n\n<h2 id=\"examples--explanations\">Examples &amp; Explanations</h2>\n\n<p>Most textbooks that law students have to buy are big, expensive, poorly edited faculty bodge-jobs that nobody would pay for otherwise.  $150 tomes in fancy binding, often full of typos and formatting errors.  It’s a racket.  Most legal study guides are also pretty terrible and expensive.  The <a href=\"https://www.aspenpublishing.com/study-aids/examples-explanations\">Examples &amp; Explanations</a> series is the exception.  As a rule, they’re affordable, thoughtfully written, and carefully edited.  How this is possible, I know not still.</p>\n\n<p>E&amp;Es are available for all the mandatory first-year-of-law-school courses, plus most of the common electives at second- and third-year level.  If you want an overview of a general area of law, like contracts, intellectual property, or personal tax, this should be your first bet.  And you can probably get by with a used copy of an old edition in most fields, especially the first-year subjects.</p>\n\n<p>I personally try to read or review an E&amp;E each year.  I’m not embarrassed to admit this, or to shelve the books in my office.  I’m embarrassed fundamental review isn’t the norm in my profession.</p>\n\n<h2 id=\"legislative-research-services\">Legislative Research Services</h2>\n\n<p>When it comes to proposed legislation, state and federal, it’s often way easier to read a summary or impact analysis than the text of the project itself, especially when amendments are still flying.  Fortunately, many legislatures fund independent, non-partisan research services in-house, whose job it is to analyze bills.  These days, the analyses go up online.</p>\n\n<p>At the federal level, that’s the <a href=\"https://www.loc.gov/crsinfo/\">Congressional Research Service</a>.  For California, it’s the <a href=\"https://sfa.senate.ca.gov/whatisthesenateofficeofflooranalysis\">Senate</a> and <a href=\"https://clerk.assembly.ca.gov/assembly-floor-analysis\">Assembly</a> “floor analysis” groups, plus the <a href=\"https://lao.ca.gov/\">Legislative Analyst’s Office</a>, that last especially for the budget.</p>\n\n<p>The Congressional Research Service in particular is a really underappreciated resource.  They more or less function as a federal public think tank.  In addition to guides on specific legislative projects, they often publish background pieces summarizing existing legislation under debate or giving broader context on a whole area of policy.  For example, <a href=\"https://crsreports.congress.gov/product/pdf/R/R46751\">here’s a report on Section 230</a> from last year.  And <a href=\"https://crsreports.congress.gov/product/pdf/R/R45008\">here’s one from December on the US, Ukraine, and Russia</a>.</p>\n\n<hr />\n\n<p>It’s your law, people.  Don’t let lawyers scare you off of reading it!</p>"
         }
       ],
-      "summary": "father of FORTRAN on programming in the fifties",
+      "summary": "learn some law without totally warping your brain",
       "authors": [
         {
           "name": "Kyle E. Mitchell"
@@ -1134,17 +1126,12 @@
       "author": "Kyle E. Mitchell",
       "tags": [
         {
-          "term": "History",
+          "term": "Law",
           "scheme": null,
           "label": null
         },
         {
-          "term": "Programming",
-          "scheme": null,
-          "label": null
-        },
-        {
-          "term": "Computing",
+          "term": "Education",
           "scheme": null,
           "label": null
         }
@@ -1153,7 +1140,7 @@
         "type": "text/html",
         "language": null,
         "base": "https://writing.kemitchell.com/atom.xml",
-        "value": "father of FORTRAN on programming in the fifties"
+        "value": "learn some law without totally warping your brain"
       }
     }
   },
@@ -1225,73 +1212,6 @@
       },
       "author": "Paul Anthony Webb (paul+blog@webb.page)",
       "href": "https://webb.page"
-    }
-  },
-  {
-    "blog": {
-      "title": "Bryan Cantrill and other blogs at DTrace.org",
-      "url": "http://dtrace.org/blogs/",
-      "feed": "http://dtrace.org/blogs/feed/",
-      "description": "A brilliant technologist and a good conference speaker who worked at Sun and\nJoyent (SmartOS), and now have founded a new startup (Oxide). Other blogs at\nDTrace.org are updated less frequently but usually are also interesting.",
-      "section": "Other IT related topics"
-    },
-    "entry": {
-      "title": "Twitter Spaces, a few weeks in",
-      "title_detail": {
-        "type": "text/plain",
-        "language": null,
-        "base": "http://dtrace.org/blogs/feed/",
-        "value": "Twitter Spaces, a few weeks in"
-      },
-      "links": [
-        {
-          "rel": "alternate",
-          "type": "text/html",
-          "href": "http://dtrace.org/blogs/bmc/2021/05/02/twitter-spaces-a-few-weeks-in/"
-        }
-      ],
-      "link": "http://dtrace.org/blogs/bmc/2021/05/02/twitter-spaces-a-few-weeks-in/",
-      "comments": "http://dtrace.org/blogs/bmc/2021/05/02/twitter-spaces-a-few-weeks-in/#comments",
-      "published": "Mon, 03 May 2021 02:15:31 +0000",
-      "published_parsed": [
-        2021,
-        5,
-        3,
-        2,
-        15,
-        31,
-        0,
-        123,
-        0
-      ],
-      "authors": [
-        {
-          "name": "bmc"
-        }
-      ],
-      "author": "bmc",
-      "author_detail": {
-        "name": "bmc"
-      },
-      "id": "http://dtrace.org/blogs/bmc/?p=1149",
-      "guidislink": false,
-      "summary": "As a kid, I listened to a lot of talk radio. This was in the 80s, before the internet &#8212; and before the AM dial became fringe. I have fond memories of falling asleep to the likes of Bruce Williams who just gave damned good, level-headed advice. It was, at essence, both optimistic and temperate: [...]",
-      "summary_detail": {
-        "type": "text/html",
-        "language": null,
-        "base": "http://dtrace.org/blogs/feed/",
-        "value": "As a kid, I listened to a lot of talk radio. This was in the 80s, before the internet &#8212; and before the AM dial became fringe. I have fond memories of falling asleep to the likes of Bruce Williams who just gave damned good, level-headed advice. It was, at essence, both optimistic and temperate: [...]"
-      },
-      "content": [
-        {
-          "type": "text/html",
-          "language": null,
-          "base": "http://dtrace.org/blogs/feed/",
-          "value": "<p>As a kid, I listened to a lot of talk radio.  This was in the 80s, before the internet &#8212; and before the AM dial became fringe.  I have fond memories of falling asleep to the likes of <a href=\"https://en.wikipedia.org/wiki/Bruce_Williams_(talk_radio_host)\">Bruce Williams</a> who just gave damned good, level-headed advice.  It was, at essence, both optimistic and temperate:  a cool head to help people work through a tough spot.</p>\n<p>Nothing really replaced the call-in show:  talk radio devolved into poisonous echo chambers, while social networking gave people other outlets (too many!) to have conversations.  But these online conversations &#8212; the written word &#8212; lack something: Twitter&#8217;s tight form gives us the hot take, blogs (ahem!) give us the longer form, but it both cases, the conversations that result seem to either lose their sizzle or go thermonuclear.  Video is really great for some stuff (I have spoken about the rise of video and the <a href=\"https://www.youtube.com/watch?v=4PaWFYm0kEw\">preservation of oral tradition in software engineering</a>) &#8212; but the discussion quality there is even worse.  (When did YouTube comments become such a hellhole?!) And of course, TikTok has given us social, short-form video, which can be very entertaining, but isn&#8217;t really designed to induce any meaningful discussion.</p>\n<p>And of course, I love podcasts, and one of the reasons I was excited to <a href=\"http://dtrace.org/blogs/bmc/2019/12/02/the-soul-of-a-new-computer-company/\">start a company</a> was to get an excuse to make <a href=\"https://oxide.computer/podcast/\">the podcast that we ourselves always wanted</a>.  Podcasts are particularly great because you can <strong>do something else</strong> while listening to them:  they fill in that time when you&#8217;re doing the dishes or picking up the kids or whatever.  But podcasts obviously miss the interactivity entirely.  (Or mostly: let us not so quickly forget <a href=\"https://twitter.com/bcantrill/status/1261207048340951041\">TWiV reading my letter on-air</a>!)</p>\n<p>Into all of this, enter Clubhouse and the rise of social audio.  I had immediate Bruce Williams flashbacks, and was excited to participate.  But my choice of device makes me unwelcome in Clubhouse&#8217;s eyes:  their lack of an Android app is clearly not a mere temporary gap, but rather a deliberate deprioritization.  (I certainly honor a young company&#8217;s need to focus, but how else can one describe an exceedingly well-capitalized company adding in-app payments before addressing 75% of the market?!)  To me, the deprioritization of Android reflects Clubhouse&#8217;s deeper problem:  it is fundamentally elitist and exclusionary.  Avid Clubhouse users may claim that this was not always so, but <strong>it says it right there on the tin</strong>:  it is, at the end of the day, a <em>clubhouse</em> &#8212; not a cafe or a town square.  I personally have no interest in participating in venues that deliberately limit the participants:  I want to engage with the broadest possible cross-section, not some subset that has been manicured by circumstance or technology choice.  (For this same reason, I do not give talks unless the talk will be recorded and made freely available.)</p>\n<p>Given all of this, you can imagine my enthusiasm for Twitter Spaces: it captures the promise that I see in the medium &#8212; but addresses many of the problems with Clubhouse&#8217;s implementation.  I have been participating in them for the past few weeks and (excitingly!) found last week that I have the ability to create Spaces.  Here are my takeaways so far:</p>\n<ul>\n<li>\n<p><strong>This is an even bigger deal than I thought it was.</strong>  All of the strengths that I perceived in the medium seem to be even stronger than I thought they would be, and in particular &#8212; as with podcasts &#8212; I can have a conversation while I do something else.  It is really nice to have social networking time after which one looks back at a clean kitchen or a prepared meal!</p>\n</li>\n<li>\n<p><strong>Spaces have broadened the people I follow.</strong>  In every Space I have been in, I have come away following someone new.  I find one of the most interesting aspects of Twitter to be able to be a part of conversations and social circles that broaden our perspectives (socially, technically, or otherwise) &#8212; and Spaces takes this to a new level:  I find that I&#8217;m following people based on a comment that they make that I wouldn&#8217;t otherwise see in the din of my feed.</p>\n</li>\n<li>\n<p><strong>Spaces have felt very playful.</strong>  In so many ways, this reminds me of early social networking circa 2003 &#8212; or of first getting online a decade prior.  It just feels new, and fresh, and&#8230; fun!  For example, I was in one space where a security researcher that I revere was with their crew, all trying to find ways to hack the captioning.  (They made some interesting discoveries: because the captioning is done locally, they can actually reveal more about you than what you actually say!)  I was more or less laughing the whole time; it was delightful.</p>\n</li>\n<li>\n<p><strong>The content is golden.</strong>  If I have one complaint about Spaces, it&#8217;s that they aren&#8217;t publicly recorded &#8212; because there&#8217;s some great content here!  I am hoping that this gets added over time (obviously, opt-in and clear to all participants!), because speaking personally, I want to go back and listen to an awesome Space that I might have missed &#8212; and I want others to be able to do the same with any Space that I host.</p>\n</li>\n<li>\n<p><strong>People have been really nice!</strong>  Okay, this is a little one, but I think an essential one:  in every Space I&#8217;ve been in, the people have just been incredibly friendly and welcoming.  One of the challenges of the written word is that it&#8217;s too easy to be nasty:  our mirror neurons don&#8217;t fire when our damage is inflicted at a distance.  (Take it from the guy still trying to apologize for a Usenet comment from several decades ago!)  While it&#8217;s still obviously very early for Twitter Spaces, being in a spoken conversation makes us much more predisposed to empathy &#8212; and I&#8217;m optimistic that the medium will retain the decency that we have lost elsewhere, allowing us a venue to listen to and learn from other perspectives.   I also really like Twitter&#8217;s emphasis on safety &#8212; and I&#8217;m hopeful that the inevitable bad behavior that does crop up is taken care of pretty quickly.</p>\n</li>\n<li>\n<p><strong>Clubhouse is in trouble.</strong>  I have been in a couple of Spaces where Clubhouse comes up (indeed, one of the Spaces I was in was a security researcher reporting how poorly Clubhouse handled a pretty serious safety issue that she had found), and in all of those conversations, the tenor is more or less the same:  there was a brief moment last summer (especially, post George Floyd) when Clubhouse felt really important &#8212; profound, even &#8212; but their poor execution since has driven people away.  In this regard, my early social networking metaphor may be apt in more ways than one: Clubhouse feels like <a href=\"https://en.wikipedia.org/wiki/Friendster\">Friendster</a>.  And just as Friendster hit on something huge (social networking!) for the wrong reasons (the founder&#8217;s desire to find dates!), Clubhouse&#8217;s focus on listening to famous people feels misplaced.  (Speaking for myself, I am looking for conversations, not outtakes of <a href=\"https://en.wikipedia.org/wiki/Behind_the_Music\">Behind the Music</a>.)</p>\n</li>\n<li>\n<p><strong>Hosting has been rewarding.</strong>  So far, <a href=\"https://twitter.com/bcantrill/status/1386765936405872641\">I have hosted one Space</a>, convincing <a href=\"https://twitter.com/ahl\">Adam</a> to join me so I wouldn&#8217;t die alone.  I think it&#8217;s fair to say that Adam was somewhat skeptical going in, but came out seeing promise in the medium.  For example, one participant was dialing in from central Asia (where it was 4a!), and we ended up in a discussion on how insulated kids can become from the underlying mechanics of how computers actually work.  He decribed that growing up needing to rely on second-hand computers was an essential part of his own technical education &#8212; that having less made him need to understand more.  It was a moment that had everyone reflecting, and I&#8217;m honestly not sure how else that little interaction would have happened.</p>\n</li>\n</ul>\n<p>All in all, very positive and promising!  Of course, there are still lots of things to stub your toe on; this is still new, after all, and lots of stuff doesn&#8217;t work quite right.  And there&#8217;s also a lot to be figured out by those of us who will use the medium (reminder: retweets were invented by users, not by Twitter!).  For my part from a hosting perspective, I am going to take some inspiration from talk radio and experiment with both regularity and time-bounds:  Adam and I are going to host a Space again tomorrow (Monday) at 5p Pacific, keeping it again to about an hour.  (We appear to be aided in our time bounds last week by a memory leak that caused my app to abort after about an hour!)  So if you&#8217;re interested, drop on by &#8212; we&#8217;d love to hear what you have to say, which indeed is very much the whole point!</p>"
-        }
-      ],
-      "wfw_commentrss": "http://dtrace.org/blogs/bmc/2021/05/02/twitter-spaces-a-few-weeks-in/feed/",
-      "slash_comments": "0"
     }
   },
   {
