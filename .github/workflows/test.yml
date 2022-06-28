@@ -1,0 +1,27 @@
+name: test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: get current date for cache keys
+        id: date
+        run: |-
+          echo "::set-output name=date::$(/bin/date -u '+%Y%m%d')"
+          echo "::set-output name=month::$(/bin/date -u '+%Y%m')"
+      - uses: actions/cache@v3
+        name: pip cache
+        with:
+          path: cache/pip
+          key: pip-${{ hashFiles('requirements.txt') }}-${{ steps.date.outputs.month }}
+          restore-keys: |
+            pip-${{ hashFiles('requirements.txt') }}
+            pip-
+      - run: make test
+        env:
+          PIP_CACHE_DIR: cache/pip
