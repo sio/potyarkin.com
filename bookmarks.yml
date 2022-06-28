@@ -8,6 +8,29 @@
 - period: 2022-06
   links:
 
+  - title: >-
+      "Idle chitchat" vs "smalltalk"
+    url: https://news.ycombinator.com/item?id=31880345
+    description: |-
+      It took me probably 7 years after moving out of my parent’s place to
+      learn that “smalltalk” and “idle chitchat” are not necessarily the same
+      thing [...]
+
+      In my taxonomy, “idle chitchat” is talking about things. “Smalltalk” is
+      learning about each other. “The weather sure is nice today, isn’t it?” =>
+      idle chitchat. You’re not likely to understand a person from that
+      starting point, except that “wow look, we both like the sun”. “Where are
+      you from? What brings you here?” => smalltalk. You’re encouraging the
+      person to reveal some small amounts of information about themselves which
+      you can use to probe further and hopefully find something fascinating [...]
+
+      Now I take conversations with strangers (or anyone really) as a sport, as
+      a challenge. “How can I use these precious moments we strangers share to
+      discover something new? To leave one of us pondering something novel
+      later in the evening” [...]
+
+      _A comment from [Hacker News thread](https://news.ycombinator.com/item?id=31859072)_
+
   - title: 13 Propositions on an Internet for a “Burning World”
     url: https://pure.mpg.de/rest/items/item_3390006_1/component/file_3390007/content
     description: |-
@@ -21,8 +44,9 @@
       in the proceedings of the joint workshops on “Technologies, Applications,
       and Uses of a Responsible Internet” and “Building Greener Internet”.
 
-      Also published in a series of
-      [blog posts](https://doing-stupid-things.as59645.net/burning/world/resillience/2022/06/27/propositions-part-1.html)
+      _Also published in a series of
+      [blog posts](https://doing-stupid-things.as59645.net/burning/world/resillience/2022/06/27/propositions-part-1.html)_
+
   - title: Notes on the small web
     url: https://felix.plesoianu.ro/web/in-the-small.html
     description: |-

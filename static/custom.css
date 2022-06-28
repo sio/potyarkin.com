@@ -4,7 +4,7 @@
   margin: 0;
 }
 .pelican-bookmarks article.full li > p + p {
-  margin-top: 0.2em;
+  margin-top: 0.5em;
 }
 .pelican-bookmarks article.full li {
   margin: 1em 0;
