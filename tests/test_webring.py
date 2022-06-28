@@ -1,12 +1,14 @@
 import pytest
 import logging
+from pathlib import Path
 
-CACHE = 'cache'
+CACHE = Path('cache/test')
 FEED = 'https://potyarkin.ml/feeds/all.atom.xml'
 TITLE = 'Orange Sun'
 
 def test_fetch(caplog):
     caplog.set_level(logging.DEBUG)
+    CACHE.mkdir(parents=True, exist_ok=True)
     from helpers import webring
     storage = webring.CachingFeedReader(CACHE)
     for _ in range(3):
