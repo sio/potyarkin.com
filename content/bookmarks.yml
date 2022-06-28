@@ -8,7 +8,8 @@
 - period: 2022-06
   links:
 
-  - title: "Idle chitchat" vs "smalltalk"
+  - title: >-
+      "Idle chitchat" vs "smalltalk"
     url: https://news.ycombinator.com/item?id=31880345
     description: |-
       it took me probably 7 years after moving out of my parent’s place to
@@ -28,7 +29,7 @@
       discover something new? to leave one of us pondering something novel
       later in the evening”. <...>
 
-      > A comment from [Hacker News thread](https://news.ycombinator.com/item?id=31859072)
+      _A comment from [Hacker News thread](https://news.ycombinator.com/item?id=31859072)_
 
   - title: 13 Propositions on an Internet for a “Burning World”
     url: https://pure.mpg.de/rest/items/item_3390006_1/component/file_3390007/content
@@ -43,8 +44,8 @@
       in the proceedings of the joint workshops on “Technologies, Applications,
       and Uses of a Responsible Internet” and “Building Greener Internet”.
 
-      Also published in a series of
-      [blog posts](https://doing-stupid-things.as59645.net/burning/world/resillience/2022/06/27/propositions-part-1.html)
+      _Also published in a series of
+      [blog posts](https://doing-stupid-things.as59645.net/burning/world/resillience/2022/06/27/propositions-part-1.html)_
 
   - title: Notes on the small web
     url: https://felix.plesoianu.ro/web/in-the-small.html
