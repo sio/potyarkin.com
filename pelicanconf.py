@@ -111,11 +111,11 @@ from pelican.themes import smallweb
 THEME = smallweb.path()
 THEME_TEMPLATES_OVERRIDES = ['content/templates/']
 DISPLAY_CATEGORIES_ON_MENU = False
-HEADER_COLOR = 'rgb(242,106,61)'
 MENUITEMS = [(name.title(), url) for name, url in SOCIAL]
 MENUITEMS.append(('feed', '/feeds/'))
 MENUITEMS.append(('bookmarks', '/bookmarks/'))
 SMALLWEB_HASHES = smallweb.hashes()
+SMALLWEB_COLORS = smallweb.colors()
 from helpers import checksum
 CSS_OVERRIDE = [
     f'static/custom.css?cache={checksum.hash("content/static/custom.css")}',
