@@ -64,8 +64,8 @@ Makefile.venv:
 
 
 .PHONY: links
-links: $(VENV)/deadlinks
-	$(VENV)/deadlinks https://potyarkin.ml -n 10 -e
+links: $(VENV)/linkchecker
+	$(VENV)/linkchecker https://potyarkin.ml --no-robots --check-extern
 
 .PHONY: test
 test: $(VENV)/pytest
