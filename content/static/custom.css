@@ -24,3 +24,24 @@
 article.full + article.full {
   padding-top: 0;
 }
+
+
+/* Custom front page */
+.pelican-frontpage .page-header {
+  font-size: 150%;
+}
+.pelican-frontpage .blog-overview li * {
+  vertical-align: middle;
+}
+.pelican-frontpage li h3,
+.pelican-frontpage li time {
+  display: inline;
+}
+.pelican-frontpage li time {
+  font-size: 75%;
+  opacity: var(--opacity-secondary);
+}
+.pelican-frontpage article.preview {
+  padding-top: 0;
+  padding-bottom: 0;
+}

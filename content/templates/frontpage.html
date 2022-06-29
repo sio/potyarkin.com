@@ -1,0 +1,71 @@
+{% extends '!theme/page.html' %}
+
+{% block title %}{{ SITENAME }}{% endblock %}
+{% block subtitle %}{{ SITESUBTITLE }}{% endblock %}
+
+
+{% block content %}
+
+{{ super() }}
+
+<article class="full">
+  <h2 id="blog"><a href="/posts">Latest blog entries</a></h2>
+  <ul class="blog-overview">
+  {% set article = dates[0] %}
+  <li><article class="preview">
+    <a href="{{ macros.url(article.url) }}">
+      <header>
+        <h3>{{ article.title }}</h2>
+        <time datetime="{{ article.locale_date }}">{{ article.locale_date }}</time>
+      </header>
+      <section>{{ article.summary|striptags }}</section>
+    </a>
+  </article></li>
+  {% for article in dates[1:DEFAULT_PAGINATION] %}
+  <li>
+      <a href="{{ macros.url(article.url) }}">{{ article.title }}</a>
+      <time datetime="{{ article.locale_date }}">{{ article.locale_date }}</time>
+  </li>
+  {% endfor %}
+  </ul>
+  <p>
+    Continue to
+    <a href="/posts/2/">older entries</a>,
+    <a href="/archive/">full archive</a>
+  </p>
+</article>
+
+<article class="full">
+  <h2 id="see-also">See also</h2>
+  <p>
+  I maintain a public list of
+  <a href="/bookmarks/">bookmarks</a>
+  and a
+  <a href="/blogroll/">blogroll</a>.
+  You may want to browse those when you're done with my writings.
+  Here is a sneak peek:
+  </p>
+  <h3><a href="/bookmarks/">Bookmarks</a></h3>
+  {% set bookmarks = yaml("content/bookmarks.yml") %}
+  <ul>
+  {% for link in (bookmarks|sum(attribute="links", start=[])|list)[:(DEFAULT_PAGINATION/2)|int] %}
+    <li>
+      <a href="{{ link.url }}">{{ link.title }}</a>
+      {% if link.by|default(False) %}
+      by {{ link.by }}
+      {% endif %}
+    </li>
+  {% endfor %}
+  </ul>
+  <h3><a href="/webring/">New articles from other interesting blogs</a></h3>
+  {% set webring = json("content/webring.json") %}
+  <ul>
+  {% for item in (webring|sort(reverse=True, attribute="entry.published_parsed")|list)[:(DEFAULT_PAGINATION/2)|int] %}
+    <li>
+    <a href="{{ item.entry.link }}">{{ item.entry.title }}</a>
+    ({{ item.blog.title }})
+    </li>
+  {% endfor %}
+  </ul>
+</article>
+{% endblock content %}
