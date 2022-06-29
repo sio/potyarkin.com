@@ -101,7 +101,7 @@ noticed that after introducing &lt;a href="https://github.com/sio/Makefile.venv"
 completely stopped activating virtual environments manually.&lt;/p&gt;
 &lt;p&gt;I encourage you to try &lt;a href="https://github.com/sio/Makefile.venv"&gt;Makefile.venv&lt;/a&gt; and hope you'll find this approach
 useful. If you have some comments or would like to point out the faults of
-using Makefiles for venv, please shoot me an e-mail or create an &lt;a href="https://github.com/sio/Makefile.venv/issue"&gt;issue&lt;/a&gt; at
+using Makefiles for venv, please shoot me an e-mail or create an &lt;a href="https://github.com/sio/Makefile.venv/issues"&gt;issue&lt;/a&gt; at
 GitHub project's page.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;PS: &lt;a href="https://github.com/sio/Makefile.venv"&gt;Makefile.venv&lt;/a&gt; was inspired by &lt;a href="https://stackoverflow.com/questions/24736146"&gt;this StackOverflow
