@@ -66,7 +66,7 @@ GitHub project's page.
 
 
 [Makefile.venv]: https://github.com/sio/Makefile.venv
-[issue]: https://github.com/sio/Makefile.venv/issue
+[issue]: https://github.com/sio/Makefile.venv/issues
 
 [bottle]: http://blog.bottlepy.org/2012/07/16/virtualenv-and-makefiles.html
 [stackoverflow]: https://stackoverflow.com/questions/24736146
