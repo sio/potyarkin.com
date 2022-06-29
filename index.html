@@ -16,7 +16,7 @@
   <link href="https://potyarkin.ml/theme/css/style.css?cache=ce1ce9e802f6452fc24c45dcd14f219b9fdbc4b78394fcb3ed490c23f88a6851" type="text/css" rel="stylesheet">
   <link href="https://potyarkin.ml/theme/css/fonts.css?cache=32c843bb3ce96eb9fb92f48c7a63dc133ab32e0d267a2e1453199c23403d5cd0" type="text/css" rel="stylesheet">
   <link href="https://potyarkin.ml/theme/css/codecolor/bleak.css?cache=4793611eaa86c9638927c57ac8d9995c5f7ca18d9ffed3721467cf3ef61b5e8e" type="text/css" rel="stylesheet">
-    <link href="https://potyarkin.ml/static/custom.css?cache=9dca6d1214981c56999b541b57bb3211c6ca0c2f5c32a37004b8ac1d6c3b9c30" type="text/css" rel="stylesheet">
+    <link href="https://potyarkin.ml/static/custom.css?cache=27320ede62aa3d1c6f89c13627403828ceaf86dd3e729156ddf0cd02025626bb" type="text/css" rel="stylesheet">
   <style>
   :root {
     --accent-hue: 14.917127071823206;
@@ -27,7 +27,7 @@
   </style>
   <meta name="theme-color" content="#f26a3d">
 </head>
-<body class="pelican-index">
+<body class="pelican-frontpage">
 <nav id="menu">
   <a href="#" class="close button">Close</a>
   <a href="#menu" class="open button">Menu</a>
@@ -45,148 +45,125 @@
     <h1>Orange Sun</h1>
     <span class="subtitle">Unsorted ramblings, sometimes related to programming</span>
   </header>
-<main rel="main">
-<ul class="article-list">
-<li>
-  <article class="preview">
-    <a href="https://potyarkin.ml/posts/2022/pip-install-pelican-theme/">
-    <header>
-      <time datetime="2022-06-10">2022-06-10</time>
-      <h1>Pip-installable Pelican themes</h1>
-    </header>
-    <section>
-      Installing Pelican themes the default way is not very pleasant: You need to invoke a separate CLI tool You may need to create some symlinks and ensure that they don't go stale the next time you use Pelican Some people (me) have resorted to git submodules instead of official CLI …
-    </section>
-    </a>
-  </article>
-</li>
-<li>
-  <article class="preview">
-    <a href="https://potyarkin.ml/posts/2022/libvirt-cirrusci-workaround/">
-    <header>
-      <time datetime="2022-03-02">2022-03-02</time>
-      <h1>Unexpected workaround for Libvirt VMs with cgroups v2 in Cirrus CI</h1>
-    </header>
-    <section>
-      Today I wrote a commit message that was several screens long. I think it deserves to be a blog post of its own Update: the commit linked above required some modification to remove flakiness, but the workaround still stands. Diff provided in this blog post was updated to reflect current …
-    </section>
-    </a>
-  </article>
-</li>
-<li>
-  <article class="preview">
-    <a href="https://potyarkin.ml/posts/2022/d-link-dir-825-revb1-throughput-test/">
-    <header>
-      <time datetime="2022-01-31">2022-01-31</time>
-      <h1>D-Link DIR-825 (rev.B1) throughput test</h1>
-    </header>
-    <section>
-      So, the year is 2022 and I'm still using D-Link DIR-825, rev.B1 as my edge router at home. Thanks to the power of opensource it is running a modern and secure OS (OpenWRT) long after the manufacturer has abandoned this product. Even though OpenWRT (and Linux in general) has …
-    </section>
-    </a>
-  </article>
-</li>
-<li>
-  <article class="preview">
-    <a href="https://potyarkin.ml/posts/2020/ansible-apt-debian-testing/">
-    <header>
-      <time datetime="2020-12-09">2020-12-09</time>
-      <h1>Ansible apt module fails to install python3-apt on Debian Testing</h1>
-    </header>
-    <section>
-      I have encountered an unexpected Ansible failure today that turned out to be not a bug. Ansible apt module had failed to auto install the required python3-apt package - only on Debian Testing. Same playbook worked fine with Debian Stable. TASK [install some apt packages] ********************************************* [WARNING]: Updating cache and auto-installing missing …
-    </section>
-    </a>
-  </article>
-</li>
-<li>
-  <article class="preview">
-    <a href="https://potyarkin.ml/posts/2020/pegatron-cape-7/">
-    <header>
-      <time datetime="2020-04-04">2020-04-04</time>
-      <h1>Pegatron Cape 7 nettop (thin client)</h1>
-    </header>
-    <section>
-      Below are hardware details of an outdated compact computer that had since become available for low price on second-hand market. I bought mine for $15 (in March 2020). This post is inspired by ParkyTowers Thin Client Database - many thanks to David Parkinson for gathering and sharing all that knowledge! Pegatron …
-    </section>
-    </a>
-  </article>
-</li>
-<li>
-  <article class="preview">
-    <a href="https://potyarkin.ml/posts/2020/running-libvirt-kvm-in-cirrus-ci/">
-    <header>
-      <time datetime="2020-02-25">2020-02-25</time>
-      <h1>Running Libvirt (KVM) in Cirrus CI</h1>
-    </header>
-    <section>
-      Up until the middle of 2019 it was very unusual to even expect that any CI service would allow nested virtualization. Those who required such functionality had to maintain their own CI runners on their own infrastructure. Things changed when Google Cloud introduced nested KVM support. Cirrus CI was probably …
-    </section>
-    </a>
-  </article>
-</li>
-<li>
-  <article class="preview">
-    <a href="https://potyarkin.ml/posts/2020/cirrus-ci-integration-for-gitlab-projects/">
-    <header>
-      <time datetime="2020-02-18">2020-02-18</time>
-      <h1>Cirrus CI integration for GitLab projects</h1>
-    </header>
-    <section>
-      Cirrus CI is a relatively new hosted CI service that offers several unique features. It's probably the only CI provider to offer full virtualization (KVM) or FreeBSD runners for free. Currently their business model is centered around GitHub Marketplace and only the projects hosted at GitHub are supported. Fortunately Cirrus …
-    </section>
-    </a>
-  </article>
-</li>
-<li>
-  <article class="preview">
-    <a href="https://potyarkin.ml/posts/2020/cygwin-ci-journey/">
-    <header>
-      <time datetime="2020-01-28">2020-01-28</time>
-      <h1>Cygwin CI journey</h1>
-    </header>
-    <section>
-      Setting up Cygwin CI environment for testing one of my projects took more than fifty trial-and-error attempts - that's why I think it will be useful to leave some written notes on the issues I've encountered. Here is the end result - GitHub CI running some Makefile tests in Cygwin. Cygwin gotchas …
-    </section>
-    </a>
-  </article>
-</li>
-<li>
-  <article class="preview">
-    <a href="https://potyarkin.ml/posts/2020/no-docker-for-selfhosted/">
-    <header>
-      <time datetime="2020-01-27">2020-01-27</time>
-      <h1>Don't blindly trust Docker for the selfhosted stuff</h1>
-    </header>
-    <section>
-      It is my strong belief that you shouldn't go crazy with all-things-docker when deploying selfhosted services at home. Online forums, especially r/selfhosted, seem to foster an opinion that providing a Dockerfile or better yet a docker-compose.yml or even prebuilt public images on Docker Hub is an acceptable way …
-    </section>
-    </a>
-  </article>
-</li>
-<li>
-  <article class="preview">
-    <a href="https://potyarkin.ml/posts/2019/manage-python-virtual-environment-from-your-makefile/">
-    <header>
-      <time datetime="2019-10-01">2019-10-01</time>
-      <h1>Manage Python virtual environment from your Makefile</h1>
-    </header>
-    <section>
-      I often use Makefiles not just as a build tool but as a handy way to execute sequences of commands. The commands I've found myself executing again and again lately are the ones to manage Python virtual environments: Create new venv Update pip to the latest version that enables all …
-    </section>
-    </a>
-  </article>
-</li>
-</ul>
 
-<nav class="pagination" role="pagination">
-  <a class="first-page disabled" href="https://potyarkin.ml/">&#8647;</a>
-  <a class="prev-page disabled"  href="https://potyarkin.ml/">&laquo;</a>
-  <p class="label">Page 1 / 3</p>
-  <a class="next-page enabled" href="https://potyarkin.ml/2/">&raquo;</a>
-  <a class="last-page enabled" href="https://potyarkin.ml/3/">&#8649;</a>
-</nav>
-</main>
+<article class="full"><!-- This page is rendered from a custom template -->
+
+<h2 id="welcome"><a class="toclink" href="#welcome">Welcome!</a></h2>
+<p>This corner of the Web is maintained by Vitaly Potyarkin. I am a computer
+enthusiast, hobbyist programmer and an accidental system administrator for my
+household</p>
+<p>I write a <a href="/posts/">blog</a>, publish some open source projects at <a href="https://github.com/sio">GitHub</a>
+and I enjoy receiving feedback and comments via <a href="mailto:sio.wtf@gmail.com">email</a></p></article>
+
+
+<article class="full">
+  <h2 id="blog"><a href="/posts">Latest blog entries</a></h2>
+  <ul class="blog-overview">
+  <li><article class="preview">
+    <a href="https://potyarkin.ml/posts/2022/pip-install-pelican-theme/">
+      <header>
+        <h3>Pip-installable Pelican themes</h2>
+        <time datetime="2022-06-10">2022-06-10</time>
+      </header>
+      <section>Installing Pelican themes the default way is not very pleasant: You need to invoke a separate CLI tool You may need to create some symlinks and ensure that they don't go stale the next time you use Pelican Some people (me) have resorted to git submodules instead of official CLI …</section>
+    </a>
+  </article></li>
+  <li>
+      <a href="https://potyarkin.ml/posts/2022/libvirt-cirrusci-workaround/">Unexpected workaround for Libvirt VMs with cgroups v2 in Cirrus CI</a>
+      <time datetime="2022-03-02">2022-03-02</time>
+  </li>
+  <li>
+      <a href="https://potyarkin.ml/posts/2022/d-link-dir-825-revb1-throughput-test/">D-Link DIR-825 (rev.B1) throughput test</a>
+      <time datetime="2022-01-31">2022-01-31</time>
+  </li>
+  <li>
+      <a href="https://potyarkin.ml/posts/2020/ansible-apt-debian-testing/">Ansible apt module fails to install python3-apt on Debian Testing</a>
+      <time datetime="2020-12-09">2020-12-09</time>
+  </li>
+  <li>
+      <a href="https://potyarkin.ml/posts/2020/pegatron-cape-7/">Pegatron Cape 7 nettop (thin client)</a>
+      <time datetime="2020-04-04">2020-04-04</time>
+  </li>
+  <li>
+      <a href="https://potyarkin.ml/posts/2020/running-libvirt-kvm-in-cirrus-ci/">Running Libvirt (KVM) in Cirrus CI</a>
+      <time datetime="2020-02-25">2020-02-25</time>
+  </li>
+  <li>
+      <a href="https://potyarkin.ml/posts/2020/cirrus-ci-integration-for-gitlab-projects/">Cirrus CI integration for GitLab projects</a>
+      <time datetime="2020-02-18">2020-02-18</time>
+  </li>
+  <li>
+      <a href="https://potyarkin.ml/posts/2020/cygwin-ci-journey/">Cygwin CI journey</a>
+      <time datetime="2020-01-28">2020-01-28</time>
+  </li>
+  <li>
+      <a href="https://potyarkin.ml/posts/2020/no-docker-for-selfhosted/">Don't blindly trust Docker for the selfhosted stuff</a>
+      <time datetime="2020-01-27">2020-01-27</time>
+  </li>
+  <li>
+      <a href="https://potyarkin.ml/posts/2019/manage-python-virtual-environment-from-your-makefile/">Manage Python virtual environment from your Makefile</a>
+      <time datetime="2019-10-01">2019-10-01</time>
+  </li>
+  </ul>
+  <p>
+    Continue to
+    <a href="/posts/2/">older entries</a>,
+    <a href="/archive/">full archive</a>
+  </p>
+</article>
+
+<article class="full">
+  <h2 id="see-also">See also</h2>
+  <p>
+  I maintain a public list of
+  <a href="/bookmarks/">bookmarks</a>
+  and a
+  <a href="/blogroll/">blogroll</a>.
+  You may want to browse those when you're done with my writings.
+  Here is a sneak peek:
+  </p>
+  <h3><a href="/bookmarks/">Bookmarks</a></h3>
+  <ul>
+    <li>
+      <a href="https://news.ycombinator.com/item?id=31880345">"Idle chitchat" vs "smalltalk"</a>
+    </li>
+    <li>
+      <a href="https://pure.mpg.de/rest/items/item_3390006_1/component/file_3390007/content">13 Propositions on an Internet for a “Burning World”</a>
+    </li>
+    <li>
+      <a href="https://felix.plesoianu.ro/web/in-the-small.html">Notes on the small web</a>
+    </li>
+    <li>
+      <a href="https://search.marginalia.nu/">Marginalia Search</a>
+    </li>
+    <li>
+      <a href="https://beej.us/guide/bgipc/html/multi/index.html">Beej's Guide to Unix IPC</a>
+    </li>
+  </ul>
+  <h3><a href="/webring/">New articles from other interesting blogs</a></h3>
+  <ul>
+    <li>
+    <a href="https://utcc.utoronto.ca/~cks/space/blog/tech/SymmetricAndAsymmetricIPRouting">What symmetric and asymmetric IP routing are</a>
+    (Wandering Thoughts)
+    </li>
+    <li>
+    <a href="https://doing-stupid-things.as59645.net/burning/world/resillience/2022/06/28/propositions-part-2.html">13 Propositions on an Internet for a Burning World (Part 2)</a>
+    (Doing stupid things (with packets and OpenBSD))
+    </li>
+    <li>
+    <a href="https://writing.kemitchell.com/2022/06/26/Legal-Sources-Not-a-Lawyers">Legal Sources for Not-a-Lawyers</a>
+    (/dev/lawyer)
+    </li>
+    <li>
+    <a href="https://drewdevault.com/2022/06/23/Copilot-GPL-washing.html">GitHub Copilot and open source laundering</a>
+    (Drew DeVault's Blog)
+    </li>
+    <li>
+    <a href="https://dataswamp.org/~solene/2022-06-22-openbsd-selling-arguments.html">How I would sell OpenBSD as a salesperson</a>
+    (Solène Rapenne)
+    </li>
+  </ul>
+</article>
 <footer class="page-footer">
   <section class="credits">
         <span class="credits-left">
