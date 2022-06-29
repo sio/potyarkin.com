@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ micro.author }} on {{ micro.timestamp|strftime(DEFAULT_DATE_FORMAT) }}
+{% endblock %}
+
+{% block subtitle %}
+<a href="{{ SITEURL }}/">{{ SITENAME }}</a> |
+<a href="{{ SITEURL }}/micro/">Microblog</a> |
+<a href="#">{{ micro.commit }}</a>
+{% endblock %}
+
+{% block content %}
+<article class="micro">{{ micro.html }}</article>
+{% endblock %}

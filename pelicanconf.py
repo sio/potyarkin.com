@@ -103,6 +103,7 @@ DEFAULT_PAGINATION = 10
 
 # Pelican plugins
 PLUGINS = [
+    'microblog',
     'neighbors',
     ]
 
