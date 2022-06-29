@@ -39,7 +39,7 @@ def main():
             except Exception:
                 log.exception(f'Error while fetching {blog["feed"]}')
                 continue
-            entries = sorted(feed.entries, key=lambda x: x.updated_parsed, reverse=True)
+            entries = sorted(feed.entries, key=lambda x: x.published_parsed, reverse=True)
             latest = entries[0]
             blog['section'] = section['section']
             webring.append(dict(blog=blog, entry=latest))
@@ -153,6 +153,7 @@ class FeedCache:
 
     LIFETIME_MINUTES = 24*60
     METADATA_VERSION = 1
+    CACHE_VERSION = 1
 
     def __init__(self, cachedir, title, url):
         sanitized_title = re.sub(r'\W', '_', title)
@@ -199,6 +200,11 @@ class FeedCache:
         if feed.bozo:
             log.warning(f'Feed contains parsing errors: {feed.bozo_exception} ({self})')
         self._directory.mkdir(exist_ok=True)
+        for entry in feed.entries:
+            if 'published_parsed' not in entry and 'updated_parsed' in entry:
+                entry['published_parsed'] = entry['updated_parsed']
+                entry['published'] = entry['updated']
+        feed['cache_version'] = self.CACHE_VERSION
         with self._feed.open('w') as f:
             json.dump(feed, f, **JSON_PARAMS)
         metadata = dict()
@@ -215,6 +221,10 @@ class FeedCache:
         log.info(f'Reading cache: {self._directory}')
         with self._feed.open() as f:
             feed = json.load(f, object_hook=feedparser.util.FeedParserDict)
+        if 'cache_version' not in feed or feed.cache_version != self.CACHE_VERSION:
+            log.warning(f'Updating cache to current version: {self}')
+            self.save(feed)
+            feed = self.read()
         if feed.bozo:
             log.warning(f'Feed contains parsing errors: {feed.bozo_exception} ({self})')
         return feed
