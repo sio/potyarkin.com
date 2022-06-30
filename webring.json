@@ -1380,5 +1380,99 @@
       "slash_comments": "19",
       "post-id": "3379"
     }
+  },
+  {
+    "blog": {
+      "title": "maya.land",
+      "url": "https://maya.land/posts/",
+      "feed": "https://maya.land/feed.xml",
+      "description": "Carefully curated personal web space. Some posts were interesting\nto me, let's see how it goes",
+      "section": "Uncategorized new blogs"
+    },
+    "entry": {
+      "title": "three pages of linguistics paper that you’ve got to read",
+      "title_detail": {
+        "type": "text/html",
+        "language": null,
+        "base": "https://maya.land/feed.xml",
+        "value": "three pages of linguistics paper that you’ve got to read"
+      },
+      "links": [
+        {
+          "href": "https://maya.land/responses/2022/06/13/anne-cutler-linguistics.html",
+          "rel": "alternate",
+          "type": "text/html",
+          "title": "three pages of linguistics paper that you’ve got to read"
+        }
+      ],
+      "link": "https://maya.land/responses/2022/06/13/anne-cutler-linguistics.html",
+      "published": "2022-06-13T00:00:00-07:00",
+      "published_parsed": [
+        2022,
+        6,
+        13,
+        7,
+        0,
+        0,
+        0,
+        164,
+        0
+      ],
+      "updated": "2022-06-13T00:00:00-07:00",
+      "updated_parsed": [
+        2022,
+        6,
+        13,
+        7,
+        0,
+        0,
+        0,
+        164,
+        0
+      ],
+      "id": "https://maya.land/responses/2022/06/13/anne-cutler-linguistics",
+      "guidislink": false,
+      "content": [
+        {
+          "type": "text/html",
+          "language": null,
+          "base": "https://maya.land/responses/2022/06/13/anne-cutler-linguistics.html",
+          "value": "<p>Really–even if you doubt me on it, it’s not want but <em>need</em>.</p>\n\n<p>Found on <a href=\"https://www.metafilter.com/195588/The-premise-of-the-paper-proves-itself\">Metafilter</a>, where a commenter replied that the author was <a href=\"https://en.wikipedia.org/wiki/Anne_Cutler\">Anne Cutler</a>, and that just this month she’d died. <em>Sentence stress and sentence comprehension</em> was the name of her freaking dissertation, so she really knew the game…</p>"
+        }
+      ],
+      "summary": "Really–even if you doubt me on it, it’s not want but need.",
+      "authors": [
+        {
+          "name": ""
+        }
+      ],
+      "author_detail": {
+        "name": ""
+      },
+      "author": "",
+      "tags": [
+        {
+          "term": "responses",
+          "scheme": null,
+          "label": null
+        },
+        {
+          "term": "bookmark",
+          "scheme": null,
+          "label": null
+        },
+        {
+          "term": "linguistics",
+          "scheme": null,
+          "label": null
+        }
+      ],
+      "summary_detail": {
+        "type": "text/html",
+        "language": null,
+        "base": "https://maya.land/feed.xml",
+        "value": "Really–even if you doubt me on it, it’s not want but need."
+      }
+    }
   }
 ]
