@@ -8,6 +8,11 @@
 - period: 2022-06
   links:
 
+  - title: Incarceration in Real Numbers
+    url: https://mkorostoff.github.io/incarceration-in-real-numbers/
+    description: |-
+      An infographic showing just how disproportional incarceration is in the USA.
+
   - title: >-
       "Idle chitchat" vs "smalltalk"
     url: https://news.ycombinator.com/item?id=31880345
