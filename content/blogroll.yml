@@ -181,6 +181,12 @@
 
 - section: Uncategorized new blogs
   blogs:
+    - title: maya.land
+      url: https://maya.land/posts/
+      feed: https://maya.land/feed.xml
+      description: |-
+        Carefully curated personal web space. Some posts were interesting
+        to me, let's see how it goes
 
 - section: Saved Google searches
   blogs:
