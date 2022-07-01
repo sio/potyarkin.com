@@ -9,14 +9,14 @@
       "section": "Linux"
     },
     "entry": {
-      "id": "tag:cspace@cks.mef.org,2009-03-24:/blog/linux/PSINumbersAndMeanings",
+      "id": "tag:cspace@cks.mef.org,2009-03-24:/blog/tech/OneIsEasierThanMore",
       "guidislink": true,
-      "link": "https://utcc.utoronto.ca/~cks/space/blog/linux/PSINumbersAndMeanings",
+      "link": "https://utcc.utoronto.ca/~cks/space/blog/tech/OneIsEasierThanMore",
       "links": [
         {
           "rel": "alternate",
           "type": "text/html",
-          "href": "https://utcc.utoronto.ca/~cks/space/blog/linux/PSINumbersAndMeanings"
+          "href": "https://utcc.utoronto.ca/~cks/space/blog/tech/OneIsEasierThanMore"
         }
       ],
       "authors": [
@@ -33,46 +33,46 @@
           "type": "text/html",
           "language": null,
           "base": "https://utcc.utoronto.ca/~cks/space/blog/?atom",
-          "value": "<div class=\"wikitext\"><p>As <a href=\"https://support.cs.toronto.edu/\">we</a> increasingly move to\nUbuntu 22.04, enough of our machines now have the Linux kernel's\nsomewhat new <a href=\"https://www.kernel.org/doc/html/latest/accounting/psi.html\">Pressure Stall Information</a> (<a href=\"https://facebookmicrosites.github.io/psi/docs/overview\">also</a>) that I've\nbeen investigating adding PSI information to our per-host dashboards\nin <a href=\"https://utcc.utoronto.ca/~cks/space/blog/sysadmin/PrometheusGrafanaSetup-2019\">our metrics setup</a>.\nIn the process I realized that I didn't understand the PSI information\nas well as I needed to, so here are some notes.</p>\n\n<p>The raw global PSI information appears in /proc/pressure in files\ncalled 'cpu', 'io', and 'memory'. Each file looks like this:</p>\n\n<blockquote><pre style=\"white-space: pre-wrap;\">\nsome avg10=4.35 avg60=1.11 avg300=0.25 total=46338094\nfull avg10=3.92 avg60=1.02 avg300=0.22 total=37445468\n</pre>\n</blockquote>\n\n<p>As covered in the documentation, the 'some' line is about when some\nprocesses (tasks) are stalled waiting for the particular thing,\nwhile the 'full' line is when all non-idle tasks are stalled and\nsome of them are waiting on the resource. This isn't the definition\ngiven in the documentation, but it is what's described in\n<a href=\"https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/kernel/sched/psi.c\">kernel/sched/psi.c</a>.\nThe difference between 'some' and 'full' is nicely summed up as\npart of the comments in psi.c (emphasis mine):</p>\n\n<blockquote><p>The percentage of wallclock time spent in those compound stall\nstates gives pressure numbers between 0 and 100 for each resource,\nwhere <strong>the SOME percentage indicates workload slowdowns and the FULL\npercentage indicates reduced CPU utilization</strong>: [...]</p>\n</blockquote>\n\n<p>(<a href=\"https://utcc.utoronto.ca/~cks/space/blog/linux/PSICpuWhyNoFull\">The global 'cpu' file doesn't have a meaningful <code>full</code> line for\ngood reasons</a>. In cgroup v2, a specific cgroup can\nhave a meaningful 'full' CPU line with non-zero values, for example\nif you're limiting its CPU usage.)</p>\n\n<p>The 'avg' numbers are percentages of the time over the past 10, 60,\nor 300 seconds when the condition is true, running from 0 to 100.\nThe total= number is the cumulative number of microseconds when the\ncondition has been true. The <a href=\"https://github.com/prometheus/node_exporter\">Prometheus host agent</a> reports the 'total='\nnumber normalized to seconds, as probably do other metrics systems.</p>\n\n<p>(The Prometheus host agent reports 'some' pressure lines as metrics\nwith 'waiting' in their names and 'full' lines as metrics with\n'stalled' in their names.)</p>\n\n<p>The 'full' numbers are a subset of the 'some' numbers. If all\nnon-idle tasks are stalled on the resource, both 'some' and 'full'\ncount up; if only some are, only 'some' counts up. At times of high\nIO or memory pressure, 'full' and 'some' will probably be almost\nequal (which suggests that the difference between them may be worth\npaying attention to). As far as the 'total=' time goes, it normally\nincreases no faster than real time, since the 'total=' time merely\ncounts the time during which the condition has been true.</p>\n\n<p>(As a result, if you take a per-second rate of increase in the total\ntime, for example by using the <a href=\"https://prometheus.io/docs/prometheus/latest/querying/functions/#rate\">PromQL <code>rate()</code> function</a>,\nwhat you get is a 0.0 to 1.0 percentage of the time over your time\nrange, or equivalently the average amount of time per second that\nthe condition has been true.)</p>\n\n<p>As covered in the extensive comments in <a href=\"https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/kernel/sched/psi.c\">kernel/sched/psi.c</a>, the\nkernel's view of lost potential, which drives these pressure indicators,\nis scaled by the number of CPUs relative to the amount of contention.\nIn general the comments in <a href=\"https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/kernel/sched/psi.c\">kernel/sched/psi.c</a> are extensive and\ndetailed, and are well worth reading to see the fine details and\nexamples. Based on the comments, a machine with a lot of CPUs is\ngoing to need a lot of delayed tasks to reach large 'full' numbers.\nAlthough I haven't carefully read the code, I'd assume that this\nscaling is also applied to the 'total=' time numbers so that\neverything works out right.</p>\n\n<p>Because of how they're defined, the 'full' state for both IO and\nmemory are inverses of CPU busyness; as your CPU goes to full usage,\n'full' stalls on IO and memory must go to zero, because there are\nactive non-idle tasks and you're not wasting any CPU waiting. This\nimplies that the higher your 'some' CPU metric, the more you're\ndriving 'full' IO and memory metrics to zero. If you manage 100%\n'some' CPU, you should definitely have 0% 'full' IO and memory\nstalls. However, I believe that you can have high 'some' IO or\nmemory at the same time as high 'some' CPU, provided that you have\nenough tasks doing enough things at once.</p>\n\n<p>I believe that it's possible to have high 'full' IO stalls with\nonly a few processes waiting for IO, provided that your system is\notherwise idle. If I'm working through the math from <a href=\"https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/kernel/sched/psi.c\">kernel/sched/psi.c</a>\ncorrectly, if you have one task waiting on IO and no other non-idle\ntasks, you will have a 100% 'full' IO number. You probably can't\nget a system that idle, though. The corollary of this is that a\nhigh 'full' IO number doesn't necessarily mean that you have a\nproblem; it may mean that your system isn't doing much other than\nIO.</p>\n\n<p>Since IO pressure requires processes (tasks) to actually wait on\nIO being completed, it's implicitly biased against read IO. <a href=\"https://utcc.utoronto.ca/~cks/space/blog/tech/ReadIOIsSynchronous\">Read\nIO is almost always synchronous</a>, with\nthings waiting for it to finish and thus being counted for IO\npressure, while write IO is often asynchronous, with no task\nexplicitly waiting for it to complete. The IO pressure information\nis fair (tasks really are waiting for their IO), but you can't take\nit as a complete picture of how loaded and busy your IO system is.</p>\n\n<p>(As usual, the process of writing this entry has left me much\nbetter informed than I was when I started.)</p>\n\n<h3>Sidebar: The documentation versus psi.c</h3>\n\n<p>The <a href=\"https://www.kernel.org/doc/html/latest/accounting/psi.html\">kernel PSI documentation</a>\ndescribes the 'full' line this way (emphasis mine):</p>\n\n<blockquote><p>The “full” line indicates the share of time in which <strong>all\nnon-idle tasks are stalled on a given resource simultaneously</strong>.</p>\n</blockquote>\n\n<p>Interpreted as written, this definition would imply that 'full' IO\nand memory stalls cannot happen at the same time. You'd need all\ntasks to be stalled on a single thing (IO or memory), not some\nstalled on one and others stalled on the other.</p>\n\n<p>The <a href=\"https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/kernel/sched/psi.c\">kernel/sched/psi.c</a> definition for 'full' merely requires\nthere to be no productive tasks running:</p>\n\n<blockquote><pre style=\"white-space: pre-wrap;\">\nFULL = nr_delayed_tasks != 0 &amp;&amp; nr_productive_tasks == 0\n</pre>\n</blockquote>\n\n<p>Life is not quite this simple, because the definition of productive\nis subtly different between IO and memory such that I think it's\npossible for IO to consider there to be a productive task running\nbut memory to consider there not to be. See the comments in psi.c\nfor the details.</p>\n</div>"
+          "value": "<div class=\"wikitext\"><p>Recently, I was sort of asked why we didn't just have multiple\nPrometheus servers (and <a href=\"https://utcc.utoronto.ca/~cks/space/blog/tech/HDDsNowSomewhatBetter\">were instead using mirrored 20TB HDs</a>). There are specific answers for the case\nof Prometheus, but in general <strong>one is the easiest number of things\nto have</strong>. The moment you have more than one of something, you get\na bunch of extra problems. At a minimum, you have to worry about\nconsistency between your N things, coordination between your N\nthings, and choosing which of your N things you're going to interact\nwith. These are all hard problems, and you don't have them if you\nonly have one thing.</p>\n\n<p>The problem of choosing between your N things is often considered\nsufficiently hard for people to deal with that systems go well out of\ntheir way in order to turn N things back into one as far as you're\nconcerned. For example, HTTP load balancers turn N web servers back into\none from an outside perspective, and RAID mirrors turn N disks back into\none as far as everything above them is concerned.</p>\n\n<p>In both cases (and many others) the illusion that you're dealing with\nonly a single thing can falter. An underlying web server or physical\ndisk that has different answers than all of the others will cause you\nheartburn and break the illusion of a single thing (well, a single\nnon-flaky thing). Still, these illusions tend to work well enough that\nwe readily use them and usually prefer them to the alternatives.</p>\n\n<p>(One reason they work so well is that vast amounts of engineering\nresources have been devoted to making them that way.)</p>\n\n<p>As a system design issue, the real question is not why you only\nhave one of something, it's whether you absolutely have to have\nmore than one. Even if having more than one works just as well as\nhaving only one, it'll almost certainly be more complicated and\nhave more peculiar failure modes. \"Do the simplest thing that works\"\nis a good idea in general, and much of the time this means 'one' is\nthe number you want.</p>\n\n<p>A corollary to this is that any 'more than one' system that wants to be\nused should pay a lot of attention to making itself work reliably and\nsmoothly. We pretty much universally use software mirrored disks on our\nLinux systems, and certainly one bit reason for that is that the Linux\nsoftware RAID people have spent a lot of effort creating a system that\njust works, minimizing the disadvantages of having two (or more) while\nmaximizing the advantages.</p>\n\n<p>(This observation is in no way new. I just feel like writing it down\ntoday.)</p>\n</div>"
         }
       ],
-      "summary": "<div class=\"wikitext\"><p>As <a href=\"https://support.cs.toronto.edu/\">we</a> increasingly move to\nUbuntu 22.04, enough of our machines now have the Linux kernel's\nsomewhat new <a href=\"https://www.kernel.org/doc/html/latest/accounting/psi.html\">Pressure Stall Information</a> (<a href=\"https://facebookmicrosites.github.io/psi/docs/overview\">also</a>) that I've\nbeen investigating adding PSI information to our per-host dashboards\nin <a href=\"https://utcc.utoronto.ca/~cks/space/blog/sysadmin/PrometheusGrafanaSetup-2019\">our metrics setup</a>.\nIn the process I realized that I didn't understand the PSI information\nas well as I needed to, so here are some notes.</p>\n\n<p>The raw global PSI information appears in /proc/pressure in files\ncalled 'cpu', 'io', and 'memory'. Each file looks like this:</p>\n\n<blockquote><pre style=\"white-space: pre-wrap;\">\nsome avg10=4.35 avg60=1.11 avg300=0.25 total=46338094\nfull avg10=3.92 avg60=1.02 avg300=0.22 total=37445468\n</pre>\n</blockquote>\n\n<p>As covered in the documentation, the 'some' line is about when some\nprocesses (tasks) are stalled waiting for the particular thing,\nwhile the 'full' line is when all non-idle tasks are stalled and\nsome of them are waiting on the resource. This isn't the definition\ngiven in the documentation, but it is what's described in\n<a href=\"https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/kernel/sched/psi.c\">kernel/sched/psi.c</a>.\nThe difference between 'some' and 'full' is nicely summed up as\npart of the comments in psi.c (emphasis mine):</p>\n\n<blockquote><p>The percentage of wallclock time spent in those compound stall\nstates gives pressure numbers between 0 and 100 for each resource,\nwhere <strong>the SOME percentage indicates workload slowdowns and the FULL\npercentage indicates reduced CPU utilization</strong>: [...]</p>\n</blockquote>\n\n<p>(<a href=\"https://utcc.utoronto.ca/~cks/space/blog/linux/PSICpuWhyNoFull\">The global 'cpu' file doesn't have a meaningful <code>full</code> line for\ngood reasons</a>. In cgroup v2, a specific cgroup can\nhave a meaningful 'full' CPU line with non-zero values, for example\nif you're limiting its CPU usage.)</p>\n\n<p>The 'avg' numbers are percentages of the time over the past 10, 60,\nor 300 seconds when the condition is true, running from 0 to 100.\nThe total= number is the cumulative number of microseconds when the\ncondition has been true. The <a href=\"https://github.com/prometheus/node_exporter\">Prometheus host agent</a> reports the 'total='\nnumber normalized to seconds, as probably do other metrics systems.</p>\n\n<p>(The Prometheus host agent reports 'some' pressure lines as metrics\nwith 'waiting' in their names and 'full' lines as metrics with\n'stalled' in their names.)</p>\n\n<p>The 'full' numbers are a subset of the 'some' numbers. If all\nnon-idle tasks are stalled on the resource, both 'some' and 'full'\ncount up; if only some are, only 'some' counts up. At times of high\nIO or memory pressure, 'full' and 'some' will probably be almost\nequal (which suggests that the difference between them may be worth\npaying attention to). As far as the 'total=' time goes, it normally\nincreases no faster than real time, since the 'total=' time merely\ncounts the time during which the condition has been true.</p>\n\n<p>(As a result, if you take a per-second rate of increase in the total\ntime, for example by using the <a href=\"https://prometheus.io/docs/prometheus/latest/querying/functions/#rate\">PromQL <code>rate()</code> function</a>,\nwhat you get is a 0.0 to 1.0 percentage of the time over your time\nrange, or equivalently the average amount of time per second that\nthe condition has been true.)</p>\n\n<p>As covered in the extensive comments in <a href=\"https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/kernel/sched/psi.c\">kernel/sched/psi.c</a>, the\nkernel's view of lost potential, which drives these pressure indicators,\nis scaled by the number of CPUs relative to the amount of contention.\nIn general the comments in <a href=\"https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/kernel/sched/psi.c\">kernel/sched/psi.c</a> are extensive and\ndetailed, and are well worth reading to see the fine details and\nexamples. Based on the comments, a machine with a lot of CPUs is\ngoing to need a lot of delayed tasks to reach large 'full' numbers.\nAlthough I haven't carefully read the code, I'd assume that this\nscaling is also applied to the 'total=' time numbers so that\neverything works out right.</p>\n\n<p>Because of how they're defined, the 'full' state for both IO and\nmemory are inverses of CPU busyness; as your CPU goes to full usage,\n'full' stalls on IO and memory must go to zero, because there are\nactive non-idle tasks and you're not wasting any CPU waiting. This\nimplies that the higher your 'some' CPU metric, the more you're\ndriving 'full' IO and memory metrics to zero. If you manage 100%\n'some' CPU, you should definitely have 0% 'full' IO and memory\nstalls. However, I believe that you can have high 'some' IO or\nmemory at the same time as high 'some' CPU, provided that you have\nenough tasks doing enough things at once.</p>\n\n<p>I believe that it's possible to have high 'full' IO stalls with\nonly a few processes waiting for IO, provided that your system is\notherwise idle. If I'm working through the math from <a href=\"https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/kernel/sched/psi.c\">kernel/sched/psi.c</a>\ncorrectly, if you have one task waiting on IO and no other non-idle\ntasks, you will have a 100% 'full' IO number. You probably can't\nget a system that idle, though. The corollary of this is that a\nhigh 'full' IO number doesn't necessarily mean that you have a\nproblem; it may mean that your system isn't doing much other than\nIO.</p>\n\n<p>Since IO pressure requires processes (tasks) to actually wait on\nIO being completed, it's implicitly biased against read IO. <a href=\"https://utcc.utoronto.ca/~cks/space/blog/tech/ReadIOIsSynchronous\">Read\nIO is almost always synchronous</a>, with\nthings waiting for it to finish and thus being counted for IO\npressure, while write IO is often asynchronous, with no task\nexplicitly waiting for it to complete. The IO pressure information\nis fair (tasks really are waiting for their IO), but you can't take\nit as a complete picture of how loaded and busy your IO system is.</p>\n\n<p>(As usual, the process of writing this entry has left me much\nbetter informed than I was when I started.)</p>\n\n<h3>Sidebar: The documentation versus psi.c</h3>\n\n<p>The <a href=\"https://www.kernel.org/doc/html/latest/accounting/psi.html\">kernel PSI documentation</a>\ndescribes the 'full' line this way (emphasis mine):</p>\n\n<blockquote><p>The “full” line indicates the share of time in which <strong>all\nnon-idle tasks are stalled on a given resource simultaneously</strong>.</p>\n</blockquote>\n\n<p>Interpreted as written, this definition would imply that 'full' IO\nand memory stalls cannot happen at the same time. You'd need all\ntasks to be stalled on a single thing (IO or memory), not some\nstalled on one and others stalled on the other.</p>\n\n<p>The <a href=\"https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/kernel/sched/psi.c\">kernel/sched/psi.c</a> definition for 'full' merely requires\nthere to be no productive tasks running:</p>\n\n<blockquote><pre style=\"white-space: pre-wrap;\">\nFULL = nr_delayed_tasks != 0 &amp;&amp; nr_productive_tasks == 0\n</pre>\n</blockquote>\n\n<p>Life is not quite this simple, because the definition of productive\nis subtly different between IO and memory such that I think it's\npossible for IO to consider there to be a productive task running\nbut memory to consider there not to be. See the comments in psi.c\nfor the details.</p>\n</div>",
-      "title": "Notes on the Linux kernel's 'pressure stall information' and its meanings",
+      "summary": "<div class=\"wikitext\"><p>Recently, I was sort of asked why we didn't just have multiple\nPrometheus servers (and <a href=\"https://utcc.utoronto.ca/~cks/space/blog/tech/HDDsNowSomewhatBetter\">were instead using mirrored 20TB HDs</a>). There are specific answers for the case\nof Prometheus, but in general <strong>one is the easiest number of things\nto have</strong>. The moment you have more than one of something, you get\na bunch of extra problems. At a minimum, you have to worry about\nconsistency between your N things, coordination between your N\nthings, and choosing which of your N things you're going to interact\nwith. These are all hard problems, and you don't have them if you\nonly have one thing.</p>\n\n<p>The problem of choosing between your N things is often considered\nsufficiently hard for people to deal with that systems go well out of\ntheir way in order to turn N things back into one as far as you're\nconcerned. For example, HTTP load balancers turn N web servers back into\none from an outside perspective, and RAID mirrors turn N disks back into\none as far as everything above them is concerned.</p>\n\n<p>In both cases (and many others) the illusion that you're dealing with\nonly a single thing can falter. An underlying web server or physical\ndisk that has different answers than all of the others will cause you\nheartburn and break the illusion of a single thing (well, a single\nnon-flaky thing). Still, these illusions tend to work well enough that\nwe readily use them and usually prefer them to the alternatives.</p>\n\n<p>(One reason they work so well is that vast amounts of engineering\nresources have been devoted to making them that way.)</p>\n\n<p>As a system design issue, the real question is not why you only\nhave one of something, it's whether you absolutely have to have\nmore than one. Even if having more than one works just as well as\nhaving only one, it'll almost certainly be more complicated and\nhave more peculiar failure modes. \"Do the simplest thing that works\"\nis a good idea in general, and much of the time this means 'one' is\nthe number you want.</p>\n\n<p>A corollary to this is that any 'more than one' system that wants to be\nused should pay a lot of attention to making itself work reliably and\nsmoothly. We pretty much universally use software mirrored disks on our\nLinux systems, and certainly one bit reason for that is that the Linux\nsoftware RAID people have spent a lot of effort creating a system that\njust works, minimizing the disadvantages of having two (or more) while\nmaximizing the advantages.</p>\n\n<p>(This observation is in no way new. I just feel like writing it down\ntoday.)</p>\n</div>",
+      "title": "Having one is often much easier than having more than one",
       "title_detail": {
         "type": "text/html",
         "language": null,
         "base": "https://utcc.utoronto.ca/~cks/space/blog/?atom",
-        "value": "Notes on the Linux kernel's 'pressure stall information' and its meanings"
+        "value": "Having one is often much easier than having more than one"
       },
       "tags": [
         {
-          "term": "linux",
+          "term": "tech",
           "scheme": null,
           "label": null
         }
       ],
-      "updated": "2022-06-30T04:52:12Z",
+      "updated": "2022-07-01T02:27:34Z",
       "updated_parsed": [
         2022,
-        6,
-        30,
+        7,
+        1,
+        2,
+        27,
+        34,
         4,
-        52,
-        12,
-        3,
-        181,
+        182,
         0
       ],
-      "published": "2022-06-30T02:52:21Z",
+      "published": "2022-07-01T02:26:33Z",
       "published_parsed": [
         2022,
-        6,
-        30,
+        7,
+        1,
         2,
-        52,
-        21,
-        3,
-        181,
+        26,
+        33,
+        4,
+        182,
         0
       ]
     }
@@ -921,54 +921,54 @@
       "section": "OpenBSD"
     },
     "entry": {
-      "title": "13 Propositions on an Internet for a Burning World (Part 3)",
+      "title": "13 Propositions on an Internet for a Burning World (Part 4)",
       "title_detail": {
         "type": "text/html",
         "language": null,
         "base": "https://doing-stupid-things.as59645.net/feed.xml",
-        "value": "13 Propositions on an Internet for a Burning World (Part 3)"
+        "value": "13 Propositions on an Internet for a Burning World (Part 4)"
       },
       "links": [
         {
-          "href": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/06/29/propositions-part-3.html",
+          "href": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/06/30/propositions-part-4.html",
           "rel": "alternate",
           "type": "text/html",
-          "title": "13 Propositions on an Internet for a Burning World (Part 3)"
+          "title": "13 Propositions on an Internet for a Burning World (Part 4)"
         }
       ],
-      "link": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/06/29/propositions-part-3.html",
-      "published": "2022-06-29T14:26:12+02:00",
+      "link": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/06/30/propositions-part-4.html",
+      "published": "2022-06-30T11:33:12+02:00",
       "published_parsed": [
         2022,
         6,
-        29,
+        30,
+        9,
+        33,
         12,
-        26,
-        12,
-        2,
-        180,
+        3,
+        181,
         0
       ],
-      "updated": "2022-06-29T14:26:12+02:00",
+      "updated": "2022-06-30T11:33:12+02:00",
       "updated_parsed": [
         2022,
         6,
-        29,
+        30,
+        9,
+        33,
         12,
-        26,
-        12,
-        2,
-        180,
+        3,
+        181,
         0
       ],
-      "id": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/06/29/propositions-part-3",
+      "id": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/06/30/propositions-part-4",
       "guidislink": false,
       "content": [
         {
           "type": "text/html",
           "language": null,
-          "base": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/06/29/propositions-part-3.html",
-          "value": "<div class=\"language-plaintext highlighter-rouge\"><div class=\"highlight\"><pre class=\"highlight\"><code>OpenBSD version: Not relevant here...\nArch:            ?\nNSFP:            Well...\n</code></pre></div></div>\n\n<p>In the <a href=\"https://doing-stupid-things.as59645.net/burning/world/resillience/2022/06/28/propositions-part-2.html\">last proposition</a>, we already took a shot at the issue of centralization.\nCentralization meaning that by now, a few large operators–Google, Amazon, Facebook, Cloudflare, Akamai–and to a lesser degree smaller ones like Hetzner or Digital Ocean are ‘the place’ where most content is hosted.\nInstead of putting a machine up in a local datacenter or with a small hoster (or, even–gasp–at home!), you just go to one of the big ones and go for it.</p>\n\n<p>This, of course does not stop at machines themselves (which, to be honest, remains a niche anyway), but <em>especially</em> concerns stuff that can come in the flavor of ‘Software-as-a-Service’.\nThe leading example here is <a href=\"https://pure.mpg.de/rest/items/item_3384330_5/component/file_3388345/content\">most likely email</a>; \nInstead of running your own mail infrastructure for your own domain (or using another <em>small</em> and <em>local</em> email provider), you usually just end up with gmail.\nSimilary, especially for corporations, Office 365 and cloud hosted MS Exchange are <em>the way to go</em>.</p>\n\n<p>Now, email makes a <em>really</em> good example, because we already figured out that <a href=\"https://pure.mpg.de/rest/items/item_3384330_5/component/file_3388345/content\">running email infrastructure</a> is hard.\nDoing so <em>securely</em> is even harder. \nSpecifically, when it comes to exchange, the whole thing got so complex that it is <a href=\"https://twitter.com/swiftonsecurity/status/1366867228914810880\"><em>‘organizational clownery’</em></a> to run a self hosted exchange;\nYou are just insanely more likely to forget an update or <em>do something stupid</em> with this beast of a software, that will ultimately spill your userdata all over the Internet…</p>\n\n<p>Hence, our next proposition is:</p>\n\n<h1 id=\"proposition-3\">Proposition 3</h1>\n<p><em>“There is a tension between privacy and security pitting decentralization vs. centralization.”</em></p>\n\n<p>Following the introduction, this point confunds several aspects of centralization and cloudification.\nOne part is that a major component of centralization and migrating to centralized cloud infrastructures is the reduction of capital expenses in terms of knowledge.\nWhile this means that organizations become dependent as they <a href=\"https://arxiv.org/abs/2104.09462\">no longer retain the ability to run their own infrastructure</a>, it also hints at the issue of security being ‘easier’ for centralized clouds.</p>\n\n<p>In general, doing things properly and more secure becomes <em>easier</em> with <em>more control</em>.\nHence, security in itself is already easier in a centralized ‘walled garden’—simply because there is more knowledge on what is <em>normal</em> to work with and detect anomalies—it is also easier when there are the resources there to run systems <em>properly</em>.\nA dedicated security team is simply unrealistic for smaller organizations, let alone small communities.\nStill, for hypergiants, we usually talk about security <em>teams</em>.\nIn addition, building a system that tolerates <a href=\"https://arxiv.org/abs/2103.13287\">human error</a> and lessens the impact of security misconfigurations needs a certain scale.</p>\n\n<p>This boils down to the rather common knowledge that operating systems gets easier <a href=\"https://everythingsysadmin.com/books.html\">if you can treat them like cattle</a>.\nThis, in turn, needs scale to be feasible.\nAnd that’s were centralization bites its tail.</p>\n\n<p>Polemically speaking, this ultimately creates a choice between the devil and the deep blue sea: \nEither you allow a selected hypergiant to—technically be able to—read your emails and their ‘walled garden’ and ability to scale operations will keep your mails and you secure.\nOr you host your own system and might be <a href=\"https://pure.mpg.de/rest/items/item_3384330_5/component/file_3388345/content\">less able to deliver your mails to others</a>, or may even find them leaked due to a configuration mistake.</p>\n\n<p>The choice is yours… if there is one at all.</p>"
+          "base": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/06/30/propositions-part-4.html",
+          "value": "<div class=\"language-plaintext highlighter-rouge\"><div class=\"highlight\"><pre class=\"highlight\"><code>OpenBSD version: Not relevant here...\nArch:            ?\nNSFP:            Well...\n</code></pre></div></div>\n\n<p>The idea of (eternal) <em>growth</em> and profitability are a cornerstone of our society (despite <a href=\"http://web.archive.org/web/20220603214700/https://www.clubofrome.org/ltg50/\">not being a thing</a>).\nEspecially in the IT world, the idea of ‘do start-up, be rich’ is the <em>ultimate</em> dream and fullfilment of an overcome deus-ex machina lifting one into the ranks of our new world’s aristocracy.\nSo, at least the fairy tale we tend to tell ourselves.</p>\n\n<p>There is another whole argument to be had how having rich ancestors is <em>really</em> beneficial in this process;\nHowever, this article is about another aspect of creating a <em>large</em> and <em>profitable</em> system that <em>scales</em>.</p>\n\n<p>We claim, that:</p>\n\n<h1 id=\"proposition-4\">Proposition 4</h1>\n<p><em>“Centralization and profit are inherently incompatible with care for infrastructures.”</em></p>\n\n<p>In our globalized economy, the idea is that people and especially corporations, naturally have the goal of maximizing their profits and gains.\nWe do not want to judge this perspective here.\nFor our proposition it is irrelevant whether this is a good or a bad thing. (spoiler: <em>We</em> think it is a bad thing… )</p>\n\n<p>But why are centralization and profit incompatible with care?<br />\nWell, it starts with centralization.<br />\nCentralizing infrastructure also means centralizing control.<br />\nCentralizing control means <a href=\"https://en.wikipedia.org/wiki/Platform_capitalism\">centralizing power</a>.<br />\nCentralizing power means that, all of a sudden, entities gain <em>the ability</em> to go through with decissions simply for their own benefit, disregarding needs of others.<br />\nThis, quiet obviously, can be come ‘suboptimal’ if we are talking about infrastructure others <em>depend</em> upon.</p>\n\n<p>Next, we have the profit component.\nThe thing with <a href=\"https://arxiv.org/abs/2104.09462\">the cloud</a> and digital systems in general is that <em>scaling</em> needs that <a href=\"https://everythingsysadmin.com/books.html\">cattle-style approach</a>.\nYou reduce cost with automation and consistency.\nIn running your system and in supporting your users, in deciding which services to run (or discontinue), in deciding which integrations with external services you allow, and what freedoms your users enjoy in <em>how</em> they can use and interact with your platform.</p>\n\n<p>Caring, however, does not only mean caring for the needs of the majority.\nStill, caring for everyone in their uniqueness means that a lot of beautiful leaves in the end make a heap whose weigth can make you collapse.\nCaring for users’ needs is simply costly.</p>\n\n<p>Similarly, caring for infrastructures entails you doing things that have <em>no</em> measurable impact on users.\nDoing maintenance and ensuring thing <em>keep running</em> does not constitute the holy grail of <em>‘innovation’</em> or the mantra of <em>‘moving fast and breaking things’</em>.\nIt simply ensures things stay the (working) same.<br />\nReducing that care will, ultimately, degrade your service.<br />\nSlowly.<br />\nUsers may not notice it at first.<br />\nUsers may never notice it at all.<br />\nAnd ultimately the infrastructure falling apart is a slow progress, much like a frog finding themselves in a pot of slowly boiling water.\nSo, if you want to (quickly, i.e., within a 5-10y timespan) increase profits… why should you care about the infrastructure, instead of banking resources on moving fast, doing (for engineers certainly also) more fun things, <em>‘innovating’</em>, and breaking things?</p>\n\n<p>Hence, in a profit-oriented world, it can become fiscally untenable to maintain sufficient care for a service/infrastructure and its users.\nTo conserve their bottom line, corporations will discontinue services users rely on, or apply support mechanics that can not provide the care <em>some</em> users may need, or neglect maintenance of existing systems.\nWhile for a <em>profit driven</em> corporation, this is a rational decision, it will mean a significant loss for users, no matter how mundane (<a href=\"https://www.androidcentral.com/nest-secure-being-discontinued-and-people-are-rightfully-losing-their-minds\">your fancy home automation no longer working</a>), unusual (<a href=\"https://www.dailymail.co.uk/sciencetech/article-10774519/Fictosexual-man-married-HOLOGRAM-no-longer-speak-wife-software-glitch.html\">you having found love with a digital entity</a>), or obviously essential (<a href=\"https://spectrum.ieee.org/bionic-eye-obsolete\">visual implants becoming obsolete</a>) a service is.\nFor you, profit does not matter, if your world—whatever that is for you—suddenly goes dark again.\nAnd (depending on the service) if the service ultimately breaks, it will not only be a loss for some, but for society at large.</p>\n\n<p>So, in summary:</p>\n\n<p>Centralization means power.<br />\nCare reduces profits in digital infrastructure.<br />\nPower allows you to ignore care to increase profits.<br />\nA rational actor will do so.<br />\nA caring one will not.<br />\nCorporations are rational.</p>"
         }
       ],
       "summary": "OpenBSD version: Not relevant here... Arch: ? NSFP: Well...",
@@ -1303,22 +1303,22 @@
       "section": "Politics"
     },
     "entry": {
-      "title": "Of Sanctions and Strategic Bombers",
+      "title": "A Guide Map for Reading the East Asian Canon",
       "title_detail": {
         "type": "text/plain",
         "language": null,
         "base": "https://scholars-stage.org/feed/",
-        "value": "Of Sanctions and Strategic Bombers"
+        "value": "A Guide Map for Reading the East Asian Canon"
       },
       "links": [
         {
           "rel": "alternate",
           "type": "text/html",
-          "href": "https://scholars-stage.org/of-sanctions-and-strategic-bombers/"
+          "href": "https://scholars-stage.org/a-guide-map-for-reading-the-east-asian-canon/"
         }
       ],
-      "link": "https://scholars-stage.org/of-sanctions-and-strategic-bombers/",
-      "comments": "https://scholars-stage.org/of-sanctions-and-strategic-bombers/#comments",
+      "link": "https://scholars-stage.org/a-guide-map-for-reading-the-east-asian-canon/",
+      "comments": "https://scholars-stage.org/a-guide-map-for-reading-the-east-asian-canon/#respond",
       "authors": [
         {
           "name": "T. Greer"
@@ -1328,57 +1328,57 @@
       "author_detail": {
         "name": "T. Greer"
       },
-      "published": "Tue, 31 May 2022 11:42:34 +0000",
+      "published": "Fri, 01 Jul 2022 02:05:39 +0000",
       "published_parsed": [
         2022,
-        5,
-        31,
-        11,
-        42,
-        34,
+        7,
         1,
-        151,
+        2,
+        5,
+        39,
+        4,
+        182,
         0
       ],
       "tags": [
         {
-          "term": "Bargaining and Balancing",
+          "term": "Books and Literature",
           "scheme": null,
           "label": null
         },
         {
-          "term": "Diplomacy",
+          "term": "Culture",
           "scheme": null,
           "label": null
         },
         {
-          "term": "Monied Interests",
+          "term": "History",
           "scheme": null,
           "label": null
         },
         {
-          "term": "Political Theory",
+          "term": "Japan",
           "scheme": null,
           "label": null
         },
         {
-          "term": "Russia",
+          "term": "The Middle Kingdom",
           "scheme": null,
           "label": null
         }
       ],
-      "id": "https://scholars-stage.org/?p=3379",
+      "id": "https://scholars-stage.org/?p=3486",
       "guidislink": false,
-      "summary": "<b>In the aftermath of the First World War,</b> military theorists across the West were desperate to fashion a path around the next war’s trenches. Engineers and tacticians spent that war tinkering away on machines that promised an escape from attrition: the gas shell, the U-boat, and the armored tank were all deployed with these hopes. All were found wanting. The aeroplane was not expected to have quite the same impact. The flying contraptions of the First World War were feather-like: they were both too light for heavy ordinance and too slim for bulky fuel storage.  Few of these biplanes and triplanes could penetrate deep behind enemy lines. None carried a payload capable of making a serious dent in the nearer trench works. Thus the incipient air forces of the First World War were chiefly used to reconnoiter the static defense works of the enemy—or to shoot down the enemy’s reconnoiterers. But the airmen flying and dying in Europe’s gray skies dreamed of something more.",
+      "summary": "<!-- wp:paragraph -->\n<p><strong>Readers may remember</strong> <a href=\"https://scholars-stage.org/a-non-western-canon-what-would-a-list-of-humanitys-100-greatest-writers-look-like/\">my stab at a global Great Books list</a>. Recently a reader contacted me asking for guidance: they wanted to read through the books on the \"East Asian\" section of that list, but did not believe he had the proper historical knowledge to understand or contextualize what they were reading. What do I recommend they read to make sense of the list?</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:paragraph -->\n<p>What follows will not make sense if you have not looked at that original post. Here is what I told him:</p>\n<!-- /wp:paragraph -->",
       "summary_detail": {
         "type": "text/html",
         "language": null,
         "base": "https://scholars-stage.org/feed/",
-        "value": "<b>In the aftermath of the First World War,</b> military theorists across the West were desperate to fashion a path around the next war’s trenches. Engineers and tacticians spent that war tinkering away on machines that promised an escape from attrition: the gas shell, the U-boat, and the armored tank were all deployed with these hopes. All were found wanting. The aeroplane was not expected to have quite the same impact. The flying contraptions of the First World War were feather-like: they were both too light for heavy ordinance and too slim for bulky fuel storage.  Few of these biplanes and triplanes could penetrate deep behind enemy lines. None carried a payload capable of making a serious dent in the nearer trench works. Thus the incipient air forces of the First World War were chiefly used to reconnoiter the static defense works of the enemy—or to shoot down the enemy’s reconnoiterers. But the airmen flying and dying in Europe’s gray skies dreamed of something more."
+        "value": "<!-- wp:paragraph -->\n<p><strong>Readers may remember</strong> <a href=\"https://scholars-stage.org/a-non-western-canon-what-would-a-list-of-humanitys-100-greatest-writers-look-like/\">my stab at a global Great Books list</a>. Recently a reader contacted me asking for guidance: they wanted to read through the books on the \"East Asian\" section of that list, but did not believe he had the proper historical knowledge to understand or contextualize what they were reading. What do I recommend they read to make sense of the list?</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:paragraph -->\n<p>What follows will not make sense if you have not looked at that original post. Here is what I told him:</p>\n<!-- /wp:paragraph -->"
       },
-      "wfw_commentrss": "https://scholars-stage.org/of-sanctions-and-strategic-bombers/feed/",
-      "slash_comments": "19",
-      "post-id": "3379"
+      "wfw_commentrss": "https://scholars-stage.org/a-guide-map-for-reading-the-east-asian-canon/feed/",
+      "slash_comments": "0",
+      "post-id": "3486"
     }
   },
   {
