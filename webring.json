@@ -9,14 +9,14 @@
       "section": "Linux"
     },
     "entry": {
-      "id": "tag:cspace@cks.mef.org,2009-03-24:/blog/tech/OneIsEasierThanMore",
+      "id": "tag:cspace@cks.mef.org,2009-03-24:/blog/web/BuildingBlogFashionShifts",
       "guidislink": true,
-      "link": "https://utcc.utoronto.ca/~cks/space/blog/tech/OneIsEasierThanMore",
+      "link": "https://utcc.utoronto.ca/~cks/space/blog/web/BuildingBlogFashionShifts",
       "links": [
         {
           "rel": "alternate",
           "type": "text/html",
-          "href": "https://utcc.utoronto.ca/~cks/space/blog/tech/OneIsEasierThanMore"
+          "href": "https://utcc.utoronto.ca/~cks/space/blog/web/BuildingBlogFashionShifts"
         }
       ],
       "authors": [
@@ -33,46 +33,46 @@
           "type": "text/html",
           "language": null,
           "base": "https://utcc.utoronto.ca/~cks/space/blog/?atom",
-          "value": "<div class=\"wikitext\"><p>Recently, I was sort of asked why we didn't just have multiple\nPrometheus servers (and <a href=\"https://utcc.utoronto.ca/~cks/space/blog/tech/HDDsNowSomewhatBetter\">were instead using mirrored 20TB HDs</a>). There are specific answers for the case\nof Prometheus, but in general <strong>one is the easiest number of things\nto have</strong>. The moment you have more than one of something, you get\na bunch of extra problems. At a minimum, you have to worry about\nconsistency between your N things, coordination between your N\nthings, and choosing which of your N things you're going to interact\nwith. These are all hard problems, and you don't have them if you\nonly have one thing.</p>\n\n<p>The problem of choosing between your N things is often considered\nsufficiently hard for people to deal with that systems go well out of\ntheir way in order to turn N things back into one as far as you're\nconcerned. For example, HTTP load balancers turn N web servers back into\none from an outside perspective, and RAID mirrors turn N disks back into\none as far as everything above them is concerned.</p>\n\n<p>In both cases (and many others) the illusion that you're dealing with\nonly a single thing can falter. An underlying web server or physical\ndisk that has different answers than all of the others will cause you\nheartburn and break the illusion of a single thing (well, a single\nnon-flaky thing). Still, these illusions tend to work well enough that\nwe readily use them and usually prefer them to the alternatives.</p>\n\n<p>(One reason they work so well is that vast amounts of engineering\nresources have been devoted to making them that way.)</p>\n\n<p>As a system design issue, the real question is not why you only\nhave one of something, it's whether you absolutely have to have\nmore than one. Even if having more than one works just as well as\nhaving only one, it'll almost certainly be more complicated and\nhave more peculiar failure modes. \"Do the simplest thing that works\"\nis a good idea in general, and much of the time this means 'one' is\nthe number you want.</p>\n\n<p>A corollary to this is that any 'more than one' system that wants to be\nused should pay a lot of attention to making itself work reliably and\nsmoothly. We pretty much universally use software mirrored disks on our\nLinux systems, and certainly one bit reason for that is that the Linux\nsoftware RAID people have spent a lot of effort creating a system that\njust works, minimizing the disadvantages of having two (or more) while\nmaximizing the advantages.</p>\n\n<p>(This observation is in no way new. I just feel like writing it down\ntoday.)</p>\n</div>"
+          "value": "<div class=\"wikitext\"><p>Tech people have always had a certain attraction to building their\nown blogs instead of using a canned platform. Not every tech person,\nby any means (there are plenty of people who use readily available\nplatforms because they have better things to spend time and energy\non), but there's generally been enough tech people that there have\nbeen tendencies and trends. Back <a href=\"https://utcc.utoronto.ca/~cks/space/blog/BlogGenesis\">when I started Wandering Thoughts</a>, the in thing to do was to build a dynamic blog\nengine. <a href=\"https://utcc.utoronto.ca/~cks/space/dwiki/DWiki\">DWiki</a>, the engine behind <a href=\"https://utcc.utoronto.ca/~cks/space/blog/\">Wandering Thoughts</a>\nwas such a dynamic engine, and it was somewhat modeled on others\nthat I saw at the time.</p>\n\n<p>As anyone who's read people's entries on 'I built my own blog/blog\nengine' knows, things have shifted a lot since the old days of the\nmid 00s. For some time now, the in thing to build has been a static\nsite or a static site generator (possibly using existing components\nwith different connections; people don't often write new Markdown\nto HTML renderers from scratch). This has gone along with a general\nshift in the style of blogs that tech people build for themselves\neven if they don't write anything new. It at least feels as if a\nnew tech blog is much more likely to be built with static site\ngeneration tools than it is to be an installation of Wordpress or\nanother dynamic blogging platform.</p>\n\n<p>(It's entirely possible that this (apparent) shift in general new\ntech blogs is an artifact of what sort of new tech blogs I wind up\nseeing, and that there's a great dark matter of such blogs where\nthe authors go with Wordpress or something else simple. Certainly\nI think that non-tech people starting new blogs generally don't go\nwith static site generators.)</p>\n\n<p>I don't know if there are any particular strong technical reasons\nfor the shift. If anything, it feels like it should have become\neasier to host a dynamic blog since the mid 00s, due to the vastly\nincreased availability of dedicated (virtual) machine hosting.  My\nperception is that it's basically a shift in the culture, although\nsomewhat pushed by an increasing emphasis on website speed (both\nnormally and under load), with the perception that static sites are\nfaster and 'less wasteful'.</p>\n\n<p>To the extent that I have feelings about this at all, I find it a\nlittle bit regretful that tech people have moved away from building\ndynamic blogs (and dynamic sites). Building <a href=\"https://utcc.utoronto.ca/~cks/space/blog/\">Wandering Thoughts</a>\nand <a href=\"https://utcc.utoronto.ca/~cks/space/dwiki/DWiki\">DWiki</a> has taught me a bunch more than I would have learned\nfrom writing a static site generator and then letting Apache (or\nsomething else) serve it for me.</p>\n\n<p>(This entry was sparked by reading <a href=\"https://brainbaking.com/post/2022/04/cool-things-people-do-with-their-blogs/\">Cool Things People Do With\nTheir Blogs</a>\n(<a href=\"https://lobste.rs/s/h9dybw/cool_things_people_do_with_their_blogs\">via</a>)\nand seeing it call out 'write a custom dynamic blog engine from\nscratch'. Back in the mid 00s, it at least felt like that was a\nroutine thing to do; nowadays, not so much. Also, see <a href=\"https://www.devever.net/~hl/mildlydynamic\">The Demise\nof the Mildly Dynamic Website</a>\n(<a href=\"https://lobste.rs/s/xqlim2/demise_mildly_dynamic_website\">via</a>).)</p>\n</div>"
         }
       ],
-      "summary": "<div class=\"wikitext\"><p>Recently, I was sort of asked why we didn't just have multiple\nPrometheus servers (and <a href=\"https://utcc.utoronto.ca/~cks/space/blog/tech/HDDsNowSomewhatBetter\">were instead using mirrored 20TB HDs</a>). There are specific answers for the case\nof Prometheus, but in general <strong>one is the easiest number of things\nto have</strong>. The moment you have more than one of something, you get\na bunch of extra problems. At a minimum, you have to worry about\nconsistency between your N things, coordination between your N\nthings, and choosing which of your N things you're going to interact\nwith. These are all hard problems, and you don't have them if you\nonly have one thing.</p>\n\n<p>The problem of choosing between your N things is often considered\nsufficiently hard for people to deal with that systems go well out of\ntheir way in order to turn N things back into one as far as you're\nconcerned. For example, HTTP load balancers turn N web servers back into\none from an outside perspective, and RAID mirrors turn N disks back into\none as far as everything above them is concerned.</p>\n\n<p>In both cases (and many others) the illusion that you're dealing with\nonly a single thing can falter. An underlying web server or physical\ndisk that has different answers than all of the others will cause you\nheartburn and break the illusion of a single thing (well, a single\nnon-flaky thing). Still, these illusions tend to work well enough that\nwe readily use them and usually prefer them to the alternatives.</p>\n\n<p>(One reason they work so well is that vast amounts of engineering\nresources have been devoted to making them that way.)</p>\n\n<p>As a system design issue, the real question is not why you only\nhave one of something, it's whether you absolutely have to have\nmore than one. Even if having more than one works just as well as\nhaving only one, it'll almost certainly be more complicated and\nhave more peculiar failure modes. \"Do the simplest thing that works\"\nis a good idea in general, and much of the time this means 'one' is\nthe number you want.</p>\n\n<p>A corollary to this is that any 'more than one' system that wants to be\nused should pay a lot of attention to making itself work reliably and\nsmoothly. We pretty much universally use software mirrored disks on our\nLinux systems, and certainly one bit reason for that is that the Linux\nsoftware RAID people have spent a lot of effort creating a system that\njust works, minimizing the disadvantages of having two (or more) while\nmaximizing the advantages.</p>\n\n<p>(This observation is in no way new. I just feel like writing it down\ntoday.)</p>\n</div>",
-      "title": "Having one is often much easier than having more than one",
+      "summary": "<div class=\"wikitext\"><p>Tech people have always had a certain attraction to building their\nown blogs instead of using a canned platform. Not every tech person,\nby any means (there are plenty of people who use readily available\nplatforms because they have better things to spend time and energy\non), but there's generally been enough tech people that there have\nbeen tendencies and trends. Back <a href=\"https://utcc.utoronto.ca/~cks/space/blog/BlogGenesis\">when I started Wandering Thoughts</a>, the in thing to do was to build a dynamic blog\nengine. <a href=\"https://utcc.utoronto.ca/~cks/space/dwiki/DWiki\">DWiki</a>, the engine behind <a href=\"https://utcc.utoronto.ca/~cks/space/blog/\">Wandering Thoughts</a>\nwas such a dynamic engine, and it was somewhat modeled on others\nthat I saw at the time.</p>\n\n<p>As anyone who's read people's entries on 'I built my own blog/blog\nengine' knows, things have shifted a lot since the old days of the\nmid 00s. For some time now, the in thing to build has been a static\nsite or a static site generator (possibly using existing components\nwith different connections; people don't often write new Markdown\nto HTML renderers from scratch). This has gone along with a general\nshift in the style of blogs that tech people build for themselves\neven if they don't write anything new. It at least feels as if a\nnew tech blog is much more likely to be built with static site\ngeneration tools than it is to be an installation of Wordpress or\nanother dynamic blogging platform.</p>\n\n<p>(It's entirely possible that this (apparent) shift in general new\ntech blogs is an artifact of what sort of new tech blogs I wind up\nseeing, and that there's a great dark matter of such blogs where\nthe authors go with Wordpress or something else simple. Certainly\nI think that non-tech people starting new blogs generally don't go\nwith static site generators.)</p>\n\n<p>I don't know if there are any particular strong technical reasons\nfor the shift. If anything, it feels like it should have become\neasier to host a dynamic blog since the mid 00s, due to the vastly\nincreased availability of dedicated (virtual) machine hosting.  My\nperception is that it's basically a shift in the culture, although\nsomewhat pushed by an increasing emphasis on website speed (both\nnormally and under load), with the perception that static sites are\nfaster and 'less wasteful'.</p>\n\n<p>To the extent that I have feelings about this at all, I find it a\nlittle bit regretful that tech people have moved away from building\ndynamic blogs (and dynamic sites). Building <a href=\"https://utcc.utoronto.ca/~cks/space/blog/\">Wandering Thoughts</a>\nand <a href=\"https://utcc.utoronto.ca/~cks/space/dwiki/DWiki\">DWiki</a> has taught me a bunch more than I would have learned\nfrom writing a static site generator and then letting Apache (or\nsomething else) serve it for me.</p>\n\n<p>(This entry was sparked by reading <a href=\"https://brainbaking.com/post/2022/04/cool-things-people-do-with-their-blogs/\">Cool Things People Do With\nTheir Blogs</a>\n(<a href=\"https://lobste.rs/s/h9dybw/cool_things_people_do_with_their_blogs\">via</a>)\nand seeing it call out 'write a custom dynamic blog engine from\nscratch'. Back in the mid 00s, it at least felt like that was a\nroutine thing to do; nowadays, not so much. Also, see <a href=\"https://www.devever.net/~hl/mildlydynamic\">The Demise\nof the Mildly Dynamic Website</a>\n(<a href=\"https://lobste.rs/s/xqlim2/demise_mildly_dynamic_website\">via</a>).)</p>\n</div>",
+      "title": "A quiet shift in what tech people build for their blogs",
       "title_detail": {
         "type": "text/html",
         "language": null,
         "base": "https://utcc.utoronto.ca/~cks/space/blog/?atom",
-        "value": "Having one is often much easier than having more than one"
+        "value": "A quiet shift in what tech people build for their blogs"
       },
       "tags": [
         {
-          "term": "tech",
+          "term": "web",
           "scheme": null,
           "label": null
         }
       ],
-      "updated": "2022-07-01T02:27:34Z",
+      "updated": "2022-07-02T01:33:30Z",
       "updated_parsed": [
         2022,
         7,
-        1,
         2,
-        27,
-        34,
-        4,
-        182,
+        1,
+        33,
+        30,
+        5,
+        183,
         0
       ],
-      "published": "2022-07-01T02:26:33Z",
+      "published": "2022-07-02T01:33:15Z",
       "published_parsed": [
         2022,
         7,
-        1,
         2,
-        26,
+        1,
         33,
-        4,
-        182,
+        15,
+        5,
+        183,
         0
       ]
     }
@@ -921,54 +921,54 @@
       "section": "OpenBSD"
     },
     "entry": {
-      "title": "13 Propositions on an Internet for a Burning World (Part 4)",
+      "title": "13 Propositions on an Internet for a Burning World (Part 6)",
       "title_detail": {
         "type": "text/html",
         "language": null,
         "base": "https://doing-stupid-things.as59645.net/feed.xml",
-        "value": "13 Propositions on an Internet for a Burning World (Part 4)"
+        "value": "13 Propositions on an Internet for a Burning World (Part 6)"
       },
       "links": [
         {
-          "href": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/06/30/propositions-part-4.html",
+          "href": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/02/propositions-part-6.html",
           "rel": "alternate",
           "type": "text/html",
-          "title": "13 Propositions on an Internet for a Burning World (Part 4)"
+          "title": "13 Propositions on an Internet for a Burning World (Part 6)"
         }
       ],
-      "link": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/06/30/propositions-part-4.html",
-      "published": "2022-06-30T11:33:12+02:00",
+      "link": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/02/propositions-part-6.html",
+      "published": "2022-07-02T16:00:12+02:00",
       "published_parsed": [
         2022,
-        6,
-        30,
-        9,
-        33,
+        7,
+        2,
+        14,
+        0,
         12,
-        3,
-        181,
+        5,
+        183,
         0
       ],
-      "updated": "2022-06-30T11:33:12+02:00",
+      "updated": "2022-07-02T16:00:12+02:00",
       "updated_parsed": [
         2022,
-        6,
-        30,
-        9,
-        33,
+        7,
+        2,
+        14,
+        0,
         12,
-        3,
-        181,
+        5,
+        183,
         0
       ],
-      "id": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/06/30/propositions-part-4",
+      "id": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/02/propositions-part-6",
       "guidislink": false,
       "content": [
         {
           "type": "text/html",
           "language": null,
-          "base": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/06/30/propositions-part-4.html",
-          "value": "<div class=\"language-plaintext highlighter-rouge\"><div class=\"highlight\"><pre class=\"highlight\"><code>OpenBSD version: Not relevant here...\nArch:            ?\nNSFP:            Well...\n</code></pre></div></div>\n\n<p>The idea of (eternal) <em>growth</em> and profitability are a cornerstone of our society (despite <a href=\"http://web.archive.org/web/20220603214700/https://www.clubofrome.org/ltg50/\">not being a thing</a>).\nEspecially in the IT world, the idea of ‘do start-up, be rich’ is the <em>ultimate</em> dream and fullfilment of an overcome deus-ex machina lifting one into the ranks of our new world’s aristocracy.\nSo, at least the fairy tale we tend to tell ourselves.</p>\n\n<p>There is another whole argument to be had how having rich ancestors is <em>really</em> beneficial in this process;\nHowever, this article is about another aspect of creating a <em>large</em> and <em>profitable</em> system that <em>scales</em>.</p>\n\n<p>We claim, that:</p>\n\n<h1 id=\"proposition-4\">Proposition 4</h1>\n<p><em>“Centralization and profit are inherently incompatible with care for infrastructures.”</em></p>\n\n<p>In our globalized economy, the idea is that people and especially corporations, naturally have the goal of maximizing their profits and gains.\nWe do not want to judge this perspective here.\nFor our proposition it is irrelevant whether this is a good or a bad thing. (spoiler: <em>We</em> think it is a bad thing… )</p>\n\n<p>But why are centralization and profit incompatible with care?<br />\nWell, it starts with centralization.<br />\nCentralizing infrastructure also means centralizing control.<br />\nCentralizing control means <a href=\"https://en.wikipedia.org/wiki/Platform_capitalism\">centralizing power</a>.<br />\nCentralizing power means that, all of a sudden, entities gain <em>the ability</em> to go through with decissions simply for their own benefit, disregarding needs of others.<br />\nThis, quiet obviously, can be come ‘suboptimal’ if we are talking about infrastructure others <em>depend</em> upon.</p>\n\n<p>Next, we have the profit component.\nThe thing with <a href=\"https://arxiv.org/abs/2104.09462\">the cloud</a> and digital systems in general is that <em>scaling</em> needs that <a href=\"https://everythingsysadmin.com/books.html\">cattle-style approach</a>.\nYou reduce cost with automation and consistency.\nIn running your system and in supporting your users, in deciding which services to run (or discontinue), in deciding which integrations with external services you allow, and what freedoms your users enjoy in <em>how</em> they can use and interact with your platform.</p>\n\n<p>Caring, however, does not only mean caring for the needs of the majority.\nStill, caring for everyone in their uniqueness means that a lot of beautiful leaves in the end make a heap whose weigth can make you collapse.\nCaring for users’ needs is simply costly.</p>\n\n<p>Similarly, caring for infrastructures entails you doing things that have <em>no</em> measurable impact on users.\nDoing maintenance and ensuring thing <em>keep running</em> does not constitute the holy grail of <em>‘innovation’</em> or the mantra of <em>‘moving fast and breaking things’</em>.\nIt simply ensures things stay the (working) same.<br />\nReducing that care will, ultimately, degrade your service.<br />\nSlowly.<br />\nUsers may not notice it at first.<br />\nUsers may never notice it at all.<br />\nAnd ultimately the infrastructure falling apart is a slow progress, much like a frog finding themselves in a pot of slowly boiling water.\nSo, if you want to (quickly, i.e., within a 5-10y timespan) increase profits… why should you care about the infrastructure, instead of banking resources on moving fast, doing (for engineers certainly also) more fun things, <em>‘innovating’</em>, and breaking things?</p>\n\n<p>Hence, in a profit-oriented world, it can become fiscally untenable to maintain sufficient care for a service/infrastructure and its users.\nTo conserve their bottom line, corporations will discontinue services users rely on, or apply support mechanics that can not provide the care <em>some</em> users may need, or neglect maintenance of existing systems.\nWhile for a <em>profit driven</em> corporation, this is a rational decision, it will mean a significant loss for users, no matter how mundane (<a href=\"https://www.androidcentral.com/nest-secure-being-discontinued-and-people-are-rightfully-losing-their-minds\">your fancy home automation no longer working</a>), unusual (<a href=\"https://www.dailymail.co.uk/sciencetech/article-10774519/Fictosexual-man-married-HOLOGRAM-no-longer-speak-wife-software-glitch.html\">you having found love with a digital entity</a>), or obviously essential (<a href=\"https://spectrum.ieee.org/bionic-eye-obsolete\">visual implants becoming obsolete</a>) a service is.\nFor you, profit does not matter, if your world—whatever that is for you—suddenly goes dark again.\nAnd (depending on the service) if the service ultimately breaks, it will not only be a loss for some, but for society at large.</p>\n\n<p>So, in summary:</p>\n\n<p>Centralization means power.<br />\nCare reduces profits in digital infrastructure.<br />\nPower allows you to ignore care to increase profits.<br />\nA rational actor will do so.<br />\nA caring one will not.<br />\nCorporations are rational.</p>"
+          "base": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/02/propositions-part-6.html",
+          "value": "<div class=\"language-plaintext highlighter-rouge\"><div class=\"highlight\"><pre class=\"highlight\"><code>OpenBSD version: Not relevant here...\nArch:            ?\nNSFP:            Well...\n</code></pre></div></div>\n\n<p>Our world is changing and—by our own hands—not necessarily for the better. \nOne might have gotten the idea from the title already (burning world), but the outlook on our future we take in this series is not really concerned with best cases.\nWe ask ourselves how a world will look in which we increased CO2 in the athmosphere to 685 ppm by 2050, sending our world to <a href=\"https://www.oecd.org/env/indicators-modelling-outlooks/oecdenvironmentaloutlookto2050theconsequencesofinaction-keyfactsandfigures.htm\">a cooking 6 degrees celsius more on average by the end of the century</a>. \nA world where billions are displaced by heat and floods, and where the global north learns that climate change will ravage us all, no matter where we live or in which delusion of exceptionalism we currently cradle ourselves.\nA world where there is no ‘global supplychain’ to collapse anymore, and most long range fibres just go… dark.</p>\n\n<p>Yes, we know that this is hard to imagine. But it is far to close to <a href=\"https://www.oecd.org/env/indicators-modelling-outlooks/oecdenvironmentaloutlookto2050theconsequencesofinaction-keyfactsandfigures.htm\">experts’ predictions</a> for comfort.\nLuckily, by now at least some people have started to think about such a world in a serious way;\nOne of them is solene, an OpenBSD developper, whose <a href=\"https://dataswamp.org/~solene/2021-10-21-huge-disaster-recovery-plan.html\">blog post</a> was fundamentally inspirational for this proposition, and i suggest you go along and read her article before continuing to read here.</p>\n\n<p>So, following the question of what we do when the hypergiants fail, we also have to ask ourselves what we could do when even more significant parts of the Internet fail in the shifts to come.\nWe claim that:</p>\n\n<h1 id=\"proposition-6\">Proposition 6</h1>\n<p><em>“Communities caring for local and distributed infrastructure are the future in a world falling apart.”</em></p>\n\n<p>The question here is, of course, how dire our future will be. \nIn a ravaged and war-torn mad-max future there will be limited space for things to be… well, peaceful enough for technologoy to be there.\nHence, instead, we are following the world solene scetched out, in which <a href=\"https://dataswamp.org/~solene/2021-10-21-huge-disaster-recovery-plan.html\"><em>“[…] we would still have *some* power available […]”</em></a>.</p>\n\n<p>That world is pretty much aligned with a rather solar-punk’y future, one where there is <em>some</em> power available, but not as abundant as now.\nWhere we are concious about what we use energy for, and how we can continue living in and with our world.</p>\n\n<p>Naturally, despite having burned down, our world would still remain littered with (disfunctional) computers and network technologoy all around us.\nAs she says, that world would most likely be a world where local communities commandeer these sets of technology and start to (re)build (potentially interconnected) networks (of networks).\nHowever, the focus there would always be providing <em>primary</em> and <em>useful</em> services for local communities.\nHaving <em>local</em> access to a knowledge database will be more important than, say, global communication.</p>\n\n<p>With supplychains gone, keeping systems and networks running will also become a difficult task in terms of getting spare parts and replacements.\nThis world will be about engineers finding ways; For the benefit of their–again–local community.</p>\n\n<p>This perspective on critical IT infrastructure contradicts the further evolution of the platform economy and centralization of the current Internet. \nIn our digitizing world we find ‘the cloud’ and ‘the Internet’ progressing into more and more <em>things</em> (It is called the Internet of Things for a reason, hm?).\nAs we <a href=\"https://doing-stupid-things.as59645.net/burning/world/resillience/2022/06/30/propositions-part-4.html\">discussed before</a>, many of these tools do not react <em>too</em> well to their cloud controllers and management platforms being… well, gone.\nHence, we also project that the task of <em>‘making it run even though the cloud controller is gone’</em> will be an essential occupation in a potential future. \nLocal communities will (have to) find ways to utilize technology and provide working services. \nTo survive.</p>"
         }
       ],
       "summary": "OpenBSD version: Not relevant here... Arch: ? NSFP: Well...",
