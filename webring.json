@@ -9,14 +9,14 @@
       "section": "Linux"
     },
     "entry": {
-      "id": "tag:cspace@cks.mef.org,2009-03-24:/blog/sysadmin/ReproducibleMachinesWhyNot",
+      "id": "tag:cspace@cks.mef.org,2009-03-24:/blog/tech/FilesystemsVsGeneralTrees",
       "guidislink": true,
-      "link": "https://utcc.utoronto.ca/~cks/space/blog/sysadmin/ReproducibleMachinesWhyNot",
+      "link": "https://utcc.utoronto.ca/~cks/space/blog/tech/FilesystemsVsGeneralTrees",
       "links": [
         {
           "rel": "alternate",
           "type": "text/html",
-          "href": "https://utcc.utoronto.ca/~cks/space/blog/sysadmin/ReproducibleMachinesWhyNot"
+          "href": "https://utcc.utoronto.ca/~cks/space/blog/tech/FilesystemsVsGeneralTrees"
         }
       ],
       "authors": [
@@ -33,46 +33,46 @@
           "type": "text/html",
           "language": null,
           "base": "https://utcc.utoronto.ca/~cks/space/blog/?atom",
-          "value": "<div class=\"wikitext\"><p>When I wrote about <a href=\"https://utcc.utoronto.ca/~cks/space/blog/sysadmin/ReproducibleMachinesWhy\">why we care about being able to (efficiently)\nreproduce machines</a>, I mentioned that this\ndidn't used to be a priority in the sufficiently old days. By the\nsufficiently old days I mean broadly the 1990s, at least in more\nmoderate sized environments like what used to be common at <a href=\"https://www.utoronto.ca/\">the\nuniversity</a>; I think by even the early\n00s, people here were starting to care. Today it's time for my\nrambles about some reasons why I think we didn't used to care as\nmuch.</p>\n\n<p>First, back then it was often harder to keep machines running in\nthe first place. Software was more primitive and hardware was\nsufficiently limited that we were pushing it much closer to the\nedge than we did later. If much of your time is spent fighting\nfires, everything else takes second place. This feeds into the\nother two reasons.</p>\n\n<p>(One area of software that was more primitive was the software\nfor automatically managing machines.)</p>\n\n<p>Second, often we didn't have enough machines to care about it; we\nmight only have one machine that could do a given function (or need\nall of the machines we had). To a certain point, the push for having\nreproducible machines comes from having more machines to reproduce\nthe first ones on to, whether these new machines are spare physical\nservers or new virtual ones. Also, to some extent the payoff in\ntime savings for getting to reproducible machines increases as you\nhave more and more machines. If you only have two or three servers,\nputting together a big automation framework may not be worth it\n(especially if the state of software means that you have to build\na good chunk of it).</p>\n\n<p>Third and related to the second issue, technology and software was\noften changing fast enough than if we needed to replace a machine,\nthe replacement hardware and software would be different enough\nthat we'd be mostly starting from scratch. Even within the university,\nthis was somewhat variable depending on what hardware you tended\nto buy; for example, there were places that were Solaris SPARC shops\nthat ran Solaris for over a decade, and I don't think Solaris changed\nhugely over that time. In that sort of environment you could reuse\na fair amount of configuration from (server) generation to generation.</p>\n\n<p>(At the same time, I know another environment that went from DEC\nMIPS Ultrix to SGI (MIPS) IRIX to x86 Linux over the course of a\nbit over a decade, with relatively little configuration reuse from\neach one to the next.)</p>\n\n<p>This didn't mean that we weren't worried about losing a machine to\nhardware failure (or disasters). Instead, our plans for recovering\nfrom that sort of problem generally involved full system restores\nin some fashion. How well that would have worked is an open question,\nsince usually we didn't have the spare hardware or the other things\nthat would have been required to do a full end to end test.</p>\n\n<p>(We could and did recover individual things from backups (<a href=\"https://twitter.com/thatcks/status/1159186709436928000\">well,\nmostly</a>,\n<a href=\"https://twitter.com/thatcks/status/520665762672160768\">also</a>),\nwe just mostly never did full system restores because server failures\nwere very uncommon.)</p>\n\n<p>All of this is somewhat of a reconstruction of what I and other\npeople were thinking at the time, or not thinking (and it's a\nreconstruction from a long way away in time). Part of it may have\nsimply been that the idea of reproducible machines wasn't really\nout there yet, especially as a realistic possibility for relatively\nsmall environments.</p>\n\n<p>PS: One of my feelings on this issue is that as a practical matter,\nyou need to actually test your documentation, procedures, and\nsoftware for reproducing machines. Doing this sort of testing is\nmuch easier in a modern environment with spare servers and virtual\nmachines.</p>\n</div>"
+          "value": "<div class=\"wikitext\"><p>A while back I read Felix Kohlgrüber's <a href=\"https://fkohlgrueber.github.io/blog/tree-structure-of-file-systems/\">The Tree Structure of File\nSystems</a>\n(<a href=\"https://lobste.rs/s/ydno8w/tree_structure_file_systems\">via</a>).\nAs I read it, it argues that filesystem directories should be a\nricher and more general data structure, one that could contain both\ndata and children (<a href=\"https://utcc.utoronto.ca/~cks/space/blog/web/WebPathsNotQuiteFilesystemAPI\">which would make web paths map better on to\nthe 'filesystem API'</a>). As it\nhappens, I think there is a relatively good reason that directories\nare organization this way, one beyond simple history.</p>\n\n<p>To put it simply, filesystem directories are optimized for out of\nmemory traversal in order to look up names. Generally their actual\nrepresentation is some form of data structure filled with &lt;name,\nreference> pairs, where the reference tells you where (on disk) to\nfind almost all substantive information about the name. In the old\ndays and in basic filesystems, the containing data structure was a\nlist; in modern filesystems, it's usually some form of balanced\ntree (sometimes once the directory is big enough). Directories are\noptimized to be searched through with as few disk reads as possible,\nbecause disk reads are assumed to be expensive.</p>\n\n<p>(Modern filesystems often put some sufficiently commonly used metadata\nabout each name into the directory as well, because that way you can\ntell programs about it without them having to a separate disk read,\npossibly a separate disk read for each name in the directory.)</p>\n\n<p>If you augment this basic data structure with data content associated\nwith the directory (well, the directory name) itself, you don't want\nto put this new data in line with the lookup data structure, where\nit will force you to read more data from disk in order to do the\nsame traversals. Instead it's mostly likely going to be referred to\nseparately. There will be one set of disk storage associated with the\ninventory of the directory's children and a second set of disk storage\nfor the data content. Entities without children will have a 'no such\nthing' marker for their first sort of disk storage and ones without\ndata will have a 'no such thing' marker for their second. If a lot\nof filesystem entities only have one or the other (ie, if they're\nconventional files or directories), then a lot of the time having\ntwo slots is a waste of (limited) space in an area where filesystems\nhave traditionally cared about (in the metadata kept for most or all\nfilesystem entities).</p>\n\n<p>More broadly, I think it's a mistake to look at filesystems through\nthe eyes of general tree structures. Filesystems originated in a\nvery constrained situation and continue to be focused on fairly\nconstrained one, one where any indirect reference to something is\nvery slow and the less that you need to access the better.</p>\n\n<p>(It's true that modern memory references have gotten slower and\nslower relative to raw CPU speed, but they're still faster than\neven NVMe speeds. Plus, a lot of in memory data structures are still\nnot being designed by programmers to minimize references and pack\nthings as densely as possible, for various reasons.)</p>\n</div>"
         }
       ],
-      "summary": "<div class=\"wikitext\"><p>When I wrote about <a href=\"https://utcc.utoronto.ca/~cks/space/blog/sysadmin/ReproducibleMachinesWhy\">why we care about being able to (efficiently)\nreproduce machines</a>, I mentioned that this\ndidn't used to be a priority in the sufficiently old days. By the\nsufficiently old days I mean broadly the 1990s, at least in more\nmoderate sized environments like what used to be common at <a href=\"https://www.utoronto.ca/\">the\nuniversity</a>; I think by even the early\n00s, people here were starting to care. Today it's time for my\nrambles about some reasons why I think we didn't used to care as\nmuch.</p>\n\n<p>First, back then it was often harder to keep machines running in\nthe first place. Software was more primitive and hardware was\nsufficiently limited that we were pushing it much closer to the\nedge than we did later. If much of your time is spent fighting\nfires, everything else takes second place. This feeds into the\nother two reasons.</p>\n\n<p>(One area of software that was more primitive was the software\nfor automatically managing machines.)</p>\n\n<p>Second, often we didn't have enough machines to care about it; we\nmight only have one machine that could do a given function (or need\nall of the machines we had). To a certain point, the push for having\nreproducible machines comes from having more machines to reproduce\nthe first ones on to, whether these new machines are spare physical\nservers or new virtual ones. Also, to some extent the payoff in\ntime savings for getting to reproducible machines increases as you\nhave more and more machines. If you only have two or three servers,\nputting together a big automation framework may not be worth it\n(especially if the state of software means that you have to build\na good chunk of it).</p>\n\n<p>Third and related to the second issue, technology and software was\noften changing fast enough than if we needed to replace a machine,\nthe replacement hardware and software would be different enough\nthat we'd be mostly starting from scratch. Even within the university,\nthis was somewhat variable depending on what hardware you tended\nto buy; for example, there were places that were Solaris SPARC shops\nthat ran Solaris for over a decade, and I don't think Solaris changed\nhugely over that time. In that sort of environment you could reuse\na fair amount of configuration from (server) generation to generation.</p>\n\n<p>(At the same time, I know another environment that went from DEC\nMIPS Ultrix to SGI (MIPS) IRIX to x86 Linux over the course of a\nbit over a decade, with relatively little configuration reuse from\neach one to the next.)</p>\n\n<p>This didn't mean that we weren't worried about losing a machine to\nhardware failure (or disasters). Instead, our plans for recovering\nfrom that sort of problem generally involved full system restores\nin some fashion. How well that would have worked is an open question,\nsince usually we didn't have the spare hardware or the other things\nthat would have been required to do a full end to end test.</p>\n\n<p>(We could and did recover individual things from backups (<a href=\"https://twitter.com/thatcks/status/1159186709436928000\">well,\nmostly</a>,\n<a href=\"https://twitter.com/thatcks/status/520665762672160768\">also</a>),\nwe just mostly never did full system restores because server failures\nwere very uncommon.)</p>\n\n<p>All of this is somewhat of a reconstruction of what I and other\npeople were thinking at the time, or not thinking (and it's a\nreconstruction from a long way away in time). Part of it may have\nsimply been that the idea of reproducible machines wasn't really\nout there yet, especially as a realistic possibility for relatively\nsmall environments.</p>\n\n<p>PS: One of my feelings on this issue is that as a practical matter,\nyou need to actually test your documentation, procedures, and\nsoftware for reproducing machines. Doing this sort of testing is\nmuch easier in a modern environment with spare servers and virtual\nmachines.</p>\n</div>",
-      "title": "Why reproducible machines didn't used to be a priority (I think)",
+      "summary": "<div class=\"wikitext\"><p>A while back I read Felix Kohlgrüber's <a href=\"https://fkohlgrueber.github.io/blog/tree-structure-of-file-systems/\">The Tree Structure of File\nSystems</a>\n(<a href=\"https://lobste.rs/s/ydno8w/tree_structure_file_systems\">via</a>).\nAs I read it, it argues that filesystem directories should be a\nricher and more general data structure, one that could contain both\ndata and children (<a href=\"https://utcc.utoronto.ca/~cks/space/blog/web/WebPathsNotQuiteFilesystemAPI\">which would make web paths map better on to\nthe 'filesystem API'</a>). As it\nhappens, I think there is a relatively good reason that directories\nare organization this way, one beyond simple history.</p>\n\n<p>To put it simply, filesystem directories are optimized for out of\nmemory traversal in order to look up names. Generally their actual\nrepresentation is some form of data structure filled with &lt;name,\nreference> pairs, where the reference tells you where (on disk) to\nfind almost all substantive information about the name. In the old\ndays and in basic filesystems, the containing data structure was a\nlist; in modern filesystems, it's usually some form of balanced\ntree (sometimes once the directory is big enough). Directories are\noptimized to be searched through with as few disk reads as possible,\nbecause disk reads are assumed to be expensive.</p>\n\n<p>(Modern filesystems often put some sufficiently commonly used metadata\nabout each name into the directory as well, because that way you can\ntell programs about it without them having to a separate disk read,\npossibly a separate disk read for each name in the directory.)</p>\n\n<p>If you augment this basic data structure with data content associated\nwith the directory (well, the directory name) itself, you don't want\nto put this new data in line with the lookup data structure, where\nit will force you to read more data from disk in order to do the\nsame traversals. Instead it's mostly likely going to be referred to\nseparately. There will be one set of disk storage associated with the\ninventory of the directory's children and a second set of disk storage\nfor the data content. Entities without children will have a 'no such\nthing' marker for their first sort of disk storage and ones without\ndata will have a 'no such thing' marker for their second. If a lot\nof filesystem entities only have one or the other (ie, if they're\nconventional files or directories), then a lot of the time having\ntwo slots is a waste of (limited) space in an area where filesystems\nhave traditionally cared about (in the metadata kept for most or all\nfilesystem entities).</p>\n\n<p>More broadly, I think it's a mistake to look at filesystems through\nthe eyes of general tree structures. Filesystems originated in a\nvery constrained situation and continue to be focused on fairly\nconstrained one, one where any indirect reference to something is\nvery slow and the less that you need to access the better.</p>\n\n<p>(It's true that modern memory references have gotten slower and\nslower relative to raw CPU speed, but they're still faster than\neven NVMe speeds. Plus, a lot of in memory data structures are still\nnot being designed by programmers to minimize references and pack\nthings as densely as possible, for various reasons.)</p>\n</div>",
+      "title": "Filesystems versus general tree structures",
       "title_detail": {
         "type": "text/html",
         "language": null,
         "base": "https://utcc.utoronto.ca/~cks/space/blog/?atom",
-        "value": "Why reproducible machines didn't used to be a priority (I think)"
+        "value": "Filesystems versus general tree structures"
       },
       "tags": [
         {
-          "term": "sysadmin",
+          "term": "tech",
           "scheme": null,
           "label": null
         }
       ],
-      "updated": "2022-07-03T01:18:34Z",
+      "updated": "2022-07-04T02:33:01Z",
       "updated_parsed": [
         2022,
         7,
-        3,
+        4,
+        2,
+        33,
         1,
-        18,
-        34,
-        6,
-        184,
+        0,
+        185,
         0
       ],
-      "published": "2022-07-03T01:17:32Z",
+      "published": "2022-07-04T02:32:01Z",
       "published_parsed": [
         2022,
         7,
-        3,
-        1,
-        17,
+        4,
+        2,
         32,
-        6,
-        184,
+        1,
+        0,
+        185,
         0
       ]
     }
@@ -921,54 +921,54 @@
       "section": "OpenBSD"
     },
     "entry": {
-      "title": "13 Propositions on an Internet for a Burning World (Part 6)",
+      "title": "13 Propositions on an Internet for a Burning World (Part 7)",
       "title_detail": {
         "type": "text/html",
         "language": null,
         "base": "https://doing-stupid-things.as59645.net/feed.xml",
-        "value": "13 Propositions on an Internet for a Burning World (Part 6)"
+        "value": "13 Propositions on an Internet for a Burning World (Part 7)"
       },
       "links": [
         {
-          "href": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/02/propositions-part-6.html",
+          "href": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/03/propositions-part-7.html",
           "rel": "alternate",
           "type": "text/html",
-          "title": "13 Propositions on an Internet for a Burning World (Part 6)"
+          "title": "13 Propositions on an Internet for a Burning World (Part 7)"
         }
       ],
-      "link": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/02/propositions-part-6.html",
-      "published": "2022-07-02T16:00:12+02:00",
+      "link": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/03/propositions-part-7.html",
+      "published": "2022-07-03T17:37:12+02:00",
       "published_parsed": [
         2022,
         7,
-        2,
-        14,
-        0,
+        3,
+        15,
+        37,
         12,
-        5,
-        183,
+        6,
+        184,
         0
       ],
-      "updated": "2022-07-02T16:00:12+02:00",
+      "updated": "2022-07-03T17:37:12+02:00",
       "updated_parsed": [
         2022,
         7,
-        2,
-        14,
-        0,
+        3,
+        15,
+        37,
         12,
-        5,
-        183,
+        6,
+        184,
         0
       ],
-      "id": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/02/propositions-part-6",
+      "id": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/03/propositions-part-7",
       "guidislink": false,
       "content": [
         {
           "type": "text/html",
           "language": null,
-          "base": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/02/propositions-part-6.html",
-          "value": "<div class=\"language-plaintext highlighter-rouge\"><div class=\"highlight\"><pre class=\"highlight\"><code>OpenBSD version: Not relevant here...\nArch:            ?\nNSFP:            Well...\n</code></pre></div></div>\n\n<p>Our world is changing and—by our own hands—not necessarily for the better. \nOne might have gotten the idea from the title already (burning world), but the outlook on our future we take in this series is not really concerned with best cases.\nWe ask ourselves how a world will look in which we increased CO2 in the athmosphere to 685 ppm by 2050, sending our world to <a href=\"https://www.oecd.org/env/indicators-modelling-outlooks/oecdenvironmentaloutlookto2050theconsequencesofinaction-keyfactsandfigures.htm\">a cooking 6 degrees celsius more on average by the end of the century</a>. \nA world where billions are displaced by heat and floods, and where the global north learns that climate change will ravage us all, no matter where we live or in which delusion of exceptionalism we currently cradle ourselves.\nA world where there is no ‘global supplychain’ to collapse anymore, and most long range fibres just go… dark.</p>\n\n<p>Yes, we know that this is hard to imagine. But it is far to close to <a href=\"https://www.oecd.org/env/indicators-modelling-outlooks/oecdenvironmentaloutlookto2050theconsequencesofinaction-keyfactsandfigures.htm\">experts’ predictions</a> for comfort.\nLuckily, by now at least some people have started to think about such a world in a serious way;\nOne of them is solene, an OpenBSD developper, whose <a href=\"https://dataswamp.org/~solene/2021-10-21-huge-disaster-recovery-plan.html\">blog post</a> was fundamentally inspirational for this proposition, and i suggest you go along and read her article before continuing to read here.</p>\n\n<p>So, following the question of what we do when the hypergiants fail, we also have to ask ourselves what we could do when even more significant parts of the Internet fail in the shifts to come.\nWe claim that:</p>\n\n<h1 id=\"proposition-6\">Proposition 6</h1>\n<p><em>“Communities caring for local and distributed infrastructure are the future in a world falling apart.”</em></p>\n\n<p>The question here is, of course, how dire our future will be. \nIn a ravaged and war-torn mad-max future there will be limited space for things to be… well, peaceful enough for technologoy to be there.\nHence, instead, we are following the world solene scetched out, in which <a href=\"https://dataswamp.org/~solene/2021-10-21-huge-disaster-recovery-plan.html\"><em>“[…] we would still have *some* power available […]”</em></a>.</p>\n\n<p>That world is pretty much aligned with a rather solar-punk’y future, one where there is <em>some</em> power available, but not as abundant as now.\nWhere we are concious about what we use energy for, and how we can continue living in and with our world.</p>\n\n<p>Naturally, despite having burned down, our world would still remain littered with (disfunctional) computers and network technologoy all around us.\nAs she says, that world would most likely be a world where local communities commandeer these sets of technology and start to (re)build (potentially interconnected) networks (of networks).\nHowever, the focus there would always be providing <em>primary</em> and <em>useful</em> services for local communities.\nHaving <em>local</em> access to a knowledge database will be more important than, say, global communication.</p>\n\n<p>With supplychains gone, keeping systems and networks running will also become a difficult task in terms of getting spare parts and replacements.\nThis world will be about engineers finding ways; For the benefit of their–again–local community.</p>\n\n<p>This perspective on critical IT infrastructure contradicts the further evolution of the platform economy and centralization of the current Internet. \nIn our digitizing world we find ‘the cloud’ and ‘the Internet’ progressing into more and more <em>things</em> (It is called the Internet of Things for a reason, hm?).\nAs we <a href=\"https://doing-stupid-things.as59645.net/burning/world/resillience/2022/06/30/propositions-part-4.html\">discussed before</a>, many of these tools do not react <em>too</em> well to their cloud controllers and management platforms being… well, gone.\nHence, we also project that the task of <em>‘making it run even though the cloud controller is gone’</em> will be an essential occupation in a potential future. \nLocal communities will (have to) find ways to utilize technology and provide working services. \nTo survive.</p>"
+          "base": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/03/propositions-part-7.html",
+          "value": "<div class=\"language-plaintext highlighter-rouge\"><div class=\"highlight\"><pre class=\"highlight\"><code>OpenBSD version: Not relevant here...\nArch:            ?\nNSFP:            Well...\n</code></pre></div></div>\n\n<p>IPv6 has been first specified in <a href=\"https://datatracker.ietf.org/doc/html/rfc1883\">RFC1883</a> in December 1995, i.e., around <em>27 years</em> ago.\nThis ‘new’ protocol is nearly as old as… well, yours truly.\nNevertheless, there is no ‘fullscale IPv6 adoption’ yet.\nWhat we see is mostly <a href=\"https://www.google.com/intl/en/ipv6/statistics.html\">large content providers</a> seeing a steady increase in clients from ISPs, especially in the global north, also having IPv6 connectivity.\nThen again, CIDR is <a href=\"https://datatracker.ietf.org/doc/html/rfc1519\">from 1993</a>, and we are still strugling with schools and universities teaching stuff involving ‘Class A’ networks.\nWhile there is undoubtedly <em>some</em> progress, v6 adoption is certainly not at the level we’d expect for a protocol <a href=\"https://datatracker.ietf.org/doc/html/rfc1945\">older than HTTP/1.0</a>, and we also see <a href=\"https://twitter.com/waiputech/status/1543593614411964416\">adoption stalling</a> in some regions.\nSo maybe… expectations on v6 adoption were a bit too high.</p>\n\n<p>In any case, what we can observe at the moment is a <a href=\"https://labs.ripe.net/author/gih/what-drives-ipv6-deployment/\">lively discussions</a> and <a href=\"https://www.apnic.net/community/ipv6/deploy-ipv6/\">various</a> different <a href=\"https://circleid.com/posts/20210803-the-irrationality-of-deploying-ipv6\">perspectives</a> on why and whether ‘it is worth it’ to deploy v6, and what drives (or inhibits) its adoption.\nHowever, in this article, we will take a slightly different perspective on IPv6  adoption; \nOne more driven by our previous thoughts on decentralization and <em>equitable access</em> to the Internet.\nSpecifically, we claim:</p>\n\n<h1 id=\"proposition-7\">Proposition 7</h1>\n<p><em>“The slow adoption of IPv6 hinders a re-decentralization of the Internet.”</em></p>\n\n<p>Well, how do we get to that conclusion?\nThe IPv4 address space is, for all practical matters <a href=\"https://www.apnic.net/manage-ip/ipv4-exhaustion/\">exhausted</a> and in any case globally <a href=\"https://dl.acm.org/doi/pdf/10.1145/2766330.2766335\">unjustly distributed</a>.\nWith the Internet still being very much IPv4 centric—at least when it comes to the path <em>outside</em> of hypergiants—communities running their own services still <em>need</em> IPv4 addresses to provide services.\nConsidering the state of the IPv4 address market, this easily means an investment of <a href=\"https://auctions.ipv4.global/\">tens of thousands of dollars</a>.\nWhile this is a prohibitive cost for a small community project, it enables hypergiants and large hosting corporations to further collect addresses on a <em>relatively</em> cheap price compared to their annual operating expenses, thereby further centralizing the Internet.\nSo, if you do not have a network for yourself, just rent a box with one of the big ones…</p>\n\n<p>At the same time, we also see that regions who got the <a href=\"https://dl.acm.org/doi/pdf/10.1145/2766330.2766335\">shorter end of the stick</a> when it comes to v4 address space historically (essentially everyone, expect for ARIN and RIPE), are now not only struggling with supplying addresses to their members, but they <em>also</em> find themselves as the targets of <a href=\"https://mybroadband.co.za/news/internet/407770-afrinic-bank-accounts-frozen-after-r740-million-damages-claim.html\">profit-driven address allocation</a>.\nWhere there is scarcity, there will be people trying to <a href=\"https://labs.ripe.net/author/wilhelm/so-long-last-8-and-thanks-for-all-the-allocations/\">gain profit</a>, and how bad profit aligns with infrastructural care is something <a href=\"https://doing-stupid-things.as59645.net/burning/world/resillience/2022/06/30/propositions-part-4.html\">we discussed before</a>.</p>\n\n<p>So, if we want to re-decentralize the Internet, work against (predatory) centralization, <em>and</em> ensure that there is equitable access to the Internet–also service providing opportunity wise–the only thing we can do is roll out <em>more</em> v6.\nAnd we are not talking about dual-stack here.\nDual stack is a nice transition technology, but <a href=\"https://datatracker.ietf.org/doc/html/rfc6555\">happy eyeballs</a> is just <a href=\"https://ant.isi.edu/events/dinr2021/P/p22.pdf\">insanely good at hiding <em>broken</em> v6</a>, and ultimately we all know that nothing last longer than a temporary solution.</p>\n\n<p>If we want to re-distribute the Internet, without <em>further</em> disadvantaging traditionally disadvantaged RIR regions, rolling out <em>more</em> IPv6 (only) is the only path forward.</p>"
         }
       ],
       "summary": "OpenBSD version: Not relevant here... Arch: ? NSFP: Well...",
