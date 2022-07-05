@@ -9,14 +9,14 @@
       "section": "Linux"
     },
     "entry": {
-      "id": "tag:cspace@cks.mef.org,2009-03-24:/blog/tech/FilesystemsVsGeneralTrees",
+      "id": "tag:cspace@cks.mef.org,2009-03-24:/blog/unix/EmptyFileWhyTrue",
       "guidislink": true,
-      "link": "https://utcc.utoronto.ca/~cks/space/blog/tech/FilesystemsVsGeneralTrees",
+      "link": "https://utcc.utoronto.ca/~cks/space/blog/unix/EmptyFileWhyTrue",
       "links": [
         {
           "rel": "alternate",
           "type": "text/html",
-          "href": "https://utcc.utoronto.ca/~cks/space/blog/tech/FilesystemsVsGeneralTrees"
+          "href": "https://utcc.utoronto.ca/~cks/space/blog/unix/EmptyFileWhyTrue"
         }
       ],
       "authors": [
@@ -33,46 +33,46 @@
           "type": "text/html",
           "language": null,
           "base": "https://utcc.utoronto.ca/~cks/space/blog/?atom",
-          "value": "<div class=\"wikitext\"><p>A while back I read Felix Kohlgrüber's <a href=\"https://fkohlgrueber.github.io/blog/tree-structure-of-file-systems/\">The Tree Structure of File\nSystems</a>\n(<a href=\"https://lobste.rs/s/ydno8w/tree_structure_file_systems\">via</a>).\nAs I read it, it argues that filesystem directories should be a\nricher and more general data structure, one that could contain both\ndata and children (<a href=\"https://utcc.utoronto.ca/~cks/space/blog/web/WebPathsNotQuiteFilesystemAPI\">which would make web paths map better on to\nthe 'filesystem API'</a>). As it\nhappens, I think there is a relatively good reason that directories\nare organization this way, one beyond simple history.</p>\n\n<p>To put it simply, filesystem directories are optimized for out of\nmemory traversal in order to look up names. Generally their actual\nrepresentation is some form of data structure filled with &lt;name,\nreference> pairs, where the reference tells you where (on disk) to\nfind almost all substantive information about the name. In the old\ndays and in basic filesystems, the containing data structure was a\nlist; in modern filesystems, it's usually some form of balanced\ntree (sometimes once the directory is big enough). Directories are\noptimized to be searched through with as few disk reads as possible,\nbecause disk reads are assumed to be expensive.</p>\n\n<p>(Modern filesystems often put some sufficiently commonly used metadata\nabout each name into the directory as well, because that way you can\ntell programs about it without them having to a separate disk read,\npossibly a separate disk read for each name in the directory.)</p>\n\n<p>If you augment this basic data structure with data content associated\nwith the directory (well, the directory name) itself, you don't want\nto put this new data in line with the lookup data structure, where\nit will force you to read more data from disk in order to do the\nsame traversals. Instead it's mostly likely going to be referred to\nseparately. There will be one set of disk storage associated with the\ninventory of the directory's children and a second set of disk storage\nfor the data content. Entities without children will have a 'no such\nthing' marker for their first sort of disk storage and ones without\ndata will have a 'no such thing' marker for their second. If a lot\nof filesystem entities only have one or the other (ie, if they're\nconventional files or directories), then a lot of the time having\ntwo slots is a waste of (limited) space in an area where filesystems\nhave traditionally cared about (in the metadata kept for most or all\nfilesystem entities).</p>\n\n<p>More broadly, I think it's a mistake to look at filesystems through\nthe eyes of general tree structures. Filesystems originated in a\nvery constrained situation and continue to be focused on fairly\nconstrained one, one where any indirect reference to something is\nvery slow and the less that you need to access the better.</p>\n\n<p>(It's true that modern memory references have gotten slower and\nslower relative to raw CPU speed, but they're still faster than\neven NVMe speeds. Plus, a lot of in memory data structures are still\nnot being designed by programmers to minimize references and pack\nthings as densely as possible, for various reasons.)</p>\n</div>"
+          "value": "<div class=\"wikitext\"><p>Among a certain segment of Unix people, a famous bit of trivia is\nthat <a href=\"https://twitter.com/rob_pike/status/966896123548872705\"><code>/bin/true</code> used to be an empty file until people complicated\nit</a> (<a href=\"https://rachelbythebay.com/w/2022/04/07/empty/\">via</a>, which reminded\nme of this). However, you might wonder why an empty executable file\nwould be true. This more or less follows from a variety of standard\nand traditional behaviors, like this:</p>\n\n<ol><li>If a shell script ends without an explicit '<code>exit &lt;status></code>'\ncommand, its exit status is the exit status of the last command\nrun in the script. (This sometimes leads people to put '<code>exit 0</code>'\nand the end of scripts to force a successful exit even if the \nimmediately previous command failed.)<p>\n</li>\n<li>If a shell script doesn't run any commands, this 'last command'\nbehavior is extended to have its exit status be 0; after all, no\ncommands have failed.<p>\n</li>\n<li>it's traditional Unix behavior that shell scripts without a #!\nline are still passed directly to the (Bourne) shell to run.\nThis dates back to V7 Unix (or earlier) and is part of <a href=\"https://utcc.utoronto.ca/~cks/space/blog/unix/BourneCommentHistory\">the\ncomplicated and surprising history of comments in the Bourne\nshell</a>.</li>\n</ol>\n\n<p>When you line all of these up, an empty executable file is interpreted\nas an empty (Bourne) shell script, which has exit status 0. And this is\nhow an empty (executable) file is true.</p>\n\n<p>(Empty files that aren't executable are generally going to be an\nerror; Bash on Linux reports 'permission denied', for example.)</p>\n\n<p>Today, all of this behavior is required by <a href=\"https://pubs.opengroup.org/onlinepubs/9699919799/\">the Unix specification</a>. One part of\nit is in the section on <a href=\"https://pubs.opengroup.org/onlinepubs/9699919799/functions/execv.html\">the exec*() functions</a>.\nThis specifically requires the behavior of passing 'shell scripts'\nto the shell:</p>\n\n<blockquote><p>[...] In the cases where the other members of the exec family of\nfunctions would fail and set <code>errno</code> to [ENOEXEC], the <code>execlp()</code>\nand <code>execvp()</code> functions shall execute a command interpreter and the\nenvironment of the executed command shall be as if the process invoked\nthe sh utility using <code>execl()</code> as follows: [...]</p>\n</blockquote>\n\n<p>There's similar language in the description of <a href=\"https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_09_01_01\">how the POSIX shell\nis to execute commands</a>\n(in 1.e.b and 2). The <a href=\"https://pubs.opengroup.org/onlinepubs/9699919799/utilities/sh.html\">POSIX <code>sh</code> manual page</a>\nfurther requires that the shell exit with a 0 status if the script\nto be executed consisted only of zero or more blank lines and\ncomments.</p>\n\n<p>A shell that doesn't claim to be POSIX compatible doesn't have to\nhave this 'pass files to sh' behavior, but if it lacks it, some\nnumber of random programs will probably fail to get run some of the\ntime. On the whole I suspect that most alternate shell authors\nimplement the behavior for compatibility.</p>\n\n<p>(It's both interesting and reassuring how many of the odd historical\nlittle corners of Unix have been chased down and carefully standardized\nby POSIX.)</p>\n</div>"
         }
       ],
-      "summary": "<div class=\"wikitext\"><p>A while back I read Felix Kohlgrüber's <a href=\"https://fkohlgrueber.github.io/blog/tree-structure-of-file-systems/\">The Tree Structure of File\nSystems</a>\n(<a href=\"https://lobste.rs/s/ydno8w/tree_structure_file_systems\">via</a>).\nAs I read it, it argues that filesystem directories should be a\nricher and more general data structure, one that could contain both\ndata and children (<a href=\"https://utcc.utoronto.ca/~cks/space/blog/web/WebPathsNotQuiteFilesystemAPI\">which would make web paths map better on to\nthe 'filesystem API'</a>). As it\nhappens, I think there is a relatively good reason that directories\nare organization this way, one beyond simple history.</p>\n\n<p>To put it simply, filesystem directories are optimized for out of\nmemory traversal in order to look up names. Generally their actual\nrepresentation is some form of data structure filled with &lt;name,\nreference> pairs, where the reference tells you where (on disk) to\nfind almost all substantive information about the name. In the old\ndays and in basic filesystems, the containing data structure was a\nlist; in modern filesystems, it's usually some form of balanced\ntree (sometimes once the directory is big enough). Directories are\noptimized to be searched through with as few disk reads as possible,\nbecause disk reads are assumed to be expensive.</p>\n\n<p>(Modern filesystems often put some sufficiently commonly used metadata\nabout each name into the directory as well, because that way you can\ntell programs about it without them having to a separate disk read,\npossibly a separate disk read for each name in the directory.)</p>\n\n<p>If you augment this basic data structure with data content associated\nwith the directory (well, the directory name) itself, you don't want\nto put this new data in line with the lookup data structure, where\nit will force you to read more data from disk in order to do the\nsame traversals. Instead it's mostly likely going to be referred to\nseparately. There will be one set of disk storage associated with the\ninventory of the directory's children and a second set of disk storage\nfor the data content. Entities without children will have a 'no such\nthing' marker for their first sort of disk storage and ones without\ndata will have a 'no such thing' marker for their second. If a lot\nof filesystem entities only have one or the other (ie, if they're\nconventional files or directories), then a lot of the time having\ntwo slots is a waste of (limited) space in an area where filesystems\nhave traditionally cared about (in the metadata kept for most or all\nfilesystem entities).</p>\n\n<p>More broadly, I think it's a mistake to look at filesystems through\nthe eyes of general tree structures. Filesystems originated in a\nvery constrained situation and continue to be focused on fairly\nconstrained one, one where any indirect reference to something is\nvery slow and the less that you need to access the better.</p>\n\n<p>(It's true that modern memory references have gotten slower and\nslower relative to raw CPU speed, but they're still faster than\neven NVMe speeds. Plus, a lot of in memory data structures are still\nnot being designed by programmers to minimize references and pack\nthings as densely as possible, for various reasons.)</p>\n</div>",
-      "title": "Filesystems versus general tree structures",
+      "summary": "<div class=\"wikitext\"><p>Among a certain segment of Unix people, a famous bit of trivia is\nthat <a href=\"https://twitter.com/rob_pike/status/966896123548872705\"><code>/bin/true</code> used to be an empty file until people complicated\nit</a> (<a href=\"https://rachelbythebay.com/w/2022/04/07/empty/\">via</a>, which reminded\nme of this). However, you might wonder why an empty executable file\nwould be true. This more or less follows from a variety of standard\nand traditional behaviors, like this:</p>\n\n<ol><li>If a shell script ends without an explicit '<code>exit &lt;status></code>'\ncommand, its exit status is the exit status of the last command\nrun in the script. (This sometimes leads people to put '<code>exit 0</code>'\nand the end of scripts to force a successful exit even if the \nimmediately previous command failed.)<p>\n</li>\n<li>If a shell script doesn't run any commands, this 'last command'\nbehavior is extended to have its exit status be 0; after all, no\ncommands have failed.<p>\n</li>\n<li>it's traditional Unix behavior that shell scripts without a #!\nline are still passed directly to the (Bourne) shell to run.\nThis dates back to V7 Unix (or earlier) and is part of <a href=\"https://utcc.utoronto.ca/~cks/space/blog/unix/BourneCommentHistory\">the\ncomplicated and surprising history of comments in the Bourne\nshell</a>.</li>\n</ol>\n\n<p>When you line all of these up, an empty executable file is interpreted\nas an empty (Bourne) shell script, which has exit status 0. And this is\nhow an empty (executable) file is true.</p>\n\n<p>(Empty files that aren't executable are generally going to be an\nerror; Bash on Linux reports 'permission denied', for example.)</p>\n\n<p>Today, all of this behavior is required by <a href=\"https://pubs.opengroup.org/onlinepubs/9699919799/\">the Unix specification</a>. One part of\nit is in the section on <a href=\"https://pubs.opengroup.org/onlinepubs/9699919799/functions/execv.html\">the exec*() functions</a>.\nThis specifically requires the behavior of passing 'shell scripts'\nto the shell:</p>\n\n<blockquote><p>[...] In the cases where the other members of the exec family of\nfunctions would fail and set <code>errno</code> to [ENOEXEC], the <code>execlp()</code>\nand <code>execvp()</code> functions shall execute a command interpreter and the\nenvironment of the executed command shall be as if the process invoked\nthe sh utility using <code>execl()</code> as follows: [...]</p>\n</blockquote>\n\n<p>There's similar language in the description of <a href=\"https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_09_01_01\">how the POSIX shell\nis to execute commands</a>\n(in 1.e.b and 2). The <a href=\"https://pubs.opengroup.org/onlinepubs/9699919799/utilities/sh.html\">POSIX <code>sh</code> manual page</a>\nfurther requires that the shell exit with a 0 status if the script\nto be executed consisted only of zero or more blank lines and\ncomments.</p>\n\n<p>A shell that doesn't claim to be POSIX compatible doesn't have to\nhave this 'pass files to sh' behavior, but if it lacks it, some\nnumber of random programs will probably fail to get run some of the\ntime. On the whole I suspect that most alternate shell authors\nimplement the behavior for compatibility.</p>\n\n<p>(It's both interesting and reassuring how many of the odd historical\nlittle corners of Unix have been chased down and carefully standardized\nby POSIX.)</p>\n</div>",
+      "title": "Why an empty (executable) file is generally true in Unix",
       "title_detail": {
         "type": "text/html",
         "language": null,
         "base": "https://utcc.utoronto.ca/~cks/space/blog/?atom",
-        "value": "Filesystems versus general tree structures"
+        "value": "Why an empty (executable) file is generally true in Unix"
       },
       "tags": [
         {
-          "term": "tech",
+          "term": "unix",
           "scheme": null,
           "label": null
         }
       ],
-      "updated": "2022-07-04T02:33:01Z",
+      "updated": "2022-07-05T02:02:13Z",
       "updated_parsed": [
         2022,
         7,
-        4,
+        5,
         2,
-        33,
+        2,
+        13,
         1,
-        0,
-        185,
+        186,
         0
       ],
-      "published": "2022-07-04T02:32:01Z",
+      "published": "2022-07-05T02:01:13Z",
       "published_parsed": [
         2022,
         7,
-        4,
+        5,
         2,
-        32,
         1,
-        0,
-        185,
+        13,
+        1,
+        186,
         0
       ]
     }
@@ -180,40 +180,40 @@
       "section": "Linux"
     },
     "entry": {
-      "title": "Tor 0.4.7.8 is ready",
+      "title": "Using sigstore-python to sign and verify your software release",
       "title_detail": {
         "type": "text/plain",
         "language": null,
         "base": "https://kushaldas.in/rss.xml",
-        "value": "Tor 0.4.7.8 is ready"
+        "value": "Using sigstore-python to sign and verify your software release"
       },
       "links": [
         {
           "rel": "alternate",
           "type": "text/html",
-          "href": "https://kushaldas.in/posts/tor-0-4-7-8-is-ready.html"
+          "href": "https://kushaldas.in/posts/using-sigstore-python-to-sign-and-verify-your-software-release.html"
         }
       ],
-      "link": "https://kushaldas.in/posts/tor-0-4-7-8-is-ready.html",
-      "summary": "<!--\n.. title: Tor 0.4.7.8 is ready\n.. slug: tor-0-4-7-8-is-ready\n.. date: 2022-06-18T09:16:56+02:00\n.. tags: Tor, Network, Security, Python, Fedora, CentOS, Almalinux, RPM\n.. link:\n.. description:\n.. type: text\n-->\n<p><img alt=\"\" src=\"https://kushaldas.in/images/tor_logo.png\" /></p>\n<p>Last night I built and pushed the Tor RPM(s) for 0.4.7.8. This is a security update, so please\nmake sure that you upgrade your relays and bridges.</p>\n<p>You can know more about the Tor's RPM respository at https://support.torproject.org/rpm/</p>\n<p>If you have any queries, feel free to find us over #tor channel on OFTC.</p>",
+      "link": "https://kushaldas.in/posts/using-sigstore-python-to-sign-and-verify-your-software-release.html",
+      "summary": "<!--\n.. title: Using sigstore-python to sign and verify your software release\n.. slug: using-sigstore-python-to-sign-and-verify-your-software-release\n.. date: 2022-07-05T17:41:01+02:00\n.. tags: Python, Security, OIDC, Sigstore, Fedora\n.. link:\n.. description:\n.. type: text\n-->\n<p><a href=\"https://www.sigstore.dev/\">Sigstore</a> allows software developers to quickly\nsign and verify the software they release. Many of the bigger projects use\nhardware-based OpenPGP keys to sign and release. But the steps used to make\nsure that the end-users are correctly verifying those signatures are long, and\npeople make mistakes. Also, not every project has access to hardware\nsmartcards, air-gapped private keys etc. Sigstore solves (or at least makes it\nway easier) these steps for most developers. It uses existing known (right now\nonly 3) big OIDC providers using which one can sign and verify any\ndata/software.</p>\n<p>For this blog post, I will use the python tool called <a href=\"https://github.com/sigstore/sigstore-python\">sigstore-python</a>.</p>\n<p>The first step is to create a virtual environment and then install the tool.</p>\n<pre><code>$ python3 -m venv .venv\n$ source .venv/bin/activate\n$ python -m pip install -r install/requirements.txt\n</code></pre>\n<p>Next, we create a file called <code>message.txt</code> with the data. This can be our actual release source code tarball.</p>\n<pre><code>$ echo &quot;Kushal loves Python!&quot; &gt; message.txt\n</code></pre>\n<h3>Signing the data</h3>\n<p>The next step is to actually sign the file.</p>\n<pre><code>$ python -m sigstore sign message.txt \nWaiting for browser interaction...\nUsing ephemeral certificate:\n-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n\nTransparency log entry created at index: 2844439\nSignature written to file message.txt.sig\nCertificate written to file message.txt.crt\n</code></pre>\n<p>The command will open up the default browser, and we will have the choice to select one of the 3 following OIDC providers.</p>\n<p><img alt=\"oidc providers\" src=\"https://kushaldas.in/images/sigstore_oidc_choice.png\" /></p>\n<p>This will also create <code>message.txt.crt</code> &amp; <code>message.txt.sig</code> files in the same directory.</p>\n<p>We can use the <code>openssl</code> command to see the contents of the certificate file.</p>\n<pre><code>$ openssl x509 -in message.txt.crt -noout -text\nCertificate:\n    Data:\n        Version: 3 (0x2)\n        Serial Number:\n            3a:c4:2d:19:20:f0:bf:85:37:a6:01:0f:49:d1:b6:39:20:06:fd:77\n        Signature Algorithm: ecdsa-with-SHA384\n        Issuer: O = sigstore.dev, CN = sigstore-intermediate\n        Validity\n            Not Before: Jul  5 14:45:23 2022 GMT\n            Not After : Jul  5 14:55:23 2022 GMT\n        Subject: \n        Subject Public Key Info:\n            Public Key Algorithm: id-ecPublicKey\n                Public-Key: (384 bit)\n                pub:\n                    04:12:aa:88:fd:c7:1f:9e:62:78:46:2a:48:63:d3:\n                    b6:92:8b:51:a4:eb:59:18:fb:18:a0:13:54:ac:d0:\n                    a4:d8:20:ab:a3:f3:5e:f5:86:aa:34:9b:30:db:59:\n                    1b:5c:3d:29:b1:5a:40:ff:55:2c:26:fc:42:58:95:\n                    53:d6:23:e5:66:90:3c:32:8c:82:b7:fc:fd:f8:28:\n                    2b:53:2d:5c:cb:df:2f:17:d0:f3:bc:26:d2:42:3d:\n                    c0:b1:55:61:50:ff:18\n                ASN1 OID: secp384r1\n                NIST CURVE: P-384\n        X509v3 extensions:\n            X509v3 Key Usage: critical\n                Digital Signature\n            X509v3 Extended Key Usage: \n                Code Signing\n            X509v3 Subject Key Identifier: \n                6C:F0:C0:63:B8:3D:BB:08:90:C3:03:45:FF:55:92:43:7D:47:19:38\n            X509v3 Authority Key Identifier: \n                DF:D3:E9:CF:56:24:11:96:F9:A8:D8:E9:28:55:A2:C6:2E:18:64:3F\n            X509v3 Subject Alternative Name: critical\n                email:mail@kushaldas.in\n            1.3.6.1.4.1.57264.1.1: \n                https://github.com/login/oauth\n            CT Precertificate SCTs: \n                Signed Certificate Timestamp:\n                    Version   : v1 (0x0)\n                    Log ID    : 08:60:92:F0:28:52:FF:68:45:D1:D1:6B:27:84:9C:45:\n                                67:18:AC:16:3D:C3:38:D2:6D:E6:BC:22:06:36:6F:72\n                    Timestamp : Jul  5 14:45:23.112 2022 GMT\n                    Extensions: none\n                    Signature : ecdsa-with-SHA256\n                                30:46:02:21:00:AB:A6:ED:59:3E:B7:C4:79:11:6A:92:\n                                29:92:BF:54:45:6A:B6:1F:6F:1C:63:7C:D9:89:26:D4:\n                                6B:EF:E3:3E:9F:02:21:00:AD:87:A7:BA:BA:7C:61:D2:\n                                53:34:E0:D0:C4:BF:6A:6E:28:B4:02:82:AA:F8:FD:0B:\n                                FB:3A:CD:B9:33:3D:F4:36\n    Signature Algorithm: ecdsa-with-SHA384\n    Signature Value:\n        30:65:02:30:17:89:76:ef:a1:0e:97:5b:a3:fe:c0:34:13:36:\n        3f:6f:2a:ba:e9:cd:bd:f2:74:d9:8c:13:2a:88:c9:96:b2:72:\n        de:34:44:95:41:f8:b0:69:5b:f0:86:a7:05:cf:81:7f:02:31:\n        00:d8:3a:12:89:39:4b:2c:ad:ff:5a:23:85:d9:c0:73:f0:b1:\n        db:5c:65:f9:5d:ee:7a:bb:b8:08:01:44:7a:2e:9f:ba:2b:4b:\n        df:6a:93:08:e9:44:2c:23:88:66:2c:f7:8f\n</code></pre>\n<h3>Verifying the signature</h3>\n<p>We can verify the signature, just make sure that the certificate &amp; signature files are in the same directory.</p>\n<pre><code>$ python -m sigstore verify message.txt \nOK: message.txt\n</code></pre>\n<p>Now, to test this with some real software releases, we will download the <code>cosign</code> RPM package and related certificate &amp; signature files. The certificate in this case, is <code>base64</code> encoded, so we decode that file first.</p>\n<pre><code>$ curl -sOL https://github.com/sigstore/cosign/releases/download/v1.9.0/cosign-1.9.0.x86_64.rpm\n$ curl -sOL https://github.com/sigstore/cosign/releases/download/v1.9.0/cosign-1.9.0.x86_64.rpm-keyless.sig\n$ curl -sOL https://github.com/sigstore/cosign/releases/download/v1.9.0/cosign-1.9.0.x86_64.rpm-keyless.pem\n$ base64 -d cosign-1.9.0.x86_64.rpm-keyless.pem &gt; cosign-1.9.0.x86_64.rpm.pem\n</code></pre>\n<p>Now let us verify the downloaded RPM package along with the <code>email</code> address and signing <code>OIDC issuer</code> URL. We are also printing the debug statements, so that\nwe can see what is actually happening for verification.</p>\n<pre><code>$ SIGSTORE_LOGLEVEL=debug python -m sigstore verify --certificate cosign-1.9.0.x86_64.rpm.pem --signature cosign-1.9.0.x86_64.rpm-keyless.sig --cert-email keyless@projectsigstore.iam.gserviceaccount.com --cert-oidc-issuer https://accounts.google.com  cosign-1.9.0.x86_64.rpm\n\nDEBUG:sigstore._cli:parsed arguments Namespace(subcommand='verify', certificate=PosixPath('cosign-1.9.0.x86_64.rpm.pem'), signature=PosixPath('cosign-1.9.0.x86_64.rpm-keyless.sig'), cert_email='keyless@projectsigstore.iam.gserviceaccount.com', cert_oidc_issuer='https://accounts.google.com', rekor_url='https://rekor.sigstore.dev', staging=False, files=[PosixPath('cosign-1.9.0.x86_64.rpm')])\nDEBUG:sigstore._cli:Using certificate from: cosign-1.9.0.x86_64.rpm.pem\nDEBUG:sigstore._cli:Using signature from: cosign-1.9.0.x86_64.rpm-keyless.sig\nDEBUG:sigstore._cli:Verifying contents from: cosign-1.9.0.x86_64.rpm\nDEBUG:sigstore._verify:Successfully verified signing certificate validity...\nDEBUG:sigstore._verify:Successfully verified signature...\nDEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): rekor.sigstore.dev:443\nDEBUG:urllib3.connectionpool:https://rekor.sigstore.dev:443 &quot;POST /api/v1/index/retrieve/ HTTP/1.1&quot; 200 69\nDEBUG:urllib3.connectionpool:https://rekor.sigstore.dev:443 &quot;GET /api/v1/log/entries/9ee91f2c5444e4ff77a3a18885f46fa2b6f7e629450904d67b5920333327b90d HTTP/1.1&quot; 200 None\nDEBUG:sigstore._verify:Successfully verified Rekor entry...\nOK: cosign-1.9.0.x86_64.rpm\n</code></pre>\n<p>Oh, one more important thing. The maintainers of the tool are amazing about\nfeedback. I had some trouble initially (a few weeks ago). They sat down with me\nto make sure that they could understand the problem &amp; also solved the issue I\nhad. You can talk to the team (and other users, including me) in the <a href=\"https://links.sigstore.dev/slack-invite\">slack room</a>.</p>",
       "summary_detail": {
         "type": "text/html",
         "language": null,
         "base": "https://kushaldas.in/rss.xml",
-        "value": "<!--\n.. title: Tor 0.4.7.8 is ready\n.. slug: tor-0-4-7-8-is-ready\n.. date: 2022-06-18T09:16:56+02:00\n.. tags: Tor, Network, Security, Python, Fedora, CentOS, Almalinux, RPM\n.. link:\n.. description:\n.. type: text\n-->\n<p><img alt=\"\" src=\"https://kushaldas.in/images/tor_logo.png\" /></p>\n<p>Last night I built and pushed the Tor RPM(s) for 0.4.7.8. This is a security update, so please\nmake sure that you upgrade your relays and bridges.</p>\n<p>You can know more about the Tor's RPM respository at https://support.torproject.org/rpm/</p>\n<p>If you have any queries, feel free to find us over #tor channel on OFTC.</p>"
+        "value": "<!--\n.. title: Using sigstore-python to sign and verify your software release\n.. slug: using-sigstore-python-to-sign-and-verify-your-software-release\n.. date: 2022-07-05T17:41:01+02:00\n.. tags: Python, Security, OIDC, Sigstore, Fedora\n.. link:\n.. description:\n.. type: text\n-->\n<p><a href=\"https://www.sigstore.dev/\">Sigstore</a> allows software developers to quickly\nsign and verify the software they release. Many of the bigger projects use\nhardware-based OpenPGP keys to sign and release. But the steps used to make\nsure that the end-users are correctly verifying those signatures are long, and\npeople make mistakes. Also, not every project has access to hardware\nsmartcards, air-gapped private keys etc. Sigstore solves (or at least makes it\nway easier) these steps for most developers. It uses existing known (right now\nonly 3) big OIDC providers using which one can sign and verify any\ndata/software.</p>\n<p>For this blog post, I will use the python tool called <a href=\"https://github.com/sigstore/sigstore-python\">sigstore-python</a>.</p>\n<p>The first step is to create a virtual environment and then install the tool.</p>\n<pre><code>$ python3 -m venv .venv\n$ source .venv/bin/activate\n$ python -m pip install -r install/requirements.txt\n</code></pre>\n<p>Next, we create a file called <code>message.txt</code> with the data. This can be our actual release source code tarball.</p>\n<pre><code>$ echo &quot;Kushal loves Python!&quot; &gt; message.txt\n</code></pre>\n<h3>Signing the data</h3>\n<p>The next step is to actually sign the file.</p>\n<pre><code>$ python -m sigstore sign message.txt \nWaiting for browser interaction...\nUsing ephemeral certificate:\n-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n\nTransparency log entry created at index: 2844439\nSignature written to file message.txt.sig\nCertificate written to file message.txt.crt\n</code></pre>\n<p>The command will open up the default browser, and we will have the choice to select one of the 3 following OIDC providers.</p>\n<p><img alt=\"oidc providers\" src=\"https://kushaldas.in/images/sigstore_oidc_choice.png\" /></p>\n<p>This will also create <code>message.txt.crt</code> &amp; <code>message.txt.sig</code> files in the same directory.</p>\n<p>We can use the <code>openssl</code> command to see the contents of the certificate file.</p>\n<pre><code>$ openssl x509 -in message.txt.crt -noout -text\nCertificate:\n    Data:\n        Version: 3 (0x2)\n        Serial Number:\n            3a:c4:2d:19:20:f0:bf:85:37:a6:01:0f:49:d1:b6:39:20:06:fd:77\n        Signature Algorithm: ecdsa-with-SHA384\n        Issuer: O = sigstore.dev, CN = sigstore-intermediate\n        Validity\n            Not Before: Jul  5 14:45:23 2022 GMT\n            Not After : Jul  5 14:55:23 2022 GMT\n        Subject: \n        Subject Public Key Info:\n            Public Key Algorithm: id-ecPublicKey\n                Public-Key: (384 bit)\n                pub:\n                    04:12:aa:88:fd:c7:1f:9e:62:78:46:2a:48:63:d3:\n                    b6:92:8b:51:a4:eb:59:18:fb:18:a0:13:54:ac:d0:\n                    a4:d8:20:ab:a3:f3:5e:f5:86:aa:34:9b:30:db:59:\n                    1b:5c:3d:29:b1:5a:40:ff:55:2c:26:fc:42:58:95:\n                    53:d6:23:e5:66:90:3c:32:8c:82:b7:fc:fd:f8:28:\n                    2b:53:2d:5c:cb:df:2f:17:d0:f3:bc:26:d2:42:3d:\n                    c0:b1:55:61:50:ff:18\n                ASN1 OID: secp384r1\n                NIST CURVE: P-384\n        X509v3 extensions:\n            X509v3 Key Usage: critical\n                Digital Signature\n            X509v3 Extended Key Usage: \n                Code Signing\n            X509v3 Subject Key Identifier: \n                6C:F0:C0:63:B8:3D:BB:08:90:C3:03:45:FF:55:92:43:7D:47:19:38\n            X509v3 Authority Key Identifier: \n                DF:D3:E9:CF:56:24:11:96:F9:A8:D8:E9:28:55:A2:C6:2E:18:64:3F\n            X509v3 Subject Alternative Name: critical\n                email:mail@kushaldas.in\n            1.3.6.1.4.1.57264.1.1: \n                https://github.com/login/oauth\n            CT Precertificate SCTs: \n                Signed Certificate Timestamp:\n                    Version   : v1 (0x0)\n                    Log ID    : 08:60:92:F0:28:52:FF:68:45:D1:D1:6B:27:84:9C:45:\n                                67:18:AC:16:3D:C3:38:D2:6D:E6:BC:22:06:36:6F:72\n                    Timestamp : Jul  5 14:45:23.112 2022 GMT\n                    Extensions: none\n                    Signature : ecdsa-with-SHA256\n                                30:46:02:21:00:AB:A6:ED:59:3E:B7:C4:79:11:6A:92:\n                                29:92:BF:54:45:6A:B6:1F:6F:1C:63:7C:D9:89:26:D4:\n                                6B:EF:E3:3E:9F:02:21:00:AD:87:A7:BA:BA:7C:61:D2:\n                                53:34:E0:D0:C4:BF:6A:6E:28:B4:02:82:AA:F8:FD:0B:\n                                FB:3A:CD:B9:33:3D:F4:36\n    Signature Algorithm: ecdsa-with-SHA384\n    Signature Value:\n        30:65:02:30:17:89:76:ef:a1:0e:97:5b:a3:fe:c0:34:13:36:\n        3f:6f:2a:ba:e9:cd:bd:f2:74:d9:8c:13:2a:88:c9:96:b2:72:\n        de:34:44:95:41:f8:b0:69:5b:f0:86:a7:05:cf:81:7f:02:31:\n        00:d8:3a:12:89:39:4b:2c:ad:ff:5a:23:85:d9:c0:73:f0:b1:\n        db:5c:65:f9:5d:ee:7a:bb:b8:08:01:44:7a:2e:9f:ba:2b:4b:\n        df:6a:93:08:e9:44:2c:23:88:66:2c:f7:8f\n</code></pre>\n<h3>Verifying the signature</h3>\n<p>We can verify the signature, just make sure that the certificate &amp; signature files are in the same directory.</p>\n<pre><code>$ python -m sigstore verify message.txt \nOK: message.txt\n</code></pre>\n<p>Now, to test this with some real software releases, we will download the <code>cosign</code> RPM package and related certificate &amp; signature files. The certificate in this case, is <code>base64</code> encoded, so we decode that file first.</p>\n<pre><code>$ curl -sOL https://github.com/sigstore/cosign/releases/download/v1.9.0/cosign-1.9.0.x86_64.rpm\n$ curl -sOL https://github.com/sigstore/cosign/releases/download/v1.9.0/cosign-1.9.0.x86_64.rpm-keyless.sig\n$ curl -sOL https://github.com/sigstore/cosign/releases/download/v1.9.0/cosign-1.9.0.x86_64.rpm-keyless.pem\n$ base64 -d cosign-1.9.0.x86_64.rpm-keyless.pem &gt; cosign-1.9.0.x86_64.rpm.pem\n</code></pre>\n<p>Now let us verify the downloaded RPM package along with the <code>email</code> address and signing <code>OIDC issuer</code> URL. We are also printing the debug statements, so that\nwe can see what is actually happening for verification.</p>\n<pre><code>$ SIGSTORE_LOGLEVEL=debug python -m sigstore verify --certificate cosign-1.9.0.x86_64.rpm.pem --signature cosign-1.9.0.x86_64.rpm-keyless.sig --cert-email keyless@projectsigstore.iam.gserviceaccount.com --cert-oidc-issuer https://accounts.google.com  cosign-1.9.0.x86_64.rpm\n\nDEBUG:sigstore._cli:parsed arguments Namespace(subcommand='verify', certificate=PosixPath('cosign-1.9.0.x86_64.rpm.pem'), signature=PosixPath('cosign-1.9.0.x86_64.rpm-keyless.sig'), cert_email='keyless@projectsigstore.iam.gserviceaccount.com', cert_oidc_issuer='https://accounts.google.com', rekor_url='https://rekor.sigstore.dev', staging=False, files=[PosixPath('cosign-1.9.0.x86_64.rpm')])\nDEBUG:sigstore._cli:Using certificate from: cosign-1.9.0.x86_64.rpm.pem\nDEBUG:sigstore._cli:Using signature from: cosign-1.9.0.x86_64.rpm-keyless.sig\nDEBUG:sigstore._cli:Verifying contents from: cosign-1.9.0.x86_64.rpm\nDEBUG:sigstore._verify:Successfully verified signing certificate validity...\nDEBUG:sigstore._verify:Successfully verified signature...\nDEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): rekor.sigstore.dev:443\nDEBUG:urllib3.connectionpool:https://rekor.sigstore.dev:443 &quot;POST /api/v1/index/retrieve/ HTTP/1.1&quot; 200 69\nDEBUG:urllib3.connectionpool:https://rekor.sigstore.dev:443 &quot;GET /api/v1/log/entries/9ee91f2c5444e4ff77a3a18885f46fa2b6f7e629450904d67b5920333327b90d HTTP/1.1&quot; 200 None\nDEBUG:sigstore._verify:Successfully verified Rekor entry...\nOK: cosign-1.9.0.x86_64.rpm\n</code></pre>\n<p>Oh, one more important thing. The maintainers of the tool are amazing about\nfeedback. I had some trouble initially (a few weeks ago). They sat down with me\nto make sure that they could understand the problem &amp; also solved the issue I\nhad. You can talk to the team (and other users, including me) in the <a href=\"https://links.sigstore.dev/slack-invite\">slack room</a>.</p>"
       },
-      "id": "https://kushaldas.in/posts/tor-0-4-7-8-is-ready.html",
+      "id": "https://kushaldas.in/posts/using-sigstore-python-to-sign-and-verify-your-software-release.html",
       "guidislink": false,
-      "published": "Sat, 18 Jun 2022 09:16:56 +0200",
+      "published": "Tue, 05 Jul 2022 17:41:01 +0200",
       "published_parsed": [
         2022,
-        6,
-        18,
         7,
-        16,
-        56,
         5,
-        169,
+        15,
+        41,
+        1,
+        1,
+        186,
         0
       ]
     }
@@ -921,54 +921,54 @@
       "section": "OpenBSD"
     },
     "entry": {
-      "title": "13 Propositions on an Internet for a Burning World (Part 7)",
+      "title": "13 Propositions on an Internet for a Burning World (Part 8)",
       "title_detail": {
         "type": "text/html",
         "language": null,
         "base": "https://doing-stupid-things.as59645.net/feed.xml",
-        "value": "13 Propositions on an Internet for a Burning World (Part 7)"
+        "value": "13 Propositions on an Internet for a Burning World (Part 8)"
       },
       "links": [
         {
-          "href": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/03/propositions-part-7.html",
+          "href": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/04/propositions-part-8.html",
           "rel": "alternate",
           "type": "text/html",
-          "title": "13 Propositions on an Internet for a Burning World (Part 7)"
+          "title": "13 Propositions on an Internet for a Burning World (Part 8)"
         }
       ],
-      "link": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/03/propositions-part-7.html",
-      "published": "2022-07-03T17:37:12+02:00",
+      "link": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/04/propositions-part-8.html",
+      "published": "2022-07-04T20:42:12+02:00",
       "published_parsed": [
         2022,
         7,
-        3,
-        15,
-        37,
+        4,
+        18,
+        42,
         12,
-        6,
-        184,
+        0,
+        185,
         0
       ],
-      "updated": "2022-07-03T17:37:12+02:00",
+      "updated": "2022-07-04T20:42:12+02:00",
       "updated_parsed": [
         2022,
         7,
-        3,
-        15,
-        37,
+        4,
+        18,
+        42,
         12,
-        6,
-        184,
+        0,
+        185,
         0
       ],
-      "id": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/03/propositions-part-7",
+      "id": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/04/propositions-part-8",
       "guidislink": false,
       "content": [
         {
           "type": "text/html",
           "language": null,
-          "base": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/03/propositions-part-7.html",
-          "value": "<div class=\"language-plaintext highlighter-rouge\"><div class=\"highlight\"><pre class=\"highlight\"><code>OpenBSD version: Not relevant here...\nArch:            ?\nNSFP:            Well...\n</code></pre></div></div>\n\n<p>IPv6 has been first specified in <a href=\"https://datatracker.ietf.org/doc/html/rfc1883\">RFC1883</a> in December 1995, i.e., around <em>27 years</em> ago.\nThis ‘new’ protocol is nearly as old as… well, yours truly.\nNevertheless, there is no ‘fullscale IPv6 adoption’ yet.\nWhat we see is mostly <a href=\"https://www.google.com/intl/en/ipv6/statistics.html\">large content providers</a> seeing a steady increase in clients from ISPs, especially in the global north, also having IPv6 connectivity.\nThen again, CIDR is <a href=\"https://datatracker.ietf.org/doc/html/rfc1519\">from 1993</a>, and we are still strugling with schools and universities teaching stuff involving ‘Class A’ networks.\nWhile there is undoubtedly <em>some</em> progress, v6 adoption is certainly not at the level we’d expect for a protocol <a href=\"https://datatracker.ietf.org/doc/html/rfc1945\">older than HTTP/1.0</a>, and we also see <a href=\"https://twitter.com/waiputech/status/1543593614411964416\">adoption stalling</a> in some regions.\nSo maybe… expectations on v6 adoption were a bit too high.</p>\n\n<p>In any case, what we can observe at the moment is a <a href=\"https://labs.ripe.net/author/gih/what-drives-ipv6-deployment/\">lively discussions</a> and <a href=\"https://www.apnic.net/community/ipv6/deploy-ipv6/\">various</a> different <a href=\"https://circleid.com/posts/20210803-the-irrationality-of-deploying-ipv6\">perspectives</a> on why and whether ‘it is worth it’ to deploy v6, and what drives (or inhibits) its adoption.\nHowever, in this article, we will take a slightly different perspective on IPv6  adoption; \nOne more driven by our previous thoughts on decentralization and <em>equitable access</em> to the Internet.\nSpecifically, we claim:</p>\n\n<h1 id=\"proposition-7\">Proposition 7</h1>\n<p><em>“The slow adoption of IPv6 hinders a re-decentralization of the Internet.”</em></p>\n\n<p>Well, how do we get to that conclusion?\nThe IPv4 address space is, for all practical matters <a href=\"https://www.apnic.net/manage-ip/ipv4-exhaustion/\">exhausted</a> and in any case globally <a href=\"https://dl.acm.org/doi/pdf/10.1145/2766330.2766335\">unjustly distributed</a>.\nWith the Internet still being very much IPv4 centric—at least when it comes to the path <em>outside</em> of hypergiants—communities running their own services still <em>need</em> IPv4 addresses to provide services.\nConsidering the state of the IPv4 address market, this easily means an investment of <a href=\"https://auctions.ipv4.global/\">tens of thousands of dollars</a>.\nWhile this is a prohibitive cost for a small community project, it enables hypergiants and large hosting corporations to further collect addresses on a <em>relatively</em> cheap price compared to their annual operating expenses, thereby further centralizing the Internet.\nSo, if you do not have a network for yourself, just rent a box with one of the big ones…</p>\n\n<p>At the same time, we also see that regions who got the <a href=\"https://dl.acm.org/doi/pdf/10.1145/2766330.2766335\">shorter end of the stick</a> when it comes to v4 address space historically (essentially everyone, expect for ARIN and RIPE), are now not only struggling with supplying addresses to their members, but they <em>also</em> find themselves as the targets of <a href=\"https://mybroadband.co.za/news/internet/407770-afrinic-bank-accounts-frozen-after-r740-million-damages-claim.html\">profit-driven address allocation</a>.\nWhere there is scarcity, there will be people trying to <a href=\"https://labs.ripe.net/author/wilhelm/so-long-last-8-and-thanks-for-all-the-allocations/\">gain profit</a>, and how bad profit aligns with infrastructural care is something <a href=\"https://doing-stupid-things.as59645.net/burning/world/resillience/2022/06/30/propositions-part-4.html\">we discussed before</a>.</p>\n\n<p>So, if we want to re-decentralize the Internet, work against (predatory) centralization, <em>and</em> ensure that there is equitable access to the Internet–also service providing opportunity wise–the only thing we can do is roll out <em>more</em> v6.\nAnd we are not talking about dual-stack here.\nDual stack is a nice transition technology, but <a href=\"https://datatracker.ietf.org/doc/html/rfc6555\">happy eyeballs</a> is just <a href=\"https://ant.isi.edu/events/dinr2021/P/p22.pdf\">insanely good at hiding <em>broken</em> v6</a>, and ultimately we all know that nothing last longer than a temporary solution.</p>\n\n<p>If we want to re-distribute the Internet, without <em>further</em> disadvantaging traditionally disadvantaged RIR regions, rolling out <em>more</em> IPv6 (only) is the only path forward.</p>"
+          "base": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/04/propositions-part-8.html",
+          "value": "<div class=\"language-plaintext highlighter-rouge\"><div class=\"highlight\"><pre class=\"highlight\"><code>OpenBSD version: Not relevant here...\nArch:            ?\nNSFP:            Well...\n</code></pre></div></div>\n\n<p>Security is <em>‘the big thing’</em>. Everything has to be secure.\nWell, it usually isn’t, but if you keep listening to security professionals (and others’ complaints about them), you might get the idea that they value security above all.\nIn fact, an analysis of <a href=\"https://arxiv.org/abs/1610.05531\">protocol design over the ages</a> from… by now… ages ago… found the same.\nFor some reason, it is hard to step beyond the CIA (Confidentiality-Integrity-Availability) nail, if you wield the security hammer.\nAnd… there is enough <em>actually</em> reputable research on this issue, just <a href=\"https://www.cs.cmu.edu/~rdriley/330/papers/Why_Johnny_Cant_Encrypt.pdf\">ask Johnny</a>.</p>\n\n<p>However, with a world in which society (and the Internet alike) are crumbling down all around us, this may change.\nIn fact, we claim that:</p>\n\n<h1 id=\"proposition-8\">Proposition 8</h1>\n<p><em>“In a burning world, functionality is more important than security, but remains trumped by safety.”</em></p>\n\n<p>So, what is this all about?\nWell, we claim that if we ever—and we hope it does not come to it—face a world burnt to its foundations, with an Internet fallen apart and hypergiants failed, paradigms of ‘what is important’ will shift dramatically.\nWe will find ourselves in a situation where the utility and functionality of systems will superimpose their security even stronger as in the current world.\nWe <em>already</em> know the common situation of <em>‘things’</em> or even <em>‘an Internet full of them’</em>  going into production because it just <em>has to work</em>. \nAnd, from a certain perspective, there is not much wrong with that. \nHumans tend to do what is easiest for them.\nSo, unless security is <em>the easiest way</em>, other ways will be taken.\n(We, of course, do not advocate for throwing insecure stuff on the Internet here. In fact, getting security <em>right</em>, i.e., in the shape of the easiest way, is part of that whole issue <a href=\"https://doing-stupid-things.as59645.net/burning/world/resillience/2022/06/27/propositions-part-1.html\">of care</a> we have been talking about.)</p>\n\n<p>Yet, if we find ourselves in a world where the question is not ‘can this funny bird app transport my … erm… posts to the Internet’, but ‘is this solar pannel turning system able to function enough to keep the community powered on’, security will not be <em>that</em> important.\nInstead of that system having a secure password only known to one or a few, we might have a password (if it is needed at all) slapped to the top of the screen (as it <a href=\"https://www.dailydot.com/debug/hawaii-agency-post-it-password/\">tends to be common practice now already…</a>)\nThe reason is simple: A bricked system no longer operable due to a lost password (due to, e.g., the people knowing the password dying) has a significant higher impact on the community than potential security considerations.\nIn fact, security may just end up being resolved by a social contract, following the lines of <em>‘you won’t break your own power supply’</em>.</p>\n\n<p>Hence, we predict that in such a world, threat modeling will see a significant shift away from security against threats from the larger Internet.\nAnd in that process, threat modeling will become a question of <a href=\"https://ieeexplore.ieee.org/abstract/document/9229815\"><em>safety</em></a>, back towards the question of <em>‘What (physical) harm can be done (by outsiders?) if it is not secure?’</em>\nUltimately, the physical safety (and survival) of local communities will have the highest importance.</p>"
         }
       ],
       "summary": "OpenBSD version: Not relevant here... Arch: ? NSFP: Well...",
@@ -1064,57 +1064,57 @@
       "section": "Other IT related topics"
     },
     "entry": {
-      "title": "New Microsoft Word Comments Weirdness",
+      "title": "Time Off Summer ’22",
       "title_detail": {
         "type": "text/html",
         "language": null,
         "base": "https://writing.kemitchell.com/atom.xml",
-        "value": "New Microsoft Word Comments Weirdness"
+        "value": "Time Off Summer ’22"
       },
       "links": [
         {
-          "href": "https://writing.kemitchell.com/2022/06/29/New-Microsoft-Word-Comments-Weirdness",
+          "href": "https://writing.kemitchell.com/2022/07/04/Time-Off",
           "rel": "alternate",
           "type": "text/html",
-          "title": "New Microsoft Word Comments Weirdness"
+          "title": "Time Off Summer ’22"
         }
       ],
-      "link": "https://writing.kemitchell.com/2022/06/29/New-Microsoft-Word-Comments-Weirdness",
-      "published": "2022-06-29T23:33:00+00:00",
+      "link": "https://writing.kemitchell.com/2022/07/04/Time-Off",
+      "published": "2022-07-04T21:46:46+00:00",
       "published_parsed": [
         2022,
-        6,
-        29,
-        23,
-        33,
+        7,
+        4,
+        21,
+        46,
+        46,
         0,
-        2,
-        180,
+        185,
         0
       ],
-      "updated": "2022-06-29T23:33:00+00:00",
+      "updated": "2022-07-04T21:46:46+00:00",
       "updated_parsed": [
         2022,
-        6,
-        29,
-        23,
-        33,
+        7,
+        4,
+        21,
+        46,
+        46,
         0,
-        2,
-        180,
+        185,
         0
       ],
-      "id": "https://writing.kemitchell.com/2022/06/29/New-Microsoft-Word-Comments-Weirdness",
+      "id": "https://writing.kemitchell.com/2022/07/04/Time-Off",
       "guidislink": false,
       "content": [
         {
           "type": "text/html",
           "language": null,
-          "base": "https://writing.kemitchell.com/2022/06/29/New-Microsoft-Word-Comments-Weirdness",
-          "value": "<p>Beware!  Microsoft Word users who bind keyboard shortcuts for the <code class=\"language-plaintext highlighter-rouge\">NextChangeOrComment</code> and <code class=\"language-plaintext highlighter-rouge\">PreviousChangeOrComment</code> commands may overlook new-style comments by relying on them.</p>\n\n<p>On my Windows machine, those commands correctly cycle through tracked changes and old-style comments, but <em>not</em> new-style comments.  The “Next Comment” and “Previous Comment” buttons on the “Review” tab cycle <em>both</em> old- and new-style comments, as well as do their corresponding <code class=\"language-plaintext highlighter-rouge\">NextComment</code> and <code class=\"language-plaintext highlighter-rouge\">PreviousComment</code> commands.</p>\n\n<p>I have bound additional shortcuts to <code class=\"language-plaintext highlighter-rouge\">NextComment</code> and <code class=\"language-plaintext highlighter-rouge\">PreviousComment</code> for now.  Hopefully Microsoft notices this was overlooked and fixes <code class=\"language-plaintext highlighter-rouge\">NextChangeOrComment</code> and <code class=\"language-plaintext highlighter-rouge\">PreviousChangeOrComment</code>.</p>"
+          "base": "https://writing.kemitchell.com/2022/07/04/Time-Off",
+          "value": "<p>I am taking the first two full weeks of August off, from Sunday, August 7 through Saturday, August 20.  Feel free to keep e-mailing me during that time, but please expect any response after I return.</p>"
         }
       ],
-      "summary": "a gotcha for legal power users",
+      "summary": "out of office August 7 through 20",
       "authors": [
         {
           "name": "Kyle E. Mitchell"
@@ -1126,12 +1126,7 @@
       "author": "Kyle E. Mitchell",
       "tags": [
         {
-          "term": "Legal Drafting",
-          "scheme": null,
-          "label": null
-        },
-        {
-          "term": "Software",
+          "term": "Law Practice",
           "scheme": null,
           "label": null
         }
@@ -1140,7 +1135,7 @@
         "type": "text/html",
         "language": null,
         "base": "https://writing.kemitchell.com/atom.xml",
-        "value": "a gotcha for legal power users"
+        "value": "out of office August 7 through 20"
       }
     }
   },
