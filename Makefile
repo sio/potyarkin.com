@@ -71,6 +71,11 @@ links: $(VENV)/linkchecker
 test: $(VENV)/pytest
 	$(VENV)/pytest
 
+.PHONY: microblog
+microblog:
+	git submodule init
+	git submodule update
+	git -C micro pull
 
 .PHONY: webring
 webring: content/webring.json
