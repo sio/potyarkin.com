@@ -1,11 +1,20 @@
 {% macro render(entry) %}
   <article class="micro">
-    <a class="permalink" href="{{ SITEURL }}/micro/{{ entry.uid }}/">permalink</a>
+    <a class="permalink" href="{{ SITEURL }}/micro/{{ entry.uid }}/">
+      <span class="author">{{ entry.author }}</span> @
+      <time datetime="{{ entry.isotime() }}">
+        {{ entry.timestamp.strftime("%H:%M, %B %e, %Y") }}
+      </time>
+    </a>
     <section class="content">
       {{ entry.html }}
     </section>
     {% for _ in microblog.attached_names(entry) %}
+    {% if loop.index == 1 %}<section class="images">{% endif %}
+    <a href="{{ SITEURL }}/{{ attachment_url(entry.uid, loop.index) }}">
     <img class="attached" src="{{ SITEURL }}/{{ attachment_url(entry.uid, loop.index) }}">
+    </a>
+    {% if loop.revindex == 1 %}</section>{% endif %}
     {% endfor %}
   </article>
 {% endmacro %}
