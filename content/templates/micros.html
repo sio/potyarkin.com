@@ -11,6 +11,7 @@ Microblog
 {% endblock %}
 
 {% block content %}
+<div class="content">
   {% for uid in micros_page.object_list %}
   {{ micros.render(microblog.read(uid)) }}
   {% endfor %}
@@ -20,5 +21,5 @@ Microblog
   {% set articles_previous_page = micros_previous_page %}
   {% set articles_next_page = micros_next_page %}
   {% include "partial/pagination.html" %}
-</section>
+</div>
 {% endblock %}

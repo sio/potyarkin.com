@@ -78,3 +78,7 @@ article.micro img.attached {
 .pelican-micro .author {
   display: none;
 }
+.pelican-micro div.content,
+.pelican-micros div.content {
+  padding-top: 2rem;
+}
