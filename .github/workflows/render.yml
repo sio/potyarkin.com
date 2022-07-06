@@ -1,6 +1,7 @@
 name: render potyarkin.ml
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - smallweb
