@@ -75,7 +75,7 @@ test: $(VENV)/pytest
 microblog:
 	git submodule init
 	git submodule update
-	git -C micro pull
+	cd micro && git pull $$(git remote|head -n1) microblog
 
 .PHONY: webring
 webring: content/webring.json
