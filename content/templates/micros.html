@@ -1,22 +1,18 @@
 {% extends 'base.html' %}
+{% import 'micros.j2' as micros with context %}
 
 {% block title %}
-{{ microblog.config.microblog.title }}
+Microblog
 {% endblock %}
 
 {% block subtitle %}
-<a href="{{ SITEURL }}/">{{ SITENAME }}</a> |
-{{ microblog.config.default.author }}
+<a href="{{ SITEURL }}/">{{ SITENAME }}</a>
+| Chatting into the void
 {% endblock %}
 
 {% block content %}
-  {% for entry in micros_page.object_list %}
-  <article class="micro">
-  <a class="permalink" href="{{ SITEURL }}/micro/{{ entry.commit }}/">
-    {{ entry.commit|truncate(8, end='…') }}
-  </a>
-  {{ entry.html }}
-  </article>
+  {% for uid in micros_page.object_list %}
+  {{ micros.render(microblog.read(uid)) }}
   {% endfor %}
 
   {% set articles_paginator = micros_paginator %}

@@ -1,0 +1,11 @@
+{% macro render(entry) %}
+  <article class="micro">
+    <a class="permalink" href="{{ SITEURL }}/micro/{{ entry.uid }}/">permalink</a>
+    <section class="content">
+      {{ entry.html }}
+    </section>
+    {% for _ in microblog.attached_names(entry) %}
+    <img class="attached" src="{{ SITEURL }}/{{ attachment_url(entry.uid, loop.index) }}">
+    {% endfor %}
+  </article>
+{% endmacro %}
