@@ -9,14 +9,14 @@
       "section": "Linux"
     },
     "entry": {
-      "id": "tag:cspace@cks.mef.org,2009-03-24:/blog/unix/EmptyFileWhyTrue",
+      "id": "tag:cspace@cks.mef.org,2009-03-24:/blog/linux/KernelSerialConsoleOnlyOne",
       "guidislink": true,
-      "link": "https://utcc.utoronto.ca/~cks/space/blog/unix/EmptyFileWhyTrue",
+      "link": "https://utcc.utoronto.ca/~cks/space/blog/linux/KernelSerialConsoleOnlyOne",
       "links": [
         {
           "rel": "alternate",
           "type": "text/html",
-          "href": "https://utcc.utoronto.ca/~cks/space/blog/unix/EmptyFileWhyTrue"
+          "href": "https://utcc.utoronto.ca/~cks/space/blog/linux/KernelSerialConsoleOnlyOne"
         }
       ],
       "authors": [
@@ -33,46 +33,46 @@
           "type": "text/html",
           "language": null,
           "base": "https://utcc.utoronto.ca/~cks/space/blog/?atom",
-          "value": "<div class=\"wikitext\"><p>Among a certain segment of Unix people, a famous bit of trivia is\nthat <a href=\"https://twitter.com/rob_pike/status/966896123548872705\"><code>/bin/true</code> used to be an empty file until people complicated\nit</a> (<a href=\"https://rachelbythebay.com/w/2022/04/07/empty/\">via</a>, which reminded\nme of this). However, you might wonder why an empty executable file\nwould be true. This more or less follows from a variety of standard\nand traditional behaviors, like this:</p>\n\n<ol><li>If a shell script ends without an explicit '<code>exit &lt;status></code>'\ncommand, its exit status is the exit status of the last command\nrun in the script. (This sometimes leads people to put '<code>exit 0</code>'\nand the end of scripts to force a successful exit even if the \nimmediately previous command failed.)<p>\n</li>\n<li>If a shell script doesn't run any commands, this 'last command'\nbehavior is extended to have its exit status be 0; after all, no\ncommands have failed.<p>\n</li>\n<li>it's traditional Unix behavior that shell scripts without a #!\nline are still passed directly to the (Bourne) shell to run.\nThis dates back to V7 Unix (or earlier) and is part of <a href=\"https://utcc.utoronto.ca/~cks/space/blog/unix/BourneCommentHistory\">the\ncomplicated and surprising history of comments in the Bourne\nshell</a>.</li>\n</ol>\n\n<p>When you line all of these up, an empty executable file is interpreted\nas an empty (Bourne) shell script, which has exit status 0. And this is\nhow an empty (executable) file is true.</p>\n\n<p>(Empty files that aren't executable are generally going to be an\nerror; Bash on Linux reports 'permission denied', for example.)</p>\n\n<p>Today, all of this behavior is required by <a href=\"https://pubs.opengroup.org/onlinepubs/9699919799/\">the Unix specification</a>. One part of\nit is in the section on <a href=\"https://pubs.opengroup.org/onlinepubs/9699919799/functions/execv.html\">the exec*() functions</a>.\nThis specifically requires the behavior of passing 'shell scripts'\nto the shell:</p>\n\n<blockquote><p>[...] In the cases where the other members of the exec family of\nfunctions would fail and set <code>errno</code> to [ENOEXEC], the <code>execlp()</code>\nand <code>execvp()</code> functions shall execute a command interpreter and the\nenvironment of the executed command shall be as if the process invoked\nthe sh utility using <code>execl()</code> as follows: [...]</p>\n</blockquote>\n\n<p>There's similar language in the description of <a href=\"https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_09_01_01\">how the POSIX shell\nis to execute commands</a>\n(in 1.e.b and 2). The <a href=\"https://pubs.opengroup.org/onlinepubs/9699919799/utilities/sh.html\">POSIX <code>sh</code> manual page</a>\nfurther requires that the shell exit with a 0 status if the script\nto be executed consisted only of zero or more blank lines and\ncomments.</p>\n\n<p>A shell that doesn't claim to be POSIX compatible doesn't have to\nhave this 'pass files to sh' behavior, but if it lacks it, some\nnumber of random programs will probably fail to get run some of the\ntime. On the whole I suspect that most alternate shell authors\nimplement the behavior for compatibility.</p>\n\n<p>(It's both interesting and reassuring how many of the odd historical\nlittle corners of Unix have been chased down and carefully standardized\nby POSIX.)</p>\n</div>"
+          "value": "<div class=\"wikitext\"><p>One of Linux's nice features is that not only does it support\n<a href=\"https://utcc.utoronto.ca/~cks/space/blog/linux/SerialConsoleLove\">serial consoles</a>, but you can have the\nconventional video console too. This is important for us because\n<a href=\"https://utcc.utoronto.ca/~cks/space/blog/sysadmin/DroppingSerialConsoles\">often we want to use the video console</a>. The video console is where\nwe usually interact with the system in person, while the serial\nconsole goes to <a href=\"https://utcc.utoronto.ca/~cks/space/blog/sysadmin/ConsoleServerSetup\">our console server</a>\nfor logging.</p>\n\n<p>(Logging in over the serial console remains somewhat useful if the\nsystem's networking isn't working for some reason, and <a href=\"https://utcc.utoronto.ca/~cks/space/blog/linux/SystemdSerialPortsFixedBaud\">systemd\nmakes it easy</a>.)</p>\n\n<p>However, recently I discovered a limitation of Linux's serial console\nsupport, which is that you can only have one serial console, or to\nput it another way you can only have kernel messages going to one\nserial port, not two or more (<a href=\"https://utcc.utoronto.ca/~cks/space/blog/linux/ManyConsolesOfLinux\">this is one of the several 'consoles'\nthat Linux has</a>). This is relevant (at least\nto us) because many servers today have two serial ports you might\nwant kernel messages to go to; one physical one, which you can\nconnect to your console server, and one virtual one supplied by the\n<a href=\"https://utcc.utoronto.ca/~cks/space/blog/tech/IPMIAndBMCTerminology\">BMC</a>, which you can connect to\nover IPMI or sometimes see (perhaps including some scrollback) on\nthe BMC's web interface.</p>\n\n<p>(This limitation is spelled out in a short sentence in <a href=\"https://www.kernel.org/doc/html/latest/admin-guide/serial-console.html\">the kernel's\nserial console documentation</a>,\nwhere it says '[n]ote that you can only define one console per\ndevice type (serial, video)'.)</p>\n\n<p>In theory perhaps you could do everything over the IPMI and not use\nthe physical serial console; <a href=\"https://www.conserver.com/\">conserver</a>\nsupports 'Serial over LAN', for example. In practice, <a href=\"https://utcc.utoronto.ca/~cks/space/blog/sysadmin/IPMISharedInterfaceProblem\">servers\ndon't always have dedicated BMC network ports</a> and 'Serial over LAN (IPMI)'\nhas a lot more complexity and thus things that can go wrong as\ncompared to simple physical serial consoles. If my goal is to capture\nas much as possible if the system goes into a terrible state or\nbits of the network start having problems, serial consoles are\ngenerally the best option.</p>\n\n<p>(For capturing kernel messages there's also the kernel's <a href=\"https://www.kernel.org/doc/html/latest/networking/netconsole.html\">netconsole</a>\nsystem. I have mixed views on it that are outside the scope of this\nentry.)</p>\n\n<p>PS: If you list multiple serial ports in console= kernel command\nline arguments, I believe the kernel uses the first one and ignores\nthe rest. I further believe that systemd behaves the same way as\nfar as its automatic serial getty support goes. You can directly\nenable a serial getty yourself, of course.</p>\n</div>"
         }
       ],
-      "summary": "<div class=\"wikitext\"><p>Among a certain segment of Unix people, a famous bit of trivia is\nthat <a href=\"https://twitter.com/rob_pike/status/966896123548872705\"><code>/bin/true</code> used to be an empty file until people complicated\nit</a> (<a href=\"https://rachelbythebay.com/w/2022/04/07/empty/\">via</a>, which reminded\nme of this). However, you might wonder why an empty executable file\nwould be true. This more or less follows from a variety of standard\nand traditional behaviors, like this:</p>\n\n<ol><li>If a shell script ends without an explicit '<code>exit &lt;status></code>'\ncommand, its exit status is the exit status of the last command\nrun in the script. (This sometimes leads people to put '<code>exit 0</code>'\nand the end of scripts to force a successful exit even if the \nimmediately previous command failed.)<p>\n</li>\n<li>If a shell script doesn't run any commands, this 'last command'\nbehavior is extended to have its exit status be 0; after all, no\ncommands have failed.<p>\n</li>\n<li>it's traditional Unix behavior that shell scripts without a #!\nline are still passed directly to the (Bourne) shell to run.\nThis dates back to V7 Unix (or earlier) and is part of <a href=\"https://utcc.utoronto.ca/~cks/space/blog/unix/BourneCommentHistory\">the\ncomplicated and surprising history of comments in the Bourne\nshell</a>.</li>\n</ol>\n\n<p>When you line all of these up, an empty executable file is interpreted\nas an empty (Bourne) shell script, which has exit status 0. And this is\nhow an empty (executable) file is true.</p>\n\n<p>(Empty files that aren't executable are generally going to be an\nerror; Bash on Linux reports 'permission denied', for example.)</p>\n\n<p>Today, all of this behavior is required by <a href=\"https://pubs.opengroup.org/onlinepubs/9699919799/\">the Unix specification</a>. One part of\nit is in the section on <a href=\"https://pubs.opengroup.org/onlinepubs/9699919799/functions/execv.html\">the exec*() functions</a>.\nThis specifically requires the behavior of passing 'shell scripts'\nto the shell:</p>\n\n<blockquote><p>[...] In the cases where the other members of the exec family of\nfunctions would fail and set <code>errno</code> to [ENOEXEC], the <code>execlp()</code>\nand <code>execvp()</code> functions shall execute a command interpreter and the\nenvironment of the executed command shall be as if the process invoked\nthe sh utility using <code>execl()</code> as follows: [...]</p>\n</blockquote>\n\n<p>There's similar language in the description of <a href=\"https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_09_01_01\">how the POSIX shell\nis to execute commands</a>\n(in 1.e.b and 2). The <a href=\"https://pubs.opengroup.org/onlinepubs/9699919799/utilities/sh.html\">POSIX <code>sh</code> manual page</a>\nfurther requires that the shell exit with a 0 status if the script\nto be executed consisted only of zero or more blank lines and\ncomments.</p>\n\n<p>A shell that doesn't claim to be POSIX compatible doesn't have to\nhave this 'pass files to sh' behavior, but if it lacks it, some\nnumber of random programs will probably fail to get run some of the\ntime. On the whole I suspect that most alternate shell authors\nimplement the behavior for compatibility.</p>\n\n<p>(It's both interesting and reassuring how many of the odd historical\nlittle corners of Unix have been chased down and carefully standardized\nby POSIX.)</p>\n</div>",
-      "title": "Why an empty (executable) file is generally true in Unix",
+      "summary": "<div class=\"wikitext\"><p>One of Linux's nice features is that not only does it support\n<a href=\"https://utcc.utoronto.ca/~cks/space/blog/linux/SerialConsoleLove\">serial consoles</a>, but you can have the\nconventional video console too. This is important for us because\n<a href=\"https://utcc.utoronto.ca/~cks/space/blog/sysadmin/DroppingSerialConsoles\">often we want to use the video console</a>. The video console is where\nwe usually interact with the system in person, while the serial\nconsole goes to <a href=\"https://utcc.utoronto.ca/~cks/space/blog/sysadmin/ConsoleServerSetup\">our console server</a>\nfor logging.</p>\n\n<p>(Logging in over the serial console remains somewhat useful if the\nsystem's networking isn't working for some reason, and <a href=\"https://utcc.utoronto.ca/~cks/space/blog/linux/SystemdSerialPortsFixedBaud\">systemd\nmakes it easy</a>.)</p>\n\n<p>However, recently I discovered a limitation of Linux's serial console\nsupport, which is that you can only have one serial console, or to\nput it another way you can only have kernel messages going to one\nserial port, not two or more (<a href=\"https://utcc.utoronto.ca/~cks/space/blog/linux/ManyConsolesOfLinux\">this is one of the several 'consoles'\nthat Linux has</a>). This is relevant (at least\nto us) because many servers today have two serial ports you might\nwant kernel messages to go to; one physical one, which you can\nconnect to your console server, and one virtual one supplied by the\n<a href=\"https://utcc.utoronto.ca/~cks/space/blog/tech/IPMIAndBMCTerminology\">BMC</a>, which you can connect to\nover IPMI or sometimes see (perhaps including some scrollback) on\nthe BMC's web interface.</p>\n\n<p>(This limitation is spelled out in a short sentence in <a href=\"https://www.kernel.org/doc/html/latest/admin-guide/serial-console.html\">the kernel's\nserial console documentation</a>,\nwhere it says '[n]ote that you can only define one console per\ndevice type (serial, video)'.)</p>\n\n<p>In theory perhaps you could do everything over the IPMI and not use\nthe physical serial console; <a href=\"https://www.conserver.com/\">conserver</a>\nsupports 'Serial over LAN', for example. In practice, <a href=\"https://utcc.utoronto.ca/~cks/space/blog/sysadmin/IPMISharedInterfaceProblem\">servers\ndon't always have dedicated BMC network ports</a> and 'Serial over LAN (IPMI)'\nhas a lot more complexity and thus things that can go wrong as\ncompared to simple physical serial consoles. If my goal is to capture\nas much as possible if the system goes into a terrible state or\nbits of the network start having problems, serial consoles are\ngenerally the best option.</p>\n\n<p>(For capturing kernel messages there's also the kernel's <a href=\"https://www.kernel.org/doc/html/latest/networking/netconsole.html\">netconsole</a>\nsystem. I have mixed views on it that are outside the scope of this\nentry.)</p>\n\n<p>PS: If you list multiple serial ports in console= kernel command\nline arguments, I believe the kernel uses the first one and ignores\nthe rest. I further believe that systemd behaves the same way as\nfar as its automatic serial getty support goes. You can directly\nenable a serial getty yourself, of course.</p>\n</div>",
+      "title": "A surprise: you can only have one Linux kernel serial console",
       "title_detail": {
         "type": "text/html",
         "language": null,
         "base": "https://utcc.utoronto.ca/~cks/space/blog/?atom",
-        "value": "Why an empty (executable) file is generally true in Unix"
+        "value": "A surprise: you can only have one Linux kernel serial console"
       },
       "tags": [
         {
-          "term": "unix",
+          "term": "linux",
           "scheme": null,
           "label": null
         }
       ],
-      "updated": "2022-07-05T02:02:13Z",
+      "updated": "2022-07-06T01:39:23Z",
       "updated_parsed": [
         2022,
         7,
-        5,
-        2,
-        2,
-        13,
+        6,
         1,
-        186,
+        39,
+        23,
+        2,
+        187,
         0
       ],
-      "published": "2022-07-05T02:01:13Z",
+      "published": "2022-07-06T01:38:32Z",
       "published_parsed": [
         2022,
         7,
-        5,
+        6,
+        1,
+        38,
+        32,
         2,
-        1,
-        13,
-        1,
-        186,
+        187,
         0
       ]
     }
@@ -921,54 +921,54 @@
       "section": "OpenBSD"
     },
     "entry": {
-      "title": "13 Propositions on an Internet for a Burning World (Part 8)",
+      "title": "13 Propositions on an Internet for a Burning World (Part 9)",
       "title_detail": {
         "type": "text/html",
         "language": null,
         "base": "https://doing-stupid-things.as59645.net/feed.xml",
-        "value": "13 Propositions on an Internet for a Burning World (Part 8)"
+        "value": "13 Propositions on an Internet for a Burning World (Part 9)"
       },
       "links": [
         {
-          "href": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/04/propositions-part-8.html",
+          "href": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/05/propositions-part-9.html",
           "rel": "alternate",
           "type": "text/html",
-          "title": "13 Propositions on an Internet for a Burning World (Part 8)"
+          "title": "13 Propositions on an Internet for a Burning World (Part 9)"
         }
       ],
-      "link": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/04/propositions-part-8.html",
-      "published": "2022-07-04T20:42:12+02:00",
+      "link": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/05/propositions-part-9.html",
+      "published": "2022-07-05T23:59:12+02:00",
       "published_parsed": [
         2022,
         7,
-        4,
-        18,
-        42,
+        5,
+        21,
+        59,
         12,
-        0,
-        185,
+        1,
+        186,
         0
       ],
-      "updated": "2022-07-04T20:42:12+02:00",
+      "updated": "2022-07-05T23:59:12+02:00",
       "updated_parsed": [
         2022,
         7,
-        4,
-        18,
-        42,
+        5,
+        21,
+        59,
         12,
-        0,
-        185,
+        1,
+        186,
         0
       ],
-      "id": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/04/propositions-part-8",
+      "id": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/05/propositions-part-9",
       "guidislink": false,
       "content": [
         {
           "type": "text/html",
           "language": null,
-          "base": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/04/propositions-part-8.html",
-          "value": "<div class=\"language-plaintext highlighter-rouge\"><div class=\"highlight\"><pre class=\"highlight\"><code>OpenBSD version: Not relevant here...\nArch:            ?\nNSFP:            Well...\n</code></pre></div></div>\n\n<p>Security is <em>‘the big thing’</em>. Everything has to be secure.\nWell, it usually isn’t, but if you keep listening to security professionals (and others’ complaints about them), you might get the idea that they value security above all.\nIn fact, an analysis of <a href=\"https://arxiv.org/abs/1610.05531\">protocol design over the ages</a> from… by now… ages ago… found the same.\nFor some reason, it is hard to step beyond the CIA (Confidentiality-Integrity-Availability) nail, if you wield the security hammer.\nAnd… there is enough <em>actually</em> reputable research on this issue, just <a href=\"https://www.cs.cmu.edu/~rdriley/330/papers/Why_Johnny_Cant_Encrypt.pdf\">ask Johnny</a>.</p>\n\n<p>However, with a world in which society (and the Internet alike) are crumbling down all around us, this may change.\nIn fact, we claim that:</p>\n\n<h1 id=\"proposition-8\">Proposition 8</h1>\n<p><em>“In a burning world, functionality is more important than security, but remains trumped by safety.”</em></p>\n\n<p>So, what is this all about?\nWell, we claim that if we ever—and we hope it does not come to it—face a world burnt to its foundations, with an Internet fallen apart and hypergiants failed, paradigms of ‘what is important’ will shift dramatically.\nWe will find ourselves in a situation where the utility and functionality of systems will superimpose their security even stronger as in the current world.\nWe <em>already</em> know the common situation of <em>‘things’</em> or even <em>‘an Internet full of them’</em>  going into production because it just <em>has to work</em>. \nAnd, from a certain perspective, there is not much wrong with that. \nHumans tend to do what is easiest for them.\nSo, unless security is <em>the easiest way</em>, other ways will be taken.\n(We, of course, do not advocate for throwing insecure stuff on the Internet here. In fact, getting security <em>right</em>, i.e., in the shape of the easiest way, is part of that whole issue <a href=\"https://doing-stupid-things.as59645.net/burning/world/resillience/2022/06/27/propositions-part-1.html\">of care</a> we have been talking about.)</p>\n\n<p>Yet, if we find ourselves in a world where the question is not ‘can this funny bird app transport my … erm… posts to the Internet’, but ‘is this solar pannel turning system able to function enough to keep the community powered on’, security will not be <em>that</em> important.\nInstead of that system having a secure password only known to one or a few, we might have a password (if it is needed at all) slapped to the top of the screen (as it <a href=\"https://www.dailydot.com/debug/hawaii-agency-post-it-password/\">tends to be common practice now already…</a>)\nThe reason is simple: A bricked system no longer operable due to a lost password (due to, e.g., the people knowing the password dying) has a significant higher impact on the community than potential security considerations.\nIn fact, security may just end up being resolved by a social contract, following the lines of <em>‘you won’t break your own power supply’</em>.</p>\n\n<p>Hence, we predict that in such a world, threat modeling will see a significant shift away from security against threats from the larger Internet.\nAnd in that process, threat modeling will become a question of <a href=\"https://ieeexplore.ieee.org/abstract/document/9229815\"><em>safety</em></a>, back towards the question of <em>‘What (physical) harm can be done (by outsiders?) if it is not secure?’</em>\nUltimately, the physical safety (and survival) of local communities will have the highest importance.</p>"
+          "base": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/05/propositions-part-9.html",
+          "value": "<div class=\"language-plaintext highlighter-rouge\"><div class=\"highlight\"><pre class=\"highlight\"><code>OpenBSD version: Not relevant here...\nArch:            ?\nNSFP:            Well...\n</code></pre></div></div>\n\n<p>Over the past decades, IT systems have become increasingly complex.\nThere are countless discussions about the explosion in <a href=\"https://pure.mpg.de/rest/items/item_3384330/component/file_3388345/content\">complexity of protocols, for example email</a>, and the ‘DNS Camel’ is certainly one of the most iconic illustrations of this issue.\nFurthermore, this trend continues into the operation of systems. \nWhile the introduction of Infrastructure-as-Code, and DevOps aims to make systems more maintainable and succeeds in certain contexts, it also adds layer upon layer of abstraction.\nTo illustrate this issue with an anecdote: When we tried to set up monitoring for a small self-hosted video conferencing setup supporting a faculty in teaching during the COVID-19 pandemic, we ultimately ended up using decades-old monitoring software (read: Nagios).\nWe did so because all more recent monitoring tools would drag along a software stack as complex, and sometimes even more complex, than the setup it was supposed to monitor.</p>\n\n<p>Hence, we claim:</p>\n\n<h1 id=\"proposition-9\">Proposition 9</h1>\n\n<p><em>“Systems that are too complex to be understood by a single person cannot be sustainable.”</em></p>\n\n<p>In a world burning down, it will be important to keep systems running.\nSystems may end up being isolated and small scale.\nThey may depend on individual operators.\nThey may depend on knowledge on how they are operated being <em>easily transferable</em> to another person.</p>\n\n<p>Again, Solene provided the foundation of this proposition <a href=\"https://dataswamp.org/~solene/2021-07-09-obsolete-feeling-in-the-crossfire.html\">in a blog article</a>. \nThis article succeeds in dissecting the reliance of automation and complex systems on its building blocks that need to be understood before they can be ‘abstracted away’.\nHowever, to be sustainable in a burning world, systems will have to be run (and understood) by small teams and communities (see <a href=\"https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/03/propositions-part-7.html\">Proposition 7</a>). \nHence, while in an ever-growing and centralizing Internet automation is a necessity, its complexity might become a curse in an Internet that is supposed to survive in a burning world.\nOr, to put it in an example: Without a central docker repository, there is no place where <code class=\"language-plaintext highlighter-rouge\">curl | sudo bash</code> can pull the image from.</p>"
         }
       ],
       "summary": "OpenBSD version: Not relevant here... Arch: ? NSFP: Well...",
@@ -1441,7 +1441,7 @@
         }
       ],
       "link": "https://scholars-stage.org/a-guide-map-for-reading-the-east-asian-canon/",
-      "comments": "https://scholars-stage.org/a-guide-map-for-reading-the-east-asian-canon/#respond",
+      "comments": "https://scholars-stage.org/a-guide-map-for-reading-the-east-asian-canon/#comments",
       "authors": [
         {
           "name": "T. Greer"
@@ -1500,7 +1500,7 @@
         "value": "<!-- wp:paragraph -->\n<p><strong>Readers may remember</strong> <a href=\"https://scholars-stage.org/a-non-western-canon-what-would-a-list-of-humanitys-100-greatest-writers-look-like/\">my stab at a global Great Books list</a>. Recently a reader contacted me asking for guidance: they wanted to read through the books on the \"East Asian\" section of that list, but did not believe he had the proper historical knowledge to understand or contextualize what they were reading. What do I recommend they read to make sense of the list?</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:paragraph -->\n<p>What follows will not make sense if you have not looked at that original post. Here is what I told him:</p>\n<!-- /wp:paragraph -->"
       },
       "wfw_commentrss": "https://scholars-stage.org/a-guide-map-for-reading-the-east-asian-canon/feed/",
-      "slash_comments": "0",
+      "slash_comments": "1",
       "post-id": "3486"
     }
   },
