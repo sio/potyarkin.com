@@ -72,6 +72,7 @@ test: $(VENV)/pytest
 	$(VENV)/pytest
 
 .PHONY: microblog
+publish html serve: | microblog
 microblog:
 	git submodule init
 	git submodule update

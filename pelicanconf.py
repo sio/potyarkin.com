@@ -102,8 +102,9 @@ SOCIAL = [
 DEFAULT_PAGINATION = 10
 
 # Pelican plugins
+import microblog.pelican
 PLUGINS = [
-    'microblog',
+    microblog.pelican,
     'neighbors',
     ]
 
@@ -139,3 +140,8 @@ JINJA_FILTERS = {
     'strftime': datetime.strftime,
     'strptime': datetime.strptime,
 }
+
+
+# Microblog
+import microblog.storage
+MICROBLOG = microblog.storage.GitStorage('./micro/')
