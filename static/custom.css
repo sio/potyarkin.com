@@ -59,7 +59,7 @@ article.micro .permalink {
   margin: 1em 0;
 }
 article.micro {
-  font-size: 120%;
+  font-size: 1.25rem;
 }
 article.micro > * {
   max-width: calc(min(0.8 * var(--content-width), 95vw));
