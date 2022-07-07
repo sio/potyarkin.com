@@ -9,14 +9,14 @@
       "section": "Linux"
     },
     "entry": {
-      "id": "tag:cspace@cks.mef.org,2009-03-24:/blog/linux/KernelSerialConsoleOnlyOne",
+      "id": "tag:cspace@cks.mef.org,2009-03-24:/blog/linux/NetconsoleMixedViews",
       "guidislink": true,
-      "link": "https://utcc.utoronto.ca/~cks/space/blog/linux/KernelSerialConsoleOnlyOne",
+      "link": "https://utcc.utoronto.ca/~cks/space/blog/linux/NetconsoleMixedViews",
       "links": [
         {
           "rel": "alternate",
           "type": "text/html",
-          "href": "https://utcc.utoronto.ca/~cks/space/blog/linux/KernelSerialConsoleOnlyOne"
+          "href": "https://utcc.utoronto.ca/~cks/space/blog/linux/NetconsoleMixedViews"
         }
       ],
       "authors": [
@@ -33,16 +33,16 @@
           "type": "text/html",
           "language": null,
           "base": "https://utcc.utoronto.ca/~cks/space/blog/?atom",
-          "value": "<div class=\"wikitext\"><p>One of Linux's nice features is that not only does it support\n<a href=\"https://utcc.utoronto.ca/~cks/space/blog/linux/SerialConsoleLove\">serial consoles</a>, but you can have the\nconventional video console too. This is important for us because\n<a href=\"https://utcc.utoronto.ca/~cks/space/blog/sysadmin/DroppingSerialConsoles\">often we want to use the video console</a>. The video console is where\nwe usually interact with the system in person, while the serial\nconsole goes to <a href=\"https://utcc.utoronto.ca/~cks/space/blog/sysadmin/ConsoleServerSetup\">our console server</a>\nfor logging.</p>\n\n<p>(Logging in over the serial console remains somewhat useful if the\nsystem's networking isn't working for some reason, and <a href=\"https://utcc.utoronto.ca/~cks/space/blog/linux/SystemdSerialPortsFixedBaud\">systemd\nmakes it easy</a>.)</p>\n\n<p>However, recently I discovered a limitation of Linux's serial console\nsupport, which is that you can only have one serial console, or to\nput it another way you can only have kernel messages going to one\nserial port, not two or more (<a href=\"https://utcc.utoronto.ca/~cks/space/blog/linux/ManyConsolesOfLinux\">this is one of the several 'consoles'\nthat Linux has</a>). This is relevant (at least\nto us) because many servers today have two serial ports you might\nwant kernel messages to go to; one physical one, which you can\nconnect to your console server, and one virtual one supplied by the\n<a href=\"https://utcc.utoronto.ca/~cks/space/blog/tech/IPMIAndBMCTerminology\">BMC</a>, which you can connect to\nover IPMI or sometimes see (perhaps including some scrollback) on\nthe BMC's web interface.</p>\n\n<p>(This limitation is spelled out in a short sentence in <a href=\"https://www.kernel.org/doc/html/latest/admin-guide/serial-console.html\">the kernel's\nserial console documentation</a>,\nwhere it says '[n]ote that you can only define one console per\ndevice type (serial, video)'.)</p>\n\n<p>In theory perhaps you could do everything over the IPMI and not use\nthe physical serial console; <a href=\"https://www.conserver.com/\">conserver</a>\nsupports 'Serial over LAN', for example. In practice, <a href=\"https://utcc.utoronto.ca/~cks/space/blog/sysadmin/IPMISharedInterfaceProblem\">servers\ndon't always have dedicated BMC network ports</a> and 'Serial over LAN (IPMI)'\nhas a lot more complexity and thus things that can go wrong as\ncompared to simple physical serial consoles. If my goal is to capture\nas much as possible if the system goes into a terrible state or\nbits of the network start having problems, serial consoles are\ngenerally the best option.</p>\n\n<p>(For capturing kernel messages there's also the kernel's <a href=\"https://www.kernel.org/doc/html/latest/networking/netconsole.html\">netconsole</a>\nsystem. I have mixed views on it that are outside the scope of this\nentry.)</p>\n\n<p>PS: If you list multiple serial ports in console= kernel command\nline arguments, I believe the kernel uses the first one and ignores\nthe rest. I further believe that systemd behaves the same way as\nfar as its automatic serial getty support goes. You can directly\nenable a serial getty yourself, of course.</p>\n</div>"
+          "value": "<div class=\"wikitext\"><p>The Linux kernel's <a href=\"https://www.kernel.org/doc/html/latest/networking/netconsole.html\">netconsole</a> allows\nyou to \"log kernel printk messages over UDP\" to a remote system;\nthis makes it another form of <a href=\"https://utcc.utoronto.ca/~cks/space/blog/linux/ManyConsolesOfLinux\">kernel (message) console</a>, alongside the video console and serial\nconsole. I've looked into netconsole periodically and played with\nit a bit, and the whole experience has left me with decidedly mixed\nfeelings and very little desire to actually use it in our environment.</p>\n\n<p>The first problem with netconsole in practice is that the story on\nthe receiving side is what you could politely call lacking. The\nusual advice is to send netconsole messages to either a listening\nsyslogd or to some manual command. No one seems to have built a\nusable, ready to go 'netconsole server' that would reliably capture\nnetconsole messages, put them in per-host files or the like, and\nso on (Facebook's <a href=\"https://facebookmicrosites.github.io/netconsd/\">netconsd</a> could be extended\ninto this but it doesn't ship with a file logger).</p>\n\n<p>The second problem is that on the sending side, the usage case for\nnetconsole is limited in our environment. If you want to capture\nnormal kernel messages off the machine in normal circumstances, a\nremote syslog server generally works just as well. If you want to\ncapture kernel messages in crazy situations, you're almost certainly\nbetter off with a serial console, including \"serial over IPMI\",\nbecause there are a lot fewer moving parts in the kernel for sending\noutput over a serial link than there are for sending even relatively\nhard-coded UDP messages.</p>\n\n<p>This reduces netconsole to two situations, where either you can't use a\nserial console (so netconsole is the best you can do) or you're mostly\nworried about intermediate kernel situations, ones where the modern\nand relatively complicated user level remote syslog path isn't going\nto work but a low level UDP direct transmission probably will. This\ncan sometimes make sense, but then you run into the lack of a good\n'netconsole server' setup, which makes the whole thing harder to deal\nwith.</p>\n\n<p>(The modern user level path for remote syslog is that kernel messages\nare read by systemd's journald, which then passes them to the local\nrsyslogd, which then writes them off to the remote syslog server.\nAs far as I know there's no way to get journald to directly write\nmessages to a remote server (syslog or otherwise). For a kernel\nmessage to make it to your remote syslog server, both journald and\n(r)syslogd have to run and be able to process the message, and then\nthe network send has to work. In a serious kernel problem, this is\nin no way certain.)</p>\n\n<p>If there was a good, ready to go netconsole server setup, I might\nset one up <a href=\"https://support.cs.toronto.edu/\">here</a> and configure\nour machines to send to it, just as a backup (especially for lower\npriority machines that we don't currently have hooked up to <a href=\"https://utcc.utoronto.ca/~cks/space/blog/sysadmin/ConsoleServerSetup\">our\nserial console server</a>). Without\none, it's probably not important enough to try to put something\ntogether, since our machines almost never panic in the first place\nand <a href=\"https://utcc.utoronto.ca/~cks/space/blog/sysadmin/CentralizeSyslog\">we already have a central syslog server</a> that captures routine kernel messages\n(along with everything else).</p>\n\n<p>(If there is such a netconsole server out there in the world, it\nneeds better publicity and I would love to hear about it.)</p>\n</div>"
         }
       ],
-      "summary": "<div class=\"wikitext\"><p>One of Linux's nice features is that not only does it support\n<a href=\"https://utcc.utoronto.ca/~cks/space/blog/linux/SerialConsoleLove\">serial consoles</a>, but you can have the\nconventional video console too. This is important for us because\n<a href=\"https://utcc.utoronto.ca/~cks/space/blog/sysadmin/DroppingSerialConsoles\">often we want to use the video console</a>. The video console is where\nwe usually interact with the system in person, while the serial\nconsole goes to <a href=\"https://utcc.utoronto.ca/~cks/space/blog/sysadmin/ConsoleServerSetup\">our console server</a>\nfor logging.</p>\n\n<p>(Logging in over the serial console remains somewhat useful if the\nsystem's networking isn't working for some reason, and <a href=\"https://utcc.utoronto.ca/~cks/space/blog/linux/SystemdSerialPortsFixedBaud\">systemd\nmakes it easy</a>.)</p>\n\n<p>However, recently I discovered a limitation of Linux's serial console\nsupport, which is that you can only have one serial console, or to\nput it another way you can only have kernel messages going to one\nserial port, not two or more (<a href=\"https://utcc.utoronto.ca/~cks/space/blog/linux/ManyConsolesOfLinux\">this is one of the several 'consoles'\nthat Linux has</a>). This is relevant (at least\nto us) because many servers today have two serial ports you might\nwant kernel messages to go to; one physical one, which you can\nconnect to your console server, and one virtual one supplied by the\n<a href=\"https://utcc.utoronto.ca/~cks/space/blog/tech/IPMIAndBMCTerminology\">BMC</a>, which you can connect to\nover IPMI or sometimes see (perhaps including some scrollback) on\nthe BMC's web interface.</p>\n\n<p>(This limitation is spelled out in a short sentence in <a href=\"https://www.kernel.org/doc/html/latest/admin-guide/serial-console.html\">the kernel's\nserial console documentation</a>,\nwhere it says '[n]ote that you can only define one console per\ndevice type (serial, video)'.)</p>\n\n<p>In theory perhaps you could do everything over the IPMI and not use\nthe physical serial console; <a href=\"https://www.conserver.com/\">conserver</a>\nsupports 'Serial over LAN', for example. In practice, <a href=\"https://utcc.utoronto.ca/~cks/space/blog/sysadmin/IPMISharedInterfaceProblem\">servers\ndon't always have dedicated BMC network ports</a> and 'Serial over LAN (IPMI)'\nhas a lot more complexity and thus things that can go wrong as\ncompared to simple physical serial consoles. If my goal is to capture\nas much as possible if the system goes into a terrible state or\nbits of the network start having problems, serial consoles are\ngenerally the best option.</p>\n\n<p>(For capturing kernel messages there's also the kernel's <a href=\"https://www.kernel.org/doc/html/latest/networking/netconsole.html\">netconsole</a>\nsystem. I have mixed views on it that are outside the scope of this\nentry.)</p>\n\n<p>PS: If you list multiple serial ports in console= kernel command\nline arguments, I believe the kernel uses the first one and ignores\nthe rest. I further believe that systemd behaves the same way as\nfar as its automatic serial getty support goes. You can directly\nenable a serial getty yourself, of course.</p>\n</div>",
-      "title": "A surprise: you can only have one Linux kernel serial console",
+      "summary": "<div class=\"wikitext\"><p>The Linux kernel's <a href=\"https://www.kernel.org/doc/html/latest/networking/netconsole.html\">netconsole</a> allows\nyou to \"log kernel printk messages over UDP\" to a remote system;\nthis makes it another form of <a href=\"https://utcc.utoronto.ca/~cks/space/blog/linux/ManyConsolesOfLinux\">kernel (message) console</a>, alongside the video console and serial\nconsole. I've looked into netconsole periodically and played with\nit a bit, and the whole experience has left me with decidedly mixed\nfeelings and very little desire to actually use it in our environment.</p>\n\n<p>The first problem with netconsole in practice is that the story on\nthe receiving side is what you could politely call lacking. The\nusual advice is to send netconsole messages to either a listening\nsyslogd or to some manual command. No one seems to have built a\nusable, ready to go 'netconsole server' that would reliably capture\nnetconsole messages, put them in per-host files or the like, and\nso on (Facebook's <a href=\"https://facebookmicrosites.github.io/netconsd/\">netconsd</a> could be extended\ninto this but it doesn't ship with a file logger).</p>\n\n<p>The second problem is that on the sending side, the usage case for\nnetconsole is limited in our environment. If you want to capture\nnormal kernel messages off the machine in normal circumstances, a\nremote syslog server generally works just as well. If you want to\ncapture kernel messages in crazy situations, you're almost certainly\nbetter off with a serial console, including \"serial over IPMI\",\nbecause there are a lot fewer moving parts in the kernel for sending\noutput over a serial link than there are for sending even relatively\nhard-coded UDP messages.</p>\n\n<p>This reduces netconsole to two situations, where either you can't use a\nserial console (so netconsole is the best you can do) or you're mostly\nworried about intermediate kernel situations, ones where the modern\nand relatively complicated user level remote syslog path isn't going\nto work but a low level UDP direct transmission probably will. This\ncan sometimes make sense, but then you run into the lack of a good\n'netconsole server' setup, which makes the whole thing harder to deal\nwith.</p>\n\n<p>(The modern user level path for remote syslog is that kernel messages\nare read by systemd's journald, which then passes them to the local\nrsyslogd, which then writes them off to the remote syslog server.\nAs far as I know there's no way to get journald to directly write\nmessages to a remote server (syslog or otherwise). For a kernel\nmessage to make it to your remote syslog server, both journald and\n(r)syslogd have to run and be able to process the message, and then\nthe network send has to work. In a serious kernel problem, this is\nin no way certain.)</p>\n\n<p>If there was a good, ready to go netconsole server setup, I might\nset one up <a href=\"https://support.cs.toronto.edu/\">here</a> and configure\nour machines to send to it, just as a backup (especially for lower\npriority machines that we don't currently have hooked up to <a href=\"https://utcc.utoronto.ca/~cks/space/blog/sysadmin/ConsoleServerSetup\">our\nserial console server</a>). Without\none, it's probably not important enough to try to put something\ntogether, since our machines almost never panic in the first place\nand <a href=\"https://utcc.utoronto.ca/~cks/space/blog/sysadmin/CentralizeSyslog\">we already have a central syslog server</a> that captures routine kernel messages\n(along with everything else).</p>\n\n<p>(If there is such a netconsole server out there in the world, it\nneeds better publicity and I would love to hear about it.)</p>\n</div>",
+      "title": "My current mixed views on the Linux kernel netconsole",
       "title_detail": {
         "type": "text/html",
         "language": null,
         "base": "https://utcc.utoronto.ca/~cks/space/blog/?atom",
-        "value": "A surprise: you can only have one Linux kernel serial console"
+        "value": "My current mixed views on the Linux kernel netconsole"
       },
       "tags": [
         {
@@ -51,28 +51,28 @@
           "label": null
         }
       ],
-      "updated": "2022-07-06T01:39:23Z",
+      "updated": "2022-07-07T02:30:50Z",
       "updated_parsed": [
         2022,
         7,
-        6,
-        1,
-        39,
-        23,
+        7,
         2,
-        187,
+        30,
+        50,
+        3,
+        188,
         0
       ],
-      "published": "2022-07-06T01:38:32Z",
+      "published": "2022-07-07T02:29:49Z",
       "published_parsed": [
         2022,
         7,
-        6,
-        1,
-        38,
-        32,
+        7,
         2,
-        187,
+        29,
+        49,
+        3,
+        188,
         0
       ]
     }
@@ -921,54 +921,54 @@
       "section": "OpenBSD"
     },
     "entry": {
-      "title": "13 Propositions on an Internet for a Burning World (Part 9)",
+      "title": "13 Propositions on an Internet for a Burning World (Part 10)",
       "title_detail": {
         "type": "text/html",
         "language": null,
         "base": "https://doing-stupid-things.as59645.net/feed.xml",
-        "value": "13 Propositions on an Internet for a Burning World (Part 9)"
+        "value": "13 Propositions on an Internet for a Burning World (Part 10)"
       },
       "links": [
         {
-          "href": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/05/propositions-part-9.html",
+          "href": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/06/propositions-part-10.html",
           "rel": "alternate",
           "type": "text/html",
-          "title": "13 Propositions on an Internet for a Burning World (Part 9)"
+          "title": "13 Propositions on an Internet for a Burning World (Part 10)"
         }
       ],
-      "link": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/05/propositions-part-9.html",
-      "published": "2022-07-05T23:59:12+02:00",
+      "link": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/06/propositions-part-10.html",
+      "published": "2022-07-06T17:26:12+02:00",
       "published_parsed": [
         2022,
         7,
-        5,
-        21,
-        59,
+        6,
+        15,
+        26,
         12,
-        1,
-        186,
+        2,
+        187,
         0
       ],
-      "updated": "2022-07-05T23:59:12+02:00",
+      "updated": "2022-07-06T17:26:12+02:00",
       "updated_parsed": [
         2022,
         7,
-        5,
-        21,
-        59,
+        6,
+        15,
+        26,
         12,
-        1,
-        186,
+        2,
+        187,
         0
       ],
-      "id": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/05/propositions-part-9",
+      "id": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/06/propositions-part-10",
       "guidislink": false,
       "content": [
         {
           "type": "text/html",
           "language": null,
-          "base": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/05/propositions-part-9.html",
-          "value": "<div class=\"language-plaintext highlighter-rouge\"><div class=\"highlight\"><pre class=\"highlight\"><code>OpenBSD version: Not relevant here...\nArch:            ?\nNSFP:            Well...\n</code></pre></div></div>\n\n<p>Over the past decades, IT systems have become increasingly complex.\nThere are countless discussions about the explosion in <a href=\"https://pure.mpg.de/rest/items/item_3384330/component/file_3388345/content\">complexity of protocols, for example email</a>, and the ‘DNS Camel’ is certainly one of the most iconic illustrations of this issue.\nFurthermore, this trend continues into the operation of systems. \nWhile the introduction of Infrastructure-as-Code, and DevOps aims to make systems more maintainable and succeeds in certain contexts, it also adds layer upon layer of abstraction.\nTo illustrate this issue with an anecdote: When we tried to set up monitoring for a small self-hosted video conferencing setup supporting a faculty in teaching during the COVID-19 pandemic, we ultimately ended up using decades-old monitoring software (read: Nagios).\nWe did so because all more recent monitoring tools would drag along a software stack as complex, and sometimes even more complex, than the setup it was supposed to monitor.</p>\n\n<p>Hence, we claim:</p>\n\n<h1 id=\"proposition-9\">Proposition 9</h1>\n\n<p><em>“Systems that are too complex to be understood by a single person cannot be sustainable.”</em></p>\n\n<p>In a world burning down, it will be important to keep systems running.\nSystems may end up being isolated and small scale.\nThey may depend on individual operators.\nThey may depend on knowledge on how they are operated being <em>easily transferable</em> to another person.</p>\n\n<p>Again, Solene provided the foundation of this proposition <a href=\"https://dataswamp.org/~solene/2021-07-09-obsolete-feeling-in-the-crossfire.html\">in a blog article</a>. \nThis article succeeds in dissecting the reliance of automation and complex systems on its building blocks that need to be understood before they can be ‘abstracted away’.\nHowever, to be sustainable in a burning world, systems will have to be run (and understood) by small teams and communities (see <a href=\"https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/03/propositions-part-7.html\">Proposition 7</a>). \nHence, while in an ever-growing and centralizing Internet automation is a necessity, its complexity might become a curse in an Internet that is supposed to survive in a burning world.\nOr, to put it in an example: Without a central docker repository, there is no place where <code class=\"language-plaintext highlighter-rouge\">curl | sudo bash</code> can pull the image from.</p>"
+          "base": "https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/06/propositions-part-10.html",
+          "value": "<div class=\"language-plaintext highlighter-rouge\"><div class=\"highlight\"><pre class=\"highlight\"><code>OpenBSD version: Not relevant here...\nArch:            ?\nNSFP:            Well...\n</code></pre></div></div>\n\n<p>We really have a tendency of <a href=\"https://doing-stupid-things.as59645.net/burning/world/resillience/2022/07/05/propositions-part-9.html\">building complex systems</a>.\nGrowthgrowthgrowth. \nEspecially, when it comes to complexity.</p>\n\n<p>Sometimes, this complexity comes in the form of <a href=\"https://www.technologyreview.com/2019/06/06/239031/training-a-single-ai-model-can-emit-as-much-carbon-as-five-cars-in-their-lifetimes/\">‘AI’ systems</a>, sometimes it throws <a href=\"http://eprints.cs.univie.ac.at/6452/1/RAID2018.pdf\">resources at concepts looking for a solutions</a>.\nSometimes it is the issue of <a href=\"https://www.pingdom.com/blog/webpages-are-getting-larger-every-year-and-heres-why-it-matters/\">bloat on the web</a>, other times we are wondering where <a href=\"https://dl.acm.org/doi/pdf/10.1145/3431832.3431837\">all the ram went</a>.</p>\n\n<p>There are countless examples of systems that <em>consume</em> a lot of resources.\nThe <a href=\"https://www.technologyreview.com/2019/06/06/239031/training-a-single-ai-model-can-emit-as-much-carbon-as-five-cars-in-their-lifetimes/\">footprint of large models</a>, as well as the <a href=\"https://en.wikipedia.org/wiki/Environmental_impact_of_cryptocurrencies\">horrendous crime against nature</a> from proof-of-work based “BlockChain Technologo” are most likely the most common examples here.\nHowever, as with the list above, this list could probably continue for ages, and we can add a lot more examples to it, like the <a href=\"https://spectrum.ieee.org/the-iots-ewaste-problem-isnt-inevitable\">piles of waste</a> the IoT brings to the table.</p>\n\n<p>In the end, this all boils down to the joint responsibility we, as computer science people and ultimately those <em>building</em> these systems have.</p>\n\n<h1 id=\"proposition-10\">Proposition 10</h1>\n<p><em>“Systems should enable a better tomorrow and not burn the world even further.”</em></p>\n\n<p>This responsibility can manifest itself in many ways.\nOne of the parts we have to talk about is how <em>more</em> abstraction leads to <em>more</em> resource needs.\nWith the wide availability of automation and support infrastructure—which of course has their good in <em>enabling</em> many people to build—systems’ resource hunger steadily increases.\nWe currently have a tendency to create a growing ball of systems supporting other systems in abstracting something simple to something more complex.\nThis, in turn, eats itself into how we build and design systems, adding layers and utilizing more resources for the <em>same</em> functionality, as most probably best illustrated by the <a href=\"https://www.pingdom.com/blog/webpages-are-getting-larger-every-year-and-heres-why-it-matters/\">web example mentioned above</a>.</p>\n\n<p>This overall development has probably been brought to the extreme by Bitcoin and its proof-of-work siblings, churning through energy on <a href=\"https://www.nytimes.com/interactive/2021/09/03/climate/bitcoin-carbon-footprint-electricity.html\">a nation-state scale</a>, while having no <em>purpose</em> except <em>profit</em>.\nBitcoin may very well be the perfect piece of performance art, illustrating the fall of a species burning itself and its planet in the strife for <em>more</em>, merely for the sake of <em>more</em>.</p>\n\n<p>As such, we claim that it is an engineer’s responsibility to ensure that the systems they build contribute to a beneficial purpose and do not harm society or the environment by needless and redundant processing.\nThis entails that this purpose is tangible and reasonable in relation to the resource consumption of the system, and serves the benefit of all instead of the profits of a few.</p>"
         }
       ],
       "summary": "OpenBSD version: Not relevant here... Arch: ? NSFP: Well...",
