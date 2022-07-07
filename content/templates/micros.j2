@@ -11,9 +11,11 @@
     </section>
     {% for _ in microblog.attached_names(entry) %}
     {% if loop.index == 1 %}<section class="images">{% endif %}
-    <a href="{{ SITEURL }}/{{ attachment_url(entry.uid, loop.index) }}">
-    <img class="attached" src="{{ SITEURL }}/{{ attachment_url(entry.uid, loop.index) }}">
-    </a>
+    {% set url=attachment_url(entry.uid, loop.index) %}
+    <input id="{{ url }}" class="checkbox-hack" type="checkbox">
+    <label for="{{ url }}" class="lightbox">
+      <img class="attached" src="{{ SITEURL }}/{{ url }}">
+    </label>
     {% if loop.revindex == 1 %}</section>{% endif %}
     {% endfor %}
   </article>
