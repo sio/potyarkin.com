@@ -5,6 +5,20 @@
 # data format is not guaranteed to remain stable over time
 #
 
+- period: 2022-07
+  links:
+
+  - title: On github as a social network
+    by: Eric Bower
+    url: https://erock.io/2022/06/03/github-as-social-network.html
+    description: |-
+      Why do I get so excited when I receive stars on my projects hosted on
+      github? I am constantly trying to come up with new projects to build, but
+      do I actually want to build them? Or do I just want social currency? I’m
+      not sure I can tell the difference anymore.
+
+      Github isn’t just a code repository, it’s a social networking site.
+
 - period: 2022-06
   links:
 
