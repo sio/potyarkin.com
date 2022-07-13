@@ -9,14 +9,14 @@
       "section": "Linux"
     },
     "entry": {
-      "id": "tag:cspace@cks.mef.org,2009-03-24:/blog/web/BingbotFrontPageBlock",
+      "id": "tag:cspace@cks.mef.org,2009-03-24:/blog/linux/SoftwareRaidModernNaming",
       "guidislink": true,
-      "link": "https://utcc.utoronto.ca/~cks/space/blog/web/BingbotFrontPageBlock",
+      "link": "https://utcc.utoronto.ca/~cks/space/blog/linux/SoftwareRaidModernNaming",
       "links": [
         {
           "rel": "alternate",
           "type": "text/html",
-          "href": "https://utcc.utoronto.ca/~cks/space/blog/web/BingbotFrontPageBlock"
+          "href": "https://utcc.utoronto.ca/~cks/space/blog/linux/SoftwareRaidModernNaming"
         }
       ],
       "authors": [
@@ -33,46 +33,46 @@
           "type": "text/html",
           "language": null,
           "base": "https://utcc.utoronto.ca/~cks/space/blog/?atom",
-          "value": "<div class=\"wikitext\"><p>Back last year I wrote about <a href=\"https://utcc.utoronto.ca/~cks/space/blog/web/BingbotAndChangedPages\">how Microsoft's Bingbot relentlessly\ncrawled the front page of Wandering Thoughts</a>.\nOn pretty much every day, a single Bingbot IP would request the front\npage of <a href=\"https://utcc.utoronto.ca/~cks/space/blog/\">Wandering Thoughts</a> a thousand times or more. Back\nin that entry I said I was tempted to block Bingbot from doing that;\nrecently, my vague irritation with Bingbot's ongoing behavior reached\na boiling point, and I actually did that.</p>\n\n<p>Since <a href=\"https://utcc.utoronto.ca/~cks/space/blog/\">Wandering Thoughts</a> is served through an Apache with\nmod_rewrite enabled, the block was relatively simple to implement.\nI just check for an exact match of the request URI (since Bingbot\nnever uses variations) and then match the user agent. By default,\nsuccessive <code>RewriteCond</code> conditions all must be true so this just\nworks.</p>\n\n<p>(The hardest bit was re-reading the mod_rewrite documentation\nyet again to determine that I wanted to match against <code>REQUEST_URI</code>.\nThis would have been faster if I'd actually fully read <a href=\"https://httpd.apache.org/docs/current/mod/mod_rewrite.html\">the\ndocumentation</a>\nand followed the cross reference to <a href=\"https://httpd.apache.org/docs/current/expr.html#vars\">expression variables</a>.)</p>\n\n<p>That Wandering Thoughts' front page now gives Bingbot 403s hasn't\nparticularly slowed it down. Over the past almost 24 hours, Bingbot\nhas made just under 1,400 requests for the URL from two different\nIPs (one of which made most of them). It doesn't yet seem to have\nlatched on to any other page with a similar death grip, although\n<a href=\"https://utcc.utoronto.ca/~cks/space/blog/linux/\">my Linux category</a> is somewhat popular with it right\nnow (with 40 requests today). Probably I'm going to have to keep an\neye on this.</p>\n\n<p>It's felt surprisingly nice to have this little irritation pushed\nout of my life. I know, I shouldn't care that Bingbot is doing bad\nand annoying things, but I do look at what IP addresses are the\nmost active here (excluding blocked requests) and always having\nBingbot show up there was this little poke. And while the operators\nof Bingbot probably will never notice or know, I can feel that I\ndid a little tiny bit to hold badly behaved web spiders to account.</p>\n\n<p>PS: So far today Bingbot has made just over 1,900 successful\nrequests (HTTP 200 result), just over 1,500 requests that were <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403\">403</a>'d,\n53 requests that got <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/304\">304 Not Modified</a>\nresponses, and six '404 no such thing' requests. I'm most surprised\nat the 304 requests, seeing as Bingbot will routinely repeatedly\nbang on unchanging URLs without getting 304s. If it could at least\nconditionally request the same thing over and over so it would\nmostly get 304s, I would probably feel slightly happier with it.\nDoing 304s for a few things but not the heavily requested URLs is\na bit irritating.</p>\n</div>"
+          "value": "<div class=\"wikitext\"><p>Suppose that you added some disks to a server and then used them\nto create a software RAID mirror called 'md2', like so:</p>\n\n\n<blockquote><pre style=\"white-space: pre-wrap;\">\nmdadm -C /dev/md2 -n 2 -l raid1 -b internal /dev/sde1 /dev/sdf1\n</pre>\n</blockquote>\n\n<p>(Having an internal bitmap may be the default these days, I haven't\nchecked.)</p>\n\n<p>Everything goes great, the software RAID finishes resyncing\n(eventually), you reboot, and suddenly your system has a '/dev/md127'\nand no '/dev/md2'. What?</p>\n\n<p>(At least, this is what happens on Ubuntu and on CentOS 7. Other\nLinux distributions may work differently, but most probably won't\nbecause a lot of this is behavior from udev and systemd.)</p>\n\n<p>Once upon a time, perhaps back in the days when the Linux kernel\nassembled software RAID devices itself during boot, the name of a\nsoftware RAID device was effectively persisted in its on-disk data.\nOnce you created a RAID array called 'md2', you could be pretty\nconfident that it would stay being /dev/md2 for the next long while,\nno matter what you did or didn't do. There were good things about\nthose days but also problems (such as what was the system supposed\nto do if it saw two separate RAID arrays that both wanted to be\nmd2), so modern Linux systems don't work that way.</p>\n\n<p>In practice, what matters is what is in <a href=\"https://man7.org/linux/man-pages/man5/mdadm.conf.5.html\">mdadm.conf</a>, the mdadm\nconfiguration file. If your software RAID array is listed in there\n(with a /dev/mdN name), it will get assigned that name when it's\nbrought up. If it's not listed in mdadm.conf, it will get assigned\na high number (often starting with /dev/md127 and then apparently\ncounting down) and that number may change from boot to boot if you\nhave multiple unlisted software RAID arrays.</p>\n\n<p>Thus, the minimal thing that you want to do is to add your new\nsoftware RAID array to your mdadm.conf (which may be /etc/mdadm.conf\nor /etc/mdadm/mdadm.conf). Fortunately mdadm has a command option\nthat will print out the information you need to add:</p>\n\n<blockquote><pre style=\"white-space: pre-wrap;\">\n# mdadm --detail --brief /dev/md2\nARRAY /dev/md2 metadata=1.2 UUID=[...]\n</pre>\n</blockquote>\n\n<p>(You can also use 'mdadm --detail --scan'. I don't know why mdadm\naccepts both and treats them the same, but I think that using --brief\nis more accurate to what you want.)</p>\n\n<p>The complication in this is that sometimes, you need the array to\nnot just be listed in mdadm.conf, but also to be in the version of\nmdadm.conf that's in your initramfs. Which means that after you add\nit to the normal mdadm.conf, you probably want to run '<code>update-initramfs\n-u</code>'.</p>\n\n<p>All of this is easy to overlook if you mostly create your software\nRAID arrays when you install your systems (as we do). I believe\nthat all competent modern Linux installers (Ubuntu, CentOS, whatever)\ntake care of all of this for you, so that your install time software\nRAID arrays are listed in all of the right places and have nice\nstatic names and so on.</p>\n\n<p>(See also <a href=\"https://utcc.utoronto.ca/~cks/space/blog/linux/SoftwareRaidAssemblySystemd\">how non-system software RAID arrays are started at boot\nunder systemd</a> and a much older entry\non <a href=\"https://utcc.utoronto.ca/~cks/space/blog/linux/RaidGrowthGotcha\">fixing a RAID growth gotcha</a> that was also\nabout having to update mdadm.conf. Hopefully the old RAID growth\ngotcha is long gone by now, but you never know. There's a more\nrecent <a href=\"https://utcc.utoronto.ca/~cks/space/blog/linux/SoftwareRaidRemovingDiskGotcha\">problem if you remove devices from a software RAID mirror</a>, where you probably want to\nimmediately zero the RAID superblocks on the removed devices.)</p>\n\n<p>PS: If you refer to your software RAID arrays in /etc/fstab and so on\nthrough either the filesystem UUID or the RAID UUID, you aren't really\naffected by the /dev/md* name bouncing around. But that name does\nshow up in various places, including host metrics and kernel logs, so\nit's my view that keeping it consistent and straight is good. And having\na fixed name and an entry in mdadm.conf makes it clear that the array is\nsupposed to be there, as opposed to being a stray array on reused disks\nor the like.</p>\n\n</div>"
         }
       ],
-      "summary": "<div class=\"wikitext\"><p>Back last year I wrote about <a href=\"https://utcc.utoronto.ca/~cks/space/blog/web/BingbotAndChangedPages\">how Microsoft's Bingbot relentlessly\ncrawled the front page of Wandering Thoughts</a>.\nOn pretty much every day, a single Bingbot IP would request the front\npage of <a href=\"https://utcc.utoronto.ca/~cks/space/blog/\">Wandering Thoughts</a> a thousand times or more. Back\nin that entry I said I was tempted to block Bingbot from doing that;\nrecently, my vague irritation with Bingbot's ongoing behavior reached\na boiling point, and I actually did that.</p>\n\n<p>Since <a href=\"https://utcc.utoronto.ca/~cks/space/blog/\">Wandering Thoughts</a> is served through an Apache with\nmod_rewrite enabled, the block was relatively simple to implement.\nI just check for an exact match of the request URI (since Bingbot\nnever uses variations) and then match the user agent. By default,\nsuccessive <code>RewriteCond</code> conditions all must be true so this just\nworks.</p>\n\n<p>(The hardest bit was re-reading the mod_rewrite documentation\nyet again to determine that I wanted to match against <code>REQUEST_URI</code>.\nThis would have been faster if I'd actually fully read <a href=\"https://httpd.apache.org/docs/current/mod/mod_rewrite.html\">the\ndocumentation</a>\nand followed the cross reference to <a href=\"https://httpd.apache.org/docs/current/expr.html#vars\">expression variables</a>.)</p>\n\n<p>That Wandering Thoughts' front page now gives Bingbot 403s hasn't\nparticularly slowed it down. Over the past almost 24 hours, Bingbot\nhas made just under 1,400 requests for the URL from two different\nIPs (one of which made most of them). It doesn't yet seem to have\nlatched on to any other page with a similar death grip, although\n<a href=\"https://utcc.utoronto.ca/~cks/space/blog/linux/\">my Linux category</a> is somewhat popular with it right\nnow (with 40 requests today). Probably I'm going to have to keep an\neye on this.</p>\n\n<p>It's felt surprisingly nice to have this little irritation pushed\nout of my life. I know, I shouldn't care that Bingbot is doing bad\nand annoying things, but I do look at what IP addresses are the\nmost active here (excluding blocked requests) and always having\nBingbot show up there was this little poke. And while the operators\nof Bingbot probably will never notice or know, I can feel that I\ndid a little tiny bit to hold badly behaved web spiders to account.</p>\n\n<p>PS: So far today Bingbot has made just over 1,900 successful\nrequests (HTTP 200 result), just over 1,500 requests that were <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403\">403</a>'d,\n53 requests that got <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/304\">304 Not Modified</a>\nresponses, and six '404 no such thing' requests. I'm most surprised\nat the 304 requests, seeing as Bingbot will routinely repeatedly\nbang on unchanging URLs without getting 304s. If it could at least\nconditionally request the same thing over and over so it would\nmostly get 304s, I would probably feel slightly happier with it.\nDoing 304s for a few things but not the heavily requested URLs is\na bit irritating.</p>\n</div>",
-      "title": "It feels surprisingly good to block Bingbot from my blog front page",
+      "summary": "<div class=\"wikitext\"><p>Suppose that you added some disks to a server and then used them\nto create a software RAID mirror called 'md2', like so:</p>\n\n\n<blockquote><pre style=\"white-space: pre-wrap;\">\nmdadm -C /dev/md2 -n 2 -l raid1 -b internal /dev/sde1 /dev/sdf1\n</pre>\n</blockquote>\n\n<p>(Having an internal bitmap may be the default these days, I haven't\nchecked.)</p>\n\n<p>Everything goes great, the software RAID finishes resyncing\n(eventually), you reboot, and suddenly your system has a '/dev/md127'\nand no '/dev/md2'. What?</p>\n\n<p>(At least, this is what happens on Ubuntu and on CentOS 7. Other\nLinux distributions may work differently, but most probably won't\nbecause a lot of this is behavior from udev and systemd.)</p>\n\n<p>Once upon a time, perhaps back in the days when the Linux kernel\nassembled software RAID devices itself during boot, the name of a\nsoftware RAID device was effectively persisted in its on-disk data.\nOnce you created a RAID array called 'md2', you could be pretty\nconfident that it would stay being /dev/md2 for the next long while,\nno matter what you did or didn't do. There were good things about\nthose days but also problems (such as what was the system supposed\nto do if it saw two separate RAID arrays that both wanted to be\nmd2), so modern Linux systems don't work that way.</p>\n\n<p>In practice, what matters is what is in <a href=\"https://man7.org/linux/man-pages/man5/mdadm.conf.5.html\">mdadm.conf</a>, the mdadm\nconfiguration file. If your software RAID array is listed in there\n(with a /dev/mdN name), it will get assigned that name when it's\nbrought up. If it's not listed in mdadm.conf, it will get assigned\na high number (often starting with /dev/md127 and then apparently\ncounting down) and that number may change from boot to boot if you\nhave multiple unlisted software RAID arrays.</p>\n\n<p>Thus, the minimal thing that you want to do is to add your new\nsoftware RAID array to your mdadm.conf (which may be /etc/mdadm.conf\nor /etc/mdadm/mdadm.conf). Fortunately mdadm has a command option\nthat will print out the information you need to add:</p>\n\n<blockquote><pre style=\"white-space: pre-wrap;\">\n# mdadm --detail --brief /dev/md2\nARRAY /dev/md2 metadata=1.2 UUID=[...]\n</pre>\n</blockquote>\n\n<p>(You can also use 'mdadm --detail --scan'. I don't know why mdadm\naccepts both and treats them the same, but I think that using --brief\nis more accurate to what you want.)</p>\n\n<p>The complication in this is that sometimes, you need the array to\nnot just be listed in mdadm.conf, but also to be in the version of\nmdadm.conf that's in your initramfs. Which means that after you add\nit to the normal mdadm.conf, you probably want to run '<code>update-initramfs\n-u</code>'.</p>\n\n<p>All of this is easy to overlook if you mostly create your software\nRAID arrays when you install your systems (as we do). I believe\nthat all competent modern Linux installers (Ubuntu, CentOS, whatever)\ntake care of all of this for you, so that your install time software\nRAID arrays are listed in all of the right places and have nice\nstatic names and so on.</p>\n\n<p>(See also <a href=\"https://utcc.utoronto.ca/~cks/space/blog/linux/SoftwareRaidAssemblySystemd\">how non-system software RAID arrays are started at boot\nunder systemd</a> and a much older entry\non <a href=\"https://utcc.utoronto.ca/~cks/space/blog/linux/RaidGrowthGotcha\">fixing a RAID growth gotcha</a> that was also\nabout having to update mdadm.conf. Hopefully the old RAID growth\ngotcha is long gone by now, but you never know. There's a more\nrecent <a href=\"https://utcc.utoronto.ca/~cks/space/blog/linux/SoftwareRaidRemovingDiskGotcha\">problem if you remove devices from a software RAID mirror</a>, where you probably want to\nimmediately zero the RAID superblocks on the removed devices.)</p>\n\n<p>PS: If you refer to your software RAID arrays in /etc/fstab and so on\nthrough either the filesystem UUID or the RAID UUID, you aren't really\naffected by the /dev/md* name bouncing around. But that name does\nshow up in various places, including host metrics and kernel logs, so\nit's my view that keeping it consistent and straight is good. And having\na fixed name and an entry in mdadm.conf makes it clear that the array is\nsupposed to be there, as opposed to being a stray array on reused disks\nor the like.</p>\n\n</div>",
+      "title": "Getting the names of your Linux software RAID devices to stick",
       "title_detail": {
         "type": "text/html",
         "language": null,
         "base": "https://utcc.utoronto.ca/~cks/space/blog/?atom",
-        "value": "It feels surprisingly good to block Bingbot from my blog front page"
+        "value": "Getting the names of your Linux software RAID devices to stick"
       },
       "tags": [
         {
-          "term": "web",
+          "term": "linux",
           "scheme": null,
           "label": null
         }
       ],
-      "updated": "2022-07-12T03:11:39Z",
+      "updated": "2022-07-13T01:34:39Z",
       "updated_parsed": [
         2022,
         7,
-        12,
-        3,
-        11,
-        39,
+        13,
         1,
-        193,
+        34,
+        39,
+        2,
+        194,
         0
       ],
-      "published": "2022-07-12T03:10:38Z",
+      "published": "2022-07-13T01:34:23Z",
       "published_parsed": [
         2022,
         7,
-        12,
-        3,
-        10,
-        38,
+        13,
         1,
-        193,
+        34,
+        23,
+        2,
+        194,
         0
       ]
     }
@@ -1149,99 +1149,94 @@
       "section": "Other IT related topics"
     },
     "entry": {
-      "id": "tag:blogger.com,1999:blog-1523733021872114025.post-6881731862507946919",
+      "id": "tag:blogger.com,1999:blog-1523733021872114025.post-8220731513215642534",
       "guidislink": true,
-      "link": "https://technoglot.blogspot.com/2022/07/first-time-work-hurdles-and-quandries.html",
-      "published": "2022-07-01T08:27:00.001-04:00",
+      "link": "https://technoglot.blogspot.com/2022/07/work-ethic-versus-burnout.html",
+      "published": "2022-07-13T07:45:00.000-04:00",
       "published_parsed": [
         2022,
         7,
-        1,
-        12,
-        27,
+        13,
+        11,
+        45,
         0,
-        4,
-        182,
+        2,
+        194,
         0
       ],
-      "updated": "2022-07-01T08:27:29.420-04:00",
+      "updated": "2022-07-13T07:45:43.972-04:00",
       "updated_parsed": [
         2022,
         7,
-        1,
-        12,
-        27,
-        29,
-        4,
-        182,
+        13,
+        11,
+        45,
+        43,
+        2,
+        194,
         0
       ],
       "tags": [
         {
-          "term": "firsttime employment",
+          "term": "burnout",
           "scheme": "http://www.blogger.com/atom/ns#",
           "label": null
         },
         {
-          "term": "networking",
+          "term": "great depression",
           "scheme": "http://www.blogger.com/atom/ns#",
           "label": null
         },
         {
-          "term": "qualifications",
-          "scheme": "http://www.blogger.com/atom/ns#",
-          "label": null
-        },
-        {
-          "term": "recruitment",
+          "term": "work ethic",
           "scheme": "http://www.blogger.com/atom/ns#",
           "label": null
         }
       ],
-      "title": "FIrst-time work: hurdles and quandries",
+      "title": "Work Ethic versus Burnout",
       "title_detail": {
         "type": "text/plain",
         "language": null,
         "base": "https://technoglot.blogspot.com/feeds/posts/default",
-        "value": "FIrst-time work: hurdles and quandries"
+        "value": "Work Ethic versus Burnout"
       },
       "content": [
         {
           "type": "text/html",
           "language": null,
           "base": "https://technoglot.blogspot.com/feeds/posts/default",
-          "value": "<p>&nbsp;</p><p>&nbsp; &nbsp; &nbsp;There is always a first time to get a paid job. There are first times for everything -- including the first breath we take after we are born. But getting a paid position is one of those types of firsts that are part of the ritual of becoming self-supporting.</p><p>&nbsp; &nbsp; &nbsp;There are two parts of this -- finding a no-experience-needed first-time position and succeeding in obtaining such.</p><p>&nbsp; &nbsp; &nbsp;For many companies, a degree (possibly Associate degree, more likely Bachelor's or above (or the non-USA equivalents)) is considered \"paper experience\". Some companies presently are starting to trade off paper experience with real-life experience. But real-life experience is rare to have that directly pertain to the skills/experience desired within a company if you are trying to find your first paid position. Sometimes, volunteer work is applicable.</p><p>&nbsp; &nbsp; &nbsp;There are places that are considered to be nests for starting paid work. How many people in high positions talk about their first jobs at McDonald's? Or as a bagger in a grocery store? Not many restaurants still wash dishes by hand -- but, once upon a dark moon, that used to be a good first time situation. My first paid position was as a neighborhood lawnmowing person (an early, very limited, entrepreneurship) followed by newspaper deliverer (on foot).</p><p>&nbsp; &nbsp; &nbsp;These jobs, associated with companies, have a couple of characteristics. First, there was a lot of turnover -- openings came up fairly frequently and if you could pass some basic requirements (cleanliness, polite demeanor, etc.) you could usually eventually get a job at one (perhaps not your first choice). Second, the pay was minimal -- in the past it was livable, in the present you had better still have other financial support.</p><p>&nbsp; &nbsp; &nbsp;But how about the positions that are considered long-term career potential?&nbsp;&nbsp;(This doesn't mean that you cannot have a long-term career at McDonald's.) First, those companies have to HAVE positions open for people with no experience. It might be in the \"mailroom\" (in electronic times, not as frequent) or janitorial areas -- but unless there is internal mobility that is not a good first step. But there may not be any non-experienced positions for the company. In that case, get your first experience at a different company where you can develop experiences that are relevant for the companies wherein you would prefer to work.</p><p>&nbsp; &nbsp; &nbsp;For the second part -- finding and succeeding in obtaining an entry-level position -- there are different gauntlets to be run depending on salary/career/social ranking. At the lowest rankings (I'm not going to list them because the titles/positions are subjective -- let's just define them as low money with low potential advancement), qualifying doesn't apply much but finding, and being allowed to apply, becomes a matter of networking and luck. In the past, it was a matter of walking to each opening that was published in the classified section of the newspaper. Now, it is primarily word-of-mouth and potentially via social job boards. But luck (which I defined, and explored, in a recent blog) plays a large role.</p><p>&nbsp; &nbsp; &nbsp;For a middle-rung position (living wage with some potential for advancement or mobility),&nbsp; old-style searches still used the classified section of newspapers but job bureaus (places where you sign up to have your resume available for distribution or job matching) were frequently used. Once again, classifieds rarely apply anymore and social networking has become a much more important areas of discovery. (Job bureaus are still used.)</p><p>&nbsp; &nbsp; &nbsp;On the high-rung side (moderately high initial salary with large potential in salary, position, and social ranking), there are still some entry-level positions. But, as I mentioned in a prior blog, there are many companies that try to demand experience for initial, first-position, jobs and many companies that require specific knowledge for these positions -- something that is truly unreasonable.</p><p>&nbsp; &nbsp; &nbsp;High-rung positions are found via direct networking or via a symbiosis of recruiters and social networking. A recruiter for such positions might receive, or need to examine, 500 potential resumes in a day. They cannot spend much more than a couple of hours looking at them as they have other duties they need to do each day. 500 resumes in 150 minutes means there is an average of 18 seconds to be spent, ON AVERAGE, per resume. I am a moderately fast reader (I can read faster but with less retention/comprehension) at about 45 words in 18 seconds. This means that, on average, the recruiter will read the first four sentences of your resume. IF something in those first four sentences (or 18 seconds of scattered keywords that catch their eye during scanning) attracts their attention then you may win more time for examination.</p><p>&nbsp; &nbsp; &nbsp;Eighteen seconds is not much time. The conclusion is to make those words count and focus on the beginning of the resume. So, if you don't have much/any experience to relate, how do you make those 45 words count in your favor? Job-relevant ACTION concluded with job-relevant RESULT. Or, job posting KEYWORD matched within relevant/reliable/consistent context.&nbsp;</p><p>&nbsp; &nbsp; &nbsp;Since you don't have (by definition within this blog) the specific experience that you hope to gain as you do the job, your action/results pairs will be associated with qualities that indicate you can succeed in gaining the knowledge needed to do the job well. Such might be aspects of focus, inventiveness, communication capabilities, organization, endurance, leadership, or other character-related aspect that can be applied to perform well in the position. They may also be associated with volunteer skill-related aspects such as pamphleting, programming, selling cookies at a table, or such.</p><p>&nbsp; &nbsp; &nbsp;A primary goal is to reduce, or eliminate, the factor of luck. This requires active networking and focus (both in application and tailoring per position). May the force be with you.</p>"
+          "value": "<p>&nbsp;</p><p>&nbsp; &nbsp; &nbsp;I grew up in a matriarchal household with my mother having lived her childhood through the Great Depression. Under such conditions, all was used until it was dust, all food disappeared from plates, you got something new only if there was nothing that could be reused or improvised, and you continued to work until there was no more work to do. When under economic depression conditions (personal or societal), it was a very reasonable, rational, approach to life. They did not want my generation to have to go through it -- and I don't want my children to have to go through it. But, it was an overwhelming factor within the environment of my childhood.</p><p>&nbsp; &nbsp; &nbsp;We did not leave the table until our plates were clean. But we did not choose our portion sizes. Sometimes, at our two or three times a year restaurant visits, my mother didn't want to finish her meal -- so I was expected to finish hers in addition to mine. Unsurprisingly, I had weight issues and continue to fight the feeling that I MUST clean the plate. I have a slogan I have devised -- \"waste or waist\". If one chooses their portion size (or are willing to have leftovers/\"doggy bags\") then requiring a clean plate can be reasonable. If the portion size is not personally chosen and it is not feasible to take it away (such as on trips) then the clean plate mentality can be quite detrimental to health. This completion mentality also applied to daily work.</p><p>&nbsp; &nbsp; &nbsp;My mother was always working. If she was on a paid job, she worked from the time she clocked in until she clocked out -- only taking legally required breaks. As the years passed (and her health declined, in addition) she could allow herself to rest at home -- but only after all other work items were done (dusting, vacuuming, polishing, washing, straightening, putting away, ...) But, during my childhood, she was always doing. If she finished one set of required duties, she would start something else. It effected a considerable aversion to home canning for me -- it's great if you need it or like doing it but if it is a matter of keeping busy then, perhaps, it isn't quite as wonderful.</p><p>&nbsp; &nbsp; &nbsp;Like a leaf in a storm, I was part of my mother's continuous travail. In general, that was good for me as I learned to search for what needed to be done -- and to do it. (Though, if you look at a previous blog, you will see this has some tiresome side-effects). Luckily, studying and reading were considered to be working and, thus, I did very well in school as well as helped clean the house and yard daily.</p><p>&nbsp; &nbsp; My mother did not suffer from burnout as far as I know. I doubt that she had ever heard of the word. Nor had her parents or grandparents. But she had little energy left to do anything with my brother or myself. She had little time, or energy, to pursue any interests she might have had for herself. She tried to get her GED three times and, each time, was diverted away from her goal.</p><p>&nbsp; &nbsp; &nbsp;When you are cleaning a house or doing a specific physical task, there is an end (unless you are totally unable to accept less than perfection). When you are doing many non-physical tasks for yourself, or a company, there is no ending. It is always possible to contact one more potential customer, work on one more program function, connect up with one more person, (write one more blog).</p><p>&nbsp; &nbsp; &nbsp;So, we end up with ways to approach work ethics and burnout (which, as you probably already noticed, applies to other activities such as eating). I would suggest that a work ethic is doing the work that needs to be done. But burnout happens when no limit is set -- no ending. Physical activities often have a built-in limit. Non-physical activities rarely do. If you hit a burnout, there is no energy left for anything else and, eventually, no energy left to do that \"core\" set of activities you consider most important. Even more, there is no energy left to prepare oneself for the future -- and that hurts everyone.</p><p>&nbsp; &nbsp; &nbsp;In work, in eating, and, in many other aspects of our lives, limits are healthy and necessary.</p>"
         }
       ],
-      "summary": "<p>&nbsp;</p><p>&nbsp; &nbsp; &nbsp;There is always a first time to get a paid job. There are first times for everything -- including the first breath we take after we are born. But getting a paid position is one of those types of firsts that are part of the ritual of becoming self-supporting.</p><p>&nbsp; &nbsp; &nbsp;There are two parts of this -- finding a no-experience-needed first-time position and succeeding in obtaining such.</p><p>&nbsp; &nbsp; &nbsp;For many companies, a degree (possibly Associate degree, more likely Bachelor's or above (or the non-USA equivalents)) is considered \"paper experience\". Some companies presently are starting to trade off paper experience with real-life experience. But real-life experience is rare to have that directly pertain to the skills/experience desired within a company if you are trying to find your first paid position. Sometimes, volunteer work is applicable.</p><p>&nbsp; &nbsp; &nbsp;There are places that are considered to be nests for starting paid work. How many people in high positions talk about their first jobs at McDonald's? Or as a bagger in a grocery store? Not many restaurants still wash dishes by hand -- but, once upon a dark moon, that used to be a good first time situation. My first paid position was as a neighborhood lawnmowing person (an early, very limited, entrepreneurship) followed by newspaper deliverer (on foot).</p><p>&nbsp; &nbsp; &nbsp;These jobs, associated with companies, have a couple of characteristics. First, there was a lot of turnover -- openings came up fairly frequently and if you could pass some basic requirements (cleanliness, polite demeanor, etc.) you could usually eventually get a job at one (perhaps not your first choice). Second, the pay was minimal -- in the past it was livable, in the present you had better still have other financial support.</p><p>&nbsp; &nbsp; &nbsp;But how about the positions that are considered long-term career potential?&nbsp;&nbsp;(This doesn't mean that you cannot have a long-term career at McDonald's.) First, those companies have to HAVE positions open for people with no experience. It might be in the \"mailroom\" (in electronic times, not as frequent) or janitorial areas -- but unless there is internal mobility that is not a good first step. But there may not be any non-experienced positions for the company. In that case, get your first experience at a different company where you can develop experiences that are relevant for the companies wherein you would prefer to work.</p><p>&nbsp; &nbsp; &nbsp;For the second part -- finding and succeeding in obtaining an entry-level position -- there are different gauntlets to be run depending on salary/career/social ranking. At the lowest rankings (I'm not going to list them because the titles/positions are subjective -- let's just define them as low money with low potential advancement), qualifying doesn't apply much but finding, and being allowed to apply, becomes a matter of networking and luck. In the past, it was a matter of walking to each opening that was published in the classified section of the newspaper. Now, it is primarily word-of-mouth and potentially via social job boards. But luck (which I defined, and explored, in a recent blog) plays a large role.</p><p>&nbsp; &nbsp; &nbsp;For a middle-rung position (living wage with some potential for advancement or mobility),&nbsp; old-style searches still used the classified section of newspapers but job bureaus (places where you sign up to have your resume available for distribution or job matching) were frequently used. Once again, classifieds rarely apply anymore and social networking has become a much more important areas of discovery. (Job bureaus are still used.)</p><p>&nbsp; &nbsp; &nbsp;On the high-rung side (moderately high initial salary with large potential in salary, position, and social ranking), there are still some entry-level positions. But, as I mentioned in a prior blog, there are many companies that try to demand experience for initial, first-position, jobs and many companies that require specific knowledge for these positions -- something that is truly unreasonable.</p><p>&nbsp; &nbsp; &nbsp;High-rung positions are found via direct networking or via a symbiosis of recruiters and social networking. A recruiter for such positions might receive, or need to examine, 500 potential resumes in a day. They cannot spend much more than a couple of hours looking at them as they have other duties they need to do each day. 500 resumes in 150 minutes means there is an average of 18 seconds to be spent, ON AVERAGE, per resume. I am a moderately fast reader (I can read faster but with less retention/comprehension) at about 45 words in 18 seconds. This means that, on average, the recruiter will read the first four sentences of your resume. IF something in those first four sentences (or 18 seconds of scattered keywords that catch their eye during scanning) attracts their attention then you may win more time for examination.</p><p>&nbsp; &nbsp; &nbsp;Eighteen seconds is not much time. The conclusion is to make those words count and focus on the beginning of the resume. So, if you don't have much/any experience to relate, how do you make those 45 words count in your favor? Job-relevant ACTION concluded with job-relevant RESULT. Or, job posting KEYWORD matched within relevant/reliable/consistent context.&nbsp;</p><p>&nbsp; &nbsp; &nbsp;Since you don't have (by definition within this blog) the specific experience that you hope to gain as you do the job, your action/results pairs will be associated with qualities that indicate you can succeed in gaining the knowledge needed to do the job well. Such might be aspects of focus, inventiveness, communication capabilities, organization, endurance, leadership, or other character-related aspect that can be applied to perform well in the position. They may also be associated with volunteer skill-related aspects such as pamphleting, programming, selling cookies at a table, or such.</p><p>&nbsp; &nbsp; &nbsp;A primary goal is to reduce, or eliminate, the factor of luck. This requires active networking and focus (both in application and tailoring per position). May the force be with you.</p>",
+      "summary": "<p>&nbsp;</p><p>&nbsp; &nbsp; &nbsp;I grew up in a matriarchal household with my mother having lived her childhood through the Great Depression. Under such conditions, all was used until it was dust, all food disappeared from plates, you got something new only if there was nothing that could be reused or improvised, and you continued to work until there was no more work to do. When under economic depression conditions (personal or societal), it was a very reasonable, rational, approach to life. They did not want my generation to have to go through it -- and I don't want my children to have to go through it. But, it was an overwhelming factor within the environment of my childhood.</p><p>&nbsp; &nbsp; &nbsp;We did not leave the table until our plates were clean. But we did not choose our portion sizes. Sometimes, at our two or three times a year restaurant visits, my mother didn't want to finish her meal -- so I was expected to finish hers in addition to mine. Unsurprisingly, I had weight issues and continue to fight the feeling that I MUST clean the plate. I have a slogan I have devised -- \"waste or waist\". If one chooses their portion size (or are willing to have leftovers/\"doggy bags\") then requiring a clean plate can be reasonable. If the portion size is not personally chosen and it is not feasible to take it away (such as on trips) then the clean plate mentality can be quite detrimental to health. This completion mentality also applied to daily work.</p><p>&nbsp; &nbsp; &nbsp;My mother was always working. If she was on a paid job, she worked from the time she clocked in until she clocked out -- only taking legally required breaks. As the years passed (and her health declined, in addition) she could allow herself to rest at home -- but only after all other work items were done (dusting, vacuuming, polishing, washing, straightening, putting away, ...) But, during my childhood, she was always doing. If she finished one set of required duties, she would start something else. It effected a considerable aversion to home canning for me -- it's great if you need it or like doing it but if it is a matter of keeping busy then, perhaps, it isn't quite as wonderful.</p><p>&nbsp; &nbsp; &nbsp;Like a leaf in a storm, I was part of my mother's continuous travail. In general, that was good for me as I learned to search for what needed to be done -- and to do it. (Though, if you look at a previous blog, you will see this has some tiresome side-effects). Luckily, studying and reading were considered to be working and, thus, I did very well in school as well as helped clean the house and yard daily.</p><p>&nbsp; &nbsp; My mother did not suffer from burnout as far as I know. I doubt that she had ever heard of the word. Nor had her parents or grandparents. But she had little energy left to do anything with my brother or myself. She had little time, or energy, to pursue any interests she might have had for herself. She tried to get her GED three times and, each time, was diverted away from her goal.</p><p>&nbsp; &nbsp; &nbsp;When you are cleaning a house or doing a specific physical task, there is an end (unless you are totally unable to accept less than perfection). When you are doing many non-physical tasks for yourself, or a company, there is no ending. It is always possible to contact one more potential customer, work on one more program function, connect up with one more person, (write one more blog).</p><p>&nbsp; &nbsp; &nbsp;So, we end up with ways to approach work ethics and burnout (which, as you probably already noticed, applies to other activities such as eating). I would suggest that a work ethic is doing the work that needs to be done. But burnout happens when no limit is set -- no ending. Physical activities often have a built-in limit. Non-physical activities rarely do. If you hit a burnout, there is no energy left for anything else and, eventually, no energy left to do that \"core\" set of activities you consider most important. Even more, there is no energy left to prepare oneself for the future -- and that hurts everyone.</p><p>&nbsp; &nbsp; &nbsp;In work, in eating, and, in many other aspects of our lives, limits are healthy and necessary.</p>",
       "links": [
         {
           "rel": "replies",
           "type": "application/atom+xml",
-          "href": "https://technoglot.blogspot.com/feeds/6881731862507946919/comments/default",
+          "href": "https://technoglot.blogspot.com/feeds/8220731513215642534/comments/default",
           "title": "Post Comments"
         },
         {
           "rel": "replies",
           "type": "text/html",
-          "href": "https://www.blogger.com/comment.g?blogID=1523733021872114025&postID=6881731862507946919",
+          "href": "https://www.blogger.com/comment.g?blogID=1523733021872114025&postID=8220731513215642534",
           "title": "0 Comments"
         },
         {
           "rel": "edit",
           "type": "application/atom+xml",
-          "href": "https://www.blogger.com/feeds/1523733021872114025/posts/default/6881731862507946919"
+          "href": "https://www.blogger.com/feeds/1523733021872114025/posts/default/8220731513215642534"
         },
         {
           "rel": "self",
           "type": "application/atom+xml",
-          "href": "https://www.blogger.com/feeds/1523733021872114025/posts/default/6881731862507946919"
+          "href": "https://www.blogger.com/feeds/1523733021872114025/posts/default/8220731513215642534"
         },
         {
           "rel": "alternate",
           "type": "text/html",
-          "href": "https://technoglot.blogspot.com/2022/07/first-time-work-hurdles-and-quandries.html",
-          "title": "FIrst-time work: hurdles and quandries"
+          "href": "https://technoglot.blogspot.com/2022/07/work-ethic-versus-burnout.html",
+          "title": "Work Ethic versus Burnout"
         }
       ],
       "authors": [
@@ -1426,22 +1421,22 @@
       "section": "Politics"
     },
     "entry": {
-      "title": "A Guide Map for Reading the East Asian Canon",
+      "title": "The Fall of History as a Major–and as a Part of the Humanities",
       "title_detail": {
         "type": "text/plain",
         "language": null,
         "base": "https://scholars-stage.org/feed/",
-        "value": "A Guide Map for Reading the East Asian Canon"
+        "value": "The Fall of History as a Major–and as a Part of the Humanities"
       },
       "links": [
         {
           "rel": "alternate",
           "type": "text/html",
-          "href": "https://scholars-stage.org/a-guide-map-for-reading-the-east-asian-canon/"
+          "href": "https://scholars-stage.org/the-fall-of-history-as-a-major-and-as-a-part-of-the-humanities/"
         }
       ],
-      "link": "https://scholars-stage.org/a-guide-map-for-reading-the-east-asian-canon/",
-      "comments": "https://scholars-stage.org/a-guide-map-for-reading-the-east-asian-canon/#comments",
+      "link": "https://scholars-stage.org/the-fall-of-history-as-a-major-and-as-a-part-of-the-humanities/",
+      "comments": "https://scholars-stage.org/the-fall-of-history-as-a-major-and-as-a-part-of-the-humanities/#comments",
       "authors": [
         {
           "name": "T. Greer"
@@ -1451,26 +1446,21 @@
       "author_detail": {
         "name": "T. Greer"
       },
-      "published": "Fri, 01 Jul 2022 02:05:39 +0000",
+      "published": "Tue, 12 Jul 2022 20:19:32 +0000",
       "published_parsed": [
         2022,
         7,
+        12,
+        20,
+        19,
+        32,
         1,
-        2,
-        5,
-        39,
-        4,
-        182,
+        193,
         0
       ],
       "tags": [
         {
-          "term": "Books and Literature",
-          "scheme": null,
-          "label": null
-        },
-        {
-          "term": "Culture",
+          "term": "Education",
           "scheme": null,
           "label": null
         },
@@ -1478,30 +1468,20 @@
           "term": "History",
           "scheme": null,
           "label": null
-        },
-        {
-          "term": "Japan",
-          "scheme": null,
-          "label": null
-        },
-        {
-          "term": "The Middle Kingdom",
-          "scheme": null,
-          "label": null
         }
       ],
-      "id": "https://scholars-stage.org/?p=3486",
+      "id": "https://scholars-stage.org/?p=3521",
       "guidislink": false,
-      "summary": "<!-- wp:paragraph -->\n<p><strong>Readers may remember</strong> <a href=\"https://scholars-stage.org/a-non-western-canon-what-would-a-list-of-humanitys-100-greatest-writers-look-like/\">my stab at a global Great Books list</a>. Recently a reader contacted me asking for guidance: they wanted to read through the books on the \"East Asian\" section of that list, but did not believe he had the proper historical knowledge to understand or contextualize what they were reading. What do I recommend they read to make sense of the list?</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:paragraph -->\n<p>What follows will not make sense if you have not looked at that original post. Here is what I told him:</p>\n<!-- /wp:paragraph -->",
+      "summary": "Over on the Scholar's Stage forum, one forum member asks why the number of American university students selecting history as their chosen four year degree has been on the decline since the 1970s. He offers three hypotheses:",
       "summary_detail": {
         "type": "text/html",
         "language": null,
         "base": "https://scholars-stage.org/feed/",
-        "value": "<!-- wp:paragraph -->\n<p><strong>Readers may remember</strong> <a href=\"https://scholars-stage.org/a-non-western-canon-what-would-a-list-of-humanitys-100-greatest-writers-look-like/\">my stab at a global Great Books list</a>. Recently a reader contacted me asking for guidance: they wanted to read through the books on the \"East Asian\" section of that list, but did not believe he had the proper historical knowledge to understand or contextualize what they were reading. What do I recommend they read to make sense of the list?</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:paragraph -->\n<p>What follows will not make sense if you have not looked at that original post. Here is what I told him:</p>\n<!-- /wp:paragraph -->"
+        "value": "Over on the Scholar's Stage forum, one forum member asks why the number of American university students selecting history as their chosen four year degree has been on the decline since the 1970s. He offers three hypotheses:"
       },
-      "wfw_commentrss": "https://scholars-stage.org/a-guide-map-for-reading-the-east-asian-canon/feed/",
-      "slash_comments": "3",
-      "post-id": "3486"
+      "wfw_commentrss": "https://scholars-stage.org/the-fall-of-history-as-a-major-and-as-a-part-of-the-humanities/feed/",
+      "slash_comments": "1",
+      "post-id": "3521"
     }
   },
   {
