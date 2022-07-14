@@ -9,14 +9,14 @@
       "section": "Linux"
     },
     "entry": {
-      "id": "tag:cspace@cks.mef.org,2009-03-24:/blog/linux/SoftwareRaidModernNaming",
+      "id": "tag:cspace@cks.mef.org,2009-03-24:/blog/unix/ExecAndShebangHistory",
       "guidislink": true,
-      "link": "https://utcc.utoronto.ca/~cks/space/blog/linux/SoftwareRaidModernNaming",
+      "link": "https://utcc.utoronto.ca/~cks/space/blog/unix/ExecAndShebangHistory",
       "links": [
         {
           "rel": "alternate",
           "type": "text/html",
-          "href": "https://utcc.utoronto.ca/~cks/space/blog/linux/SoftwareRaidModernNaming"
+          "href": "https://utcc.utoronto.ca/~cks/space/blog/unix/ExecAndShebangHistory"
         }
       ],
       "authors": [
@@ -33,46 +33,46 @@
           "type": "text/html",
           "language": null,
           "base": "https://utcc.utoronto.ca/~cks/space/blog/?atom",
-          "value": "<div class=\"wikitext\"><p>Suppose that you added some disks to a server and then used them\nto create a software RAID mirror called 'md2', like so:</p>\n\n\n<blockquote><pre style=\"white-space: pre-wrap;\">\nmdadm -C /dev/md2 -n 2 -l raid1 -b internal /dev/sde1 /dev/sdf1\n</pre>\n</blockquote>\n\n<p>(Having an internal bitmap may be the default these days, I haven't\nchecked.)</p>\n\n<p>Everything goes great, the software RAID finishes resyncing\n(eventually), you reboot, and suddenly your system has a '/dev/md127'\nand no '/dev/md2'. What?</p>\n\n<p>(At least, this is what happens on Ubuntu and on CentOS 7. Other\nLinux distributions may work differently, but most probably won't\nbecause a lot of this is behavior from udev and systemd.)</p>\n\n<p>Once upon a time, perhaps back in the days when the Linux kernel\nassembled software RAID devices itself during boot, the name of a\nsoftware RAID device was effectively persisted in its on-disk data.\nOnce you created a RAID array called 'md2', you could be pretty\nconfident that it would stay being /dev/md2 for the next long while,\nno matter what you did or didn't do. There were good things about\nthose days but also problems (such as what was the system supposed\nto do if it saw two separate RAID arrays that both wanted to be\nmd2), so modern Linux systems don't work that way.</p>\n\n<p>In practice, what matters is what is in <a href=\"https://man7.org/linux/man-pages/man5/mdadm.conf.5.html\">mdadm.conf</a>, the mdadm\nconfiguration file. If your software RAID array is listed in there\n(with a /dev/mdN name), it will get assigned that name when it's\nbrought up. If it's not listed in mdadm.conf, it will get assigned\na high number (often starting with /dev/md127 and then apparently\ncounting down) and that number may change from boot to boot if you\nhave multiple unlisted software RAID arrays.</p>\n\n<p>Thus, the minimal thing that you want to do is to add your new\nsoftware RAID array to your mdadm.conf (which may be /etc/mdadm.conf\nor /etc/mdadm/mdadm.conf). Fortunately mdadm has a command option\nthat will print out the information you need to add:</p>\n\n<blockquote><pre style=\"white-space: pre-wrap;\">\n# mdadm --detail --brief /dev/md2\nARRAY /dev/md2 metadata=1.2 UUID=[...]\n</pre>\n</blockquote>\n\n<p>(You can also use 'mdadm --detail --scan'. I don't know why mdadm\naccepts both and treats them the same, but I think that using --brief\nis more accurate to what you want.)</p>\n\n<p>The complication in this is that sometimes, you need the array to\nnot just be listed in mdadm.conf, but also to be in the version of\nmdadm.conf that's in your initramfs. Which means that after you add\nit to the normal mdadm.conf, you probably want to run '<code>update-initramfs\n-u</code>'.</p>\n\n<p>All of this is easy to overlook if you mostly create your software\nRAID arrays when you install your systems (as we do). I believe\nthat all competent modern Linux installers (Ubuntu, CentOS, whatever)\ntake care of all of this for you, so that your install time software\nRAID arrays are listed in all of the right places and have nice\nstatic names and so on.</p>\n\n<p>(See also <a href=\"https://utcc.utoronto.ca/~cks/space/blog/linux/SoftwareRaidAssemblySystemd\">how non-system software RAID arrays are started at boot\nunder systemd</a> and a much older entry\non <a href=\"https://utcc.utoronto.ca/~cks/space/blog/linux/RaidGrowthGotcha\">fixing a RAID growth gotcha</a> that was also\nabout having to update mdadm.conf. Hopefully the old RAID growth\ngotcha is long gone by now, but you never know. There's a more\nrecent <a href=\"https://utcc.utoronto.ca/~cks/space/blog/linux/SoftwareRaidRemovingDiskGotcha\">problem if you remove devices from a software RAID mirror</a>, where you probably want to\nimmediately zero the RAID superblocks on the removed devices.)</p>\n\n<p>PS: If you refer to your software RAID arrays in /etc/fstab and so on\nthrough either the filesystem UUID or the RAID UUID, you aren't really\naffected by the /dev/md* name bouncing around. But that name does\nshow up in various places, including host metrics and kernel logs, so\nit's my view that keeping it consistent and straight is good. And having\na fixed name and an entry in mdadm.conf makes it clear that the array is\nsupposed to be there, as opposed to being a stray array on reused disks\nor the like.</p>\n\n</div>"
+          "value": "<div class=\"wikitext\"><p>When I wrote about <a href=\"https://utcc.utoronto.ca/~cks/space/blog/unix/EmptyFileWhyTrue\">why an empty executable file is true in Unix</a>, I mentioned that it's traditional Unix behavior\nthat shell scripts without a '#!' line are passed directly to the\nBourne shell. The short version of why this behavior exists is that\nbefore a certain point, Unix didn't understand '#!' lines at all.</p>\n\n<p>In V7 (and versions before it), the exec*() family of system\ncalls only worked on actual binary executables. In order to make\nshell scripts more or less work, the shell (and I think perhaps\nsome other programs) reacted to an <code>ENOEXEC</code> error by assuming\nthe executable was actually a shell script. In the traditional\nUnix manner, the shell didn't do any sort of safety check to see\nif the file actually had ASCII text in it; if execve() returned\n<code>ENOEXEC</code>, that was good enough for it (you can see this in the\nexecs() function in <a href=\"https://minnie.tuhs.org/cgi-bin/utree.pl?file=V7/usr/src/cmd/sh/service.c\">sh/service.c</a>).</p>\n\n<p>(The V7 shell was actually reasonably clever about how it handled this\ncase. Rather than exec'ing itself again, it longjmp()'d back to the\nstart of main() in the same process.)</p>\n\n<p>Before I started my research for writing this entry, I would have\nsaid that kernel support for '#!' was added in 4.2 BSD. That's\ncertainly where it first appeared and where it became well known,\nbut according to <a href=\"https://en.wikipedia.org/wiki/Shebang_(Unix)#History\">the history section of Wikipedia's page on #!</a>, it was first\nintroduced by Dennis Ritchie in 1980, after V7, although it might\nhave been suggested to him by someone else. It didn't become known\nthrough later releases of Research Unix because those were never\nvery widely spread, <a href=\"https://utcc.utoronto.ca/~cks/space/blog/unix/V7WhyItMattersSoMuch\">unlike V7</a>.</p>\n\n<p>(This suggests that at least some of <a href=\"https://utcc.utoronto.ca/~cks/space/blog/unix/BourneCommentHistory\">my somewhat apocryphal history\nof comments in the Bourne shell</a> is wrong. I'd\nguess that '#' was added as a comment character to the Bourne shell\nat some point after V7, since otherwise a shell script that started\nwith '#!/bin/sh' would produce an error from the Bourne shell.)</p>\n\n<p>Unix owes a lot to <a href=\"https://en.wikipedia.org/wiki/Dennis_Ritchie\">Dennis Ritchie</a> as it is, but I'm\nstill pleased and glad to learn that we owe a bit more to him than\nI thought (as well as to whoever suggested the idea to him). Plus,\nfinding this out is a nice reminder to myself that the history of\nUnix can be more interesting than what I remember from the folklore\nI've absorbed over time.</p>\n</div>"
         }
       ],
-      "summary": "<div class=\"wikitext\"><p>Suppose that you added some disks to a server and then used them\nto create a software RAID mirror called 'md2', like so:</p>\n\n\n<blockquote><pre style=\"white-space: pre-wrap;\">\nmdadm -C /dev/md2 -n 2 -l raid1 -b internal /dev/sde1 /dev/sdf1\n</pre>\n</blockquote>\n\n<p>(Having an internal bitmap may be the default these days, I haven't\nchecked.)</p>\n\n<p>Everything goes great, the software RAID finishes resyncing\n(eventually), you reboot, and suddenly your system has a '/dev/md127'\nand no '/dev/md2'. What?</p>\n\n<p>(At least, this is what happens on Ubuntu and on CentOS 7. Other\nLinux distributions may work differently, but most probably won't\nbecause a lot of this is behavior from udev and systemd.)</p>\n\n<p>Once upon a time, perhaps back in the days when the Linux kernel\nassembled software RAID devices itself during boot, the name of a\nsoftware RAID device was effectively persisted in its on-disk data.\nOnce you created a RAID array called 'md2', you could be pretty\nconfident that it would stay being /dev/md2 for the next long while,\nno matter what you did or didn't do. There were good things about\nthose days but also problems (such as what was the system supposed\nto do if it saw two separate RAID arrays that both wanted to be\nmd2), so modern Linux systems don't work that way.</p>\n\n<p>In practice, what matters is what is in <a href=\"https://man7.org/linux/man-pages/man5/mdadm.conf.5.html\">mdadm.conf</a>, the mdadm\nconfiguration file. If your software RAID array is listed in there\n(with a /dev/mdN name), it will get assigned that name when it's\nbrought up. If it's not listed in mdadm.conf, it will get assigned\na high number (often starting with /dev/md127 and then apparently\ncounting down) and that number may change from boot to boot if you\nhave multiple unlisted software RAID arrays.</p>\n\n<p>Thus, the minimal thing that you want to do is to add your new\nsoftware RAID array to your mdadm.conf (which may be /etc/mdadm.conf\nor /etc/mdadm/mdadm.conf). Fortunately mdadm has a command option\nthat will print out the information you need to add:</p>\n\n<blockquote><pre style=\"white-space: pre-wrap;\">\n# mdadm --detail --brief /dev/md2\nARRAY /dev/md2 metadata=1.2 UUID=[...]\n</pre>\n</blockquote>\n\n<p>(You can also use 'mdadm --detail --scan'. I don't know why mdadm\naccepts both and treats them the same, but I think that using --brief\nis more accurate to what you want.)</p>\n\n<p>The complication in this is that sometimes, you need the array to\nnot just be listed in mdadm.conf, but also to be in the version of\nmdadm.conf that's in your initramfs. Which means that after you add\nit to the normal mdadm.conf, you probably want to run '<code>update-initramfs\n-u</code>'.</p>\n\n<p>All of this is easy to overlook if you mostly create your software\nRAID arrays when you install your systems (as we do). I believe\nthat all competent modern Linux installers (Ubuntu, CentOS, whatever)\ntake care of all of this for you, so that your install time software\nRAID arrays are listed in all of the right places and have nice\nstatic names and so on.</p>\n\n<p>(See also <a href=\"https://utcc.utoronto.ca/~cks/space/blog/linux/SoftwareRaidAssemblySystemd\">how non-system software RAID arrays are started at boot\nunder systemd</a> and a much older entry\non <a href=\"https://utcc.utoronto.ca/~cks/space/blog/linux/RaidGrowthGotcha\">fixing a RAID growth gotcha</a> that was also\nabout having to update mdadm.conf. Hopefully the old RAID growth\ngotcha is long gone by now, but you never know. There's a more\nrecent <a href=\"https://utcc.utoronto.ca/~cks/space/blog/linux/SoftwareRaidRemovingDiskGotcha\">problem if you remove devices from a software RAID mirror</a>, where you probably want to\nimmediately zero the RAID superblocks on the removed devices.)</p>\n\n<p>PS: If you refer to your software RAID arrays in /etc/fstab and so on\nthrough either the filesystem UUID or the RAID UUID, you aren't really\naffected by the /dev/md* name bouncing around. But that name does\nshow up in various places, including host metrics and kernel logs, so\nit's my view that keeping it consistent and straight is good. And having\na fixed name and an entry in mdadm.conf makes it clear that the array is\nsupposed to be there, as opposed to being a stray array on reused disks\nor the like.</p>\n\n</div>",
-      "title": "Getting the names of your Linux software RAID devices to stick",
+      "summary": "<div class=\"wikitext\"><p>When I wrote about <a href=\"https://utcc.utoronto.ca/~cks/space/blog/unix/EmptyFileWhyTrue\">why an empty executable file is true in Unix</a>, I mentioned that it's traditional Unix behavior\nthat shell scripts without a '#!' line are passed directly to the\nBourne shell. The short version of why this behavior exists is that\nbefore a certain point, Unix didn't understand '#!' lines at all.</p>\n\n<p>In V7 (and versions before it), the exec*() family of system\ncalls only worked on actual binary executables. In order to make\nshell scripts more or less work, the shell (and I think perhaps\nsome other programs) reacted to an <code>ENOEXEC</code> error by assuming\nthe executable was actually a shell script. In the traditional\nUnix manner, the shell didn't do any sort of safety check to see\nif the file actually had ASCII text in it; if execve() returned\n<code>ENOEXEC</code>, that was good enough for it (you can see this in the\nexecs() function in <a href=\"https://minnie.tuhs.org/cgi-bin/utree.pl?file=V7/usr/src/cmd/sh/service.c\">sh/service.c</a>).</p>\n\n<p>(The V7 shell was actually reasonably clever about how it handled this\ncase. Rather than exec'ing itself again, it longjmp()'d back to the\nstart of main() in the same process.)</p>\n\n<p>Before I started my research for writing this entry, I would have\nsaid that kernel support for '#!' was added in 4.2 BSD. That's\ncertainly where it first appeared and where it became well known,\nbut according to <a href=\"https://en.wikipedia.org/wiki/Shebang_(Unix)#History\">the history section of Wikipedia's page on #!</a>, it was first\nintroduced by Dennis Ritchie in 1980, after V7, although it might\nhave been suggested to him by someone else. It didn't become known\nthrough later releases of Research Unix because those were never\nvery widely spread, <a href=\"https://utcc.utoronto.ca/~cks/space/blog/unix/V7WhyItMattersSoMuch\">unlike V7</a>.</p>\n\n<p>(This suggests that at least some of <a href=\"https://utcc.utoronto.ca/~cks/space/blog/unix/BourneCommentHistory\">my somewhat apocryphal history\nof comments in the Bourne shell</a> is wrong. I'd\nguess that '#' was added as a comment character to the Bourne shell\nat some point after V7, since otherwise a shell script that started\nwith '#!/bin/sh' would produce an error from the Bourne shell.)</p>\n\n<p>Unix owes a lot to <a href=\"https://en.wikipedia.org/wiki/Dennis_Ritchie\">Dennis Ritchie</a> as it is, but I'm\nstill pleased and glad to learn that we owe a bit more to him than\nI thought (as well as to whoever suggested the idea to him). Plus,\nfinding this out is a nice reminder to myself that the history of\nUnix can be more interesting than what I remember from the folklore\nI've absorbed over time.</p>\n</div>",
+      "title": "How Unix didn't used to support '#!', a brief history",
       "title_detail": {
         "type": "text/html",
         "language": null,
         "base": "https://utcc.utoronto.ca/~cks/space/blog/?atom",
-        "value": "Getting the names of your Linux software RAID devices to stick"
+        "value": "How Unix didn't used to support '#!', a brief history"
       },
       "tags": [
         {
-          "term": "linux",
+          "term": "unix",
           "scheme": null,
           "label": null
         }
       ],
-      "updated": "2022-07-13T01:34:39Z",
+      "updated": "2022-07-14T02:43:59Z",
       "updated_parsed": [
         2022,
         7,
-        13,
-        1,
-        34,
-        39,
+        14,
         2,
-        194,
+        43,
+        59,
+        3,
+        195,
         0
       ],
-      "published": "2022-07-13T01:34:23Z",
+      "published": "2022-07-14T02:42:58Z",
       "published_parsed": [
         2022,
         7,
-        13,
-        1,
-        34,
-        23,
+        14,
         2,
-        194,
+        42,
+        58,
+        3,
+        195,
         0
       ]
     }
@@ -1480,7 +1480,7 @@
         "value": "Over on the Scholar's Stage forum, one forum member asks why the number of American university students selecting history as their chosen four year degree has been on the decline since the 1970s. He offers three hypotheses:"
       },
       "wfw_commentrss": "https://scholars-stage.org/the-fall-of-history-as-a-major-and-as-a-part-of-the-humanities/feed/",
-      "slash_comments": "1",
+      "slash_comments": "10",
       "post-id": "3521"
     }
   },
