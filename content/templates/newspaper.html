@@ -1,0 +1,32 @@
+{% extends '!theme/page.html' %}
+
+{% block subtitle %}
+<a href="{{ SITEURL }}/">{{ SITENAME }}</a> |
+{{ page.subtitle }}
+{% endblock %}
+
+{% block content %}
+{% set data = json("content/newspaper.json") %}
+{% set current = namespace(section=null, day=null) %}
+  {% for item in data %}
+  {% if current.day != item.entry.published_parsed[:3] %}
+    {% if current.day != null %}</ul></section>{% endif %}
+    {% set current.day = item.entry.published_parsed[:3] %}
+    {% set current.section = null %}
+    {% set day = datetime(*current.day).strftime(DEFAULT_DATE_FORMAT) %}
+    <section class="daily">
+    <h2 id="{{ day }}"><a href="#{{ day }}">{{ day }}</a></h2>
+  {% endif %}
+  {% if current.section != item.blog.section %}
+    {% if current.section != null %}</ul>{% endif %}
+    {% set current.section = item.blog.section %}
+    <strong>{{ current.section }}</strong>
+    <ul>
+  {% endif %}
+  <li>
+  <a href="{{ item.entry.link }}">{{ item.entry.title }}</a>
+  ({{ item.blog.title }})
+  </li>
+  {% endfor %}
+  </ul>
+{% endblock content %}

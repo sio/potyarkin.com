@@ -17,6 +17,7 @@ PAGE_PATHS = [
     'pages',
     'blogroll.md',
     'bookmarks.md',
+    'newspaper.md',
     'webring.md',
 ]
 STATIC_PATHS = [
@@ -125,15 +126,15 @@ CSS_OVERRIDE = [
 
 
 # Jinja2 customization
-
+from datetime import datetime
 import helpers.json
 import helpers.yaml
 JINJA_GLOBALS = {
+    'datetime': datetime,
     'json': helpers.json.read,
     'yaml': helpers.yaml.read,
 }
 
-from datetime import datetime
 import helpers.markdown
 JINJA_FILTERS = {
     'md': helpers.markdown.custom(MARKDOWN),

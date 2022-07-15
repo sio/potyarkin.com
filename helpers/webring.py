@@ -105,6 +105,11 @@ class CachingFeedReader:
         if not self.cachedir.is_dir():
             raise ValueError(f'cache directory does not exist: {self.cachedir}')
 
+    def cached(self, title, url):
+        '''Read feed from cache without accessing network'''
+        cache = self._cache(title, url)
+        return cache.read()
+
     def feed(self, title, url):
         '''Parse feed from URL, use cache if applicable'''
         cache = self._cache(title, url)

@@ -85,3 +85,12 @@ publish html serve: | webring
 .PHONY: content/webring.json
 content/webring.json: content/blogroll.yml helpers/webring.py | venv
 	$(VENV)/python -m helpers.webring $< $@ --cache-mkdir
+
+.PHONY: newspaper
+newspaper: content/newspaper.json
+publish html serve: | newspaper
+
+.PHONY: content/newspaper.json
+content/newspaper.json: content/webring.json
+content/newspaper.json: content/blogroll.yml helpers/newspaper.py | venv
+	$(VENV)/python -m helpers.newspaper $< $@

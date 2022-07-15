@@ -19,4 +19,5 @@ eggs/
 
 # Webring
 /content/webring.json
+/content/newspaper.json
 /cache/
