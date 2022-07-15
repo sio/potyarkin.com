@@ -181,6 +181,26 @@
         Joyent (SmartOS), and now have founded a new startup (Oxide). Other blogs at
         DTrace.org are updated less frequently but usually are also interesting.
 
+    - title: Monomythical Newsletter
+      by: Nadia Asparouhova (Nadia Eghbal)
+      url: https://nayafia.substack.com/archive
+      feed: https://nayafia.substack.com/feed
+      description: |-
+        I've been following Nadia Eghbal's newsletter ever since I've read her
+        [Roads and Bridges] essay. She provides a fresh view on the culture and
+        communities I'm accustomed to. A lot of things she sees I was so used
+        to seeing that I didn't ever acknowledge having seen them.
+
+        [Roads and Bridges]: https://potyarkin.ml/posts/2018/roads-and-bridges-sustaining-modern-digital-infrastructure/
+
+    - title: Nadia Eghbal's Blog
+      by: Nadia Asparouhova (Nadia Eghbal)
+      url: https://nadia.xyz/posts/
+      feed: https://nadia.xyz/feed.xml
+      description: |-
+        Another venue where Nadia Eghbal publishes her writings
+        _(see Monomythical Newsletter above)_
+
 - section: Politics
   blogs:
     - title: Scholar's Stage
