@@ -156,7 +156,7 @@ class CachingFeedReader:
 class FeedCache:
     '''Cache object for a single feed'''
 
-    LIFETIME_MINUTES = 24*60
+    LIFETIME_MINUTES = 12*60
     METADATA_VERSION = 1
     CACHE_VERSION = 1
 
