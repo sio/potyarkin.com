@@ -3,7 +3,7 @@
 {% block subtitle %}
 <a href="{{ SITEURL }}/">{{ SITENAME }}</a> |
 {{ page.subtitle }} |
-<a href="{{ SITEURL }}/webring.json">Source</a>
+<a href="{{ SITEURL }}/blogroll.yml">Source</a>
 {% endblock %}
 
 {% block content %}
@@ -29,9 +29,5 @@
   </li>
   {% endfor %}
   </ul>
-<blockquote>
-This page is also available in a machine readable form:
-<a href="{{ SITEURL }}/webring.json">webring.json</a>
-</blockquote>
 </article>
 {% endblock content %}
