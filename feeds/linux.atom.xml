@@ -1,5 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - linux</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/linux.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2019-07-30T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>On dotfiles management</title><link href="https://potyarkin.ml/posts/2019/on-dotfiles-management/" rel="alternate"></link><published>2019-07-30T00:00:00+03:00</published><updated>2019-07-30T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2019-07-30:/posts/2019/on-dotfiles-management/</id><summary type="html">&lt;p&gt;This will be yet another description of dotfiles management by some random
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - linux</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/linux.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2022-07-21T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>"No user exists for uid" when pushing to git repo</title><link href="https://potyarkin.ml/posts/2022/no-user-exists-for-uid/" rel="alternate"></link><published>2022-07-21T00:00:00+03:00</published><updated>2022-07-21T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-07-21:/posts/2022/no-user-exists-for-uid/</id><summary type="html">&lt;p&gt;Today I tried to automate pushing to a Git repository from a Docker container.
+And like many others I failed with an error:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ git push
+No user exists for uid 2918
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository …&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Today I tried to automate pushing to a Git repository from a Docker container.
+And like many others I failed with an error:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ git push
+No user exists for uid 2918
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Following best practices I was running the container under a random UID to
+drop root privileges, and of course there was no user with that UID in the
+system. I don't think that's egregious enough to warrant an error instead
+of a warning from &lt;code&gt;git push&lt;/code&gt;, so I've started digging.&lt;/p&gt;
+&lt;p&gt;I was very surprised to learn where this error &lt;a href="https://github.com/openssh/openssh-portable/blob/c46f6fed419167c1671e4227459e108036c760f8/ssh.c#L659-L664"&gt;comes from&lt;/a&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cm"&gt;/*&lt;/span&gt;
+&lt;span class="cm"&gt; * openssh/ssh.c: Main program for the ssh client.&lt;/span&gt;
+&lt;span class="cm"&gt; */&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;ac&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kt"&gt;char&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;av&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="c1"&gt;// ...lines omitted...&lt;/span&gt;
+
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="cm"&gt;/* Get user data. */&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;pw&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;getpwuid&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;getuid&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="n"&gt;pw&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="n"&gt;logit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;No user exists for uid %lu&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u_long&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;getuid&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;255&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;getuid()&lt;/code&gt; is pretty self-explanatory, it returns the UID of current user.
+Afterwards &lt;code&gt;getpwuid()&lt;/code&gt; attempts to fetch data for the provided UID from
+&lt;code&gt;/etc/passwd&lt;/code&gt;. It fails, of course, and returns NULL. OpenSSH client treats
+that as a show stopper and exits with an error.&lt;/p&gt;
+&lt;p&gt;I was hoping that finding the place where error is generated will help me to
+come up with a setup that avoids the problematic code branch altogether,
+but no luck this time. It's straight in the &lt;code&gt;main()&lt;/code&gt; function of ssh client,
+no conditional branching whatsoever.&lt;/p&gt;
+&lt;p&gt;I will be looking into generating a bogus &lt;code&gt;/etc/passwd&lt;/code&gt; entry on-the-fly prior
+to launching my application in container. I would very much like to avoid
+hardcoding the UID itself.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Meanwhile, here is a punchline for you:&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;When current UID is not in /etc/passwd OpenSSH client can not even print a
+usage message:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ ssh
+No user exists for uid 3432
+
+$ ssh --help
+No user exists for uid 3432
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="posts"></category><category term="linux"></category><category term="ssh"></category><category term="git"></category></entry><entry><title>On dotfiles management</title><link href="https://potyarkin.ml/posts/2019/on-dotfiles-management/" rel="alternate"></link><published>2019-07-30T00:00:00+03:00</published><updated>2019-07-30T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2019-07-30:/posts/2019/on-dotfiles-management/</id><summary type="html">&lt;p&gt;This will be yet another description of dotfiles management by some random
 person on the Internet. I will try to explain what my setup is like and why it
 is that way.&lt;/p&gt;
 &lt;p&gt;If you're not yet using version control software for your configuration files

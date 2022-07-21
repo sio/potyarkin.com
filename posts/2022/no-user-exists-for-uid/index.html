@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>"No user exists for uid" when pushing to git repo</title>
+  <meta name="description" content="Orange Sun | Posts | Vitaly Potyarkin | 2022-07-21">
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="origin">
+  <meta name="generator" content="Pelican">
+  <link href="https://potyarkin.ml/posts/2022/no-user-exists-for-uid/" rel="canonical">
+<link href="https://potyarkin.ml/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Orange Sun Full Atom Feed" />
+<link href="https://potyarkin.ml/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="Orange Sun Full RSS Feed" />
+  <link href="https://potyarkin.ml/theme/css/style.css?cache=ce1ce9e802f6452fc24c45dcd14f219b9fdbc4b78394fcb3ed490c23f88a6851" type="text/css" rel="stylesheet">
+  <link href="https://potyarkin.ml/theme/css/fonts.css?cache=32c843bb3ce96eb9fb92f48c7a63dc133ab32e0d267a2e1453199c23403d5cd0" type="text/css" rel="stylesheet">
+  <link href="https://potyarkin.ml/theme/css/codecolor/bleak.css?cache=4793611eaa86c9638927c57ac8d9995c5f7ca18d9ffed3721467cf3ef61b5e8e" type="text/css" rel="stylesheet">
+    <link href="https://potyarkin.ml/static/custom.css?cache=f63a8f89729d723646a4498f24236bb902fd8c385a3bc90b2b2f0d4046dd987b" type="text/css" rel="stylesheet">
+  <style>
+  :root {
+    --accent-hue: 14.917127071823206;
+    --accent-saturation: 87.43961352657004%;
+    --accent-lightness: 59.411764705882355%;
+    --accent-rgb: #f26a3d;
+  }
+  </style>
+  <meta name="theme-color" content="#f26a3d">
+</head>
+<body class="pelican-article">
+<nav id="menu">
+  <a href="#" class="close button">Close</a>
+  <a href="#menu" class="open button">Menu</a>
+  <ul class="menu-list">
+      <li><a href="/archive/">Archive</a></li>
+      <li><a href="/tags/">Tags</a></li>
+      <li><a href="mailto:sio.wtf@gmail.com">Email</a></li>
+      <li><a href="https://github.com/sio">Github</a></li>
+      <li><a href="/feeds/">feed</a></li>
+      <li><a href="/bookmarks/">bookmarks</a></li>
+      <li><a href="https://potyarkin.ml/blogroll/">Blogroll</a></li>
+      <li><a href="https://potyarkin.ml/webring/">Webring</a></li>
+  </ul>
+</nav>  <header class="page-header">
+    <h1>"No user exists for uid" when pushing to git repo</h1>
+    <span class="subtitle"><a href="https://potyarkin.ml/">Orange Sun</a> |
+<a href="https://potyarkin.ml/posts/">Posts</a> |   <a href="https://potyarkin.ml/">Vitaly Potyarkin</a>
+| 2022-07-21
+</span>
+  </header>
+<article class="full"><p>Today I tried to automate pushing to a Git repository from a Docker container.
+And like many others I failed with an error:</p>
+<div class="highlight"><pre><span></span><code>$ git push
+No user exists for uid 2918
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+</code></pre></div>
+
+<p>Following best practices I was running the container under a random UID to
+drop root privileges, and of course there was no user with that UID in the
+system. I don't think that's egregious enough to warrant an error instead
+of a warning from <code>git push</code>, so I've started digging.</p>
+<p>I was very surprised to learn where this error <a href="https://github.com/openssh/openssh-portable/blob/c46f6fed419167c1671e4227459e108036c760f8/ssh.c#L659-L664">comes from</a>:</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/*</span>
+<span class="cm"> * openssh/ssh.c: Main program for the ssh client.</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ac</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">av</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// ...lines omitted...</span>
+
+<span class="w">    </span><span class="cm">/* Get user data. */</span><span class="w"></span>
+<span class="w">    </span><span class="n">pw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getpwuid</span><span class="p">(</span><span class="n">getuid</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">pw</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">logit</span><span class="p">(</span><span class="s">&quot;No user exists for uid %lu&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">u_long</span><span class="p">)</span><span class="n">getuid</span><span class="p">());</span><span class="w"></span>
+<span class="w">        </span><span class="n">exit</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p><code>getuid()</code> is pretty self-explanatory, it returns the UID of current user.
+Afterwards <code>getpwuid()</code> attempts to fetch data for the provided UID from
+<code>/etc/passwd</code>. It fails, of course, and returns NULL. OpenSSH client treats
+that as a show stopper and exits with an error.</p>
+<p>I was hoping that finding the place where error is generated will help me to
+come up with a setup that avoids the problematic code branch altogether,
+but no luck this time. It's straight in the <code>main()</code> function of ssh client,
+no conditional branching whatsoever.</p>
+<p>I will be looking into generating a bogus <code>/etc/passwd</code> entry on-the-fly prior
+to launching my application in container. I would very much like to avoid
+hardcoding the UID itself.</p>
+<p><em>Meanwhile, here is a punchline for you:</em></p>
+<p>When current UID is not in /etc/passwd OpenSSH client can not even print a
+usage message:</p>
+<div class="highlight"><pre><span></span><code>$ ssh
+No user exists for uid 3432
+
+$ ssh --help
+No user exists for uid 3432
+</code></pre></div></article>
+<nav class="article-tags">
+  <a href="https://potyarkin.ml/tags/linux/">linux</a>
+  <a href="https://potyarkin.ml/tags/ssh/">ssh</a>
+  <a href="https://potyarkin.ml/tags/git/">git</a>
+</nav>
+<nav class="neighbors">
+  <a class="neighbor neighbor-prev" href="https://potyarkin.ml/posts/2022/pip-install-pelican-theme/">
+    <h1>Pip-installable Pelican themes</h1>
+    <p>Installing Pelican themes the default way is not very pleasant: You need to invoke a...</p>
+  </a>
+  <span class="neighbor"></span>
+</nav>
+<footer class="page-footer">
+  <section class="credits">
+        <span class="credits-left">
+          Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a>
+        </span>
+        <span class="credits-center">
+          <a href="https://potyarkin.ml/">Orange Sun</a>
+        </span>
+        <span class="credits-right">
+          Theme <a href="https://github.com/sio/pelican-smallweb" rel="nofollow">SmallWeb</a>
+        </span>
+  </section>
+</footer></body>
+</html>

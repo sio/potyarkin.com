@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Orange Sun</title><link>https://potyarkin.ml/</link><description>Unsorted ramblings, sometimes related to programming</description><lastBuildDate>Fri, 10 Jun 2022 00:00:00 +0300</lastBuildDate><item><title>Pip-installable Pelican themes</title><link>https://potyarkin.ml/posts/2022/pip-install-pelican-theme/</link><description>&lt;p&gt;Installing &lt;a href="https://blog.getpelican.com/"&gt;Pelican&lt;/a&gt; themes &lt;a href="https://docs.getpelican.com/en/3.6.3/pelican-themes.html#installing-themes"&gt;the default way&lt;/a&gt; is not very
+<rss version="2.0"><channel><title>Orange Sun</title><link>https://potyarkin.ml/</link><description>Unsorted ramblings, sometimes related to programming</description><lastBuildDate>Thu, 21 Jul 2022 00:00:00 +0300</lastBuildDate><item><title>"No user exists for uid" when pushing to git repo</title><link>https://potyarkin.ml/posts/2022/no-user-exists-for-uid/</link><description>&lt;p&gt;Today I tried to automate pushing to a Git repository from a Docker container.
+And like many others I failed with an error:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ git push
+No user exists for uid 2918
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository …&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vitaly Potyarkin</dc:creator><pubDate>Thu, 21 Jul 2022 00:00:00 +0300</pubDate><guid isPermaLink="false">tag:potyarkin.ml,2022-07-21:/posts/2022/no-user-exists-for-uid/</guid><category>posts</category><category>linux</category><category>ssh</category><category>git</category></item><item><title>Pip-installable Pelican themes</title><link>https://potyarkin.ml/posts/2022/pip-install-pelican-theme/</link><description>&lt;p&gt;Installing &lt;a href="https://blog.getpelican.com/"&gt;Pelican&lt;/a&gt; themes &lt;a href="https://docs.getpelican.com/en/3.6.3/pelican-themes.html#installing-themes"&gt;the default way&lt;/a&gt; is not very
 pleasant:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;You need to invoke a separate CLI tool&lt;/li&gt;
