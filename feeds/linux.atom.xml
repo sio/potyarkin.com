@@ -36,17 +36,17 @@ of a warning from &lt;code&gt;git push&lt;/code&gt;, so I've started digging.&lt
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;code&gt;getuid()&lt;/code&gt; is pretty self-explanatory, it returns the UID of current user.
+&lt;p&gt;&lt;code&gt;getuid()&lt;/code&gt; is pretty self-explanatory, it returns UID of current user.
 Afterwards &lt;code&gt;getpwuid()&lt;/code&gt; attempts to fetch data for the provided UID from
 &lt;code&gt;/etc/passwd&lt;/code&gt;. It fails, of course, and returns NULL. OpenSSH client treats
 that as a show stopper and exits with an error.&lt;/p&gt;
 &lt;p&gt;I was hoping that finding the place where error is generated will help me to
-come up with a setup that avoids the problematic code branch altogether,
+come up with a setup that avoids problematic code branch altogether,
 but no luck this time. It's straight in the &lt;code&gt;main()&lt;/code&gt; function of ssh client,
 no conditional branching whatsoever.&lt;/p&gt;
 &lt;p&gt;I will be looking into generating a bogus &lt;code&gt;/etc/passwd&lt;/code&gt; entry on-the-fly prior
 to launching my application in container. I would very much like to avoid
-hardcoding the UID itself.&lt;/p&gt;
+hardcoding the UID at build time.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Meanwhile, here is a punchline for you:&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;When current UID is not in /etc/passwd OpenSSH client can not even print a
 usage message:&lt;/p&gt;
