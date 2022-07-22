@@ -41,19 +41,19 @@ int main(int ac, char **av) {
     }
 ```
 
-`getuid()` is pretty self-explanatory, it returns the UID of current user.
+`getuid()` is pretty self-explanatory, it returns UID of current user.
 Afterwards `getpwuid()` attempts to fetch data for the provided UID from
 `/etc/passwd`. It fails, of course, and returns NULL. OpenSSH client treats
 that as a show stopper and exits with an error.
 
 I was hoping that finding the place where error is generated will help me to
-come up with a setup that avoids the problematic code branch altogether,
+come up with a setup that avoids problematic code branch altogether,
 but no luck this time. It's straight in the `main()` function of ssh client,
 no conditional branching whatsoever.
 
 I will be looking into generating a bogus `/etc/passwd` entry on-the-fly prior
 to launching my application in container. I would very much like to avoid
-hardcoding the UID itself.
+hardcoding the UID at build time.
 
 *Meanwhile, here is a punchline for you:*
 
