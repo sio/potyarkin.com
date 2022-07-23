@@ -86,7 +86,7 @@ that as a show stopper and exits with an error.</p>
 come up with a setup that avoids problematic code branch altogether,
 but no luck this time. It's straight in the <code>main()</code> function of ssh client,
 no conditional branching whatsoever.</p>
-<p>I will be looking into generating a bogus <code>/etc/passwd</code> entry on-the-fly prior
+<p>I will be <a href="https://github.com/sio/microblog-server/blob/1468a8832805f8a72252473020085495d31efcb9/container/addpasswd.c">looking into generating</a> a bogus <code>/etc/passwd</code> entry on-the-fly prior
 to launching my application in container. I would very much like to avoid
 hardcoding the UID at build time.</p>
 <p><em>Meanwhile, here is a punchline for you:</em></p>

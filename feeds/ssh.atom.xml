@@ -44,7 +44,7 @@ that as a show stopper and exits with an error.&lt;/p&gt;
 come up with a setup that avoids problematic code branch altogether,
 but no luck this time. It's straight in the &lt;code&gt;main()&lt;/code&gt; function of ssh client,
 no conditional branching whatsoever.&lt;/p&gt;
-&lt;p&gt;I will be looking into generating a bogus &lt;code&gt;/etc/passwd&lt;/code&gt; entry on-the-fly prior
+&lt;p&gt;I will be &lt;a href="https://github.com/sio/microblog-server/blob/1468a8832805f8a72252473020085495d31efcb9/container/addpasswd.c"&gt;looking into generating&lt;/a&gt; a bogus &lt;code&gt;/etc/passwd&lt;/code&gt; entry on-the-fly prior
 to launching my application in container. I would very much like to avoid
 hardcoding the UID at build time.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Meanwhile, here is a punchline for you:&lt;/em&gt;&lt;/p&gt;
