@@ -51,9 +51,11 @@ come up with a setup that avoids problematic code branch altogether,
 but no luck this time. It's straight in the `main()` function of ssh client,
 no conditional branching whatsoever.
 
-I will be looking into generating a bogus `/etc/passwd` entry on-the-fly prior
+I will be [looking into generating][bogus] a bogus `/etc/passwd` entry on-the-fly prior
 to launching my application in container. I would very much like to avoid
 hardcoding the UID at build time.
+
+[bogus]: https://github.com/sio/microblog-server/blob/1468a8832805f8a72252473020085495d31efcb9/container/addpasswd.c
 
 *Meanwhile, here is a punchline for you:*
 
