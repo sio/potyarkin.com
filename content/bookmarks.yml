@@ -8,6 +8,19 @@
 - period: 2022-07
   links:
 
+  - title: USB WiFi adapters in Linux
+    url: https://github.com/morrownr/USB-WiFi/blob/main/home/USB_WiFi_Chipsets.md
+    description: |-
+      To summarize: Drivers are a big problem.
+      In-tree kernel support is even bigger problem.
+
+      *2.4GHz* recommendation seems to be Ralink `rt5370`,
+      for *5GHz* there are reports of success with `mt7612u`, `mt7610u`
+
+      Beware: `mt7601u` on Linux does not support AP mode
+
+      See also: <https://elinux.org/RPi_USB_Wi-Fi_Adapters>
+
   - title: On github as a social network
     by: Eric Bower
     url: https://erock.io/2022/06/03/github-as-social-network.html
