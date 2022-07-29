@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - networking</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/networking.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2022-07-29T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Negotiating down to 100Mbit between two 1Gbit devices</title><link href="https://potyarkin.ml/posts/2022/negotiating-down-to-100mbit/" rel="alternate"></link><published>2022-07-29T00:00:00+03:00</published><updated>2022-07-29T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-07-29:/posts/2022/negotiating-down-to-100mbit/</id><summary type="html">&lt;p&gt;Connecting two gigabit-capable devices via 4-wire UTP cable is an abomination,
+but sometimes we have to live with it (e.g. when a &lt;a href="https://nevalink.net/"&gt;greedy ISP&lt;/a&gt;
+decides to save a few cents and pulls a cheap cable to your apartment).&lt;/p&gt;
+&lt;p&gt;The fun starts when these devices try to negotiate Ethernet connection …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Connecting two gigabit-capable devices via 4-wire UTP cable is an abomination,
+but sometimes we have to live with it (e.g. when a &lt;a href="https://nevalink.net/"&gt;greedy ISP&lt;/a&gt;
+decides to save a few cents and pulls a cheap cable to your apartment).&lt;/p&gt;
+&lt;p&gt;The fun starts when these devices try to negotiate Ethernet connection speed.
+&lt;a href="https://en.wikipedia.org/wiki/Autonegotiation#Electrical_signals"&gt;Autonegotiation pulses&lt;/a&gt; are essentially 10BASE-T and use only 4 wires with no
+checking of cable category, even CAT3 is enough. So autonegotiation will
+"successfully" settle on 1Gbit though there is not enough physical conductors
+for it. The link will not work.&lt;/p&gt;
+&lt;p&gt;To negotiate a working connection instead we need to remove 1Gbit from
+advertised link modes at least on one end. In Linux it should be rather
+straightforward with &lt;a href="https://manpages.debian.org/ethtool"&gt;ethtool&lt;/a&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ ethtool -s $IFACE advertise 0x00f
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;0x00f is a sum of hex values for all 10Mbit and 100Mbit modes
+(0x001 + 0x002 + 0x004 + 0x008) which does not include 1Gbit or anything
+above that. Tweaking advertised link modes is better than forcing a particular
+connection speed (&lt;code&gt;ethtool -s $IFACE speed 100&lt;/code&gt;) because in absence of
+autonegotiation advertisement the other side may play it safe and switch
+to half-duplex.&lt;/p&gt;
+&lt;p&gt;That's the theory. In practise, hardware is difficult. Drivers for NICs are
+tricky and sometimes incomplete. On D-Link DIR-825 changes made by ethtool
+command did not stick: after a short hiccup NIC would immediately return back
+to default settings, ignoring ethtool input completely.&lt;/p&gt;
+&lt;p&gt;But all is not lost. Through trial and error I found a sequence that worked.
+Don't ask me why, I'm not cool enough yet to understand kernel drivers code.
+Here is what worked for me:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;# Excerpt from /etc/rc.local
+# (order of commands and delays matter!)
+WAN=eth1
+ethtool -s $WAN autoneg off
+sleep 1
+ethtool -s $WAN speed 100
+sleep 1
+ethtool -s $WAN advertise 0x00f
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Which results in a proper NIC configuration:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Supported ports: [ TP MII ]
+Supported link modes:   10baseT/Half 10baseT/Full
+                        100baseT/Half 100baseT/Full
+                        1000baseT/Half 1000baseT/Full
+Supported pause frame use: Symmetric Receive-only
+Supports auto-negotiation: Yes
+Supported FEC modes: Not reported
+Advertised link modes:  10baseT/Half 10baseT/Full
+                        100baseT/Half 100baseT/Full
+Advertised pause frame use: No
+Advertised auto-negotiation: Yes
+Advertised FEC modes: Not reported
+Link partner advertised link modes:  10baseT/Half 10baseT/Full
+                                     100baseT/Half 100baseT/Full
+Link partner advertised pause frame use: Symmetric
+Link partner advertised auto-negotiation: Yes
+Link partner advertised FEC modes: Not reported
+Speed: 100Mb/s
+Duplex: Full
+Port: MII
+PHYAD: 4
+Transceiver: external
+Auto-negotiation: on
+Current message level: 0x000000ff (255)
+                       drv probe link timer ifdown ifup rx_err tx_err
+Link detected: yes
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Let's hope some variation of this will work for your misbehaving device too!
+Good luck!&lt;/p&gt;</content><category term="posts"></category><category term="linux"></category><category term="networking"></category></entry></feed>
