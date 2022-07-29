@@ -3,7 +3,7 @@
     <a class="permalink" href="{{ SITEURL }}/micro/{{ entry.uid }}/">
       <span class="author">{{ entry.author }}</span> @
       <time datetime="{{ entry.isotime() }}">
-        {{ entry.timestamp.strftime("%H:%M, %B %e, %Y") }}
+        {{ entry.timestamp.strftime(DEFAULT_DATE_FORMAT) }}
       </time>
     </a>
     <section class="content">
