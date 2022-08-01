@@ -2,14 +2,14 @@
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - linux</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/linux.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2022-07-29T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Negotiating down to 100Mbit between two 1Gbit devices</title><link href="https://potyarkin.ml/posts/2022/negotiating-down-to-100mbit/" rel="alternate"></link><published>2022-07-29T00:00:00+03:00</published><updated>2022-07-29T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-07-29:/posts/2022/negotiating-down-to-100mbit/</id><summary type="html">&lt;p&gt;Connecting two gigabit-capable devices via 4-wire UTP cable is an abomination,
 but sometimes we have to live with it (e.g. when a &lt;a href="https://nevalink.net/"&gt;greedy ISP&lt;/a&gt;
 decides to save a few cents and pulls a cheap cable to your apartment).&lt;/p&gt;
-&lt;p&gt;The fun starts when these devices try to negotiate Ethernet connection …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Connecting two gigabit-capable devices via 4-wire UTP cable is an abomination,
+&lt;p&gt;The fun starts when the devices try to negotiate Ethernet connection …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Connecting two gigabit-capable devices via 4-wire UTP cable is an abomination,
 but sometimes we have to live with it (e.g. when a &lt;a href="https://nevalink.net/"&gt;greedy ISP&lt;/a&gt;
 decides to save a few cents and pulls a cheap cable to your apartment).&lt;/p&gt;
-&lt;p&gt;The fun starts when these devices try to negotiate Ethernet connection speed.
+&lt;p&gt;The fun starts when the devices try to negotiate Ethernet connection speed.
 &lt;a href="https://en.wikipedia.org/wiki/Autonegotiation#Electrical_signals"&gt;Autonegotiation pulses&lt;/a&gt; are essentially 10BASE-T and use only 4 wires with no
 checking of cable category, even CAT3 is enough. So autonegotiation will
-"successfully" settle on 1Gbit though there is not enough physical conductors
-for it. The link will not work.&lt;/p&gt;
+"succeed" and will settle on 1Gbit since it's supported by both ends, even
+though there is not enough physical conductors for it. The link will not work.&lt;/p&gt;
 &lt;p&gt;To negotiate a working connection instead we need to remove 1Gbit from
 advertised link modes at least on one end. In Linux it should be rather
 straightforward with &lt;a href="https://manpages.debian.org/ethtool"&gt;ethtool&lt;/a&gt;:&lt;/p&gt;
@@ -17,12 +17,12 @@ straightforward with &lt;a href="https://manpages.debian.org/ethtool"&gt;ethtool
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;0x00f is a sum of hex values for all 10Mbit and 100Mbit modes
-(0x001 + 0x002 + 0x004 + 0x008) which does not include 1Gbit or anything
+(0x001 + 0x002 + 0x004 + 0x008), explicitly excluding 1Gbit and everything
 above that. Tweaking advertised link modes is better than forcing a particular
 connection speed (&lt;code&gt;ethtool -s $IFACE speed 100&lt;/code&gt;) because in absence of
 autonegotiation advertisement the other side may play it safe and switch
 to half-duplex.&lt;/p&gt;
-&lt;p&gt;That's the theory. In practise, hardware is difficult. Drivers for NICs are
+&lt;p&gt;That's the theory. In practise however, hardware is difficult. Drivers for NICs are
 tricky and sometimes incomplete. On D-Link DIR-825 changes made by ethtool
 command did not stick: after a short hiccup NIC would immediately return back
 to default settings, ignoring ethtool input completely.&lt;/p&gt;
