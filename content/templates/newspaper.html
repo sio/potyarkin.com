@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-<div id="content">
+<div class="content">
 {% set data = json("content/newspaper.json") %}
 {% set current = namespace(section=null, day=null) %}
   {% for item in data %}
