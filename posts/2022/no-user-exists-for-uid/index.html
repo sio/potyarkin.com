@@ -88,7 +88,8 @@ but no luck this time. It's straight in the <code>main()</code> function of ssh 
 no conditional branching whatsoever.</p>
 <p>I will be <a href="https://github.com/sio/microblog-server/blob/1468a8832805f8a72252473020085495d31efcb9/container/addpasswd.c">looking into generating</a> a bogus <code>/etc/passwd</code> entry on-the-fly prior
 to launching my application in container. I would very much like to avoid
-hardcoding the UID at build time.</p>
+hardcoding the UID at build time.
+<em>(<strong>UPD</strong>: proper workaround would be to use <a href="https://cwrap.org/nss_wrapper.html">libnss-wrapper</a> like <a href="https://github.com/docker-library/postgres/blob/623c00456eab020e203704232c9bd7703ed7ff34/docker-entrypoint.sh#L76-L82">postgres does</a>)</em></p>
 <p><em>Meanwhile, here is a punchline for you:</em></p>
 <p>When current UID is not in /etc/passwd OpenSSH client can not even print a
 usage message:</p>
