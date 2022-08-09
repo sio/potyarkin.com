@@ -8,6 +8,21 @@
 - period: 2022-07
   links:
 
+  - title: ToolJet - low code CRUD app builder
+    url: https://docs.tooljet.com/docs/
+    description: |-
+      ToolJet (AGPLv3) allows hand-crafting SQL queries and applying
+      Javascript transformations to process the data.
+      That's a nice feature many competitors are lacking.
+
+      I did not try ToolJet yet. Bookmarking to return to this later.
+
+      Also consider:
+
+      - [Baserow](https://baserow.io/) (MIT Expat + EULA for some components)
+      - [AppSmith](https://www.appsmith.com/) (Apache-2.0)
+      - [Budibase](https://budibase.com/) (GPLv3 mostly)
+
   - title: USB WiFi adapters in Linux
     url: https://github.com/morrownr/USB-WiFi/blob/main/home/USB_WiFi_Chipsets.md
     description: |-
