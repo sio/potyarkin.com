@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block content %}
+<div id="content">
 {% set data = json("content/newspaper.json") %}
 {% set current = namespace(section=null, day=null) %}
   {% for item in data %}
@@ -29,4 +30,5 @@
   </li>
   {% endfor %}
   </ul>
+</div>
 {% endblock content %}
