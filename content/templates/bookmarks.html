@@ -10,7 +10,11 @@
 {% set data = yaml("content/bookmarks.yml") %}
 <article class="full">
   {% for section in data %}{% if section.links %}
-  <h2>{{ section.period|strptime("%Y-%m")|strftime("%B %Y") }}</h2>
+  <h2 id="{{ section.period }}">
+    <a href="#{{ section.period }}">
+      {{ section.period|strptime("%Y-%m")|strftime("%B %Y") }}
+    </a>
+  </h2>
   <ul>
     {% for link in section.links %}
     <li>
