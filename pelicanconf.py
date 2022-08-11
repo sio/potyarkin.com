@@ -117,7 +117,7 @@ THEME = smallweb.path()
 THEME_TEMPLATES_OVERRIDES = ['content/templates/']
 DISPLAY_CATEGORIES_ON_MENU = False
 MENUITEMS = [(name.title(), url) for name, url in SOCIAL]
-MENUITEMS.append(('feed', '/feeds/'))
+MENUITEMS.append(('feeds', '/feeds/'))
 MENUITEMS.append(('bookmarks', '/bookmarks/'))
 SMALLWEB_HASHES = smallweb.hashes()
 SMALLWEB_COLORS = smallweb.colors()
