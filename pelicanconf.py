@@ -103,8 +103,10 @@ SOCIAL = [
 DEFAULT_PAGINATION = 10
 
 # Pelican plugins
+import helpers.linkfeed
 import microblog.pelican
 PLUGINS = [
+    helpers.linkfeed,
     microblog.pelican,
     'neighbors',
     ]
