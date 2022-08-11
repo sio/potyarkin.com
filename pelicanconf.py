@@ -146,3 +146,4 @@ JINJA_FILTERS = {
 # Microblog
 import microblog.storage
 MICROBLOG = microblog.storage.GitStorage('./micro/')
+MICROBLOG_FEED_ATOM = 'feeds/extra/microblog.atom.xml'
