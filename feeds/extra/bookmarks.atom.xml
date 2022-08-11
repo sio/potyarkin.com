@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - Bookmarks - Orange Sun</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/extra/bookmarks.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2022-08-01T00:00:00+00:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>July 2022</title><link href="https://potyarkin.ml/bookmarks/#2022-07" rel="alternate"></link><published>2022-08-01T00:00:00+00:00</published><updated>2022-08-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-08-01:/bookmarks//2022-07</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://github.com/morrownr/USB-WiFi/blob/main/home/USB_WiFi_Chipsets.md"&gt;USB WiFi adapters in Linux&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;To summarize: Drivers are a big problem.
+In-tree kernel support is even bigger problem.&lt;/p&gt;
+&lt;p&gt;2.4GHz recommendation seems to be Ralink rt5370,
+for 5GHz there are reports of success with mt7612u, mt7610u&lt;/p&gt;
+&lt;p&gt;Beware: mt7601u on Linux does not support AP mode&lt;/p&gt;
+&lt;p&gt;See also: &lt;a href="https://elinux.org/RPi_USB_Wi-Fi_Adapters"&gt;https://elinux.org/RPi_USB_Wi-Fi_Adapters&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://erock.io/2022/06/03/github-as-social-network.html"&gt;On github as a social network&lt;/a&gt;
+    by Eric Bower
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Why do I get so excited when I receive stars on my projects hosted on
+github? I am constantly trying to come up with new projects to build, but
+do I actually want to build them? Or do I just want social currency? I’m
+not sure I can tell the difference anymore.&lt;/p&gt;
+&lt;p&gt;Github isn’t just a code repository, it’s a social networking site.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://rosenzweig.io/blog/software-freedom-isnt-about-licenses-its-about-power.html"&gt;Software freedom isn’t about licenses – it’s about power&lt;/a&gt;
+    by Alyssa Rosenzweig
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Licensing does matter; user autonomy is lost with subscription models,
+revocable licenses, binary-only software, and onerous legal clauses. Yet
+these issues pertinent to desktop software do not scratch the surface of
+today’s digital power dynamics.&lt;/p&gt;
+&lt;p&gt;Today, companies exert power over their users by tracking, selling data,
+psychological manipulation, intrusive advertising, planned obsolescence,
+and hostile Digital “Rights” Management (DRM) software. These issues
+affect every digital user, technically inclined or otherwise, on desktops
+and smartphones alike.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>June 2022</title><link href="https://potyarkin.ml/bookmarks/#2022-06" rel="alternate"></link><published>2022-07-01T00:00:00+00:00</published><updated>2022-07-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-07-01:/bookmarks//2022-06</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://mkorostoff.github.io/incarceration-in-real-numbers/"&gt;Incarceration in Real Numbers&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;An infographic showing just how disproportional incarceration is in the USA.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://news.ycombinator.com/item?id=31880345"&gt;"Idle chitchat" vs "smalltalk"&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;It took me probably 7 years after moving out of my parent’s place to
+learn that “smalltalk” and “idle chitchat” are not necessarily the same
+thing [...]&lt;/p&gt;
+&lt;p&gt;In my taxonomy, “idle chitchat” is talking about things. “Smalltalk” is
+learning about each other. “The weather sure is nice today, isn’t it?” =&amp;gt;
+idle chitchat. You’re not likely to understand a person from that
+starting point, except that “wow look, we both like the sun”. “Where are
+you from? What brings you here?” =&amp;gt; smalltalk. You’re encouraging the
+person to reveal some small amounts of information about themselves which
+you can use to probe further and hopefully find something fascinating [...]&lt;/p&gt;
+&lt;p&gt;Now I take conversations with strangers (or anyone really) as a sport, as
+a challenge. “How can I use these precious moments we strangers share to
+discover something new? To leave one of us pondering something novel
+later in the evening” [...]&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;A comment from &lt;a href="https://news.ycombinator.com/item?id=31859072"&gt;Hacker News thread&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://pure.mpg.de/rest/items/item_3390006_1/component/file_3390007/content"&gt;13 Propositions on an Internet for a “Burning World”&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;However, up until then, we live in a burning world, i.e., one evaporating
+under the human-made climate emergency and countless other shifts we find
+ourselves in at the moment. The Internet of today will certainly neither
+be sustainable nor resilient in the future we are heading towards.&lt;/p&gt;
+&lt;p&gt;Tobias Fiebig and Doris Aschenbrenner wrote down these
+thoughts in a paper in the form of “13 propositions”, which will appear
+in the proceedings of the joint workshops on “Technologies, Applications,
+and Uses of a Responsible Internet” and “Building Greener Internet”.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Also published in a series of
+&lt;a href="https://doing-stupid-things.as59645.net/burning/world/resillience/2022/06/27/propositions-part-1.html"&gt;blog posts&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://felix.plesoianu.ro/web/in-the-small.html"&gt;Notes on the small web&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;There still exists a web like the one I browsed when I was a teenager.
+It's just not as visible anymore with all the loud giants grabbing most
+of attention first.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>May 2022</title><link href="https://potyarkin.ml/bookmarks/#2022-05" rel="alternate"></link><published>2022-06-01T00:00:00+00:00</published><updated>2022-06-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-06-01:/bookmarks//2022-05</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://search.marginalia.nu/"&gt;Marginalia Search&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Remember when you used to explore the Internet, when you used to discover
+cool little websites made by people and it wasn't just a bunch of low
+effort content mill listicles and blog spam? I want to show you that the
+Internet you used to go exploring is still very much there. There are
+still tons of small personal websites, and a wealth of long form text
+from both the past and the present. So it's a search engine. It's perhaps
+not the greatest at finding what you already knew was there. Instead it
+is designed to help you find some things you didn't even know you were
+looking for.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://beej.us/guide/bgipc/html/multi/index.html"&gt;Beej's Guide to Unix IPC&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;These documents are meant to springboard the aforementioned user into the
+realm of IPC by delivering a concise overview of various IPC techniques.
+This is not the definitive set of documents that cover this subject, by
+any means.  Like I said, it is designed to simply give you a foothold in
+this, the exciting world of IPC.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://bugs.chromium.org/p/chromium/issues/detail?id=1251355"&gt;Google Chrome loses all saved passwords on Linux&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;A bug from 2021 that affects about 5% of Linux Chrome installations.
+Password sync errors out when it encounters just one mangled row in SQLite
+database. Check if you're affected by this error: &lt;code&gt;chrome://sync-internals/&lt;/code&gt;
+(look for red/green row for 'Passwords' on the right side of screen),
+workaround: enable &lt;code&gt;chrome://flags/#clean-undecryptable-passwords&lt;/code&gt;, then
+toggle sync off/on.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://www.smbc-comics.com/covid/files/miniSciWebv6.pdf"&gt;Science Abridged Beyond the Point of Usefulness&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Aristotle said a bunch of stuff that was wrong. Galileo and Newton fixed
+things up. Then Einstein broke everything again. Now, we’ve basically got it
+all worked out, except for small stuff, big stuff, hot stuff, cold stuff,
+fast stuff, heavy stuff, dark stuff, turbulence, and the concept of time.
+&lt;em&gt;(The book is licensed under CC-BY-NC-3.0)&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://github.com/cirros-dev/cirros"&gt;Cirros Linux&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;em&gt;(Via &lt;a href="https://docs.openstack.org/image-guide/obtain-images.html"&gt;OpenStack images&lt;/a&gt;)&lt;/em&gt; -
+A minimal Linux distribution that was designed for use as a test image on
+clouds such as OpenStack Compute. Comes with cloud-init out of the box and
+supports insecure login by default (user: &lt;code&gt;cirros&lt;/code&gt;, password: &lt;code&gt;gocubsgo&lt;/code&gt;)&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>April 2022</title><link href="https://potyarkin.ml/bookmarks/#2022-04" rel="alternate"></link><published>2022-05-01T00:00:00+00:00</published><updated>2022-05-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-05-01:/bookmarks//2022-04</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://jonathanalland.com/caroline.html"&gt;Caroline&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;A short story about friendship, imagination and growing up. Well written. Sad.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>February 2022</title><link href="https://potyarkin.ml/bookmarks/#2022-02" rel="alternate"></link><published>2022-03-01T00:00:00+00:00</published><updated>2022-03-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-03-01:/bookmarks//2022-02</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="http://ratfactor.com/notes"&gt;Dave Gauer's Notebook System&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Looking back at ten years of logging each day into paper notebooks,
+transcribed into text files later (with vim plugins and shell scripts for
+automation)&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>January 2022</title><link href="https://potyarkin.ml/bookmarks/#2022-01" rel="alternate"></link><published>2022-02-01T00:00:00+00:00</published><updated>2022-02-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-02-01:/bookmarks//2022-01</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://grep.be/blog/en/computer/debian/Announcing_extrepo/"&gt;Extrepo&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Manage Debian external repositories in a safe manner. Google Chrome and
+GitLab runner are already added into &lt;a href="https://salsa.debian.org/extrepo-team/extrepo-data"&gt;repository database&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://star-history.com/#sio/Makefile.venv&amp;sio/LibPQ&amp;sio/bash-complete-partial-path&amp;Date"&gt;GitHub stars history for my
+  projects&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://bbenchoff.github.io/pages/LinuxDevice.html"&gt;A Minimum Viable Computer, or Linux for $15&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;A single developer designs and builds a cheap Linux handheld computer
+(Allwinner F1C100s, 533MHz, 32-64MB DDR, Buildroot)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://www.waveform.com/tools/bufferbloat"&gt;Bufferbloat Test&lt;/a&gt;
+    by Waveform
+    &lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://en.wikipedia.org/wiki/Constraint_programming"&gt;Constraint Programming&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;A concept that might be useful for some programming projects. There are
+several known algorithms with good opensource implementations, no need to
+attempt to solve this alone.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>November 2021</title><link href="https://potyarkin.ml/bookmarks/#2021-11" rel="alternate"></link><published>2021-12-01T00:00:00+00:00</published><updated>2021-12-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2021-12-01:/bookmarks//2021-11</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://hippocampusmagazine.com/2021/11/the-gradual-extinction-of-softness-by-chantha-nguon-with-kim-green/"&gt;The Gradual Extinction of Softness&lt;/a&gt;
+    by Chantha Nguon with Kim Green
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;An essay about first hand experience of
+Kambodian revolution (Khmer Rouge) and fleeing to Saigon. Going from a
+middle class 9-year old girl to a woman in a refugee camp to a founder of
+Women's Development Centre back in Cambodia.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://0x08.in/"&gt;b4cksp4ce&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;A hackspace in St. Petersburg&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://www.audubon.org/news/these-mighty-shorebirds-keep-breaking-flight-records-and-you-can-follow-along"&gt;Bird flew from Alaska to Australia non-stop, 8,100 miles in 239 hours&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Amazing that our state of the art technology is a fragile device that can
+fly for 30 minutes, while this ancient entity can fly nonstop, deriving
+energy from bugs and water, fly through storms, self repair any damage, has
+self navigation and local avoidance, and even can self replicate
+&lt;a href="https://news.ycombinator.com/item?id=29225729"&gt;(more comments)&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://drewdevault.com/2021/11/24/A-philosophy-for-instant-messaging.html"&gt;A philosophy for productive instant messaging&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;An approach to instant messaging I agree with. Will probably link to this if
+topics comes up&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>October 2021</title><link href="https://potyarkin.ml/bookmarks/#2021-10" rel="alternate"></link><published>2021-11-01T00:00:00+00:00</published><updated>2021-11-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2021-11-01:/bookmarks//2021-10</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://blog.lasseter.org/posts/2020/07/terminal-server-on-a-budget/"&gt;Terminal Server on a Budget&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Using &lt;code&gt;conserver&lt;/code&gt; for out-of-band (OOB) management of whitebox servers via
+serial console. See also:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.conserver.com/"&gt;Conserver&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.conserver.com/consoles/"&gt;Zonker's Greater Scroll of Console Knowledge&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://blog.zugschlus.de/archives/707-Serial-Console-Server-for-the-Poor-I.html"&gt;Serial Console Server for the Poor&lt;/a&gt; -
+    udev rules&lt;/li&gt;
+&lt;li&gt;Using serial for out-of-band access and OS reinstallation:
+    &lt;a href="https://adventurist.me/posts/00308"&gt;FreeBSD/Ubuntu&lt;/a&gt;,
+    &lt;a href="https://adventurist.me/posts/00307"&gt;dualboot&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>September 2021</title><link href="https://potyarkin.ml/bookmarks/#2021-09" rel="alternate"></link><published>2021-10-01T00:00:00+00:00</published><updated>2021-10-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2021-10-01:/bookmarks//2021-09</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://goteleport.com/"&gt;Teleport Access Plane&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Certificate authority and access plane for SSH, kubernetes, web apps etc.
+Issues short-lived certificates after web based authentication. Supports
+session recording, access requests, live session view&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>August 2021</title><link href="https://potyarkin.ml/bookmarks/#2021-08" rel="alternate"></link><published>2021-09-01T00:00:00+00:00</published><updated>2021-09-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2021-09-01:/bookmarks//2021-08</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://www.display-solution.com/en/lcd-panel-control-boards/hdmi-dp-lcd-tft-scaler-board/"&gt;LCD Scaler Board&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Turn any laptop screen into a proper monitor with a simple cheap board.
+Inputs: DC power, HDMI/VGA signal. Outputs: LVDS, backlight.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>July 2021</title><link href="https://potyarkin.ml/bookmarks/#2021-07" rel="alternate"></link><published>2021-08-01T00:00:00+00:00</published><updated>2021-08-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2021-08-01:/bookmarks//2021-07</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://docs.broadcom.com/doc/12355769"&gt;SAS2Flash Utility&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Quick reference guide for flashing LSI SAS controllers (SAS 2008, SAS 2308)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://documentation.suse.com/sles/15-SP1/pdf/article-vt-best-practices_color_en.pdf"&gt;Virtualization Best Practices&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;A guide from SUSE documentation. Good explanations of Kernel Samepage
+Merging (KSM), memballoon, hugepages plus sane checklists for Windows guest
+configuration.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://tldp.org/HOWTO/Adv-Routing-HOWTO/lartc.rpdb.multiple-links.html"&gt;Linux routing for multiple uplinks/providers&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;A straightforward explanation of dual WAN setup on a Linux router&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://www.kalzumeus.com/2012/01/23/salary-negotiation/"&gt;Salary Negotiation: Make More Money, Be More Valued&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>June 2021</title><link href="https://potyarkin.ml/bookmarks/#2021-06" rel="alternate"></link><published>2021-07-01T00:00:00+00:00</published><updated>2021-07-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2021-07-01:/bookmarks//2021-06</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://docs.microsoft.com/en-us/azure/virtual-machines/acu"&gt;Which Azure VMs support nested virtualization&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Check this list for instances marked with &lt;code&gt;***&lt;/code&gt; to indicate support for
+nested virtualization. Best fit for my purposes are &lt;code&gt;E4ds_v4&lt;/code&gt;, &lt;code&gt;D4ds_v4&lt;/code&gt;, &lt;code&gt;E4s_v3&lt;/code&gt;
+(D4 means general purpose with 4 vCPU, E4 offers extended memory with 4vCPU)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://www.reddit.com/r/homelab/comments/nyus92"&gt;Inserting cage nuts in server rack without a tool&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Use two screwdrivers to save your fingers even if you don't have the special tool&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://techoverflow.net/2019/02/23/how-to-run-x-server-using-xserver-xorg-video-dummy-driver-on-ubuntu/"&gt;How to run X server using xserver-xorg-video-dummy driver&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Sometimes you need to use X server on a machine without a video card. Dummy
+driver helps in such cases&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>April 2021</title><link href="https://potyarkin.ml/bookmarks/#2021-04" rel="alternate"></link><published>2021-05-01T00:00:00+00:00</published><updated>2021-05-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2021-05-01:/bookmarks//2021-04</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://gregoryszorc.com/blog/2021/04/06/surprisingly-slow/"&gt;Surprisingly Slow&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;A writeup on possible performance bottlenecks with modern computing:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Automated environment detection&lt;/li&gt;
+&lt;li&gt;New process overhead&lt;/li&gt;
+&lt;li&gt;Closing file handles on Windows&lt;/li&gt;
+&lt;li&gt;Writing to Terminals&lt;/li&gt;
+&lt;li&gt;Thermal throttling / ACPI C-state, P-state&lt;/li&gt;
+&lt;li&gt;Interpreter overhead&lt;/li&gt;
+&lt;li&gt;Storage I/O&lt;/li&gt;
+&lt;li&gt;Unnecessary compression (zlib vs zstandard vs no compression)&lt;/li&gt;
+&lt;li&gt;Old baseline for x86_64 binaries&lt;/li&gt;
+&lt;li&gt;Inefficiend diff implementations (sometimes lower algorithm complexity
+    does not result in faster runtimes)&lt;/li&gt;
+&lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="http://wiki.c2.com/?WhyIsPayrollHard"&gt;Why Is Payroll Hard&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;A real world description of why business logic is almost never algorithmic&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>March 2021</title><link href="https://potyarkin.ml/bookmarks/#2021-03" rel="alternate"></link><published>2021-04-01T00:00:00+00:00</published><updated>2021-04-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2021-04-01:/bookmarks//2021-03</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://mkorostoff.github.io/1-pixel-wealth/"&gt;Wealth shown to scale&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;A comparison infografic with 1px = $1000 showing the scale of Jeff Bezo's
+fortune and that of top 400 Americans.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://darrylcauldwell.github.io/post/homelab-pi/#finished-rack"&gt;Raspberry Pi Cluster&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Laser cut aluminium case for RasPi cluster&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>February 2021</title><link href="https://potyarkin.ml/bookmarks/#2021-02" rel="alternate"></link><published>2021-03-01T00:00:00+00:00</published><updated>2021-03-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2021-03-01:/bookmarks//2021-02</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://rmurphey.medium.com/girl-computer-31ecd328bc53"&gt;Girl &amp; Computer&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;A woman reminiscing about all the events leading to her working full time as
+a programmer, starting with her parents buying a computer in 1982, when she
+was a 5 year girl.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://blog.danslimmon.com/2019/07/15/do-nothing-scripting-the-key-to-gradual-automation/"&gt;Do-nothing scripting: the key to gradual automation&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;A good idea on gradual introduction on automation into
+checklist/runbook-style workflows&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://arxiv.org/pdf/2008.06030.pdf"&gt;On the design on text editors&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;A short research paper that highlights numerous possibilities of
+text/code editor improvement with modern technology.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>November 2020</title><link href="https://potyarkin.ml/bookmarks/#2020-11" rel="alternate"></link><published>2020-12-01T00:00:00+00:00</published><updated>2020-12-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-12-01:/bookmarks//2020-11</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://javierguillen.wordpress.com/2012/02/06/can-earlier-be-used-in-dax-measures/"&gt;Can EARLIER be used in DAX measures?&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;A workaround to create a row context when calculating DAX measures.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>October 2020</title><link href="https://potyarkin.ml/bookmarks/#2020-10" rel="alternate"></link><published>2020-11-01T00:00:00+00:00</published><updated>2020-11-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-11-01:/bookmarks//2020-10</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://0xc45.com/blog/openbsd-home-router/"&gt;OpenBSD Home Router&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;A guide to building a home router from scratch: firewall, dhcp, dns&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://riscj.dev/projects/rpirack/posts/01.html"&gt;PXE booting a Raspberry Pi 4&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Hand-on guide to setting up PXE boot for multiple clients&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>August 2020</title><link href="https://potyarkin.ml/bookmarks/#2020-08" rel="alternate"></link><published>2020-09-01T00:00:00+00:00</published><updated>2020-09-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-09-01:/bookmarks//2020-08</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://www.reddit.com/r/homelab/comments/iel5gz/"&gt;What to do with a lot of on-prem compute?&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;A group of people bought several thousand dollars worth of compute equipment
+and just now are thinking about how to create a profitable business out of it.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://github.com/TimeToogo/tunshell"&gt;Tunshell&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Easy remote shell for inaccessible hosts (e.g. double-NATed)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://www.ventoy.net/"&gt;Ventoy&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Boot multiple live ISOs from a single USB drive&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>July 2020</title><link href="https://potyarkin.ml/bookmarks/#2020-07" rel="alternate"></link><published>2020-08-01T00:00:00+00:00</published><updated>2020-08-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-08-01:/bookmarks//2020-07</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://mtlynch.io/tinypilot/"&gt;TinyPilot: Build a KVM Over IP for Under $100&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Use Raspberry Pi to emulate mouse/keyboard via USB OTG port and to capture
+and broadcast video signal with HDMI-USB dongle.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://history.army.mil/catalog/browse/title.html"&gt;Declassified writings of German generals written for training of US military
+immediately after World War II&lt;/a&gt;
+    by Center for Military History
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;ul&gt;
+&lt;li&gt;&lt;a href="https://history.army.mil/html/books/104/104-24/index.html"&gt;Warfare in the Far North&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://history.army.mil/catalog/pubs/104/104-1.html"&gt;Military Improvisations in the Russian Campaign&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://history.army.mil/html/books/104/104-6/index.html"&gt;Effects of Climate on Combat in European Russia&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://en.wikipedia.org/wiki/Myth_of_the_clean_Wehrmacht"&gt;Myth of the clean Wehrmacht&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>June 2020</title><link href="https://potyarkin.ml/bookmarks/#2020-06" rel="alternate"></link><published>2020-07-01T00:00:00+00:00</published><updated>2020-07-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-07-01:/bookmarks//2020-06</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="http://myowndevice.ru/index.php/theory/item/12-delaem-pechatnuyu-platu"&gt;Изготовление печатной платы с холодным переносом тонера&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Перенос тонера с помощью ацетона (1 часть ацетона, 2 части жидкости для
+снятия лака без ацетона), травление перекисью водорода и лимонной кислотой.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>May 2020</title><link href="https://potyarkin.ml/bookmarks/#2020-05" rel="alternate"></link><published>2020-06-01T00:00:00+00:00</published><updated>2020-06-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-06-01:/bookmarks//2020-05</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://github.com/alegrey91/systemd-service-hardening"&gt;Systemd service hardening&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;A short guide on how to use &lt;code&gt;systemd-analyze security&lt;/code&gt; and how to harden
+your systemd units&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://blog.darknedgy.net/technology/2020/05/02/0/"&gt;Systemd, 10 years later&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;A large essay on the history and internals of systemd&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>April 2020</title><link href="https://potyarkin.ml/bookmarks/#2020-04" rel="alternate"></link><published>2020-05-01T00:00:00+00:00</published><updated>2020-05-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-05-01:/bookmarks//2020-04</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://blog.wikichoon.com/2014/07/enabling-hyper-v-enlightenments-with-kvm.html"&gt;Enabling Hyper-V enlightenments with KVM&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;KVM offers some special features that make Windows guests run faster. See
+also: &lt;a href="https://bugzilla.redhat.com/show_bug.cgi?id=1610461"&gt;synic, stimer&lt;/a&gt;,
+&lt;a href="https://www.reddit.com/r/VFIO/comments/80p1q7"&gt;hpet, hypervclock&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://nullprogram.com/blog/2019/03/22/"&gt;Endlessh: an SSH Tarpit&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Delay incoming SSH connections for weeks to trap attacker's resources.
+Implemented in C with a proof of concept draft in asynchronous Python.
+Also features a draft of HTTP tarpit.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>March 2020</title><link href="https://potyarkin.ml/bookmarks/#2020-03" rel="alternate"></link><published>2020-04-01T00:00:00+00:00</published><updated>2020-04-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-04-01:/bookmarks//2020-03</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://fasterthanli.me/blog/2020/a-half-hour-to-learn-rust/"&gt;A half-hour to learn Rust&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;An introduction to Rust that is enough to read and understand the code you
+see online&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://www.parkytowers.me.uk/thin/"&gt;Thin Clients Hardware database (ParkyTowers)&lt;/a&gt;
+    by David Parkinson
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;A thorough database of thin client hardware, with detailed photos of
+internal layout, description of extension capabilities and Linux support&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>February 2020</title><link href="https://potyarkin.ml/bookmarks/#2020-02" rel="alternate"></link><published>2020-03-01T00:00:00+00:00</published><updated>2020-03-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-03-01:/bookmarks//2020-02</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://www.bitlog.com/2020/02/12/why-are-we-so-bad-at-software-engineering/"&gt;Why are we so bad at software engineering?&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Our industry’s mindset grew in an environment where failure is cheap and we
+are incentivized to move quickly. Our processes are poorly applied when the
+cost of a redo is high or a redo is impossible.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem/amp/"&gt;Docker and the PID 1 zombie reaping problem&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;A good explanation of why PID 1 has extra responsibilities (cleaning up adopted
+defunct processes), plus a working example of simple init process written in
+Python&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="http://0pointer.de/blog/projects/systemd.html"&gt;Rethinking PID 1&lt;/a&gt;
+    by Lennart Poettering
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;The article that started systemd era&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://www.jeffgeerling.com/blog/2018/testing-your-ansible-roles-molecule"&gt;Testing your Ansible roles with Molecule&lt;/a&gt;
+    by Jeff Geerling
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Overview of automated testing for Ansible roles&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://univers-libre.net/posts/ansible-molecule-gitlab-ci.html"&gt;Using molecule with GitLab CI&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Hands-on example of implementing Molecule tests in GitLab CI&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://blog.codecentric.de/en/2018/12/continuous-infrastructure-ansible-molecule-travisci/"&gt;Continuous Infrastructure with Ansible, Molecule &amp; TravisCI&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;A three-part series of blog posts on Molecule: scenarios, drivers, linters.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>January 2020</title><link href="https://potyarkin.ml/bookmarks/#2020-01" rel="alternate"></link><published>2020-02-01T00:00:00+00:00</published><updated>2020-02-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-02-01:/bookmarks//2020-01</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://drewdevault.com/2020/01/17/Effective-project-governance.html"&gt;A philosophy of project governance&lt;/a&gt;
+    by Drew DeVault
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Reflections on software projects being intrinsically social systems that can
+not be programmed. Good arguments on why Code of Conduct must not be
+elevated to the position of highest authority.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>November 2019</title><link href="https://potyarkin.ml/bookmarks/#2019-11" rel="alternate"></link><published>2019-12-01T00:00:00+00:00</published><updated>2019-12-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2019-12-01:/bookmarks//2019-11</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://en.wikipedia.org/wiki/Rate_limiting"&gt;Rate limiting algorithms&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Multiple approaches to implementing rate limits in your code.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://en.wikipedia.org/wiki/Token_bucket"&gt;Token bucket&lt;/a&gt;, also: in use with Python
+    &lt;a href="https://quentin.pradet.me/blog/how-do-you-rate-limit-calls-with-aiohttp.html"&gt;aiohttp&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://en.wikipedia.org/wiki/Leaky_bucket"&gt;Leaky bucket&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Fixed window counter&lt;/li&gt;
+&lt;li&gt;Sliding window log&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://medium.com/figma-design/an-alternative-approach-to-rate-limiting-f8a06cf7c94c"&gt;Sliding window counter&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>October 2019</title><link href="https://potyarkin.ml/bookmarks/#2019-10" rel="alternate"></link><published>2019-11-01T00:00:00+00:00</published><updated>2019-11-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2019-11-01:/bookmarks//2019-10</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://www.idontplaydarts.com/2016/04/detecting-curl-pipe-bash-server-side/"&gt;Detecting the use of "curl | bash" server side&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Piping curl to shell may be detected via HTTP fetching delays even if User
+Agent is masked. Requires lots of null-byte padding though.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="http://kroah.com/log/blog/2019/08/14/patch-workflow-with-mutt-2019/"&gt;Patch workflow with Mutt&lt;/a&gt;
+    by Greg Kroah-Hartman
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Detailed description of email based kernel dev
+workflow. Notable references:
+&lt;a href="http://isync.sourceforge.net/"&gt;isync/mbsync&lt;/a&gt;,
+&lt;a href="https://aerc-mail.org/"&gt;aerc&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://www.google.com/get/noto/#emoji-zsye-color"&gt;Noto Color Emoji Font&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Add this to &lt;code&gt;~/.fonts&lt;/code&gt; to enable emoji rendering in Debian 9. Available in
+Debian repos for Buster+ (10+)&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>August 2019</title><link href="https://potyarkin.ml/bookmarks/#2019-08" rel="alternate"></link><published>2019-09-01T00:00:00+00:00</published><updated>2019-09-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2019-09-01:/bookmarks//2019-08</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="http://www.art.net/%7Ehopkins/Don/unix-haters/tirix/embarrassing-memo.html"&gt;Software Usability II, Tom Davis&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Internal SGI memo (1993) regarding performance issues in their latest
+release. The problems highlighted there are not unique to that company or
+that time period, they frequently appear in all large software development
+projects nowadays. &lt;em&gt;This article is part of Unix Haters Handbook&lt;/em&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://hynek.me/articles/testing-packaging/"&gt;Packaging Python projects&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Turns out there is a technical reason for putting Python code under &lt;code&gt;src/&lt;/code&gt;
+directory in your repo. It makes easier to spot errors in &lt;code&gt;setup.cfg&lt;/code&gt; and
+&lt;code&gt;MANIFEST.in&lt;/code&gt;.
+See also:
+&lt;a href="https://blog.ionelmc.ro/2014/05/25/python-packaging/#the-structure"&gt;Packaging a Python library&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://queue.acm.org/detail.cfm?id=3212479"&gt;C Is Not a Low-level Language&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;C was a good low-level abstraction in the era of PDP-11 but it is less so
+now. Parallel programming should not be hard, future hardware could make it
+better by dropping some C compatibility.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>July 2019</title><link href="https://potyarkin.ml/bookmarks/#2019-07" rel="alternate"></link><published>2019-08-01T00:00:00+00:00</published><updated>2019-08-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2019-08-01:/bookmarks//2019-07</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://matklad.github.io/2019/05/19/consider-using-asciidoctor-for-your-next-presentation.html"&gt;Consider Using Asciidoctor for Your Next Presentation&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Asciidoc is a nice format to write documentation, this is what it can do for
+presentations.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="http://nifty.stanford.edu/"&gt;Nifty Assignments&lt;/a&gt;
+    by Stanford University
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;A collection of unusual
+and interesting assignments for learning programming&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://blackhole12.com/blog/risc-is-fundamentally-unscalable/"&gt;RISC Is Fundamentally Unscalable&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Overview of upcoming issues in microprocessor design when current scaling
+techniques will stop working. Wow moment: the speed of light is now a
+limiting factor when designing CPUs. Includes some hints that VLIW
+architecture might be the future (see: Intel Itanium project)&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>June 2019</title><link href="https://potyarkin.ml/bookmarks/#2019-06" rel="alternate"></link><published>2019-07-01T00:00:00+00:00</published><updated>2019-07-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2019-07-01:/bookmarks//2019-06</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://habr.com/ru/post/453596/"&gt;Мошенники и ЭЦП&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Использование поддельной электронно-цифровой подписи для мошенничества
+(создание юридических лиц, сделки с недвижимостью)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://bigthink.com/politics-current-affairs/a-belief-in-meritocracy-is-not-only-false-its-bad-for-you"&gt;A belief in meritocracy is not only false: it’s bad for you&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry></feed>
