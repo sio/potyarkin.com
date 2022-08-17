@@ -8,6 +8,14 @@
 - period: 2022-08
   links:
 
+  - title: How NAT traversal works
+    url: https://tailscale.com/blog/how-nat-traversal-works/
+    by: Tailscale
+    description: |-
+      A systematic review of firewall hole punching (with and without NAT
+      and/or CGNAT in between). Tailscale uses that to build their VPN mesh but
+      the article is applicable to any P2P communication over UDP.
+
   - title: ToolJet - low code CRUD app builder
     url: https://docs.tooljet.com/docs/
     description: |-
