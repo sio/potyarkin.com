@@ -117,7 +117,7 @@
   blogs:
     - title: Solène Rapenne
       url: https://dataswamp.org/~solene/
-      feed: https://dataswamp.org/~solene/rss.xml
+      feed: https://dataswamp.org/~solene/rss-html.xml
       description: |-
         OpenBSD developer solene@. Also some posts on NixOS, reproducible builds,
         game engines...
