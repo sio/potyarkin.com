@@ -8,6 +8,15 @@
 - period: 2022-08
   links:
 
+  - title: Contributor-mainainter-project fallacy
+    url: https://www.reddit.com/r/opensource/comments/wxozko/comment/ilslpdb/
+    description: |-
+      That's where the contributor-maintainer-project rhetoric comes in.
+      Calling the key people in this scenario (you, and that other person who
+      is using your code) "maintainer" and "contributor", and the software you
+      wrote a "project", is highly suggestive; it implies a few things that,
+      while not true, create big expectations
+
   - title: How NAT traversal works
     url: https://tailscale.com/blog/how-nat-traversal-works/
     by: Tailscale
