@@ -8,6 +8,24 @@
 - period: 2022-08
   links:
 
+  - title: DuckCorp - a non-profit Magical Organization
+    url: https://users.duckcorp.org/index.php/A_bit_of_History
+    description: |-
+      I always admire (and envy) friend groups which set out to build something
+      and then _actually_ build something. DuckCorp is an endearing example of such.
+      Started at a student dorm and still alive and evolving 20+ years later,
+      they run some IT infrastructure and provide software and services to members.
+
+  - title: Johnny.Decimal system
+    url: https://johnnydecimal.com/
+    description: |-
+      A personal system for information/knowledge/data classification and
+      management. Applicable to file system hierarchy, emails, note taking apps
+      and even to IRC logs.
+
+      I doubt I'll ever implement something like this for myself, but it never
+      hurts to have an option.
+
   - title: Contributor-mainainter-project fallacy
     url: https://www.reddit.com/r/opensource/comments/wxozko/comment/ilslpdb/
     description: |-
