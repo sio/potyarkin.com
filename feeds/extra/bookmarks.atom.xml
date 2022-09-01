@@ -1,5 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - Bookmarks - Orange Sun</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/extra/bookmarks.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2022-08-01T00:00:00+00:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>July 2022</title><link href="https://potyarkin.ml/bookmarks/#2022-07" rel="alternate"></link><published>2022-08-01T00:00:00+00:00</published><updated>2022-08-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-08-01:/bookmarks//2022-07</id><content type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - Bookmarks - Orange Sun</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/extra/bookmarks.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2022-09-01T00:00:00+00:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>August 2022</title><link href="https://potyarkin.ml/bookmarks/#2022-08" rel="alternate"></link><published>2022-09-01T00:00:00+00:00</published><updated>2022-09-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-09-01:/bookmarks//2022-08</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://users.duckcorp.org/index.php/A_bit_of_History"&gt;DuckCorp - a non-profit Magical Organization&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;I always admire (and envy) friend groups which set out to build something
+and then &lt;em&gt;actually&lt;/em&gt; build something. DuckCorp is an endearing example of such.
+Started at a student dorm and still alive and evolving 20+ years later,
+they run some IT infrastructure and provide software and services to members.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://johnnydecimal.com/"&gt;Johnny.Decimal system&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;A personal system for information/knowledge/data classification and
+management. Applicable to file system hierarchy, emails, note taking apps
+and even to IRC logs.&lt;/p&gt;
+&lt;p&gt;I doubt I'll ever implement something like this for myself, but it never
+hurts to have an option.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://www.reddit.com/r/opensource/comments/wxozko/comment/ilslpdb/"&gt;Contributor-mainainter-project fallacy&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;That's where the contributor-maintainer-project rhetoric comes in.
+Calling the key people in this scenario (you, and that other person who
+is using your code) "maintainer" and "contributor", and the software you
+wrote a "project", is highly suggestive; it implies a few things that,
+while not true, create big expectations&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://tailscale.com/blog/how-nat-traversal-works/"&gt;How NAT traversal works&lt;/a&gt;
+    by Tailscale
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;A systematic review of firewall hole punching (with and without NAT
+and/or CGNAT in between). Tailscale uses that to build their VPN mesh but
+the article is applicable to any P2P communication over UDP.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://docs.tooljet.com/docs/"&gt;ToolJet - low code CRUD app builder&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;ToolJet (AGPLv3) allows hand-crafting SQL queries and applying
+Javascript transformations to process the data.
+That's a nice feature many competitors are lacking.&lt;/p&gt;
+&lt;p&gt;I did not try ToolJet yet. Bookmarking to return to this later.&lt;/p&gt;
+&lt;p&gt;Also consider:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://baserow.io/"&gt;Baserow&lt;/a&gt; (MIT Expat + EULA for some components)&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.appsmith.com/"&gt;AppSmith&lt;/a&gt; (Apache-2.0)&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://budibase.com/"&gt;Budibase&lt;/a&gt; (GPLv3 mostly)&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/lowdefy/lowdefy"&gt;Lowdefy&lt;/a&gt; (Apache-2.0)&lt;/li&gt;
+&lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>July 2022</title><link href="https://potyarkin.ml/bookmarks/#2022-07" rel="alternate"></link><published>2022-08-01T00:00:00+00:00</published><updated>2022-08-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-08-01:/bookmarks//2022-07</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
