@@ -5,6 +5,22 @@
 # data format is not guaranteed to remain stable over time
 #
 
+- period: 2022-09
+  links:
+
+  - title: Immutable Linux OS with a hermetic /usr partition
+    url: https://0pointer.net/blog/fitting-everything-together.html
+    by: Lennart Poettering
+    description: |-
+      Thoughts on how to build an immutable Linux OS with automated A/B rootfs
+      image upgrades.
+
+      Notable mentions:
+
+      - [mkosi](https://0pointer.net/blog/mkosi-a-tool-for-generating-os-images.html)
+      - [systemd-nspawn](https://www.freedesktop.org/software/systemd/man/systemd-nspawn.html)
+
+
 - period: 2022-08
   links:
 
