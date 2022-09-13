@@ -161,7 +161,11 @@ def find_feeds(url):
 def feedlinks(url):
     '''Return links to RSS/Atom feeds from a web page URL'''
     http = dict()
-    page = http_get(url, result=http)
+    try:
+        page = http_get(url, result=http)
+    except Exception as exc:
+        log.error('%s while fetching %s', exc, url)
+        return list()
     urlparts = urlparse(url)
     parser = FeedLinkParser()
     try:
