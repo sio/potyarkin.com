@@ -144,7 +144,8 @@ def feedlinks(url):
         if link.startswith('/'):  # absolute links
             feeds.add(f'{urlparts.scheme}://{urlparts.netloc}{link}')
         elif '://' not in link:   # relative links
-            feeds.add(f'{urlparts.scheme}://{urlparts.netloc}{urlparts.path}/{link}')
+            path = urlparts.path.rstrip('/')
+            feeds.add(f'{urlparts.scheme}://{urlparts.netloc}{path}/{link}')
         else:
             feeds.add(link)
     return list(feeds)
