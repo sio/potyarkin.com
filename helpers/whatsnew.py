@@ -23,6 +23,7 @@ log = logging.getLogger(__name__)
 NOISY_FEED_DOMAINS = {
     'bigthink.com',
     'en.wikipedia.org',
+    'habr.com',
     'news.ycombinator.com',
     'pure.mpg.de',
     'queue.acm.org',
@@ -35,7 +36,7 @@ NOISY_URL_PATTERNS = {
 def main():
     bookmarks_file = 'content/bookmarks.yml'
     cache_dir = 'cache/whatsnew'
-    fetch_last_articles = 5
+    fetch_last_articles = 3
 
     reader = CachingFeedReader(cache_dir)
     bookmarks = deserialize(bookmarks_file)
