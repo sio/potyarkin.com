@@ -21,9 +21,14 @@ log = logging.getLogger(__name__)
 
 
 NOISY_FEED_DOMAINS = {
+    'bigthink.com',
+    'en.wikipedia.org',
     'news.ycombinator.com',
     'pure.mpg.de',
     'queue.acm.org',
+}
+NOISY_URL_PATTERNS = {
+    '/#comment',
 }
 
 
@@ -59,6 +64,8 @@ def main():
                     continue
                 entries = sorted(feed.entries, key=lambda x: x.published_parsed, reverse=True)
                 for entry in entries[:fetch_last_articles]:
+                    if any(pattern in entry.link for pattern in NOISY_URL_PATTERNS):
+                        continue
                     output.append(dict(
                         title=entry.title,
                         url=entry.link,
