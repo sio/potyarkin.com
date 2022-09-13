@@ -206,9 +206,22 @@ class FeedCache:
             log.warning(f'Feed contains parsing errors: {feed.bozo_exception} ({self})')
         self._directory.mkdir(exist_ok=True)
         for entry in feed.entries:
-            if 'published_parsed' not in entry and 'updated_parsed' in entry:
+            if 'published_parsed' in entry:
+                continue
+            if 'updated_parsed' in entry:
                 entry['published_parsed'] = entry['updated_parsed']
                 entry['published'] = entry['updated']
+                continue
+            if 'published_parsed' in feed:
+                entry['published_parsed'] = list(feed['published_parsed'])
+                entry['published'] = feed['published']
+                continue
+            if 'updated_parsed' in feed:
+                entry['published_parsed'] = list(feed['updated_parsed'])
+                entry['published'] = feed['updated']
+                continue
+            entry['published_parsed'] = [0] * 9
+
         feed['cache_version'] = self.CACHE_VERSION
         with self._feed.open('w') as f:
             json.dump(feed, f, **JSON_PARAMS)
