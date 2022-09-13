@@ -169,7 +169,9 @@ def feedlinks(url):
         return list()
     feeds = set()
     for link in parser.results:
-        if link.startswith('/'):  # absolute links
+        if link.startswith('//'):   # same-scheme links
+            feeds.add(f'{urlparts.scheme}:{link}')
+        elif link.startswith('/'):  # absolute links
             feeds.add(f'{urlparts.scheme}://{urlparts.netloc}{link}')
         elif '://' not in link:   # relative links
             path = urlparts.path.rstrip('/')
