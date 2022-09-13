@@ -50,7 +50,7 @@ def render(output, pelican=True):
             slug: whatsnew
             ''').strip())
     else:
-        print("# ")
+        print(f"# {title}")
     links_seen = set()
     for link in sorted(output, key=lambda x: x['date'], reverse=True):
         if link['url'] in links_seen:
