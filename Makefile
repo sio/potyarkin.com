@@ -94,3 +94,8 @@ publish html serve: | newspaper
 content/newspaper.json: content/webring.json
 content/newspaper.json: content/blogroll.yml helpers/newspaper.py | venv
 	$(VENV)/python -m helpers.newspaper $< $@
+
+.PHONY: whatsnew
+whatsnew: | venv
+	mkdir -p cache/whatsnew
+	$(VENV)/python -m helpers.whatsnew
