@@ -99,10 +99,8 @@ def whatsnew(bookmarks_file, cache_dir='cache/whatsnew', fetch_last_articles=3, 
         for link in links:
             if not link.get('url'):
                 continue
-            page = link['url']
-            url = urlparse(page)
-            site = f'{url.scheme}://{url.netloc}'
-            for feed_url in chain(feedlinks(page), feedlinks(site)):
+            page_url = link['url']
+            for feed_url in find_feeds(page_url):
                 if feed_url in feeds_seen:
                     continue
                 feeds_seen.add(feed_url)
@@ -122,10 +120,40 @@ def whatsnew(bookmarks_file, cache_dir='cache/whatsnew', fetch_last_articles=3, 
                         url=entry.link,
                         summary=entry.get('summary'),
                         date=list(entry.published_parsed),
-                        site=site,
                     ))
     return output
 
+
+def find_feeds(url):
+    '''Find feeds related to URL'''
+    urlparts = urlparse(url)
+    site = f'{urlparts.scheme}://{urlparts.netloc}'
+    path = urlparts.path.split('/')
+
+    always_check_subdirectories = {
+        'blog',
+        'wiki',
+        'posts',
+    }
+
+    default_feeds = set(feedlinks(url))
+    default_feeds.update(feedlinks(site))
+    if len(path) >= 2 and path[1].lower() in always_check_subdirectories:
+        default_feeds.update(feedlinks(f'{site}/{path[1]}/'))
+        default_feeds.update(feedlinks(f'{site}/{path[1]}'))
+    if default_feeds:
+        yield from default_feeds
+        return []
+
+    while path:
+        last = path.pop()
+        if not last.strip():
+            continue
+        feeds = feedlinks(f'{site}{"/".join(path)}')
+        if feeds:
+            yield from feeds
+            return []
+    return []
 
 @persistent_cache('cache/feedlinks.json', max_age=7*24*60*60)
 def feedlinks(url):
