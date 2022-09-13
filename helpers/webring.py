@@ -121,7 +121,7 @@ class CachingFeedReader:
                 if key in cache.metadata:
                     fetch_params[key] = cache.metadata[key]
         feed = feedparser.parse(url, **fetch_params)
-        if feed.get('status') == 200:
+        if feed.get('status') in {200, 301, 302}:
             cache.save(feed)
             return feed
         elif cache.exists():
@@ -142,6 +142,7 @@ class CachingFeedReader:
             return cache.read()
         else:
             if feed.bozo:
+                log.warning('Bozo feed: %s, %s entries, status=%s', url, len(feed.entries), feed.get('status'))
                 if isinstance(feed.bozo_exception, Exception):
                     raise feed.bozo_exception
                 else:
