@@ -3,6 +3,7 @@ Check what's new on sites I've previously bookmarked
 '''
 
 import atexit
+import hashlib
 import json
 import logging
 import yaml
@@ -35,11 +36,52 @@ NOISY_URL_PATTERNS = {
 
 def main():
     bookmarks_file = 'content/bookmarks.yml'
-    cache_dir = 'cache/whatsnew'
-    fetch_last_articles = 3
+    bookmarks_checksum = checksum(bookmarks_file)
+    render(whatsnew(bookmarks_file, cache_key=bookmarks_checksum))
 
-    reader = CachingFeedReader(cache_dir)
+
+def render(output):
+    '''Render a simple Markdown document with a list of links'''
+    print("# What's new? (on the sites I've bookmarked)")
+    links_seen = set()
+    for link in sorted(output, key=lambda x: x['date'], reverse=True):
+        if link['url'] in links_seen:
+            continue
+        links_seen.add(link['url'])
+        date = '-'.join(f'{x:02d}' for x in link['date'][:3])
+        print(f'  - **{link["title"]}** ({date})  ')
+        print(f'    <{link["url"]}>')
+        print()
+
+
+def persistent_cache(filename, max_age=12*60*60):
+    cache = dict()
+    try:
+        with open(filename) as f:
+            cache = json.load(f)
+    except (IOError, ValueError):
+        pass
+    atexit.register(lambda: json.dump(cache, open(filename, 'w'), indent=2, sort_keys=True))
+    def decorator(original_function):
+        def new_function(*args, **kwargs):
+            now = datetime.now().timestamp()
+            key = str((args, kwargs))
+            if key not in cache \
+            or now > cache[key]['timestamp'] + max_age:
+                cache[key] = dict(
+                    timestamp=now,
+                    result=original_function(*args, **kwargs)
+                )
+            return cache[key]['result']
+        return new_function
+    return decorator
+
+
+@persistent_cache('cache/whatsnew.json', max_age=3*24*60*60)
+def whatsnew(bookmarks_file, cache_dir='cache/whatsnew', fetch_last_articles=3, cache_key=None):
+    '''Find new posts on pages mentioned in bookmarks'''
     bookmarks = deserialize(bookmarks_file)
+    reader = CachingFeedReader(cache_dir)
     feeds_seen = set()
     output = list()
     for section in bookmarks:
@@ -74,44 +116,7 @@ def main():
                         date=list(entry.published_parsed),
                         site=site,
                     ))
-    render(output)
-
-
-def render(output):
-    '''Render a simple Markdown document with a list of links'''
-    print("# What's new?")
-    links_seen = set()
-    for link in sorted(output, key=lambda x: x['date'], reverse=True):
-        if link['url'] in links_seen:
-            continue
-        links_seen.add(link['url'])
-        date = '-'.join(f'{x:02d}' for x in link['date'][:3])
-        print(f'  - **{link["title"]}** ({date})  ')
-        print(f'    <{link["url"]}>')
-        print()
-
-
-def persistent_cache(filename, max_age=12*60*60):
-    cache = dict()
-    try:
-        with open(filename) as f:
-            cache = json.load(f)
-    except (IOError, ValueError):
-        pass
-    atexit.register(lambda: json.dump(cache, open(filename, 'w'), indent=2, sort_keys=True))
-    def decorator(original_function):
-        def new_function(*args, **kwargs):
-            now = datetime.now().timestamp()
-            key = str((args, kwargs))
-            if key not in cache \
-            or now > cache[key]['timestamp'] + max_age:
-                cache[key] = dict(
-                    timestamp=now,
-                    result=original_function(*args, **kwargs)
-                )
-            return cache[key]['result']
-        return new_function
-    return decorator
+    return output
 
 
 @persistent_cache('cache/feedlinks.json', max_age=7*24*60*60)
@@ -156,6 +161,14 @@ class FeedLinkParser(HTMLParser):
 def deserialize(yamlfile):
     with open(yamlfile) as f:
         return yaml.safe_load(f)
+
+
+def checksum(filename, algorithm='sha256'):
+    hasher = getattr(hashlib, algorithm)()
+    with open(filename, 'rb') as file:
+        for chunk in iter(lambda: file.read(2**16), bytes()):
+            hasher.update(chunk)
+    return f'{algorithm}:{hasher.hexdigest()}'
 
 
 if __name__ == '__main__':
