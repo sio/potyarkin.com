@@ -96,6 +96,7 @@ content/newspaper.json: content/blogroll.yml helpers/newspaper.py | venv
 	$(VENV)/python -m helpers.newspaper $< $@
 
 .PHONY: whatsnew
+publish html serve: | whatsnew
 whatsnew: | venv
 	mkdir -p cache/whatsnew
-	$(VENV)/python -m helpers.whatsnew > whatsnew.md
+	$(VENV)/python -m helpers.whatsnew > content/pages/whatsnew.md

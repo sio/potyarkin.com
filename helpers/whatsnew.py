@@ -12,6 +12,7 @@ from datetime import datetime
 from functools import cache
 from html.parser import HTMLParser
 from itertools import chain
+from textwrap import dedent
 from urllib.parse import urlparse
 
 from feedparser.http import get as http_get
@@ -40,9 +41,17 @@ def main():
     render(whatsnew(bookmarks_file, cache_key=bookmarks_checksum))
 
 
-def render(output):
+def render(output, pelican=True):
     '''Render a simple Markdown document with a list of links'''
-    print("# What's new? (on the sites I've bookmarked)")
+    title = "What's new? (on the sites I've bookmarked)"
+    if pelican:
+        print(dedent(f'''
+            title: {title}
+            status: hidden
+            slug: whatsnew
+            ''').strip())
+    else:
+        print("# ")
     links_seen = set()
     for link in sorted(output, key=lambda x: x['date'], reverse=True):
         if link['url'] in links_seen:
