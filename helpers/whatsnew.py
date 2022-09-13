@@ -156,9 +156,11 @@ class FeedLinkParser(HTMLParser):
         super().__init__(*a, **ka)
 
     def handle_starttag(self, tag, attrs):
-        if tag != 'link':
+        if tag.lower() not in {'link', 'a'}:
             return
         attrs = dict(attrs)
+        if attrs.get('rel', '').lower() != 'alternate':
+            return
         link_type = attrs.get('type', '').lower()
         if 'application/atom' not in link_type \
         and 'application/rss' not in link_type:
