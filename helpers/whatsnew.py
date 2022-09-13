@@ -20,6 +20,13 @@ from .webring import CachingFeedReader
 log = logging.getLogger(__name__)
 
 
+NOISY_FEED_DOMAINS = {
+    'news.ycombinator.com',
+    'pure.mpg.de',
+    'queue.acm.org',
+}
+
+
 def main():
     bookmarks_file = 'content/bookmarks.yml'
     cache_dir = 'cache/whatsnew'
@@ -43,6 +50,8 @@ def main():
                 if feed_url in feeds_seen:
                     continue
                 feeds_seen.add(feed_url)
+                if urlparse(feed_url).netloc in NOISY_FEED_DOMAINS:
+                    continue
                 try:
                     feed = reader.feed(title=feed_url, url=feed_url)
                 except Exception as exc:
