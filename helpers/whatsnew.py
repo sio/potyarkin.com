@@ -56,6 +56,7 @@ def main():
                     feed = reader.feed(title=feed_url, url=feed_url)
                 except Exception as exc:
                     log.error('%s while processing feed: %s', exc, feed_url)
+                    continue
                 entries = sorted(feed.entries, key=lambda x: x.published_parsed, reverse=True)
                 for entry in entries[:fetch_last_articles]:
                     output.append(dict(
