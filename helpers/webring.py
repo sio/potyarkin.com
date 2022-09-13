@@ -14,7 +14,7 @@ import feedparser
 import yaml
 
 
-logging.basicConfig(format='%(levelname)-8s %(message)s', level=logging.INFO)
+logging.basicConfig(format='%(levelname)-8s %(message)s', level=logging.INFO + 1)
 log = logging.getLogger(__name__)
 
 
