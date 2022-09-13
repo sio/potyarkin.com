@@ -9,7 +9,6 @@ import logging
 import yaml
 from collections import defaultdict
 from datetime import datetime
-from functools import cache
 from html.parser import HTMLParser
 from itertools import chain
 from textwrap import dedent
