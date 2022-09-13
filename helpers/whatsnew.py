@@ -65,14 +65,20 @@ def main():
                         date=list(entry.published_parsed),
                         site=site,
                     ))
+    render(output)
+
+
+def render(output):
+    '''Render a simple Markdown document with a list of links'''
+    print("# What's new?")
     links_seen = set()
     for link in sorted(output, key=lambda x: x['date'], reverse=True):
         if link['url'] in links_seen:
             continue
         links_seen.add(link['url'])
-        date = '-'.join(str(x) for x in link['date'][:3])
-        print(f'  {link["title"]} ({date})')
-        print(f'    {link["url"]}')
+        date = '-'.join(f'{x:02d}' for x in link['date'][:3])
+        print(f'  - **{link["title"]}** ({date})  ')
+        print(f'    <{link["url"]}>')
         print()
 
 

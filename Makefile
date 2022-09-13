@@ -98,4 +98,4 @@ content/newspaper.json: content/blogroll.yml helpers/newspaper.py | venv
 .PHONY: whatsnew
 whatsnew: | venv
 	mkdir -p cache/whatsnew
-	$(VENV)/python -m helpers.whatsnew
+	$(VENV)/python -m helpers.whatsnew > whatsnew.md
