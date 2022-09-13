@@ -41,7 +41,7 @@ jobs:
             cache/whatsnew
             cache/whatsnew.json
             cache/feedlinks.json
-          key: webring-${{ hashFiles('content/bookmarks.yml') }}-${{ steps.date.outputs.date }}
+          key: whatsnew-${{ hashFiles('content/bookmarks.yml') }}-${{ steps.date.outputs.date }}
           restore-keys: |
             whatsnew-${{ hashFiles('content/bookmarks.yml') }}
             whatsnew-
