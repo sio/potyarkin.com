@@ -712,7 +712,7 @@
       and interesting assignments for learning programming
 
   - title: RISC Is Fundamentally Unscalable
-    url: https://blackhole12.com/blog/risc-is-fundamentally-unscalable/
+    url: https://erikmcclure.com/blog/risc-is-fundamentally-unscalable/
     description: |-
       Overview of upcoming issues in microprocessor design when current scaling
       techniques will stop working. Wow moment: the speed of light is now a
