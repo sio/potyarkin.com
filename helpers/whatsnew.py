@@ -26,8 +26,10 @@ NOISY_FEED_DOMAINS = {
     'en.wikipedia.org',
     'habr.com',
     'news.ycombinator.com',
+    'old.reddit.com',
     'pure.mpg.de',
     'queue.acm.org',
+    'www.reddit.com',
 }
 NOISY_URL_PATTERNS = {
     '/#comment',
