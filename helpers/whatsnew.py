@@ -63,7 +63,7 @@ def render(output, pelican=True):
 
         date = '-'.join(f'{x:02d}' for x in link['date'][:3])
         if date != prev_date:
-            print(f'## <center>{date}</center>\n')
+            print(f'\n## <center>{date}</center>\n')
         prev_date = date
 
         domain = urlparse(url).netloc.lower()
