@@ -54,14 +54,22 @@ def render(output, pelican=True):
     else:
         print(f"# {title}")
     links_seen = set()
+    prev_date = ''
     for link in sorted(output, key=lambda x: x['date'], reverse=True):
-        if link['url'] in links_seen:
+        url = link['url']
+        if url in links_seen:
             continue
-        links_seen.add(link['url'])
+        links_seen.add(url)
+
         date = '-'.join(f'{x:02d}' for x in link['date'][:3])
-        print(f'  - **{link["title"]}** ({date})  ')
-        print(f'    <{link["url"]}>')
-        print()
+        if date != prev_date:
+            print(f'## <center>{date}</center>\n')
+        prev_date = date
+
+        domain = urlparse(url).netloc.lower()
+        if domain.startswith('www.'):
+            domain = domain[len('www.'):]
+        print(f'  - [{link["title"]}]({url}) ({domain})')
 
 
 def persistent_cache(filename, max_age=12*60*60):
