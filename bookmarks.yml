@@ -8,6 +8,19 @@
 - period: 2022-09
   links:
 
+  - title: Exfiltration by encoding data in pixel colour values
+    url: https://www.pentestpartners.com/security-blog/exfiltration-by-encoding-data-in-pixel-colour-values/
+    description: |-
+      I've had the same idea last night. Unsurprisingly, someone else had
+      thought of it 5 years ago and had already coded a proof-of-concept. It's
+      a shame that GitHub repo is just a ZIP dump.
+
+      *Note*: RDP is not a pixel perfect protocol, it modifies color values in
+      a way not perceptible for humans. This makes theoretical density of 24 bits
+      per pixel impossible. Article author had settled for mere 3 bits per
+      pixel (with a large safety margin). Author estimates that 15 bits per
+      pixel should be achievable on a good connection
+
   - title: Immutable Linux OS with a hermetic /usr partition
     url: https://0pointer.net/blog/fitting-everything-together.html
     by: Lennart Poettering
