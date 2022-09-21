@@ -8,6 +8,13 @@
 - period: 2022-09
   links:
 
+  - title: Signing arbitrary data with SSH keys
+    url: https://www.agwa.name/blog/post/ssh_signatures
+    description: |-
+      Using ssh-keygen instead of PGP to sign arbitrary data is easier and
+      (seems to be) as safe. Namespaces are a neat feature that prevents
+      signature reuse across protocols.
+
   - title: Exfiltration by encoding data in pixel colour values
     url: https://www.pentestpartners.com/security-blog/exfiltration-by-encoding-data-in-pixel-colour-values/
     description: |-
