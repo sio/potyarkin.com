@@ -8,6 +8,17 @@
 - period: 2022-09
   links:
 
+  - title: How to create an SSH certificate authority
+    url: https://jameshfisher.com/2018/03/16/how-to-create-an-ssh-certificate-authority/
+    by: Jim Fisher
+    description: |-
+      SSH certificates and surrounding infrastructure are tough to get
+      a handle on. Especially these days when every article tries to push
+      their _access plane single sign-on RBAC solution._
+
+      Jim Fisher's explanation just clicked for me. SSH cert authority is
+      simply another SSH key pair.
+
   - title: Signing arbitrary data with SSH keys
     url: https://www.agwa.name/blog/post/ssh_signatures
     description: |-
