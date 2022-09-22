@@ -26,6 +26,12 @@
       (seems to be) as safe. Namespaces are a neat feature that prevents
       signature reuse across protocols.
 
+  - title: Create ED25519 certificates for TLS with OpenSSL
+    url: https://blog.pinterjann.is/ed25519-certificates.html
+    description: |-
+      It is possible to sign X.509 certificates (HTTPS / TLS) with a ED25519
+      key even though no root CA does that. Useful for selfsigned certs though
+
   - title: Exfiltration by encoding data in pixel colour values
     url: https://www.pentestpartners.com/security-blog/exfiltration-by-encoding-data-in-pixel-colour-values/
     description: |-
