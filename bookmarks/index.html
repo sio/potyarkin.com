@@ -49,6 +49,31 @@ Unsorted links to the pages I've considered interesting at some time |
 </span>
   </header>
 <article class="full">
+  <h2 id="2022-10">
+    <a href="#2022-10">
+      October 2022
+    </a>
+  </h2>
+  <ul>
+    <li>
+      <p><strong>
+      <a href="https://kailueke.gitlab.io/systemd-custom-bpf-firewall/">Custom BPF firewalls for systemd services</a>
+      </strong></p>
+      <p>Unfortunately, <code>net_cls</code> was deprecated and dropped in cgroups v2, so
+writing custom eBPF programs appears to be the only way to achieve
+per-unit firewalling with systemd.</p>
+<p>See also:</p>
+<ul>
+<li><a href="https://gitlab.gnome.org/GNOME/gnome-software/-/issues/1038">Similar thought process in Gnome bug tracker</a></li>
+<li><a href="https://aya-rs.dev/book/programs/cgroup-skb/">Writing cgroup/skb BPF program in Rust</a></li>
+<li><a href="https://github.com/mk-fg/fgtk/blob/master/bpf/cgroup-skb.nonet.c">Well-commented example of cgroup/skb program</a></li>
+<li><a href="https://nfil.dev/coding/security/ebpf-firewall-with-cgroups/">Using Cilium libraries to interact with eBPF program from Go</a></li>
+<li><a href="https://unix.stackexchange.com/a/467164/5255">Where packet mark is stored in sk_buff</a></li>
+<li><a href="https://medium.com/@c0ngwang/understanding-struct-sk-buff-730cf847a722">eBPF __sk_buff is not kernel's sk_buff</a></li>
+<li><code>man 7 bpf-helpers</code> -&gt; <code>bpf_setsockopt</code> -&gt; SO_MARK; <code>man 7 socket</code> -&gt; SO_MARK</li>
+</ul>
+    </li>
+  </ul>
   <h2 id="2022-09">
     <a href="#2022-09">
       September 2022
