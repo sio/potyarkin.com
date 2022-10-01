@@ -5,6 +5,27 @@
 # data format is not guaranteed to remain stable over time
 #
 
+- period: 2022-10
+  links:
+
+  - title: Custom BPF firewalls for systemd services
+    url: https://kailueke.gitlab.io/systemd-custom-bpf-firewall/
+    description: |-
+      Unfortunately, `net_cls` was deprecated and dropped in cgroups v2, so
+      writing custom eBPF programs appears to be the only way to achieve
+      per-unit firewalling with systemd.
+
+      See also:
+
+      - [Similar thought process in Gnome bug tracker](https://gitlab.gnome.org/GNOME/gnome-software/-/issues/1038)
+      - [Writing cgroup/skb BPF program in Rust](https://aya-rs.dev/book/programs/cgroup-skb/)
+      - [Well-commented example of cgroup/skb program](https://github.com/mk-fg/fgtk/blob/master/bpf/cgroup-skb.nonet.c)
+      - [Using Cilium libraries to interact with eBPF program from Go](https://nfil.dev/coding/security/ebpf-firewall-with-cgroups/)
+      - [Where packet mark is stored in sk_buff](https://unix.stackexchange.com/a/467164/5255)
+      - [eBPF __sk_buff is not kernel's sk_buff](https://medium.com/@c0ngwang/understanding-struct-sk-buff-730cf847a722)
+      - `man 7 bpf-helpers` -> `bpf_setsockopt` -> SO_MARK; `man 7 socket` -> SO_MARK
+
+
 - period: 2022-09
   links:
 
