@@ -8,6 +8,13 @@
 - period: 2022-10
   links:
 
+  - title: Bottom-up eBPF
+    url: https://medium.com/@phylake/bottom-up-ebpf-d7ca9cbe8321
+    description: |-
+      This article shows where `SEC` macro comes from but I'm still not sure if
+      similar `__section` macro is its accepted successor. It's certainly seen
+      more often in the wild.
+
   - title: Custom BPF firewalls for systemd services
     url: https://kailueke.gitlab.io/systemd-custom-bpf-firewall/
     description: |-
