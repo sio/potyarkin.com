@@ -31,6 +31,8 @@
       - [Where packet mark is stored in sk_buff](https://unix.stackexchange.com/a/467164/5255)
       - [eBPF __sk_buff is not kernel's sk_buff](https://medium.com/@c0ngwang/understanding-struct-sk-buff-730cf847a722)
       - man 7 bpf-helpers -> bpf_setsockopt -> SO_MARK; man 7 socket -> SO_MARK
+      - ['uknown function' when loading a BPF program may mean that helper is
+        just not allowed](https://stackoverflow.com/a/62173263/3275560)
 
 
 - period: 2022-09
