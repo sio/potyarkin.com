@@ -8,7 +8,7 @@ import json
 import logging
 import yaml
 from collections import defaultdict
-from datetime import datetime
+from datetime import datetime, timezone
 from html.parser import HTMLParser
 from itertools import chain
 from textwrap import dedent
@@ -34,6 +34,7 @@ NOISY_FEED_DOMAINS = {
 NOISY_URL_PATTERNS = {
     '/#comment',
 }
+MAX_AGE_DAYS = 365
 
 
 def main():
@@ -82,7 +83,7 @@ def persistent_cache(filename, max_age=12*60*60):
     atexit.register(lambda: json.dump(cache, open(filename, 'w'), indent=2, sort_keys=True))
     def decorator(original_function):
         def new_function(*args, **kwargs):
-            now = datetime.now().timestamp()
+            now = datetime.now(tz=timezone.utc).timestamp()
             key = str((args, kwargs))
             if key not in cache \
             or now > cache[key]['timestamp'] + max_age:
@@ -102,6 +103,7 @@ def whatsnew(bookmarks_file, cache_dir='cache/whatsnew', fetch_last_articles=3, 
     reader = CachingFeedReader(cache_dir)
     feeds_seen = set()
     output = list()
+    now = datetime.now()
     for section in bookmarks:
         links = section.get('links')
         if not links:
@@ -124,6 +126,8 @@ def whatsnew(bookmarks_file, cache_dir='cache/whatsnew', fetch_last_articles=3, 
                 entries = sorted(feed.entries, key=lambda x: x.published_parsed, reverse=True)
                 for entry in entries[:fetch_last_articles]:
                     if any(pattern in entry.link for pattern in NOISY_URL_PATTERNS):
+                        continue
+                    if (now - datetime(*entry.published_parsed[:3])).days > MAX_AGE_DAYS:
                         continue
                     output.append(dict(
                         title=entry.title,
