@@ -30,6 +30,7 @@ NOISY_FEED_DOMAINS = {
     'pure.mpg.de',
     'queue.acm.org',
     'www.reddit.com',
+    'www.smbc-comics.com',
 }
 NOISY_URL_PATTERNS = {
     '/#comment',
