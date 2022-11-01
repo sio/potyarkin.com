@@ -1,5 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - Bookmarks - Orange Sun</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/extra/bookmarks.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2022-10-01T00:00:00+00:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>September 2022</title><link href="https://potyarkin.ml/bookmarks/#2022-09" rel="alternate"></link><published>2022-10-01T00:00:00+00:00</published><updated>2022-10-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-10-01:/bookmarks//2022-09</id><content type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - Bookmarks - Orange Sun</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/extra/bookmarks.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2022-11-01T00:00:00+00:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>October 2022</title><link href="https://potyarkin.ml/bookmarks/#2022-10" rel="alternate"></link><published>2022-11-01T00:00:00+00:00</published><updated>2022-11-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-11-01:/bookmarks//2022-10</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://docs.gitlab.com/ee/architecture/blueprints/runner_scaling/"&gt;Next GitLab Runner Auto-scaling Architecture (RFC)&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;At this moment one of our core products - GitLab Runner - and one of its
+most important features - ability to auto-scale job execution
+environments - depends on an external product that is abandoned.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://medium.com/@phylake/bottom-up-ebpf-d7ca9cbe8321"&gt;Bottom-up eBPF&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;This article shows where &lt;code&gt;SEC&lt;/code&gt; macro comes from but I'm still not sure if
+similar &lt;code&gt;__section&lt;/code&gt; macro is its accepted successor. It's certainly seen
+more often in the wild.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://kailueke.gitlab.io/systemd-custom-bpf-firewall/"&gt;Custom BPF firewalls for systemd services&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Unfortunately, &lt;code&gt;net_cls&lt;/code&gt; was deprecated and dropped in cgroups v2, so
+writing custom eBPF programs appears to be the only way to achieve
+per-unit firewalling with systemd.&lt;/p&gt;
+&lt;p&gt;See also:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://gitlab.gnome.org/GNOME/gnome-software/-/issues/1038"&gt;Similar thought process in Gnome bug tracker&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://aya-rs.dev/book/programs/cgroup-skb/"&gt;Writing cgroup/skb BPF program in Rust&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/mk-fg/fgtk/blob/master/bpf/cgroup-skb.nonet.c"&gt;Well-commented example of cgroup/skb program&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://nfil.dev/coding/security/ebpf-firewall-with-cgroups/"&gt;Using Cilium libraries to interact with eBPF program from Go&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://unix.stackexchange.com/a/467164/5255"&gt;Where packet mark is stored in sk_buff&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://medium.com/@c0ngwang/understanding-struct-sk-buff-730cf847a722"&gt;eBPF __sk_buff is not kernel's sk_buff&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;man 7 bpf-helpers -&amp;gt; bpf_setsockopt -&amp;gt; SO_MARK; man 7 socket -&amp;gt; SO_MARK&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://stackoverflow.com/a/62173263/3275560"&gt;'uknown function' when loading a BPF program may mean that helper is
+  just not allowed&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>September 2022</title><link href="https://potyarkin.ml/bookmarks/#2022-09" rel="alternate"></link><published>2022-10-01T00:00:00+00:00</published><updated>2022-10-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-10-01:/bookmarks//2022-09</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
