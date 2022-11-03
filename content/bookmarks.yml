@@ -8,7 +8,8 @@
 - period: 2022-11
   links:
 
-  - title: SSH: Uniqueness of User Certificates Serial Numbers
+  - title: >-
+      SSH: Uniqueness of User Certificates Serial Numbers
     url: https://yaobinwen.github.io/2021/03/26/SSH-X509-cert-serial-numbers.html
     description: |-
       Uniqueness of SSH user certificate serial numbers is left up to issuer to
