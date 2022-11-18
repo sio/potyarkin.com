@@ -59,7 +59,8 @@ def render(output, pelican=True):
     prev_date = ''
     for link in sorted(output, key=lambda x: x['date'], reverse=True):
         url = link['url']
-        if url in links_seen:
+        if url in links_seen or not url or not url.strip() \
+        or 'title' not in link or not link['title'] or not link['title'].strip():
             continue
         links_seen.add(url)
 
@@ -128,6 +129,9 @@ def whatsnew(bookmarks_file, cache_dir='cache/whatsnew', fetch_last_articles=3, 
                 for entry in entries[:fetch_last_articles]:
                     if any(pattern in entry.link for pattern in NOISY_URL_PATTERNS):
                         continue
+                    if not entry.link or not entry.link.strip() \
+                    or not entry.title or not entry.title.strip():
+                        continue
                     if (now - datetime(*entry.published_parsed[:3])).days > MAX_AGE_DAYS:
                         continue
                     output.append(dict(
@@ -188,6 +192,8 @@ def feedlinks(url):
         return list()
     feeds = set()
     for link in parser.results:
+        if not link or not link.strip():
+            continue
         if link.startswith('//'):   # same-scheme links
             feeds.add(f'{urlparts.scheme}:{link}')
         elif link.startswith('/'):  # absolute links
