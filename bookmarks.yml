@@ -8,6 +8,13 @@
 - period: 2022-11
   links:
 
+  - title: The Great Noun List
+    by: Desi Quintans
+    url: http://www.desiquintans.com/nounlist
+    description: |-
+      List of 6700+ most popular English nouns. Useful for all kinds of things.
+      Dedicated to public domain, no usage restrictions, no attribution required.
+
   - title: >-
       SSH: Uniqueness of User Certificates Serial Numbers
     url: https://yaobinwen.github.io/2021/03/26/SSH-X509-cert-serial-numbers.html
