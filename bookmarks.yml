@@ -8,6 +8,11 @@
 - period: 2022-11
   links:
 
+  - title: Everything I wish I knew when learning C
+    url: https://tmewett.com/c-tips/
+    description: |-
+      This is why I don't write C
+
   - title: Everything you should know about certificates and PKI but are too afraid to ask
     url: https://smallstep.com/blog/everything-pki/
     description: |-
