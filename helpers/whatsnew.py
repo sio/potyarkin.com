@@ -29,6 +29,7 @@ NOISY_FEED_DOMAINS = {
     'old.reddit.com',
     'pure.mpg.de',
     'queue.acm.org',
+    'techoverflow.net',
     'www.reddit.com',
     'www.smbc-comics.com',
 }
