@@ -8,6 +8,13 @@
 - period: 2022-11
   links:
 
+  - title: What Colour are your bits?
+    url: https://ansuz.sooke.bc.ca/entry/23
+    description: |-
+      Information (bits) may have some properties that are not possible to
+      calculate from data alone. Does this transmission violate copyright?
+      Is this file infected by a virus? Is this number random?
+
   - title: Everything I wish I knew when learning C
     url: https://tmewett.com/c-tips/
     description: |-
