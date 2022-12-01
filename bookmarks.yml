@@ -5,6 +5,16 @@
 # data format is not guaranteed to remain stable over time
 #
 
+- period: 2022-12
+  links:
+
+  - title: Your problem with Vim is that you don't grok vi
+    url: https://stackoverflow.com/a/1220118
+    description: |-
+      A StackOverflow answer that could have been a long blog post.
+      Good explanation of some vi intricacies I didn't understand before.
+
+
 - period: 2022-11
   links:
 
