@@ -8,6 +8,12 @@
 - period: 2022-12
   links:
 
+  - title: Go is not an easy language
+    url: https://www.arp242.net/go-easy.html
+    by: Martin Tournoij
+    description: |-
+      Even though Go is _simple_, often it is not _easy_
+
   - title: Your problem with Vim is that you don't grok vi
     url: https://stackoverflow.com/a/1220118
     description: |-
