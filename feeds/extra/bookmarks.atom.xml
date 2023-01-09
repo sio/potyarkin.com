@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - Bookmarks - Orange Sun</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/extra/bookmarks.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2022-12-01T00:00:00+00:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>November 2022</title><link href="https://potyarkin.ml/bookmarks/#2022-11" rel="alternate"></link><published>2022-12-01T00:00:00+00:00</published><updated>2022-12-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-12-01:/bookmarks//2022-11</id><content type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - Bookmarks - Orange Sun</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/extra/bookmarks.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2023-01-01T00:00:00+00:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>December 2022</title><link href="https://potyarkin.ml/bookmarks/#2022-12" rel="alternate"></link><published>2023-01-01T00:00:00+00:00</published><updated>2023-01-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2023-01-01:/bookmarks//2022-12</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://www.arp242.net/go-easy.html"&gt;Go is not an easy language&lt;/a&gt;
+    by Martin Tournoij
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Even though Go is &lt;em&gt;simple&lt;/em&gt;, often it is not &lt;em&gt;easy&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://stackoverflow.com/a/1220118"&gt;Your problem with Vim is that you don't grok vi&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;A StackOverflow answer that could have been a long blog post.
+Good explanation of some vi intricacies I didn't understand before.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>November 2022</title><link href="https://potyarkin.ml/bookmarks/#2022-11" rel="alternate"></link><published>2022-12-01T00:00:00+00:00</published><updated>2022-12-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-12-01:/bookmarks//2022-11</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;

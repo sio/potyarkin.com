@@ -105,8 +105,8 @@ cmd.</p>
 <p>Some of my attempts were just me trying to work around GitHub CI limitations.
 For example, dynamically calculating the value of environment variable based
 on values of other variables. This looks quite ugly:</p>
-<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Use absolute path for CYGWIN_ROOT</span><span class="w"></span>
-<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;::set-env name=CYGWIN_ROOT::${env:GITHUB_WORKSPACE}\${env:CYGWIN_ROOT}&quot;</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Use absolute path for CYGWIN_ROOT</span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;::set-env name=CYGWIN_ROOT::${env:GITHUB_WORKSPACE}\${env:CYGWIN_ROOT}&quot;</span>
 </code></pre></div>
 
 <p>I've also failed at proper syntax for YAML multiline strings more times than

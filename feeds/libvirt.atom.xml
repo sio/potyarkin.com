@@ -62,43 +62,43 @@ by Libvirt domains.&lt;/p&gt;
 &lt;p&gt;This is why I'm adding this meaningless cgroups burn-in to my pipelines.
 "It ain't stupid if it works", right?&lt;/p&gt;
 &lt;h4 id="full-commit-diff"&gt;&lt;a class="toclink" href="#full-commit-diff"&gt;Full commit diff&lt;/a&gt;&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="gh"&gt;diff --git a/.cirrus.yml.j2 b/.cirrus.yml.j2&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="gd"&gt;--- a/.cirrus.yml.j2&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="gi"&gt;+++ b/.cirrus.yml.j2&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="gu"&gt;@@ -21,6 +21,8 @@ task:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;    # VENVDIR must be absolute path for &amp;#39;cd &amp;amp;&amp;amp; make&amp;#39; approach to work&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;    # VENVDIR should not be cached! Cirrus CI drops some binaries randomly&lt;span class="w"&gt;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="gh"&gt;diff --git a/.cirrus.yml.j2 b/.cirrus.yml.j2&lt;/span&gt;
+&lt;span class="gd"&gt;--- a/.cirrus.yml.j2&lt;/span&gt;
+&lt;span class="gi"&gt;+++ b/.cirrus.yml.j2&lt;/span&gt;
+&lt;span class="gu"&gt;@@ -21,6 +21,8 @@ task:&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;    # VENVDIR must be absolute path for &amp;#39;cd &amp;amp;&amp;amp; make&amp;#39; approach to work
+&lt;span class="w"&gt; &lt;/span&gt;    # VENVDIR should not be cached! Cirrus CI drops some binaries randomly
 
-&lt;span class="gi"&gt;+    CGROUP_WORKAROUND: /sys/fs/cgroup/machine/qemu-cgroup_workaround.libvirt-qemu&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="gi"&gt;+&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;    # Pass values from cirrus-run environment&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;    CLONE_URL: &amp;quot;{{ CI_REPOSITORY_URL }}&amp;quot;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;    CLONE_SHA: &amp;quot;{{ CI_COMMIT_SHA }}&amp;quot;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="gu"&gt;@@ -61,6 +63,16 @@ task:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;  libvirtd_background_script:&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;    - sleep 2 &amp;amp;&amp;amp; /usr/sbin/libvirtd&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gi"&gt;+    CGROUP_WORKAROUND: /sys/fs/cgroup/machine/qemu-cgroup_workaround.libvirt-qemu&lt;/span&gt;
+&lt;span class="gi"&gt;+&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;    # Pass values from cirrus-run environment
+&lt;span class="w"&gt; &lt;/span&gt;    CLONE_URL: &amp;quot;{{ CI_REPOSITORY_URL }}&amp;quot;
+&lt;span class="w"&gt; &lt;/span&gt;    CLONE_SHA: &amp;quot;{{ CI_COMMIT_SHA }}&amp;quot;
+&lt;span class="gu"&gt;@@ -61,6 +63,16 @@ task:&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;  libvirtd_background_script:
+&lt;span class="w"&gt; &lt;/span&gt;    - sleep 2 &amp;amp;&amp;amp; /usr/sbin/libvirtd
 
-&lt;span class="gi"&gt;+  # Workaround for cgroups v2&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="gi"&gt;+  # I have no idea why or how this works (see commit message for a longer rant)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="gi"&gt;+  cgroups_workaround_background_script:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="gi"&gt;+    - mkdir -p &amp;quot;$CGROUP_WORKAROUND&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="gi"&gt;+    - ls -lF &amp;quot;$CGROUP_WORKAROUND&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="gi"&gt;+    - bash -c &amp;#39;echo $$ &amp;gt; /tmp/cgroups_workaround.pid; sleep infinity&amp;#39; &amp;amp;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="gi"&gt;+    - sleep 1&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="gi"&gt;+    - cat /tmp/cgroups_workaround.pid &amp;gt;&amp;gt; $CGROUP_WORKAROUND/cgroup.procs&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="gi"&gt;+    - cat $CGROUP_WORKAROUND/cgroup.procs&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="gi"&gt;+&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;  # Execute automated tests&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;  test_script:&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;    - cd ansible/tests&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="gu"&gt;@@ -70,6 +82,9 @@ task:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;  always:&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;    cache_debug_script:&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;      - find &amp;quot;$HOME/cache&amp;quot; -type f || echo &amp;quot;Exit code: $?&amp;quot;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="gi"&gt;+    cgroups_debug_script:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="gi"&gt;+      - fgrep cgroup /proc/mounts || echo &amp;quot;Exit code: $?&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="gi"&gt;+      - find /sys/fs/cgroup -exec ls -ldF {} \; || echo &amp;quot;Exit code: $?&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;    kvm_debug_script:&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;      - free -h&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;      - pstree -alT&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gi"&gt;+  # Workaround for cgroups v2&lt;/span&gt;
+&lt;span class="gi"&gt;+  # I have no idea why or how this works (see commit message for a longer rant)&lt;/span&gt;
+&lt;span class="gi"&gt;+  cgroups_workaround_background_script:&lt;/span&gt;
+&lt;span class="gi"&gt;+    - mkdir -p &amp;quot;$CGROUP_WORKAROUND&amp;quot;&lt;/span&gt;
+&lt;span class="gi"&gt;+    - ls -lF &amp;quot;$CGROUP_WORKAROUND&amp;quot;&lt;/span&gt;
+&lt;span class="gi"&gt;+    - bash -c &amp;#39;echo $$ &amp;gt; /tmp/cgroups_workaround.pid; sleep infinity&amp;#39; &amp;amp;&lt;/span&gt;
+&lt;span class="gi"&gt;+    - sleep 1&lt;/span&gt;
+&lt;span class="gi"&gt;+    - cat /tmp/cgroups_workaround.pid &amp;gt;&amp;gt; $CGROUP_WORKAROUND/cgroup.procs&lt;/span&gt;
+&lt;span class="gi"&gt;+    - cat $CGROUP_WORKAROUND/cgroup.procs&lt;/span&gt;
+&lt;span class="gi"&gt;+&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;  # Execute automated tests
+&lt;span class="w"&gt; &lt;/span&gt;  test_script:
+&lt;span class="w"&gt; &lt;/span&gt;    - cd ansible/tests
+&lt;span class="gu"&gt;@@ -70,6 +82,9 @@ task:&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;  always:
+&lt;span class="w"&gt; &lt;/span&gt;    cache_debug_script:
+&lt;span class="w"&gt; &lt;/span&gt;      - find &amp;quot;$HOME/cache&amp;quot; -type f || echo &amp;quot;Exit code: $?&amp;quot;
+&lt;span class="gi"&gt;+    cgroups_debug_script:&lt;/span&gt;
+&lt;span class="gi"&gt;+      - fgrep cgroup /proc/mounts || echo &amp;quot;Exit code: $?&amp;quot;&lt;/span&gt;
+&lt;span class="gi"&gt;+      - find /sys/fs/cgroup -exec ls -ldF {} \; || echo &amp;quot;Exit code: $?&amp;quot;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;    kvm_debug_script:
+&lt;span class="w"&gt; &lt;/span&gt;      - free -h
+&lt;span class="w"&gt; &lt;/span&gt;      - pstree -alT
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="posts"></category><category term="ci"></category><category term="automation"></category><category term="libvirt"></category></entry></feed>

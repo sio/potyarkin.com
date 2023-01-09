@@ -17,7 +17,7 @@ pleasant:&lt;/p&gt;
 packages with a sole &lt;code&gt;__init__.py&lt;/code&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;pkg_resources&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;resource_filename&lt;/span&gt;
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;path&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-    &lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
 &lt;span class="sd"&gt;    Return path to theme templates and assets&lt;/span&gt;
 &lt;span class="sd"&gt;    Use this value for THEME in Pelican settings&lt;/span&gt;
 &lt;span class="sd"&gt;    &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
@@ -71,9 +71,9 @@ to be explicitly invoked. Instead, you write make targets that depend on
 &lt;code&gt;venv&lt;/code&gt; and refer to all executables in virtual environment via
 &lt;code&gt;$(VENV)/executable&lt;/code&gt;, e.g. &lt;code&gt;$(VENV)/python&lt;/code&gt; or &lt;code&gt;$(VENV)/pip&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Using &lt;a href="https://github.com/sio/Makefile.venv"&gt;Makefile.venv&lt;/a&gt; is easy:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;test&lt;/span&gt;
-&lt;span class="nf"&gt;test&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;venv&lt;/span&gt;
-    &lt;span class="k"&gt;$(&lt;/span&gt;VENV&lt;span class="k"&gt;)&lt;/span&gt;/python -m unittest
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;test&lt;/span&gt;
+&lt;span class="nf"&gt;test&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;venv&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;VENV&lt;span class="k"&gt;)&lt;/span&gt;/python&lt;span class="w"&gt; &lt;/span&gt;-m&lt;span class="w"&gt; &lt;/span&gt;unittest
 
 &lt;span class="cp"&gt;include Makefile.venv  # All the magic happens here&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;

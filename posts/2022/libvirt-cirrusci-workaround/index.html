@@ -106,45 +106,45 @@ by Libvirt domains.</p>
 <p>This is why I'm adding this meaningless cgroups burn-in to my pipelines.
 "It ain't stupid if it works", right?</p>
 <h4 id="full-commit-diff"><a class="toclink" href="#full-commit-diff">Full commit diff</a></h4>
-<div class="highlight"><pre><span></span><code><span class="gh">diff --git a/.cirrus.yml.j2 b/.cirrus.yml.j2</span><span class="w"></span>
-<span class="gd">--- a/.cirrus.yml.j2</span><span class="w"></span>
-<span class="gi">+++ b/.cirrus.yml.j2</span><span class="w"></span>
-<span class="gu">@@ -21,6 +21,8 @@ task:</span><span class="w"></span>
-<span class="w"> </span>    # VENVDIR must be absolute path for &#39;cd &amp;&amp; make&#39; approach to work<span class="w"></span>
-<span class="w"> </span>    # VENVDIR should not be cached! Cirrus CI drops some binaries randomly<span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="gh">diff --git a/.cirrus.yml.j2 b/.cirrus.yml.j2</span>
+<span class="gd">--- a/.cirrus.yml.j2</span>
+<span class="gi">+++ b/.cirrus.yml.j2</span>
+<span class="gu">@@ -21,6 +21,8 @@ task:</span>
+<span class="w"> </span>    # VENVDIR must be absolute path for &#39;cd &amp;&amp; make&#39; approach to work
+<span class="w"> </span>    # VENVDIR should not be cached! Cirrus CI drops some binaries randomly
 
-<span class="gi">+    CGROUP_WORKAROUND: /sys/fs/cgroup/machine/qemu-cgroup_workaround.libvirt-qemu</span><span class="w"></span>
-<span class="gi">+</span><span class="w"></span>
-<span class="w"> </span>    # Pass values from cirrus-run environment<span class="w"></span>
-<span class="w"> </span>    CLONE_URL: &quot;{{ CI_REPOSITORY_URL }}&quot;<span class="w"></span>
-<span class="w"> </span>    CLONE_SHA: &quot;{{ CI_COMMIT_SHA }}&quot;<span class="w"></span>
-<span class="gu">@@ -61,6 +63,16 @@ task:</span><span class="w"></span>
-<span class="w"> </span>  libvirtd_background_script:<span class="w"></span>
-<span class="w"> </span>    - sleep 2 &amp;&amp; /usr/sbin/libvirtd<span class="w"></span>
+<span class="gi">+    CGROUP_WORKAROUND: /sys/fs/cgroup/machine/qemu-cgroup_workaround.libvirt-qemu</span>
+<span class="gi">+</span>
+<span class="w"> </span>    # Pass values from cirrus-run environment
+<span class="w"> </span>    CLONE_URL: &quot;{{ CI_REPOSITORY_URL }}&quot;
+<span class="w"> </span>    CLONE_SHA: &quot;{{ CI_COMMIT_SHA }}&quot;
+<span class="gu">@@ -61,6 +63,16 @@ task:</span>
+<span class="w"> </span>  libvirtd_background_script:
+<span class="w"> </span>    - sleep 2 &amp;&amp; /usr/sbin/libvirtd
 
-<span class="gi">+  # Workaround for cgroups v2</span><span class="w"></span>
-<span class="gi">+  # I have no idea why or how this works (see commit message for a longer rant)</span><span class="w"></span>
-<span class="gi">+  cgroups_workaround_background_script:</span><span class="w"></span>
-<span class="gi">+    - mkdir -p &quot;$CGROUP_WORKAROUND&quot;</span><span class="w"></span>
-<span class="gi">+    - ls -lF &quot;$CGROUP_WORKAROUND&quot;</span><span class="w"></span>
-<span class="gi">+    - bash -c &#39;echo $$ &gt; /tmp/cgroups_workaround.pid; sleep infinity&#39; &amp;</span><span class="w"></span>
-<span class="gi">+    - sleep 1</span><span class="w"></span>
-<span class="gi">+    - cat /tmp/cgroups_workaround.pid &gt;&gt; $CGROUP_WORKAROUND/cgroup.procs</span><span class="w"></span>
-<span class="gi">+    - cat $CGROUP_WORKAROUND/cgroup.procs</span><span class="w"></span>
-<span class="gi">+</span><span class="w"></span>
-<span class="w"> </span>  # Execute automated tests<span class="w"></span>
-<span class="w"> </span>  test_script:<span class="w"></span>
-<span class="w"> </span>    - cd ansible/tests<span class="w"></span>
-<span class="gu">@@ -70,6 +82,9 @@ task:</span><span class="w"></span>
-<span class="w"> </span>  always:<span class="w"></span>
-<span class="w"> </span>    cache_debug_script:<span class="w"></span>
-<span class="w"> </span>      - find &quot;$HOME/cache&quot; -type f || echo &quot;Exit code: $?&quot;<span class="w"></span>
-<span class="gi">+    cgroups_debug_script:</span><span class="w"></span>
-<span class="gi">+      - fgrep cgroup /proc/mounts || echo &quot;Exit code: $?&quot;</span><span class="w"></span>
-<span class="gi">+      - find /sys/fs/cgroup -exec ls -ldF {} \; || echo &quot;Exit code: $?&quot;</span><span class="w"></span>
-<span class="w"> </span>    kvm_debug_script:<span class="w"></span>
-<span class="w"> </span>      - free -h<span class="w"></span>
-<span class="w"> </span>      - pstree -alT<span class="w"></span>
+<span class="gi">+  # Workaround for cgroups v2</span>
+<span class="gi">+  # I have no idea why or how this works (see commit message for a longer rant)</span>
+<span class="gi">+  cgroups_workaround_background_script:</span>
+<span class="gi">+    - mkdir -p &quot;$CGROUP_WORKAROUND&quot;</span>
+<span class="gi">+    - ls -lF &quot;$CGROUP_WORKAROUND&quot;</span>
+<span class="gi">+    - bash -c &#39;echo $$ &gt; /tmp/cgroups_workaround.pid; sleep infinity&#39; &amp;</span>
+<span class="gi">+    - sleep 1</span>
+<span class="gi">+    - cat /tmp/cgroups_workaround.pid &gt;&gt; $CGROUP_WORKAROUND/cgroup.procs</span>
+<span class="gi">+    - cat $CGROUP_WORKAROUND/cgroup.procs</span>
+<span class="gi">+</span>
+<span class="w"> </span>  # Execute automated tests
+<span class="w"> </span>  test_script:
+<span class="w"> </span>    - cd ansible/tests
+<span class="gu">@@ -70,6 +82,9 @@ task:</span>
+<span class="w"> </span>  always:
+<span class="w"> </span>    cache_debug_script:
+<span class="w"> </span>      - find &quot;$HOME/cache&quot; -type f || echo &quot;Exit code: $?&quot;
+<span class="gi">+    cgroups_debug_script:</span>
+<span class="gi">+      - fgrep cgroup /proc/mounts || echo &quot;Exit code: $?&quot;</span>
+<span class="gi">+      - find /sys/fs/cgroup -exec ls -ldF {} \; || echo &quot;Exit code: $?&quot;</span>
+<span class="w"> </span>    kvm_debug_script:
+<span class="w"> </span>      - free -h
+<span class="w"> </span>      - pstree -alT
 </code></pre></div></article>
 <nav class="article-tags">
   <a href="https://potyarkin.ml/tags/ci/">ci</a>

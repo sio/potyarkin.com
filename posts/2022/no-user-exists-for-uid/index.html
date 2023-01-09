@@ -65,17 +65,17 @@ of a warning from <code>git push</code>, so I've started digging.</p>
 <p>I was very surprised to learn where this error <a href="https://github.com/openssh/openssh-portable/blob/c46f6fed419167c1671e4227459e108036c760f8/ssh.c#L659-L664">comes from</a>:</p>
 <div class="highlight"><pre><span></span><code><span class="cm">/*</span>
 <span class="cm"> * openssh/ssh.c: Main program for the ssh client.</span>
-<span class="cm"> */</span><span class="w"></span>
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ac</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">av</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="cm"> */</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ac</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">av</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="c1">// ...lines omitted...</span>
 
-<span class="w">    </span><span class="cm">/* Get user data. */</span><span class="w"></span>
-<span class="w">    </span><span class="n">pw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getpwuid</span><span class="p">(</span><span class="n">getuid</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">pw</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">logit</span><span class="p">(</span><span class="s">&quot;No user exists for uid %lu&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">u_long</span><span class="p">)</span><span class="n">getuid</span><span class="p">());</span><span class="w"></span>
-<span class="w">        </span><span class="n">exit</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="cm">/* Get user data. */</span>
+<span class="w">    </span><span class="n">pw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getpwuid</span><span class="p">(</span><span class="n">getuid</span><span class="p">());</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">pw</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">logit</span><span class="p">(</span><span class="s">&quot;No user exists for uid %lu&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">u_long</span><span class="p">)</span><span class="n">getuid</span><span class="p">());</span>
+<span class="w">        </span><span class="n">exit</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 </code></pre></div>
 
 <p><code>getuid()</code> is pretty self-explanatory, it returns UID of current user.
