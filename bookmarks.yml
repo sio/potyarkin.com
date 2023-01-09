@@ -5,6 +5,22 @@
 # data format is not guaranteed to remain stable over time
 #
 
+- period: 2023-01
+  links:
+
+  - title: Golang is evil on shitty networks
+    url: https://withinboredom.info/blog/2022/12/29/golang-is-evil-on-shitty-networks/
+    description: |-
+      With a folow up: [The Cargo Cult of TCP_NODELAY](https://withinboredom.info/blog/2023/01/03/the-cargo-cult-of-tcp_nodelay-when-to-use-it/)
+
+      This article notices and explaines an opinionated Golang's default of
+      setting TCP_NODELAY on all TCP sockets. It's used to improve throughput
+      over datacenter-grade links (Ethernet) but may result in poor performance
+      on unreliable networks (WiFi, mobile). Userspace IO buffering may help to
+      work around this problem because raw socket is not easily exposed in
+      Golang to revert this setting (in case it's required).
+
+
 - period: 2022-12
   links:
 
