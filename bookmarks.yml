@@ -18,7 +18,7 @@
       over datacenter-grade links (Ethernet) but may result in poor performance
       on unreliable networks (WiFi, mobile). Userspace IO buffering may help to
       work around this problem because raw socket is not easily exposed in
-      Golang to revert this setting (in case it's required).
+      Golang (to revert this setting in case it's required).
 
 
 - period: 2022-12

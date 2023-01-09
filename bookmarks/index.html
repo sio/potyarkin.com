@@ -65,7 +65,7 @@ setting TCP_NODELAY on all TCP sockets. It's used to improve throughput
 over datacenter-grade links (Ethernet) but may result in poor performance
 on unreliable networks (WiFi, mobile). Userspace IO buffering may help to
 work around this problem because raw socket is not easily exposed in
-Golang to revert this setting (in case it's required).</p>
+Golang (to revert this setting in case it's required).</p>
     </li>
   </ul>
   <h2 id="2022-12">
