@@ -2,7 +2,7 @@
 Generate monthly Atom feed for bookmarks.yml
 '''
 
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from textwrap import dedent
 
@@ -50,15 +50,21 @@ class LinkFeedGenerator(Generator):
             path=self.feed_path,
         )
 
+def start_of_next_month(dt: datetime) -> datetime:
+    '''
+    https://stackoverflow.com/a/59199379
+    '''
+    return (dt.replace(day=1) + timedelta(days=32)).replace(day=1)
 
 class LinkFeedItem:
 
     def __init__(self, period, links, generator):
         period_parsed = datetime.strptime(period, generator.month_format)
+        period_parsed = period_parsed.replace(tzinfo=timezone.utc)
         self.title = period_parsed.strftime('%B %Y')
         self.url = generator.settings.get('SITEURL', '') + '/bookmarks/#' + period
         self.category = 'bookmarks'
-        self.date = datetime(period_parsed.year, period_parsed.month + 1, 1, tzinfo=timezone.utc)
+        self.date = start_of_next_month(period_parsed)
         self.author = generator.settings.get('AUTHOR', 'Bookmarks')
         self.summary = generator.feed_template.render(links=links)
 
