@@ -60,7 +60,7 @@ Unsorted links to the pages I've considered interesting at some time |
       <a href="https://withinboredom.info/blog/2022/12/29/golang-is-evil-on-shitty-networks/">Golang is evil on shitty networks</a>
       </strong></p>
       <p>With a folow up: <a href="https://withinboredom.info/blog/2023/01/03/the-cargo-cult-of-tcp_nodelay-when-to-use-it/">The Cargo Cult of TCP_NODELAY</a></p>
-<p>This article notices and explaines an opinionated Golang's default of
+<p>This article notices and explains an opinionated Golang's default of
 setting TCP_NODELAY on all TCP sockets. It's used to improve throughput
 over datacenter-grade links (Ethernet) but may result in poor performance
 on unreliable networks (WiFi, mobile). Userspace IO buffering may help to
