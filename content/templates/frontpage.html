@@ -57,7 +57,7 @@
     </li>
   {% endfor %}
   </ul>
-  <h3><a href="/webring/">New articles from other interesting blogs</a></h3>
+  <h3><a href="/blogroll/">New articles from other interesting blogs</a></h3>
   {% set webring = json("content/webring.json") %}
   <ul>
   {% for item in (webring|sort(reverse=True, attribute="entry.published_parsed")|list)[:(DEFAULT_PAGINATION/2)|int] %}
