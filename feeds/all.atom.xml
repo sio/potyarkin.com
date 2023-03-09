@@ -24,7 +24,7 @@ to develop and hone some arbitrary skills but in this case the skills are not
 useless outside of the game. In addition to programming (obviously) AoC
 tickled parts of my brain responsible for spatial thinking, math and
 creativity. I was reminded of how much I enjoyed similarly spirited
-math/physics puzzles when I was at school - it's a shame these experiences are
+math and physics puzzles when I was at school - it's a shame these experiences are
 so rare in adult life.&lt;/p&gt;
 &lt;p&gt;Roughly since Day 10 I've started taking notes about each puzzle and my
 thought process during solving it. I've intended to include them into this
@@ -35,14 +35,14 @@ my notes:&lt;/p&gt;
 &lt;li&gt;Advent of Code is fun! Grid puzzles and mazes are very fun, especially 3D
   ones! Tetris... Yummy! Maze on the surface of a cube... Brilliant!&lt;/li&gt;
 &lt;li&gt;At some point I've grown tired. It was beginning to feel more like work and
-  less like fun. Taking a (long) break here and there has helped to bring back
-  the joy&lt;/li&gt;
+  less like fun. Taking a (long) break here and there has helped to bring 
+  the joy back&lt;/li&gt;
 &lt;li&gt;Sometimes I got stuck. There is a large online community around Advent of
   Code, so there are a lot of ways to unblock oneself. I did not actively
   engage with any user group in particular, but on one occasion reading Reddit
   comments has helped to push me in the right direction, and on another one
   I've benefited from GitHub's social networking side.&lt;/li&gt;
-&lt;li&gt;AoC is a computer game you can continue playing without a computer. A lot of
+&lt;li&gt;AoC is a computer game you can continue playing without away from keyboard. A lot of
   good solution ideas have come to me while I was in shower or in a traffic
   jam.&lt;/li&gt;
 &lt;li&gt;A couple of times I felt very clever when I solved Part 2 of the puzzle
@@ -53,14 +53,14 @@ my notes:&lt;/p&gt;
 month before the start of Advent of Code, so I went in expecting to learn a
 lot and I was not disappointed. I've grown to appreciate the breadth of Golang
 standard library and to love type redefining. All of &lt;a href="https://github.com/sio/advent-of-code/tree/master/aoc2022"&gt;my solutions&lt;/a&gt; use only
-the standard library - this has happened organically, I did not impose any
+the standard library - this happened organically, I did not impose any
 restrictions in this regard.&lt;/p&gt;
 &lt;p&gt;All in all, Go turned out to be exactly what it has promised: a nice language
 with a fast compiler and strict type system. From now on I will choose it over
 Python for personal projects.&lt;/p&gt;
-&lt;p&gt;Working on these 25 puzzles I've gotten used to having an extra thread of
+&lt;p&gt;Working on these 25 puzzles I've gotten used to always having an extra thread of
 thought in background, completely unrelated to personal or work life. Even
-though I miss it now, I'm not yet sure that I should dive into AoC puzzles
+though I miss it now, I'm not yet sure if I should dive into AoC puzzles
 from previous years. Do they introduce enough variety to tickle my mind in
 some new ways or are they just more of the same thing? If I ever decide to
 try, I've heard that AoC 2019 IntCode puzzles are good - I'll probably start
