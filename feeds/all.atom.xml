@@ -1,5 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/all.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2022-07-29T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Negotiating down to 100Mbit between two 1Gbit devices</title><link href="https://potyarkin.ml/posts/2022/negotiating-down-to-100mbit/" rel="alternate"></link><published>2022-07-29T00:00:00+03:00</published><updated>2022-07-29T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-07-29:/posts/2022/negotiating-down-to-100mbit/</id><summary type="html">&lt;p&gt;Connecting two gigabit-capable devices via 4-wire UTP cable is an abomination,
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/all.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2023-03-09T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Advent of Code 2022 was fun!</title><link href="https://potyarkin.ml/posts/2023/aoc2022/" rel="alternate"></link><published>2023-03-09T00:00:00+03:00</published><updated>2023-03-09T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2023-03-09:/posts/2023/aoc2022/</id><summary type="html">&lt;p&gt;This was the first year I participated in &lt;a href="https://adventofcode.com"&gt;Advent of Code&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/sio/advent-of-code/tree/master/aoc2022"&gt;&lt;img alt="" src="https://potyarkin.ml/resources/aoc2022.svg"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;In case you're not familiar with it, AoC is a Christmas themed programming
+competition consisting of 25 challenges published daily (from December 1st to
+December 25th). The web site produces personalized puzzle inputs for each user
+and expects only …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This was the first year I participated in &lt;a href="https://adventofcode.com"&gt;Advent of Code&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/sio/advent-of-code/tree/master/aoc2022"&gt;&lt;img alt="" src="https://potyarkin.ml/resources/aoc2022.svg"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;In case you're not familiar with it, AoC is a Christmas themed programming
+competition consisting of 25 challenges published daily (from December 1st to
+December 25th). The web site produces personalized puzzle inputs for each user
+and expects only the results to be submitted for validation, not full
+algorithms. Participants may use any programming language they like.&lt;/p&gt;
+&lt;p&gt;I did not compete for global or community &lt;a href="https://adventofcode.com/2022/leaderboard"&gt;leaderboards&lt;/a&gt; - that would be too
+high of a pressure to remain fun. Instead I took a self paced approach and
+solved puzzles whenever I felt like it - though I've never skipped ahead to
+start the next challenge until I was done with the current one.
+&lt;a href="https://github.com/sio/advent-of-code/tree/master/aoc2022"&gt;I completed&lt;/a&gt; the first 18 puzzles in December 2022 and finished the
+remaining ones in 2023.&lt;/p&gt;
+&lt;p&gt;It was very fun!&lt;/p&gt;
+&lt;p&gt;For me Advent of Code turned out to be the best computer game I played in
+years (though I'm not much of a gamer). Like many games it requires the player
+to develop and hone some arbitrary skills but in this case the skills are not
+useless outside of the game. In addition to programming (obviously) AoC
+tickled parts of my brain responsible for spatial thinking, math and
+creativity. I was reminded of how much I enjoyed similarly spirited
+math/physics puzzles when I was at school - it's a shame these experiences are
+so rare in adult life.&lt;/p&gt;
+&lt;p&gt;Roughly since Day 10 I've started taking notes about each puzzle and my
+thought process during solving it. I've intended to include them into this
+blog post, but I decided against it. There are enough AoC walkthroughs &lt;a href="https://www.google.com/search?q=%22advent+of+code%22+%222022%22+walkthrough"&gt;out
+there&lt;/a&gt; already. Here is a condensed list of bullet points from
+my notes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Advent of Code is fun! Grid puzzles and mazes are very fun, especially 3D
+  ones! Tetris... Yummy! Maze on the surface of a cube... Brilliant!&lt;/li&gt;
+&lt;li&gt;At some point I've grown tired. It was beginning to feel more like work and
+  less like fun. Taking a (long) break here and there has helped to bring back
+  the joy&lt;/li&gt;
+&lt;li&gt;Sometimes I got stuck. There is a large online community around Advent of
+  Code, so there are a lot of ways to unblock oneself. I did not actively
+  engage with any user group in particular, but on one occasion reading Reddit
+  comments has helped to push me in the right direction, and on another one
+  I've benefited from GitHub's social networking side.&lt;/li&gt;
+&lt;li&gt;AoC is a computer game you can continue playing without a computer. A lot of
+  good solution ideas have come to me while I was in shower or in a traffic
+  jam.&lt;/li&gt;
+&lt;li&gt;A couple of times I felt very clever when I solved Part 2 of the puzzle
+  before seeing the prompt.&lt;/li&gt;
+&lt;li&gt;Off-by-one errors are truly the bane of programmer's existence :-)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I solved all 2022's puzzles using Go language. I've picked it up less than a
+month before the start of Advent of Code, so I went in expecting to learn a
+lot and I was not disappointed. I've grown to appreciate the breadth of Golang
+standard library and to love type redefining. All of &lt;a href="https://github.com/sio/advent-of-code/tree/master/aoc2022"&gt;my solutions&lt;/a&gt; use only
+the standard library - this has happened organically, I did not impose any
+restrictions in this regard.&lt;/p&gt;
+&lt;p&gt;All in all, Go turned out to be exactly what it has promised: a nice language
+with a fast compiler and strict type system. From now on I will choose it over
+Python for personal projects.&lt;/p&gt;
+&lt;p&gt;Working on these 25 puzzles I've gotten used to having an extra thread of
+thought in background, completely unrelated to personal or work life. Even
+though I miss it now, I'm not yet sure that I should dive into AoC puzzles
+from previous years. Do they introduce enough variety to tickle my mind in
+some new ways or are they just more of the same thing? If I ever decide to
+try, I've heard that AoC 2019 IntCode puzzles are good - I'll probably start
+with those.&lt;/p&gt;</content><category term="posts"></category><category term="programming"></category><category term="go"></category></entry><entry><title>Negotiating down to 100Mbit between two 1Gbit devices</title><link href="https://potyarkin.ml/posts/2022/negotiating-down-to-100mbit/" rel="alternate"></link><published>2022-07-29T00:00:00+03:00</published><updated>2022-07-29T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-07-29:/posts/2022/negotiating-down-to-100mbit/</id><summary type="html">&lt;p&gt;Connecting two gigabit-capable devices via 4-wire UTP cable is an abomination,
 but sometimes we have to live with it (e.g. when a &lt;a href="https://nevalink.net/"&gt;greedy ISP&lt;/a&gt;
 decides to save a few cents and pulls a cheap cable to your apartment).&lt;/p&gt;
 &lt;p&gt;The fun starts when the devices try to negotiate Ethernet connection …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Connecting two gigabit-capable devices via 4-wire UTP cable is an abomination,
