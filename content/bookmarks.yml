@@ -5,6 +5,15 @@
 # data format is not guaranteed to remain stable over time
 #
 
+- period: 2023-03
+  links:
+
+  - title: Hexagonal Grids - Cube Coordinates
+    url: https://www.redblobgames.com/grids/hexagons/#coordinates-cube
+    description: |-
+      How to reason about hexagonal tiles when programming
+
+
 - period: 2023-01
   links:
 
