@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - Bookmarks - Orange Sun</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/extra/bookmarks.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2023-02-01T00:00:00+00:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>January 2023</title><link href="https://potyarkin.ml/bookmarks/#2023-01" rel="alternate"></link><published>2023-02-01T00:00:00+00:00</published><updated>2023-02-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2023-02-01:/bookmarks//2023-01</id><content type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - Bookmarks - Orange Sun</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/extra/bookmarks.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2023-04-01T00:00:00+00:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>March 2023</title><link href="https://potyarkin.ml/bookmarks/#2023-03" rel="alternate"></link><published>2023-04-01T00:00:00+00:00</published><updated>2023-04-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2023-04-01:/bookmarks//2023-03</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://www.redblobgames.com/grids/hexagons/#coordinates-cube"&gt;Hexagonal Grids - Cube Coordinates&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;How to reason about hexagonal tiles when programming&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>January 2023</title><link href="https://potyarkin.ml/bookmarks/#2023-01" rel="alternate"></link><published>2023-02-01T00:00:00+00:00</published><updated>2023-02-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2023-02-01:/bookmarks//2023-01</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
