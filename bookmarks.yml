@@ -5,6 +5,18 @@
 # data format is not guaranteed to remain stable over time
 #
 
+- period: 2023-05
+  links:
+
+  - title: The TTY demystified
+    by: Linus Åkesson
+    url: https://www.linusakesson.net/programming/tty/
+    description: |-
+      Good introduction into the world of ttys. Explains the relationship
+      between ttys, ptys, line discipline and mixes in a sidebar on Unix
+      signals.
+
+
 - period: 2023-03
   links:
 
