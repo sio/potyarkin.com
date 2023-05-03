@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Orange Sun</title><link>https://potyarkin.ml/</link><description>Unsorted ramblings, sometimes related to programming</description><lastBuildDate>Thu, 09 Mar 2023 00:00:00 +0300</lastBuildDate><item><title>Advent of Code 2022 was fun!</title><link>https://potyarkin.ml/posts/2023/aoc2022/</link><description>&lt;p&gt;This was the first year I participated in &lt;a href="https://adventofcode.com"&gt;Advent of Code&lt;/a&gt;.&lt;/p&gt;
+<rss version="2.0"><channel><title>Orange Sun</title><link>https://potyarkin.ml/</link><description>Unsorted ramblings, sometimes related to programming</description><lastBuildDate>Wed, 03 May 2023 00:00:00 +0300</lastBuildDate><item><title>A pull request 10 years in the making</title><link>https://potyarkin.ml/posts/2023/10-year-pull-request/</link><description>&lt;blockquote&gt;
+&lt;p&gt;Once upon a time there was a bug in a free software project that annoyed me
+for long enough that I've learned C to fix it. And it felt good.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Now that we've got a TL;DR out of the way, here is the story.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://potyarkin.ml/resources/pr893_timeline.svg"&gt;&lt;img alt="story timeline" src="https://potyarkin.ml/resources/pr893_timeline.svg"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;There is a good torrent …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vitaly Potyarkin</dc:creator><pubDate>Wed, 03 May 2023 00:00:00 +0300</pubDate><guid isPermaLink="false">tag:potyarkin.ml,2023-05-03:/posts/2023/10-year-pull-request/</guid><category>posts</category><category>opensource</category><category>programming</category></item><item><title>Advent of Code 2022 was fun!</title><link>https://potyarkin.ml/posts/2023/aoc2022/</link><description>&lt;p&gt;This was the first year I participated in &lt;a href="https://adventofcode.com"&gt;Advent of Code&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/sio/advent-of-code/tree/master/aoc2022"&gt;&lt;img alt="" src="https://potyarkin.ml/resources/aoc2022.svg"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;In case you're not familiar with it, AoC is a Christmas themed programming
 competition consisting of 25 challenges published daily (from December 1st to
