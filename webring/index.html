@@ -53,10 +53,10 @@ Latest posts from other interesting blogs |
     <ul>
   <li>
     <p><strong>
-    <a href="https://utcc.utoronto.ca/~cks/space/blog/linux/NFSServerBreakingLocks">Forcefully breaking NFS locks on Linux NFS servers as of Ubuntu 22.04</a>
+    <a href="https://utcc.utoronto.ca/~cks/space/blog/linux/FlockFcntlAndNFS">Flock() and fcntl() file locks and Linux NFS (v3)</a>
     ::&nbsp;Wandering Thoughts
     </strong></p>
-    <p>As I discovered when I first explored /proc/locks, the Linux NFS server supports two special files in /proc/fs/nfsd that will get it to break some of the locks it holds, 'unlock_ip' and...</p>
+    <p>Unix broadly and Linux specifically has long had three functions that can do file locks, flock(), fcntl(), and lockf(). The latter two are collectively known as 'POSIX' file locks because they...</p>
   </li>
   <li>
     <p><strong>
