@@ -40,6 +40,8 @@ def main():
                 log.exception(f'Error while fetching {blog["feed"]}')
                 continue
             entries = sorted(feed.entries, key=lambda x: x.published_parsed, reverse=True)
+            if len(entries) == 0:
+                continue
             latest = entries[0]
             blog['section'] = section['section']
             webring.append(dict(blog=blog, entry=latest))
