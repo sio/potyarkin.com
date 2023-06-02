@@ -1,5 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/all.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2023-05-03T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>A pull request 10 years in the making</title><link href="https://potyarkin.ml/posts/2023/10-year-pull-request/" rel="alternate"></link><published>2023-05-03T00:00:00+03:00</published><updated>2023-05-03T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2023-05-03:/posts/2023/10-year-pull-request/</id><summary type="html">&lt;blockquote&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/all.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2023-06-02T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Many-to-many relationships in Excel data model</title><link href="https://potyarkin.ml/posts/2023/excel-many-to-many/" rel="alternate"></link><published>2023-06-02T00:00:00+03:00</published><updated>2023-06-02T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2023-06-02:/posts/2023/excel-many-to-many/</id><summary type="html">&lt;p&gt;This is a quick hack to build many-to-many relationships in Excel data model
+even though they are not supported out of the box.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Create intermediate &lt;a href="https://stackoverflow.com/a/70682229"&gt;calculated table&lt;/a&gt; and use DAX to fill it
+    with unique values from related columns on both sides of the relationship:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;EVALUATE
+  FILTER(
+    DISTINCT(
+      UNION(
+        VALUES …&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;This is a quick hack to build many-to-many relationships in Excel data model
+even though they are not supported out of the box.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Create intermediate &lt;a href="https://stackoverflow.com/a/70682229"&gt;calculated table&lt;/a&gt; and use DAX to fill it
+    with unique values from related columns on both sides of the relationship:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;EVALUATE
+  FILTER(
+    DISTINCT(
+      UNION(
+        VALUES(&amp;#39;TableA&amp;#39;[Field]),
+        VALUES(&amp;#39;TableB&amp;#39;[Field])
+      )
+    ),
+    NOT(ISBLANK([Field]))
+  )
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create two one-to-many relationships placing this intermediate table in
+    between&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For all intents and purposes you may now forget that this intermediate table
+exists: it will get updated automatically whenever you update the data model,
+and it will not consume much resources. Pivot tables and DAX formulas will
+work as if the two original tables were directly connected via many-to-many
+link.&lt;/p&gt;
+&lt;p&gt;A similar intermediate table may be created with Power Query, but that's a lot
+less elegant (unless you're already using Power Query elsewhere in the
+workbook) and takes significantly longer to recalculate.&lt;/p&gt;</content><category term="posts"></category><category term="excel"></category></entry><entry><title>A pull request 10 years in the making</title><link href="https://potyarkin.ml/posts/2023/10-year-pull-request/" rel="alternate"></link><published>2023-05-03T00:00:00+03:00</published><updated>2023-05-03T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2023-05-03:/posts/2023/10-year-pull-request/</id><summary type="html">&lt;blockquote&gt;
 &lt;p&gt;Once upon a time there was a bug in a free software project that annoyed me
 for long enough that I've learned C to fix it. And it felt good.&lt;/p&gt;
 &lt;/blockquote&gt;

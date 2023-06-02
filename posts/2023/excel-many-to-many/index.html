@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Orange Sun - 2023 archives</title>
-  <meta name="description" content="Unsorted ramblings, sometimes related to programming">
+  <title>Many-to-many relationships in Excel data model</title>
+  <meta name="description" content="Orange Sun | Posts | Vitaly Potyarkin | 2023-06-02">
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -10,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="referrer" content="origin">
   <meta name="generator" content="Pelican">
-  <link href="https://potyarkin.ml/" rel="canonical">
+  <link href="https://potyarkin.ml/posts/2023/excel-many-to-many/" rel="canonical">
 <link href="https://potyarkin.ml/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Orange Sun Full Atom Feed" />
 <link href="https://potyarkin.ml/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="Orange Sun Full RSS Feed" />
   <link href="https://potyarkin.ml/theme/css/style.css?cache=ce1ce9e802f6452fc24c45dcd14f219b9fdbc4b78394fcb3ed490c23f88a6851" type="text/css" rel="stylesheet">
@@ -27,7 +27,7 @@
   </style>
   <meta name="theme-color" content="#f26a3d">
 </head>
-<body class="pelican-period_archives">
+<body class="pelican-article">
 <nav id="menu">
   <a href="#" class="close button">Close</a>
   <a href="#menu" class="open button">Menu</a>
@@ -42,19 +42,54 @@
       <li><a href="https://potyarkin.ml/webring/">Webring</a></li>
   </ul>
 </nav>  <header class="page-header">
-    <h1>Orange Sun - 2023 archives</h1>
-    <span class="subtitle">Unsorted ramblings, sometimes related to programming</span>
+    <h1>Many-to-many relationships in Excel data model</h1>
+    <span class="subtitle"><a href="https://potyarkin.ml/">Orange Sun</a> |
+<a href="https://potyarkin.ml/posts/">Posts</a> |   <a href="https://potyarkin.ml/">Vitaly Potyarkin</a>
+| 2023-06-02
+</span>
   </header>
-<h1>Archives for 2023</h1>
+<article class="full"><p>This is a quick hack to build many-to-many relationships in Excel data model
+even though they are not supported out of the box.</p>
+<ul>
+<li>
+<p>Create intermediate <a href="https://stackoverflow.com/a/70682229">calculated table</a> and use DAX to fill it
+    with unique values from related columns on both sides of the relationship:</p>
+<div class="highlight"><pre><span></span><code>EVALUATE
+  FILTER(
+    DISTINCT(
+      UNION(
+        VALUES(&#39;TableA&#39;[Field]),
+        VALUES(&#39;TableB&#39;[Field])
+      )
+    ),
+    NOT(ISBLANK([Field]))
+  )
+</code></pre></div>
 
-<dl>
-    <dt>2023-06-02</dt>
-    <dd><a href="https://potyarkin.ml/posts/2023/excel-many-to-many/">Many-to-many relationships in Excel data model</a></dd>
-    <dt>2023-05-03</dt>
-    <dd><a href="https://potyarkin.ml/posts/2023/10-year-pull-request/">A pull request 10 years in the making</a></dd>
-    <dt>2023-03-09</dt>
-    <dd><a href="https://potyarkin.ml/posts/2023/aoc2022/">Advent of Code 2022 was fun!</a></dd>
-</dl>
+</li>
+<li>
+<p>Create two one-to-many relationships placing this intermediate table in
+    between</p>
+</li>
+</ul>
+<p>For all intents and purposes you may now forget that this intermediate table
+exists: it will get updated automatically whenever you update the data model,
+and it will not consume much resources. Pivot tables and DAX formulas will
+work as if the two original tables were directly connected via many-to-many
+link.</p>
+<p>A similar intermediate table may be created with Power Query, but that's a lot
+less elegant (unless you're already using Power Query elsewhere in the
+workbook) and takes significantly longer to recalculate.</p></article>
+<nav class="article-tags">
+  <a href="https://potyarkin.ml/tags/excel/">excel</a>
+</nav>
+<nav class="neighbors">
+  <a class="neighbor neighbor-prev" href="https://potyarkin.ml/posts/2023/10-year-pull-request/">
+    <h1>A pull request 10 years in the making</h1>
+    <p>Once upon a time there was a bug in a free software project that annoyed me for long...</p>
+  </a>
+  <span class="neighbor"></span>
+</nav>
 <footer class="page-footer">
   <section class="credits">
         <span class="credits-left">
