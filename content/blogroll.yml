@@ -133,6 +133,18 @@
 
 - section: Other IT related topics
   blogs:
+    - title: Julia Evans
+      url: https://jvns.ca/
+      feed: https://jvns.ca/atom.xml
+      description: |-
+        A frequently updated personal tech blog. It covers so many subjects
+        that it's hard to assign a specific category. I've enjoyed
+        posts explaining low level Linux fundamentals to beginners but there
+        are also many good articles on blogging, idea of small web, Python and
+        even Kubernetes.
+
+        And don't forget the awesome hand crafted zines!
+
     - title: Data, tech, and sometimes Nutella
       by: Vicky Boykis
       url: https://vickiboykis.com
