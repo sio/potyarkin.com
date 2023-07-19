@@ -13,7 +13,7 @@ Turns out the agent is pretty fast!
 On a cheap cloud machine it was able to reliably sign more than 500 messages
 per second with an ED25519 key. RSA signing was about 4-5 times slower, as
 expected.
-For a personal heuristic I've decided to remember that ED25519 signatures
+For a personal heuristic I've decided to memorize that ED25519 signatures
 cost 2ms and RSA ones 8ms.
 
 Message size had little effect on throughput because both in ED25519 and in
