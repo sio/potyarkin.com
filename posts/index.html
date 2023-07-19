@@ -51,6 +51,19 @@
 <ul class="article-list">
 <li>
   <article class="preview">
+    <a href="https://potyarkin.ml/posts/2023/ssh-agent-benchmark/">
+    <header>
+      <time datetime="2023-07-19">2023-07-19</time>
+      <h1>Benchmarking ssh-agent performance</h1>
+    </header>
+    <section>
+      I have an application idea that would require calling ssh-agent rather frequently - but how many requests per second can it handle? To answer this question I wrote a small benchmark in Go. It runs a tight loop sending messages for ssh-agent to sign. Turns out the agent is pretty fast …
+    </section>
+    </a>
+  </article>
+</li>
+<li>
+  <article class="preview">
     <a href="https://potyarkin.ml/posts/2023/excel-many-to-many/">
     <header>
       <time datetime="2023-06-02">2023-06-02</time>
@@ -162,19 +175,6 @@
     </header>
     <section>
       I have encountered an unexpected Ansible failure today that turned out to be not a bug. Ansible apt module had failed to auto install the required python3-apt package - only on Debian Testing. Same playbook worked fine with Debian Stable. TASK [install some apt packages] ********************************************* [WARNING]: Updating cache and auto-installing missing …
-    </section>
-    </a>
-  </article>
-</li>
-<li>
-  <article class="preview">
-    <a href="https://potyarkin.ml/posts/2020/pegatron-cape-7/">
-    <header>
-      <time datetime="2020-04-04">2020-04-04</time>
-      <h1>Pegatron Cape 7 nettop (thin client)</h1>
-    </header>
-    <section>
-      Below are hardware details of an outdated compact computer that had since become available for low price on second-hand market. I bought mine for $15 (in March 2020). This post is inspired by ParkyTowers Thin Client Database - many thanks to David Parkinson for gathering and sharing all that knowledge! Pegatron …
     </section>
     </a>
   </article>

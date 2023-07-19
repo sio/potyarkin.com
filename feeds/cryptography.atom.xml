@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - cryptography</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/cryptography.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2023-07-19T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Benchmarking ssh-agent performance</title><link href="https://potyarkin.ml/posts/2023/ssh-agent-benchmark/" rel="alternate"></link><published>2023-07-19T00:00:00+03:00</published><updated>2023-07-19T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2023-07-19:/posts/2023/ssh-agent-benchmark/</id><summary type="html">&lt;p&gt;I have an application idea that would require calling ssh-agent rather
+frequently - but how many requests per second can it handle?&lt;/p&gt;
+&lt;p&gt;To answer this question I wrote a &lt;a href="https://github.com/sio/ssh-agent-benchmark/blob/master/ssh_agent_test.go"&gt;small benchmark&lt;/a&gt; in Go.
+It runs a tight loop sending messages for ssh-agent to sign.
+Turns out the agent is pretty fast …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I have an application idea that would require calling ssh-agent rather
+frequently - but how many requests per second can it handle?&lt;/p&gt;
+&lt;p&gt;To answer this question I wrote a &lt;a href="https://github.com/sio/ssh-agent-benchmark/blob/master/ssh_agent_test.go"&gt;small benchmark&lt;/a&gt; in Go.
+It runs a tight loop sending messages for ssh-agent to sign.
+Turns out the agent is pretty fast!&lt;/p&gt;
+&lt;p&gt;On a cheap cloud machine it was able to reliably sign more than 500 messages
+per second with an ED25519 key. RSA signing was about 4-5 times slower, as
+expected.
+For a personal heuristic I've decided to remember that ED25519 signatures
+cost 2ms and RSA ones 8ms.&lt;/p&gt;
+&lt;p&gt;Message size had little effect on throughput because both in ED25519 and in
+RSA signatures inputs are hashed with a fast SHA algorithm prior to any other
+processing.&lt;/p&gt;
+&lt;p&gt;Just in case my random number generator was too slow I checked if it affects
+the benchmark results. Tests confirmed that it doesn't.&lt;/p&gt;
+&lt;p&gt;Of course, 500 rps does not sound &lt;em&gt;web scale&lt;/em&gt; but for me it's more than
+enough. OpenSSH ssh-agent utilizes only a single core, so there is some
+potential for performance improvement if you need - but that would mean
+doing the signatures in your software. I would rather trust OpenSSH team
+(who are known to be just the right amount of paranoid) than touch private key
+material with my clumsy hands.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;You can run the same tests yourself: clone the &lt;a href="https://github.com/sio/ssh-agent-benchmark"&gt;repo&lt;/a&gt; and execute &lt;code&gt;make&lt;/code&gt; from
+top-level directory.
+Benchmark names describe the key being used, message size and whether the
+message is unique or the same for each iteration. Here is a sample output:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="go"&gt;BenchmarkSshAgent/key_ed25519/32B/unique-4          3553      1763363 ns/op&lt;/span&gt;
+&lt;span class="go"&gt;BenchmarkSshAgent/key_ed25519/32B/same-4            3568      1708270 ns/op&lt;/span&gt;
+&lt;span class="go"&gt;BenchmarkSshAgent/key_rsa4096/32B/unique-4           778      7824780 ns/op&lt;/span&gt;
+&lt;span class="go"&gt;BenchmarkSshAgent/key_rsa4096/32B/same-4             763      7657785 ns/op&lt;/span&gt;
+&lt;span class="go"&gt;BenchmarkSshAgent/key_ed25519/64B/unique-4          3456      1752457 ns/op&lt;/span&gt;
+&lt;span class="go"&gt;BenchmarkSshAgent/key_ed25519/64B/same-4            3598      1733750 ns/op&lt;/span&gt;
+&lt;span class="go"&gt;BenchmarkSshAgent/key_rsa4096/64B/unique-4           781      7639828 ns/op&lt;/span&gt;
+&lt;span class="go"&gt;BenchmarkSshAgent/key_rsa4096/64B/same-4             798      7720210 ns/op&lt;/span&gt;
+&lt;span class="go"&gt;BenchmarkSshAgent/key_ed25519/256B/unique-4         3549      1735906 ns/op&lt;/span&gt;
+&lt;span class="go"&gt;BenchmarkSshAgent/key_ed25519/256B/same-4           3417      1722301 ns/op&lt;/span&gt;
+&lt;span class="go"&gt;BenchmarkSshAgent/key_rsa4096/256B/unique-4          698      7738767 ns/op&lt;/span&gt;
+&lt;span class="go"&gt;BenchmarkSshAgent/key_rsa4096/256B/same-4            787      7625366 ns/op&lt;/span&gt;
+&lt;span class="go"&gt;BenchmarkSshAgent/key_ed25519/1024B/unique-4        3555      1703601 ns/op&lt;/span&gt;
+&lt;span class="go"&gt;BenchmarkSshAgent/key_ed25519/1024B/same-4          3651      1633226 ns/op&lt;/span&gt;
+&lt;span class="go"&gt;BenchmarkSshAgent/key_rsa4096/1024B/unique-4         805      7542115 ns/op&lt;/span&gt;
+&lt;span class="go"&gt;BenchmarkSshAgent/key_rsa4096/1024B/same-4           810      7437307 ns/op&lt;/span&gt;
+&lt;span class="go"&gt;BenchmarkSshAgent/key_ed25519/16384B/unique-4       3205      1935190 ns/op&lt;/span&gt;
+&lt;span class="go"&gt;BenchmarkSshAgent/key_ed25519/16384B/same-4         3296      1907921 ns/op&lt;/span&gt;
+&lt;span class="go"&gt;BenchmarkSshAgent/key_rsa4096/16384B/unique-4        783      7624776 ns/op&lt;/span&gt;
+&lt;span class="go"&gt;BenchmarkSshAgent/key_rsa4096/16384B/same-4          759      7620548 ns/op&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="posts"></category><category term="ssh"></category><category term="cryptography"></category><category term="benchmark"></category><category term="go"></category><category term="ed25519"></category></entry></feed>

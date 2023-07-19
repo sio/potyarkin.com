@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Orange Sun</title><link>https://potyarkin.ml/</link><description>Unsorted ramblings, sometimes related to programming</description><lastBuildDate>Fri, 02 Jun 2023 00:00:00 +0300</lastBuildDate><item><title>Many-to-many relationships in Excel data model</title><link>https://potyarkin.ml/posts/2023/excel-many-to-many/</link><description>&lt;p&gt;This is a quick hack to build many-to-many relationships in Excel data model
+<rss version="2.0"><channel><title>Orange Sun</title><link>https://potyarkin.ml/</link><description>Unsorted ramblings, sometimes related to programming</description><lastBuildDate>Wed, 19 Jul 2023 00:00:00 +0300</lastBuildDate><item><title>Benchmarking ssh-agent performance</title><link>https://potyarkin.ml/posts/2023/ssh-agent-benchmark/</link><description>&lt;p&gt;I have an application idea that would require calling ssh-agent rather
+frequently - but how many requests per second can it handle?&lt;/p&gt;
+&lt;p&gt;To answer this question I wrote a &lt;a href="https://github.com/sio/ssh-agent-benchmark/blob/master/ssh_agent_test.go"&gt;small benchmark&lt;/a&gt; in Go.
+It runs a tight loop sending messages for ssh-agent to sign.
+Turns out the agent is pretty fast …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vitaly Potyarkin</dc:creator><pubDate>Wed, 19 Jul 2023 00:00:00 +0300</pubDate><guid isPermaLink="false">tag:potyarkin.ml,2023-07-19:/posts/2023/ssh-agent-benchmark/</guid><category>posts</category><category>ssh</category><category>cryptography</category><category>benchmark</category><category>go</category><category>ed25519</category></item><item><title>Many-to-many relationships in Excel data model</title><link>https://potyarkin.ml/posts/2023/excel-many-to-many/</link><description>&lt;p&gt;This is a quick hack to build many-to-many relationships in Excel data model
 even though they are not supported out of the box.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;

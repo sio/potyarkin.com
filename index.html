@@ -60,14 +60,18 @@ and I enjoy receiving feedback and comments via <a href="mailto:sio.wtf@gmail.co
   <h2 id="blog"><a href="/posts">Latest blog entries</a></h2>
   <ul class="blog-overview">
   <li><article class="preview">
-    <a href="https://potyarkin.ml/posts/2023/excel-many-to-many/">
+    <a href="https://potyarkin.ml/posts/2023/ssh-agent-benchmark/">
       <header>
-        <h3>Many-to-many relationships in Excel data model</h3>
-        <time datetime="2023-06-02">2023-06-02</time>
+        <h3>Benchmarking ssh-agent performance</h3>
+        <time datetime="2023-07-19">2023-07-19</time>
       </header>
-      <section>This is a quick hack to build many-to-many relationships in Excel data model even though they are not supported out of the box. Create intermediate calculated table and use DAX to fill it with unique values from related columns on both sides of the relationship: EVALUATE FILTER( DISTINCT( UNION( VALUES …</section>
+      <section>I have an application idea that would require calling ssh-agent rather frequently - but how many requests per second can it handle? To answer this question I wrote a small benchmark in Go. It runs a tight loop sending messages for ssh-agent to sign. Turns out the agent is pretty fast …</section>
     </a>
   </article></li>
+  <li>
+      <a href="https://potyarkin.ml/posts/2023/excel-many-to-many/">Many-to-many relationships in Excel data model</a>
+      <time datetime="2023-06-02">2023-06-02</time>
+  </li>
   <li>
       <a href="https://potyarkin.ml/posts/2023/10-year-pull-request/">A pull request 10 years in the making</a>
       <time datetime="2023-05-03">2023-05-03</time>
@@ -99,10 +103,6 @@ and I enjoy receiving feedback and comments via <a href="mailto:sio.wtf@gmail.co
   <li>
       <a href="https://potyarkin.ml/posts/2020/ansible-apt-debian-testing/">Ansible apt module fails to install python3-apt on Debian Testing</a>
       <time datetime="2020-12-09">2020-12-09</time>
-  </li>
-  <li>
-      <a href="https://potyarkin.ml/posts/2020/pegatron-cape-7/">Pegatron Cape 7 nettop (thin client)</a>
-      <time datetime="2020-04-04">2020-04-04</time>
   </li>
   </ul>
   <p>
