@@ -24,7 +24,7 @@ Just in case my random number generator was too slow I checked if it affects
 the benchmark results. Tests confirmed that it doesn't.
 
 Of course, 500 rps does not sound _web scale_ but for me it's more than
-enough. OpenSSH ssh-agent utilizes only a single core, so there is some
+enough. OpenSSH ssh-agent utilizes only a single CPU core, so there is some
 potential for performance improvement if you need - but that would mean
 doing the signatures in your software. I would rather trust OpenSSH team
 (who are known to be just the right amount of paranoid) than touch private key
