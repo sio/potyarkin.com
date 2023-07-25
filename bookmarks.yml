@@ -5,6 +5,16 @@
 # data format is not guaranteed to remain stable over time
 #
 
+- period: 2023-07
+  links:
+
+  - title: Understanding SSH
+    url: https://containerssh.io/development/containerssh/ssh/
+    description: |-
+      An introductory overview of SSH protocol. Helpful if you're implementing
+      your own SSH server
+
+
 - period: 2023-05
   links:
 
