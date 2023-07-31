@@ -8,6 +8,12 @@
 - period: 2023-07
   links:
 
+  - title: Cap'n Proto - cerealization protocol
+    url: https://capnproto.org/
+    description: |-
+      Binary serialization protocol used extensively at Cloudflare.
+      Is faster and feels cleaner than protobufs.
+
   - title: Understanding SSH
     url: https://containerssh.io/development/containerssh/ssh/
     description: |-
