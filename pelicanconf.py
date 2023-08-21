@@ -75,7 +75,7 @@ PAGINATION_PATTERNS = (
     (2, '{base_name}/{number}/', '{base_name}/{number}/index.html'),
 )
 
-# Custom configuration for potyarkin.ml
+# Custom configuration for potyarkin.com
 AUTHOR = 'Vitaly Potyarkin'
 SITENAME = 'Orange Sun'
 SITESUBTITLE = 'Unsorted ramblings, sometimes related to programming'

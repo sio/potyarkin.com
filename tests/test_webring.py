@@ -7,7 +7,7 @@ import feedparser
 from helpers import webring
 
 
-FEED = 'https://potyarkin.ml/feeds/all.atom.xml'
+FEED = 'https://potyarkin.com/feeds/all.atom.xml'
 TITLE = 'Orange Sun'
 CACHE = Path('cache/test')
 CACHE.mkdir(parents=True, exist_ok=True)

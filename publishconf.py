@@ -10,7 +10,7 @@ import sys
 sys.path.append(os.curdir)
 from pelicanconf import *
 
-SITEURL = 'https://potyarkin.ml'
+SITEURL = 'https://potyarkin.com'
 RELATIVE_URLS = False
 
 FEED_ALL_RSS = 'feeds/all.rss.xml'

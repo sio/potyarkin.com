@@ -1,6 +1,6 @@
 # Personal blog powered by Pelican and Python
 
-This repo contains content and configuration for my static website <https://potyarkin.ml>
+This repo contains content and configuration for my static website <https://potyarkin.com>
 
 ### Proudly powered by Pelican and Python
 

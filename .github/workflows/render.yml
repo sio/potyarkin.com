@@ -1,4 +1,4 @@
-name: render potyarkin.ml
+name: render potyarkin.com
 
 on:
   workflow_dispatch:

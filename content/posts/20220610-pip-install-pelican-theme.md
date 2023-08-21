@@ -61,5 +61,5 @@ See [SmallWeb] repository for an example.
 [pelican-plugins-pip]: https://docs.getpelican.com/en/stable/plugins.html#namespace-plugin-structure
 [poetry-config]: https://github.com/sio/pelican-smallweb/blob/master/pyproject.toml
 [my themes]: https://pypi.org/project/pelican-theme-smallweb/
-[requirements.txt]: https://github.com/sio/potyarkin.ml/blob/smallweb/requirements.txt#L3
+[requirements.txt]: https://github.com/sio/potyarkin.com/blob/smallweb/requirements.txt#L3
 [SmallWeb]: https://github.com/sio/pelican-smallweb
