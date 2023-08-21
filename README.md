@@ -1,7 +1,7 @@
 # Rendered static website
 
 This directory contains rendered contents for the website located at
-<https://potyarkin.ml>
+<https://potyarkin.com>
 
 # Important!
 

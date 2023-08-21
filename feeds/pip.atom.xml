@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - pip</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/pip.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2022-06-10T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Pip-installable Pelican themes</title><link href="https://potyarkin.ml/posts/2022/pip-install-pelican-theme/" rel="alternate"></link><published>2022-06-10T00:00:00+03:00</published><updated>2022-06-10T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-06-10:/posts/2022/pip-install-pelican-theme/</id><summary type="html">&lt;p&gt;Installing &lt;a href="https://blog.getpelican.com/"&gt;Pelican&lt;/a&gt; themes &lt;a href="https://docs.getpelican.com/en/3.6.3/pelican-themes.html#installing-themes"&gt;the default way&lt;/a&gt; is not very
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - pip</title><link href="https://potyarkin.com/" rel="alternate"></link><link href="https://potyarkin.com/feeds/pip.atom.xml" rel="self"></link><id>https://potyarkin.com/</id><updated>2022-06-10T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Pip-installable Pelican themes</title><link href="https://potyarkin.com/posts/2022/pip-install-pelican-theme/" rel="alternate"></link><published>2022-06-10T00:00:00+03:00</published><updated>2022-06-10T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2022-06-10:/posts/2022/pip-install-pelican-theme/</id><summary type="html">&lt;p&gt;Installing &lt;a href="https://blog.getpelican.com/"&gt;Pelican&lt;/a&gt; themes &lt;a href="https://docs.getpelican.com/en/3.6.3/pelican-themes.html#installing-themes"&gt;the default way&lt;/a&gt; is not very
 pleasant:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;You need to invoke a separate CLI tool&lt;/li&gt;
@@ -43,7 +43,7 @@ themes&lt;/a&gt; to PyPI and provide easy invocation instructions:&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;All the end users need to do is to add another line mentioning my theme to
-whichever &lt;a href="https://github.com/sio/potyarkin.ml/blob/smallweb/requirements.txt#L3"&gt;file they use&lt;/a&gt; to create their Pelican venv.&lt;/p&gt;
+whichever &lt;a href="https://github.com/sio/potyarkin.com/blob/smallweb/requirements.txt#L3"&gt;file they use&lt;/a&gt; to create their Pelican venv.&lt;/p&gt;
 &lt;p&gt;On developer side we need to create &lt;code&gt;pelican/themes/themename&lt;/code&gt; folder
 structure and point poetry at &lt;code&gt;pelican&lt;/code&gt; for top-level package name. All theme
 files should be placed into &lt;code&gt;pelican/themes/themename&lt;/code&gt; and one extra

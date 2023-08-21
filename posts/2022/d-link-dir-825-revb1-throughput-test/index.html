@@ -10,13 +10,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="referrer" content="origin">
   <meta name="generator" content="Pelican">
-  <link href="https://potyarkin.ml/posts/2022/d-link-dir-825-revb1-throughput-test/" rel="canonical">
-<link href="https://potyarkin.ml/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Orange Sun Full Atom Feed" />
-<link href="https://potyarkin.ml/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="Orange Sun Full RSS Feed" />
-  <link href="https://potyarkin.ml/theme/css/style.css?cache=ce1ce9e802f6452fc24c45dcd14f219b9fdbc4b78394fcb3ed490c23f88a6851" type="text/css" rel="stylesheet">
-  <link href="https://potyarkin.ml/theme/css/fonts.css?cache=32c843bb3ce96eb9fb92f48c7a63dc133ab32e0d267a2e1453199c23403d5cd0" type="text/css" rel="stylesheet">
-  <link href="https://potyarkin.ml/theme/css/codecolor/bleak.css?cache=4793611eaa86c9638927c57ac8d9995c5f7ca18d9ffed3721467cf3ef61b5e8e" type="text/css" rel="stylesheet">
-    <link href="https://potyarkin.ml/static/custom.css?cache=e3963750b86fbc40a84ec4f04703361dd7c0b05acd171c3015a6d39c5477d664" type="text/css" rel="stylesheet">
+  <link href="https://potyarkin.com/posts/2022/d-link-dir-825-revb1-throughput-test/" rel="canonical">
+<link href="https://potyarkin.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Orange Sun Full Atom Feed" />
+<link href="https://potyarkin.com/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="Orange Sun Full RSS Feed" />
+  <link href="https://potyarkin.com/theme/css/style.css?cache=ce1ce9e802f6452fc24c45dcd14f219b9fdbc4b78394fcb3ed490c23f88a6851" type="text/css" rel="stylesheet">
+  <link href="https://potyarkin.com/theme/css/fonts.css?cache=32c843bb3ce96eb9fb92f48c7a63dc133ab32e0d267a2e1453199c23403d5cd0" type="text/css" rel="stylesheet">
+  <link href="https://potyarkin.com/theme/css/codecolor/bleak.css?cache=4793611eaa86c9638927c57ac8d9995c5f7ca18d9ffed3721467cf3ef61b5e8e" type="text/css" rel="stylesheet">
+    <link href="https://potyarkin.com/static/custom.css?cache=e3963750b86fbc40a84ec4f04703361dd7c0b05acd171c3015a6d39c5477d664" type="text/css" rel="stylesheet">
   <style>
   :root {
     --accent-hue: 14.917127071823206;
@@ -38,13 +38,13 @@
       <li><a href="https://github.com/sio">Github</a></li>
       <li><a href="/feeds/">feeds</a></li>
       <li><a href="/bookmarks/">bookmarks</a></li>
-      <li><a href="https://potyarkin.ml/blogroll/">Blogroll</a></li>
-      <li><a href="https://potyarkin.ml/webring/">Webring</a></li>
+      <li><a href="https://potyarkin.com/blogroll/">Blogroll</a></li>
+      <li><a href="https://potyarkin.com/webring/">Webring</a></li>
   </ul>
 </nav>  <header class="page-header">
     <h1>D-Link DIR-825 (rev.B1) throughput test</h1>
-    <span class="subtitle"><a href="https://potyarkin.ml/">Orange Sun</a> |
-<a href="https://potyarkin.ml/posts/">Posts</a> |   <a href="https://potyarkin.ml/">Vitaly Potyarkin</a>
+    <span class="subtitle"><a href="https://potyarkin.com/">Orange Sun</a> |
+<a href="https://potyarkin.com/posts/">Posts</a> |   <a href="https://potyarkin.com/">Vitaly Potyarkin</a>
 | 2022-01-31
 </span>
   </header>
@@ -54,7 +54,7 @@ router at home.</p>
 (OpenWRT) long after the manufacturer has abandoned this product.
 Even though OpenWRT (and Linux in general) has increased the system
 requirements, DIR-825 still meets the minimal <a href="https://openwrt.org/supported_devices/864_warning">8/64</a> criteria.</p>
-<p><img alt="Photo of D-Link DIR-825, rev.B1" src="https://potyarkin.ml/resources/dir825/router.jpg"></p>
+<p><img alt="Photo of D-Link DIR-825, rev.B1" src="https://potyarkin.com/resources/dir825/router.jpg"></p>
 <p>To put things into perspective: I bought this very device in November, 2011
 for the equivalent of $120. Its WiFi standard is pretty outdated (802.11n),
 but that's enough since all my essential devices are hardwired.</p>
@@ -73,12 +73,12 @@ other one connected to one of LAN ports. I put together all the
 required commands into a <a href="https://github.com/sio/router-throughput-test">Makefile</a> to avoid having to memorize them - you
 might find this repo useful if you ever need to perform a similar test on
 your router.</p>
-<p>To establish a <a href="https://potyarkin.ml/resources/dir825/baseline.log">baseline</a> I connected the laptops directly to each other
+<p>To establish a <a href="https://potyarkin.com/resources/dir825/baseline.log">baseline</a> I connected the laptops directly to each other
 without any routers or switches in between. I got the expected near-gigabit
 speeds: 932Mbps down, 941Mbps up - nothing unusual here.</p>
 <p>Here are the test results with router in between
-(full logs: <a href="https://potyarkin.ml/resources/dir825/test1.log">part one</a>, <a href="https://potyarkin.ml/resources/dir825/test2.log">part two</a>)</p>
-<p><img alt="average: bidir 130/162Mbps, down 262Mbps, up 382Mbps" src="https://potyarkin.ml/resources/dir825/results.svg"></p>
+(full logs: <a href="https://potyarkin.com/resources/dir825/test1.log">part one</a>, <a href="https://potyarkin.com/resources/dir825/test2.log">part two</a>)</p>
+<p><img alt="average: bidir 130/162Mbps, down 262Mbps, up 382Mbps" src="https://potyarkin.com/resources/dir825/results.svg"></p>
 <p>Maximum throughput was achieved in upload tests (<em>382Mbps</em>). This is
 probably explained by having to process less firewall rules for outgoing
 traffic. Download speed even with a very basic iptables configuration was
@@ -95,15 +95,15 @@ frequently become underutilized if the traffic will happen to flow in both
 directions at once.</p>
 <p>Looks like I finally need a new router after almost 11 years with DIR-825...</p></article>
 <nav class="article-tags">
-  <a href="https://potyarkin.ml/tags/hardware/">hardware</a>
-  <a href="https://potyarkin.ml/tags/router/">router</a>
+  <a href="https://potyarkin.com/tags/hardware/">hardware</a>
+  <a href="https://potyarkin.com/tags/router/">router</a>
 </nav>
 <nav class="neighbors">
-  <a class="neighbor neighbor-prev" href="https://potyarkin.ml/posts/2020/ansible-apt-debian-testing/">
+  <a class="neighbor neighbor-prev" href="https://potyarkin.com/posts/2020/ansible-apt-debian-testing/">
     <h1>Ansible apt module fails to install python3-apt on Debian Testing</h1>
     <p>I have encountered an unexpected Ansible failure today that turned out to be not a...</p>
   </a>
-  <a class="neighbor neighbor-next" href="https://potyarkin.ml/posts/2022/libvirt-cirrusci-workaround/">
+  <a class="neighbor neighbor-next" href="https://potyarkin.com/posts/2022/libvirt-cirrusci-workaround/">
     <h1>Unexpected workaround for Libvirt VMs with cgroups v2 in Cirrus CI</h1>
     <p>Today I wrote a commit message that was several screens long. I think it deserves to...</p>
   </a>
@@ -114,7 +114,7 @@ directions at once.</p>
           Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a>
         </span>
         <span class="credits-center">
-          <a href="https://potyarkin.ml/">Orange Sun</a>
+          <a href="https://potyarkin.com/">Orange Sun</a>
         </span>
         <span class="credits-right">
           Theme <a href="https://github.com/sio/pelican-smallweb" rel="nofollow">SmallWeb</a>

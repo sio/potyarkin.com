@@ -10,13 +10,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="referrer" content="origin">
   <meta name="generator" content="Pelican">
-  <link href="https://potyarkin.ml/posts/2018/unit-testing-in-power-query-m-language/" rel="canonical">
-<link href="https://potyarkin.ml/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Orange Sun Full Atom Feed" />
-<link href="https://potyarkin.ml/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="Orange Sun Full RSS Feed" />
-  <link href="https://potyarkin.ml/theme/css/style.css?cache=ce1ce9e802f6452fc24c45dcd14f219b9fdbc4b78394fcb3ed490c23f88a6851" type="text/css" rel="stylesheet">
-  <link href="https://potyarkin.ml/theme/css/fonts.css?cache=32c843bb3ce96eb9fb92f48c7a63dc133ab32e0d267a2e1453199c23403d5cd0" type="text/css" rel="stylesheet">
-  <link href="https://potyarkin.ml/theme/css/codecolor/bleak.css?cache=4793611eaa86c9638927c57ac8d9995c5f7ca18d9ffed3721467cf3ef61b5e8e" type="text/css" rel="stylesheet">
-    <link href="https://potyarkin.ml/static/custom.css?cache=e3963750b86fbc40a84ec4f04703361dd7c0b05acd171c3015a6d39c5477d664" type="text/css" rel="stylesheet">
+  <link href="https://potyarkin.com/posts/2018/unit-testing-in-power-query-m-language/" rel="canonical">
+<link href="https://potyarkin.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Orange Sun Full Atom Feed" />
+<link href="https://potyarkin.com/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="Orange Sun Full RSS Feed" />
+  <link href="https://potyarkin.com/theme/css/style.css?cache=ce1ce9e802f6452fc24c45dcd14f219b9fdbc4b78394fcb3ed490c23f88a6851" type="text/css" rel="stylesheet">
+  <link href="https://potyarkin.com/theme/css/fonts.css?cache=32c843bb3ce96eb9fb92f48c7a63dc133ab32e0d267a2e1453199c23403d5cd0" type="text/css" rel="stylesheet">
+  <link href="https://potyarkin.com/theme/css/codecolor/bleak.css?cache=4793611eaa86c9638927c57ac8d9995c5f7ca18d9ffed3721467cf3ef61b5e8e" type="text/css" rel="stylesheet">
+    <link href="https://potyarkin.com/static/custom.css?cache=e3963750b86fbc40a84ec4f04703361dd7c0b05acd171c3015a6d39c5477d664" type="text/css" rel="stylesheet">
   <style>
   :root {
     --accent-hue: 14.917127071823206;
@@ -38,13 +38,13 @@
       <li><a href="https://github.com/sio">Github</a></li>
       <li><a href="/feeds/">feeds</a></li>
       <li><a href="/bookmarks/">bookmarks</a></li>
-      <li><a href="https://potyarkin.ml/blogroll/">Blogroll</a></li>
-      <li><a href="https://potyarkin.ml/webring/">Webring</a></li>
+      <li><a href="https://potyarkin.com/blogroll/">Blogroll</a></li>
+      <li><a href="https://potyarkin.com/webring/">Webring</a></li>
   </ul>
 </nav>  <header class="page-header">
     <h1>Unit testing in Power Query M Language</h1>
-    <span class="subtitle"><a href="https://potyarkin.ml/">Orange Sun</a> |
-<a href="https://potyarkin.ml/posts/">Posts</a> |   <a href="https://potyarkin.ml/">Vitaly Potyarkin</a>
+    <span class="subtitle"><a href="https://potyarkin.com/">Orange Sun</a> |
+<a href="https://potyarkin.com/posts/">Posts</a> |   <a href="https://potyarkin.com/">Vitaly Potyarkin</a>
 | 2018-04-01
 </span>
   </header>
@@ -73,7 +73,7 @@ following features:</p>
 <p>Inner workings of the test framework are described in the
 <a href="https://libpq.ml/Docs/UnitTesting">documentation</a>. This article will demonstrate how it works.</p>
 <h2 id="unittest-demo"><a class="toclink" href="#unittest-demo">UnitTest demo</a></h2>
-<p>All modules described here are imported with LibPQ, so a basic familiarity with the library is assumed (<a href="https://libpq.ml">readme</a>, <a href="https://potyarkin.ml/posts/2018/getting-started-with-libpq/">getting started</a>).</p>
+<p>All modules described here are imported with LibPQ, so a basic familiarity with the library is assumed (<a href="https://libpq.ml">readme</a>, <a href="https://potyarkin.com/posts/2018/getting-started-with-libpq/">getting started</a>).</p>
 <p>Let's create a basic test suite and save it in the directory listed in <code>LibPQPath</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="cm">/* DemoTests.pq - sample test suite */</span>
 <span class="p">[</span>
@@ -104,7 +104,7 @@ test discovery tools to distinguish it from just another record.</p>
 <li>Return the test results as a table, reporting as much data about the failed
   tests as possible</li>
 </ul>
-<p><a href="https://potyarkin.ml/posts/2018/unit-testing-in-power-query-m-language/libpq-unittest-long.png"><img alt="Test results" src="https://potyarkin.ml/posts/2018/unit-testing-in-power-query-m-language/libpq-unittest-long.png"></a></p>
+<p><a href="https://potyarkin.com/posts/2018/unit-testing-in-power-query-m-language/libpq-unittest-long.png"><img alt="Test results" src="https://potyarkin.com/posts/2018/unit-testing-in-power-query-m-language/libpq-unittest-long.png"></a></p>
 <p>In the screenshot above we invoke <a href="https://github.com/sio/LibPQ/blob/master/Modules/UnitTest.Discover.pq">UnitTest.Discover</a> with <code>compact_output =
 false</code> but when you'll have dozens of test cases you'll probably prefer default
 behavior (group test results by status).</p>
@@ -113,16 +113,16 @@ behavior (group test results by status).</p>
 <a href="https://libpq.ml/Docs/UnitTesting">UnitTest</a> documentation and a more extensive <a href="https://github.com/sio/LibPQ/blob/master/Samples/Tests.Sample.pq">test sample</a> that makes use of
 subtests.</p></article>
 <nav class="article-tags">
-  <a href="https://potyarkin.ml/tags/m/">m</a>
-  <a href="https://potyarkin.ml/tags/power-query/">power-query</a>
-  <a href="https://potyarkin.ml/tags/libpq/">LibPQ</a>
+  <a href="https://potyarkin.com/tags/m/">m</a>
+  <a href="https://potyarkin.com/tags/power-query/">power-query</a>
+  <a href="https://potyarkin.com/tags/libpq/">LibPQ</a>
 </nav>
 <nav class="neighbors">
-  <a class="neighbor neighbor-prev" href="https://potyarkin.ml/posts/2018/getting-started-with-libpq/">
+  <a class="neighbor neighbor-prev" href="https://potyarkin.com/posts/2018/getting-started-with-libpq/">
     <h1>Getting started with LibPQ</h1>
     <p>This is a step by step guide to getting started with LibPQ, an illustrated version of...</p>
   </a>
-  <a class="neighbor neighbor-next" href="https://potyarkin.ml/posts/2018/why-software-translation-is-a-waste-of-time/">
+  <a class="neighbor neighbor-next" href="https://potyarkin.com/posts/2018/why-software-translation-is-a-waste-of-time/">
     <h1>Why software translation is a waste of time</h1>
     <p>Disclaimer: I am not a professional software developer, and my opinion might not be as...</p>
   </a>
@@ -133,7 +133,7 @@ subtests.</p></article>
           Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a>
         </span>
         <span class="credits-center">
-          <a href="https://potyarkin.ml/">Orange Sun</a>
+          <a href="https://potyarkin.com/">Orange Sun</a>
         </span>
         <span class="credits-right">
           Theme <a href="https://github.com/sio/pelican-smallweb" rel="nofollow">SmallWeb</a>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - hardware</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/hardware.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2022-01-31T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>D-Link DIR-825 (rev.B1) throughput test</title><link href="https://potyarkin.ml/posts/2022/d-link-dir-825-revb1-throughput-test/" rel="alternate"></link><published>2022-01-31T00:00:00+03:00</published><updated>2022-01-31T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-01-31:/posts/2022/d-link-dir-825-revb1-throughput-test/</id><summary type="html">&lt;p&gt;So, the year is 2022 and I'm still using D-Link &lt;a href="https://openwrt.org/toh/d-link/dir-825"&gt;DIR-825&lt;/a&gt;, rev.B1 as my edge
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - hardware</title><link href="https://potyarkin.com/" rel="alternate"></link><link href="https://potyarkin.com/feeds/hardware.atom.xml" rel="self"></link><id>https://potyarkin.com/</id><updated>2022-01-31T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>D-Link DIR-825 (rev.B1) throughput test</title><link href="https://potyarkin.com/posts/2022/d-link-dir-825-revb1-throughput-test/" rel="alternate"></link><published>2022-01-31T00:00:00+03:00</published><updated>2022-01-31T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2022-01-31:/posts/2022/d-link-dir-825-revb1-throughput-test/</id><summary type="html">&lt;p&gt;So, the year is 2022 and I'm still using D-Link &lt;a href="https://openwrt.org/toh/d-link/dir-825"&gt;DIR-825&lt;/a&gt;, rev.B1 as my edge
 router at home.&lt;/p&gt;
 &lt;p&gt;Thanks to the power of opensource it is running a modern and secure OS
 (OpenWRT) long after the manufacturer has abandoned this product.
@@ -9,7 +9,7 @@ router at home.&lt;/p&gt;
 (OpenWRT) long after the manufacturer has abandoned this product.
 Even though OpenWRT (and Linux in general) has increased the system
 requirements, DIR-825 still meets the minimal &lt;a href="https://openwrt.org/supported_devices/864_warning"&gt;8/64&lt;/a&gt; criteria.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Photo of D-Link DIR-825, rev.B1" src="https://potyarkin.ml/resources/dir825/router.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Photo of D-Link DIR-825, rev.B1" src="https://potyarkin.com/resources/dir825/router.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;To put things into perspective: I bought this very device in November, 2011
 for the equivalent of $120. Its WiFi standard is pretty outdated (802.11n),
 but that's enough since all my essential devices are hardwired.&lt;/p&gt;
@@ -28,12 +28,12 @@ other one connected to one of LAN ports. I put together all the
 required commands into a &lt;a href="https://github.com/sio/router-throughput-test"&gt;Makefile&lt;/a&gt; to avoid having to memorize them - you
 might find this repo useful if you ever need to perform a similar test on
 your router.&lt;/p&gt;
-&lt;p&gt;To establish a &lt;a href="https://potyarkin.ml/resources/dir825/baseline.log"&gt;baseline&lt;/a&gt; I connected the laptops directly to each other
+&lt;p&gt;To establish a &lt;a href="https://potyarkin.com/resources/dir825/baseline.log"&gt;baseline&lt;/a&gt; I connected the laptops directly to each other
 without any routers or switches in between. I got the expected near-gigabit
 speeds: 932Mbps down, 941Mbps up - nothing unusual here.&lt;/p&gt;
 &lt;p&gt;Here are the test results with router in between
-(full logs: &lt;a href="https://potyarkin.ml/resources/dir825/test1.log"&gt;part one&lt;/a&gt;, &lt;a href="https://potyarkin.ml/resources/dir825/test2.log"&gt;part two&lt;/a&gt;)&lt;/p&gt;
-&lt;p&gt;&lt;img alt="average: bidir 130/162Mbps, down 262Mbps, up 382Mbps" src="https://potyarkin.ml/resources/dir825/results.svg"&gt;&lt;/p&gt;
+(full logs: &lt;a href="https://potyarkin.com/resources/dir825/test1.log"&gt;part one&lt;/a&gt;, &lt;a href="https://potyarkin.com/resources/dir825/test2.log"&gt;part two&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;&lt;img alt="average: bidir 130/162Mbps, down 262Mbps, up 382Mbps" src="https://potyarkin.com/resources/dir825/results.svg"&gt;&lt;/p&gt;
 &lt;p&gt;Maximum throughput was achieved in upload tests (&lt;em&gt;382Mbps&lt;/em&gt;). This is
 probably explained by having to process less firewall rules for outgoing
 traffic. Download speed even with a very basic iptables configuration was
@@ -48,7 +48,7 @@ running a monitoring tool did not have any significant impact on the results
 it's completely out of its depth with faster connections. Even 300Mbps will
 frequently become underutilized if the traffic will happen to flow in both
 directions at once.&lt;/p&gt;
-&lt;p&gt;Looks like I finally need a new router after almost 11 years with DIR-825...&lt;/p&gt;</content><category term="posts"></category><category term="hardware"></category><category term="router"></category></entry><entry><title>Pegatron Cape 7 nettop (thin client)</title><link href="https://potyarkin.ml/posts/2020/pegatron-cape-7/" rel="alternate"></link><published>2020-04-04T00:00:00+03:00</published><updated>2020-04-04T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-04-04:/posts/2020/pegatron-cape-7/</id><summary type="html">&lt;blockquote&gt;
+&lt;p&gt;Looks like I finally need a new router after almost 11 years with DIR-825...&lt;/p&gt;</content><category term="posts"></category><category term="hardware"></category><category term="router"></category></entry><entry><title>Pegatron Cape 7 nettop (thin client)</title><link href="https://potyarkin.com/posts/2020/pegatron-cape-7/" rel="alternate"></link><published>2020-04-04T00:00:00+03:00</published><updated>2020-04-04T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2020-04-04:/posts/2020/pegatron-cape-7/</id><summary type="html">&lt;blockquote&gt;
 &lt;p&gt;Below are hardware details of an outdated compact computer that had since
 become available for low price on second-hand market. I bought mine for $15
 (in March 2020).&lt;/p&gt;
@@ -64,11 +64,11 @@ become available for low price on second-hand market. I bought mine for $15
 Database&lt;/a&gt; - many thanks to David
 Parkinson for gathering and sharing all that knowledge!&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Pegatron Cape 7&lt;/strong&gt; was announced in early 2009 (&lt;a href="https://potyarkin.ml/resources/pegatron/booklet.pdf"&gt;marketing booklet&lt;/a&gt;
+&lt;p&gt;&lt;strong&gt;Pegatron Cape 7&lt;/strong&gt; was announced in early 2009 (&lt;a href="https://potyarkin.com/resources/pegatron/booklet.pdf"&gt;marketing booklet&lt;/a&gt;
 is dated by 2009-04-13). It is based on Intel Atom 230 series CPU along with
 SiS 968/672 (models A, B, C, D) or nVidia Ion chipset (models E, F). The unit
 I have is model D, all further photos and description apply to that model.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://potyarkin.ml/gallery/pegatron/" title="More photos of Pegatron Cape 7"&gt;&lt;img alt="Pegatron Cape 7 photos" src="https://potyarkin.ml/resources/pegatron/thumb/0-overview.jpg"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://potyarkin.com/gallery/pegatron/" title="More photos of Pegatron Cape 7"&gt;&lt;img alt="Pegatron Cape 7 photos" src="https://potyarkin.com/resources/pegatron/thumb/0-overview.jpg"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;The hardware is similar to &lt;a href="https://www.parkytowers.me.uk/thin/dell/fx160/"&gt;Dell
 FX160&lt;/a&gt; but is packaged into a
 significantly more compact case and uses external power supply. Pegatron is an
@@ -211,7 +211,7 @@ laptop HDD or SATA SSD. Thick 12.5mm drives fit only when HDD bracket is
 removed, but just barely - cover will be slightly bulged. Using SSD might not
 provide the expected performance benefit because SATA bus appears to be
 limited at 300 Mbps (37.6 MB/s) - numbers are from block diagram (page 15 of
-the &lt;a href="https://potyarkin.ml/resources/pegatron/booklet.pdf"&gt;booklet&lt;/a&gt;).&lt;/p&gt;
+the &lt;a href="https://potyarkin.com/resources/pegatron/booklet.pdf"&gt;booklet&lt;/a&gt;).&lt;/p&gt;
 &lt;h2 id="bios"&gt;&lt;a class="toclink" href="#bios"&gt;BIOS&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;BIOS is a standard AMI BIOS. Pressing &lt;strong&gt;Del&lt;/strong&gt; at startup opens setup screen,
 &lt;strong&gt;F8&lt;/strong&gt; shows a shorter boot menu to select a device for one-off boot.&lt;/p&gt;
@@ -222,21 +222,21 @@ several configurable options for power management:&lt;/p&gt;
 &lt;li&gt;Power On by RTC Alarm&lt;/li&gt;
 &lt;li&gt;Restore on AC Power Loss&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;See also: &lt;a href="https://potyarkin.ml/gallery/pegatron-bios/"&gt;screenshots from BIOS setup&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;See also: &lt;a href="https://potyarkin.com/gallery/pegatron-bios/"&gt;screenshots from BIOS setup&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id="pictures"&gt;&lt;a class="toclink" href="#pictures"&gt;Pictures&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;See &lt;a href="https://potyarkin.ml/gallery/pegatron/" title="More photos of Pegatron Cape 7"&gt;the gallery&lt;/a&gt; or download individual images in high resolution:&lt;/p&gt;
+&lt;p&gt;See &lt;a href="https://potyarkin.com/gallery/pegatron/" title="More photos of Pegatron Cape 7"&gt;the gallery&lt;/a&gt; or download individual images in high resolution:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="https://potyarkin.ml/resources/pegatron/img/1-outlook.jpg"&gt;Nettop overview - standing&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://potyarkin.ml/resources/pegatron/img/0-overview.jpg"&gt;Nettop overview - lying&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://potyarkin.ml/resources/pegatron/img/2-front.jpg"&gt;Front panel&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://potyarkin.ml/resources/pegatron/img/3-back.jpg"&gt;Back panel&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://potyarkin.ml/resources/pegatron/img/4-open.jpg"&gt;Open case&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://potyarkin.ml/resources/pegatron/img/5-motherboard-front.jpg"&gt;Motherboard (front)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://potyarkin.ml/resources/pegatron/img/6-motherboard-back.jpg"&gt;Motherboard (back)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://potyarkin.ml/resources/pegatron/img/7-case.jpg"&gt;Empty case (inside)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://potyarkin.com/resources/pegatron/img/1-outlook.jpg"&gt;Nettop overview - standing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://potyarkin.com/resources/pegatron/img/0-overview.jpg"&gt;Nettop overview - lying&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://potyarkin.com/resources/pegatron/img/2-front.jpg"&gt;Front panel&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://potyarkin.com/resources/pegatron/img/3-back.jpg"&gt;Back panel&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://potyarkin.com/resources/pegatron/img/4-open.jpg"&gt;Open case&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://potyarkin.com/resources/pegatron/img/5-motherboard-front.jpg"&gt;Motherboard (front)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://potyarkin.com/resources/pegatron/img/6-motherboard-back.jpg"&gt;Motherboard (back)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://potyarkin.com/resources/pegatron/img/7-case.jpg"&gt;Empty case (inside)&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;!-- internal links --&gt;
-&lt;!-- external links --&gt;</content><category term="posts"></category><category term="hardware"></category></entry><entry><title>Installing One by Wacom in Debian Stretch</title><link href="https://potyarkin.ml/posts/2018/installing-one-by-wacom-in-debian-stretch/" rel="alternate"></link><published>2018-08-22T00:00:00+03:00</published><updated>2018-08-22T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-08-22:/posts/2018/installing-one-by-wacom-in-debian-stretch/</id><summary type="html">&lt;p&gt;I believe there are many people who run Debian Stable as their main desktop OS.
+&lt;!-- external links --&gt;</content><category term="posts"></category><category term="hardware"></category></entry><entry><title>Installing One by Wacom in Debian Stretch</title><link href="https://potyarkin.com/posts/2018/installing-one-by-wacom-in-debian-stretch/" rel="alternate"></link><published>2018-08-22T00:00:00+03:00</published><updated>2018-08-22T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2018-08-22:/posts/2018/installing-one-by-wacom-in-debian-stretch/</id><summary type="html">&lt;p&gt;I believe there are many people who run Debian Stable as their main desktop OS.
 This article is a short how-to on enabling newer hardware in Debian Stable
 without switching to another version or distribution.&lt;/p&gt;
 &lt;blockquote&gt;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - LibPQ</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/libpq.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2018-04-01T12:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Unit testing in Power Query M Language</title><link href="https://potyarkin.ml/posts/2018/unit-testing-in-power-query-m-language/" rel="alternate"></link><published>2018-04-01T12:00:00+03:00</published><updated>2018-04-01T12:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-04-01:/posts/2018/unit-testing-in-power-query-m-language/</id><summary type="html">&lt;p&gt;As your code base gets bigger,
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - LibPQ</title><link href="https://potyarkin.com/" rel="alternate"></link><link href="https://potyarkin.com/feeds/libpq.atom.xml" rel="self"></link><id>https://potyarkin.com/</id><updated>2018-04-01T12:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Unit testing in Power Query M Language</title><link href="https://potyarkin.com/posts/2018/unit-testing-in-power-query-m-language/" rel="alternate"></link><published>2018-04-01T12:00:00+03:00</published><updated>2018-04-01T12:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2018-04-01:/posts/2018/unit-testing-in-power-query-m-language/</id><summary type="html">&lt;p&gt;As your code base gets bigger,
 &lt;a href="https://en.wikipedia.org/wiki/Test_automation"&gt;test automation&lt;/a&gt; becomes more
 and more important. This applies to any development platform, including Power
 Query / PowerBI. If you reuse your code and improve some low level function
@@ -29,7 +29,7 @@ following features:&lt;/p&gt;
 &lt;p&gt;Inner workings of the test framework are described in the
 &lt;a href="https://libpq.ml/Docs/UnitTesting"&gt;documentation&lt;/a&gt;. This article will demonstrate how it works.&lt;/p&gt;
 &lt;h2 id="unittest-demo"&gt;&lt;a class="toclink" href="#unittest-demo"&gt;UnitTest demo&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;All modules described here are imported with LibPQ, so a basic familiarity with the library is assumed (&lt;a href="https://libpq.ml"&gt;readme&lt;/a&gt;, &lt;a href="https://potyarkin.ml/posts/2018/getting-started-with-libpq/"&gt;getting started&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;All modules described here are imported with LibPQ, so a basic familiarity with the library is assumed (&lt;a href="https://libpq.ml"&gt;readme&lt;/a&gt;, &lt;a href="https://potyarkin.com/posts/2018/getting-started-with-libpq/"&gt;getting started&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;Let's create a basic test suite and save it in the directory listed in &lt;code&gt;LibPQPath&lt;/code&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cm"&gt;/* DemoTests.pq - sample test suite */&lt;/span&gt;
 &lt;span class="p"&gt;[&lt;/span&gt;
@@ -60,21 +60,21 @@ test discovery tools to distinguish it from just another record.&lt;/p&gt;
 &lt;li&gt;Return the test results as a table, reporting as much data about the failed
   tests as possible&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;a href="https://potyarkin.ml/posts/2018/unit-testing-in-power-query-m-language/libpq-unittest-long.png"&gt;&lt;img alt="Test results" src="https://potyarkin.ml/posts/2018/unit-testing-in-power-query-m-language/libpq-unittest-long.png"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://potyarkin.com/posts/2018/unit-testing-in-power-query-m-language/libpq-unittest-long.png"&gt;&lt;img alt="Test results" src="https://potyarkin.com/posts/2018/unit-testing-in-power-query-m-language/libpq-unittest-long.png"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;In the screenshot above we invoke &lt;a href="https://github.com/sio/LibPQ/blob/master/Modules/UnitTest.Discover.pq"&gt;UnitTest.Discover&lt;/a&gt; with &lt;code&gt;compact_output =
 false&lt;/code&gt; but when you'll have dozens of test cases you'll probably prefer default
 behavior (group test results by status).&lt;/p&gt;
 &lt;h2 id="more-about-unittest-in-libpq"&gt;&lt;a class="toclink" href="#more-about-unittest-in-libpq"&gt;More about UnitTest in LibPQ&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;If you liked the idea of unit testing M language code, check out the main
 &lt;a href="https://libpq.ml/Docs/UnitTesting"&gt;UnitTest&lt;/a&gt; documentation and a more extensive &lt;a href="https://github.com/sio/LibPQ/blob/master/Samples/Tests.Sample.pq"&gt;test sample&lt;/a&gt; that makes use of
-subtests.&lt;/p&gt;</content><category term="posts"></category><category term="m"></category><category term="power-query"></category><category term="LibPQ"></category></entry><entry><title>Getting started with LibPQ</title><link href="https://potyarkin.ml/posts/2018/getting-started-with-libpq/" rel="alternate"></link><published>2018-04-01T00:00:00+03:00</published><updated>2018-04-01T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-04-01:/posts/2018/getting-started-with-libpq/</id><summary type="html">&lt;p&gt;This is a step by step guide to getting started with &lt;a href="https://potyarkin.ml/posts/2018/expanding-power-query-standard-library-introducing-libpq/"&gt;LibPQ&lt;/a&gt;, an illustrated
+subtests.&lt;/p&gt;</content><category term="posts"></category><category term="m"></category><category term="power-query"></category><category term="LibPQ"></category></entry><entry><title>Getting started with LibPQ</title><link href="https://potyarkin.com/posts/2018/getting-started-with-libpq/" rel="alternate"></link><published>2018-04-01T00:00:00+03:00</published><updated>2018-04-01T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2018-04-01:/posts/2018/getting-started-with-libpq/</id><summary type="html">&lt;p&gt;This is a step by step guide to getting started with &lt;a href="https://potyarkin.com/posts/2018/expanding-power-query-standard-library-introducing-libpq/"&gt;LibPQ&lt;/a&gt;, an illustrated
 version of &lt;a href="https://libpq.ml/#installation-and-usage"&gt;"Installation and usage"&lt;/a&gt; section of the official
 documentation.&lt;/p&gt;
 &lt;h2 id="installation"&gt;&lt;a class="toclink" href="#installation"&gt;Installation&lt;/a&gt;&lt;/h2&gt;
 &lt;h3 id="libpq-source-code"&gt;&lt;a class="toclink" href="#libpq-source-code"&gt;LibPQ source code&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;The source code of the library has to be present in each workbook that uses it.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Create a new blank query: &lt;code&gt;Data …&lt;/code&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;This is a step by step guide to getting started with &lt;a href="https://potyarkin.ml/posts/2018/expanding-power-query-standard-library-introducing-libpq/"&gt;LibPQ&lt;/a&gt;, an illustrated
+&lt;li&gt;Create a new blank query: &lt;code&gt;Data …&lt;/code&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;This is a step by step guide to getting started with &lt;a href="https://potyarkin.com/posts/2018/expanding-power-query-standard-library-introducing-libpq/"&gt;LibPQ&lt;/a&gt;, an illustrated
 version of &lt;a href="https://libpq.ml/#installation-and-usage"&gt;"Installation and usage"&lt;/a&gt; section of the official
 documentation.&lt;/p&gt;
 &lt;h2 id="installation"&gt;&lt;a class="toclink" href="#installation"&gt;Installation&lt;/a&gt;&lt;/h2&gt;
@@ -84,10 +84,10 @@ documentation.&lt;/p&gt;
 &lt;li&gt;Create a new blank query: &lt;code&gt;Data &amp;gt; Get &amp;amp; Transform &amp;gt; From Other Sources &amp;gt;
   Blank Query&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Go to "Advanced editor" and replace the query code with the contents of
-  &lt;a href="https://potyarkin.ml/posts/2018/expanding-power-query-standard-library-introducing-libpq/"&gt;&lt;code&gt;LibPQ.pq&lt;/code&gt;&lt;/a&gt; (switch to "Raw" view to make selecting easier)&lt;/li&gt;
+  &lt;a href="https://potyarkin.com/posts/2018/expanding-power-query-standard-library-introducing-libpq/"&gt;&lt;code&gt;LibPQ.pq&lt;/code&gt;&lt;/a&gt; (switch to "Raw" view to make selecting easier)&lt;/li&gt;
 &lt;li&gt;Save new query under the name &lt;code&gt;LibPQ&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;a href="https://potyarkin.ml/posts/2018/getting-started-with-libpq/libpq-main-module.png"&gt;&lt;img alt="Main module of LibPQ" src="https://potyarkin.ml/posts/2018/getting-started-with-libpq/libpq-main-module.png"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://potyarkin.com/posts/2018/getting-started-with-libpq/libpq-main-module.png"&gt;&lt;img alt="Main module of LibPQ" src="https://potyarkin.com/posts/2018/getting-started-with-libpq/libpq-main-module.png"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="specifying-modules-location"&gt;&lt;a class="toclink" href="#specifying-modules-location"&gt;Specifying modules location&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;After the previous step LibPQ doesn't know yet where it should get the modules'
 source code from. You can specify an unlimited number of local and web locations
@@ -96,7 +96,7 @@ where the modules are saved:&lt;/p&gt;
 &lt;li&gt;Create a new blank query and name it &lt;code&gt;LibPQPath&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Copy the contents of &lt;a href="https://github.com/sio/LibPQ/blob/master/LibPQPath-sample.pq"&gt;LibPQPath-sample.pq&lt;/a&gt; and modify it in Advanced editor.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;a href="https://potyarkin.ml/posts/2018/getting-started-with-libpq/libpq-path-editor.png"&gt;&lt;img alt="LibPQ-Path" src="https://potyarkin.ml/posts/2018/getting-started-with-libpq/libpq-path-editor.png"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://potyarkin.com/posts/2018/getting-started-with-libpq/libpq-path-editor.png"&gt;&lt;img alt="LibPQ-Path" src="https://potyarkin.com/posts/2018/getting-started-with-libpq/libpq-path-editor.png"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;LibPQ will search for your modules first in local directories (in order they
 are listed), then in web locations. If the module is found, no further
 locations are checked.&lt;/p&gt;
@@ -122,7 +122,7 @@ queries in Advanced editor. LibPQ will search for the file named
 &lt;code&gt;ModuleName.pq&lt;/code&gt; in all locations that you've listed in LibPQPath. If the module
 is found, its source code will be evaluated and the result will be returned.&lt;/p&gt;
 &lt;p&gt;For example, let's import &lt;code&gt;Date.Parse&lt;/code&gt; from standard LibPQ collection:&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://potyarkin.ml/posts/2018/getting-started-with-libpq/libpq-date-parse.png"&gt;&lt;img alt="Date.Parse" src="https://potyarkin.ml/posts/2018/getting-started-with-libpq/libpq-date-parse.png"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://potyarkin.com/posts/2018/getting-started-with-libpq/libpq-date-parse.png"&gt;&lt;img alt="Date.Parse" src="https://potyarkin.com/posts/2018/getting-started-with-libpq/libpq-date-parse.png"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;That works because &lt;code&gt;LibPQPath&lt;/code&gt; contains reference to
 &lt;code&gt;https://raw.githubusercontent.com/sio/LibPQ/master/Modules/&lt;/code&gt;, where the source
 code for &lt;code&gt;Date.Parse.pq&lt;/code&gt; is located.&lt;/p&gt;
@@ -136,7 +136,7 @@ later:&lt;/p&gt;
   available for importing&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;If you have any further questions about LibPQ please create an &lt;a href="https://github.com/sio/LibPQ/issues"&gt;issue&lt;/a&gt; on GitHub
-or contact me via &lt;a href="mailto:sio.wtf@gmail.com"&gt;e-mail&lt;/a&gt;.&lt;/p&gt;</content><category term="posts"></category><category term="m"></category><category term="power-query"></category><category term="LibPQ"></category></entry><entry><title>Expanding Power Query standard library - introducing LibPQ</title><link href="https://potyarkin.ml/posts/2018/expanding-power-query-standard-library-introducing-libpq/" rel="alternate"></link><published>2018-01-03T00:00:00+03:00</published><updated>2018-01-03T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2018-01-03:/posts/2018/expanding-power-query-standard-library-introducing-libpq/</id><summary type="html">&lt;p&gt;Power Query formula language (also known as M language) is a very capable yet
+or contact me via &lt;a href="mailto:sio.wtf@gmail.com"&gt;e-mail&lt;/a&gt;.&lt;/p&gt;</content><category term="posts"></category><category term="m"></category><category term="power-query"></category><category term="LibPQ"></category></entry><entry><title>Expanding Power Query standard library - introducing LibPQ</title><link href="https://potyarkin.com/posts/2018/expanding-power-query-standard-library-introducing-libpq/" rel="alternate"></link><published>2018-01-03T00:00:00+03:00</published><updated>2018-01-03T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2018-01-03:/posts/2018/expanding-power-query-standard-library-introducing-libpq/</id><summary type="html">&lt;p&gt;Power Query formula language (also known as M language) is a very capable yet
 not very flexible tool. It lacks some features taken for granted by developers
 who are used to other programming languages such as compatibility with version
 control systems, extensibility by third-party libraries, etc.&lt;/p&gt;

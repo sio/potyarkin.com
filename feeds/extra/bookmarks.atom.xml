@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - Bookmarks - Orange Sun</title><link href="https://potyarkin.ml/" rel="alternate"></link><link href="https://potyarkin.ml/feeds/extra/bookmarks.atom.xml" rel="self"></link><id>https://potyarkin.ml/</id><updated>2023-08-01T00:00:00+00:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>July 2023</title><link href="https://potyarkin.ml/bookmarks/#2023-07" rel="alternate"></link><published>2023-08-01T00:00:00+00:00</published><updated>2023-08-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2023-08-01:/bookmarks//2023-07</id><content type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - Bookmarks - Orange Sun</title><link href="https://potyarkin.com/" rel="alternate"></link><link href="https://potyarkin.com/feeds/extra/bookmarks.atom.xml" rel="self"></link><id>https://potyarkin.com/</id><updated>2023-08-01T00:00:00+00:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>July 2023</title><link href="https://potyarkin.com/bookmarks/#2023-07" rel="alternate"></link><published>2023-08-01T00:00:00+00:00</published><updated>2023-08-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2023-08-01:/bookmarks//2023-07</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -15,7 +15,7 @@ Is faster and feels cleaner than protobufs.&lt;/p&gt;
     &lt;p&gt;An introductory overview of SSH protocol. Helpful if you're implementing
 your own SSH server&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>May 2023</title><link href="https://potyarkin.ml/bookmarks/#2023-05" rel="alternate"></link><published>2023-06-01T00:00:00+00:00</published><updated>2023-06-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2023-06-01:/bookmarks//2023-05</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>May 2023</title><link href="https://potyarkin.com/bookmarks/#2023-05" rel="alternate"></link><published>2023-06-01T00:00:00+00:00</published><updated>2023-06-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2023-06-01:/bookmarks//2023-05</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -26,7 +26,7 @@ your own SSH server&lt;/p&gt;
 between ttys, ptys, line discipline and mixes in a sidebar on Unix
 signals.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>March 2023</title><link href="https://potyarkin.ml/bookmarks/#2023-03" rel="alternate"></link><published>2023-04-01T00:00:00+00:00</published><updated>2023-04-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2023-04-01:/bookmarks//2023-03</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>March 2023</title><link href="https://potyarkin.com/bookmarks/#2023-03" rel="alternate"></link><published>2023-04-01T00:00:00+00:00</published><updated>2023-04-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2023-04-01:/bookmarks//2023-03</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -34,7 +34,7 @@ signals.&lt;/p&gt;
     &lt;/strong&gt;&lt;/p&gt;
     &lt;p&gt;How to reason about hexagonal tiles when programming&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>January 2023</title><link href="https://potyarkin.ml/bookmarks/#2023-01" rel="alternate"></link><published>2023-02-01T00:00:00+00:00</published><updated>2023-02-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2023-02-01:/bookmarks//2023-01</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>January 2023</title><link href="https://potyarkin.com/bookmarks/#2023-01" rel="alternate"></link><published>2023-02-01T00:00:00+00:00</published><updated>2023-02-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2023-02-01:/bookmarks//2023-01</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -48,7 +48,7 @@ on unreliable networks (WiFi, mobile). Userspace IO buffering may help to
 work around this problem because raw socket is not easily exposed in
 Golang (to revert this setting in case it's required).&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>December 2022</title><link href="https://potyarkin.ml/bookmarks/#2022-12" rel="alternate"></link><published>2023-01-01T00:00:00+00:00</published><updated>2023-01-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2023-01-01:/bookmarks//2022-12</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>December 2022</title><link href="https://potyarkin.com/bookmarks/#2022-12" rel="alternate"></link><published>2023-01-01T00:00:00+00:00</published><updated>2023-01-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2023-01-01:/bookmarks//2022-12</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -64,7 +64,7 @@ Golang (to revert this setting in case it's required).&lt;/p&gt;
     &lt;p&gt;A StackOverflow answer that could have been a long blog post.
 Good explanation of some vi intricacies I didn't understand before.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>November 2022</title><link href="https://potyarkin.ml/bookmarks/#2022-11" rel="alternate"></link><published>2022-12-01T00:00:00+00:00</published><updated>2022-12-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-12-01:/bookmarks//2022-11</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>November 2022</title><link href="https://potyarkin.com/bookmarks/#2022-11" rel="alternate"></link><published>2022-12-01T00:00:00+00:00</published><updated>2022-12-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2022-12-01:/bookmarks//2022-11</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -110,7 +110,7 @@ Dedicated to public domain, no usage restrictions, no attribution required.&lt;/
     &lt;p&gt;Uniqueness of SSH user certificate serial numbers is left up to issuer to
 implement. For a low volume CA golang's UnixNano() seems not bad.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>October 2022</title><link href="https://potyarkin.ml/bookmarks/#2022-10" rel="alternate"></link><published>2022-11-01T00:00:00+00:00</published><updated>2022-11-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-11-01:/bookmarks//2022-10</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>October 2022</title><link href="https://potyarkin.com/bookmarks/#2022-10" rel="alternate"></link><published>2022-11-01T00:00:00+00:00</published><updated>2022-11-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2022-11-01:/bookmarks//2022-10</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -148,7 +148,7 @@ per-unit firewalling with systemd.&lt;/p&gt;
   just not allowed&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>September 2022</title><link href="https://potyarkin.ml/bookmarks/#2022-09" rel="alternate"></link><published>2022-10-01T00:00:00+00:00</published><updated>2022-10-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-10-01:/bookmarks//2022-09</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>September 2022</title><link href="https://potyarkin.com/bookmarks/#2022-09" rel="alternate"></link><published>2022-10-01T00:00:00+00:00</published><updated>2022-10-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2022-10-01:/bookmarks//2022-09</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -202,7 +202,7 @@ image upgrades.&lt;/p&gt;
 &lt;li&gt;&lt;a href="https://www.freedesktop.org/software/systemd/man/systemd-nspawn.html"&gt;systemd-nspawn&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>August 2022</title><link href="https://potyarkin.ml/bookmarks/#2022-08" rel="alternate"></link><published>2022-09-01T00:00:00+00:00</published><updated>2022-09-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-09-01:/bookmarks//2022-08</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>August 2022</title><link href="https://potyarkin.com/bookmarks/#2022-08" rel="alternate"></link><published>2022-09-01T00:00:00+00:00</published><updated>2022-09-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2022-09-01:/bookmarks//2022-08</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -258,7 +258,7 @@ That's a nice feature many competitors are lacking.&lt;/p&gt;
 &lt;li&gt;&lt;a href="https://github.com/lowdefy/lowdefy"&gt;Lowdefy&lt;/a&gt; (Apache-2.0)&lt;/li&gt;
 &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>July 2022</title><link href="https://potyarkin.ml/bookmarks/#2022-07" rel="alternate"></link><published>2022-08-01T00:00:00+00:00</published><updated>2022-08-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-08-01:/bookmarks//2022-07</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>July 2022</title><link href="https://potyarkin.com/bookmarks/#2022-07" rel="alternate"></link><published>2022-08-01T00:00:00+00:00</published><updated>2022-08-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2022-08-01:/bookmarks//2022-07</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -297,7 +297,7 @@ and hostile Digital “Rights” Management (DRM) software. These issues
 affect every digital user, technically inclined or otherwise, on desktops
 and smartphones alike.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>June 2022</title><link href="https://potyarkin.ml/bookmarks/#2022-06" rel="alternate"></link><published>2022-07-01T00:00:00+00:00</published><updated>2022-07-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-07-01:/bookmarks//2022-06</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>June 2022</title><link href="https://potyarkin.com/bookmarks/#2022-06" rel="alternate"></link><published>2022-07-01T00:00:00+00:00</published><updated>2022-07-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2022-07-01:/bookmarks//2022-06</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -348,7 +348,7 @@ and Uses of a Responsible Internet” and “Building Greener Internet”.&lt;/p
 It's just not as visible anymore with all the loud giants grabbing most
 of attention first.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>May 2022</title><link href="https://potyarkin.ml/bookmarks/#2022-05" rel="alternate"></link><published>2022-06-01T00:00:00+00:00</published><updated>2022-06-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-06-01:/bookmarks//2022-05</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>May 2022</title><link href="https://potyarkin.com/bookmarks/#2022-05" rel="alternate"></link><published>2022-06-01T00:00:00+00:00</published><updated>2022-06-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2022-06-01:/bookmarks//2022-05</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -404,7 +404,7 @@ A minimal Linux distribution that was designed for use as a test image on
 clouds such as OpenStack Compute. Comes with cloud-init out of the box and
 supports insecure login by default (user: &lt;code&gt;cirros&lt;/code&gt;, password: &lt;code&gt;gocubsgo&lt;/code&gt;)&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>April 2022</title><link href="https://potyarkin.ml/bookmarks/#2022-04" rel="alternate"></link><published>2022-05-01T00:00:00+00:00</published><updated>2022-05-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-05-01:/bookmarks//2022-04</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>April 2022</title><link href="https://potyarkin.com/bookmarks/#2022-04" rel="alternate"></link><published>2022-05-01T00:00:00+00:00</published><updated>2022-05-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2022-05-01:/bookmarks//2022-04</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -412,7 +412,7 @@ supports insecure login by default (user: &lt;code&gt;cirros&lt;/code&gt;, passw
     &lt;/strong&gt;&lt;/p&gt;
     &lt;p&gt;A short story about friendship, imagination and growing up. Well written. Sad.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>February 2022</title><link href="https://potyarkin.ml/bookmarks/#2022-02" rel="alternate"></link><published>2022-03-01T00:00:00+00:00</published><updated>2022-03-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-03-01:/bookmarks//2022-02</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>February 2022</title><link href="https://potyarkin.com/bookmarks/#2022-02" rel="alternate"></link><published>2022-03-01T00:00:00+00:00</published><updated>2022-03-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2022-03-01:/bookmarks//2022-02</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -422,7 +422,7 @@ supports insecure login by default (user: &lt;code&gt;cirros&lt;/code&gt;, passw
 transcribed into text files later (with vim plugins and shell scripts for
 automation)&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>January 2022</title><link href="https://potyarkin.ml/bookmarks/#2022-01" rel="alternate"></link><published>2022-02-01T00:00:00+00:00</published><updated>2022-02-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2022-02-01:/bookmarks//2022-01</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>January 2022</title><link href="https://potyarkin.com/bookmarks/#2022-01" rel="alternate"></link><published>2022-02-01T00:00:00+00:00</published><updated>2022-02-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2022-02-01:/bookmarks//2022-01</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -458,7 +458,7 @@ GitLab runner are already added into &lt;a href="https://salsa.debian.org/extrep
 several known algorithms with good opensource implementations, no need to
 attempt to solve this alone.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>November 2021</title><link href="https://potyarkin.ml/bookmarks/#2021-11" rel="alternate"></link><published>2021-12-01T00:00:00+00:00</published><updated>2021-12-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2021-12-01:/bookmarks//2021-11</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>November 2021</title><link href="https://potyarkin.com/bookmarks/#2021-11" rel="alternate"></link><published>2021-12-01T00:00:00+00:00</published><updated>2021-12-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2021-12-01:/bookmarks//2021-11</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -493,7 +493,7 @@ self navigation and local avoidance, and even can self replicate
     &lt;p&gt;An approach to instant messaging I agree with. Will probably link to this if
 topics comes up&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>October 2021</title><link href="https://potyarkin.ml/bookmarks/#2021-10" rel="alternate"></link><published>2021-11-01T00:00:00+00:00</published><updated>2021-11-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2021-11-01:/bookmarks//2021-10</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>October 2021</title><link href="https://potyarkin.com/bookmarks/#2021-10" rel="alternate"></link><published>2021-11-01T00:00:00+00:00</published><updated>2021-11-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2021-11-01:/bookmarks//2021-10</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -511,7 +511,7 @@ serial console. See also:&lt;/p&gt;
     &lt;a href="https://adventurist.me/posts/00307"&gt;dualboot&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>September 2021</title><link href="https://potyarkin.ml/bookmarks/#2021-09" rel="alternate"></link><published>2021-10-01T00:00:00+00:00</published><updated>2021-10-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2021-10-01:/bookmarks//2021-09</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>September 2021</title><link href="https://potyarkin.com/bookmarks/#2021-09" rel="alternate"></link><published>2021-10-01T00:00:00+00:00</published><updated>2021-10-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2021-10-01:/bookmarks//2021-09</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -521,7 +521,7 @@ serial console. See also:&lt;/p&gt;
 Issues short-lived certificates after web based authentication. Supports
 session recording, access requests, live session view&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>August 2021</title><link href="https://potyarkin.ml/bookmarks/#2021-08" rel="alternate"></link><published>2021-09-01T00:00:00+00:00</published><updated>2021-09-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2021-09-01:/bookmarks//2021-08</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>August 2021</title><link href="https://potyarkin.com/bookmarks/#2021-08" rel="alternate"></link><published>2021-09-01T00:00:00+00:00</published><updated>2021-09-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2021-09-01:/bookmarks//2021-08</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -530,7 +530,7 @@ session recording, access requests, live session view&lt;/p&gt;
     &lt;p&gt;Turn any laptop screen into a proper monitor with a simple cheap board.
 Inputs: DC power, HDMI/VGA signal. Outputs: LVDS, backlight.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>July 2021</title><link href="https://potyarkin.ml/bookmarks/#2021-07" rel="alternate"></link><published>2021-08-01T00:00:00+00:00</published><updated>2021-08-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2021-08-01:/bookmarks//2021-07</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>July 2021</title><link href="https://potyarkin.com/bookmarks/#2021-07" rel="alternate"></link><published>2021-08-01T00:00:00+00:00</published><updated>2021-08-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2021-08-01:/bookmarks//2021-07</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -557,7 +557,7 @@ configuration.&lt;/p&gt;
     &lt;a href="https://www.kalzumeus.com/2012/01/23/salary-negotiation/"&gt;Salary Negotiation: Make More Money, Be More Valued&lt;/a&gt;
     &lt;/strong&gt;&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>June 2021</title><link href="https://potyarkin.ml/bookmarks/#2021-06" rel="alternate"></link><published>2021-07-01T00:00:00+00:00</published><updated>2021-07-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2021-07-01:/bookmarks//2021-06</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>June 2021</title><link href="https://potyarkin.com/bookmarks/#2021-06" rel="alternate"></link><published>2021-07-01T00:00:00+00:00</published><updated>2021-07-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2021-07-01:/bookmarks//2021-06</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -580,7 +580,7 @@ nested virtualization. Best fit for my purposes are &lt;code&gt;E4ds_v4&lt;/code
     &lt;p&gt;Sometimes you need to use X server on a machine without a video card. Dummy
 driver helps in such cases&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>April 2021</title><link href="https://potyarkin.ml/bookmarks/#2021-04" rel="alternate"></link><published>2021-05-01T00:00:00+00:00</published><updated>2021-05-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2021-05-01:/bookmarks//2021-04</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>April 2021</title><link href="https://potyarkin.com/bookmarks/#2021-04" rel="alternate"></link><published>2021-05-01T00:00:00+00:00</published><updated>2021-05-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2021-05-01:/bookmarks//2021-04</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -607,7 +607,7 @@ driver helps in such cases&lt;/p&gt;
     &lt;/strong&gt;&lt;/p&gt;
     &lt;p&gt;A real world description of why business logic is almost never algorithmic&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>March 2021</title><link href="https://potyarkin.ml/bookmarks/#2021-03" rel="alternate"></link><published>2021-04-01T00:00:00+00:00</published><updated>2021-04-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2021-04-01:/bookmarks//2021-03</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>March 2021</title><link href="https://potyarkin.com/bookmarks/#2021-03" rel="alternate"></link><published>2021-04-01T00:00:00+00:00</published><updated>2021-04-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2021-04-01:/bookmarks//2021-03</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -622,7 +622,7 @@ fortune and that of top 400 Americans.&lt;/p&gt;
     &lt;/strong&gt;&lt;/p&gt;
     &lt;p&gt;Laser cut aluminium case for RasPi cluster&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>February 2021</title><link href="https://potyarkin.ml/bookmarks/#2021-02" rel="alternate"></link><published>2021-03-01T00:00:00+00:00</published><updated>2021-03-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2021-03-01:/bookmarks//2021-02</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>February 2021</title><link href="https://potyarkin.com/bookmarks/#2021-02" rel="alternate"></link><published>2021-03-01T00:00:00+00:00</published><updated>2021-03-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2021-03-01:/bookmarks//2021-02</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -646,7 +646,7 @@ checklist/runbook-style workflows&lt;/p&gt;
     &lt;p&gt;A short research paper that highlights numerous possibilities of
 text/code editor improvement with modern technology.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>November 2020</title><link href="https://potyarkin.ml/bookmarks/#2020-11" rel="alternate"></link><published>2020-12-01T00:00:00+00:00</published><updated>2020-12-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-12-01:/bookmarks//2020-11</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>November 2020</title><link href="https://potyarkin.com/bookmarks/#2020-11" rel="alternate"></link><published>2020-12-01T00:00:00+00:00</published><updated>2020-12-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2020-12-01:/bookmarks//2020-11</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -654,7 +654,7 @@ text/code editor improvement with modern technology.&lt;/p&gt;
     &lt;/strong&gt;&lt;/p&gt;
     &lt;p&gt;A workaround to create a row context when calculating DAX measures.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>October 2020</title><link href="https://potyarkin.ml/bookmarks/#2020-10" rel="alternate"></link><published>2020-11-01T00:00:00+00:00</published><updated>2020-11-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-11-01:/bookmarks//2020-10</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>October 2020</title><link href="https://potyarkin.com/bookmarks/#2020-10" rel="alternate"></link><published>2020-11-01T00:00:00+00:00</published><updated>2020-11-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2020-11-01:/bookmarks//2020-10</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -668,7 +668,7 @@ text/code editor improvement with modern technology.&lt;/p&gt;
     &lt;/strong&gt;&lt;/p&gt;
     &lt;p&gt;Hand-on guide to setting up PXE boot for multiple clients&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>August 2020</title><link href="https://potyarkin.ml/bookmarks/#2020-08" rel="alternate"></link><published>2020-09-01T00:00:00+00:00</published><updated>2020-09-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-09-01:/bookmarks//2020-08</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>August 2020</title><link href="https://potyarkin.com/bookmarks/#2020-08" rel="alternate"></link><published>2020-09-01T00:00:00+00:00</published><updated>2020-09-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2020-09-01:/bookmarks//2020-08</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -689,7 +689,7 @@ and just now are thinking about how to create a profitable business out of it.&l
     &lt;/strong&gt;&lt;/p&gt;
     &lt;p&gt;Boot multiple live ISOs from a single USB drive&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>July 2020</title><link href="https://potyarkin.ml/bookmarks/#2020-07" rel="alternate"></link><published>2020-08-01T00:00:00+00:00</published><updated>2020-08-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-08-01:/bookmarks//2020-07</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>July 2020</title><link href="https://potyarkin.com/bookmarks/#2020-07" rel="alternate"></link><published>2020-08-01T00:00:00+00:00</published><updated>2020-08-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2020-08-01:/bookmarks//2020-07</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -715,7 +715,7 @@ immediately after World War II&lt;/a&gt;
     &lt;a href="https://en.wikipedia.org/wiki/Myth_of_the_clean_Wehrmacht"&gt;Myth of the clean Wehrmacht&lt;/a&gt;
     &lt;/strong&gt;&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>June 2020</title><link href="https://potyarkin.ml/bookmarks/#2020-06" rel="alternate"></link><published>2020-07-01T00:00:00+00:00</published><updated>2020-07-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-07-01:/bookmarks//2020-06</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>June 2020</title><link href="https://potyarkin.com/bookmarks/#2020-06" rel="alternate"></link><published>2020-07-01T00:00:00+00:00</published><updated>2020-07-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2020-07-01:/bookmarks//2020-06</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -724,7 +724,7 @@ immediately after World War II&lt;/a&gt;
     &lt;p&gt;Перенос тонера с помощью ацетона (1 часть ацетона, 2 части жидкости для
 снятия лака без ацетона), травление перекисью водорода и лимонной кислотой.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>May 2020</title><link href="https://potyarkin.ml/bookmarks/#2020-05" rel="alternate"></link><published>2020-06-01T00:00:00+00:00</published><updated>2020-06-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-06-01:/bookmarks//2020-05</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>May 2020</title><link href="https://potyarkin.com/bookmarks/#2020-05" rel="alternate"></link><published>2020-06-01T00:00:00+00:00</published><updated>2020-06-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2020-06-01:/bookmarks//2020-05</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -739,7 +739,7 @@ your systemd units&lt;/p&gt;
     &lt;/strong&gt;&lt;/p&gt;
     &lt;p&gt;A large essay on the history and internals of systemd&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>April 2020</title><link href="https://potyarkin.ml/bookmarks/#2020-04" rel="alternate"></link><published>2020-05-01T00:00:00+00:00</published><updated>2020-05-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-05-01:/bookmarks//2020-04</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>April 2020</title><link href="https://potyarkin.com/bookmarks/#2020-04" rel="alternate"></link><published>2020-05-01T00:00:00+00:00</published><updated>2020-05-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2020-05-01:/bookmarks//2020-04</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -757,7 +757,7 @@ also: &lt;a href="https://bugzilla.redhat.com/show_bug.cgi?id=1610461"&gt;synic,
 Implemented in C with a proof of concept draft in asynchronous Python.
 Also features a draft of HTTP tarpit.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>March 2020</title><link href="https://potyarkin.ml/bookmarks/#2020-03" rel="alternate"></link><published>2020-04-01T00:00:00+00:00</published><updated>2020-04-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-04-01:/bookmarks//2020-03</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>March 2020</title><link href="https://potyarkin.com/bookmarks/#2020-03" rel="alternate"></link><published>2020-04-01T00:00:00+00:00</published><updated>2020-04-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2020-04-01:/bookmarks//2020-03</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -774,7 +774,7 @@ see online&lt;/p&gt;
     &lt;p&gt;A thorough database of thin client hardware, with detailed photos of
 internal layout, description of extension capabilities and Linux support&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>February 2020</title><link href="https://potyarkin.ml/bookmarks/#2020-02" rel="alternate"></link><published>2020-03-01T00:00:00+00:00</published><updated>2020-03-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-03-01:/bookmarks//2020-02</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>February 2020</title><link href="https://potyarkin.com/bookmarks/#2020-02" rel="alternate"></link><published>2020-03-01T00:00:00+00:00</published><updated>2020-03-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2020-03-01:/bookmarks//2020-02</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -818,7 +818,7 @@ Python&lt;/p&gt;
     &lt;/strong&gt;&lt;/p&gt;
     &lt;p&gt;A three-part series of blog posts on Molecule: scenarios, drivers, linters.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>January 2020</title><link href="https://potyarkin.ml/bookmarks/#2020-01" rel="alternate"></link><published>2020-02-01T00:00:00+00:00</published><updated>2020-02-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2020-02-01:/bookmarks//2020-01</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>January 2020</title><link href="https://potyarkin.com/bookmarks/#2020-01" rel="alternate"></link><published>2020-02-01T00:00:00+00:00</published><updated>2020-02-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2020-02-01:/bookmarks//2020-01</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -829,7 +829,7 @@ Python&lt;/p&gt;
 not be programmed. Good arguments on why Code of Conduct must not be
 elevated to the position of highest authority.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>November 2019</title><link href="https://potyarkin.ml/bookmarks/#2019-11" rel="alternate"></link><published>2019-12-01T00:00:00+00:00</published><updated>2019-12-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2019-12-01:/bookmarks//2019-11</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>November 2019</title><link href="https://potyarkin.com/bookmarks/#2019-11" rel="alternate"></link><published>2019-12-01T00:00:00+00:00</published><updated>2019-12-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2019-12-01:/bookmarks//2019-11</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -845,7 +845,7 @@ elevated to the position of highest authority.&lt;/p&gt;
 &lt;li&gt;&lt;a href="https://medium.com/figma-design/an-alternative-approach-to-rate-limiting-f8a06cf7c94c"&gt;Sliding window counter&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>October 2019</title><link href="https://potyarkin.ml/bookmarks/#2019-10" rel="alternate"></link><published>2019-11-01T00:00:00+00:00</published><updated>2019-11-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2019-11-01:/bookmarks//2019-10</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>October 2019</title><link href="https://potyarkin.com/bookmarks/#2019-10" rel="alternate"></link><published>2019-11-01T00:00:00+00:00</published><updated>2019-11-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2019-11-01:/bookmarks//2019-10</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -871,7 +871,7 @@ workflow. Notable references:
     &lt;p&gt;Add this to &lt;code&gt;~/.fonts&lt;/code&gt; to enable emoji rendering in Debian 9. Available in
 Debian repos for Buster+ (10+)&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>August 2019</title><link href="https://potyarkin.ml/bookmarks/#2019-08" rel="alternate"></link><published>2019-09-01T00:00:00+00:00</published><updated>2019-09-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2019-09-01:/bookmarks//2019-08</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>August 2019</title><link href="https://potyarkin.com/bookmarks/#2019-08" rel="alternate"></link><published>2019-09-01T00:00:00+00:00</published><updated>2019-09-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2019-09-01:/bookmarks//2019-08</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -900,7 +900,7 @@ See also:
 now. Parallel programming should not be hard, future hardware could make it
 better by dropping some C compatibility.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>July 2019</title><link href="https://potyarkin.ml/bookmarks/#2019-07" rel="alternate"></link><published>2019-08-01T00:00:00+00:00</published><updated>2019-08-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2019-08-01:/bookmarks//2019-07</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>July 2019</title><link href="https://potyarkin.com/bookmarks/#2019-07" rel="alternate"></link><published>2019-08-01T00:00:00+00:00</published><updated>2019-08-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2019-08-01:/bookmarks//2019-07</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
@@ -926,7 +926,7 @@ techniques will stop working. Wow moment: the speed of light is now a
 limiting factor when designing CPUs. Includes some hints that VLIW
 architecture might be the future (see: Intel Itanium project)&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>June 2019</title><link href="https://potyarkin.ml/bookmarks/#2019-06" rel="alternate"></link><published>2019-07-01T00:00:00+00:00</published><updated>2019-07-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.ml,2019-07-01:/bookmarks//2019-06</id><content type="html">
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>June 2019</title><link href="https://potyarkin.com/bookmarks/#2019-06" rel="alternate"></link><published>2019-07-01T00:00:00+00:00</published><updated>2019-07-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2019-07-01:/bookmarks//2019-06</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
