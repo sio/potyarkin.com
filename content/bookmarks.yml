@@ -5,6 +5,17 @@
 # data format is not guaranteed to remain stable over time
 #
 
+- period: 2023-08
+  links:
+
+  - title: Using Ed25519 signing keys for encryption
+    url: https://words.filippo.io/using-ed25519-keys-for-encryption/
+    description:
+      Ed25519 keys may be converted to X25519 keys to be used for encryption.
+      Unfortunately, this requires access to raw private key material and will
+      not work for keys stored in ssh-agent
+
+
 - period: 2023-07
   links:
 
