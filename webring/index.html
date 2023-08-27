@@ -53,10 +53,10 @@ Latest posts from other interesting blogs |
     <ul>
   <li>
     <p><strong>
-    <a href="https://utcc.utoronto.ca/~cks/space/blog/linux/Ubuntu2204EnableNFSv4">Enabling NFS v4 an Ubuntu 22.04 fileserver (instead of just NFS v3)</a>
+    <a href="https://utcc.utoronto.ca/~cks/space/blog/linux/NFSv4IdmapdDomain">Linux NFS v4 idmapd domain handling and server/client agreement</a>
     ::&nbsp;Wandering Thoughts
     </strong></p>
-    <p>In Ubuntu 22.04 and other modern Linux distributions, the way you prevent your fileservers from doing NFS v4 is to set some options in /etc/nfs.conf. The default is to support NFS v4, so you need...</p>
+    <p>As mentioned in the nfsidmap(5) manual page, NFS v4 represents UIDs and GIDs as 'id@domain' strings in contexts like stat(2) results and thus, for example, 'ls -l' output (this was explained to me...</p>
   </li>
   <li>
     <p><strong>
