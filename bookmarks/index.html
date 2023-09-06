@@ -57,6 +57,29 @@ Unsorted links to the pages I've considered interesting at some time |
   <ul>
     <li>
       <p><strong>
+      <a href="https://www.sstic.org/media/SSTIC2021/SSTIC-actes/protecting_ssh_authentication_with_tpm_20/SSTIC2021-Article-protecting_ssh_authentication_with_tpm_20-iooss.pdf">Protecting SSH authentication with TPM 2.0</a>
+      by Nicolas Iooss
+      </strong></p>
+      <p>Page 19:</p>
+<blockquote>
+<p>This confirms that tpm2-pkcs11’s database contains an encrypted version
+of the private key, stored in attribute CKA_TPM2_PRIV_BLOB of the
+PKCS#11 object associated with the private key. This attribute is
+encrypted using the seedValue of the used SRK, which is a secret
+supposed to never leave the TPM. Therefore this analysis also confirms
+that only the TPM itself can decrypt this attribute.</p>
+</blockquote>
+<p>See also: <a href="https://www.barbhack.fr/2021/slides/barbhack2021_tpm_auth.pdf">slides</a></p>
+    </li>
+  </ul>
+  <h2 id="2023-08">
+    <a href="#2023-08">
+      August 2023
+    </a>
+  </h2>
+  <ul>
+    <li>
+      <p><strong>
       <a href="https://words.filippo.io/using-ed25519-keys-for-encryption/">Using Ed25519 signing keys for encryption</a>
       </strong></p>
       <p>Ed25519 keys may be converted to X25519 keys to be used for encryption. Unfortunately, this requires access to raw private key material and will not work for keys stored in ssh-agent</p>
