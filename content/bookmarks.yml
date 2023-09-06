@@ -11,7 +11,7 @@
   - title: Protecting SSH authentication with TPM 2.0
     by: Nicolas Iooss
     url: https://www.sstic.org/media/SSTIC2021/SSTIC-actes/protecting_ssh_authentication_with_tpm_20/SSTIC2021-Article-protecting_ssh_authentication_with_tpm_20-iooss.pdf
-    description:
+    description: |-
       Page 19:
 
       > This confirms that tpm2-pkcs11’s database contains an encrypted version
