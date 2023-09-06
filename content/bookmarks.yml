@@ -8,6 +8,25 @@
 - period: 2023-08
   links:
 
+  - title: Protecting SSH authentication with TPM 2.0
+    by: Nicolas Iooss
+    url: https://www.sstic.org/media/SSTIC2021/SSTIC-actes/protecting_ssh_authentication_with_tpm_20/SSTIC2021-Article-protecting_ssh_authentication_with_tpm_20-iooss.pdf
+    description:
+      Page 19:
+
+      > This confirms that tpm2-pkcs11’s database contains an encrypted version
+      > of the private key, stored in attribute CKA_TPM2_PRIV_BLOB of the
+      > PKCS#11 object associated with the private key. This attribute is
+      > encrypted using the seedValue of the used SRK, which is a secret
+      > supposed to never leave the TPM. Therefore this analysis also confirms
+      > that only the TPM itself can decrypt this attribute.
+
+      See also: [slides](https://www.barbhack.fr/2021/slides/barbhack2021_tpm_auth.pdf)
+
+
+- period: 2023-08
+  links:
+
   - title: Using Ed25519 signing keys for encryption
     url: https://words.filippo.io/using-ed25519-keys-for-encryption/
     description:
