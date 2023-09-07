@@ -71,8 +71,11 @@ links: $(VENV)/linkchecker
 test: $(VENV)/pytest
 	$(VENV)/pytest
 
+.PHONY: extras
+extras: microblog webring newspaper whatsnew
+publish: | extras
+
 .PHONY: microblog
-publish html serve: | microblog
 microblog:
 	git submodule init
 	git submodule update
@@ -80,7 +83,6 @@ microblog:
 
 .PHONY: webring
 webring: content/webring.json
-publish html serve: | webring
 
 .PHONY: content/webring.json
 content/webring.json: content/blogroll.yml helpers/webring.py | venv
@@ -88,7 +90,6 @@ content/webring.json: content/blogroll.yml helpers/webring.py | venv
 
 .PHONY: newspaper
 newspaper: content/newspaper.json
-publish html serve: | newspaper
 
 .PHONY: content/newspaper.json
 content/newspaper.json: content/webring.json
@@ -96,7 +97,6 @@ content/newspaper.json: content/blogroll.yml helpers/newspaper.py | venv
 	$(VENV)/python -m helpers.newspaper $< $@
 
 .PHONY: whatsnew
-publish html serve: | whatsnew
 whatsnew: | venv
 	mkdir -p cache/whatsnew
 	$(VENV)/python -m helpers.whatsnew > content/pages/whatsnew.md
