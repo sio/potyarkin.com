@@ -5,6 +5,19 @@
 # data format is not guaranteed to remain stable over time
 #
 
+
+- period: 2023-10
+  links:
+
+  - title: Finding the Best Block Filesystem
+    by: Michael Opdenacker
+    url: https://bootlin.com/pub/conferences/2023/eoss/opdenacker-finding-best-block-filesystem/opdenacker-finding-best-block-filesystem.pdf
+    description: |-
+      Comparison of mainline Linux filesystems for use as rootfs in embedded devices.
+      EROFS provides some extra read performance but the advantage is not significant.
+      Squashfs still wins on image size, especially with zstd compression.
+
+
 - period: 2023-09
   links:
 
