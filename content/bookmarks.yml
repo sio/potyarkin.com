@@ -57,6 +57,7 @@
   links:
 
   - title: Using Ed25519 signing keys for encryption
+    by: Filippo Valsorda
     url: https://words.filippo.io/using-ed25519-keys-for-encryption/
     description:
       Ed25519 keys may be converted to X25519 keys to be used for encryption.
