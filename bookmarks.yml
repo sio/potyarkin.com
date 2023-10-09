@@ -9,6 +9,15 @@
 - period: 2023-10
   links:
 
+  - title: Stealing power out of PC RS-232 port
+    by: Tomi Engdahl
+    url: https://www.epanorama.net/circuits/rspower.html
+    description: |-
+      An awful awful idea to use RS-232 signal lines as power source. I love it!
+      Turns out you can steal 3-5mA per line (times three for DRT, RTS, TD)
+      before triggering short circuit protection - which gives you an ample power
+      budget of 40-90mW!
+
   - title: Finding the Best Block Filesystem
     by: Michael Opdenacker
     url: https://bootlin.com/pub/conferences/2023/eoss/opdenacker-finding-best-block-filesystem/opdenacker-finding-best-block-filesystem.pdf
