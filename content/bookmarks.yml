@@ -12,6 +12,9 @@
   - title: getaddrinfo() on glibc calls getenv(), oh boy
     by: Rachel Kroll
     url: https://rachelbythebay.com/w/2023/10/16/env/
+    description: |-
+      This affects Go when it's used with CGO_ENABLED (`netdns=cgo`),
+      i.e. by default.
 
   - title: Stealing power out of PC RS-232 port
     by: Tomi Engdahl
