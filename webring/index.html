@@ -53,10 +53,10 @@ Latest posts from other interesting blogs |
     <ul>
   <li>
     <p><strong>
-    <a href="https://utcc.utoronto.ca/~cks/space/blog/sysadmin/NetworkSessionsQuiteDurable">Internet network sessions can be remarkably durable</a>
+    <a href="https://utcc.utoronto.ca/~cks/space/blog/unix/DupSharedOffsetNecessary">dup()'s shared file IO offset is a necessary part of Unix</a>
     ::&nbsp;Wandering Thoughts
     </strong></p>
-    <p>These days, we do NAT for our internal networks on our perimeter firewall instead of the firewalls for these internal networks. One of the advantages of doing your NAT on your perimeter firewall...</p>
+    <p>In a recent entry I noted dup() somewhat weird seeming behavior that the new file descriptor you get from dup() (and also from dup2(), its sometimes better sibling) shares the file's IO offset...</p>
   </li>
   <li>
     <p><strong>
@@ -178,10 +178,10 @@ Latest posts from other interesting blogs |
   </li>
   <li>
     <p><strong>
-    <a href="https://writing.kemitchell.com/2023/10/17/Amazon-Restricted-License">Amazon Has a Restricted License, Too</a>
+    <a href="https://writing.kemitchell.com/2023/10/24/Scheduled-Relicensing">A Short, Simple Template for Scheduled Relicensing</a>
     ::&nbsp;/dev/lawyer
     </strong></p>
-    <p>For all the brouhaha over new company licenses keeping code from Amazon, it utterly slipped my mind that Amazon has its own restricted, “source-available” license, too. You can find it in the wild...</p>
+    <p>Companies choosing to release their software under restricted terms, but scheduling transition to more permissive ones later, have usually lumped their legal language for initial and long-term...</p>
   </li>
   <li>
     <p><strong>
