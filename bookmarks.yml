@@ -6,6 +6,22 @@
 #
 
 
+- period: 2023-11
+  links:
+
+  - title: How to build a plugin system on the web and also sleep well at night
+    by: Figma
+    url: https://www.figma.com/blog/how-we-built-the-figma-plugin-system/
+    description: |-
+      Running untrusted and potentially unsafe code in your application is difficult.
+      Figma considered multiple options and went with Javascript Realms Shim.
+      They have had to [migrate] to a separate JS interpreter compiled to WASM
+      after [vulnerabilities] have been discovered in Realms Shim.
+
+      [vulnerabilities]: https://agoric.com/blog/technology/realms-shim-security-updates
+      [migrate]: https://www.figma.com/blog/an-update-on-plugin-security/
+
+
 - period: 2023-10
   links:
 
