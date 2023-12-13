@@ -5,6 +5,17 @@
 # data format is not guaranteed to remain stable over time
 #
 
+- period: 2023-12
+  links:
+
+  - title: Solving the Looming Developer Liability Problem
+    by: James Bottomley
+    url: https://blog.hansenpartnership.com/solving-the-looming-developer-liability-problem/
+    description: |-
+      Current _no warranty_ clauses may not be enough to limit developer
+      liability under new legislation, for example EU Cyber Resilience Act.
+      New clauses may be required to add indemnification to existing licenses.
+
 
 - period: 2023-11
   links:
