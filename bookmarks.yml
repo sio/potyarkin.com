@@ -8,6 +8,11 @@
 - period: 2023-12
   links:
 
+  - title: Paged Out! (magazine)
+    url: https://pagedout.institute/
+    description: |-
+      Web zine with one-page articles about programming, hacking, security, demoscene, etc.
+
   - title: Solving the Looming Developer Liability Problem
     by: James Bottomley
     url: https://blog.hansenpartnership.com/solving-the-looming-developer-liability-problem/
