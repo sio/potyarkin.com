@@ -45,7 +45,7 @@ Query [M language]({tag}/m) which is rather narrowly focused on data
 processing and is not a general purpose language.
 
 So, with effectively zero prior knowledge I started learning from [The
-Purescript book](https://book.purescript.org/) but quickly switched to
+Purescript Book](https://book.purescript.org/) but quickly switched to
 [Functional Programming Made Easier](https://leanpub.com/fp-made-easier) by
 Charles Scalfani - the former was too fast paced for me.
 Scalfani's book was an enjoyable read even if a little too verbose.
@@ -116,4 +116,4 @@ checked at compile time.
 I could probably pour more effort, practise more, find new learning resources
 - and complete the remaining challenges. I'm stubborn enough to see this through.
 But my hobby time is not unlimited and there are other projects waiting -
-I'm certain I will enjoy some of them more.
+I'm certain I will enjoy some of those more.
