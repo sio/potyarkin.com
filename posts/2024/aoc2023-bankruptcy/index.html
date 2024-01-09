@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Declaring bankruptcy on Advent of Purescript 2023</title>
+  <meta name="description" content="Orange Sun | Posts | Vitaly Potyarkin | 2024-01-09">
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="origin">
+  <meta name="generator" content="Pelican">
+  <link href="https://potyarkin.com/posts/2024/aoc2023-bankruptcy/" rel="canonical">
+<link href="https://potyarkin.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Orange Sun Full Atom Feed" />
+<link href="https://potyarkin.com/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="Orange Sun Full RSS Feed" />
+  <link href="https://potyarkin.com/theme/css/style.css?cache=ce1ce9e802f6452fc24c45dcd14f219b9fdbc4b78394fcb3ed490c23f88a6851" type="text/css" rel="stylesheet">
+  <link href="https://potyarkin.com/theme/css/fonts.css?cache=32c843bb3ce96eb9fb92f48c7a63dc133ab32e0d267a2e1453199c23403d5cd0" type="text/css" rel="stylesheet">
+  <link href="https://potyarkin.com/theme/css/codecolor/bleak.css?cache=4793611eaa86c9638927c57ac8d9995c5f7ca18d9ffed3721467cf3ef61b5e8e" type="text/css" rel="stylesheet">
+    <link href="https://potyarkin.com/static/custom.css?cache=e3963750b86fbc40a84ec4f04703361dd7c0b05acd171c3015a6d39c5477d664" type="text/css" rel="stylesheet">
+  <style>
+  :root {
+    --accent-hue: 14.917127071823206;
+    --accent-saturation: 87.43961352657004%;
+    --accent-lightness: 59.411764705882355%;
+    --accent-rgb: #f26a3d;
+  }
+  </style>
+  <meta name="theme-color" content="#f26a3d">
+</head>
+<body class="pelican-article">
+<nav id="menu">
+  <a href="#" class="close button">Close</a>
+  <a href="#menu" class="open button">Menu</a>
+  <ul class="menu-list">
+      <li><a href="/archive/">Archive</a></li>
+      <li><a href="/tags/">Tags</a></li>
+      <li><a href="mailto:sio.wtf@gmail.com">Email</a></li>
+      <li><a href="https://github.com/sio">Github</a></li>
+      <li><a href="/feeds/">feeds</a></li>
+      <li><a href="/bookmarks/">bookmarks</a></li>
+      <li><a href="https://potyarkin.com/blogroll/">Blogroll</a></li>
+      <li><a href="https://potyarkin.com/webring/">Webring</a></li>
+  </ul>
+</nav>  <header class="page-header">
+    <h1>Declaring bankruptcy on Advent of Purescript 2023</h1>
+    <span class="subtitle"><a href="https://potyarkin.com/">Orange Sun</a> |
+<a href="https://potyarkin.com/posts/">Posts</a> |   <a href="https://potyarkin.com/">Vitaly Potyarkin</a>
+| 2024-01-09
+</span>
+  </header>
+<article class="full"><p>Advent of Code is a <a href="https://potyarkin.com/posts/2023/aoc2022/">fun challenge</a> and this year I decided to attempt
+<a href="https://sio.github.io/advent-of-code/2023/">solving it in Purescript</a>. Today I'm declaring this attempt a
+failure. This post will serve as a postmortem.</p>
+<h2 id="choosing-purescript"><a class="toclink" href="#choosing-purescript">Choosing Purescript</a></h2>
+<p>Last year I solved my first Advent of Code using Go. It was fun and I knew
+immediately that I will come back for the next AoC. I also knew that I won't
+be solving it using the same language - learning on the go (pun intended)
+contributed significantly to my enjoyment of AoC 2022.</p>
+<p>In November 2023 I listened to an <a href="https://corecursive.com/teaching-fp-with-richard-feldman/">old podcast</a> where Richard Feldman
+evangelises Elm programming language. I got interested and initially decided
+to use Elm for the upcoming Advent of Code. While I was learning the basics of
+the language I also learned about the ongoing old controversy in Elm community
+related to how its BDFL handles communication and development. I decided that
+that's too much drama for my liking and that it has too little hope of
+resolving anytime soon
+- and that it's better to stay away from Elm.</p>
+<p>That's how I ended up with <a href="https://www.purescript.org/">Purescript</a>. It was probably the only other
+frontend language that offered functional programming with a strong type
+system and a <a href="https://github.com/purescript-halogen/purescript-halogen">nice UI framework</a>. I hoped that using an
+unconventional language would introduce me to frontend development without
+dealing with unpleasant Javascript ecosystem.</p>
+<h2 id="learning-purescript"><a class="toclink" href="#learning-purescript">Learning Purescript</a></h2>
+<p>My only prior experience with functional programming was Microsoft's Power
+Query <a href="https://potyarkin.com/tags/m/">M language</a> which is rather narrowly focused on data
+processing and is not a general purpose language.</p>
+<p>So, with effectively zero prior knowledge I started learning from <a href="https://book.purescript.org/">The
+Purescript book</a> but quickly switched to
+<a href="https://leanpub.com/fp-made-easier">Functional Programming Made Easier</a> by
+Charles Scalfani - the former was too fast paced for me.
+Scalfani's book was an enjoyable read even if a little too verbose.
+I did not follow author's advice to type out and run all code snippets from
+the book - that may have contributed to my eventual failure but I don't think
+that it was a major factor.</p>
+<h2 id="failing-purescript"><a class="toclink" href="#failing-purescript">Failing Purescript</a></h2>
+<p>I enjoyed solving small textbook problems in Purescript. It's a very nice
+language. Here are the things I liked most about it:</p>
+<ul>
+<li>Separation of pure and effectful functions</li>
+<li>Fearless refactoring</li>
+<li>Clean and readable syntax</li>
+<li>Pattern matching with exhaustiveness checking</li>
+<li>Function currying, tail call optimisation and other FP niceties</li>
+<li>Type system</li>
+</ul>
+<p>I had no problems with understanding recursion, currying, pattern matching,
+etc. I had relatively little problems with understanding monads and related
+concepts.</p>
+<p>My problem was that these nice abstract concepts just did not translate in my
+head to applicable programming techniques. Simple practical tasks tripped me
+up hard.</p>
+<p>Parsing text was painful. For the first AoC puzzle I decided to <a href="https://github.com/sio/advent-of-code/blob/18c766f757eb71af581ffdeabba056586cf1bd3b/aoc2023/src/Day01/Solve.purs#L137-L147">tough it out</a>
+with a bespoke char based parser even though I vaguely understood that there
+should be a monad based parser combinator library for that. That vague
+knowledge was not provided by any of these books, I've picked it up
+accidentally from some random blog post on the web.</p>
+<p>For the second AoC day I <a href="https://github.com/sio/advent-of-code/blob/18c766f757eb71af581ffdeabba056586cf1bd3b/aoc2023/src/Day02/Solve.purs#L112-L120">used the proper library</a>. It was better but still
+felt unnecessarily difficult. When third day's puzzle called for a parser not
+based on regular grammar my mind just blanked out. I was loaded up to the brim
+with pure theory and I lacked practical knowledge to apply it.</p>
+<p>All this time while I was struggling with text parsing the actual tasks I
+picked up Purescript for (frontend experiments and puzzle solving) were
+deprioritized to background. I have to commend Purescript and Halogen on this
+because if it was anything less than straightforward none of UI and/or puzzle
+solutions would get done - I just barely devoted any time to that.</p>
+<p>The project got stalled. I was reluctant to finish the last chapters of
+Scalfani's book because I was confident that they won't provide me with
+practical knowledge I was lacking. I was hesitant to go web diving for new,
+more practical learning materials because I wasn't sure they exist -
+Purescript community is rather small, and most learning resources are
+enumerated in multiple places. I evaluated those lists the first time I looked.
+I probably should've gone looking for more generic functional programming
+knowledge - and that would blow my free time budget.</p>
+<p>So I'm just declaring bankruptcy on this project.</p>
+<h2 id="conclusion"><a class="toclink" href="#conclusion">Conclusion</a></h2>
+<p>Even though I failed to cowboy my way into Purescript I still got <a href="https://sio.github.io/advent-of-code/2023/">the
+solutions to first two days</a> of Advent of Code to show off -
+all logic executed client side, all UI generated on demand, all type safe and
+checked at compile time.</p>
+<p>I could probably pour more effort, practise more, find new learning resources
+- and complete the remaining challenges. I'm stubborn enough to see this through.
+But my hobby time is not unlimited and there are other projects waiting -
+I'm certain I will enjoy some of them more.</p></article>
+<nav class="article-tags">
+  <a href="https://potyarkin.com/tags/programming/">programming</a>
+  <a href="https://potyarkin.com/tags/purescript/">purescript</a>
+  <a href="https://potyarkin.com/tags/advent-of-code/">advent-of-code</a>
+</nav>
+<nav class="neighbors">
+  <a class="neighbor neighbor-prev" href="https://potyarkin.com/posts/2023/ssh-agent-benchmark/">
+    <h1>Benchmarking ssh-agent performance</h1>
+    <p>I have an application idea that would require calling ssh-agent rather frequently -...</p>
+  </a>
+  <span class="neighbor"></span>
+</nav>
+<footer class="page-footer">
+  <section class="credits">
+        <span class="credits-left">
+          Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a>
+        </span>
+        <span class="credits-center">
+          <a href="https://potyarkin.com/">Orange Sun</a>
+        </span>
+        <span class="credits-right">
+          Theme <a href="https://github.com/sio/pelican-smallweb" rel="nofollow">SmallWeb</a>
+        </span>
+  </section>
+</footer></body>
+</html>

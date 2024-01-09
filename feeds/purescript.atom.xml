@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - purescript</title><link href="https://potyarkin.com/" rel="alternate"></link><link href="https://potyarkin.com/feeds/purescript.atom.xml" rel="self"></link><id>https://potyarkin.com/</id><updated>2024-01-09T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Declaring bankruptcy on Advent of Purescript 2023</title><link href="https://potyarkin.com/posts/2024/aoc2023-bankruptcy/" rel="alternate"></link><published>2024-01-09T00:00:00+03:00</published><updated>2024-01-09T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2024-01-09:/posts/2024/aoc2023-bankruptcy/</id><summary type="html">&lt;p&gt;Advent of Code is a &lt;a href="https://potyarkin.com/posts/2023/aoc2022/"&gt;fun challenge&lt;/a&gt; and this year I decided to attempt
+&lt;a href="https://sio.github.io/advent-of-code/2023/"&gt;solving it in Purescript&lt;/a&gt;. Today I'm declaring this attempt a
+failure. This post will serve as a postmortem.&lt;/p&gt;
+&lt;h2 id="choosing-purescript"&gt;&lt;a class="toclink" href="#choosing-purescript"&gt;Choosing Purescript&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Last year I solved my first Advent of Code using Go. It was fun and I …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Advent of Code is a &lt;a href="https://potyarkin.com/posts/2023/aoc2022/"&gt;fun challenge&lt;/a&gt; and this year I decided to attempt
+&lt;a href="https://sio.github.io/advent-of-code/2023/"&gt;solving it in Purescript&lt;/a&gt;. Today I'm declaring this attempt a
+failure. This post will serve as a postmortem.&lt;/p&gt;
+&lt;h2 id="choosing-purescript"&gt;&lt;a class="toclink" href="#choosing-purescript"&gt;Choosing Purescript&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Last year I solved my first Advent of Code using Go. It was fun and I knew
+immediately that I will come back for the next AoC. I also knew that I won't
+be solving it using the same language - learning on the go (pun intended)
+contributed significantly to my enjoyment of AoC 2022.&lt;/p&gt;
+&lt;p&gt;In November 2023 I listened to an &lt;a href="https://corecursive.com/teaching-fp-with-richard-feldman/"&gt;old podcast&lt;/a&gt; where Richard Feldman
+evangelises Elm programming language. I got interested and initially decided
+to use Elm for the upcoming Advent of Code. While I was learning the basics of
+the language I also learned about the ongoing old controversy in Elm community
+related to how its BDFL handles communication and development. I decided that
+that's too much drama for my liking and that it has too little hope of
+resolving anytime soon
+- and that it's better to stay away from Elm.&lt;/p&gt;
+&lt;p&gt;That's how I ended up with &lt;a href="https://www.purescript.org/"&gt;Purescript&lt;/a&gt;. It was probably the only other
+frontend language that offered functional programming with a strong type
+system and a &lt;a href="https://github.com/purescript-halogen/purescript-halogen"&gt;nice UI framework&lt;/a&gt;. I hoped that using an
+unconventional language would introduce me to frontend development without
+dealing with unpleasant Javascript ecosystem.&lt;/p&gt;
+&lt;h2 id="learning-purescript"&gt;&lt;a class="toclink" href="#learning-purescript"&gt;Learning Purescript&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;My only prior experience with functional programming was Microsoft's Power
+Query &lt;a href="https://potyarkin.com/tags/m/"&gt;M language&lt;/a&gt; which is rather narrowly focused on data
+processing and is not a general purpose language.&lt;/p&gt;
+&lt;p&gt;So, with effectively zero prior knowledge I started learning from &lt;a href="https://book.purescript.org/"&gt;The
+Purescript book&lt;/a&gt; but quickly switched to
+&lt;a href="https://leanpub.com/fp-made-easier"&gt;Functional Programming Made Easier&lt;/a&gt; by
+Charles Scalfani - the former was too fast paced for me.
+Scalfani's book was an enjoyable read even if a little too verbose.
+I did not follow author's advice to type out and run all code snippets from
+the book - that may have contributed to my eventual failure but I don't think
+that it was a major factor.&lt;/p&gt;
+&lt;h2 id="failing-purescript"&gt;&lt;a class="toclink" href="#failing-purescript"&gt;Failing Purescript&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I enjoyed solving small textbook problems in Purescript. It's a very nice
+language. Here are the things I liked most about it:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Separation of pure and effectful functions&lt;/li&gt;
+&lt;li&gt;Fearless refactoring&lt;/li&gt;
+&lt;li&gt;Clean and readable syntax&lt;/li&gt;
+&lt;li&gt;Pattern matching with exhaustiveness checking&lt;/li&gt;
+&lt;li&gt;Function currying, tail call optimisation and other FP niceties&lt;/li&gt;
+&lt;li&gt;Type system&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I had no problems with understanding recursion, currying, pattern matching,
+etc. I had relatively little problems with understanding monads and related
+concepts.&lt;/p&gt;
+&lt;p&gt;My problem was that these nice abstract concepts just did not translate in my
+head to applicable programming techniques. Simple practical tasks tripped me
+up hard.&lt;/p&gt;
+&lt;p&gt;Parsing text was painful. For the first AoC puzzle I decided to &lt;a href="https://github.com/sio/advent-of-code/blob/18c766f757eb71af581ffdeabba056586cf1bd3b/aoc2023/src/Day01/Solve.purs#L137-L147"&gt;tough it out&lt;/a&gt;
+with a bespoke char based parser even though I vaguely understood that there
+should be a monad based parser combinator library for that. That vague
+knowledge was not provided by any of these books, I've picked it up
+accidentally from some random blog post on the web.&lt;/p&gt;
+&lt;p&gt;For the second AoC day I &lt;a href="https://github.com/sio/advent-of-code/blob/18c766f757eb71af581ffdeabba056586cf1bd3b/aoc2023/src/Day02/Solve.purs#L112-L120"&gt;used the proper library&lt;/a&gt;. It was better but still
+felt unnecessarily difficult. When third day's puzzle called for a parser not
+based on regular grammar my mind just blanked out. I was loaded up to the brim
+with pure theory and I lacked practical knowledge to apply it.&lt;/p&gt;
+&lt;p&gt;All this time while I was struggling with text parsing the actual tasks I
+picked up Purescript for (frontend experiments and puzzle solving) were
+deprioritized to background. I have to commend Purescript and Halogen on this
+because if it was anything less than straightforward none of UI and/or puzzle
+solutions would get done - I just barely devoted any time to that.&lt;/p&gt;
+&lt;p&gt;The project got stalled. I was reluctant to finish the last chapters of
+Scalfani's book because I was confident that they won't provide me with
+practical knowledge I was lacking. I was hesitant to go web diving for new,
+more practical learning materials because I wasn't sure they exist -
+Purescript community is rather small, and most learning resources are
+enumerated in multiple places. I evaluated those lists the first time I looked.
+I probably should've gone looking for more generic functional programming
+knowledge - and that would blow my free time budget.&lt;/p&gt;
+&lt;p&gt;So I'm just declaring bankruptcy on this project.&lt;/p&gt;
+&lt;h2 id="conclusion"&gt;&lt;a class="toclink" href="#conclusion"&gt;Conclusion&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Even though I failed to cowboy my way into Purescript I still got &lt;a href="https://sio.github.io/advent-of-code/2023/"&gt;the
+solutions to first two days&lt;/a&gt; of Advent of Code to show off -
+all logic executed client side, all UI generated on demand, all type safe and
+checked at compile time.&lt;/p&gt;
+&lt;p&gt;I could probably pour more effort, practise more, find new learning resources
+- and complete the remaining challenges. I'm stubborn enough to see this through.
+But my hobby time is not unlimited and there are other projects waiting -
+I'm certain I will enjoy some of them more.&lt;/p&gt;</content><category term="posts"></category><category term="programming"></category><category term="purescript"></category><category term="advent-of-code"></category></entry></feed>

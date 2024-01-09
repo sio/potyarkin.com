@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - programming</title><link href="https://potyarkin.com/" rel="alternate"></link><link href="https://potyarkin.com/feeds/programming.atom.xml" rel="self"></link><id>https://potyarkin.com/</id><updated>2024-01-09T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Declaring bankruptcy on Advent of Purescript 2023</title><link href="https://potyarkin.com/posts/2024/aoc2023-bankruptcy/" rel="alternate"></link><published>2024-01-09T00:00:00+03:00</published><updated>2024-01-09T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2024-01-09:/posts/2024/aoc2023-bankruptcy/</id><summary type="html">&lt;p&gt;Advent of Code is a &lt;a href="https://potyarkin.com/posts/2023/aoc2022/"&gt;fun challenge&lt;/a&gt; and this year I decided to attempt
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - advent-of-code</title><link href="https://potyarkin.com/" rel="alternate"></link><link href="https://potyarkin.com/feeds/advent-of-code.atom.xml" rel="self"></link><id>https://potyarkin.com/</id><updated>2024-01-09T00:00:00+03:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>Declaring bankruptcy on Advent of Purescript 2023</title><link href="https://potyarkin.com/posts/2024/aoc2023-bankruptcy/" rel="alternate"></link><published>2024-01-09T00:00:00+03:00</published><updated>2024-01-09T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2024-01-09:/posts/2024/aoc2023-bankruptcy/</id><summary type="html">&lt;p&gt;Advent of Code is a &lt;a href="https://potyarkin.com/posts/2023/aoc2022/"&gt;fun challenge&lt;/a&gt; and this year I decided to attempt
 &lt;a href="https://sio.github.io/advent-of-code/2023/"&gt;solving it in Purescript&lt;/a&gt;. Today I'm declaring this attempt a
 failure. This post will serve as a postmortem.&lt;/p&gt;
 &lt;h2 id="choosing-purescript"&gt;&lt;a class="toclink" href="#choosing-purescript"&gt;Choosing Purescript&lt;/a&gt;&lt;/h2&gt;
@@ -84,71 +84,7 @@ checked at compile time.&lt;/p&gt;
 &lt;p&gt;I could probably pour more effort, practise more, find new learning resources
 - and complete the remaining challenges. I'm stubborn enough to see this through.
 But my hobby time is not unlimited and there are other projects waiting -
-I'm certain I will enjoy some of them more.&lt;/p&gt;</content><category term="posts"></category><category term="programming"></category><category term="purescript"></category><category term="advent-of-code"></category></entry><entry><title>A pull request 10 years in the making</title><link href="https://potyarkin.com/posts/2023/10-year-pull-request/" rel="alternate"></link><published>2023-05-03T00:00:00+03:00</published><updated>2023-05-03T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2023-05-03:/posts/2023/10-year-pull-request/</id><summary type="html">&lt;blockquote&gt;
-&lt;p&gt;Once upon a time there was a bug in a free software project that annoyed me
-for long enough that I've learned C to fix it. And it felt good.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Now that we've got a TL;DR out of the way, here is the story.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://potyarkin.com/resources/pr893_timeline.svg"&gt;&lt;img alt="story timeline" src="https://potyarkin.com/resources/pr893_timeline.svg"&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;There is a good torrent …&lt;/p&gt;</summary><content type="html">&lt;blockquote&gt;
-&lt;p&gt;Once upon a time there was a bug in a free software project that annoyed me
-for long enough that I've learned C to fix it. And it felt good.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Now that we've got a TL;DR out of the way, here is the story.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://potyarkin.com/resources/pr893_timeline.svg"&gt;&lt;img alt="story timeline" src="https://potyarkin.com/resources/pr893_timeline.svg"&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;There is a good torrent client called &lt;a href="https://transmissionbt.com/"&gt;Transmission&lt;/a&gt;. It's lightweight, fast
-and reliable. I have compared it against alternatives several times and
-Transmission had always come out on top.&lt;/p&gt;
-&lt;p&gt;In 2011 I've found out that Transmission had open file limit essentially
-hardcoded to a value of 1024. Given that in Unix-like systems this limit
-is also spent on open network sockets the number seemed extremely low.&lt;/p&gt;
-&lt;p&gt;Back then FOSS culture was still very foreign to me, so I did what any
-consumer would naturally do: I contacted support. Helpful visitors of
-Transmission forums told me that open file limit is indeed hardcoded and
-pointed me to a &lt;a href="https://trac.transmissionbt.com/ticket/4164"&gt;bug tracker ticket&lt;/a&gt; which discussed this issue and
-which was closed several months prior without any real fix.&lt;/p&gt;
-&lt;p&gt;Bug tracker discussion pointed out that there was a good reason for setting
-such limit, a decades old limitation in glibc - important enough to be
-featured first in BUGS section of &lt;a href="https://manpages.debian.org/bullseye/manpages-dev/select.2.en.html#BUGS"&gt;&lt;code&gt;man 2 select&lt;/code&gt;&lt;/a&gt;. Since Transmission
-had hit this limitation via intermediate library (libcurl) there wasn't
-much else for Transmission developers to do at the time besides to hardcode a
-safe low value. Facebook had contributed an alternative libcurl API to work
-around that bug only &lt;a href="https://daniel.haxx.se/blog/2012/09/03/introducing-curl_multi_wait/"&gt;a year later&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;I did not handle the news well. In fact I did not understand most of it at the
-time, only that developers were aware of a problem and that they were not
-going to do anything about it. I switched to another torrent client and went
-on to moan on local forums about how silly Transmission is and how it's useful
-only for toy workloads. For several years every time someone mentioned
-Transmission in IRC/XMPP chats I would snarkily introduce them to this bug.
-Not my finest hour, I know.&lt;/p&gt;
-&lt;p&gt;In the mean time I was hitting the limitations of other torrent clients and
-remembered Transmission mostly fondly (if not for that one bug). Some time
-later I even returned to Transmission and was sharding workloads between
-multiple instances to avoid exhausting open files limit. I reviewed the
-alternatives from time to time and have not found any other client to be better enough
-to switch to.&lt;/p&gt;
-&lt;p&gt;As time went on other people got burned by the same bug. Some of them started
-badmouthing Transmission like I did. Forums posts and bug tracker tickets
-piled on, but no forward progress was made.&lt;/p&gt;
-&lt;p&gt;Unrelated to Transmission, I got introduced to FOSS scene. I've acquired a
-habit of checking if I could understand the source code upon encountering a
-nasty bug in a piece of software. I submitted a few small PRs to other
-projects I used, shared a few projects of my own and experienced being on the
-receiving end of an issue/PR. After many years I decided to look at that
-Transmission issue again.&lt;/p&gt;
-&lt;p&gt;Turned out that thanks to all commenters on Trac and on GitHub, the issue has
-been investigated to its root already. Libcurl was the culprit. Quick web
-search had introduced me to &lt;code&gt;curl_multi_wait&lt;/code&gt; API, and after some introductory C
-tutorials I was able to replace all &lt;code&gt;select()&lt;/code&gt; calls with the new API.&lt;/p&gt;
-&lt;p&gt;I submitted the &lt;a href="https://github.com/transmission/transmission/pull/893"&gt;pull request&lt;/a&gt; in April 2019 and the rest is history:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;My PR got merged into Transmission in July 2020, providing closure to more
-  than a dozen of bug reports&lt;/li&gt;
-&lt;li&gt;The first stable version of Transmission featuring my fix (v4.0.0) has
-  become available in 2023&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;It felt good to finally remove this thorn instead of complaining about it.
-I probably should have done that much sooner.&lt;/p&gt;</content><category term="posts"></category><category term="opensource"></category><category term="programming"></category></entry><entry><title>Advent of Code 2022 was fun!</title><link href="https://potyarkin.com/posts/2023/aoc2022/" rel="alternate"></link><published>2023-03-09T00:00:00+03:00</published><updated>2023-03-09T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2023-03-09:/posts/2023/aoc2022/</id><summary type="html">&lt;p&gt;This was the first year I participated in &lt;a href="https://adventofcode.com"&gt;Advent of Code&lt;/a&gt;.&lt;/p&gt;
+I'm certain I will enjoy some of them more.&lt;/p&gt;</content><category term="posts"></category><category term="programming"></category><category term="purescript"></category><category term="advent-of-code"></category></entry><entry><title>Advent of Code 2022 was fun!</title><link href="https://potyarkin.com/posts/2023/aoc2022/" rel="alternate"></link><published>2023-03-09T00:00:00+03:00</published><updated>2023-03-09T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2023-03-09:/posts/2023/aoc2022/</id><summary type="html">&lt;p&gt;This was the first year I participated in &lt;a href="https://adventofcode.com"&gt;Advent of Code&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/sio/advent-of-code/tree/master/aoc2022"&gt;&lt;img alt="" src="https://potyarkin.com/resources/aoc2022.svg"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;In case you're not familiar with it, AoC is a Christmas themed programming
 competition consisting of 25 challenges published daily (from December 1st to
