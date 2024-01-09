@@ -29,7 +29,7 @@ dealing with unpleasant Javascript ecosystem.&lt;/p&gt;
 Query &lt;a href="https://potyarkin.com/tags/m/"&gt;M language&lt;/a&gt; which is rather narrowly focused on data
 processing and is not a general purpose language.&lt;/p&gt;
 &lt;p&gt;So, with effectively zero prior knowledge I started learning from &lt;a href="https://book.purescript.org/"&gt;The
-Purescript book&lt;/a&gt; but quickly switched to
+Purescript Book&lt;/a&gt; but quickly switched to
 &lt;a href="https://leanpub.com/fp-made-easier"&gt;Functional Programming Made Easier&lt;/a&gt; by
 Charles Scalfani - the former was too fast paced for me.
 Scalfani's book was an enjoyable read even if a little too verbose.
@@ -84,7 +84,7 @@ checked at compile time.&lt;/p&gt;
 &lt;p&gt;I could probably pour more effort, practise more, find new learning resources
 - and complete the remaining challenges. I'm stubborn enough to see this through.
 But my hobby time is not unlimited and there are other projects waiting -
-I'm certain I will enjoy some of them more.&lt;/p&gt;</content><category term="posts"></category><category term="programming"></category><category term="purescript"></category><category term="advent-of-code"></category></entry><entry><title>Benchmarking ssh-agent performance</title><link href="https://potyarkin.com/posts/2023/ssh-agent-benchmark/" rel="alternate"></link><published>2023-07-19T00:00:00+03:00</published><updated>2023-07-19T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2023-07-19:/posts/2023/ssh-agent-benchmark/</id><summary type="html">&lt;p&gt;I have an application idea that would require calling ssh-agent rather
+I'm certain I will enjoy some of those more.&lt;/p&gt;</content><category term="posts"></category><category term="programming"></category><category term="purescript"></category><category term="advent-of-code"></category></entry><entry><title>Benchmarking ssh-agent performance</title><link href="https://potyarkin.com/posts/2023/ssh-agent-benchmark/" rel="alternate"></link><published>2023-07-19T00:00:00+03:00</published><updated>2023-07-19T00:00:00+03:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2023-07-19:/posts/2023/ssh-agent-benchmark/</id><summary type="html">&lt;p&gt;I have an application idea that would require calling ssh-agent rather
 frequently - but how many requests per second can it handle?&lt;/p&gt;
 &lt;p&gt;To answer this question I wrote a &lt;a href="https://github.com/sio/ssh-agent-benchmark/blob/master/ssh_agent_test.go"&gt;small benchmark&lt;/a&gt; in Go.
 It runs a tight loop sending messages for ssh-agent to sign.
