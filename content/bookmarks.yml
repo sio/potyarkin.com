@@ -16,6 +16,10 @@
         instead of using a proper USB-to-UART device signature.
         Looks like CDC (Communications Device Class) is simpler to implement in firmware.
 
+        Here is a [relevant comment] regarding CDC-ACM implementation
+
+        [relevant comment]: https://old.reddit.com/r/linux/comments/11y07qn/w/jd81taw/
+
 
 - period: 2023-12
   links:
