@@ -5,6 +5,18 @@
 # data format is not guaranteed to remain stable over time
 #
 
+- period: 2024-01
+  links:
+
+    - title: What is the difference between /dev/ttyUSB and /dev/ttyACM?
+      by: Samuel Tardieu
+      url: https://rfc1149.net/blog/2013/03/05/what-is-the-difference-between-devttyusbx-and-devttyacmx/
+      description: |-
+        Microcontroller based USB devices often present themselves as a modem
+        instead of using a proper USB-to-UART device signature.
+        Looks like CDC (Communications Device Class) is simpler to implement in firmware.
+
+
 - period: 2023-12
   links:
 
