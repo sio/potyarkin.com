@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - Bookmarks - Orange Sun</title><link href="https://potyarkin.com/" rel="alternate"></link><link href="https://potyarkin.com/feeds/extra/bookmarks.atom.xml" rel="self"></link><id>https://potyarkin.com/</id><updated>2024-01-01T00:00:00+00:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>December 2023</title><link href="https://potyarkin.com/bookmarks/#2023-12" rel="alternate"></link><published>2024-01-01T00:00:00+00:00</published><updated>2024-01-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2024-01-01:/bookmarks//2023-12</id><content type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - Bookmarks - Orange Sun</title><link href="https://potyarkin.com/" rel="alternate"></link><link href="https://potyarkin.com/feeds/extra/bookmarks.atom.xml" rel="self"></link><id>https://potyarkin.com/</id><updated>2024-02-01T00:00:00+00:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>January 2024</title><link href="https://potyarkin.com/bookmarks/#2024-01" rel="alternate"></link><published>2024-02-01T00:00:00+00:00</published><updated>2024-02-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2024-02-01:/bookmarks//2024-01</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://rfc1149.net/blog/2013/03/05/what-is-the-difference-between-devttyusbx-and-devttyacmx/"&gt;What is the difference between /dev/ttyUSB and /dev/ttyACM?&lt;/a&gt;
+    by Samuel Tardieu
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Microcontroller based USB devices often present themselves as a modem
+instead of using a proper USB-to-UART device signature.
+Looks like CDC (Communications Device Class) is simpler to implement in firmware.&lt;/p&gt;
+&lt;p&gt;Here is a &lt;a href="https://old.reddit.com/r/linux/comments/11y07qn/w/jd81taw/"&gt;relevant comment&lt;/a&gt; regarding CDC-ACM implementation&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>December 2023</title><link href="https://potyarkin.com/bookmarks/#2023-12" rel="alternate"></link><published>2024-01-01T00:00:00+00:00</published><updated>2024-01-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2024-01-01:/bookmarks//2023-12</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
