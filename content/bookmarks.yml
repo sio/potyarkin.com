@@ -5,6 +5,15 @@
 # data format is not guaranteed to remain stable over time
 #
 
+- period: 2024-02
+  links:
+
+    - title: How Doom didn't kill the Amiga
+      by: Carl Svensson
+      url: https://www.datagubbe.se/afb/
+      description: A detailed account of the rise and fall of an Amiga zealot
+
+
 - period: 2024-01
   links:
 
