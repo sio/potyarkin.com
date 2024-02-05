@@ -189,11 +189,12 @@ def feedlinks(url):
     parser = FeedLinkParser()
     try:
         parser.feed(page.decode())
+        links = parser.results
     except Exception as exc:
         log.error('%s while searching for feed links in %s', exc, url)
-        return list()
+        links = list()
     feeds = set()
-    for link in parser.results:
+    for link in links:
         if not link or not link.strip():
             continue
         if link.startswith('//'):   # same-scheme links
@@ -205,7 +206,22 @@ def feedlinks(url):
             feeds.add(f'{urlparts.scheme}://{urlparts.netloc}{path}/{link}')
         else:
             feeds.add(link)
-    return list(feeds)
+    if len(feeds) > 0:
+        return list(feeds)
+    for filename in {'feed.xml', 'atom.xml', 'rss.xml'}:
+        path = urlparts.path.rstrip('/').split('/')
+        while True:
+            url = f'{urlparts.scheme}://{urlparts.netloc}{"/".join(path)}/{filename}'
+            try:
+                http_get(url, result=http)
+                if http['status'] >= 200 and http['status'] < 300:
+                    return [url]
+            except Exception:
+                pass
+            if len(path) == 0:
+                break
+            path.pop()
+    return list()
 
 
 class FeedLinkParser(HTMLParser):
