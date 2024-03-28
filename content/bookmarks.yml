@@ -5,6 +5,18 @@
 # data format is not guaranteed to remain stable over time
 #
 
+- period: 2024-03
+  links:
+
+    - title: Corel Netwinder - Linux ARM PC from 1999
+      url: http://www.netwinder.org/about.html
+      description: |-
+        An interesting relic of turn-of-millenium Internet describing an
+        interesting piece of hardware. Some old user pages are still online,
+        [~tinymoth](https://netwinder.osuosl.org/users/t/tinymoth/public_html/)
+        contains photos of motherboard and chip identifiers.
+
+
 - period: 2024-02
   links:
 
