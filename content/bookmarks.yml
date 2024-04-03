@@ -8,6 +8,17 @@
 - period: 2024-03
   links:
 
+    - title: Timeline of the xz open source attack
+      by: Russ Cox
+      url: https://research.swtch.com/xz-timeline
+      description: |-
+        Over a period of over two years, an attacker using the name “Jia Tan”
+        worked as a diligent, effective contributor to the xz compression
+        library, eventually being granted commit access and maintainership.
+        Using that access, they installed a very subtle, carefully hidden
+        backdoor into liblzma, a part of xz that also happens to be a
+        dependency of OpenSSH sshd on Debian, Ubuntu, Fedora, and other
+        systemd-based Linux systems
     - title: Corel Netwinder - Linux ARM PC from 1999
       url: http://www.netwinder.org/about.html
       description: |-
