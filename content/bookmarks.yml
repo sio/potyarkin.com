@@ -5,6 +5,21 @@
 # data format is not guaranteed to remain stable over time
 #
 
+- period: 2024-04
+  links:
+
+    - title: My deployment platform is a shell script
+      by: Jes Olson
+      url: https://j3s.sh/thought/my-deployment-platform-is-a-shell-script.html
+      description: |-
+        Not that I agree with everything the author says, but saving this anyways.
+        Author is an interesting person with a good writing style. Will read more.
+
+        Jes Olson is also involved in running
+        a [hackerspace](https://layerze.ro/)
+        and a [computer club](https://cyberia.club/) in Minneapolis.
+
+
 - period: 2024-03
   links:
 
