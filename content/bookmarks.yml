@@ -8,16 +8,23 @@
 - period: 2024-04
   links:
 
-    - title: My deployment platform is a shell script
-      by: Jes Olson
-      url: https://j3s.sh/thought/my-deployment-platform-is-a-shell-script.html
-      description: |-
-        Not that I agree with everything the author says, but saving this anyways.
-        Author is an interesting person with a good writing style. Will read more.
+  - title: Linux Security Hardening and Other Tweaks
+    by: blakkheim
+    url: https://vez.mrsk.me/linux-hardening.html
+    description: |-
+      Many security-related sysctl options.
+      Should probably consider adopting most of those after a review.
 
-        Jes Olson is also involved in running
-        a [hackerspace](https://layerze.ro/)
-        and a [computer club](https://cyberia.club/) in Minneapolis.
+  - title: My deployment platform is a shell script
+    by: Jes Olson
+    url: https://j3s.sh/thought/my-deployment-platform-is-a-shell-script.html
+    description: |-
+      Not that I agree with everything the author says, but saving this anyways.
+      Author is an interesting person with a good writing style. Will read more.
+
+      Jes Olson is also involved in running
+      a [hackerspace](https://layerze.ro/)
+      and a [computer club](https://cyberia.club/) in Minneapolis.
 
 
 - period: 2024-03
@@ -34,6 +41,7 @@
         backdoor into liblzma, a part of xz that also happens to be a
         dependency of OpenSSH sshd on Debian, Ubuntu, Fedora, and other
         systemd-based Linux systems
+
     - title: Corel Netwinder - Linux ARM PC from 1999
       url: http://www.netwinder.org/about.html
       description: |-
