@@ -8,6 +8,12 @@
 - period: 2024-04
   links:
 
+  - title: 'Passkeys: A Shattered Dream'
+    by: William Brown
+    url: https://fy.blackhats.net.au/blog/2024-04-26-passkeys-a-shattered-dream/
+    description: |-
+      An apt description of why current hype around passkeys makes me uneasy
+
   - title: Linux Security Hardening and Other Tweaks
     by: blakkheim
     url: https://vez.mrsk.me/linux-hardening.html
