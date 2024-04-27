@@ -8,6 +8,17 @@
 - period: 2024-04
   links:
 
+  - title: DDC OLED (Driving OLED display via HDMI I2C pins)
+    url: https://mitxela.com/projects/ddc-oled
+    description: |-
+      HDMI cables contain an i2c bus (yay backwards compatibility) which can be
+      (ab)used for some fun projects. [Changing EDID serial] may have real
+      world [applications], may be some devices for that already [exist]?
+
+      [Changing EDID serial]: https://forum.espruino.com/conversations/325555/
+      [applications]: https://notes.alinpanaitiu.com/Weird%20monitor%20bugs
+      [exist]: https://www.aten.com/global/en/products/professional-audiovideo/video-converters/vc081a/
+
   - title: 'Passkeys: A Shattered Dream'
     by: William Brown
     url: https://fy.blackhats.net.au/blog/2024-04-26-passkeys-a-shattered-dream/
