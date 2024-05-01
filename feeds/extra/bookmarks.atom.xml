@@ -1,5 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - Bookmarks - Orange Sun</title><link href="https://potyarkin.com/" rel="alternate"></link><link href="https://potyarkin.com/feeds/extra/bookmarks.atom.xml" rel="self"></link><id>https://potyarkin.com/</id><updated>2024-04-01T00:00:00+00:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>March 2024</title><link href="https://potyarkin.com/bookmarks/#2024-03" rel="alternate"></link><published>2024-04-01T00:00:00+00:00</published><updated>2024-04-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2024-04-01:/bookmarks//2024-03</id><content type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - Bookmarks - Orange Sun</title><link href="https://potyarkin.com/" rel="alternate"></link><link href="https://potyarkin.com/feeds/extra/bookmarks.atom.xml" rel="self"></link><id>https://potyarkin.com/</id><updated>2024-05-01T00:00:00+00:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>April 2024</title><link href="https://potyarkin.com/bookmarks/#2024-04" rel="alternate"></link><published>2024-05-01T00:00:00+00:00</published><updated>2024-05-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2024-05-01:/bookmarks//2024-04</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://mitxela.com/projects/ddc-oled"&gt;DDC OLED (Driving OLED display via HDMI I2C pins)&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;HDMI cables contain an i2c bus (yay backwards compatibility) which can be
+(ab)used for some fun projects. &lt;a href="https://forum.espruino.com/conversations/325555/"&gt;Changing EDID serial&lt;/a&gt; may have real
+world &lt;a href="https://notes.alinpanaitiu.com/Weird%20monitor%20bugs"&gt;applications&lt;/a&gt;, may be some devices for that already &lt;a href="https://www.aten.com/global/en/products/professional-audiovideo/video-converters/vc081a/"&gt;exist&lt;/a&gt;?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://fy.blackhats.net.au/blog/2024-04-26-passkeys-a-shattered-dream/"&gt;Passkeys: A Shattered Dream&lt;/a&gt;
+    by William Brown
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;An apt description of why current hype around passkeys makes me uneasy&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://vez.mrsk.me/linux-hardening.html"&gt;Linux Security Hardening and Other Tweaks&lt;/a&gt;
+    by blakkheim
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Many security-related sysctl options.
+Should probably consider adopting most of those after a review.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://j3s.sh/thought/my-deployment-platform-is-a-shell-script.html"&gt;My deployment platform is a shell script&lt;/a&gt;
+    by Jes Olson
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Not that I agree with everything the author says, but saving this anyways.
+Author is an interesting person with a good writing style. Will read more.&lt;/p&gt;
+&lt;p&gt;Jes Olson is also involved in running
+a &lt;a href="https://layerze.ro/"&gt;hackerspace&lt;/a&gt;
+and a &lt;a href="https://cyberia.club/"&gt;computer club&lt;/a&gt; in Minneapolis.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>March 2024</title><link href="https://potyarkin.com/bookmarks/#2024-03" rel="alternate"></link><published>2024-04-01T00:00:00+00:00</published><updated>2024-04-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2024-04-01:/bookmarks//2024-03</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
