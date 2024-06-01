@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - Bookmarks - Orange Sun</title><link href="https://potyarkin.com/" rel="alternate"></link><link href="https://potyarkin.com/feeds/extra/bookmarks.atom.xml" rel="self"></link><id>https://potyarkin.com/</id><updated>2024-05-01T00:00:00+00:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>April 2024</title><link href="https://potyarkin.com/bookmarks/#2024-04" rel="alternate"></link><published>2024-05-01T00:00:00+00:00</published><updated>2024-05-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2024-05-01:/bookmarks//2024-04</id><content type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Orange Sun - Bookmarks - Orange Sun</title><link href="https://potyarkin.com/" rel="alternate"></link><link href="https://potyarkin.com/feeds/extra/bookmarks.atom.xml" rel="self"></link><id>https://potyarkin.com/</id><updated>2024-06-01T00:00:00+00:00</updated><subtitle>Unsorted ramblings, sometimes related to programming</subtitle><entry><title>May 2024</title><link href="https://potyarkin.com/bookmarks/#2024-05" rel="alternate"></link><published>2024-06-01T00:00:00+00:00</published><updated>2024-06-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2024-06-01:/bookmarks//2024-05</id><content type="html">
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://www.hezmatt.org/~mpalmer/blog/2024/05/14/is-this-project-still-maintained.html"&gt;"Is This Project Still Maintained?"
+&lt;/a&gt;
+    by Matt Palmer
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Some thoughts on maintainer responsibilities, user entitlement and
+personal projects.
+Also contains a draft of "The Open Source Maintainer's Manifesto"&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;
+    &lt;a href="https://www.potaroo.net/ispcol/2024-04/ipv6-prefixes.html"&gt;IPv6 Prefix Lengths&lt;/a&gt;
+    &lt;/strong&gt;&lt;/p&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;I’m left with the observation that IPv6 is not in fact a 128-bit
+address protocol in the same way as IPv4 is a 32-bit address protocol.
+It’s a “64-bits plus a few extra interface identifier bits” address
+protocol.&lt;/p&gt;
+&lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><category term="bookmarks"></category></entry><entry><title>April 2024</title><link href="https://potyarkin.com/bookmarks/#2024-04" rel="alternate"></link><published>2024-05-01T00:00:00+00:00</published><updated>2024-05-01T00:00:00+00:00</updated><author><name>Vitaly Potyarkin</name></author><id>tag:potyarkin.com,2024-05-01:/bookmarks//2024-04</id><content type="html">
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;
