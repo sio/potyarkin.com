@@ -5,6 +5,21 @@
 # data format is not guaranteed to remain stable over time
 #
 
+- period: 2024-06
+  links:
+
+  - title: The curious case of stalled squashfs reads
+    by: Chris Down
+    url: https://chrisdown.name/2018/04/17/kernel-adventures-the-curious-case-of-squashfs-stalls.html
+    description: |-
+      Facebook SRE debugs stalled squashfs reads down to a suboptimal kernel
+      configuration. These days CONFIG_SQUASHFS_DECOMP_MULTI_PERCPU is enabled
+      by default in Debian, so the problem should not reoccur.
+
+      In the last part of the article author recommends using btrfs for
+      blockdevs with transparent compression in production environment.
+
+
 - period: 2024-05
   links:
 
