@@ -49,6 +49,24 @@ Unsorted links to the pages I've considered interesting at some time |
 </span>
   </header>
 <article class="full">
+  <h2 id="2024-06">
+    <a href="#2024-06">
+      June 2024
+    </a>
+  </h2>
+  <ul>
+    <li>
+      <p><strong>
+      <a href="https://chrisdown.name/2018/04/17/kernel-adventures-the-curious-case-of-squashfs-stalls.html">The curious case of stalled squashfs reads</a>
+      by Chris Down
+      </strong></p>
+      <p>Facebook SRE debugs stalled squashfs reads down to a suboptimal kernel
+configuration. These days CONFIG_SQUASHFS_DECOMP_MULTI_PERCPU is enabled
+by default in Debian, so the problem should not reoccur.</p>
+<p>In the last part of the article author recommends using btrfs for
+blockdevs with transparent compression in production environment.</p>
+    </li>
+  </ul>
   <h2 id="2024-05">
     <a href="#2024-05">
       May 2024
