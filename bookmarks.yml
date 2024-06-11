@@ -8,6 +8,16 @@
 - period: 2024-06
   links:
 
+  - title: What is PID 0?
+    by: Dave Anderson
+    url: https://blog.dave.tf/post/linux-pid0/
+    description: |-
+      > Unix PIDs do start at 0! PID 0 just isn’t shown to userspace through
+      > traditional APIs. PID 0 starts the kernel, then retires to a quiet life
+      > of helping a bit with process scheduling and power management. Also the
+      > entire web is mostly wrong about PID 0, because of one sentence on
+      > Wikipedia from 16 years ago.
+
   - title: The curious case of stalled squashfs reads
     by: Chris Down
     url: https://chrisdown.name/2018/04/17/kernel-adventures-the-curious-case-of-squashfs-stalls.html
