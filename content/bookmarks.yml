@@ -8,6 +8,14 @@
 - period: 2024-06
   links:
 
+  - title: Fight understanding decay with a rich Incident Summary
+    by: Dan Slimmon
+    url: https://blog.danslimmon.com/2024/06/14/fight-knowledge-decay-with-a-rich-incident-summary/
+    description: |-
+      Role of _scribe_ during incident response is not only to keep track of
+      _incident timeline_ but also to maintain an _incident summary_ for when
+      new responders join the effort.
+
   - title: What is PID 0?
     by: Dave Anderson
     url: https://blog.dave.tf/post/linux-pid0/
