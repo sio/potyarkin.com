@@ -8,6 +8,17 @@
 - period: 2024-06
   links:
 
+  - title: TechInfoDepot Wiki (hardware specs for wireless routers)
+    url: https://techinfodepot.shoutwiki.com/wiki/Main_Page
+    description: |-
+      This knowledge base complements [OpenWRT docs](https://openwrt.org/docs/start)
+      with a lot of hardware specific information.
+
+      It is a fork of WikiDevi (shut down in 2019), similar to:
+
+      - [Wireless CAT Wiki](https://wikidevi.wi-cat.ru/Main_Page)
+      - [DeviWiki](https://deviwiki.com/wiki/)
+
   - title: Fight understanding decay with a rich Incident Summary
     by: Dan Slimmon
     url: https://blog.danslimmon.com/2024/06/14/fight-knowledge-decay-with-a-rich-incident-summary/
