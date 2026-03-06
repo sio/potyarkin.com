@@ -2,6 +2,6 @@ pelican==4.7.2
 pelican-neighbors==1.2.0
 https://github.com/sio/pelican-smallweb/tarball/v2024.04.15#egginfo=pelican-smallweb
 microblog-server>=1.0.1
-Markdown==3.3.7
+Markdown==3.8.1
 PyYAML==6.0
 feedparser>=6.0.10,<6.1
