@@ -5,6 +5,19 @@
 # data format is not guaranteed to remain stable over time
 #
 
+- period: 2026-04
+  links:
+
+  - title: CAP_NET_ADMIN for non-root user in Docker container
+    url: https://marcoguerri.github.io/2023/10/13/capabilities-and-docker.html
+    description: |-
+      `docker run --cap-add=` only adds specified capabilities to the bounding
+      set when container is executed as non-root user. Elevating effective
+      privileges for processes inside the container requires specifying file
+      capabilities on the executable (which in turn requires either being
+      root/CAP_SETFCAP or baking capabilities into the image itself).
+
+
 - period: 2024-06
   links:
 
